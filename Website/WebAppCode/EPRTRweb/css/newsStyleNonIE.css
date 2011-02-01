@@ -1,0 +1,101 @@
+﻿/*----------------------------------------------------------*/
+/*-- The news are not presented correctly in IE version 7 --*/
+/*-- These styles will fix this                           --*/
+/*----------------------------------------------------------*/
+
+#timeStamp
+{
+    clear:left;
+    float:left;
+}
+
+#PanelHeaderStyle
+{
+    left:175px; 
+    margin-left:10px;
+}
+#contentPanelArea
+{
+    clear: left; 
+    float: left;
+    width: 400px;
+    margin-top:10px;
+}
+
+#topNews
+{
+    float:left; 
+    margin-top:34px;
+    clear:left;
+}
+
+#OtherNews
+{
+    float:left; 
+    margin-top:17px;
+    clear:left;
+}
+
+#homeContent
+{
+    padding-left:40px;
+    width:57%;
+    clear:none;
+}
+
+.news_area 
+{
+	top:-20px;
+	z-index: 1;
+}
+.newsImage
+{
+    top:22px;
+    
+    padding-top: 1px;
+	padding-right: 3px;
+	padding-bottom: 0px;
+	padding-left: 3px;
+	height:30px;
+	background-color:#AC8367;
+	text-align:center;
+	vertical-align:middle;
+
+	font-size: 1.2em;	
+	color:White;
+	font-weight:bold;
+}
+
+.newsImage a, a:focus
+{
+    color:White;
+    cursor:pointer;
+}
+
+.news_box 
+{
+    
+	
+	background-color: #FFFFCA; /* FFFFCA */
+	/* clear: left;*/
+	/* float: left;*/
+	/* width: 200px;*/
+	/*border: 1px dotted #000000;*/ /*999999 */
+	
+}
+.news_box td 
+{
+    
+    border: 1px dotted #999999;
+    text-decoration: none;
+	padding-top: 2px;
+	padding-left: 1px;
+	padding-bottom: 2px;
+	position:relative;
+    top:-20px;
+}
+
+/*.news_head 
+{
+}
+*/

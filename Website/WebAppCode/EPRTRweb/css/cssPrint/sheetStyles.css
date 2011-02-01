@@ -1,0 +1,12 @@
+﻿/*-----------------------------------------------------*/
+/*-- Styles for controlling the layout of components --*/
+/*-----------------------------------------------------*/
+.layout_sheet_download_print
+{
+    display:none;
+}
+
+.layout_sheet_contentsBox
+{
+    display:none;
+}
