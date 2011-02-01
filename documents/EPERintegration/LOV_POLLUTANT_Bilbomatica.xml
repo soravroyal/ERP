@@ -1,0 +1,100 @@
+﻿<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="1" Code="GRHGAS" Name="Greenhouse gases" StartYear="2001" CAS="NULL" CodeEPER="GRHGASEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="2" Code="OTHGAS" Name="Other gases" StartYear="2001" CAS="NULL" CodeEPER="OTHGASEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="3" Code="HEVMET" Name="Heavy metals" StartYear="2001" CAS="NULL" CodeEPER="HEVMETEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="4" Code="PEST" Name="Pesticides" StartYear="2007" CAS="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="5" Code="CHLORG" Name="Chlorinated organic substances" StartYear="2001" CAS="NULL" CodeEPER="CHLORGEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="6" Code="OTHORG" Name="Other organic substances" StartYear="2001" CAS="NULL" CodeEPER="OTHORGEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="7" Code="INORG" Name="Inorganic substances" StartYear="2001" CAS="NULL" CodeEPER="INORGEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="8" Code="BTEX" Name="BTEX" StartYear="2001" ParentID="6" CAS="NULL" eperPollutant_ID="43" CodeEPER="BTEXEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="9" Code="CH4" Name="Methane (CH4)" StartYear="2001" ParentID="1" CAS="74-82-8" eperPollutant_ID="3" CodeEPER="CH4EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="10" Code="CO2" Name="Carbon dioxide (CO2)" StartYear="2001" ParentID="1" CAS="124-38-9" eperPollutant_ID="5" CodeEPER="CO2EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="11" Code="HFCS" Name="Hydro-fluorocarbons (HFCs)" StartYear="2001" ParentID="1" CAS="NULL" eperPollutant_ID="6" CodeEPER="HFCSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="12" Code="N2O" Name="Nitrous oxide (N2O)" StartYear="2001" ParentID="1" CAS="10024-97-2" eperPollutant_ID="7" CodeEPER="N2OEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="13" Code="PFCS" Name="Perfluorocarbons (PFCs)" StartYear="2001" ParentID="1" CAS="NULL" eperPollutant_ID="11" CodeEPER="PFCSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="14" Code="SF6" Name="Sulphur hexafluoride (SF6)" StartYear="2001" ParentID="1" CAS="2551-62-4" eperPollutant_ID="12" CodeEPER="SF6EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="15" Code="CO" Name="Carbon monoxide (CO)" StartYear="2001" ParentID="2" CAS="630-08-0" eperPollutant_ID="4" CodeEPER="COEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="16" Code="NH3" Name="Ammonia (NH3)" StartYear="2001" ParentID="2" CAS="7664-41-7" eperPollutant_ID="8" CodeEPER="NH3EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="17" Code="NMVOC" Name="Non-methane volatile organic compounds (NMVOC)" StartYear="2001" ParentID="2" CAS="NULL" eperPollutant_ID="9" CodeEPER="NMVOCEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="18" Code="NOX" Name="Nitrogen oxides (NOx/NO2)" StartYear="2001" ParentID="2" CAS="NULL" eperPollutant_ID="10" CodeEPER="NOXEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="19" Code="SOX" Name="Sulphur oxides (SOx/SO2)" StartYear="2001" ParentID="2" CAS="NULL" eperPollutant_ID="13" CodeEPER="SOXEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="20" Code="HCFCS" Name="Hydrochlorofluorocarbons(HCFCs)" StartYear="2007" ParentID="2" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="21" Code="CFCS" Name="Chlorofluorocarbons (CFCs)" StartYear="2007" ParentID="2" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="22" Code="HALONS" Name="Halons" StartYear="2007" ParentID="2" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="23" Code="CHLORINE AND INORGANIC COMPOUNDS" Name="Chlorine and inorganic compounds (as HCl)" StartYear="2001" ParentID="2" CAS="NULL" eperPollutant_ID="51" CodeEPER="CHLORINE AND INORGANIC COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="24" Code="FLUORINE AND INORGANIC COMPOUNDS" Name="Fluorine and inorganic compounds (as HF)" StartYear="2001" ParentID="2" CAS="NULL" eperPollutant_ID="54" CodeEPER="FLUORINE AND INORGANIC COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="25" Code="HCN" Name="Hydrogen cyanide (HCN)" StartYear="2001" ParentID="2" CAS="74-90-8" eperPollutant_ID="55" CodeEPER="HCNEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="26" Code="AS AND COMPOUNDS" Name="Arsenic and compounds (as As)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="17" CodeEPER="AS AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="27" Code="CD AND COMPOUNDS" Name="Cadmium and compounds (as Cd)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="18" CodeEPER="CD AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="28" Code="CR AND COMPOUNDS" Name="Chromium and compounds (as Cr)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="19" CodeEPER="CR AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="29" Code="CU AND COMPOUNDS" Name="Copper and compounds (as Cu)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="20" CodeEPER="CU AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="30" Code="HG AND COMPOUNDS" Name="Mercury and compounds (as Hg)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="21" CodeEPER="HG AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="31" Code="NI AND COMPOUNDS" Name="Nickel and compounds (as Ni)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="22" CodeEPER="NI AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="32" Code="PB AND COMPOUNDS" Name="Lead and compounds (as Pb)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="23" CodeEPER="PB AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="33" Code="ZN AND COMPOUNDS" Name="Zinc and compounds (as Zn)" StartYear="2001" ParentID="3" CAS="NULL" eperPollutant_ID="24" CodeEPER="ZN AND COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="34" Code="ALACHLOR" Name="Alachlor" StartYear="2007" ParentID="4" CAS="15972-60-8" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="35" Code="ALDRIN" Name="Aldrin" StartYear="2007" ParentID="4" CAS="309-00-2" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="36" Code="ATRAZINE" Name="Atrazine" StartYear="2007" ParentID="4" CAS="1912-24-9" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="37" Code="CLORDANE" Name="Chlordane" StartYear="2007" ParentID="4" CAS="57-74-9" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="38" Code="CHLORDECONE" Name="Chlordecone" StartYear="2007" ParentID="4" CAS="143-50-0" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="39" Code="CHLORFENVINPHOS" Name="Chlorfenvinphos" StartYear="2007" ParentID="4" CAS="470-90-6" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="40" Code="CHLORPYRIFOS" Name="Chlorpyrifos" StartYear="2007" ParentID="4" CAS="2921-88-2" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="41" Code="DDT" Name="DDT" StartYear="2007" ParentID="4" CAS="50-29-3" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="42" Code="DIELDRIN" Name="Dieldrin" StartYear="2007" ParentID="4" CAS="60-57-1" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="43" Code="DIURON" Name="Diuron" StartYear="2007" ParentID="4" CAS="330-54-1" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="44" Code="ENDOSULPHAN" Name="Endosulphan" StartYear="2007" ParentID="4" CAS="115-29-7" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="45" Code="ENDRIN" Name="Endrin" StartYear="2007" ParentID="4" CAS="72-20-8" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="46" Code="HEPTACHLOR" Name="Heptachlor" StartYear="2007" ParentID="4" CAS="76-44-8" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="47" Code="HEXACHLOROCYCLOHEXANE(HCH)" Name="1,2,3,4,5,6-hexachlorocyclohexane (HCH)" StartYear="2007" ParentID="4" CAS="608-73-1" eperPollutant_ID="31" CodeEPER="HEXACHLOROCYCLOHEXANE(HCH)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="48" Code="LINDANE" Name="Lindane" StartYear="2007" ParentID="4" CAS="58-89-9" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="49" Code="MIREX" Name="Mirex" StartYear="2007" ParentID="4" CAS="2385-85-5" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="50" Code="SIMAZINE" Name="Simazine" StartYear="2007" ParentID="4" CAS="122-34-9" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="51" Code="TOXAPHENE" Name="Toxaphene" StartYear="2007" ParentID="4" CAS="8001-35-2" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="52" Code="ISOPROTURON" Name="Isoproturon" StartYear="2007" ParentID="4" CAS="34123-59-6" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="53" Code="TRIBUTYLTIN AND COMPOUNDS" Name="Tributyltin and compounds" StartYear="2007" ParentID="4" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="54" Code="TRIPHENYLTIN AND COMPOUNDS" Name="Triphenyltin and compounds" StartYear="2007" ParentID="4" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="55" Code="TRIFLURALIN" Name="Trifluralin" StartYear="2007" ParentID="4" CAS="1582-09-8" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="56" Code="ISODRIN" Name="Isodrin" StartYear="2007" ParentID="4" CAS="465-73-6" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="57" Code="CHLORO-ALKANES (C10-13)" Name="Chloro-alkanes, C10-C13" StartYear="2001" ParentID="5" CAS="85535-84-8" eperPollutant_ID="28" CodeEPER="CHLORO-ALKANES (C10-13)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="58" Code="DICHLOROETHANE-1,2 (DCE)" Name="1,2-dichloroethane (DCE)" StartYear="2001" ParentID="5" CAS="107-06-2" eperPollutant_ID="26" CodeEPER="DICHLOROETHANE-1,2 (DCE)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="59" Code="DICHLOROMETHANE (DCM)" Name="Dichloromethane (DCM)" StartYear="2001" ParentID="5" CAS="75-09-2" eperPollutant_ID="27" CodeEPER="DICHLOROMETHANE (DCM)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="60" Code="HALOGENATED ORGANIC COMPOUNDS" Name="Halogenated organic compounds (as AOX)" StartYear="2001" ParentID="5" CAS="NULL" eperPollutant_ID="32" CodeEPER="HALOGENATED ORGANIC COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="61" Code="HEXACHLOROBENZENE (HCB)" Name="Hexachlorobenzene (HCB)" StartYear="2001" ParentID="5" CAS="118-74-1" eperPollutant_ID="29" CodeEPER="HEXACHLOROBENZENE (HCB)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="62" Code="HEXACHLOROBUTADIENE (HCBD)" Name="Hexachlorobutadiene (HCBD)" StartYear="2001" ParentID="5" CAS="87-68-3" eperPollutant_ID="30" CodeEPER="HEXACHLOROBUTADIENE (HCBD)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="63" Code="PCDD+PCDF (DIOXINS+FURANS)" Name="PCDD + PCDF (dioxins + furans) (as Teq)" StartYear="2001" ParentID="5" CAS="NULL" eperPollutant_ID="33" CodeEPER="PCDD+PCDF (DIOXINS+FURANS)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="64" Code="PENTACHLOROBENZENE" Name="Pentachlorobenzene" StartYear="2007" ParentID="5" CAS="608-93-5" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="65" Code="PENTACHLOROPHENOL (PCP)" Name="Pentachlorophenol (PCP)" StartYear="2001" ParentID="5" CAS="87-86-5" eperPollutant_ID="34" CodeEPER="PENTACHLOROPHENOL (PCP)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="66" Code="POLYCHLORINATED BIPHENYLS (PCBS)" Name="Polychlorinated biphenyls (PCBs)" StartYear="2007" ParentID="5" CAS="1336-36-3" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="67" Code="TETRACHLOROETHYLENE (PER)" Name="Tetrachloroethylene (PER)" StartYear="2001" ParentID="5" CAS="127-18-4" eperPollutant_ID="35" CodeEPER="TETRACHLOROETHYLENE (PER)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="68" Code="TETRACHLOROMETHANE (TCM)" Name="Tetrachloromethane (TCM)" StartYear="2001" ParentID="5" CAS="56-23-5" eperPollutant_ID="36" CodeEPER="TETRACHLOROMETHANE (TCM)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="69" Code="TRICHLOROBENZENES (TCB)" Name="Trichlorobenzenes (TCBs) (all isomers)" StartYear="2001" ParentID="5" CAS="12002-48-1" eperPollutant_ID="37" CodeEPER="TRICHLOROBENZENES (TCB)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="70" Code="TRICHLOROETHANE-1,1,1 (TCE)" Name="1,1,1-trichloroethane" StartYear="2001" ParentID="5" CAS="71-55-6" eperPollutant_ID="38" CodeEPER="TRICHLOROETHANE-1,1,1 (TCE)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="71" Code="TETRACHLOROETHANE-1,1,2,2" Name="1,1,2,2-tetrachloroethane" StartYear="2007" ParentID="5" CAS="79-34-5" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="72" Code="TRICHLOROETHYLENE (TRI)" Name="Trichloroethylene" StartYear="2001" ParentID="5" CAS="79-01-6" eperPollutant_ID="39" CodeEPER="TRICHLOROETHYLENE (TRI)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="73" Code="TRICHLOROMETHANE" Name="Trichloromethane" StartYear="2001" ParentID="5" CAS="67-66-3" eperPollutant_ID="40" CodeEPER="TRICHLOROMETHANEEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="74" Code="VINYL CHLORIDE" Name="Vinyl chloride" StartYear="2007" ParentID="5" CAS="75-01-4" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="75" Code="BROMINATED DIPHENYLETHER" Name="Brominated diphenylethers (PBDE)" StartYear="2001" ParentID="5" CAS="NULL" eperPollutant_ID="44" CodeEPER="BROMINATED DIPHENYLETHEREPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="76" Code="HEXABROMOBIPHENYL" Name="Hexabromobiphenyl" StartYear="2007" ParentID="5" CAS="36355-1-8" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="77" Code="ANTHRACENE" Name="Anthracene" StartYear="2007" ParentID="6" CAS="120-12-7" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="78" Code="NP/NPES" Name="Nonylphenol and Nonylphenol ethoxylates (NP/NPEs)" StartYear="2007" ParentID="6" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="79" Code="ETHYLENE OXIDE" Name="Ethylene oxide" StartYear="2007" ParentID="6" CAS="75-21-8" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="80" Code="NAPHTHALENE" Name="Naphthalene" StartYear="2007" ParentID="6" CAS="91-20-3" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="81" Code="ORGANOTIN - COMPOUNDS" Name="Organotin compounds (as total Sn)" StartYear="2001" ParentID="6" CAS="NULL" eperPollutant_ID="45" CodeEPER="ORGANOTIN - COMPOUNDSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="82" Code="DEHP" Name="Di-(2-ethyl hexyl) phthalate (DEHP)" StartYear="2007" ParentID="6" CAS="117-81-7" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="83" Code="PHENOLS" Name="Phenols (as total C)" StartYear="2001" ParentID="6" CAS="108-95-2" eperPollutant_ID="47" CodeEPER="PHENOLSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="84" Code="POLYCYCLIC AROMATIC HYDROCARBONS" Name="Polycyclic aromatic hydrocarbons (PAHs)" StartYear="2007" ParentID="6" CAS="NULL" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="85" Code="TOTAL ORGANIC CARBON (TOC)" Name="Total organic carbon (TOC) (as total C or COD/3)" StartYear="2001" ParentID="6" CAS="NULL" eperPollutant_ID="48" CodeEPER="TOTAL ORGANIC CARBON (TOC)EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="86" Code="OCTYLPHENOLS AND OCTYLPHENOL ETHOXYLATES" Name="Octylphenols and Octylphenol ethoxylates" StartYear="2007" ParentID="6" CAS="1806-26-4" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="87" Code="FLUORANTHENE" Name="Fluoranthene" StartYear="2007" ParentID="6" CAS="206-44-0" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="88" Code="BENZO(G,H,I)PERYLENE" Name="Benzo(g,h,i)perylene" StartYear="2007" ParentID="6" CAS="191-24-2" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="89" Code="BENZENE" Name="Benzene" StartYear="2007" ParentID="8" CAS="71-43-2" eperPollutant_ID="42" CodeEPER="BENZENEEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="90" Code="ETHYLBENZENE" Name="Ethyl benzene" StartYear="2007" ParentID="8" CAS="100-41-4" eperPollutant_ID="487" CodeEPER="ETHYLBENZENEEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="91" Code="TOLUENE" Name="Toluene" StartYear="2007" ParentID="8" CAS="108-88-3" eperPollutant_ID="489" CodeEPER="TOLUENEEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="92" Code="XYLENES" Name="Xylenes" StartYear="2007" ParentID="8" CAS="1330-20-7" eperPollutant_ID="488" CodeEPER="XYLENESEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="93" Code="TOTAL - NITROGEN" Name="Total nitrogen" StartYear="2001" ParentID="7" CAS="NULL" eperPollutant_ID="14" CodeEPER="TOTAL - NITROGENEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="94" Code="TOTAL - PHOSPHORUS" Name="Total phosphorus" StartYear="2001" ParentID="7" CAS="NULL" eperPollutant_ID="15" CodeEPER="TOTAL - PHOSPHORUSEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="95" Code="CHLORIDES" Name="Chlorides (as total Cl)" StartYear="2001" ParentID="7" CAS="NULL" eperPollutant_ID="50" CodeEPER="CHLORIDESEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="96" Code="ASBESTOS" Name="Asbestos" StartYear="2007" ParentID="7" CAS="1332-21-4" CodeEPER="NULL" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="97" Code="CYANIDES" Name="Cyanides (as total CN)" StartYear="2001" ParentID="7" CAS="NULL" eperPollutant_ID="52" CodeEPER="CYANIDESEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="98" Code="FLUORIDES" Name="Fluorides (as total F)" StartYear="2001" ParentID="7" CAS="NULL" eperPollutant_ID="53" CodeEPER="FLUORIDESEPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="99" Code="PM10" Name="Particulate matter (PM10)" StartYear="2001" ParentID="7" CAS="NULL" eperPollutant_ID="56" CodeEPER="PM10EPER" />
+<EPRTRWeb.dbo.LOV_POLLUTANT LOV_PollutantID="100" Code="PAHs in EPER" Name="Polycyclic Aromatic Hydrocarbons (PAH in EPER)" StartYear="2001" EndYear="2004" ParentID="6" CAS="NULL" eperPollutant_ID="46" CodeEPER="PAHs in EPER" />
