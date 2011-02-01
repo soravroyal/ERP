@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<BaseWidget	xmlns				="com.esri.solutions.flexviewer.*" 
+			xmlns:mx			="http://www.adobe.com/2006/mxml" 
+			xmlns:toccomp		="com.esri.solutions.flexviewer.components.toccustom.*" 
+			xmlns:widgets		="com.esri.solutions.flexviewer.widgets.*"
+			x					="600" 
+			y					="300" 
+			widgetConfigLoaded	="init()">
+	
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.FlexEvent;
+			import com.esri.solutions.flexviewer.AppEvent;
+			import com.esri.solutions.flexviewer.SiteContainer;
+			import com.esri.ags.layers.ArcGISTiledMapServiceLayer;
+			import mx.graphics.ImageSnapshot;
+			import mx.controls.Image;
+			
+	
+			import mx.controls.List;
+			
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.esri.ags.layers.Layer;
+			import com.esri.ags.layers.ArcGISDynamicMapServiceLayer;
+			import com.esri.ags.layers.LayerInfo;			
+			import com.esri.ags.events.MapEvent;
+			import com.esri.ags.Map;
+			import com.esri.solutions.flexviewer.ConfigData;
+			import com.esri.solutions.flexviewer.utils.WidgetEffects;
+			import mx.controls.Alert;
+			import mx.collections.*;
+			import mx.printing.PrintAdvancedDataGrid;
+			import mx.printing.PrintDataGrid;
+			import flash.external.ExternalInterface;
+			import com.esri.solutions.flexviewer.components.toc.utils.MapUtil;
+			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomMapLayerItem;		
+			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomLayerInfoItem;		
+			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomItem;
+			
+
+			import mx.core.Application;
+
+			
+			//labels
+			[Bindable]
+			private var visibilityLabel:String;
+			
+			[Bindable]
+			private var transparencyLabel:String;
+			
+			[Bindable]
+			private var filterLabel:String;
+			
+			[Bindable]
+			private var legendLabel:String;
+			
+			[Bindable]
+			private var layerlabels:String;			
+			
+			private var layerlabelsAlias:Object;
+			
+			[Bindable]
+			private var showLayersInTOC:Boolean;			
+			
+			[Bindable]
+			private var zoomToFilter:Boolean;
+			
+			private var excludeMapLayersInTOC:Array;
+			
+			//excluding layers in a map service from TOC
+			[Bindable]
+			private var excludeMapLayersInTOCobj:Object;
+			
+			[Bindable]
+			private var keepTOCCollapsed:Boolean;
+			
+			
+			private var excludeAllLayersInit:Boolean;
+			
+			[Bindable]
+			private var includeSingleLayersStr:String = "";
+			
+			private var excludeMapLayersFromFilter:Array;
+			[Bindable]
+			private var excludeMapLayersFromFilterObj:Object;
+			
+			[Bindable]
+			private var filterGroups:XMLList;
+			
+			[Bindable]
+			private var openTreeInitially:Boolean = false;
+		
+			private var includeLayersCalled:Boolean = false;
+		
+			
+			private var appurl:String = mx.core.Application.application.url.slice(0,mx.core.Application.application.url.lastIndexOf("/"));
+				
+			private const ICON_URL:String = appurl +"/"+ "com/esri/solutions/flexviewer/assets/images/icons/";
+			
+			//legend image btn is only shown when a legend image should be shown
+			private var legendBtn:Image;
+			private var showLegendFirstTime:Boolean = true;
+			
+			private var layeridlistName:String;
+			private var layeridlist:Array;
+			private var layeridlistObj:Object;
+						
+			private function init():void
+			{
+				if (configXML)
+				{
+					
+					setText();
+					//labels
+					
+					layerlabels = configXML.labels.layerlabels || "";
+					if(layerlabels != ""){
+						if(!layerlabelsAlias) layerlabelsAlias = new Object();
+						var llabels:Array = layerlabels.split(";");
+						for(var i:int = 0; i < layerlabels.length; i++){
+							var llabel:Array = String(llabels[i]).split(":");
+							layerlabelsAlias[llabel[0]] = llabel[1];
+						}
+						Application.application.labelAlias = layerlabelsAlias;
+					}
+					includeSingleLayersStr = configXML.includesinglelayers.text().toString();
+					filterGroups = configXML.filtergroups;
+					layerfilter.filterGroups = configXML.filtergroups;
+					showLayersInTOC = configXML.showlayers == 'true';
+					zoomToFilter = configXML.zoomtofilter == 'true';
+					openTreeInitially = configXML.opentoconstart == 'true';
+					excludeMapLayersInTOC = String(configXML.excludemaplayers).split(",");
+					if(excludeMapLayersInTOC.length > 0){
+						excludeMapLayersInTOCobj = new Object();
+						for(var t : int =0; t < excludeMapLayersInTOC.length; t++){
+							excludeMapLayersInTOCobj[excludeMapLayersInTOC[t]] = false;
+						}	 
+					}
+					layeridlistName = String(configXML.layeridlist.@mapserviceid);
+					layeridlist = String(configXML.layeridlist).split(",");
+					if(layeridlist.length > 0){
+						layeridlistObj = new Object();
+						layeridlistObj.mapservice = layeridlistName;
+						for(var n : int =0; n < layeridlist.length; n++){
+							var temp:Array = layeridlist[n].split(":");
+							layeridlistObj[temp[0]] = temp[1];
+						}	 
+					}
+					
+					
+					keepTOCCollapsed = String(configXML.keeptoccollapsed) == "true";
+					
+					
+					excludeAllLayersInit = configXML.excludealllayers == 'true';
+					
+					excludeMapLayersFromFilter = String(configXML.excludemaplayersfromfilter).split(",");
+					if(excludeMapLayersFromFilter.length > 0){
+						excludeMapLayersFromFilterObj = new Object();
+						for(var s : int =0; s < excludeMapLayersFromFilter.length; s++){
+							excludeMapLayersFromFilterObj[excludeMapLayersFromFilter[s]] = true;
+						}	 
+					} 
+				}
+				toc.map = map;				
+				toc.configData = configData;
+				//if all layers should be excluded initially, wait for toc to be added before executing excludeAlllayers
+				if(excludeAllLayersInit){
+					toc.addEventListener(Event.ADDED,executeExcludeAllLayers);
+				}else{
+					toc.excludeLayers = getBasemaps();
+				}
+				
+				toc.excludeGraphicsLayers = true;
+				layerRepeater.dataProvider = getLayers();
+				/** if filter is available**/
+				if(filterGroups.length() > 0) wTemplate.addTitlebarButton(ICON_URL + "i_filter.gif", filterLabel, showStateFilter, "filterbtn");
+				/****/
+				legendBtn = wTemplate.addTitlebarButton(ICON_URL + "i_legend.png", legendLabel, showStateLegend, "legendbtn");
+				legendBtn.visible = false;
+				legendBtn.includeInLayout = false;
+				wTemplate.addTitlebarButton(ICON_URL + "i_options.png", transparencyLabel, showStateOptions, "transparencybtn");
+				wTemplate.addTitlebarButton(ICON_URL + "i_layers.png", visibilityLabel, showStateVisibility, "visibilitybtn");
+			
+				SiteContainer.addEventListener(AppEvent.UPDATE_STATIC_LEGEND, updateLegend_handler);
+				
+				 ExternalInterface.addCallback("setLayersVisibility", setLayersVisibility);
+				 ExternalInterface.addCallback("getVisibleLayers", getVisibleLayers);
+				 ExternalInterface.addCallback("setVisibleLayers", setVisibleLayers);				 
+				 ExternalInterface.addCallback("setExcludeLayers", setExcludeLayers);
+				 ExternalInterface.addCallback("excludeAllLayers", excludeAllLayers);
+				 ExternalInterface.addCallback("includeLayers", includeLayers);		
+				ExternalInterface.addCallback("setAllLayersDefinition", setAllLayersDefinition);
+				
+				if(keepTOCCollapsed)
+				{
+					toc.x = -20;
+				}
+				if(openTreeInitially)
+				{
+					toc.openTree();
+				}
+
+			}			
+			
+			private function getBasemaps():ArrayCollection
+			{
+				var baseMaps:ArrayCollection = new ArrayCollection();
+				for (var i:Number = 0; i < configData.configBasemaps.length; i++)
+		        {
+		        	baseMaps.addItem(configData.configBasemaps[i].id);
+		        }
+				return baseMaps;
+			}			
+			
+			private function getLayers():Array
+			{
+				var basemapCount:Number = configData.configBasemaps.length;
+				var layerArray:Array = [];
+				for (var i:Number = map.layerIds.length -1; i >= basemapCount; i--)
+				{
+					var layer:Layer = map.getLayer(map.layerIds[i]);
+					if (!(layer is GraphicsLayer))
+						layerArray.push(layer);
+				}
+				return layerArray;
+			}
+						
+			private function showStateVisibility(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 0, 400);
+			}			
+			
+			private function showStateOptions(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 1, 400);
+			}
+			private function showStateLegend(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 2, 400);
+			}
+			private function showStateFilter(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 3, 400);
+			}
+			
+			private function setExcludeLayers(layers:String, setvisibility:String = "true"):void
+			{ 
+				var _setvisibility:Boolean = setvisibility == "true";
+				var layerArr:Array = layers.split(",");
+				if(_setvisibility){
+					for(var index:int = 0; index < layerArr.length; index ++){
+		        		setLayersVisibility(layerArr[index],"", "false", "false");
+		       	 	}
+				}
+		        
+		       
+				var baseMaps:ArrayCollection = new ArrayCollection(layerArr);
+				for (var i:Number = 0; i < configData.configBasemaps.length; i++)
+		        {		        	
+		        	baseMaps.addItem(configData.configBasemaps[i].id);
+		        }
+		        toc.excludeLayers = baseMaps;
+			}
+			
+			private function includeLayers(layers:String = "-1", setvisibility:String = "true", excludeOthers:String = "true"):Boolean
+			{ 
+				includeLayersCalled = true;
+				trace(" layeridlistObj[layers.split(',')[0]]" +  layeridlistObj[layers.split(",")[0]])
+				if(layers.indexOf(":::") != -1 || layeridlistObj[layers.split(",")[0]])
+				{
+					setVisibleLayers(layers);
+
+				}
+				if(layers == "none")
+				{
+					excludeAllLayers();
+					return true
+				}
+					
+			        
+				 if(excludeOthers == "true"){
+					excludeAllLayers();
+				}
+				
+				var layerArr:Array;
+				var _setvisibility:Boolean = setvisibility == "true";
+				
+				//if(layers == "-1" || layers == ""){
+				if(layers == "-1" || layers == ""){
+					layerArr = map.layerIds;
+					var basemaps:ArrayCollection = getBasemaps();
+					for(var h:int = 0; h < layerArr.length;h++){
+						if(basemaps.contains(layerArr[h])){
+							layerArr.splice(h,1);
+							h--;
+						}
+					}
+				}
+				else{
+					layerArr = layers.split(",");
+				} 
+		      	var excludedLayers:ArrayCollection = toc.excludeLayers as ArrayCollection;
+		      	
+				
+				if(_setvisibility){
+					
+					for(var index:int = 0; index < layerArr.length; index ++)
+					{
+						var lId:String = String(layerArr[index]).split(":::")[0];
+						if(layeridlistObj[layerArr[index]]) lId = this.layeridlistName;
+	        		 	map.getLayer(lId).visible = _setvisibility;		        		 
+	       	 		}
+				}
+				for (var i:Number = 0; i < layerArr.length; i++)
+		        {
+		        	var laId:String = String(layerArr[i]).split(":::")[0];
+					for (var j:Number = 0; j < excludedLayers.length; j++)
+			        {	
+			        	if(excludedLayers.getItemAt(j) == laId){	        	
+			        		excludedLayers.removeItemAt(j);
+			        	}
+			        }
+		        }
+		        toc.excludeLayers = excludedLayers;
+		      
+		       
+		        return true;       
+			  }
+			private function includeSingleLayers(mapserviceid:String,layers:String = "-1", setvisibility:String = "true", excludeOthers:String = "true"):void
+			{ 
+				var _excludeOthers:Boolean  = excludeOthers == "true";
+				
+				if(map.getLayer(mapserviceid) is ArcGISDynamicMapServiceLayer){
+					var mapServiceLayer:ArcGISDynamicMapServiceLayer = ArcGISDynamicMapServiceLayer(map.getLayer(mapserviceid));
+				
+					var layerArr:Array;
+					var excludeSingleLayers:ArrayCollection = new ArrayCollection();
+					var _setvisibility:Boolean = setvisibility == "true";
+					
+					
+					if(layers == "-1"){
+						//show all layers in mapservice						
+						layers = "";
+					}
+					else{
+						//show layers in layers string
+						layerArr = layers.split(",");
+					} 
+			      				      	
+					if(_setvisibility){						 
+						 if(ArrayCollection(toc.dataProvider).length > 0){
+		        		 	setLayersVisibility(mapserviceid,layers,excludeOthers);
+			       	 	}
+					}
+					
+					var excludedLayers:ArrayCollection = toc.excludeLayers as ArrayCollection;
+					
+					for (var j:Number = 0; j < excludedLayers.length; j++)
+			        {	
+			        	if(excludedLayers.getItemAt(j) == mapserviceid)
+			        	{	        	
+			        		excludedLayers.removeItemAt(j);
+			        	}
+			        }
+			        
+			        var visibleLayers:Array = new Array();
+			        for (var l :int =0; l < mapServiceLayer.layerInfos.length; l++)
+				    {
+				    	if(!layerArr){
+				    		visibleLayers.push(l);
+				    		excludeSingleLayers = null;
+				    	}else{
+					        for ( var name:int = 0; name < layerArr.length; name++)
+					        {						        
+					        	var li:LayerInfo = mapServiceLayer.layerInfos[l] as LayerInfo;
+					        	if (li.name == layerArr[name])
+					        	{
+					        		excludeSingleLayers.addItem(mapserviceid + "_" + li.name)
+						        	visibleLayers.push(l);
+					        	}
+						     }
+					    }
+				     }
+			        toc.excludeSingleLayers = excludeSingleLayers;
+			        //if(ArrayCollection(toc.dataProvider).length < 1 && _setvisibility){
+			        if( _setvisibility){	
+			       		        		
+		        		mapServiceLayer.visible = _setvisibility;
+		        		mapServiceLayer.visibleLayers = new ArrayCollection(visibleLayers);
+		        	}
+			     	
+			        toc.excludeLayers = excludedLayers; 
+			       
+		        }      
+			  }
+			private function executeExcludeAllLayers(e:Event):void
+			{
+				if(!includeLayersCalled)
+				{
+					excludeAllLayers("true");
+				}
+				
+				toc.removeEventListener(Event.ADDED,executeExcludeAllLayers);
+			}
+			
+			private function excludeAllLayers(setvisibility:String = "true"):void
+			{ 
+				var _setvisibility:Boolean = setvisibility == "true";				
+				if(_setvisibility){	
+		       	 	var basemaps:ArrayCollection = getBasemaps();			
+					for(var index:int = 0; index < map.layerIds.length; index ++){
+						if(!basemaps.contains(map.layerIds[index])){
+		     	   			setLayersVisibility(map.layerIds[index],"", "false", "false");
+		    			}
+		       	 	}
+		 		 }
+		        toc.excludeLayers = new ArrayCollection(map.layerIds);
+
+			}
+		
+			
+			/*setLayersVisibility:
+			*
+			* if turnOthersOff = true, all layers not in layers string in service is 
+			* turned off and layers in the layers string is turned off - turnon is ignored
+			* 
+			*/ 
+			private function setLayersVisibility(mapServiceName:String,layers:String="",_turnOthersOff:String = "false",_turnon:String = "true",_turnOtherLayersOff:String = "true"):void
+			{
+				var mapServicesToTurnOff:ArrayCollection = new ArrayCollection();
+				var turnOthersOff:Boolean = _turnOthersOff == "true";
+				if(!turnOthersOff && (_turnOthersOff != "false")){
+				 //specific mapservices are listed
+					mapServicesToTurnOff = new ArrayCollection(_turnOthersOff.split(","));
+					//turnOthersOff = true;
+				}
+				var turnon:Boolean = _turnon == "true";
+				var mapServiceLayer:Layer
+				if(map.getLayer(mapServiceName) is ArcGISDynamicMapServiceLayer){
+					mapServiceLayer = ArcGISDynamicMapServiceLayer(map.getLayer(mapServiceName));
+				}else if (map.getLayer(mapServiceName) is ArcGISTiledMapServiceLayer){					
+					mapServiceLayer = ArcGISTiledMapServiceLayer(map.getLayer(mapServiceName)); 
+				}
+				if(mapServiceLayer){
+					mapServiceLayer.visible = turnon;
+					ExternalInterface.call("sendToJavaScript",mapServiceLayer.name + " id: " +mapServiceLayer.id + " mapServiceLayer.visible : "+mapServiceLayer.visible );
+					var layerids : Array = layers.split(",");
+					var layeridsNumber : Array = new Array();
+					for(var li:int = 0; li < layerids.length; li++)
+					{
+						if(layerids[li] != "") layeridsNumber.push(Number(layerids[li]));
+					}
+					/*if(!isNaN(layerids[0])){
+						 layerids = getLayerLabels(mapServiceLayer, layerids)
+					}*/
+					var visibleLayers:ArrayCollection = new ArrayCollection(layerids);
+					var visibleLayersNumber:ArrayCollection = new ArrayCollection(layeridsNumber);
+					
+					if(mapServiceLayer is ArcGISDynamicMapServiceLayer && layeridsNumber.length > 0)
+					{
+						ArcGISDynamicMapServiceLayer(mapServiceLayer).visibleLayers = visibleLayersNumber;
+						var linfos:Array = ArcGISDynamicMapServiceLayer(mapServiceLayer).layerInfos;
+						if(linfos)
+						{
+							for(var inf:int = 0 ; inf < linfos.length ; inf ++)
+							{
+								var linfo:LayerInfo = LayerInfo(ArcGISDynamicMapServiceLayer(mapServiceLayer).layerInfos[inf])
+								if(visibleLayersNumber.contains(linfo.id))
+								{
+									linfo.defaultVisibility = true;
+								}
+								else
+								{
+									linfo.defaultVisibility = false;
+								}
+									
+							}
+						}
+						
+								
+					}
+					//ExternalInterface.call("console.log",mapServiceLayer.name + " layers: " +layers + " layerids : "+layerids );
+					
+			
+					var tocprovider:ArrayCollection = ArrayCollection(toc.dataProvider);
+					for(var i:int = 0; i < tocprovider.length; i++){
+						var item:Object = tocprovider.getItemAt(i);
+						//if(item is TocCustomMapLayerItem && TocCustomMapLayerItem(item).id == mapServiceLayer.id){
+						if(item is TocCustomMapLayerItem){
+							
+							var tcml:TocCustomMapLayerItem = TocCustomMapLayerItem(item);
+							
+							if((turnOthersOff && TocCustomMapLayerItem(item).id != mapServiceLayer.id)  || mapServicesToTurnOff.contains(TocCustomMapLayerItem(item).id)){
+								tcml.visible = false;
+								
+							} 
+							//turn on/off layers in service if layers is not empty string
+							if(layers.length > 0 && tcml && tcml.children && tcml.id == mapServiceLayer.id  && mapServiceLayer is ArcGISDynamicMapServiceLayer){
+								turnOthersOff = _turnOtherLayersOff != "false";
+								for(var k:int = 0; k < tcml.children.length; k++){
+									if( tcml.children.getItemAt(k) is TocCustomLayerInfoItem){
+										var tcil:TocCustomLayerInfoItem = TocCustomLayerInfoItem(tcml.children.getItemAt(k));
+										//turn on layers in arg and other off, else turn layer on/off
+										if(turnOthersOff){											
+											tcil.visible = (tcml.visible && visibleLayers.contains(tcil.id));
+											
+										} 
+										else if(visibleLayers.contains(tcil.id) && tcml.visible){	
+											tcil.visible = turnon;
+											tcml.visible = turnon;
+										}
+										
+										 
+									}
+								}
+							}
+							
+							
+							
+							
+						}
+						
+					}
+				}
+				
+								
+			}
+			
+		  public function getVisibleLayers():String{
+				// for each layer in map if visible - add to string
+				var visibleLayersString:String = "";
+				var basemaps:ArrayCollection = getBasemaps();
+				for each (var layerId:String in map.layerIds) {
+					var layer:Layer = map.getLayer(layerId);
+					if(layer.visible && !basemaps.contains(layerId)){
+						if(visibleLayersString != "") visibleLayersString = visibleLayersString + ",";
+						visibleLayersString = visibleLayersString + layer.id;
+					} 
+				}
+				
+				return visibleLayersString;
+			}
+			
+			 public function setVisibleLayers(layers:String, _includeSingleLayersStr:String = ""):void
+			 {
+				// for each layer in map if visible - add to string
+				if(_includeSingleLayersStr != "") includeSingleLayersStr = _includeSingleLayersStr;
+				else includeSingleLayersStr = "";
+				var basemaps:ArrayCollection = getBasemaps();	
+				var visibleLayersArray:Array = layers.split(",");
+				for (var i:int = 0; i < visibleLayersArray.length; i++){
+					if(!basemaps.contains(visibleLayersArray[i])){
+						//turn all off in first run
+						
+						//see if maplayer has layer ids to show included:
+						var _maplayerid:String = visibleLayersArray[i].split(":::")[0];
+						if(visibleLayersArray[i].split(":::").length > 1)
+						{
+							includeSingleLayersStr = visibleLayersArray[i].split(":::")[1]; 
+							var pattern:RegExp = /::/gi;
+							includeSingleLayersStr = includeSingleLayersStr.replace(pattern, ",");
+						}
+						else if(layeridlistObj[_maplayerid])
+						{//check if layers per mapservice is defined in config (put in layeridlistObj)
+						if(includeSingleLayersStr != "") includeSingleLayersStr += ",";
+							includeSingleLayersStr += layeridlistObj[_maplayerid];
+							_maplayerid = layeridlistObj.mapservice;
+							
+						}
+						else
+						{
+							includeSingleLayersStr = "";
+						}
+						setLayersVisibility(_maplayerid, includeSingleLayersStr	,"false");
+						
+					}
+				}
+				
+				
+			}			
+		
+			private function getLayerLabels(_mapServiceLayer:ArcGISDynamicMapServiceLayer, _layerids:Array):Array{
+				for(var h:int = 0; h < _layerids.length; h++){
+					_layerids[h] = MapUtil.getLayerLabel(_mapServiceLayer,_layerids[h]);
+				}
+				return _layerids;		
+			}
+			private function getLayerIds(_mapServiceLayer:ArcGISDynamicMapServiceLayer, _layernames:Array):Array{
+				for(var h:int = 0; h < _layernames.length; h++){
+					_layernames[h] = MapUtil.getLayerId(_mapServiceLayer,_layernames[h]);
+				}
+				return _layernames;		
+			}
+			private function updateLegend_handler(event:AppEvent):void
+			{	
+				var mlId:String = event.data.maplayerid;
+				if(event.data.layerid  && event.data.layerid != "")
+				{
+					mlId = mlId +"_"+event.data.layerid;
+				} 
+			
+				if(event.data.action == "remove")
+				{
+					removeLegendImage(mlId);
+				}
+				else
+				{
+					setLegendImage(event.data.label,event.data.legend,mlId);
+				}
+			}
+			public function setLegendImage(layername:String,legendurl:String,maplayerid:String="",layerid:String=""):void{
+				legendBtn.visible = true;
+				legendBtn.includeInLayout = true;
+				var lId:String = maplayerid;
+				if(layerid != "") lId = lId +"_"+layerid
+				imageLegend.addLegend(layername,legendurl,lId);
+				if(showLegendFirstTime)
+				{
+					setTimeout(showStateLegend, 500, null);
+					showLegendFirstTime = false; 
+				}
+			}
+			
+			public function removeLegendImages():void{
+				legendBtn.visible = false;
+				legendBtn.includeInLayout = false;
+				imageLegend.clearLegends();
+			}
+			
+			public function removeLegendImage(layername:String):void{
+				//returns false if the legend stack has no children - i.e no legends to show
+				if(!imageLegend.removeLegend(layername)){
+					legendBtn.visible = false;
+					legendBtn.includeInLayout = false;
+				}
+			}
+		
+			override public function printwidget():DisplayObject{
+				var childadded:Boolean = false;
+				var tocBitmap:Bitmap;	
+				var sprite:Sprite = new Sprite();
+				var tocBitMapData:BitmapData = toc.prettyPrint();
+				if(tocBitMapData){
+					tocBitmap = new Bitmap(tocBitMapData);				
+					sprite.addChild(tocBitmap);
+					childadded = true;
+				} 				
+				if(legendBtn.visible){										
+					var imageLegendBitmap:Bitmap = new Bitmap(imageLegend.prettyPrint());
+					var imgLegendDS:DisplayObject = sprite.addChild(imageLegendBitmap);
+					childadded = true;
+					if(tocBitmap) imgLegendDS.x = tocBitmap.width;
+										
+				}
+				if(childadded) return sprite;
+				else return null;
+			}
+			
+		override public function updateLocale(value:String):void{
+   				super.updateLocale(value);
+			
+   				//add specific  widget texts here    	
+				setText();
+				toc.invalidateList();
+				var widgetstate:String = this.getState();
+            	//Set state of widget to update toc.
+            	if(viewStack.selectedIndex == 0 && widgetstate == BaseWidget.STATE_MAXIMIZED){
+            		this.setState(BaseWidget.STATE_MINIMIZED);
+            		this.setState(widgetstate)
+            	}             
+			}
+			
+			private function setText():void{
+				
+				//title
+				if(resourceManager.getString(widgetResourceFile, 'widgettitle'))wTemplate.setTitle(resourceManager.getString(widgetResourceFile, 'widgettitle'));
+
+				//widget labels:
+				filterLabel = resourceManager.getString(widgetResourceFile, 'filterLabel') || "Layer Filter"; 	
+				legendLabel = resourceManager.getString(widgetResourceFile, 'legendLabel')  || "Other Legends";
+				transparencyLabel = resourceManager.getString(widgetResourceFile, 'transparencyLabel')|| "Layer Transparency"; 	
+				visibilityLabel = resourceManager.getString(widgetResourceFile, 'visibilityLabel') || "Layer Visibility";
+				
+				//buttons			
+					
+				if(wTemplate.titleBar.getChildByName("visibilitybtn"))Image(wTemplate.titleBar.getChildByName("visibilitybtn")).toolTip = visibilityLabel;
+				if(wTemplate.titleBar.getChildByName("transparencybtn"))Image(wTemplate.titleBar.getChildByName("transparencybtn")).toolTip = transparencyLabel;			
+				if(wTemplate.titleBar.getChildByName("legendbtn"))Image(wTemplate.titleBar.getChildByName("legendbtn")).toolTip = legendLabel;
+				if(wTemplate.titleBar.getChildByName("filterbtn"))Image(wTemplate.titleBar.getChildByName("filterbtn")).toolTip = filterLabel;
+				
+			}
+			private var layerdefinition:String;
+			private function setAllLayersDefinition(def:String = ""):void
+			{
+				ExternalInterface.call("console.log","setAllLayersDefinition " +def + " layerfilter.initializedComplete" + layerfilter.initializedComplete);
+				if(layerfilter.initializedComplete)
+				{
+					layerfilter.setAllLayersDefinition(def);
+				}
+				else {
+					layerdefinition = def;
+					layerfilter.addEventListener(FlexEvent.CREATION_COMPLETE,layerfilter_creationComplete_handler);
+				}
+			}
+			private function layerfilter_creationComplete_handler(e:FlexEvent):void
+			{
+				layerfilter.setAllLayersDefinition(layerdefinition);
+				layerfilter.removeEventListener(FlexEvent.CREATION_COMPLETE,setAllLayersDefinition);
+			}
+			
+	
+		]]>
+	</mx:Script>	
+	<mx:Metadata>
+        [ResourceBundle("FilterAllWidgetStrings")]
+    </mx:Metadata> 
+	
+	<WidgetTemplate id="wTemplate" height="280" >
+		<mx:ViewStack id="viewStack" width="100%" height="100%" creationPolicy="all">
+			<mx:Canvas id="vbox" width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+							
+				<mx:Label text="{visibilityLabel}" styleName="WidgetText" width="100%"/>
+				<toccomp:TOCCustom y="22" id="toc" width="100%" height="100%" showLayersInMapservice="{showLayersInTOC}" excludeLayersInMapservice="{excludeMapLayersInTOCobj}" setLayersDefinition="{layerfilter.setAllLayersDefinition}" setLayersVisibility="{this.setLayersVisibility}" doubleClickEnabled="{!keepTOCCollapsed}"  />				
+				<!--mx:VBox y="85" horizontalScrollPolicy="auto"  >
+					<mx:Label text="mapservice" />
+					<mx:TextInput id="ti" width="100" text="sector1" />	
+					<mx:Button label="setVisibleLayers" click="{setVisibleLayers(ti.text)}" />					
+					<mx:Button label="includeLayers" click="{includeLayers(ti.text)}" />
+					<mx:Button  y="105"  label="excludeAllLayers" click="{excludeAllLayers()}" />	
+				</mx:VBox>
+				 
+		<mx:HBox><mx:Button label="setlayerdef" click="{setAllLayersDefinition(def.text)}" />
+		<mx:TextInput id="def"  text="ReportingYear = 2007 AND FacilityName LIKE 'Central%'" /></mx:HBox-->
+		
+			</mx:Canvas>
+			<mx:VBox width="100%" height="100%">
+				<mx:Label text="{transparencyLabel}" styleName="WidgetText" width="100%"/>
+				<mx:Repeater id="layerRepeater">
+						<widgets:LayerAlpha id="l" layer="{layerRepeater.currentItem}" visible="{Layer(layerRepeater.currentItem).visible}"/>
+				</mx:Repeater>
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%">
+				<mx:Label text="{legendLabel}" styleName="WidgetText" width="100%"/>
+					<widgets:ImageLegend  id="imageLegend" parentWidget="{this}"  viewStack="{this.viewStack}"/>									
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%">
+				<mx:Label text="{filterLabel}" styleName="WidgetText" width="100%"/>
+					<widgets:LayerFilter id="layerfilter" toc="{toc}" filterGroups="{filterGroups}" basemaps="{getBasemaps()}" excludeMapLayersFromFilter="{excludeMapLayersFromFilterObj}" zoomToFilter="{zoomToFilter}"/>
+									
+			</mx:VBox>
+		</mx:ViewStack>
+	</WidgetTemplate>
+	
+</BaseWidget>
