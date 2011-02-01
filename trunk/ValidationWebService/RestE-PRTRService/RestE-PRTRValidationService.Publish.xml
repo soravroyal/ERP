@@ -1,0 +1,38 @@
+<publishData>
+  <publishTarget publishUrl="D:\EPERSearch\PrecompiledWeb\E-PRTRValidationService\">
+    <file relUrl="RestE-PRTRService.svc" publishTime="10/08/2010 09:14:46" />
+    <file relUrl="Web.config" publishTime="12/09/2010 13:44:03" />
+    <file relUrl="bin/RestE-PRTRService.pdb" publishTime="12/10/2010 11:49:08" />
+    <file relUrl="bin/EPRTR.ResourceProviders.pdb" publishTime="10/06/2010 09:53:39" />
+    <file relUrl="bin/Microsoft.Http.dll" publishTime="03/12/2009 15:29:54" />
+    <file relUrl="bin/QueryLayer.dll" publishTime="12/10/2010 11:49:07" />
+    <file relUrl="bin/RestE-PRTRService.dll" publishTime="12/10/2010 11:49:08" />
+    <file relUrl="bin/EPRTR.ResourceProviders.dll" publishTime="10/06/2010 09:53:39" />
+    <file relUrl="bin/Microsoft.Http.Extensions.dll" publishTime="03/12/2009 15:29:54" />
+    <file relUrl="bin/QueryLayer.pdb" publishTime="12/10/2010 11:49:07" />
+  </publishTarget>
+  <publishTarget publishUrl="D:\EPERSearch\PrecompiledWeb\WebService\">
+    <file relUrl="bin/Microsoft.Http.dll" publishTime="03/12/2009 15:29:54" />
+    <file relUrl="bin/RestE-PRTRService.pdb" publishTime="10/13/2010 15:56:51" />
+    <file relUrl="bin/EPRTR.ResourceProviders.pdb" publishTime="10/06/2010 09:53:39" />
+    <file relUrl="RestE-PRTRService.svc" publishTime="10/08/2010 09:14:46" />
+    <file relUrl="Web.config" publishTime="10/13/2010 12:47:31" />
+    <file relUrl="bin/QueryLayer.dll" publishTime="10/13/2010 12:48:46" />
+    <file relUrl="bin/RestE-PRTRService.dll" publishTime="10/13/2010 15:56:51" />
+    <file relUrl="bin/EPRTR.ResourceProviders.dll" publishTime="10/06/2010 09:53:39" />
+    <file relUrl="bin/Microsoft.Http.Extensions.dll" publishTime="03/12/2009 15:29:54" />
+    <file relUrl="bin/QueryLayer.pdb" publishTime="10/13/2010 12:48:46" />
+  </publishTarget>
+  <publishTarget publishUrl="D:\EPERSearch\PrecompiledWeb\E-PRTR\WebService\">
+    <file relUrl="bin/Microsoft.Http.dll" publishTime="03/12/2009 15:29:54" />
+    <file relUrl="bin/RestE-PRTRService.pdb" publishTime="10/08/2010 10:39:53" />
+    <file relUrl="bin/EPRTR.ResourceProviders.pdb" publishTime="10/06/2010 09:53:39" />
+    <file relUrl="RestE-PRTRService.svc" publishTime="10/08/2010 09:14:46" />
+    <file relUrl="Web.config" publishTime="10/08/2010 10:39:32" />
+    <file relUrl="bin/QueryLayer.dll" publishTime="10/08/2010 10:39:52" />
+    <file relUrl="bin/RestE-PRTRService.dll" publishTime="10/08/2010 10:39:53" />
+    <file relUrl="bin/EPRTR.ResourceProviders.dll" publishTime="10/06/2010 09:53:39" />
+    <file relUrl="bin/Microsoft.Http.Extensions.dll" publishTime="03/12/2009 15:29:54" />
+    <file relUrl="bin/QueryLayer.pdb" publishTime="10/08/2010 10:39:52" />
+  </publishTarget>
+</publishData>
