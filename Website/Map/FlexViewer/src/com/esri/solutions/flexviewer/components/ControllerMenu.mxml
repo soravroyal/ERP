@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:Canvas	xmlns:mx	="http://www.adobe.com/2006/mxml" 
+			xmlns:flash	="flash.filters.*" 
+	       	xmlns:comp	="com.esri.solutions.flexviewer.components.*" 
+	       	rollOver	="openMenu()" 
+	       	rollOut		="closeMenu()">
+<!--
+ /**
+  * The ControllerMenu represents the drop down menu on the controler bar. 
+  * Each ControllerMenu will have menu items of ControllerMenuItem on it.
+  */
+-->	
+	<mx:Script>
+		<![CDATA[
+				
+			import mx.collections.ArrayCollection;
+			
+			/**
+			 * menuImage is the url to the image used for the menu.
+			 */
+			[Bindable]
+			public var menuImage:String;
+			
+			/**
+			 * menuLabel  is the lable displayed for the menu.
+			 */
+			[Bindable]
+			public var menuLabel:String;
+			
+			/**
+			 * menuCollection is the array collection of controller menu items to be listed in the menu.
+			 */
+			[Bindable]
+			public var menuCollection:ArrayCollection;
+		
+			private var menuTimer:uint;
+			
+			private static var STATE_MAXIMIZED:String = "maximized";
+			
+			//open menu
+			private function openMenu():void
+			{
+				menuTimer = setTimeout(showMenu, 200);
+			}
+			
+			//close menu
+			private function closeMenu():void
+			{
+				clearTimeout(menuTimer);
+				currentState = "";
+			}
+			
+			//show menu
+			private function showMenu():void
+			{
+				currentState = ControllerMenu.STATE_MAXIMIZED;
+			}
+		
+			private function menuRuleVisible(curItem:Number):Boolean
+			{
+				if (curItem < menuCollection.length - 1)
+				{
+					return true;
+				}
+				else
+				{ 
+					return false;
+				}
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:Metadata>
+        [ResourceBundle("ControllerStrings")]
+    </mx:Metadata> 
+
+	<mx:states>
+		<mx:State name="maximized">
+			<mx:SetProperty target="{menuBox}" name="height"/>
+			<mx:SetProperty target="{menuBox}" name="width"/>
+		</mx:State>
+	</mx:states>
+	
+	<mx:transitions>
+		<mx:Transition fromState="" toState="*">
+			<mx:Resize duration="400" target="{menuBox}" /> 
+		</mx:Transition>
+		<mx:Transition fromState="*" toState="">
+			<mx:Resize duration="200" target="{menuBox}" /> 
+		</mx:Transition>
+	</mx:transitions>
+	
+	<mx:VBox id="mainBox" horizontalAlign="left" verticalGap="0" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+		<!--mx:Image id="menuIcon" source="{menuImage}" buttonMode="true" useHandCursor="true">
+			<mx:filters>
+				<flash:GlowFilter color="#000000" alpha="0.5" blurX="10" blurY="10"/>
+			</mx:filters>
+		</mx:Image-->
+		<mx:VBox id="menuBox"  height="26" horizontalAlign="left" verticalGap="0" verticalScrollPolicy="off" horizontalScrollPolicy="off">
+			<mx:VBox backgroundColor="#FFFFFF" backgroundAlpha="0.0" rollOver="currentState='maximized'" verticalGap="0" horizontalAlign="center">
+				<mx:Canvas styleName="ControllerMenuCanvas">
+					<mx:HBox verticalAlign="middle" horizontalAlign="left">
+						<mx:Spacer width="1"/>
+						<mx:Image  id="menuIcon" height="15" width="15" source="{menuImage}" buttonMode="true" useHandCursor="true"/>
+						<mx:Label styleName="ControllerMenuTitle" text="{ resourceManager.getString('ControllerStrings', this.id) || menuLabel}">
+							<!--mx:filters>
+								<flash:GlowFilter color="#000000" alpha="0.8" blurX="10" blurY="10"/>
+							</mx:filters-->
+						</mx:Label>
+					</mx:HBox>					
+				</mx:Canvas>
+				<mx:HBox horizontalAlign="center" width="100%" >
+					<mx:VRule styleName="ControllerRule" height="10" visible="{currentState=='maximized'}"/>
+				</mx:HBox>
+			</mx:VBox>
+			<mx:Canvas styleName="ControllerCanvas" minWidth="140" includeInLayout="false">
+				<mx:VBox width="100%" verticalGap="0" horizontalAlign="center" click="{currentState=''}"  >
+					<mx:Repeater id="menuRepeater" dataProvider="{menuCollection}">
+						<comp:ControllerMenuItem itemId          ="{menuRepeater.currentItem.id}" 
+							                     itemLabel       ="{menuRepeater.currentItem.label}" 
+							                     itemIcon        ="{menuRepeater.currentItem.icon}" 
+							                     itemRuleVisible ="{menuRuleVisible(menuRepeater.currentIndex)}" 
+							                     itemAction      ="{menuRepeater.currentItem.action}" 
+							                     itemValue       ="{menuRepeater.currentItem.value}" />
+					</mx:Repeater>
+				</mx:VBox>
+			</mx:Canvas>
+		</mx:VBox>
+	</mx:VBox>
+	<mx:Canvas width="{mainBox.width}" height="{mainBox.height}" />
+	
+</mx:Canvas>
