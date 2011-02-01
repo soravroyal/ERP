@@ -1,0 +1,12 @@
+D:\E-PRTRService\QueryLayer\bin\Release\QueryLayer.dll.config
+D:\E-PRTRService\QueryLayer\bin\Release\QueryLayer.dll
+D:\E-PRTRService\QueryLayer\bin\Release\QueryLayer.pdb
+D:\E-PRTRService\QueryLayer\obj\Release\ResolveAssemblyReference.cache
+D:\E-PRTRService\QueryLayer\obj\Release\QueryLayer.dll
+D:\E-PRTRService\QueryLayer\obj\Release\QueryLayer.pdb
+D:\ValidationWebService\QueryLayer\bin\Release\QueryLayer.dll.config
+D:\ValidationWebService\QueryLayer\bin\Release\QueryLayer.dll
+D:\ValidationWebService\QueryLayer\bin\Release\QueryLayer.pdb
+D:\ValidationWebService\QueryLayer\obj\Release\ResolveAssemblyReference.cache
+D:\ValidationWebService\QueryLayer\obj\Release\QueryLayer.dll
+D:\ValidationWebService\QueryLayer\obj\Release\QueryLayer.pdb
