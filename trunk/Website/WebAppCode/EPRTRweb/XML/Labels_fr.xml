@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<labels>
+  <label id="Search">Search (FR)</label>
+  <label id="All">All (FR)</label>
+  <label id="pollutanthead">Pollutant Descriptions (FR)</label>
+  <label id="pollutantheadnotes">This page will display information relating to pollutant substances. You can also search for a pollutant by pollutant group or by selecting a specific pollutant.(FR)</label>
+  <label id="Group">Pollutant Group (FR)</label>
+  <label id="Pollutant">Pollutant (FR)</label>
+  <label id="Contents">Contents (FR)</label>
+  <label id="Summary">Summary (FR)</label>
+  <label id="synonyms">Synonyms or other commercial names (FR)</label>
+  <label id="rands">R &amp; S Phrases (FR)</label>
+  <label id="randsex">Description of R &amp; S Phrases (FR)</label>
+  <label id="physical">Physical Properties (FR)</label>
+  <label id="impacts">Impacts on Human Health and the Environment (FR)</label>
+  <label id="clpghs">CLP/GHS Data (FR)</label>
+  <label id="clp">CLP Data (FR)</label>
+  <label id="clpex">Explanation of what clp is (FR)</label>
+  <label id="ghs">GHS Data (FR)</label>
+  <label id="ghsex">Explanation of what GHS is (FR)</label>
+  <label id="provisions">Provisions Under Regulations (FR)</label>
+  <label id="IUPAC">IUPAC Name: (FR)</label>
+  <label id="CASNumber">CAS Number: (FR)</label>
+  <label id="CASToolTip">A CAS Number is... (FR)</label>
+  <label id="ECNumber">EC Number: (FR)</label>
+  <label id="ECToolTip">An EC Number is... (FR)</label>
+  <label id="Formula">Formula: (FR)</label>
+  <label id="Classification">Classification (FR)</label>
+  <label id="ClassificationTooltip">Classification is... (FR)</label>
+  <label id="description">Description (FR)</label>
+  <label id="mainuses">Main Uses (FR)</label>
+  <label id="mainmethodsrelease">Main methods of release (FR)</label>
+ 
+  <label id="print">Print (FR)</label>
+  <label id="PollutantInfo">Pollutant Info (FR)</label>
+  <label id="Pollutants">Pollutants (FR)</label>
+  <label id="Name">Name: (FR)</label>
+  <label id="structure">Structure: (FR)</label>
+  <label id="provprtr">Provisions Under PRTR Regulation (FR)</label>
+  <label id="provother">Provisions Under Other Regulations (FR)</label>
+  <label id="chemspider">Chemspider id (FR)</label>
+</labels>
