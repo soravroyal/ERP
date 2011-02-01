@@ -1,0 +1,1 @@
+delete from LOV_ANNEXIACTIVITY where Code in ('1.(g)','2.(g)','3.(h)','4.(g)','4.(h)','5.(h)','5.(i)','6.(d)','6.(e)')

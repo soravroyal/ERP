@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  MapForce Project File  -->
+<Project Expanded="Yes" Type="Root" language="cs" OutputDir="output\" Title="eprtr" OutputName="eprtr" Version="6">
+	<Folder FolderName="Mapping Folder" Expanded="Yes" Type="MappingFolder">
+		<File Type="Mapping" FilePath="\\sdkcga6306\c$\EIONET\XML\EPRTR_xml2master-mapping.mfd"/>
+	</Folder>
+</Project>

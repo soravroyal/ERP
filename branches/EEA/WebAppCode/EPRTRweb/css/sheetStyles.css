@@ -1,0 +1,227 @@
+﻿/*-------------------------------------------------------------------------------------------*/
+/*-- Sheet headers. Common for all levels --*/
+/*-------------------------------------------------------------------------------------------*/
+
+
+#resultSheet_subHeader_label
+{
+	text-align:left;
+	border-bottom: none;
+	vertical-align:top;
+}
+#resultSheet_subHeader_value 
+{
+	margin-left:10px;
+	text-align:left;
+	border-bottom: none;
+	vertical-align:top;
+}
+
+.resultSheet_alert
+{
+	float:left;
+	clear:left;
+	margin-top:10px;
+	background-color:Transparent;
+	color:Red;
+	width:375px;
+}
+
+.resultSheet_alert a
+{
+	color:Red;
+}
+
+.resultSheet_info 
+{
+	float:left;
+	clear:left;
+	margin-top:10px;
+	background-color:Transparent;
+}
+
+.resultSheet_txt 
+{
+	float:left;
+	clear:left;
+	margin-top:10px;
+	background-color:Transparent;
+}
+
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/*-- Styles for controlling the layout of components in sheets --*/
+/*-------------------------------------------------------------------------------------------*/
+
+
+.layout_resultArea {
+	clear: left right;
+	float: left;
+	margin-top: 10px;
+	margin-left: 25px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	width:96.7%;
+}
+
+
+
+.layout_sheet_header
+{
+	float:left;
+	margin:10px 10px 0px 10px;
+}
+
+
+.layout_sheet_subHeader 
+{
+	float:left;
+	clear:left;
+	margin:10px 0 10px 20px;
+	width:70%;
+}
+
+.layout_sheet_subHeader td
+{
+    vertical-align: top;
+}
+
+.layout_sheet_content 
+{
+	clear:both;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.layout_sheet_download_print
+{
+	float:right;
+	margin:10px 10px 0px 10px;
+	
+}
+
+.layout_sheet_contentsBox
+{
+	float: right;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+
+/*subsheets that opens inside tabels*/
+.layout_sheetIntable
+{
+	padding: 10px 0px 10px 10px;
+}
+
+.layout_sheetInsheet
+{
+	width:100%;
+}
+
+
+/*-------------------------------------------------------------------------------------------*/
+/*-- styles for the contents link box --*/
+/*-------------------------------------------------------------------------------------------*/
+
+.contentsBox_header
+{
+	margin-left: 5px;
+	margin-top: 3px;
+}
+
+
+.contentsBox_item {
+	text-decoration: none;
+	color: #000099;
+	margin-left: 25px;
+	margin-right: 5px;
+	clear: left;
+	float: left;
+}
+
+
+.contentsBox_item_selected {
+	color: #AA8162;
+}
+
+
+
+
+/*-------------------------------------------------------------------------------------------*/
+/*-- Styles for controlling the look of sheets     --*/
+/*-------------------------------------------------------------------------------------------*/
+
+.look_sheet_level0 {
+	background-color: #F7F7F7;
+	border: dotted 1px #000000;
+}
+
+.look_sheet_level1 {
+	background-color:#EEEEEE;
+	border:dotted 1px black;
+}
+
+.look_sheet_level2
+{
+	background-color:#D8D8D8;
+	border:dotted 1px black;
+}
+
+
+.look_sheet_contentsBox
+{
+	background-color: #FFFFFF;
+	padding-bottom: 7px;
+	border-top: 1px solid #D6BAA5;
+	border-right: 1px solid #BE9170;
+	border-bottom: 1px solid #BE9170;
+	border-left: 1px solid #D6BAA5;
+}
+
+/*-------------------------------------------------------------------------------------------*/
+/*-- Misc. styles                                  --*/
+/*-------------------------------------------------------------------------------------------*/
+
+.listHelp
+{
+	float: left;
+	clear: left;
+}
+
+.pagingPollutant
+{
+    float: right;
+    clear: right;
+}
+
+.pagingTextPollutant
+{
+    float: left;
+    clear: left;
+}
+
+.aoPollutantGroup
+{
+    float: right;
+    clear: right;
+}
+
+.aoPollutantGroup select
+{
+    width: auto !important; 
+}
+
+.RadioButtonSelector
+{
+
+}
+
+.clearBoth
+{
+    clear:both;
+}

@@ -1,0 +1,48 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{13B27DCC-DE98-7347-978C-A24630301AC0}</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AssemblyName>EPRTRcms</AssemblyName>
+		<RootNamespace>EPRTRcms</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+			<DebugSymbols>true</DebugSymbols>
+			<DebugType>full</DebugType>
+			<Optimize>false</Optimize>
+			<OutputPath>bin\Debug\</OutputPath>
+			<DefineConstants>DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System">
+			<Name>System</Name>
+		</Reference>
+		<Reference Include="System.Data">
+			<Name>System.Data</Name>
+		</Reference>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\AltovaDB\AltovaDB.csproj">
+			<Name>AltovaDB</Name>
+			<Project>{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}</Project>
+			<!-- <Package>{5D458EA4-4826-4648-A52F-CF3D0787600F}</Package> -->
+		</ProjectReference>
+		<ProjectReference Include="..\Altova\Altova.csproj">
+			<Name>Altova</Name>
+			<Project>{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}</Project>
+			<!-- <Package>{5D458EA4-4826-4648-A52F-CF3D0787600F}</Package> -->
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.cs"/>
+		<Compile Include="EPRTRcms_TypeInfo.cs"/>
+	</ItemGroup>
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
