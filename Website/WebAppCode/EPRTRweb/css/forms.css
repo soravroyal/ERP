@@ -16,18 +16,14 @@
 /*To position legend the same in IE and Firefox*/
 fieldset
 {
-    position: relative;
-    /*margin-top:1em;*/
     margin-top: 1em;
     padding: 10px; /*.75em 1em;*/
     border: 1px solid #ccc; 
     }
 
     
-fieldset legend{
-    position:absolute;
-    top: -.5em;
-    left: .5em;
+fieldset legend
+{
     }
 
 
