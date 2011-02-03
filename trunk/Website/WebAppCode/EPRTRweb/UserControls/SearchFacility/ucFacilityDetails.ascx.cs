@@ -84,9 +84,13 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
         List<FacilityDetailElement> elements = new List<FacilityDetailElement>();
 
         elements.Add(new FacilityDetailElement(
-                                       Resources.GetGlobal("Facility", "FacilityDetailsTitle"), 
-                                       String.Empty, 
+                                       Resources.GetGlobal("Facility", "FacilityDetailsTitle"),
+                                       String.Empty,
                                        true));
+
+        elements.Add(new FacilityDetailElement(
+                                       Resources.GetGlobal("Common", "NationalID")+":", 
+                                       fac.NationalID));
 
         elements.Add(new FacilityDetailElement(
                                        Resources.GetGlobal("Facility", "ParentCompanyName"),
