@@ -89,6 +89,10 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
                                        true));
 
         elements.Add(new FacilityDetailElement(
+                                       Resources.GetGlobal("Common", "NationalID") + ":",
+                                       fac.NationalID));
+
+        elements.Add(new FacilityDetailElement(
                                        Resources.GetGlobal("Facility", "ParentCompanyName"),
                                        ConfidentialFormat.Format(fac.ParentCompanyName, fac.ConfidentialIndicator)));
         

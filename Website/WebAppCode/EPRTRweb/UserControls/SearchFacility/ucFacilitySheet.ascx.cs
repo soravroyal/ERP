@@ -87,18 +87,27 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
         if (String.IsNullOrEmpty(facilityID) || String.IsNullOrEmpty(reportingYear))
         {
             FacilityBasic = null;
+            populateDefaultContent();
         }
         else
         {
+            
             int facId = Convert.ToInt32(facilityID);
             int year = Convert.ToInt32(reportingYear);
             FacilityBasic = Facility.GetFacilityBasic(facId, year);
-
+            Populate(facId, year, Sheets.FacilityDetails.Details.ToString());
         }
-
-        populateDefaultContent();
     }
 
+
+    /// <summary>
+    /// Present content for the facility given by facilityID and ReportingYear
+    /// </summary>
+    public void Populate(int facilityID, int reportingYear, string content)
+    {
+        FacilityBasic = Facility.GetFacilityBasic(facilityID, reportingYear);
+        populateContent(content);
+    }
 
     /// <summary>
     /// Present default content for the facility report saved in FacilityBasic
@@ -359,7 +368,7 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
     {
         if (fy != null)
         {
-            this.Populate(fy.FacilityReportId.ToString(), Content);
+            this.Populate(fy.FacilityId, fy.ReportingYear, Content);
         }
 
     }
