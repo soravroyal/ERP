@@ -170,11 +170,6 @@ public partial class ucFacilityWaste : System.Web.UI.UserControl
         return MethodUsedFormat.MethodFormat(row.MethodTypeCode, row.MethodDesignation, row.ConfidentialIndicator);
     }
 
-    protected string GetMethodUsedTitle(object obj)
-    {
-        FACILITYDETAIL_WASTETRANSFER row = (FACILITYDETAIL_WASTETRANSFER)obj;
-        return MethodUsedFormat.MethodFormatToolTip(row.MethodTypeCode, row.MethodDesignation, row.ConfidentialIndicator);
-    }
 
     protected string GetReceivingCountry(object obj)
     {
@@ -217,68 +212,7 @@ public partial class ucFacilityWaste : System.Web.UI.UserControl
         return ((FACILITYDETAIL_WASTETRANSFER)obj).ConfidentialCode;
     }
 
-    //protected double? GetQuantity(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).Quantity;
-    //}
-    //protected string GetUnitCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).UnitCode;
-    //}
-    //protected bool GetConfidentialIndicator(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).ConfidentialIndicator;
-    //}
-    //protected string GetWasteTreatmentCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WasteTreatmentCode;
-    //}
-    //protected string GetMethodCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).MethodCode;
-    //}
-    //protected string GetMethodTypeCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).MethodTypeCode;
-    //}
-    //protected string GetMethodDesignation(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).MethodDesignation;
-    //}
     
-
-    //protected string GetWHPCountryCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPCountryCode;
-    //}
-    //protected string GetWHPName(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPName;
-    //}
-    //protected string GetWHPCity(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPCity;
-    //}
-    //protected string GetWHPAddress(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPAddress;
-    //}
-    //protected string GetWHPPostalCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPPostalCode;
-    //}
-    //protected string GetWHPSitePostalCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPSitePostalCode;
-    //}
-    //protected string GetWHPSiteCity(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPSiteCity;
-    //}
-    //protected string GetWHPSiteAddress(object obj)
-    //{
-    //    return ((FACILITYDETAIL_WASTETRANSFER)obj).WHPSiteAddress;
-    //}
 
 
 

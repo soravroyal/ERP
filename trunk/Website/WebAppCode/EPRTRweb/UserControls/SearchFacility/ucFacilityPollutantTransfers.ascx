@@ -3,7 +3,6 @@
 
 <%@ Register Src="~/UserControls/SearchFacility/TimeSeries/ucFacilityPollutantTransfersTrendSheet.ascx" TagName="TransferTrend" TagPrefix="eprtr" %>
 
-
 <asp:Panel ID="facilityPollutantTransfers" runat="server" Width="100%" Height="100%">
 
 <div>
@@ -36,7 +35,7 @@
             <td title="<%# GetPollutantName(Container.DataItem)%>"><div id="PollutantName"><%# GetPollutantName(Container.DataItem)%></div></td>
             <td title="<%# GetQuantity(Container.DataItem)%>"><div id="QuantityTotal"><%# GetQuantity(Container.DataItem)%></div></td>
             <td title="<%# GetMethodBasisName(Container.DataItem)%>"><div id="PollutantMethod"><%# GetMethodBasisName(Container.DataItem)%></div></td>
-            <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="SpecialMethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+            <td ><div id="SpecialMethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
             <td title="<%# GetConfidentialityReason(Container.DataItem)%>"><div id="Reason"> <%# GetConfidentialCode(Container.DataItem)%></div></td>
           </tr>
           

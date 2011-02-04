@@ -122,11 +122,6 @@ public partial class ucFacilityPollutantTransfers : System.Web.UI.UserControl
         return LOVResources.MethodBasisName(row.MethodCode);
     }
 
-    protected string GetMethodUsedTitle(object obj)
-    {
-        FACILITYDETAIL_POLLUTANTTRANSFER row = (FACILITYDETAIL_POLLUTANTTRANSFER)obj;
-        return MethodUsedFormat.MethodFormatToolTip(row.MethodTypeCode, row.MethodDesignation, row.ConfidentialIndicator);
-    }
 
     protected string GetMethodUsed(object obj)
     {
