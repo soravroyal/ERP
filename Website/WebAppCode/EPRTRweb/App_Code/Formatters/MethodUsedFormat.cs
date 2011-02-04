@@ -30,10 +30,10 @@ namespace EPRTR.Formatters
         /// <summary>
         /// Formats the methods used for a given pollutant or waste. Notice that each of these can have multiple methods reported
         /// Each method will be seperated by linebreaks to be uused in tooltips (&#13;)
-        public static string MethodFormatToolTip(string typeCodes, string designations, bool confidential)
+        /*public static string MethodFormatToolTip(string typeCodes, string designations, bool confidential)
         {
             return format(typeCodes, designations, confidential, "&#13;");
-        }
+        }*/
 
 
         /// <summary>
@@ -70,12 +70,12 @@ namespace EPRTR.Formatters
                         //CEN/ISO is removed as this is also part of the designation
                         if (!typeCode.ToUpper().Equals("CEN/ISO"))
                         {
-                            result += typeCode;
+                            result += String.Format("<abbr title=\"{0}\"> {1} </abbr>", LOVResources.MethodTypeName(typeCode), typeCode) ;
                         }
 
                         if (!String.IsNullOrEmpty(designation))
                         {
-                            result += " " + designation;
+                            result += " " + String.Format("<span title=\"{0}\">{0}</span>", designation);
                         }
 
                         result += delimiter;

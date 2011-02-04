@@ -65,7 +65,7 @@ sup         {bottom: .25em;}
 sub         {top: .25em;}
 
 abbr, 
-acronym     { border-bottom: 1px dotted #666; }
+acronym     { /*border-bottom: 1px dotted #666;*/ }
 address     { margin: 0 0 1.5em; font-style: italic; }
 del         { color:#666; }
 

@@ -38,7 +38,7 @@
                 <td title="<%# GetQuantity(Container.DataItem)%>"><div id="QuantityTotal"><%# GetQuantity(Container.DataItem)%></div></td>
                 <td title=" <%# GetTreatment(Container.DataItem)%>"><div id="SpecialTreatment"><%# GetTreatment(Container.DataItem)%></div></td>
                 <td title="<%# GetMethodBasis(Container.DataItem)%>"><div id="SpecialMethod"><%# GetMethodBasis(Container.DataItem)%></div></td>
-                <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="SpecialMethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+                <td><div id="SpecialMethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
                 <td title="<%# GetConfidentialReason(Container.DataItem)%>"><div id="Reason"><%# GetConfidentialCode(Container.DataItem)%></div></td>
             </tr>
         </ItemTemplate>
@@ -82,7 +82,7 @@
                 <td title="<%# GetQuantity(Container.DataItem)%>"><div id="QuantityTotal"><%# GetQuantity(Container.DataItem)%></div></td>
                 <td title="<%# GetTreatment(Container.DataItem)%>"><div id="SpecialTreatment"><%# GetTreatment(Container.DataItem)%></div></td>
                 <td title="<%# GetMethodBasis(Container.DataItem) %>"><div id="SpecialMethod"><%# GetMethodBasis(Container.DataItem)%></div></td>
-                <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="SpecialMethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+                <td ><div id="SpecialMethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
                 <td title="<%# GetConfidentialReason(Container.DataItem)%>"><div id="Reason"><%# GetConfidentialCode(Container.DataItem)%></div></td>
             </tr>
         </ItemTemplate>
@@ -128,7 +128,7 @@
                 <td title=" <%# GetQuantity(Container.DataItem)%>"><div id="QuantityTotal"><%# GetQuantity(Container.DataItem)%></div></td>
                 <td title="<%# GetTreatment(Container.DataItem)%>"><div id="Treatment"><%# GetTreatment(Container.DataItem)%></div></td>
                 <td title=" <%# GetMethodBasis(Container.DataItem)%>"><div id="Method"><%# GetMethodBasis(Container.DataItem)%></div></td>
-                <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+                <td ><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
                 <td title="<%# GetReceivingCountry(Container.DataItem)%>"><div id="ReceivingCountry"><%# GetReceivingCountry(Container.DataItem)%></div></td>
                 <td title=" <%# GetWHPNameAndAddress(Container.DataItem)%>"><div id="Recoverer"><%# GetWHPNameAndAddress(Container.DataItem)%></div></td>
                 <td title=" <%# GetWHPSiteAddress(Container.DataItem)%>"><div id="Actual"><%# GetWHPSiteAddress(Container.DataItem)%></div></td>

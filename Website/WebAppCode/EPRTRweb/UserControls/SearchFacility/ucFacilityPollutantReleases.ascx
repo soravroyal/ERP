@@ -35,7 +35,7 @@
                     <td title="<%# GetAccidentalQuantity(Container.DataItem)%>"><div id="Accidental"><%# GetAccidentalQuantity(Container.DataItem)%></div></td>
                     <td title="<%# GetAccidentalPercent(Container.DataItem)%>"><div id="AccidentalPercent"><%# GetAccidentalPercent(Container.DataItem)%></div></td>
                     <td title="<%# GetMethodBasisName(Container.DataItem) %>"><div id="Method"><%# GetMethodBasisName(Container.DataItem) %></div></td>
-                    <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+                    <td ><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
                     <td title="<%# GetConfidentialityReason(Container.DataItem)%>"><div id="Reason"> <%# GetConfidentialCode(Container.DataItem)%> </div></td>
                 </tr>
                 <tr>
@@ -84,7 +84,7 @@
                     <td title="<%# GetAccidentalQuantity(Container.DataItem)%>"><div id="Accidental"><%# GetAccidentalQuantity(Container.DataItem)%></div></td>
                     <td title="<%# GetAccidentalPercent(Container.DataItem)%>"><div id="AccidentalPercent"><%# GetAccidentalPercent(Container.DataItem)%></div></td>
                     <td title="<%# GetMethodBasisName(Container.DataItem)%>"><div id="Method"><%# GetMethodBasisName(Container.DataItem) %></div></td>
-                    <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+                    <td ><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
                     <td title="<%# GetConfidentialityReason(Container.DataItem)%>"><div id="Reason"> <%# GetConfidentialCode(Container.DataItem)%> </div></td>
                 </tr>
                 <tr>
@@ -133,7 +133,7 @@
                     <td title="<%# GetAccidentalQuantity(Container.DataItem)%>"><div id="Accidental"><%# GetAccidentalQuantity(Container.DataItem)%></div></td>
                     <td title="<%# GetAccidentalPercent(Container.DataItem)%>"><div id="AccidentalPercent"><%# GetAccidentalPercent(Container.DataItem)%></div></td>
                     <td title="<%# GetMethodBasisName(Container.DataItem) %>"><div id="Method"><%# GetMethodBasisName(Container.DataItem)%></div></td>
-                    <td title="<%# GetMethodUsedTitle(Container.DataItem)%>"><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
+                    <td><div id="MethodUsed"><%# GetMethodUsed(Container.DataItem)%></div></td>
                     <td title="<%# GetConfidentialityReason(Container.DataItem)%>"><div id="Reason"> <%# GetConfidentialCode(Container.DataItem)%> </div></td>
                 </tr>
                 <tr>

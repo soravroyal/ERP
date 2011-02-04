@@ -178,29 +178,7 @@ public partial class ucFacilityEmissionsEPER : System.Web.UI.UserControl
         return LOVResources.MethodBasisName(row.MethodCode);
     }
 
-    protected string GetMethodUsedTitle(object obj)
-    {
-        FACILITYDETAIL_POLLUTANTRELEASE row = (FACILITYDETAIL_POLLUTANTRELEASE)obj;
-        return MethodUsedFormat.MethodFormatToolTip(row.MethodTypeCode, row.MethodDesignation, row.ConfidentialIndicator);
-    }
 
-    protected string GetMethodUsed(object obj)
-    {
-        FACILITYDETAIL_POLLUTANTRELEASE row = (FACILITYDETAIL_POLLUTANTRELEASE)obj;
-        return MethodUsedFormat.MethodFormat(row.MethodTypeCode, row.MethodDesignation, row.ConfidentialIndicator);
-    }
-
-    protected string GetConfidentialityReason(object obj)
-    {
-        FACILITYDETAIL_POLLUTANTRELEASE row = (FACILITYDETAIL_POLLUTANTRELEASE)obj;
-        return LOVResources.ConfidentialityReason(row.ConfidentialCode);
-    }
-
-    protected string GetConfidentialCode(object obj)
-    {
-        FACILITYDETAIL_POLLUTANTRELEASE row = (FACILITYDETAIL_POLLUTANTRELEASE)obj;
-        return row.ConfidentialCode;
-    }
 
 
 

@@ -169,11 +169,6 @@ public partial class ucFacilityPollutantReleases : System.Web.UI.UserControl
         return LOVResources.MethodBasisName(row.MethodCode);
     }
 
-    protected string GetMethodUsedTitle(object obj)
-    {
-        FACILITYDETAIL_POLLUTANTRELEASE row = (FACILITYDETAIL_POLLUTANTRELEASE)obj;
-        return MethodUsedFormat.MethodFormatToolTip(row.MethodTypeCode, row.MethodDesignation, row.ConfidentialIndicator);
-    }
 
     protected string GetMethodUsed(object obj)
     {
@@ -192,50 +187,6 @@ public partial class ucFacilityPollutantReleases : System.Web.UI.UserControl
         FACILITYDETAIL_POLLUTANTRELEASE row = (FACILITYDETAIL_POLLUTANTRELEASE)obj;
         return row.ConfidentialCode;
     }
-
-
-    ///// </summary>
-    //protected string GetPollutantCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).PollutantCode;
-    //}
-    //protected double GetTotalQuantity(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).TotalQuantity;
-    //}
-    //protected string GetTotalQuantityUnitCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).TotalQuantityUnitCode;
-    //}
-    //protected double GetAccidentalQuantity(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).AccidentalQuantity;
-    //}
-    //protected string GetAccidentalQuantityUnitCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).AccidentalQuantityUnitCode;
-    //}
-    //protected string GetMethodCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).MethodCode;
-    //}
-    //protected string GetMethodTypeCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).MethodTypeCode;
-    //}
-    //protected string GetMethodDesignation(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).MethodDesignation;
-    //}
-    //protected bool GetConfidentialIndicator(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).ConfidentialIndicator;
-    //}
-    //protected string GetConfidentialCode(object obj)
-    //{
-    //    return ((FACILITYDETAIL_POLLUTANTRELEASE)obj).ConfidentialCode;
-    //}
-
 
     #endregion
 }

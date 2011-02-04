@@ -108,6 +108,27 @@ namespace EPRTR.Localization
         }
         #endregion
 
+        #region LOVMethodType
+        /// <summary>
+        /// Gets the name of a methodType (ISO/CEN, NRB etc) based on the code
+        /// </summary>
+        public static string MethodTypeName(string code)
+        {
+            return GetResource("LOV_METHODTYPE", code);
+        }
+
+        /// <param name="confidentialIndicator">Indicates if confidentiality has been claimed</param>
+        public static string MethodTypeName(string code, bool confidentialIndicator)
+        {
+            if (String.IsNullOrEmpty(code))
+            {
+                return ConfidentialFormat.Format(code, confidentialIndicator);
+            }
+
+            return MethodTypeName(code);
+        }
+        #endregion
+
         #region LOVNaceActivity
         /// <summary>
         /// Gets the name of a NaceActivity (incl. code) based on the code
