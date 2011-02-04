@@ -673,6 +673,22 @@ namespace QueryLayer
         }
         #endregion
 
+        #region LatestPublication
+
+        public static DateTime? GetLatestPublicationDate()
+        {
+            DataClassesLOVDataContext db = getLOVDataContext();
+            return db.LATEST_DATAIMPORTs.Max(x => x.Published);
+        }
+
+        public static DateTime? GetLatestReviewDate()
+        {
+            DataClassesLOVDataContext db = getLOVDataContext();
+            return db.LATEST_DATAIMPORTs.Max(x => x.ForReview);
+        }
+
+        #endregion
+
         #region Data context
         private static DataClassesLOVDataContext getLOVDataContext()
         {

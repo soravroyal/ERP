@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="EPRTRweb" Class="DataClassesLOVDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sdkcga6302;Initial Catalog=EPRTRweb;User ID=sa" SettingsObjectName="QueryLayer.Properties.Settings" SettingsPropertyName="EPRTRwebConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.LOV_ANNEXIACTIVITY" Member="LOV_ANNEXIACTIVITies">
     <Type Name="LOV_ANNEXIACTIVITY">
       <Column Name="LOV_AnnexIActivityID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -55,18 +56,6 @@
       <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.LOV_POLLUTANT" Member="LOV_POLLUTANTs">
-    <Type Name="LOV_POLLUTANT">
-      <Column Name="LOV_PollutantID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Code" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="StartYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="EndYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="CAS" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="eperPollutant_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.LOV_RIVERBASINDISTRICT" Member="LOV_RIVERBASINDISTRICTs">
     <Type Name="LOV_RIVERBASINDISTRICT">
       <Column Name="LOV_RiverBasinDistrictID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
@@ -109,6 +98,27 @@
       <Column Name="StartYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="EndYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LATEST_DATAIMPORT" Member="LATEST_DATAIMPORTs">
+    <Type Name="LATEST_DATAIMPORT">
+      <Column Name="ReportingYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LOV_CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ForReview" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Published" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LOV_POLLUTANT" Member="LOV_POLLUTANTs">
+    <Type Name="LOV_POLLUTANT">
+      <Column Name="LOV_PollutantID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="StartYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EndYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ParentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CAS" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="eperPollutant_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CodeEPER" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

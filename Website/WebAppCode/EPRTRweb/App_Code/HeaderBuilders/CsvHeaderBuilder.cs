@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using QueryLayer;
 using QueryLayer.Filters;
+using EPRTR.Localization;
+using EPRTR.Formatters;
+using System;
+using System.Configuration;
 
 namespace EPRTR.HeaderBuilders
 {
@@ -14,12 +18,12 @@ namespace EPRTR.HeaderBuilders
         /// returns a dictionary with csv headers <key, value> for facility details
         /// </summary>
         public static Dictionary<string, string> GetFacilityTrendHeader(
-            int facilityReportId, 
+            int facilityReportId,
             bool confidentialityAffected)
         {
             Facility.FacilityBasic basic = Facility.GetFacilityBasic(facilityReportId);
 
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
             addFacilityIdentification(header, basic);
             addFacilityName(header, basic);
             addFacilityAddress(header, basic);
@@ -37,9 +41,9 @@ namespace EPRTR.HeaderBuilders
             FacilitySearchFilter filter,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
-            addYear(header, filter.YearFilter); 
+            addYear(header, filter.YearFilter);
             addArea(header, filter.AreaFilter);
             addFacilityLocation(header, filter.FacilityLocationFilter);
             addActivity(header, filter.ActivityFilter);
@@ -50,7 +54,7 @@ namespace EPRTR.HeaderBuilders
 
             addWasteReceiver(header, filter.WasteReceiverFilter);
             addConfidentiality(header, confidentialityAffected);
-            
+
             return header;
         }
 
@@ -59,12 +63,12 @@ namespace EPRTR.HeaderBuilders
         /// </summary>
         public static Dictionary<string, string> GetPollutantTransferSearchHeader(PollutantTransfersSearchFilter filter)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addPollutant(header, filter.PollutantFilter);
             addYear(header, filter.YearFilter);
             addArea(header, filter.AreaFilter);
-            
+
             return header;
         }
 
@@ -85,7 +89,7 @@ namespace EPRTR.HeaderBuilders
             PollutantReleaseSearchFilter filter,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addPollutant(header, filter.PollutantFilter);
             addMedium(header, filter.MediumFilter);
@@ -105,7 +109,7 @@ namespace EPRTR.HeaderBuilders
             MediumFilter.Medium medium,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addPollutant(header, filter.PollutantFilter);
             addMedium(header, medium);
@@ -124,7 +128,7 @@ namespace EPRTR.HeaderBuilders
             WasteTransferSearchFilter filter,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addYear(header, filter.YearFilter);
             addArea(header, filter.AreaFilter);
@@ -133,13 +137,13 @@ namespace EPRTR.HeaderBuilders
 
             return header;
         }
-        
+
         /// <summary>
         /// returns a dictionary with sheet headers <key, value> for Industrial activity search
         /// </summary>
         public static Dictionary<string, string> GetIndustrialActivitySearchHeader(IndustrialActivitySearchFilter filter)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addYear(header, filter.YearFilter);
             addArea(header, filter.AreaFilter);
@@ -170,14 +174,14 @@ namespace EPRTR.HeaderBuilders
             MediumFilter.Medium currentMedium,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addArea(header, filter.AreaFilter);
             addActivity(header, filter.ActivityFilter);
             addPollutant(header, filter.PollutantFilter);
             addMedium(header, currentMedium);
             addConfidentiality(header, confidentialityAffected);
-            
+
             return header;
         }
 
@@ -188,7 +192,7 @@ namespace EPRTR.HeaderBuilders
             PollutantTransferTimeSeriesFilter filter,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addArea(header, filter.AreaFilter);
             addActivity(header, filter.ActivityFilter);
@@ -206,7 +210,7 @@ namespace EPRTR.HeaderBuilders
             WasteTypeFilter.Type currentWasteType,
             bool confidentialityAffected)
         {
-            Dictionary<string, string> header = new Dictionary<string, string>();
+            Dictionary<string, string> header = makeHeader();
 
             addArea(header, filter.AreaFilter);
             addActivity(header, filter.ActivityFilter);
@@ -215,6 +219,31 @@ namespace EPRTR.HeaderBuilders
 
             return header;
         }
- 
+
+
+
+        protected static void addDatabaseDate(Dictionary<string, string> header)
+        {
+            string appIsReview = ConfigurationManager.AppSettings["IsReview"];
+            if (!String.IsNullOrEmpty(appIsReview) && appIsReview.ToLower().Equals("true"))
+            {
+                header.Add(Resources.GetGlobal("Common", "DatabaseDateReview"), ListOfValues.GetLatestReviewDate().Format());
+            }
+            else
+            {
+                header.Add(Resources.GetGlobal("Common", "DatabaseDate"), ListOfValues.GetLatestPublicationDate().Format());
+            }
+        }
+
+        protected static Dictionary<string, string> makeHeader()
+        {
+            Dictionary<string, string> header = new Dictionary<string, string>();
+
+            addDatabaseDate(header);
+
+            return header;
+
+        }
+
     }
 }
