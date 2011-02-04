@@ -3,3 +3,6 @@
 ---InsertUpdate|ResourceType|ResourceKey|CultureCode|ResourceValue
 -- Delete|ResourceType|ResourceKey
 
+--Database date in CSV headers
+
+InsertUpdate|Common|DatabaseDate|en-GB|E-PRTR database date
