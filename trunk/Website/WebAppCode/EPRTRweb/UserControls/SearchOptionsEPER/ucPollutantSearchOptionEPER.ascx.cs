@@ -67,7 +67,7 @@ public partial class ucPollutantSearchOptionsEPER : System.Web.UI.UserControl
         //Value of areas are prefixed to separate them from countries
         foreach (LOV_POLLUTANT g in groups)
         {
-            string text = LOVResources.PollutantGroupName(g.CodeEper);
+            string text = LOVResources.PollutantGroupName(g.CodeEPER);
             string value = g.LOV_PollutantID.ToString();
             string n1 = text + "+" + value;
             lista1.Add(n1);
@@ -140,7 +140,7 @@ public partial class ucPollutantSearchOptionsEPER : System.Web.UI.UserControl
 
         foreach (LOV_POLLUTANT p in pollutants)
         {
-           string text=LOVResources.PollutantNameEPER(p.Code, p.CodeEper);
+           string text=LOVResources.PollutantNameEPER(p.Code, p.CodeEPER);
            string value = p.LOV_PollutantID.ToString();
            string n1 = text + "+" + value;
             lista1.Add(n1);
