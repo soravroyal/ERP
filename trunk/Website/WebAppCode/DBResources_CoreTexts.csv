@@ -5,4 +5,5 @@
 
 --Database date in CSV headers
 
-InsertUpdate|Common|DatabaseDate|en-GB|E-PRTR database date
+InsertUpdate|Common|DatabaseDate|en-GB|E-PRTR database version
+InsertUpdate|Common|DatabaseDateReview|en-GB|E-PRTR REVIEW database version
