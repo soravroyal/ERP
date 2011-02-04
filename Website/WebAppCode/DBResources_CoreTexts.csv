@@ -9,15 +9,15 @@ InsertUpdate|Common|DatabaseDateReview|en-GB|E-PRTR REVIEW database version
 
 
 --LOV_METODTYPE
-InsertUpdate|LOV_METODTYPE|CEN/ISO|en-GB|Internationally approved measurement standard
-InsertUpdate|LOV_METODTYPE|ETS|en-GB|Guidelines for the monitoring and reporting of greenhouse gas emissions under the Emission Trading Scheme.
-InsertUpdate|LOV_METODTYPE|IPCC|en-GB|IPCC Guidelines
-InsertUpdate|LOV_METODTYPE|UNECE/EMEP|en-GB|UNECE/EMEP EMEP/CORINAIR Emission Inventory Guidebook
-InsertUpdate|LOV_METODTYPE|PER|en-GB|Measurement/Calculation Methodology already prescribed by the competent authority in a licence or an operating permit for that facility
-InsertUpdate|LOV_METODTYPE|NRB|en-GB|National or regional binding measurement/calculation methodology prescribed by legal act for the pollutant and facility concerned.
-InsertUpdate|LOV_METODTYPE|ALT|en-GB|Alternative measurement methodology in accordance with existing CEN/ISO measurement standards
-InsertUpdate|LOV_METODTYPE|CRM|en-GB|Measurement methodology for the performance of which is demonstrated by means of certified reference materials and accepted by competent authority.
-InsertUpdate|LOV_METODTYPE|MAB|en-GB|Mass balance method which is accepted by the competent authority
-InsertUpdate|LOV_METODTYPE|SSC|en-GB|European-wide sector specific calculation method
-InsertUpdate|LOV_METODTYPE|WEIGH|en-GB|Weighing
-InsertUpdate|LOV_METODTYPE|OTH|en-GB|Other measurement/calculation methodology
+InsertUpdate|LOV_METHODTYPE|CEN/ISO|en-GB|Internationally approved measurement standard
+InsertUpdate|LOV_METHODTYPE|ETS|en-GB|Guidelines for the monitoring and reporting of greenhouse gas emissions under the Emission Trading Scheme.
+InsertUpdate|LOV_METHODTYPE|IPCC|en-GB|IPCC Guidelines
+InsertUpdate|LOV_METHODTYPE|UNECE/EMEP|en-GB|UNECE/EMEP EMEP/CORINAIR Emission Inventory Guidebook
+InsertUpdate|LOV_METHODTYPE|PER|en-GB|Measurement/Calculation Methodology already prescribed by the competent authority in a licence or an operating permit for that facility
+InsertUpdate|LOV_METHODTYPE|NRB|en-GB|National or regional binding measurement/calculation methodology prescribed by legal act for the pollutant and facility concerned.
+InsertUpdate|LOV_METHODTYPE|ALT|en-GB|Alternative measurement methodology in accordance with existing CEN/ISO measurement standards
+InsertUpdate|LOV_METHODTYPE|CRM|en-GB|Measurement methodology for the performance of which is demonstrated by means of certified reference materials and accepted by competent authority.
+InsertUpdate|LOV_METHODTYPE|MAB|en-GB|Mass balance method which is accepted by the competent authority
+InsertUpdate|LOV_METHODTYPE|SSC|en-GB|European-wide sector specific calculation method
+InsertUpdate|LOV_METHODTYPE|WEIGH|en-GB|Weighing
+InsertUpdate|LOV_METHODTYPE|OTH|en-GB|Other measurement/calculation methodology
