@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="EPRTRweb" Class="DataClassesPollutantReleaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sdkcga6302;Initial Catalog=EPRTRweb;User ID=sa" SettingsObjectName="QueryLayer.Properties.Settings" SettingsPropertyName="EPRTRwebConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.POLLUTANTRELEASE" Member="POLLUTANTRELEASEs">
     <Type Name="POLLUTANTRELEASE">
       <Column Name="FacilityReportID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FacilityName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FacilityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ConfidentialIndicatorFacility" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="ReportingYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PollutantCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="PollutantGroupCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
@@ -15,25 +15,24 @@
       <Column Name="QuantityAir" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="QuantityAccidentalAir" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PercentAccidentalAir" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MethodTypeDesignationAir" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="MethodTypeCodeAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="QuantityWater" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="QuantityAccidentalWater" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PercentAccidentalWater" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MethodTypeDesignationWater" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="MethodTypeCodeWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="QuantitySoil" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="QuantityAccidentalSoil" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PercentAccidentalSoil" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MethodTypeDesignationSoil" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
+      <Column Name="MethodTypeCodeSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitAccidentalAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitAccidentalWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitAccidentalSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ConfidentialIndicator" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ConfidentialCodeAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ConfidentialCodeWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ConfidentialCodeSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LOV_ConfidentialityIDAir" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_ConfidentialityIDWater" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_ConfidentialityIDSoil" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="CountryCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="LOV_CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="RiverBasinDistrictCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
@@ -57,6 +56,14 @@
       <Column Name="LOV_NACESectorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LOV_NACEActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LOV_NACESubActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_ConfidentialityIDAir" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_ConfidentialityIDWater" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_ConfidentialityIDSoil" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConfidentialCodeAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConfidentialCodeWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConfidentialCodeSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ConfidentialIndicator" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ConfidentialIndicatorFacility" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

@@ -111,7 +111,7 @@ namespace QueryLayer
         public static TimeSeriesClasses.ComparisonPollutant GetComparisonTimeSeries(PollutantReleasesTimeSeriesFilter filter, int yearFrom, int yearTo, MediumFilter.Medium medium)
         {
             // Create lambda with pollutant release filter
-            DataClassesPollutantReleaseDataContext db = new DataClassesPollutantReleaseDataContext();
+            DataClassesPollutantReleaseDataContext db = getDataContext();
             ParameterExpression param = Expression.Parameter(typeof(POLLUTANTRELEASE), "s");
             Expression exp = LinqExpressionBuilder.GetLinqExpressionPollutantReleases(filter, param);
             // apply medium

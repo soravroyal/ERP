@@ -9,6 +9,7 @@ using EPRTR.Localization;
 using System.Globalization;
 using System.Threading;
 using EPRTR.Formatters;
+using System.Text;
 
 namespace EPRTR.CsvUtilities
 {
@@ -419,11 +420,19 @@ namespace EPRTR.CsvUtilities
             result += Resources.GetGlobal("Common", "ActivityName") + listSeparator;
             result += Resources.GetGlobal("Common", "CountryCode") + listSeparator;
             result += Resources.GetGlobal("Common", "CountryName") + listSeparator;
+            
             result += Resources.GetGlobal("Common", "TotalQuantity") + listSeparator;
             result += Resources.GetGlobal("Common", "TotalQuantityUnit") + listSeparator;
             result += Resources.GetGlobal("Common", "AccidentalQuantity") + listSeparator;
             result += Resources.GetGlobal("Common", "AccidentalUnit") + listSeparator;
             result += Resources.GetGlobal("Common", "AccidentalPercent") + listSeparator;
+            
+            result += Resources.GetGlobal("Common", "MethodBasisCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodBasisName") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodTypeCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodTypeName") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodDesignation") + listSeparator;
+            
             result += Resources.GetGlobal("Common", "URL") + listSeparator;
             result += Environment.NewLine;
             return result;
@@ -445,8 +454,76 @@ namespace EPRTR.CsvUtilities
             result += AddSimple(r.Unit);
             result += AddPercentage(r.PercentageAccidental, r.ConfidentialIndicator);
 
+            result += AddSimple(r.MethodBasisCode);
+            result += AddText(LOVResources.MethodBasisName(r.MethodBasisCode));
+            result += AddMethodUsed(r.MethodTypeCode, r.MethodDesignation, r.ConfidentialIndicator);
+
             result += AddSimple(r.Url);
             result += Environment.NewLine;
+            return result;
+        }
+
+        //multiple methods can be reported per pollutant. In this case they are sepeareted by | in the Database
+        private string AddMethodUsed(string methodTypeCodes, string methodDesignations, bool confidential)
+        {
+            string[] codeDelimiter = { "|" }; 
+            string csvDelimiter = " " + ASCIIEncoding.ASCII.GetString(new byte[] { 0010 });  //will cause linebreak when csv opens in Excel
+
+            string result=string.Empty;
+
+            string[] designationSplit = null;
+            string[] typecodeSplit = null;
+
+            string resultTypeCode = string.Empty;
+            string resultTypeName = string.Empty;
+            string resultDesignation = string.Empty;
+
+
+            //designations will never be given without type codes.
+            if (String.IsNullOrEmpty(methodTypeCodes))
+            {
+                resultTypeCode = ConfidentialFormat.Format(null, confidential);
+                resultTypeName = ConfidentialFormat.Format(null, confidential);
+                resultDesignation = ConfidentialFormat.Format(null, confidential);;
+            }
+            else
+            {
+
+                typecodeSplit = methodTypeCodes.Split(codeDelimiter, StringSplitOptions.None);
+
+                if (!String.IsNullOrEmpty(methodDesignations))
+                {
+                    designationSplit = methodDesignations.Split(codeDelimiter, StringSplitOptions.None);
+                }
+
+                
+                for (int i = 0; i < typecodeSplit.Length; i++)
+                {
+                    string prefix = typecodeSplit.Length>1 ? i+1+": " : "";
+
+                    string typeCode = typecodeSplit[i];
+                    string designation = (designationSplit != null && i<designationSplit.Length)? designationSplit[i] : null;
+
+                    if (!String.IsNullOrEmpty(typeCode))
+                    {
+                        resultTypeCode += prefix+typeCode;
+                        resultTypeName += prefix+LOVResources.MethodTypeName(typeCode);
+                        resultDesignation += prefix + (!String.IsNullOrEmpty(designation) ? designation : "");
+
+                        if (i != typecodeSplit.Length - 1)
+                        {
+                            resultTypeCode += csvDelimiter;
+                            resultTypeName += csvDelimiter;
+                            resultDesignation += csvDelimiter;
+                        }
+                    }
+                }
+            }
+
+            result += AddText(resultTypeCode);
+            result += AddText(resultTypeName);
+            result += AddText(resultDesignation);
+            
             return result;
         }
 
@@ -465,12 +542,18 @@ namespace EPRTR.CsvUtilities
             result += Resources.GetGlobal("Common", "Quantity") + listSeparator;
             result += Resources.GetGlobal("Common", "QuantityUnit") + listSeparator;
 
+            result += Resources.GetGlobal("Common", "MethodBasisCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodBasisName") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodTypeCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodTypeName") + listSeparator;
+            result += Resources.GetGlobal("Common", "MethodDesignation") + listSeparator;
+
             result += Resources.GetGlobal("Common", "URL") + listSeparator;
             result += Environment.NewLine;
             return result;
         }
 
-        public string GetPollutantTransfersFacilityRow(PollutantTransfers.ResultFacility r)
+        public string GetPollutantTransfersFacilityRow(PollutantTransfers.ResultFacilityCSV r)
         {
             string result = AddValue(r.FacilityReportId);
             result += AddValue(r.FacilityId);
@@ -480,8 +563,12 @@ namespace EPRTR.CsvUtilities
             result += AddSimple(r.CountryCode);
             result += AddText(LOVResources.CountryName(r.CountryCode));
             
-            result += AddValue(r.Quantity);
+            result += AddValue(r.Quantity, r.ConfidentialIndicator);
             result += AddValue(r.QuantityUnit);
+
+            result += AddSimple(r.MethodBasisCode);
+            result += AddText(LOVResources.MethodBasisName(r.MethodBasisCode));
+            result += AddMethodUsed(r.MethodTypeCode, r.MethodDesignation, r.ConfidentialIndicator); 
 
             result += AddSimple(r.Url);
             result += Environment.NewLine;
@@ -728,76 +815,9 @@ namespace EPRTR.CsvUtilities
 
         #endregion
 
-        #region helper methods
-        private string AddSimple(object element)
-        {
-            return string.Format("{0}", element) + listSeparator;
-        }
-
-        private string AddValue(object element)
-        {
-            if (element == null)
-            {
-                return NOTHING_REPORTED + listSeparator;
-            }
-            else
-            {
-                return string.Format(csvCulture, "{0}", element) + listSeparator;
-            }
-        }
-
-        private string AddValue(object element, bool confidential)
-        {
-            string result; 
-            
-            if (confidential)
-            {
-                result = Resources.GetGlobal("Common", "Total") + listSeparator;
-            }
-            else
-            {
-                if (element == null)
-                {
-                    result = NOTHING_REPORTED + listSeparator;
-                }
-                else
-                {
-                    result = AddValue(element);
-                }
-            }
-
-            return result;
-        }
-
-        private string AddPercentage(double? element)
-        {
-            return String.Format(csvCulture, "{0:F5}", element) + listSeparator;
-        }
-
-        private string AddPercentage(double? element, bool confidential)
-        {
-            string result; 
-
-            if (confidential)
-            {
-                result = Resources.GetGlobal("Common", "Total") + listSeparator; 
-            }
-            else
-            {
-                result = AddPercentage(element);
-            }
-
-            return result;
-        }
-
-        private string AddText(string element)
-        {
-            return string.Format("\"{0}\"", element) + listSeparator;
-        }
-
-       # endregion
 
 
+        #region pollutant release activity
 
         public string GetPollutantReleaseActivityHeader()
         {
@@ -906,5 +926,78 @@ namespace EPRTR.CsvUtilities
             result += Environment.NewLine;
             return result;
         }
+        #endregion
+
+        #region helper methods
+        private string AddSimple(object element)
+        {
+            return string.Format("{0}", element) + listSeparator;
+        }
+
+        private string AddValue(object element)
+        {
+            if (element == null)
+            {
+                return NOTHING_REPORTED + listSeparator;
+            }
+            else
+            {
+                return string.Format(csvCulture, "{0}", element) + listSeparator;
+            }
+        }
+
+        private string AddValue(object element, bool confidential)
+        {
+            string result;
+
+            if (confidential && element == null)
+            {
+                result = ConfidentialFormat.Format(null, confidential) + listSeparator;
+            }
+            else
+            {
+                if (element == null)
+                {
+                    result = NOTHING_REPORTED + listSeparator;
+                }
+                else
+                {
+                    result = AddValue(element);
+                }
+            }
+
+            return result;
+        }
+
+        private string AddPercentage(double? element)
+        {
+            return String.Format(csvCulture, "{0:F5}", element) + listSeparator;
+        }
+
+        private string AddPercentage(double? element, bool confidential)
+        {
+            string result;
+
+            if (confidential && element == null)
+            {
+                result = result = ConfidentialFormat.Format(null, confidential) +listSeparator;
+            }
+            else
+            {
+                result = AddPercentage(element);
+            }
+
+            return result;
+        }
+
+        private string AddText(string element)
+        {
+            return string.Format("\"{0}\"", element) + listSeparator;
+        }
+
+        # endregion
+
     }
+
+
 }

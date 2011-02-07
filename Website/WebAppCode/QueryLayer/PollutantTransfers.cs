@@ -573,13 +573,14 @@ namespace QueryLayer
             public string CountryCode { get; private set; }
             public int FacilityReportId { get; private set; }
             public QuantityUnit QuantityUnit { get; private set; }
+            public bool ConfidentialIndicator { get; private set; }
             public bool ConfidentialIndicatorFacility { get; private set; }
 
             // Only used with CSV download
             public int FacilityId { get; private set; }
             public string Url { get; set; }
 
-            public ResultFacility(string activityCode, string name, double quantity, string countryCode, int facilityReportId, QuantityUnit quantityUnit, bool confidentialIndicatorFacility, int facilityId)
+            public ResultFacility(string activityCode, string name, double quantity, string countryCode, int facilityReportId, QuantityUnit quantityUnit, bool confidentialIndicatorFacility, bool confidentialIndicator, int facilityId)
             {
                 ActivityCode = activityCode;
                 FacilityName = name;
@@ -588,9 +589,30 @@ namespace QueryLayer
                 FacilityReportId = facilityReportId;
                 QuantityUnit = quantityUnit;
                 ConfidentialIndicatorFacility = confidentialIndicatorFacility;
+                ConfidentialIndicator = confidentialIndicator;
                 FacilityId = facilityId;
             }
         }
+
+        public class ResultFacilityCSV : ResultFacility
+        {
+            // public properties
+            public int FacilityId { get; private set; }
+            public string MethodBasisCode { get; private set; }
+            public string MethodTypeCode { get; private set; }
+            public string MethodDesignation { get; private set; }
+            public string Url;
+
+            public ResultFacilityCSV(string activityCode, string name, double quantity, string countryCode, int facilityReportId, QuantityUnit quantityUnit, bool confidentialIndicatorFacility, bool confidentialIndicator, int facilityId, string methodBasisCode, string methodTypeCode, String methodDesignation) :
+                base(activityCode,name, quantity,countryCode,facilityReportId, quantityUnit, confidentialIndicatorFacility,confidentialIndicator, facilityId)
+            {
+                this.MethodBasisCode = methodBasisCode;
+                this.MethodTypeCode = methodTypeCode;
+                this.MethodDesignation = methodDesignation;
+            }
+
+        }
+
 
 
         /// <summary>
@@ -634,6 +656,7 @@ namespace QueryLayer
                     v.FacilityReportID, 
                     unit, 
                     v.ConfidentialIndicatorFacility, 
+                    v.ConfidentialIndicator,
                     v.FacilityID));
             }
 
@@ -650,9 +673,9 @@ namespace QueryLayer
         // Facilities - CSV
         // ----------------------------------------------------------------------------------
         #region Facilities - CSV
-        public static IEnumerable<PollutantTransfers.ResultFacility> GetFacilityListCSV(PollutantTransfersSearchFilter filter)
+        public static IEnumerable<PollutantTransfers.ResultFacilityCSV> GetFacilityListCSV(PollutantTransfersSearchFilter filter)
         {
-            List<PollutantTransfers.ResultFacility> result = new List<PollutantTransfers.ResultFacility>();
+            List<PollutantTransfers.ResultFacilityCSV> result = new List<PollutantTransfers.ResultFacilityCSV>();
 
             // create expression
             DataClassesPollutantTransferDataContext db = getPollutantTransferDataContext();
@@ -667,7 +690,7 @@ namespace QueryLayer
             foreach (var v in data)
             {
                 QuantityUnit unit = (v.UnitCode == QuantityUnit.Tonnes.ToString()) ? QuantityUnit.Tonnes : QuantityUnit.Kilo;
-                var row = new PollutantTransfers.ResultFacility(
+                var row = new PollutantTransfers.ResultFacilityCSV(
                     v.IAActivityCode, 
                     v.FacilityName, 
                     v.Quantity, 
@@ -675,7 +698,11 @@ namespace QueryLayer
                     v.FacilityReportID, 
                     unit, 
                     v.ConfidentialIndicatorFacility,
-                    v.FacilityID);
+                    v.ConfidentialIndicator,
+                    v.FacilityID,
+                    v.MethodCode,
+                    v.MethodTypeCode,
+                    v.MethodTypeDesignation);
                 
                 result.Add(row);
             }
