@@ -301,45 +301,45 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
     #endregion
 
 
-    //public void DoSaveCSV(object sender, EventArgs e)
-    //{
-    //    try
-    //    {
-    //        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-    //        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+    public void DoSaveCSV(object sender, EventArgs e)
+    {
+        try
+        {
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
 
-    //        // Create Header
-    //        var filter = SearchFilter;
+            // Create Header
+            var filter = SearchFilter;
 
-    //        bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
+            bool isConfidentialityAffected = PollutantTransfers.IsAffectedByConfidentiality(filter);
 
-    //        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantReleaseSearchHeader(
-    //            filter,
-    //            isConfidentialityAffected);
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantTransferSearchHeader(
+                filter,
+                isConfidentialityAffected);
 
-    //        // Create Body
-    //        var rows = PollutantTransfer.GetActivityTree(filter);
+            // Create Body
+            var rows = PollutantTransfers.GetActivityTree(filter);
 
-    //        // dump to file
-    //        string topheader = csvformat.CreateHeader(header);
-    //        string rowHeader = csvformat.GetPollutantReleaseActivityHeader();
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string rowHeader = csvformat.GetPollutantTransferActivityHeader();
 
-    //        Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Activity_List");
+            Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Activity_List");
 
-    //        Response.Write(topheader + rowHeader);
+            Response.Write(topheader + rowHeader);
 
-    //        foreach (var item in rows)
-    //        {
-    //            string row = csvformat.GetPollutantReleaseActivityRow(item);
-    //            Response.Write(row);
-    //        }
+            foreach (var item in rows)
+            {
+                string row = csvformat.GetPollutantTransferActivityRow(item);
+                Response.Write(row);
+            }
 
-    //        Response.End();
-    //    }
-    //    catch (Exception exception)
-    //    {
+            Response.End();
+        }
+        catch (Exception exception)
+        {
 
-    //    }
-    //}
+        }
+    }
 
 }
