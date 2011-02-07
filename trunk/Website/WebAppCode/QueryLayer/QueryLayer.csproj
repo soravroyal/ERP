@@ -52,6 +52,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AreaOverview.cs" />
+    <Compile Include="DataClassesPollutantRelease.cs">
+      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesPollutantRelease.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesPollutantTransfer.cs">
+      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesPollutantTransfer.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
+    </Compile>
     <Compile Include="DataClassesCulture.cs">
       <DependentUpon>DataClassesCulture.dbml</DependentUpon>
     </Compile>
@@ -93,22 +109,6 @@
       <DependentUpon>DataClassesWasteTransfer.dbml</DependentUpon>
     </Compile>
     <Compile Include="Enums\CoordinateStatus.cs" />
-    <Compile Include="DataClassesPollutantRelease.cs">
-      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="DataClassesPollutantRelease.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="DataClassesPollutantTransfer.cs">
-      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
-    </Compile>
-    <Compile Include="DataClassesPollutantTransfer.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
-    </Compile>
     <Compile Include="Facility.cs" />
     <Compile Include="Filters\ActivityFilter.cs" />
     <Compile Include="Filters\AreaFilter.cs" />
@@ -172,28 +172,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="DataClassesPollutantRelease.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClassesPollutantRelease.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataClassesPollutantRelease.dbml.layout">
-      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
-    </None>
-    <None Include="DataClassesPollutantTransfer.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClassesPollutantTransfer.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DataClassesPollutantTransfer.dbml.layout">
-      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
@@ -244,8 +222,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="DataClassesPollutantTransfer.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesPollutantTransfer.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DataClassesWasteTransfer.dbml.layout">
       <DependentUpon>DataClassesWasteTransfer.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesPollutantRelease.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesPollutantRelease.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataClassesPollutantTransfer.dbml.layout">
+      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesPollutantRelease.dbml.layout">
+      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

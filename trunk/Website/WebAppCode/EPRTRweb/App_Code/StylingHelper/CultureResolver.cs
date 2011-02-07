@@ -13,7 +13,7 @@ public static class CultureResolver
     public static string Resolve(HttpRequest request)
     {
         // get list of currently allowed cultures from CMS database
-        IEnumerable<string> allowedCultures = ListOfValues.GetAllCultureCodes().ToList();
+        IEnumerable<string> allowedCultures = ListOfValues.GetAllCultureCodes();
 
         // retrieve cookie
         HttpCookie cultureCookie = request.Cookies["Culture"];

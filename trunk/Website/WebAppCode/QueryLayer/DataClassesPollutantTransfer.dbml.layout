@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.625" name="DataClassesPollutantTransfer">
-  <DataContextMoniker Name="/DataClassesPollutantTransferDataContext" />
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 10.875" name="DataClasses1">
+  <DataContextMoniker Name="/DataClasses1DataContext" />
   <nestedChildShapes>
-    <classShape Id="be2a7ba1-8452-4544-ace6-25765b7bbd22" absoluteBounds="2.5, 1.25, 2, 7.17700439453125">
-      <DataClassMoniker Name="/DataClassesPollutantTransferDataContext/POLLUTANTTRANSFER" />
+    <classShape Id="c2dce731-f6c6-4eb9-93c9-a9e9e45d1fae" absoluteBounds="4.25, 1.875, 2, 8.6937483723958326">
+      <DataClassMoniker Name="/DataClasses1DataContext/POLLUTANTTRANSFER" />
       <nestedChildShapes>
-        <elementListCompartment Id="21fe2856-6517-4e6a-b104-59ae35168b06" absoluteBounds="2.5149999999999997, 1.71, 1.9700000000000002, 6.61700439453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="48b88feb-3a2f-43bf-9461-a756966acf69" absoluteBounds="4.265, 2.335, 1.9700000000000002, 8.1337483723958321" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

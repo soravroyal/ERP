@@ -704,47 +704,31 @@ namespace QueryLayer
                 this.ConfidentialIndicatorFacility = confidentialFacilitity;
                 this.ConfidentialIndicator = confidential;
                 this.Unit = CODE_KG; //pollutant releases are always reported in kgs
-                //this.Unit = CODE_TNE; //pollutant releases are always reported in toneladas
             }
 
         }
 
 
-        public class ResultFacilityCSV
+        public class ResultFacilityCSV: ResultFacility
         {
             // public properties
             public int FacilityId { get; private set; }
-            public string FacilityName { get; private set; }
-            public double? QuantityTotal { get; private set; }
-            public double? QuantityAccidental { get; private set; }
-            public string QuantityTotalUnit { get; private set; }
-            public string QuantityAccidentalUnit { get; private set; }
-            public double? PercentageAccidental { get; private set; }
-            public string ActivityCode { get; private set; }
-            public string CountryCode { get; private set; }
-            public int FacilityReportId { get; private set; }
-            public string Unit { get; private set; }
-            public bool ConfidentialIndicatorFacility { get; private set; }
-            public bool ConfidentialIndicator { get; private set; }
+            public string MethodBasisCode { get; private set; }
+            public string MethodTypeCode { get; private set; }
+            public string MethodDesignation { get; private set; }
             public string Url;
 
-            public ResultFacilityCSV(int facilityReportId, int facilityId, string facilityName, double? quantityTotal, double? quantityAccidental, double? percent, string activityCode, string countryCode, bool confidentialFacilitity, bool confidential)
+            public ResultFacilityCSV(int facilityReportId, int facilityId, string facilityName, double? quantityTotal, double? quantityAccidental, double? percent, string activityCode, string countryCode, bool confidentialFacilitity, bool confidential, string methodBasisCode, string methodTypeCode, String methodDesignation):
+                        base(facilityReportId,facilityName,quantityTotal,quantityAccidental,percent,activityCode,countryCode,confidentialFacilitity, confidential)
             {
-                this.FacilityReportId = facilityReportId;
                 this.FacilityId = facilityId;
-                this.FacilityName = facilityName;
-                this.QuantityTotal = quantityTotal;
-                this.QuantityAccidental = quantityAccidental;
-                this.PercentageAccidental = percent;
-                this.ActivityCode = activityCode;
-                this.CountryCode = countryCode;
-                this.ConfidentialIndicatorFacility = confidentialFacilitity;
-                this.ConfidentialIndicator = confidential;
-                this.Unit = CODE_KG; //pollutant releases are always reported in kgs
-                //this.Unit = CODE_TNE; //pollutant releases are always reported in toneladas
+                this.MethodBasisCode = methodBasisCode;
+                this.MethodTypeCode = methodTypeCode;
+                this.MethodDesignation = methodDesignation;
             }
 
         }
+
 
         /// <summary>
         /// Returns the number of facilities corresponding to the filter. Always use POLLUTANTRELEASE table, since it has the fewest records.
@@ -945,7 +929,10 @@ namespace QueryLayer
                     v.IAActivityCode,
                     v.CountryCode,
                     v.ConfidentialIndicatorFacility,
-                    v.ConfidentialIndicator
+                    v.ConfidentialIndicator,
+                    getMethodBasis(selectedMedium)(v),
+                    getMethodType(selectedMedium)(v),
+                    getMethodDesignation(selectedMedium)(v)
                    ));
 
             return data;
@@ -1015,6 +1002,76 @@ namespace QueryLayer
                     break;
                 case MediumFilter.Medium.Soil:
                     func = s => s.PercentAccidentalSoil;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("medium", "Illegal medium");
+            }
+
+            return func.Compile();
+        }
+
+
+        //function to select the rigth method basis property dependend on medium
+        private static Func<POLLUTANTRELEASE, string> getMethodBasis(MediumFilter.Medium? medium)
+        {
+            Expression<Func<POLLUTANTRELEASE, string>> func = s => null;
+
+            switch (medium)
+            {
+                case MediumFilter.Medium.Air:
+                    func = s => "XXX"; //s.MethodTypeCodeAir;
+                    break;
+                case MediumFilter.Medium.Water:
+                    func = s => "XXX"; // s.MethodTypeCodeWater;
+                    break;
+                case MediumFilter.Medium.Soil:
+                    func = s => "XXX"; //s.MethodTypeCodeSoil;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("medium", "Illegal medium");
+            }
+
+            return func.Compile();
+        }
+
+        //function to select the rigth method type property dependend on medium
+        private static Func<POLLUTANTRELEASE, string> getMethodType(MediumFilter.Medium? medium)
+        {
+            Expression<Func<POLLUTANTRELEASE, string>> func = s => null;
+
+            switch (medium)
+            {
+                case MediumFilter.Medium.Air:
+                    func = s => s.MethodTypeCodeAir;
+                    break;
+                case MediumFilter.Medium.Water:
+                    func = s => s.MethodTypeCodeWater;
+                    break;
+                case MediumFilter.Medium.Soil:
+                    func = s => s.MethodTypeCodeSoil;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("medium", "Illegal medium");
+            }
+
+            return func.Compile();
+        }
+
+        //function to select the rigth method designation property dependend on medium
+        private static Func<POLLUTANTRELEASE, string> getMethodDesignation(MediumFilter.Medium? medium)
+        {
+            Expression<Func<POLLUTANTRELEASE, string>> func = s => null;
+
+            switch (medium)
+            {
+                case MediumFilter.Medium.Air:
+                    func = s => s.MethodTypeDesignationAir;
+                    break;
+                case MediumFilter.Medium.Water:
+                    func = s => s.MethodTypeDesignationWater;
+                    break;
+                case MediumFilter.Medium.Soil:
+                    func = s => s.MethodTypeDesignationSoil;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("medium", "Illegal medium");

@@ -654,8 +654,8 @@ namespace QueryLayer
         {
             if (ListOfValues.lovCultureCache == null)
             {
-                var db = new DataClassesCultureDataContext();
-                ListOfValues.lovCultureCache = db.LOV_Cultures;
+                var db = getCultureDataContext();
+                ListOfValues.lovCultureCache = db.LOV_Cultures.ToList();
             }
             return ListOfValues.lovCultureCache;
         }
@@ -664,9 +664,11 @@ namespace QueryLayer
         {
             if (lovCultureCodesCache == null)
             {
-                var db = new DataClassesCultureDataContext();
+                var db = getCultureDataContext();;
                 lovCultureCodesCache = from c in db.LOV_Cultures
                                        select c.Code;
+                
+                lovCultureCodesCache  =  lovCultureCodesCache.ToList();
             }
 
             return lovCultureCodesCache;
