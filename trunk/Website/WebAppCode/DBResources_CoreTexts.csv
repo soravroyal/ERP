@@ -21,3 +21,11 @@ InsertUpdate|LOV_METHODTYPE|MAB|en-GB|Mass balance method which is accepted by t
 InsertUpdate|LOV_METHODTYPE|SSC|en-GB|European-wide sector specific calculation method
 InsertUpdate|LOV_METHODTYPE|WEIGH|en-GB|Weighing
 InsertUpdate|LOV_METHODTYPE|OTH|en-GB|Other measurement/calculation methodology
+
+
+--method info in CSV
+InsertUpdate|Common|MethodBasisCode|en-GB|Method Basis Code
+InsertUpdate|Common|MethodBasisName|en-GB|Method Basis Name
+InsertUpdate|Common|MethodTypeCode|en-GB|Method Type Code
+InsertUpdate|Common|MethodTypeName|en-GB|Method Type Name
+InsertUpdate|Common|MethodTypeName|en-GB|Method Designation
