@@ -111,7 +111,7 @@ public partial class ucPollutantTransfersSheet : System.Web.UI.UserControl
             this.ucPollutantTransfersActivities.Populate(filter);
             txt = Resources.GetGlobal("Pollutant", "AllValuesAreYearlyTransfers");
             this.ucDownloadPrint.Visible = true;
-            this.ucDownloadPrint.Show(false, true);
+            this.ucDownloadPrint.Show(true, true);
             this.ucDownloadPrint.SetPrintControl(this);
 
             Sheet = Sheets.PollutantTransfers.Activities;
@@ -232,6 +232,9 @@ public partial class ucPollutantTransfersSheet : System.Web.UI.UserControl
         {
             case Sheets.PollutantTransfers.Facilities:
                 ucPollutantTransfersFacilities.DoSaveCSV(this, EventArgs.Empty);
+                break;
+            case Sheets.PollutantTransfers.Activities:
+                this.ucPollutantTransfersActivities.DoSaveCSV(this, EventArgs.Empty);
                 break;
             default:
                 break;

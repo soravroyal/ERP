@@ -455,13 +455,41 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
     {
         try
         {
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
 
+            // Create Header
+            var filter = SearchFilter;
+
+            bool isConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(filter);
+
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetWasteTransfersSearchHeader(
+                filter,
+                isConfidentialityAffected);
+
+            // Create Body
+            var rows = WasteTransfers.GetActivityTree(filter);
+
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string rowHeader = csvformat.GetWasteTransferActivityHeader();
+
+            Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Activity_List");
+
+            Response.Write(topheader + rowHeader);
+
+            //foreach (var item in rows)
+            //{
+            //    string row = csvformat.GetPollutantTransferActivityRow(item);
+            //    Response.Write(row);
+            //}
+
+            Response.End();
         }
         catch (Exception exception)
         {
 
         }
     }
-
 
 }

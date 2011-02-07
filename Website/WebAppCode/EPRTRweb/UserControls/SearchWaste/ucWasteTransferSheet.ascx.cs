@@ -130,7 +130,7 @@ public partial class ucWasteTransferSheet : System.Web.UI.UserControl
             this.ucWasteTransferActivities.Populate(filter);
             txt = Resources.GetGlobal("WasteTransfers", "AllValuesAreYearlyTransfers");
             this.ucDownloadPrint.Visible = true; // activate print button only
-            this.ucDownloadPrint.Show(false, true);
+            this.ucDownloadPrint.Show(true, true);
             this.ucDownloadPrint.SetPrintControl(this);
 
             Sheet = Sheets.WasteTransfers.Activities;
