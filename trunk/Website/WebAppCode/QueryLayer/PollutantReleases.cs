@@ -92,6 +92,7 @@ namespace QueryLayer
         public interface PollutantReleaseRow
         {
             int Facilities{ get; }
+            int AccidentalFacilities { get; }
             double? QuantityAir { get; }
             double? QuantityWater { get; }
             double? QuantitySoil { get; }
