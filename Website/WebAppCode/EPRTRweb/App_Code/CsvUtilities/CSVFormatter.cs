@@ -873,8 +873,17 @@ namespace EPRTR.CsvUtilities
                 return result;
             }
 
-            result += AddActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
-            
+            result += addActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
+            result += addPollutantReleaseCols(r);            
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+        private string addPollutantReleaseCols(PollutantReleases.PollutantReleaseRow r)
+        {
+            string result = "";
+
             result += AddValue(r.Facilities);
             result += AddValue(r.AccidentalFacilities);
 
@@ -889,11 +898,10 @@ namespace EPRTR.CsvUtilities
             result += AddValue(r.AccidentalSoil);
             result += AddSimple(r.UnitSoil);
 
-            result += Environment.NewLine;
             return result;
         }
 
-        private string AddActivityTreeCols(int level, string sectorCode, string activityCode, string subactivityCode)
+        private string addActivityTreeCols(int level, string sectorCode, string activityCode, string subactivityCode)
         {
             string result = string.Empty;
 
@@ -934,8 +942,8 @@ namespace EPRTR.CsvUtilities
                 {
                     // if no subactivity code is present (level == 1) 
                     // add sector code and name once more
-                    result += AddSimple("");
-                    result += AddSimple("");
+                    result += AddSimple(" ");
+                    result += AddSimple(" ");
                     //result += AddSimple(activityCode);
                     //result += AddSimple("   " + LOVResources.AnnexIActivityName(activityCode));
                 }
@@ -944,10 +952,10 @@ namespace EPRTR.CsvUtilities
             {
                 // if no activity code present (level == 0) add sector code and name 
                 // two times more
-                result += AddSimple("");
-                result += AddSimple("");
-                result += AddSimple("");
-                result += AddSimple("");
+                result += AddSimple(" ");
+                result += AddSimple(" ");
+                result += AddSimple(" ");
+                result += AddSimple(" ");
 
                 //result += AddSimple(sectorCode);
                 //result += AddSimple(LOVResources.AnnexIActivityName(sectorCode));
@@ -961,7 +969,7 @@ namespace EPRTR.CsvUtilities
         #endregion
 
 
-        #region pollutant release activity
+        #region pollutant transfer activity
 
         public string GetPollutantTransferActivityHeader()
         {
@@ -989,15 +997,21 @@ namespace EPRTR.CsvUtilities
                 return result;
             }
 
-            result += AddActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
+            result += addActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
+            result += addPollutantTransferCols(r);
 
-            result += AddValue(r.Facilities);
+            result += Environment.NewLine;
+            return result;
+        }
+
+        private string addPollutantTransferCols(PollutantTransfers.PollutantTransferRow r)
+        {
+            string result = AddValue(r.Facilities);
 
             // add actual values
             result += AddValue(r.Quantity);
             result += AddSimple(r.Unit);
 
-            result += Environment.NewLine;
             return result;
         }
 
@@ -1023,16 +1037,20 @@ namespace EPRTR.CsvUtilities
                 WasteTypeFilter.Type.NonHazardous
             })
             {
-
+                //add total col for type
+                result += AddSimple(getQuantityHeaderWaste(type, null)); 
+                
+                //add treatment col for type
                 foreach (var treatment in new List<WasteTreatmentFilter.Treatment>() { 
-                WasteTreatmentFilter.Treatment.Disposal, 
                 WasteTreatmentFilter.Treatment.Recovery, 
+                WasteTreatmentFilter.Treatment.Disposal, 
                 WasteTreatmentFilter.Treatment.Unspecified
-            })
+                })
                 {
-                    result += AddSimple(GetColumnHeaderWaste(QUANTITY_KEY_STR, type, treatment));
-                    result += AddSimple(GetColumnHeaderWaste(UNIT_KEY_STR, type, treatment));
+                    result += AddSimple(getQuantityHeaderWaste(type, treatment));
+                    
                 }
+                result += AddSimple(getUnitHeaderWaste(type));
             }
 
             result += Environment.NewLine;
@@ -1045,12 +1063,81 @@ namespace EPRTR.CsvUtilities
         /// <param name="keyStr">Use specific resource key "Quantity"</param>
         /// <param name="treatment">Use either disposal, recovery, unspecified</param>
         /// <returns>The concatenation</returns>
-        private string GetColumnHeaderWaste(string keyStr, WasteTypeFilter.Type type, WasteTreatmentFilter.Treatment treatment)
+        private string getQuantityHeaderWaste(WasteTypeFilter.Type type, WasteTreatmentFilter.Treatment? treatment)
         {
             string typeStr = Resources.GetGlobal("LOV_WASTETYPE", EnumUtil.GetStringValue(type));
-            string treatmentStr = Resources.GetGlobal("LOV_WASTETREATMENT", EnumUtil.GetStringValue(treatment));
-            string quantityTypeStr = Resources.GetGlobal("Common", keyStr);
+
+            string treatmentStr = string.Empty;
+            if (treatment == null)
+            {
+                treatmentStr = Resources.GetGlobal("Common", "Total");
+            }
+            else
+            {
+                treatmentStr = Resources.GetGlobal("LOV_WASTETREATMENT", EnumUtil.GetStringValue(treatment));
+            }
+
+            string quantityTypeStr = Resources.GetGlobal("Common", QUANTITY_KEY_STR);
+            
             return string.Format("{0} - {1} - {2}", quantityTypeStr, typeStr, treatmentStr);
+        }
+
+        private string getUnitHeaderWaste( WasteTypeFilter.Type type)
+        {
+            string typeStr = Resources.GetGlobal("LOV_WASTETYPE", EnumUtil.GetStringValue(type));
+            string quantityTypeStr = Resources.GetGlobal("Common", UNIT_KEY_STR);
+            return string.Format("{0} - {1}", quantityTypeStr, typeStr);
+        }
+
+
+        public string GetWasteTransferActivityRow(WasteTransfers.ActivityTreeListRow r)
+        {
+
+            string result = string.Empty;
+
+            // do not add a line for the total values
+            if (r.SectorCode == "TOT")
+            {
+                return result;
+            }
+
+            result += addActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
+            result += addWasteTransferCols(r);
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+        private string addWasteTransferCols(WasteTransfers.WasteTransferRow r)
+        {
+            string result = AddValue(r.Facilities);
+
+            result += AddValue(r.TotalHWIC);
+            result += AddValue(r.QuantityRecoveryHWIC); 
+            result += AddValue(r.QuantityDisposalHWIC);
+            result += AddValue(r.QuantityUnspecHWIC);
+            result += AddSimple(r.UnitCodeHWIC);
+
+            result += AddValue(r.TotalHWOC);
+            result += AddValue(r.QuantityRecoveryHWOC); 
+            result += AddValue(r.QuantityDisposalHWOC);
+            result += AddValue(r.QuantityUnspecHWOC);
+            result += AddSimple(r.UnitCodeHWOC);
+
+            result += AddValue(r.TotalSum);
+            result += AddValue(r.QuantityRecoverySum); 
+            result += AddValue(r.QuantityDisposalSum);
+            result += AddValue(r.QuantityUnspecSum);
+            result += AddSimple(r.UnitCodeSum);
+
+            result += AddValue(r.TotalNONHW);
+            result += AddValue(r.QuantityRecoveryNONHW); 
+            result += AddValue(r.QuantityDisposalNONHW);
+            result += AddValue(r.QuantityUnspecNONHW);
+            result += AddSimple(r.UnitCodeNONHW);
+
+
+            return result;
         }
 
 

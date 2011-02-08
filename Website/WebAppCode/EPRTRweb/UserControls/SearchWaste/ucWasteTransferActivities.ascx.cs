@@ -478,11 +478,11 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
 
             Response.Write(topheader + rowHeader);
 
-            //foreach (var item in rows)
-            //{
-            //    string row = csvformat.GetPollutantTransferActivityRow(item);
-            //    Response.Write(row);
-            //}
+            foreach (var item in rows)
+            {
+                string row = csvformat.GetWasteTransferActivityRow(item);
+                Response.Write(row);
+            }
 
             Response.End();
         }
