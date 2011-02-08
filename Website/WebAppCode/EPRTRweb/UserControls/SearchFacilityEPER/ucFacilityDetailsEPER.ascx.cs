@@ -88,9 +88,6 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
                                        String.Empty, 
                                        true));
 
-        elements.Add(new FacilityDetailElement(
-                                       Resources.GetGlobal("Common", "NationalID") + ":",
-                                       fac.NationalID));
 
         elements.Add(new FacilityDetailElement(
                                        Resources.GetGlobal("Facility", "ParentCompanyName"),
@@ -197,6 +194,11 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
                 Resources.GetGlobal("Pollutant", "ConfidentialityReason"),
                 LOVResources.ConfidentialityReason(fac.ConfidentialIndicatorCode)));
         }
+
+        elements.Add(new FacilityDetailElement(
+                                       Resources.GetGlobal("Common", "NationalID") + ":",
+                                       FacilityDetailsFormat.FormatNationalId(fac)));
+
 
         // This is not the most elegant way to obtain a spacing  spacing
         elements.Add(new FacilityDetailElement(String.Empty, String.Empty));
