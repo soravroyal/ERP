@@ -7,29 +7,30 @@ using QueryLayer.Utilities;
 
 namespace QueryLayer.Filters
 {
-	/// <summary>
-	/// Holds information about selected waste type for waste transfers
-	/// </summary>
-	[Serializable]
-	public class WasteTypeFilter :ICloneable
-	{
-		/// <summary>
-		/// true if selection includes transfer of non hazardous waste, false otherwise
-		/// </summary>
-		public bool NonHazardousWaste { get; set; }
-
-		/// <summary>
-		/// true if selection includes transfer of hazardous waste within country (domestic), false otherwise
-		/// </summary>
-		public bool HazardousWasteCountry { get; set; }
-
-		/// <summary>
-		/// true if selection includes transfer of hazardous waste outside country (transboundary), false otherwise
-		/// </summary>
-		public bool HazardousWasteTransboundary { get; set; }
+    /// <summary>
+    /// Holds information about selected waste type for waste transfers
+    /// </summary>
+    [Serializable]
+    public class WasteTypeFilter : ICloneable
+    {
+        /// <summary>
+        /// true if selection includes transfer of non hazardous waste, false otherwise
+        /// </summary>
+        public bool NonHazardousWaste { get; set; }
 
         /// <summary>
-        /// Returns true if the filter includes the waste type given.
+        /// true if selection includes transfer of hazardous waste within country (domestic), false otherwise
+        /// </summary>
+        public bool HazardousWasteCountry { get; set; }
+
+        /// <summary>
+        /// true if selection includes transfer of hazardous waste outside country (transboundary), false otherwise
+        /// </summary>
+        public bool HazardousWasteTransboundary { get; set; }
+
+        /// <summary>
+        /// Returns true if the filter includes the waste type given. 
+        /// For type "Hazardous" true will be returned as soon as one of the hazardous types are included
         /// </summary>
         public bool InludesWasteType(WasteTypeFilter.Type wasteType)
         {
@@ -44,10 +45,17 @@ namespace QueryLayer.Filters
                 case Type.Hazardous:
                     return HazardousWasteCountry || HazardousWasteTransboundary;
                 default:
-                    throw new ArgumentOutOfRangeException("Unknown waste type") ;
+                    throw new ArgumentOutOfRangeException("Unknown waste type");
             }
         }
 
+        /// <summary>
+        /// Returns true if the filter includes the both hazardous waste types. 
+        /// </summary>
+        public bool InludesAllHazardousWasteType()
+        {
+            return HazardousWasteCountry && HazardousWasteTransboundary;
+        }
 
 
         /// <summary>
@@ -58,23 +66,23 @@ namespace QueryLayer.Filters
             return this.MemberwiseClone();
         }
 
-		/// <summary>
-		/// Defines the possible waste types in the database
-		/// </summary>
-		public enum Type
-		{
-			[StringValue("NON-HW")]
-			NonHazardous = 0,
-			
+        /// <summary>
+        /// Defines the possible waste types in the database
+        /// </summary>
+        public enum Type
+        {
+            [StringValue("NON-HW")]
+            NonHazardous = 0,
+
             [StringValue("HWIC")]
-			HazardousCountry,
-			
+            HazardousCountry,
+
             [StringValue("HWOC")]
-			HazardousTransboundary,
-            
+            HazardousTransboundary,
+
             [StringValue("HW")] //representes the total of HWOC and HWIC (not included in the search options)
             Hazardous
-		}
+        }
 
         public WasteTypeFilter()
         {
@@ -86,7 +94,7 @@ namespace QueryLayer.Filters
             this.HazardousWasteCountry = false;
             this.HazardousWasteTransboundary = false;
             this.NonHazardousWaste = false;
-            
+
             switch (wasteType)
             {
                 case WasteTypeFilter.Type.HazardousCountry:
@@ -106,5 +114,5 @@ namespace QueryLayer.Filters
                     }
             }
         }
-	}
+    }
 }

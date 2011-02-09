@@ -398,7 +398,7 @@ public partial class ucPollutantReleasesActivities : System.Web.UI.UserControl
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetPollutantReleaseActivityHeader();
+            string rowHeader = csvformat.GetPollutantReleaseActivityHeader(filter);
 
             Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Activity_List");
 
@@ -406,7 +406,7 @@ public partial class ucPollutantReleasesActivities : System.Web.UI.UserControl
 
             foreach (var item in rows)
             {
-                string row = csvformat.GetPollutantReleaseActivityRow(item);
+                string row = csvformat.GetPollutantReleaseActivityRow(item, filter);
                 Response.Write(row);
             }
 
