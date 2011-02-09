@@ -9,6 +9,8 @@ using QueryLayer.Utilities;
 using EPRTR.Localization;
 using EPRTR.Comparers;
 using System.Web.UI;
+using System.Globalization;
+using EPRTR.CsvUtilities;
 
 public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 {
@@ -225,6 +227,47 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
     }
     #endregion
 
+
+    public void DoSaveCSV(object sender, EventArgs e)
+    {
+        try
+        {
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+            // Create Header
+            var filter = SearchFilter;
+
+            bool isConfidentialityAffected = PollutantTransfers.IsAffectedByConfidentiality(filter);
+
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantTransferSearchHeader(
+                filter,
+                isConfidentialityAffected);
+
+            // Create Body
+            var rows = PollutantTransfers.GetAreaTree(filter);
+
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string rowHeader = csvformat.GetPollutantTransferAreaHeader(filter);
+
+            Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Area_List");
+
+            Response.Write(topheader + rowHeader);
+
+            foreach (var item in rows)
+            {
+                string row = csvformat.GetPollutantTransferAreaRow(item, filter);
+                Response.Write(row);
+            }
+
+            Response.End();
+        }
+        catch (Exception exception)
+        {
+
+        }
+    }
 
 
 
