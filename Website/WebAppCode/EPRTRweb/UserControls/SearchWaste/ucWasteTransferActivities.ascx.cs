@@ -472,7 +472,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetWasteTransferActivityHeader();
+            string rowHeader = csvformat.GetWasteTransferActivityHeader(filter);
 
             Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Activity_List");
 
@@ -480,7 +480,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
 
             foreach (var item in rows)
             {
-                string row = csvformat.GetWasteTransferActivityRow(item);
+                string row = csvformat.GetWasteTransferActivityRow(item,filter);
                 Response.Write(row);
             }
 

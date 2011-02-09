@@ -39,7 +39,7 @@ namespace EPRTR.CsvUtilities
             {
                 this.csvCulture = csvCulture;
             }
-            
+
             listSeparator = csvCulture.TextInfo.ListSeparator;
         }
 
@@ -109,7 +109,7 @@ namespace EPRTR.CsvUtilities
             result += Resources.GetGlobal("Common", "RiverBasinDistrictName") + listSeparator;
             result += Resources.GetGlobal("Common", "NUTSRegionCode") + listSeparator;
             result += Resources.GetGlobal("Common", "NUTSRegionName") + listSeparator;
-            result += Resources.GetGlobal("Common", "URL") + listSeparator; 
+            result += Resources.GetGlobal("Common", "URL") + listSeparator;
             result += Environment.NewLine;
             return result;
         }
@@ -192,7 +192,7 @@ namespace EPRTR.CsvUtilities
         {
             string result = AddValue(r.Year);
             result += AddText(pollutantName);
-            result += AddSimple(medium );
+            result += AddSimple(medium);
             result += AddValue(r.Quantity);
             result += AddSimple(r.QuantityUnit);
             result += AddValue(r.QuantityAccidental);
@@ -335,9 +335,9 @@ namespace EPRTR.CsvUtilities
             result += Resources.GetGlobal("Common", "Medium") + listSeparator;
             result += Resources.GetGlobal("Common", "TotalQuantity") + listSeparator;
             result += Resources.GetGlobal("Common", "TotalQuantityUnit") + listSeparator;
-            result += Resources.GetGlobal("Common", "AccidentalQuantity") + listSeparator; 
-            result += Resources.GetGlobal("Common", "AccidentalUnit") + listSeparator; 
-            result += Resources.GetGlobal("Common", "AccidentalPercent") + listSeparator; 
+            result += Resources.GetGlobal("Common", "AccidentalQuantity") + listSeparator;
+            result += Resources.GetGlobal("Common", "AccidentalUnit") + listSeparator;
+            result += Resources.GetGlobal("Common", "AccidentalPercent") + listSeparator;
             result += Environment.NewLine;
             return result;
         }
@@ -360,14 +360,14 @@ namespace EPRTR.CsvUtilities
         /// </summary>
         public string GetPollutantTransfersTrendHeader()
         {
-            string result = Resources.GetGlobal("Common", "Year") + listSeparator; 
+            string result = Resources.GetGlobal("Common", "Year") + listSeparator;
             result += Resources.GetGlobal("Pollutant", "PollutantName") + listSeparator;
             result += Resources.GetGlobal("Pollutant", "Quantity") + listSeparator;
             result += Resources.GetGlobal("Common", "QuantityUnit") + listSeparator;
             result += Environment.NewLine;
             return result;
         }
-        
+
         /// <summary>
         /// Get Waste Transfer Header
         /// </summary>
@@ -418,19 +418,19 @@ namespace EPRTR.CsvUtilities
             result += Resources.GetGlobal("Common", "ActivityName") + listSeparator;
             result += Resources.GetGlobal("Common", "CountryCode") + listSeparator;
             result += Resources.GetGlobal("Common", "CountryName") + listSeparator;
-            
+
             result += Resources.GetGlobal("Common", "TotalQuantity") + listSeparator;
             result += Resources.GetGlobal("Common", "TotalQuantityUnit") + listSeparator;
             result += Resources.GetGlobal("Common", "AccidentalQuantity") + listSeparator;
             result += Resources.GetGlobal("Common", "AccidentalUnit") + listSeparator;
             result += Resources.GetGlobal("Common", "AccidentalPercent") + listSeparator;
-            
+
             result += Resources.GetGlobal("Common", "MethodBasisCode") + listSeparator;
             result += Resources.GetGlobal("Common", "MethodBasisName") + listSeparator;
             result += Resources.GetGlobal("Common", "MethodTypeCode") + listSeparator;
             result += Resources.GetGlobal("Common", "MethodTypeName") + listSeparator;
             result += Resources.GetGlobal("Common", "MethodDesignation") + listSeparator;
-            
+
             result += Resources.GetGlobal("Common", "URL") + listSeparator;
             result += Environment.NewLine;
             return result;
@@ -464,10 +464,10 @@ namespace EPRTR.CsvUtilities
         //multiple methods can be reported per pollutant. In this case they are sepeareted by | in the Database
         private string AddMethodUsed(string methodTypeCodes, string methodDesignations, bool confidential)
         {
-            string[] codeDelimiter = { "|" }; 
+            string[] codeDelimiter = { "|" };
             string csvDelimiter = " " + ASCIIEncoding.ASCII.GetString(new byte[] { 0010 });  //will cause linebreak when csv opens in Excel
 
-            string result=string.Empty;
+            string result = string.Empty;
 
             string[] designationSplit = null;
             string[] typecodeSplit = null;
@@ -482,7 +482,7 @@ namespace EPRTR.CsvUtilities
             {
                 resultTypeCode = ConfidentialFormat.Format(null, confidential);
                 resultTypeName = ConfidentialFormat.Format(null, confidential);
-                resultDesignation = ConfidentialFormat.Format(null, confidential);;
+                resultDesignation = ConfidentialFormat.Format(null, confidential); ;
             }
             else
             {
@@ -494,18 +494,18 @@ namespace EPRTR.CsvUtilities
                     designationSplit = methodDesignations.Split(codeDelimiter, StringSplitOptions.None);
                 }
 
-                
+
                 for (int i = 0; i < typecodeSplit.Length; i++)
                 {
-                    string prefix = typecodeSplit.Length>1 ? i+1+": " : "";
+                    string prefix = typecodeSplit.Length > 1 ? i + 1 + ": " : "";
 
                     string typeCode = typecodeSplit[i];
-                    string designation = (designationSplit != null && i<designationSplit.Length)? designationSplit[i] : null;
+                    string designation = (designationSplit != null && i < designationSplit.Length) ? designationSplit[i] : null;
 
                     if (!String.IsNullOrEmpty(typeCode))
                     {
-                        resultTypeCode += prefix+typeCode;
-                        resultTypeName += prefix+LOVResources.MethodTypeName(typeCode);
+                        resultTypeCode += prefix + typeCode;
+                        resultTypeName += prefix + LOVResources.MethodTypeName(typeCode);
                         resultDesignation += prefix + (!String.IsNullOrEmpty(designation) ? designation : "");
 
                         if (i != typecodeSplit.Length - 1)
@@ -521,14 +521,14 @@ namespace EPRTR.CsvUtilities
             result += AddText(resultTypeCode);
             result += AddText(resultTypeName);
             result += AddText(resultDesignation);
-            
+
             return result;
         }
 
 
         public string GetPollutantTranfersFacilityHeader()
         {
-            
+
             string result = Resources.GetGlobal("Common", "FacilityReportID") + listSeparator;
             result += Resources.GetGlobal("Facility", "EPRTRFacilityID") + listSeparator;
             result += Resources.GetGlobal("Common", "FacilityName") + listSeparator;
@@ -560,19 +560,19 @@ namespace EPRTR.CsvUtilities
             result += AddText(LOVResources.AnnexIActivityName(r.ActivityCode));
             result += AddSimple(r.CountryCode);
             result += AddText(LOVResources.CountryName(r.CountryCode));
-            
+
             result += AddValue(r.Quantity, r.ConfidentialIndicator);
             result += AddValue(r.QuantityUnit);
 
             result += AddSimple(r.MethodBasisCode);
             result += AddText(LOVResources.MethodBasisName(r.MethodBasisCode));
-            result += AddMethodUsed(r.MethodTypeCode, r.MethodDesignation, r.ConfidentialIndicator); 
+            result += AddMethodUsed(r.MethodTypeCode, r.MethodDesignation, r.ConfidentialIndicator);
 
             result += AddSimple(r.Url);
             result += Environment.NewLine;
             return result;
         }
-        
+
         public string GetWasteTransfersFacilityHeader()
         {
             string result = Resources.GetGlobal("Common", "FacilityReportID") + listSeparator;
@@ -607,12 +607,12 @@ namespace EPRTR.CsvUtilities
             result += AddText(LOVResources.AnnexIActivityName(r.ActivityCode));
             result += AddSimple(r.CountryCode);
             result += AddText(LOVResources.CountryName(r.CountryCode));
-            
-                        
+
+
             // if one column is confidential the total column must be as well 
-            result += AddValue(r.QuantityTotal, 
-                r.ConfidentialIndicatorRecovery || 
-                r.ConfidentialIndicatorDisposal || 
+            result += AddValue(r.QuantityTotal,
+                r.ConfidentialIndicatorRecovery ||
+                r.ConfidentialIndicatorDisposal ||
                 r.ConfidentialIndicatorUnspecified);
 
             result += AddSimple(r.QuantityCommonUnit);
@@ -631,13 +631,13 @@ namespace EPRTR.CsvUtilities
         #endregion // Facility lists for PR, PT and WT
 
 
-        #region  Industrial Activiy 
-        
+        #region  Industrial Activiy
+
         public string GetIndustrialActivityPollutantReleasesHeader()
         {
             string result = "";
             result += Resources.GetGlobal("Common", "Level") + listSeparator;
-            
+
             result += Resources.GetGlobal("Common", "PollutantGroupCode") + listSeparator;
             result += Resources.GetGlobal("Common", "PollutantGroup") + listSeparator;
             result += Resources.GetGlobal("Common", "PollutantCode") + listSeparator;
@@ -689,7 +689,7 @@ namespace EPRTR.CsvUtilities
             result += AddValue(r.QuantitySoil);
             result += AddValue(r.AccidentalSoil);
             result += AddSimple(r.UnitSoil);
-            
+
             result += Environment.NewLine;
             return result;
         }
@@ -697,7 +697,7 @@ namespace EPRTR.CsvUtilities
         public string GetIndustrialActivityPollutantTransfersHeader()
         {
             string result = "";
-            
+
             result += Resources.GetGlobal("Common", "Level") + listSeparator;
             result += Resources.GetGlobal("Common", "PollutantGroupCode") + listSeparator;
             result += Resources.GetGlobal("Common", "PollutantGroup") + listSeparator;
@@ -728,7 +728,7 @@ namespace EPRTR.CsvUtilities
         private string GetIAPollutantBasicInfo(TreeListRow r)
         {
             string result = "";
-            
+
             // Level 0: Pollutant Group
             // Level 1: Pollutant
             string pollutantLevelStr = (r.Level == 0) ? "PollutantGroup" : "Pollutant";
@@ -744,7 +744,7 @@ namespace EPRTR.CsvUtilities
             // add group name or pollutant name
             result += AddSimple(r.Code);
             result += AddSimple((r.Level == 0) ? groupName : pollutantName);
-        
+
             return result;
         }
 
@@ -773,15 +773,15 @@ namespace EPRTR.CsvUtilities
 
         private string GetColumnHeadersByTreatment(string treatmentTypeKey)
         {
-            string percentStr= Resources.GetGlobal("Common", "WasteTreatmentPercentage");
+            string percentStr = Resources.GetGlobal("Common", "WasteTreatmentPercentage");
             string quantityStr = Resources.GetGlobal("Common", "Quantity");
             string treatmentTypeStr = Resources.GetGlobal("Common", treatmentTypeKey);
 
             string result = string.Empty;
             result += string.Format("{0} - {1}", treatmentTypeStr, quantityStr) + listSeparator;
             result += string.Format("{0} - {1}", treatmentTypeStr, percentStr) + listSeparator;
-            
-            return result;            
+
+            return result;
         }
 
         public string GetIndustrialActivityWasteTransfersRow(Summary.WasteSummaryTreeListRow r)
@@ -817,25 +817,25 @@ namespace EPRTR.CsvUtilities
 
         #region pollutant release activity / area
 
-        public string GetPollutantReleaseActivityHeader()
+        public string GetPollutantReleaseActivityHeader(PollutantReleaseSearchFilter filter)
         {
             string result = string.Empty;
 
             result += addActivityTreeHeaderCols();
-            result += addPollutantReleaseHeaderCols();
+            result += addPollutantReleaseHeaderCols(filter.MediumFilter);
 
             result += Environment.NewLine;
             return result;
         }
 
 
-        public string GetPollutantReleaseActivityRow(PollutantReleases.ActivityTreeListRow r)
+        public string GetPollutantReleaseActivityRow(PollutantReleases.ActivityTreeListRow r, PollutantReleaseSearchFilter filter)
         {
 
             string result = string.Empty;
 
             result += addActivityTreeCols(r);
-            result += addPollutantReleaseCols(r);            
+            result += addPollutantReleaseCols(r, filter.MediumFilter);
 
             result += Environment.NewLine;
             return result;
@@ -847,7 +847,7 @@ namespace EPRTR.CsvUtilities
             string result = string.Empty;
 
             result += addAreaTreeHeaderCols(filter.AreaFilter);
-            result += addPollutantReleaseHeaderCols();
+            result += addPollutantReleaseHeaderCols(filter.MediumFilter);
 
             result += Environment.NewLine;
             return result;
@@ -860,14 +860,14 @@ namespace EPRTR.CsvUtilities
             string result = string.Empty;
 
             result += addAreaTreeCols(r, filter.AreaFilter);
-            result += addPollutantReleaseCols(r);
+            result += addPollutantReleaseCols(r, filter.MediumFilter);
 
             result += Environment.NewLine;
             return result;
         }
 
 
-        private string addPollutantReleaseHeaderCols()
+        private string addPollutantReleaseHeaderCols(MediumFilter filter)
         {
             string result = string.Empty;
 
@@ -875,7 +875,7 @@ namespace EPRTR.CsvUtilities
             string facilities = Resources.GetGlobal("Common", "Facilities");
             string accidental = Resources.GetGlobal("Common", "Accidental");
             result += facilities + listSeparator;
-            result += string.Format("{0} - {1}", facilities, accidental)+ listSeparator;
+            result += string.Format("{0} - {1}", facilities, accidental) + listSeparator;
 
             foreach (var medium in new List<MediumFilter.Medium>() { 
                 MediumFilter.Medium.Air, 
@@ -883,16 +883,19 @@ namespace EPRTR.CsvUtilities
                 MediumFilter.Medium.Soil
             })
             {
-                result += AddSimple(GetColumnHeaderByMedium(QUANTITY_KEY_STR, medium));
-                result += AddSimple(GetColumnHeaderByMedium(QUANTITY_ACCIDENTAL_KEY_STR, medium));
-                result += AddSimple(GetColumnHeaderByMedium(UNIT_KEY_STR, medium));
+                if (filter.InludesMedium(medium))
+                {
+                    result += AddSimple(GetColumnHeaderByMedium(QUANTITY_KEY_STR, medium));
+                    result += AddSimple(GetColumnHeaderByMedium(QUANTITY_ACCIDENTAL_KEY_STR, medium));
+                    result += AddSimple(GetColumnHeaderByMedium(UNIT_KEY_STR, medium));
+                }
             }
             return result;
         }
 
 
-        
-        private string addPollutantReleaseCols(PollutantReleases.PollutantReleaseRow r)
+
+        private string addPollutantReleaseCols(PollutantReleases.PollutantReleaseRow r, MediumFilter filter)
         {
             string result = "";
 
@@ -900,15 +903,25 @@ namespace EPRTR.CsvUtilities
             result += AddValue(r.AccidentalFacilities);
 
             // add actual values
-            result += AddValue(r.QuantityAir);
-            result += AddValue(r.AccidentalAir);
-            result += AddSimple(r.UnitAir);
-            result += AddValue(r.QuantityWater);
-            result += AddValue(r.AccidentalWater);
-            result += AddSimple(r.UnitWater);
-            result += AddValue(r.QuantitySoil);
-            result += AddValue(r.AccidentalSoil);
-            result += AddSimple(r.UnitSoil);
+
+            if (filter.ReleasesToAir)
+            {
+                result += AddValue(r.QuantityAir);
+                result += AddValue(r.AccidentalAir);
+                result += AddSimple(r.UnitAir);
+            }
+            if (filter.ReleasesToWater)
+            {
+                result += AddValue(r.QuantityWater);
+                result += AddValue(r.AccidentalWater);
+                result += AddSimple(r.UnitWater);
+            }
+            if (filter.ReleasesToSoil)
+            {
+                result += AddValue(r.QuantitySoil);
+                result += AddValue(r.AccidentalSoil);
+                result += AddSimple(r.UnitSoil);
+            }
 
             return result;
         }
@@ -931,7 +944,7 @@ namespace EPRTR.CsvUtilities
         }
 
 
-        private string addActivityTreeCols(ActivityTreeListRow r)// int level, string sectorCode, string activityCode, string subactivityCode)
+        private string addActivityTreeCols(ActivityTreeListRow r)
         {
             string result = string.Empty;
 
@@ -1025,7 +1038,7 @@ namespace EPRTR.CsvUtilities
         }
 
 
-        private string addAreaTreeCols(AreaTreeListRow  r , AreaFilter filter)//int level, string countryCode, string regionCode)
+        private string addAreaTreeCols(AreaTreeListRow r, AreaFilter filter)//int level, string countryCode, string regionCode)
         {
             string result = string.Empty;
 
@@ -1172,25 +1185,25 @@ namespace EPRTR.CsvUtilities
 
         #region waste transfer activity / area
 
-        public string GetWasteTransferActivityHeader()
+        public string GetWasteTransferActivityHeader(WasteTransferSearchFilter filter)
         {
             string result = string.Empty;
 
             //activity tree headers
             result += addActivityTreeHeaderCols();
-            result += addWasteTransferHeaderCols();
+            result += addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
             result += Environment.NewLine;
             return result;
         }
 
-        public string GetWasteTransferActivityRow(WasteTransfers.ActivityTreeListRow r)
+        public string GetWasteTransferActivityRow(WasteTransfers.ActivityTreeListRow r, WasteTransferSearchFilter filter)
         {
 
             string result = string.Empty;
 
             result += addActivityTreeCols(r);
-            result += addWasteTransferCols(r);
+            result += addWasteTransferCols(r,filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
             result += Environment.NewLine;
             return result;
@@ -1201,7 +1214,7 @@ namespace EPRTR.CsvUtilities
             string result = string.Empty;
 
             result += addAreaTreeHeaderCols(filter.AreaFilter);
-            result += addWasteTransferHeaderCols();
+            result += addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
             result += Environment.NewLine;
             return result;
@@ -1214,7 +1227,7 @@ namespace EPRTR.CsvUtilities
             string result = string.Empty;
 
             result += addAreaTreeCols(r, filter.AreaFilter);
-            result += addWasteTransferCols(r);
+            result += addWasteTransferCols(r,filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
             result += Environment.NewLine;
             return result;
@@ -1222,7 +1235,7 @@ namespace EPRTR.CsvUtilities
 
 
 
-        private string addWasteTransferHeaderCols()
+        private string addWasteTransferHeaderCols(WasteTypeFilter typeFilter, WasteTreatmentFilter treatmentFilter)
         {
             string result = string.Empty;
 
@@ -1236,20 +1249,34 @@ namespace EPRTR.CsvUtilities
                 WasteTypeFilter.Type.NonHazardous
             })
             {
-                //add total col for type
-                result += AddSimple(getQuantityHeaderWaste(type, null));
-
-                //add treatment col for type
-                foreach (var treatment in new List<WasteTreatmentFilter.Treatment>() { 
-                WasteTreatmentFilter.Treatment.Recovery, 
-                WasteTreatmentFilter.Treatment.Disposal, 
-                WasteTreatmentFilter.Treatment.Unspecified
-                })
+                if (typeFilter.InludesWasteType(type))
                 {
-                    result += AddSimple(getQuantityHeaderWaste(type, treatment));
+                    if (type.Equals(WasteTypeFilter.Type.Hazardous) && !typeFilter.InludesAllHazardousWasteType())
+                    {
+                        continue;
+                    }
 
+                    //add total col per type
+                    if (treatmentFilter.IncludesAll())
+                    {
+                        result += AddSimple(getQuantityHeaderWaste(type, null));
+                    }
+
+                    //add treatment col for type 
+                    foreach (var treatment in new List<WasteTreatmentFilter.Treatment>() { 
+                        WasteTreatmentFilter.Treatment.Recovery, 
+                        WasteTreatmentFilter.Treatment.Disposal, 
+                        WasteTreatmentFilter.Treatment.Unspecified
+                        })
+                    {
+                        if (treatmentFilter.InludesTreatment(treatment))
+                        {
+                            result += AddSimple(getQuantityHeaderWaste(type, treatment));
+                        }
+
+                    }
+                    result += AddSimple(getUnitHeaderWaste(type));
                 }
-                result += AddSimple(getUnitHeaderWaste(type));
             }
 
             return result;
@@ -1276,11 +1303,11 @@ namespace EPRTR.CsvUtilities
             }
 
             string quantityTypeStr = Resources.GetGlobal("Common", QUANTITY_KEY_STR);
-            
+
             return string.Format("{0} - {1} - {2}", quantityTypeStr, typeStr, treatmentStr);
         }
 
-        private string getUnitHeaderWaste( WasteTypeFilter.Type type)
+        private string getUnitHeaderWaste(WasteTypeFilter.Type type)
         {
             string typeStr = Resources.GetGlobal("LOV_WASTETYPE", EnumUtil.GetStringValue(type));
             string quantityTypeStr = Resources.GetGlobal("Common", UNIT_KEY_STR);
@@ -1288,33 +1315,97 @@ namespace EPRTR.CsvUtilities
         }
 
 
-        private string addWasteTransferCols(WasteTransfers.WasteTransferRow r)
+        private string addWasteTransferCols(WasteTransfers.WasteTransferRow r, WasteTypeFilter typeFilter, WasteTreatmentFilter treatmentFilter)
         {
             string result = AddValue(r.Facilities);
 
-            result += AddValue(r.TotalHWIC);
-            result += AddValue(r.QuantityRecoveryHWIC); 
-            result += AddValue(r.QuantityDisposalHWIC);
-            result += AddValue(r.QuantityUnspecHWIC);
-            result += AddSimple(r.UnitCodeHWIC);
+            //HWIC
+            if (typeFilter.HazardousWasteCountry)
+            {
+                if (treatmentFilter.IncludesAll())
+                {
+                    result += AddValue(r.TotalHWIC);
+                }
+                if (treatmentFilter.Recovery)
+                {
+                    result += AddValue(r.QuantityRecoveryHWIC);
+                }
+                if (treatmentFilter.Disposal)
+                {
+                    result += AddValue(r.QuantityDisposalHWIC);
+                }
+                if (treatmentFilter.Unspecified)
+                {
+                    result += AddValue(r.QuantityUnspecHWIC);
+                }
+                result += AddSimple(r.UnitCodeHWIC);
+            }
 
-            result += AddValue(r.TotalHWOC);
-            result += AddValue(r.QuantityRecoveryHWOC); 
-            result += AddValue(r.QuantityDisposalHWOC);
-            result += AddValue(r.QuantityUnspecHWOC);
-            result += AddSimple(r.UnitCodeHWOC);
+            //HWOC
+            if (typeFilter.HazardousWasteTransboundary)
+            {
+                if (treatmentFilter.IncludesAll())
+                {
+                    result += AddValue(r.TotalHWOC);
+                }
+                if (treatmentFilter.Recovery)
+                {
+                    result += AddValue(r.QuantityRecoveryHWOC);
+                }
+                if (treatmentFilter.Disposal)
+                {
+                    result += AddValue(r.QuantityDisposalHWOC);
+                }
+                if (treatmentFilter.Unspecified)
+                {
+                    result += AddValue(r.QuantityUnspecHWOC);
+                }
+                result += AddSimple(r.UnitCodeHWOC);
+            }
 
-            result += AddValue(r.TotalSum);
-            result += AddValue(r.QuantityRecoverySum); 
-            result += AddValue(r.QuantityDisposalSum);
-            result += AddValue(r.QuantityUnspecSum);
-            result += AddSimple(r.UnitCodeSum);
+            //HW total
+            if (typeFilter.HazardousWasteCountry && typeFilter.HazardousWasteTransboundary)
+            {
+                if (treatmentFilter.IncludesAll())
+                {
+                    result += AddValue(r.TotalSum);
+                }
+                if (treatmentFilter.Recovery)
+                {
+                    result += AddValue(r.QuantityRecoverySum);
+                }
+                if (treatmentFilter.Disposal)
+                {
+                    result += AddValue(r.QuantityDisposalSum);
+                }
+                if (treatmentFilter.Unspecified)
+                {
+                    result += AddValue(r.QuantityUnspecSum);
+                }
+                result += AddSimple(r.UnitCodeSum);
+            }
 
-            result += AddValue(r.TotalNONHW);
-            result += AddValue(r.QuantityRecoveryNONHW); 
-            result += AddValue(r.QuantityDisposalNONHW);
-            result += AddValue(r.QuantityUnspecNONHW);
-            result += AddSimple(r.UnitCodeNONHW);
+            //NON-HW
+            if (typeFilter.NonHazardousWaste)
+            {
+                if (treatmentFilter.IncludesAll())
+                {
+                    result += AddValue(r.TotalNONHW);
+                }
+                if (treatmentFilter.Recovery)
+                {
+                    result += AddValue(r.QuantityRecoveryNONHW);
+                }
+                if (treatmentFilter.Disposal)
+                {
+                    result += AddValue(r.QuantityDisposalNONHW);
+                }
+                if (treatmentFilter.Unspecified)
+                {
+                    result += AddValue(r.QuantityUnspecNONHW);
+                }
+                result += AddSimple(r.UnitCodeNONHW);
+            }
 
 
             return result;
@@ -1375,7 +1466,7 @@ namespace EPRTR.CsvUtilities
 
             if (confidential && element == null)
             {
-                result = result = ConfidentialFormat.Format(null, confidential) +listSeparator;
+                result = result = ConfidentialFormat.Format(null, confidential) + listSeparator;
             }
             else
             {

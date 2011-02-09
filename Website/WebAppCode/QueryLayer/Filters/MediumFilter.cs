@@ -35,6 +35,27 @@ namespace QueryLayer.Filters
 
 
         /// <summary>
+        /// Returns true if the filter includes the medium given.
+        /// </summary>
+        public bool InludesMedium(MediumFilter.Medium medium)
+        {
+            switch (medium)
+            {
+                case Medium.Air:
+                    return ReleasesToAir;
+                case Medium.Water:
+                    return ReleasesToWater;
+                case Medium.Soil:
+                    return ReleasesToSoil;
+                case Medium.WasteWater:
+                    return TransferToWasteWater;
+
+                default:
+                    throw new ArgumentOutOfRangeException("Unknown medium");
+            }
+        }
+
+        /// <summary>
         /// Creates a new object that is a deep copy of the current instance.
         /// </summary>
         public object Clone()

@@ -31,6 +31,32 @@ namespace QueryLayer.Filters
 
 
         /// <summary>
+        /// Returns true if the filter includes the waste treatment given.
+        /// </summary>
+        public bool InludesTreatment(WasteTreatmentFilter.Treatment treatment)
+        {
+            switch (treatment)
+            {
+                case Treatment.Recovery:
+                    return Recovery;
+                case Treatment.Disposal:
+                    return Disposal;
+                case Treatment.Unspecified:
+                    return Unspecified;
+                default:
+                    throw new ArgumentOutOfRangeException("Unknown waste treatment");
+            }
+        }
+
+        /// <summary>
+        /// Returns true if the filter includes all waste treatments.
+        /// </summary>
+        public bool IncludesAll()
+        {
+            return Recovery && Disposal && Unspecified;
+        }
+
+        /// <summary>
         /// Creates a new object that is a deep copy of the current instance.
         /// </summary>
         public object Clone()
