@@ -153,6 +153,7 @@
     <Compile Include="Enums\QuantityUnit.cs" />
     <Compile Include="Utilities\AccidentalPercent.cs" />
     <Compile Include="Utilities\ActivityTreeListRow.cs" />
+    <Compile Include="Utilities\AreaTreeListRow.cs" />
     <Compile Include="Utilities\DebuggerWriter.cs" />
     <Compile Include="Utilities\DoubleExtensions.cs" />
     <Compile Include="Utilities\EnumUtil.cs" />

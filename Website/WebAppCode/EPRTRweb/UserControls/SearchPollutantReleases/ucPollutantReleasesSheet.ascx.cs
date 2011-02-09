@@ -128,7 +128,7 @@ public partial class ucPollutantReleasesSheet : System.Web.UI.UserControl
             this.ucPollutantReleasesAreas.Populate(filter);
             txt = Resources.GetGlobal("Pollutant", "AllValuesAreYearlyReleases");
             this.ucDownloadPrint.Visible = true; // activate print button only
-            this.ucDownloadPrint.Show(false, true);
+            this.ucDownloadPrint.Show(true, true);
             this.ucDownloadPrint.SetPrintControl(this);
 
             Sheet = Sheets.PollutantReleases.Areas;
@@ -248,6 +248,9 @@ public partial class ucPollutantReleasesSheet : System.Web.UI.UserControl
                 break;
             case Sheets.PollutantReleases.Activities:
                 this.ucPollutantReleasesActivities.DoSaveCSV(this, EventArgs.Empty);
+                break;
+            case Sheets.PollutantReleases.Areas:
+                this.ucPollutantReleasesAreas.DoSaveCSV(this, EventArgs.Empty);
                 break;
             default:
                 break;

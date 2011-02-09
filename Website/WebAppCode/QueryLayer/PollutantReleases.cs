@@ -132,9 +132,6 @@ namespace QueryLayer
                 this.UnitAir = CODE_KG;
                 this.UnitWater = CODE_KG;
                 this.UnitSoil = CODE_KG;
-                // this.UnitAir = CODE_TNE;
-                //this.UnitWater = CODE_TNE;
-                 //this.UnitSoil = CODE_TNE;
             }
 
             public int Facilities { get; internal set; }
@@ -184,6 +181,7 @@ namespace QueryLayer
 
             //create result with full tree
             IEnumerable<ActivityTreeListRow> result = sectors.Union(activities).Union(subactivities)
+                                                               .OrderBy(s => ActivityTreeListRow.CODE_TOTAL.Equals(s.SectorCode))
                                                                .OrderBy(s => s.SectorCode)
                                                                .ThenBy(s => s.ActivityCode)
                                                                .ThenBy(s => s.SubactivityCode);
@@ -374,6 +372,61 @@ namespace QueryLayer
         // ----------------------------------------------------------------------------------
         #region Area
 
+
+        [Serializable]
+        public class AreaTreeListRow : QueryLayer.Utilities.AreaTreeListRow, PollutantReleaseRow
+        {
+            public AreaTreeListRow(string countryCode, string subAreaCode, AreaFilter.RegionType regionType,
+                          string pollutantCode,
+                          int facilities, int accidentalFacilities,
+                          double? quantityAir, double? accidentalAir,
+                          double? quantityWater, double? accidentalWater,
+                          double? quantitySoil, double? accidentalSoil,
+                          bool hasChildren)
+                : base(countryCode, subAreaCode, regionType, hasChildren)
+            {
+                this.PollutantCode = pollutantCode;
+                this.Facilities = facilities;
+                this.AccidentalFacilities = accidentalFacilities;
+
+                this.QuantityAir = quantityAir;
+                this.QuantityWater = quantityWater;
+                this.QuantitySoil = quantitySoil;
+
+                this.AccidentalAir = accidentalAir;
+                this.AccidentalWater = accidentalWater;
+                this.AccidentalSoil = accidentalSoil;
+
+                //pollutant releases are always reported in kg
+                this.UnitAir = CODE_KG;
+                this.UnitWater = CODE_KG;
+                this.UnitSoil = CODE_KG;
+            }
+
+            public int Facilities { get; internal set; }
+            public int AccidentalFacilities { get; internal set; }
+
+            public string PollutantCode { get; private set; }
+
+            public double? QuantityAir { get; private set; }
+            public double? QuantityWater { get; private set; }
+            public double? QuantitySoil { get; private set; }
+
+            public double? AccidentalAir { get; private set; }
+            public double? AccidentalWater { get; private set; }
+            public double? AccidentalSoil { get; private set; }
+
+            public string UnitAir { get; private set; }
+            public string UnitWater { get; private set; }
+            public string UnitSoil { get; private set; }
+
+        }
+
+
+
+
+
+
         [Serializable]
         public class ReleasesTreeListRow : TreeListRow, PollutantReleaseRow
         {
@@ -420,6 +473,147 @@ namespace QueryLayer
             public string UnitWater { get; private set; }
             public string UnitSoil { get; private set; }
 
+        }
+
+        /// <summary>
+        /// return full area tree with all rows expanded
+        /// </summary>
+        public static IEnumerable<AreaTreeListRow> GetAreaTree(PollutantReleaseSearchFilter filter)
+        {
+            IEnumerable<AreaTreeListRow> countries = GetCountries(filter).ToList();
+
+            List<string> countryCodes = countries.Where(p => p.HasChildren).Select(p => p.CountryCode).ToList();
+            IEnumerable<AreaTreeListRow> subareas = GetSubAreas(filter, countryCodes).ToList();
+
+            IEnumerable<AreaTreeListRow> result = countries.Union(subareas)
+                                                               .OrderBy(x => AreaTreeListRow.CODE_TOTAL.Equals(x.CountryCode))
+                                                               .ThenBy(x => x.CountryCode)
+                                                               .ThenBy(x => AreaTreeListRow.CODE_UNKNOWN.Equals(x.RegionCode))
+                                                               .ThenBy(x => x.RegionCode);
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// return all countries that fullfill search criteria
+        /// </summary>
+        public static IEnumerable<AreaTreeListRow> GetCountries(PollutantReleaseSearchFilter filter)
+        {
+            DataClassesPollutantReleaseDataContext db = getPollutantReleaseDataContext();
+            Expression<Func<POLLUTANTRELEASE, bool>> lambda = getActivityAreaLambda(filter);
+
+
+            //find data for contry level. Country level always has children.
+            IEnumerable<AreaTreeListRow> countries = db.POLLUTANTRELEASEs.Where(lambda)
+                                                     .GroupBy(p => new { CountryCode = p.CountryCode, PollutantCode = p.PollutantCode })
+                                                     .Select(x => new AreaTreeListRow(
+                                                         x.Key.CountryCode,
+                                                         null,
+                                                         filter.AreaFilter.TypeRegion,
+                                                         x.Key.PollutantCode,
+                                                         x.Count(),
+                                                         x.Count(z => z.QuantityAccidentalAir > 0 || z.QuantityAccidentalSoil > 0 || z.QuantityAccidentalWater > 0),
+                                                         x.Sum(p => p.QuantityAir),
+                                                         x.Sum(p => p.QuantityAccidentalAir),
+                                                         x.Sum(p => p.QuantityWater),
+                                                         x.Sum(p => p.QuantityAccidentalWater),
+                                                         x.Sum(p => p.QuantitySoil),
+                                                         x.Sum(p => p.QuantityAccidentalSoil),
+                                                         true));
+
+
+            List<AreaTreeListRow> result = countries.ToList(); //make sure sql is executed now to do it only once
+
+            List<AreaTreeListRow> totals = result.GroupBy(p => new { PollutantCode = p.PollutantCode })
+                                             .Select(x => new AreaTreeListRow(
+                                                 AreaTreeListRow.CODE_TOTAL,
+                                                 null,
+                                                 filter.AreaFilter.TypeRegion,
+                                                 x.Key.PollutantCode,
+                                                 x.Sum(p => p.Facilities),
+                                                 x.Sum(p => p.AccidentalFacilities),
+                                                 x.SumOrNull(p => p.QuantityAir),
+                                                 x.SumOrNull(p => p.AccidentalAir),
+                                                 x.SumOrNull(p => p.QuantityWater),
+                                                 x.SumOrNull(p => p.AccidentalWater),
+                                                 x.SumOrNull(p => p.QuantitySoil),
+                                                 x.SumOrNull(p => p.AccidentalSoil),
+                                                 false)).ToList();
+
+
+            //only add total to result if more than one country.
+            if (result.Select(r => r.CountryCode).Distinct().Count() > 1)
+            {
+                result.AddRange(totals);
+            }
+
+            //find facility count
+            int facilityCount = 0;
+            if (result.Count == 1)
+            {
+                facilityCount = result.Single().Facilities;
+            }
+            else if (totals.Count == 1)
+            {
+                facilityCount = totals.Single().Facilities;
+            }
+            else
+            {
+                facilityCount = GetFacilityCount(filter);
+            }
+
+            filter.Count = facilityCount;
+
+            return result;
+        }
+
+
+         //<summary>
+         //Return all subareas (level 1) that fullfill search criteria. 
+         //If countryCodes are null, all subareas will be returned. If countryCodes is empty no subareas will be returned.
+         //</summary>
+        public static IEnumerable<AreaTreeListRow> GetSubAreas(PollutantReleaseSearchFilter filter, List<string> countryCodes)
+        {
+            if (countryCodes != null && countryCodes.Count() == 0)
+                return new List<AreaTreeListRow>();
+
+            DataClassesPollutantReleaseDataContext db = getPollutantReleaseDataContext();
+            Expression<Func<POLLUTANTRELEASE, bool>> lambda = getActivityAreaLambda(filter);
+
+            //add countries to expression
+            if (countryCodes != null)
+            {
+                ParameterExpression param = lambda.Parameters[0];
+                Expression countryExp = LinqExpressionBuilder.GetInExpr(param, "CountryCode", countryCodes);
+
+                Expression exp = LinqExpressionBuilder.CombineAnd(lambda.Body, countryExp);
+                lambda = Expression.Lambda<Func<POLLUTANTRELEASE, bool>>(exp, param);
+            }
+
+            //find data for sub-area level, this level never has children.
+
+            AreaFilter.RegionType regionType = filter.AreaFilter.TypeRegion;
+            bool isRbd = AreaFilter.RegionType.RiverBasinDistrict.Equals(regionType);
+
+            IEnumerable<AreaTreeListRow> subareas = db.POLLUTANTRELEASEs.Where(lambda)
+                .GroupBy(p => new { CountryCode = p.CountryCode, SubAreaCode =  isRbd ? p.RiverBasinDistrictCode : p.NUTSLevel2RegionCode, PollutantCode = p.PollutantCode })
+                                         .Select(x => new AreaTreeListRow(
+                                             x.Key.CountryCode,
+                                             !x.Key.SubAreaCode.Equals(null) ? x.Key.SubAreaCode : AreaTreeListRow.CODE_UNKNOWN,
+                                             regionType,
+                                             x.Key.PollutantCode,
+                                             x.Count(),
+                                             x.Count(z => z.QuantityAccidentalAir > 0 || z.QuantityAccidentalSoil > 0 || z.QuantityAccidentalWater > 0),
+                                             x.Sum(p => p.QuantityAir),
+                                             x.Sum(p => p.QuantityAccidentalAir),
+                                             x.Sum(p => p.QuantityWater),
+                                             x.Sum(p => p.QuantityAccidentalWater),
+                                             x.Sum(p => p.QuantitySoil),
+                                             x.Sum(p => p.QuantityAccidentalSoil),
+                                             false));
+
+            return subareas;
         }
 
 

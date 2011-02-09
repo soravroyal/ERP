@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Globalization;
+using System.Text;
+using System.Threading;
+using EPRTR.Formatters;
+using EPRTR.Localization;
 using QueryLayer;
 using QueryLayer.Filters;
 using QueryLayer.Utilities;
-using EPRTR.Localization;
-using System.Globalization;
-using System.Threading;
-using EPRTR.Formatters;
-using System.Text;
 
 namespace EPRTR.CsvUtilities
 {
@@ -817,20 +815,67 @@ namespace EPRTR.CsvUtilities
 
 
 
-        #region pollutant release activity
+        #region pollutant release activity / area
 
         public string GetPollutantReleaseActivityHeader()
         {
             string result = string.Empty;
 
-            //activity tree headers
-            result += AddActivityTreeHeaderCols();
+            result += addActivityTreeHeaderCols();
+            result += addPollutantReleaseHeaderCols();
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        public string GetPollutantReleaseActivityRow(PollutantReleases.ActivityTreeListRow r)
+        {
+
+            string result = string.Empty;
+
+            result += addActivityTreeCols(r);
+            result += addPollutantReleaseCols(r);            
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        public string GetPollutantReleaseAreaHeader(PollutantReleaseSearchFilter filter)
+        {
+            string result = string.Empty;
+
+            result += addAreaTreeHeaderCols(filter.AreaFilter);
+            result += addPollutantReleaseHeaderCols();
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        public string GetPollutantReleaseAreaRow(PollutantReleases.AreaTreeListRow r, PollutantReleaseSearchFilter filter)
+        {
+
+            string result = string.Empty;
+
+            result += addAreaTreeCols(r, filter.AreaFilter);
+            result += addPollutantReleaseCols(r);
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        private string addPollutantReleaseHeaderCols()
+        {
+            string result = string.Empty;
 
             //facility headers
             string facilities = Resources.GetGlobal("Common", "Facilities");
             string accidental = Resources.GetGlobal("Common", "Accidental");
             result += facilities + listSeparator;
-            result += string.Format("{0} - {1}", facilities, accidental);
+            result += string.Format("{0} - {1}", facilities, accidental)+ listSeparator;
 
             foreach (var medium in new List<MediumFilter.Medium>() { 
                 MediumFilter.Medium.Air, 
@@ -842,44 +887,11 @@ namespace EPRTR.CsvUtilities
                 result += AddSimple(GetColumnHeaderByMedium(QUANTITY_ACCIDENTAL_KEY_STR, medium));
                 result += AddSimple(GetColumnHeaderByMedium(UNIT_KEY_STR, medium));
             }
-
-            result += Environment.NewLine;
             return result;
         }
 
-        private string AddActivityTreeHeaderCols()
-        {
-            string result = string.Empty;
 
-            result += Resources.GetGlobal("Common", "Level") + listSeparator;
-            result += Resources.GetGlobal("Common", "SectorCode") + listSeparator;
-            result += Resources.GetGlobal("Common", "Sector") + listSeparator;
-            result += Resources.GetGlobal("Common", "ActivityCode") + listSeparator;
-            result += Resources.GetGlobal("Common", "Activity") + listSeparator;
-            result += Resources.GetGlobal("Common", "SubactivityCode") + listSeparator;
-            result += Resources.GetGlobal("Common", "Subactivity") + listSeparator;
-
-            return result;
-        }
-
-        public string GetPollutantReleaseActivityRow(PollutantReleases.ActivityTreeListRow r)
-        {
-
-            string result = string.Empty;
-
-            // do not add a line for the total values
-            if (r.SectorCode == "TOT")
-            {
-                return result;
-            }
-
-            result += addActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
-            result += addPollutantReleaseCols(r);            
-
-            result += Environment.NewLine;
-            return result;
-        }
-
+        
         private string addPollutantReleaseCols(PollutantReleases.PollutantReleaseRow r)
         {
             string result = "";
@@ -901,7 +913,25 @@ namespace EPRTR.CsvUtilities
             return result;
         }
 
-        private string addActivityTreeCols(int level, string sectorCode, string activityCode, string subactivityCode)
+
+
+        private string addActivityTreeHeaderCols()
+        {
+            string result = string.Empty;
+
+            result += Resources.GetGlobal("Common", "Level") + listSeparator;
+            result += Resources.GetGlobal("Common", "SectorCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "Sector") + listSeparator;
+            result += Resources.GetGlobal("Common", "ActivityCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "Activity") + listSeparator;
+            result += Resources.GetGlobal("Common", "SubactivityCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "Subactivity") + listSeparator;
+
+            return result;
+        }
+
+
+        private string addActivityTreeCols(ActivityTreeListRow r)// int level, string sectorCode, string activityCode, string subactivityCode)
         {
             string result = string.Empty;
 
@@ -910,12 +940,23 @@ namespace EPRTR.CsvUtilities
             // Level 1: Activity
             // Level 2: Subactivity
 
-            string pollutantLevelStr = Resources.GetGlobal("Common", "Sector");
-            if (level == 1)
+            string pollutantLevelStr = string.Empty;
+            if (r.Level == 0)
+            {
+                if (ActivityTreeListRow.CODE_TOTAL.Equals(r.SectorCode))
+                {
+                    pollutantLevelStr = Resources.GetGlobal("Common", "Total");
+                }
+                else
+                {
+                    pollutantLevelStr = Resources.GetGlobal("Common", "Sector");
+                }
+            }
+            else if (r.Level == 1)
             {
                 pollutantLevelStr = Resources.GetGlobal("Common", "Activity");
             }
-            if (level == 2)
+            else if (r.Level == 2)
             {
                 pollutantLevelStr = Resources.GetGlobal("Common", "Subactivity");
             }
@@ -924,63 +965,143 @@ namespace EPRTR.CsvUtilities
             result += AddSimple(pollutantLevelStr);
 
             // always add sector code and name
-            result += AddSimple(sectorCode);
-            result += AddSimple(LOVResources.AnnexIActivityName(sectorCode));
+            result += AddSimple(r.SectorCode);
+            result += AddSimple(LOVResources.AnnexIActivityName(r.SectorCode));
 
 
-            if (activityCode != null)
+            if (r.ActivityCode != null)
             {
-                result += AddSimple(activityCode);
-                result += AddSimple(LOVResources.AnnexIActivityName(activityCode));
+                result += AddSimple(r.ActivityCode);
+                result += AddSimple(LOVResources.AnnexIActivityName(r.ActivityCode));
 
-                if (subactivityCode != null)
+                if (r.SubactivityCode != null)
                 {
-                    result += AddSimple(subactivityCode);
-                    result += AddSimple("      " + LOVResources.AnnexIActivityName(subactivityCode));
+                    result += AddSimple(r.SubactivityCode);
+                    result += AddSimple("      " + LOVResources.AnnexIActivityName(r.SubactivityCode));
                 }
                 else
                 {
                     // if no subactivity code is present (level == 1) 
-                    // add sector code and name once more
+                    // add empty cols for activity (quantity and unit)
                     result += AddSimple(" ");
                     result += AddSimple(" ");
-                    //result += AddSimple(activityCode);
-                    //result += AddSimple("   " + LOVResources.AnnexIActivityName(activityCode));
                 }
             }
             else
             {
-                // if no activity code present (level == 0) add sector code and name 
-                // two times more
+                // if no activity code present (level == 0) 
+                // add empty cols for activity and subactivity (quantity and unit)
                 result += AddSimple(" ");
                 result += AddSimple(" ");
                 result += AddSimple(" ");
                 result += AddSimple(" ");
-
-                //result += AddSimple(sectorCode);
-                //result += AddSimple(LOVResources.AnnexIActivityName(sectorCode));
-                //result += AddSimple(sectorCode);
-                //result += AddSimple(LOVResources.AnnexIActivityName(sectorCode));
 
             }
             return result;
 
         }
+
+
+        private string addAreaTreeHeaderCols(AreaFilter filter)
+        {
+            string result = string.Empty;
+
+            result += Resources.GetGlobal("Common", "Level") + listSeparator;
+            result += Resources.GetGlobal("Common", "CountryCode") + listSeparator;
+            result += Resources.GetGlobal("Common", "Country") + listSeparator;
+
+            if (filter.TypeRegion.Equals(AreaFilter.RegionType.RiverBasinDistrict))
+            {
+                result += Resources.GetGlobal("Common", "RiverBasinDistrictCode") + listSeparator;
+                result += Resources.GetGlobal("Common", "RiverBasinDistrict") + listSeparator;
+            }
+            else
+            {
+                result += Resources.GetGlobal("Common", "NUTSRegionCode") + listSeparator;
+                result += Resources.GetGlobal("Facility", "NUTS") + listSeparator;
+            }
+
+            return result;
+        }
+
+
+        private string addAreaTreeCols(AreaTreeListRow  r , AreaFilter filter)//int level, string countryCode, string regionCode)
+        {
+            string result = string.Empty;
+
+            bool isRbd = filter.TypeRegion.Equals(AreaFilter.RegionType.RiverBasinDistrict);
+            // Level 0: Country
+            // Level 1: NUTS/RBD
+
+            string pollutantLevelStr = string.Empty;
+            if (r.Level == 0)
+            {
+                if (AreaTreeListRow.CODE_TOTAL.Equals(r.CountryCode))
+                {
+                    pollutantLevelStr = Resources.GetGlobal("Common", "Total");
+                }
+                else
+                {
+                    pollutantLevelStr = Resources.GetGlobal("Common", "Country");
+                }
+            }
+            else if (r.Level == 1)
+            {
+                if (isRbd)
+                {
+                    pollutantLevelStr = Resources.GetGlobal("Common", "RiverBasinDistrict");
+                }
+                else
+                {
+                    pollutantLevelStr = Resources.GetGlobal("Facility", "NUTS");
+                }
+            }
+
+            // add level
+            result += AddSimple(pollutantLevelStr);
+
+            // always add country code and name
+            result += AddSimple(r.CountryCode);
+            result += AddSimple(LOVResources.CountryName(r.CountryCode));
+
+
+            if (r.RegionCode != null)
+            {
+                result += AddSimple(r.RegionCode);
+
+                if (isRbd)
+                {
+                    result += AddSimple(LOVResources.RiverBasinDistrictName(r.RegionCode));
+                }
+                else
+                {
+                    result += AddSimple(LOVResources.NutsRegionName(r.RegionCode));
+                }
+
+            }
+            else
+            {
+                // if no country code present (level == 0) 
+                // add empty cols for region (quantity and unit)
+                result += AddSimple(" ");
+                result += AddSimple(" ");
+
+            }
+
+            return result;
+
+        }
+
         #endregion
 
-
-        #region pollutant transfer activity
+        #region pollutant transfer activity/ area
 
         public string GetPollutantTransferActivityHeader()
         {
             string result = string.Empty;
 
-            result += AddActivityTreeHeaderCols();
-
-            result += Resources.GetGlobal("Common", "Facilities") + listSeparator;
-
-            result += Resources.GetGlobal("Common", "Quantity") + listSeparator;
-            result += Resources.GetGlobal("Common", "QuantityUnit") + listSeparator;
+            result += addActivityTreeHeaderCols();
+            result += addPollutantTransferHeaderCols();
 
             result += Environment.NewLine;
             return result;
@@ -991,16 +1112,22 @@ namespace EPRTR.CsvUtilities
 
             string result = string.Empty;
 
-            // do not add a line for the total values
-            if (r.SectorCode == "TOT")
-            {
-                return result;
-            }
-
-            result += addActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
+            result += addActivityTreeCols(r);
             result += addPollutantTransferCols(r);
 
             result += Environment.NewLine;
+            return result;
+        }
+
+        private string addPollutantTransferHeaderCols()
+        {
+            string result = string.Empty;
+
+            result += Resources.GetGlobal("Common", "Facilities") + listSeparator;
+
+            result += Resources.GetGlobal("Common", "Quantity") + listSeparator;
+            result += Resources.GetGlobal("Common", "QuantityUnit") + listSeparator;
+
             return result;
         }
 
@@ -1018,14 +1145,35 @@ namespace EPRTR.CsvUtilities
 
         #endregion
 
-        #region waste transfer activity
+        #region waste transfer activity / area
 
         public string GetWasteTransferActivityHeader()
         {
             string result = string.Empty;
 
             //activity tree headers
-            result += AddActivityTreeHeaderCols();
+            result += addActivityTreeHeaderCols();
+            result += addWasteTransferHeaderCols();
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+        public string GetWasteTransferActivityRow(WasteTransfers.ActivityTreeListRow r)
+        {
+
+            string result = string.Empty;
+
+            result += addActivityTreeCols(r);
+            result += addWasteTransferCols(r);
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+        private string addWasteTransferHeaderCols()
+        {
+            string result = string.Empty;
 
             //facility headers
             result += AddSimple(Resources.GetGlobal("Common", "Facilities"));
@@ -1038,8 +1186,8 @@ namespace EPRTR.CsvUtilities
             })
             {
                 //add total col for type
-                result += AddSimple(getQuantityHeaderWaste(type, null)); 
-                
+                result += AddSimple(getQuantityHeaderWaste(type, null));
+
                 //add treatment col for type
                 foreach (var treatment in new List<WasteTreatmentFilter.Treatment>() { 
                 WasteTreatmentFilter.Treatment.Recovery, 
@@ -1048,12 +1196,11 @@ namespace EPRTR.CsvUtilities
                 })
                 {
                     result += AddSimple(getQuantityHeaderWaste(type, treatment));
-                    
+
                 }
                 result += AddSimple(getUnitHeaderWaste(type));
             }
 
-            result += Environment.NewLine;
             return result;
         }
 
@@ -1089,24 +1236,6 @@ namespace EPRTR.CsvUtilities
             return string.Format("{0} - {1}", quantityTypeStr, typeStr);
         }
 
-
-        public string GetWasteTransferActivityRow(WasteTransfers.ActivityTreeListRow r)
-        {
-
-            string result = string.Empty;
-
-            // do not add a line for the total values
-            if (r.SectorCode == "TOT")
-            {
-                return result;
-            }
-
-            result += addActivityTreeCols(r.Level, r.SectorCode, r.ActivityCode, r.SubactivityCode);
-            result += addWasteTransferCols(r);
-
-            result += Environment.NewLine;
-            return result;
-        }
 
         private string addWasteTransferCols(WasteTransfers.WasteTransferRow r)
         {
