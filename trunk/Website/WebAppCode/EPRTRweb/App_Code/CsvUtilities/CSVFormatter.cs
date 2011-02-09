@@ -1018,7 +1018,7 @@ namespace EPRTR.CsvUtilities
             else
             {
                 result += Resources.GetGlobal("Common", "NUTSRegionCode") + listSeparator;
-                result += Resources.GetGlobal("Facility", "NUTS") + listSeparator;
+                result += Resources.GetGlobal("Common", "NUTSRegion") + listSeparator;
             }
 
             return result;
@@ -1053,7 +1053,7 @@ namespace EPRTR.CsvUtilities
                 }
                 else
                 {
-                    pollutantLevelStr = Resources.GetGlobal("Facility", "NUTS");
+                    pollutantLevelStr = Resources.GetGlobal("Common", "NUTSRegion");
                 }
             }
 
@@ -1119,6 +1119,31 @@ namespace EPRTR.CsvUtilities
             return result;
         }
 
+
+        public string GetPollutantTransferAreaHeader(PollutantTransfersSearchFilter filter)
+        {
+            string result = string.Empty;
+
+            result += addAreaTreeHeaderCols(filter.AreaFilter);
+            result += addPollutantTransferHeaderCols();
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        public string GetPollutantTransferAreaRow(PollutantTransfers.AreaTreeListRow r, PollutantTransfersSearchFilter filter)
+        {
+
+            string result = string.Empty;
+
+            result += addAreaTreeCols(r, filter.AreaFilter);
+            result += addPollutantTransferCols(r);
+
+            result += Environment.NewLine;
+            return result;
+        }
+
         private string addPollutantTransferHeaderCols()
         {
             string result = string.Empty;
@@ -1170,6 +1195,32 @@ namespace EPRTR.CsvUtilities
             result += Environment.NewLine;
             return result;
         }
+
+        public string GetWasteTransferAreaHeader(WasteTransferSearchFilter filter)
+        {
+            string result = string.Empty;
+
+            result += addAreaTreeHeaderCols(filter.AreaFilter);
+            result += addWasteTransferHeaderCols();
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        public string GetWasteTransferAreaRow(WasteTransfers.AreaTreeListRow r, WasteTransferSearchFilter filter)
+        {
+
+            string result = string.Empty;
+
+            result += addAreaTreeCols(r, filter.AreaFilter);
+            result += addWasteTransferCols(r);
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
 
         private string addWasteTransferHeaderCols()
         {

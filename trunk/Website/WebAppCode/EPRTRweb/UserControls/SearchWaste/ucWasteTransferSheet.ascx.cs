@@ -145,7 +145,7 @@ public partial class ucWasteTransferSheet : System.Web.UI.UserControl
             this.ucWasteTransferAreas.Populate(filter);
             txt = Resources.GetGlobal("WasteTransfers", "AllValuesAreYearlyTransfers");
             this.ucDownloadPrint.Visible = true; // activate print button only
-            this.ucDownloadPrint.Show(false, true);
+            this.ucDownloadPrint.Show(true, true);
             this.ucDownloadPrint.SetPrintControl(this);
 
             Sheet = Sheets.WasteTransfers.Areas;
@@ -310,6 +310,9 @@ public partial class ucWasteTransferSheet : System.Web.UI.UserControl
         {
             case Sheets.WasteTransfers.Activities:
                 ucWasteTransferActivities.DoSaveCSV(this, EventArgs.Empty);
+                break;
+            case Sheets.WasteTransfers.Areas:
+                ucWasteTransferAreas.DoSaveCSV(this, EventArgs.Empty);
                 break;
             case Sheets.WasteTransfers.HazTransboundary:
                 ucWasteTransferHazTransboundary.DoSaveCSV(this, EventArgs.Empty);

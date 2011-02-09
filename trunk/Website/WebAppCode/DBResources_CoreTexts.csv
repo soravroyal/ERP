@@ -32,3 +32,6 @@ InsertUpdate|Common|MethodTypeName|en-GB|Method Designation
 
 --National ID in facility details
 InsertUpdate|Facility|InYear|en-GB|(in {0})
+
+--new CSV downloads
+InsertUpdate|Common|NUTSRegion|en-GB|NUTS Region

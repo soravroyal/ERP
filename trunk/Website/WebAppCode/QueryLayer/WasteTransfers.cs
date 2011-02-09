@@ -678,6 +678,79 @@ namespace QueryLayer
         // ----------------------------------------------------------------------------------
         #region Areas
 
+        [Serializable]
+        public class AreaTreeListRow : QueryLayer.Utilities.AreaTreeListRow, WasteTransferRow
+        {
+            public AreaTreeListRow(string countryCode, string subAreaCode, AreaFilter.RegionType regionType,
+                                        int facilities,
+                                        double? quantityRecoveryHWIC, double? quantityDisposalHWIC, double? quantityUnspecHWIC,
+                                        double? quantityRecoveryHWOC, double? quantityDisposalHWOC, double? quantityUnspecHWOC,
+                                        double? quantityRecoveryNONHW, double? quantityDisposalNONHW, double? quantityUnspecNONHW,
+                                        bool hasChildren)
+                : base(countryCode, subAreaCode, regionType, hasChildren)
+            {
+                this.Facilities = facilities;
+
+                //Hazardous inside Country
+                this.QuantityRecoveryHWIC = quantityRecoveryHWIC;
+                this.QuantityDisposalHWIC = quantityDisposalHWIC;
+                this.QuantityUnspecHWIC = quantityUnspecHWIC;
+
+                this.TotalHWIC = quantityRecoveryHWIC.Add(quantityDisposalHWIC, quantityUnspecHWIC);
+
+                //Hazardous outside country
+                this.QuantityRecoveryHWOC = quantityRecoveryHWOC;
+                this.QuantityDisposalHWOC = quantityDisposalHWOC;
+                this.QuantityUnspecHWOC = quantityUnspecHWOC;
+                this.TotalHWOC = quantityRecoveryHWOC.Add(quantityDisposalHWOC, quantityUnspecHWOC);
+
+                // Hazardous total
+                this.QuantityRecoverySum = quantityRecoveryHWIC.Add(quantityRecoveryHWOC);
+                this.QuantityDisposalSum = quantityDisposalHWIC.Add(quantityDisposalHWOC);
+                this.QuantityUnspecSum = quantityUnspecHWIC.Add(quantityUnspecHWOC);
+                this.TotalSum = TotalHWIC.Add(TotalHWOC);
+
+                // Non Hazardous
+                this.QuantityRecoveryNONHW = quantityRecoveryNONHW;
+                this.QuantityDisposalNONHW = quantityDisposalNONHW;
+                this.QuantityUnspecNONHW = quantityUnspecNONHW;
+                this.TotalNONHW = quantityRecoveryNONHW.Add(quantityDisposalNONHW, quantityUnspecNONHW);
+
+                //waste is always reported in t
+                this.UnitCodeNONHW = QuantityUnit.Tonnes;
+                this.UnitCodeHWIC = QuantityUnit.Tonnes;
+                this.UnitCodeHWOC = QuantityUnit.Tonnes;
+                this.UnitCodeSum = QuantityUnit.Tonnes;
+            }
+
+            public int Facilities { get; internal set; }
+
+            public double? TotalHWIC { get; internal set; }
+            public double? QuantityRecoveryHWIC { get; internal set; }
+            public double? QuantityDisposalHWIC { get; internal set; }
+            public double? QuantityUnspecHWIC { get; internal set; }
+            public QuantityUnit UnitCodeHWIC { get; internal set; }
+
+            public double? TotalHWOC { get; internal set; }
+            public double? QuantityRecoveryHWOC { get; internal set; }
+            public double? QuantityDisposalHWOC { get; internal set; }
+            public double? QuantityUnspecHWOC { get; internal set; }
+            public QuantityUnit UnitCodeHWOC { get; internal set; }
+
+            public double? TotalSum { get; internal set; }
+            public double? QuantityRecoverySum { get; internal set; }
+            public double? QuantityDisposalSum { get; internal set; }
+            public double? QuantityUnspecSum { get; internal set; }
+            public QuantityUnit UnitCodeSum { get; internal set; }
+
+            public double? TotalNONHW { get; internal set; }
+            public double? QuantityRecoveryNONHW { get; internal set; }
+            public double? QuantityDisposalNONHW { get; internal set; }
+            public double? QuantityUnspecNONHW { get; internal set; }
+            public QuantityUnit UnitCodeNONHW { get; internal set; }
+
+        }
+
 
         [Serializable]
         public class WasteTreeListRow : TreeListRow, WasteTransferRow
@@ -778,6 +851,136 @@ namespace QueryLayer
             public QuantityUnit UnitCodeNONHW { get { return this.unitCodeNONHW; } }
 
         }
+
+        /// <summary>
+        /// return full area tree with all rows expanded
+        /// </summary>
+        public static IEnumerable<AreaTreeListRow> GetAreaTree(WasteTransferSearchFilter filter)
+        {
+            IEnumerable<AreaTreeListRow> countries = GetCountries(filter).ToList();
+
+            List<string> countryCodes = countries.Where(p => p.HasChildren).Select(p => p.CountryCode).ToList();
+            IEnumerable<AreaTreeListRow> subareas = GetSubAreas(filter, countryCodes).ToList();
+
+            IEnumerable<AreaTreeListRow> result = countries.Union(subareas)
+                                                               .OrderBy(x => AreaTreeListRow.CODE_TOTAL.Equals(x.CountryCode))
+                                                               .ThenBy(x => x.CountryCode)
+                                                               .ThenBy(x => AreaTreeListRow.CODE_UNKNOWN.Equals(x.RegionCode))
+                                                               .ThenBy(x => x.RegionCode);
+
+            return result;
+        }
+
+
+
+        /// <summary>
+        /// return all countries that fullfill search criteria
+        /// </summary>
+        public static IEnumerable<AreaTreeListRow> GetCountries(WasteTransferSearchFilter filter)
+        {
+            DataClassesWasteTransferDataContext db = getWasteTransferDataContext();
+            Expression<Func<WASTETRANSFER, bool>> lambda = getActivityAreaLambda(filter);
+
+            //find data for country level. Country level always has children.
+            IEnumerable<AreaTreeListRow> countries = db.WASTETRANSFERs.Where(lambda)
+                                                     .GroupBy(p => new { CountryCode = p.CountryCode })
+                                                     .Select(x => new AreaTreeListRow(
+                                                         x.Key.CountryCode,
+                                                         null,
+                                                         filter.AreaFilter.TypeRegion,
+                                                         x.Count(),
+                                                         x.Sum(p => p.QuantityRecoveryHWIC),
+                                                         x.Sum(p => p.QuantityDisposalHWIC),
+                                                         x.Sum(p => p.QuantityUnspecHWIC),
+                                                         x.Sum(p => p.QuantityRecoveryHWOC),
+                                                         x.Sum(p => p.QuantityDisposalHWOC),
+                                                         x.Sum(p => p.QuantityUnspecHWOC),
+                                                         x.Sum(p => p.QuantityRecoveryNONHW),
+                                                         x.Sum(p => p.QuantityDisposalNONHW),
+                                                         x.Sum(p => p.QuantityUnspecNONHW),
+                                                         true));
+
+
+            List<AreaTreeListRow> result = countries.ToList(); //make sure sql is executed now to do it only once
+
+            AreaTreeListRow total = result.GroupBy(p => 1)
+                                             .Select(x => new AreaTreeListRow(
+                                                 AreaTreeListRow.CODE_TOTAL,
+                                                 null,
+                                                 filter.AreaFilter.TypeRegion,
+                                                 x.Sum(p => p.Facilities),
+                                                 x.SumOrNull(p => p.QuantityRecoveryHWIC),
+                                                 x.SumOrNull(p => p.QuantityDisposalHWIC),
+                                                 x.SumOrNull(p => p.QuantityUnspecHWIC),
+                                                 x.SumOrNull(p => p.QuantityRecoveryHWOC),
+                                                 x.SumOrNull(p => p.QuantityDisposalHWOC),
+                                                 x.SumOrNull(p => p.QuantityUnspecHWOC),
+                                                 x.SumOrNull(p => p.QuantityRecoveryNONHW),
+                                                 x.SumOrNull(p => p.QuantityDisposalNONHW),
+                                                 x.SumOrNull(p => p.QuantityUnspecNONHW),
+                                                 false)).SingleOrDefault();
+
+
+            int facilitiesCount = total != null ? total.Facilities : 0;
+
+            //only add total to result if more than one row.
+            if (result.Count() > 1)
+            {
+                result.Add(total);
+            }
+
+            return result;
+        }
+
+
+        ///<summary>
+        ///Return all subareas (level 1) that fullfill search criteria. 
+        ///If countryCodes are null, all subareas will be returned. If countryCodes is empty no subareas will be returned.
+        ///</summary>
+        public static IEnumerable<AreaTreeListRow> GetSubAreas(WasteTransferSearchFilter filter, List<string> countryCodes)
+        {
+            if (countryCodes != null && countryCodes.Count() == 0)
+                return new List<AreaTreeListRow>();
+
+            DataClassesWasteTransferDataContext db = getWasteTransferDataContext();
+            Expression<Func<WASTETRANSFER, bool>> lambda = getActivityAreaLambda(filter);
+
+            //add activities to expression
+            if (countryCodes != null)
+            {
+                ParameterExpression param = lambda.Parameters[0];
+                Expression activityExp = LinqExpressionBuilder.GetInExpr(param, "CountryCode", countryCodes);
+
+                Expression exp = LinqExpressionBuilder.CombineAnd(lambda.Body, activityExp);
+                lambda = Expression.Lambda<Func<WASTETRANSFER, bool>>(exp, param);
+            }
+
+            //find data for sub-activity level, this level never has children.
+
+            AreaFilter.RegionType regionType = filter.AreaFilter.TypeRegion;
+            bool isRbd = AreaFilter.RegionType.RiverBasinDistrict.Equals(regionType);
+
+            IEnumerable<AreaTreeListRow> subareas = db.WASTETRANSFERs.Where(lambda)
+                                                                 .GroupBy(p => new { CountryCode = p.CountryCode, SubAreaCode = isRbd ? p.RiverBasinDistrictCode : p.NUTSLevel2RegionCode })
+                                                                 .Select(x => new AreaTreeListRow(
+                                                                     x.Key.CountryCode,
+                                                                     !x.Key.SubAreaCode.Equals(null) ? x.Key.SubAreaCode : AreaTreeListRow.CODE_UNKNOWN,
+                                                                     regionType,
+                                                                     x.Count(),
+                                                                     x.Sum(p => p.QuantityRecoveryHWIC),
+                                                                     x.Sum(p => p.QuantityDisposalHWIC),
+                                                                     x.Sum(p => p.QuantityUnspecHWIC),
+                                                                     x.Sum(p => p.QuantityRecoveryHWOC),
+                                                                     x.Sum(p => p.QuantityDisposalHWOC),
+                                                                     x.Sum(p => p.QuantityUnspecHWOC),
+                                                                     x.Sum(p => p.QuantityRecoveryNONHW),
+                                                                     x.Sum(p => p.QuantityDisposalNONHW),
+                                                                     x.Sum(p => p.QuantityUnspecNONHW),
+                                                                     false));
+
+            return subareas;
+        }
+
 
         /// <summary>
         /// get areas

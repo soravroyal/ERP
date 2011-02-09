@@ -9,6 +9,8 @@ using QueryLayer.Filters;
 using QueryLayer.Utilities;
 using EPRTR.Localization;
 using EPRTR.Comparers;
+using System.Globalization;
+using EPRTR.CsvUtilities;
  
 public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 {
@@ -360,4 +362,47 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
         return ((WasteTransfers.WasteTreeListRow )obj).AllowFacilityLink();
     }
     #endregion
+
+    public void DoSaveCSV(object sender, EventArgs e)
+    {
+        try
+        {
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+            // Create Header
+            var filter = SearchFilter;
+
+            bool isConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(filter);
+
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetWasteTransfersSearchHeader(
+                filter,
+                isConfidentialityAffected);
+
+            // Create Body
+            var rows = WasteTransfers.GetAreaTree(filter);
+
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string rowHeader = csvformat.GetWasteTransferAreaHeader(filter);
+
+            Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Area_List");
+
+            Response.Write(topheader + rowHeader);
+
+            foreach (var item in rows)
+            {
+                string row = csvformat.GetWasteTransferAreaRow(item, filter);
+                Response.Write(row);
+            }
+
+            Response.End();
+        }
+        catch (Exception exception)
+        {
+
+        }
+    }
+
+
 }
