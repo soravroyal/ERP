@@ -115,9 +115,6 @@ namespace EPRTR.Comparers
                 if (row1.RegionCode == null && row2.RegionCode == null) return 0;
 
 
-                //compare level to keep country before regions within the country
-                //res = row1.RegionCode.CompareTo(row2.RegionCode);
-
                 if(res == 0)
                 {
                     //unknown region must always be last

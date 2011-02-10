@@ -40,6 +40,9 @@ namespace EPRTR.ResourceProviders
             this.classKey = classKey;
             this.dalc = new StringResourcesLinq(classKey);
 
+            resourceCache = this.dalc.GetAllResources();
+
+
         }
 
         #region IResourceProvider Members
@@ -64,7 +67,7 @@ namespace EPRTR.ResourceProviders
                 throw new ArgumentNullException("resourceKey");
             }
             
-            if (culture == null)
+            if (culture == null || String.IsNullOrEmpty(culture.Name))
             {
                 culture = CultureInfo.CurrentUICulture;
             }

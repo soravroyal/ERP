@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using System.Linq;
 using EPRTR.ResourceProviders.Properties;
 using System.Diagnostics;
+using LinqUtilities;
 
 namespace EPRTR.ResourceProviders
 {
@@ -56,7 +57,7 @@ namespace EPRTR.ResourceProviders
 
 
             // set up LINQ expression and get resource from database
-            DBResourceDataClassesDataContext db = new DBResourceDataClassesDataContext();
+            DBResourceDataClassesDataContext db = getDataContext();
             IEnumerable<StringResource> res = db.StringResources.Where(m => m.CultureCode.Equals(culture.Name) && m.ResourceKey.Equals(resourceKey) && m.ResourceType.Equals(this.resourceType));
 
             foreach (StringResource r in res)
@@ -140,7 +141,10 @@ namespace EPRTR.ResourceProviders
                 string k = r.ResourceKey;
                 string v = r.ResourceValue;
 
-                resourceDictionary.Add(k, v);
+                if (!resourceDictionary.Contains(k))
+                {
+                    resourceDictionary.Add(k, v);
+                }
             }
 
             return resourceDictionary;
@@ -177,6 +181,52 @@ namespace EPRTR.ResourceProviders
             }
             return resourceValue;
         }
+
+        /// <summary>
+        /// Returns a dictionary type containing all resources for the resource type as passed to the constructor.
+        /// </summary>
+        /// <returns>If found, the dictionary contains key/value pairs for each resource for the specified culture.</returns>
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public Dictionary<string, Dictionary<string, string>> GetAllResources()
+        {
+            Debug.WriteLine(String.Format("StringResourcesLinq.GetAllResources({0})", this.resourceType));
+
+            Dictionary<string, Dictionary<string, string>> resourceCache = new Dictionary<string, Dictionary<string, string>>();
+
+            // set up LINQ expression and get resource from database
+            DBResourceDataClassesDataContext db = getDataContext();
+            List<StringResource> res = db.StringResources.Where(m => m.ResourceType.Equals(this.resourceType)).ToList();
+
+            var cultures = res.Select(m => m.CultureCode).Distinct();
+
+            foreach (var culture in cultures)
+            {
+                Dictionary<string, string> resCacheByCulture = new Dictionary<string, string>();
+                resourceCache.Add(culture, resCacheByCulture);
+
+                IEnumerable<StringResource> cultureResources = res.Where(m => m.CultureCode.Equals(culture));
+                foreach (StringResource r in cultureResources)
+                {
+                    string k = r.ResourceKey;
+                    string v = r.ResourceValue;
+
+                    if (!resCacheByCulture.ContainsKey(k))
+                    {
+                        resCacheByCulture.Add(k, v);
+                    }
+                }
+            }
+
+            return resourceCache;
+        }
+
+        private static DBResourceDataClassesDataContext getDataContext()
+        {
+            DBResourceDataClassesDataContext db = new DBResourceDataClassesDataContext();
+            //db.Log = new DebuggerWriter();
+            return db;
+        }
+
 
         #region IDisposable Members
 

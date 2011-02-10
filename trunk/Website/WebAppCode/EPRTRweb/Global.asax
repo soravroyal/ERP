@@ -15,6 +15,7 @@
         enlog.Message = String.Format("Application started");
         enlog.Severity = System.Diagnostics.TraceEventType.Information;
         enlog.Priority = 1;
+
         Logger.Write(enlog);
     }
     

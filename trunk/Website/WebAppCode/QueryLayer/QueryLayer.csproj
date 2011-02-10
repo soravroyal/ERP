@@ -154,7 +154,6 @@
     <Compile Include="Utilities\AccidentalPercent.cs" />
     <Compile Include="Utilities\ActivityTreeListRow.cs" />
     <Compile Include="Utilities\AreaTreeListRow.cs" />
-    <Compile Include="Utilities\DebuggerWriter.cs" />
     <Compile Include="Utilities\DoubleExtensions.cs" />
     <Compile Include="Utilities\EnumUtil.cs" />
     <Compile Include="Utilities\Summary.cs" />
@@ -246,6 +245,12 @@
     <None Include="DataClassesPollutantRelease.dbml.layout">
       <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqUtilities\LinqUtilities.csproj">
+      <Project>{3B3166B8-A93C-4636-AB19-BAEEC9DA1709}</Project>
+      <Name>LinqUtilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
