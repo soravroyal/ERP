@@ -4,7 +4,7 @@
 <%@ Register src="~/UserControls/Common/ucTreeTableLabel.ascx" tagname="TreeLabel" tagprefix="eprtr" %>
 
 <div>
-<asp:ListView ID="lvPollutantReleasesArea" runat="server" OnItemCommand="OnItemCommand" OnDataBinding="OnDataBinding">
+<asp:ListView ID="lvPollutantReleasesArea" runat="server" OnItemCommand="OnItemCommand" OnItemDataBound="rows_OnItemDataBound"  OnDataBinding="OnDataBinding">
 
         <LayoutTemplate>
          <table>

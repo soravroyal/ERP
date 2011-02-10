@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using EPRTR.Comparers;
+using EPRTR.CsvUtilities;
 using EPRTR.Formatters;
+using EPRTR.Localization;
 using EPRTR.Utilities;
 using QueryLayer;
 using QueryLayer.Filters;
 using QueryLayer.Utilities;
-using EPRTR.Localization;
-using EPRTR.Comparers;
-using System.Globalization;
-using EPRTR.CsvUtilities;
 
 public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 {
     private const string FILTER = "pollutantreleasesfilter";
-    private const string TREE = "pollutantreleasestree";
-    private const string BASERESULT = "base_releasesarea";
+    private const string RESULT = "base_releasesarea";
     public EventHandler ContentChanged;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -32,15 +32,6 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
         set { ViewState[FILTER] = value; }
     }
 
-    /// <summary>
-    /// Information on which part of tree structure is expanded/collapsed
-    /// </summary>
-    private Dictionary<string, bool> TreeStructure
-    {
-        get { return ViewState[TREE] as Dictionary<string, bool>; }
-        set { ViewState[TREE] = value; }
-    }
-
 
     /// <summary>
     /// method to populate the listview
@@ -49,17 +40,14 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
     {
         SearchFilter = filter;
 
-        List<PollutantReleases.ReleasesTreeListRow> data = QueryLayer.PollutantReleases.GetArea(filter);
-        PollutantReleasesAreaTreeListRowComparer c = new PollutantReleasesAreaTreeListRowComparer(filter.AreaFilter);
-        data.Sort(c);
+        List<PollutantReleases.AreaTreeListRow> data = QueryLayer.PollutantReleases.GetCountries(filter).ToList<PollutantReleases.AreaTreeListRow>();
+        
+        sortResult(data);
+        ViewState[RESULT] = data;
 
-        ViewState[BASERESULT] = data;
         this.lvPollutantReleasesArea.DataSource = data;
         this.lvPollutantReleasesArea.DataBind();
 
-        // reset tree structure
-        TreeStructure = new Dictionary<string, bool>();
-        
     }
 
     /// <summary>
@@ -86,26 +74,60 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
                 }
                 else
                 {
-                    string code = e.CommandName.ToString();
-                    bool expanded = TreeListHelper.GetExpanded(TreeStructure, code);
-                    TreeListHelper.SetExpanded(TreeStructure, code, !expanded);
-
-                    List<PollutantReleases.ReleasesTreeListRow> baseResult = ViewState[BASERESULT] as List<PollutantReleases.ReleasesTreeListRow>;
-
-                    List<PollutantReleases.ReleasesTreeListRow> data = QueryLayer.PollutantReleases.GetAreaTree(TreeStructure, SearchFilter, baseResult);
-                    PollutantReleasesAreaTreeListRowComparer c = new PollutantReleasesAreaTreeListRowComparer(SearchFilter.AreaFilter);
-                    data.Sort(c);
-
-                    this.lvPollutantReleasesArea.DataSource = data;
-                    this.lvPollutantReleasesArea.DataBind();
-
-                    // notify that content has changed (print)
-                    if (ContentChanged != null)
-                        ContentChanged.Invoke(null, EventArgs.Empty);
+                    toggleExpanded(rowindex);
                 }
             }
         }
     }
+
+
+    private void toggleExpanded(int rowindex)
+    {
+        List<PollutantReleases.AreaTreeListRow> data = ViewState[RESULT] as List<PollutantReleases.AreaTreeListRow>;
+        PollutantReleases.AreaTreeListRow row = data[rowindex];
+
+        //toggle expansion
+        row.IsExpanded = !row.IsExpanded;
+
+        //get data from database, if not already loaded
+        if (row.HasChildren && row.IsExpanded && !data.Any(r => r.Level == row.Level + 1 && r.ParentCode == row.Code))
+        {
+            if (row.Level == 0)
+            {
+                var subareas = PollutantReleases.GetSubAreas(SearchFilter, new List<string> { row.CountryCode });
+                addToResult(subareas);
+            }
+        }
+
+        this.lvPollutantReleasesArea.DataSource = data;
+        this.lvPollutantReleasesArea.DataBind();
+
+        // notify that content has changed (print)
+        if (ContentChanged != null)
+            ContentChanged.Invoke(null, EventArgs.Empty);
+    }
+
+
+    //add data to list. Sort and save new list in viewstate.
+    private void addToResult(IEnumerable<PollutantReleases.AreaTreeListRow> rows)
+    {
+        List<PollutantReleases.AreaTreeListRow> data = ViewState[RESULT] as List<PollutantReleases.AreaTreeListRow>;
+        data.AddRange(rows);
+        sortResult(data);
+        ViewState[RESULT] = data;
+
+
+    }
+
+    private void sortResult(List<PollutantReleases.AreaTreeListRow> data)
+    {
+        if (data != null && data.Count > 0)
+        {
+            PollutantReleasesAreaTreeListRowComparer c = new PollutantReleasesAreaTreeListRowComparer(SearchFilter.AreaFilter);
+            data.Sort(c);
+        }
+    }
+
 
     private void toggleTimeseries(ListViewCommandEventArgs e, int rowindex)
     {
@@ -181,6 +203,29 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 
     }
 
+    //Rows will only be shown if parent is expanded (grand-parents must be expanded too)
+    protected void rows_OnItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+        ListViewDataItem dataItem = e.Item as ListViewDataItem;
+        if (dataItem == null) return; //safe check
+
+        int rowindex = dataItem.DataItemIndex;
+
+        PollutantReleases.AreaTreeListRow row = dataItem.DataItem as PollutantReleases.AreaTreeListRow;
+        List<PollutantReleases.AreaTreeListRow> data = ViewState[RESULT] as List<PollutantReleases.AreaTreeListRow>;
+
+        //Countries need not to be considered. Will always be visible
+        bool collapsed = false;
+        if (row.Level > 0)
+        {
+            //is country collapsed?
+            collapsed = !data.Single(d => d.CountryCode == row.CountryCode && d.Level == 0).IsExpanded;
+        }
+
+        dataItem.Visible = !collapsed;
+    }
+
+
     //only show air if selected in filter
     protected bool ShowAir
     {
@@ -237,52 +282,52 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 
     protected string GetFacilities(object obj)
     {
-        return NumberFormat.Format(((PollutantReleases.ReleasesTreeListRow)obj).Facilities);
+        return NumberFormat.Format(((PollutantReleases.PollutantReleaseRow)obj).Facilities);
     }
 
     protected string GetAccidentalFacilities(object obj)
     {
-        return NumberFormat.Format(((PollutantReleases.ReleasesTreeListRow)obj).AccidentalFacilities);
+        return NumberFormat.Format(((PollutantReleases.PollutantReleaseRow)obj).AccidentalFacilities);
     }
 
 
     protected string GetTotalAir(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).FormatTotalAir();
+        return ((PollutantReleases.PollutantReleaseRow)obj).FormatTotalAir();
     }
     protected string GetAccidentalAir(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).FormatAccidentalAir();
+        return ((PollutantReleases.PollutantReleaseRow)obj).FormatAccidentalAir();
     }
     protected string GetToolTipAir(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).ToolTipAir();
+        return ((PollutantReleases.PollutantReleaseRow)obj).ToolTipAir();
     }
 
     protected string GetTotalSoil(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).FormatTotalSoil();
+        return ((PollutantReleases.PollutantReleaseRow)obj).FormatTotalSoil();
     }
     protected string GetAccidentalSoil(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).FormatAccidentalSoil();
+        return ((PollutantReleases.PollutantReleaseRow)obj).FormatAccidentalSoil();
     }
     protected string GetToolTipSoil(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).ToolTipSoil();
+        return ((PollutantReleases.PollutantReleaseRow)obj).ToolTipSoil();
     }
 
     protected string GetTotalWater(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).FormatTotalWater();
+        return ((PollutantReleases.PollutantReleaseRow)obj).FormatTotalWater();
     }
     protected string GetAccidentalWater(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).FormatAccidentalWater();
+        return ((PollutantReleases.PollutantReleaseRow)obj).FormatAccidentalWater();
     }
     protected string GetToolTipWater(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).ToolTipWater();
+        return ((PollutantReleases.PollutantReleaseRow)obj).ToolTipWater();
     }
     protected string GetToolTipTimeSeries()
     {
@@ -291,7 +336,7 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 
     protected bool ShowFacilityLink(object obj)
     {
-        return ((PollutantReleases.ReleasesTreeListRow)obj).AllowFacilityLink();
+        return ((PollutantReleases.AreaTreeListRow)obj).AllowFacilityLink();
     }
     #endregion
 
@@ -330,7 +375,7 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 
             Response.End();
         }
-        catch (Exception exception)
+        catch (Exception)
         {
 
         }

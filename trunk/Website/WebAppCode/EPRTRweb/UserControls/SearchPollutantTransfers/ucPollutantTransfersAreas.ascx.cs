@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Web.UI;
 using System.Web.UI.WebControls;
+using EPRTR.Comparers;
+using EPRTR.CsvUtilities;
 using EPRTR.Formatters;
+using EPRTR.Localization;
 using EPRTR.Utilities;
 using QueryLayer;
 using QueryLayer.Filters;
 using QueryLayer.Utilities;
-using EPRTR.Localization;
-using EPRTR.Comparers;
-using System.Web.UI;
-using System.Globalization;
-using EPRTR.CsvUtilities;
 
 public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 {
-    private const string TREE = "pollutantTransferAreaTree";
     private const string FILTER = "pollutantTransferAreaFilter";
-    private const string BASERESULT = "pollutantTransfersAreaResult";
+    private const string RESULT = "pollutantTransfersAreaResult";
     public EventHandler ContentChanged;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -32,14 +32,6 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
         set { ViewState[FILTER] = value; }
     }
 
-    /// <summary>
-    /// Information on which part of tree structure is expanded/collapsed
-    /// </summary>
-    private Dictionary<string, bool> TreeStructure
-    {
-        get { return ViewState[TREE] as Dictionary<string, bool>; }
-        set { ViewState[TREE] = value; }
-    }
 
     /// <summary>
     /// Fill table according to filter
@@ -47,17 +39,13 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
     public void Populate(PollutantTransfersSearchFilter filter)
     {
         SearchFilter = filter;
-        List<PollutantTransfers.TransfersTreeListRow> data = QueryLayer.PollutantTransfers.GetArea(filter);
+        List<PollutantTransfers.AreaTreeListRow> data = QueryLayer.PollutantTransfers.GetCountries(filter).ToList();
 
-        PollutantTransfersAreaTreeListRowComparer c = new PollutantTransfersAreaTreeListRowComparer(filter.AreaFilter);
-        data.Sort(c);
-        ViewState[BASERESULT] = data;
+        sortResult(data);
+        ViewState[RESULT] = data;
 
         this.lvPollutantTransfersAreas.DataSource = data;
         this.lvPollutantTransfersAreas.DataBind();
-
-        // reset tree structure
-        TreeStructure = new Dictionary<string, bool>();
     }
 
     /// <summary>
@@ -84,26 +72,60 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
                 }
                 else
                 {
-
-                    bool expanded = TreeListHelper.GetExpanded(TreeStructure, code);
-                    TreeListHelper.SetExpanded(TreeStructure, code, !expanded);
-
-                    List<PollutantTransfers.TransfersTreeListRow> baseResult = ViewState[BASERESULT] as List<PollutantTransfers.TransfersTreeListRow>;
-
-                    List<PollutantTransfers.TransfersTreeListRow> data = QueryLayer.PollutantTransfers.GetAreaTree(TreeStructure, SearchFilter, baseResult);
-                    PollutantTransfersAreaTreeListRowComparer c = new PollutantTransfersAreaTreeListRowComparer(SearchFilter.AreaFilter);
-                    data.Sort(c);
-
-                    this.lvPollutantTransfersAreas.DataSource = data;
-                    this.lvPollutantTransfersAreas.DataBind();
-
-                    // notify that content has changed (print)
-                    if (ContentChanged != null)
-                        ContentChanged.Invoke(null, EventArgs.Empty);
+                    toggleExpanded(rowindex);
                 }
             }
         }
     }
+
+    private void toggleExpanded(int rowindex)
+    {
+        List<PollutantTransfers.AreaTreeListRow> data = ViewState[RESULT] as List<PollutantTransfers.AreaTreeListRow>;
+        PollutantTransfers.AreaTreeListRow row = data[rowindex];
+
+        //toggle expansion
+        row.IsExpanded = !row.IsExpanded;
+
+        //get data from database, if not already loaded
+        if (row.HasChildren && row.IsExpanded && !data.Any(r => r.Level == row.Level + 1 && r.ParentCode == row.Code))
+        {
+            if (row.Level == 0)
+            {
+                var subareas = PollutantTransfers.GetSubAreas(SearchFilter, new List<string> { row.CountryCode });
+                addToResult(subareas);
+            }
+
+        }
+
+        this.lvPollutantTransfersAreas.DataSource = data;
+        this.lvPollutantTransfersAreas.DataBind();
+
+
+        // notify that content has changed (print)
+        if (ContentChanged != null)
+            ContentChanged.Invoke(null, EventArgs.Empty);
+    }
+
+    //add data to list. Sort and save new list in viewstate.
+    private void addToResult(IEnumerable<PollutantTransfers.AreaTreeListRow> rows)
+    {
+        List<PollutantTransfers.AreaTreeListRow> data = ViewState[RESULT] as List<PollutantTransfers.AreaTreeListRow>;
+        data.AddRange(rows);
+        sortResult(data);
+        ViewState[RESULT] = data;
+
+
+    }
+
+    private void sortResult(List<PollutantTransfers.AreaTreeListRow> data)
+    {
+        if (data != null && data.Count > 0)
+        {
+            PollutantTransfersAreaTreeListRowComparer c = new PollutantTransfersAreaTreeListRowComparer(SearchFilter.AreaFilter);
+            data.Sort(c);
+        }
+    }
+
 
     private void toggleTimeseries(ListViewCommandEventArgs e, int rowindex)
     {
@@ -166,6 +188,29 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 
 
     #region DataBinding methods
+
+    //Rows will only be shown if parent is expanded (grand-parents must be expanded too)
+    protected void rows_OnItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+        ListViewDataItem dataItem = e.Item as ListViewDataItem;
+        if (dataItem == null) return; //safe check
+
+        int rowindex = dataItem.DataItemIndex;
+
+        PollutantTransfers.AreaTreeListRow row = dataItem.DataItem as PollutantTransfers.AreaTreeListRow;
+        List<PollutantTransfers.AreaTreeListRow> data = ViewState[RESULT] as List<PollutantTransfers.AreaTreeListRow>;
+
+        //Countries need not to be considered. Will always be visible
+        bool collapsed = false;
+        if (row.Level > 0)
+        {
+            //is country collapsed?
+            collapsed = !data.Single(d => d.CountryCode == row.CountryCode && d.Level == 0).IsExpanded;
+        }
+
+        dataItem.Visible = !collapsed;
+    }
+
     protected string GetRowCss(object obj)
     {
         return ((TreeListRow)obj).GetRowCssClass();
@@ -204,17 +249,17 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 
     protected string GetFacilities(object obj)
     {
-        return NumberFormat.Format(((PollutantTransfers.TransfersTreeListRow)obj).Facilities);
+        return NumberFormat.Format(((PollutantTransfers.PollutantTransferRow)obj).Facilities);
     }
 
     protected string GetTotal(object obj)
     {
-        return ((PollutantTransfers.TransfersTreeListRow)obj).FormatTotal();
+        return ((PollutantTransfers.PollutantTransferRow)obj).FormatTotal();
     }
 
     protected string GetToolTip(object obj)
     {
-        return ((PollutantTransfers.TransfersTreeListRow)obj).ToolTip();
+        return ((PollutantTransfers.PollutantTransferRow)obj).ToolTip();
     }
     protected string GetToolTipTimeSeries()
     {
@@ -223,7 +268,7 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 
     protected bool ShowFacilityLink(object obj)
     {
-        return ((PollutantTransfers.TransfersTreeListRow)obj).AllowFacilityLink();
+        return ((PollutantTransfers.AreaTreeListRow)obj).AllowFacilityLink();
     }
     #endregion
 
@@ -263,7 +308,7 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 
             Response.End();
         }
-        catch (Exception exception)
+        catch (Exception)
         {
 
         }

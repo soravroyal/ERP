@@ -8,7 +8,7 @@
 </asp:Panel>
 
 <div> 
-<asp:ListView ID="lvWasteTransferArea" runat="server" OnItemCommand="OnItemCommand" OnDataBinding="OnDataBinding">
+<asp:ListView ID="lvWasteTransferArea" runat="server" OnItemCommand="OnItemCommand" OnItemDataBound="rows_OnItemDataBound" OnDataBinding="OnDataBinding">
 
       <LayoutTemplate>
        <table>
