@@ -35,3 +35,6 @@ InsertUpdate|Facility|InYear|en-GB|(in {0})
 
 --new CSV downloads
 InsertUpdate|Common|NUTSRegion|en-GB|NUTS Region
+
+--remove dublicate resources (that are no longer used anyway)
+Delete|Library|PollutantPageContent
