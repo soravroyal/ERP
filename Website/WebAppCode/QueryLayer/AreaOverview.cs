@@ -1,13 +1,12 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Linq.Expressions;
-using QueryLayer.LinqFramework;
-using QueryLayer.Filters;
-using QueryLayer.Utilities;
+using LinqUtilities;
 using QueryLayer.Enums;
+using QueryLayer.Filters;
+using QueryLayer.LinqFramework;
+using QueryLayer.Utilities;
 
 namespace QueryLayer
 {
