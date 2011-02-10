@@ -412,7 +412,7 @@ public partial class ucPollutantReleasesActivities : System.Web.UI.UserControl
 
             Response.End();
         }
-        catch (Exception exception)
+        catch (Exception)
         {
 
         }

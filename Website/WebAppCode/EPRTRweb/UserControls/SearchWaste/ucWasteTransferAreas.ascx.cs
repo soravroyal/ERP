@@ -11,12 +11,12 @@ using EPRTR.Localization;
 using EPRTR.Comparers;
 using System.Globalization;
 using EPRTR.CsvUtilities;
+using System.Linq;
  
 public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 {
     private const string FILTER = "wasteTransferAreaFilter";
-    private const string TREE = "wasteTransferAreaTree";
-    private const string BASERESULT = "wasteTransferAreaResult";
+    private const string RESULT = "wasteTransferAreaResult";
     public EventHandler ContentChanged;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -33,14 +33,6 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
         set { ViewState[FILTER] = value; }
     }
 
-    /// <summary>
-    /// Information on which part of tree structure is expanded/collapsed
-    /// </summary>
-    private Dictionary<string, bool> TreeStructure
-    {
-        get { return ViewState[TREE] as Dictionary<string, bool>; }
-        set { ViewState[TREE] = value; }
-    }
 
 
     /// <summary>
@@ -49,18 +41,14 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
     public void Populate(WasteTransferSearchFilter filter)
     {
         SearchFilter = filter;
-        List<WasteTransfers.WasteTreeListRow> data = QueryLayer.WasteTransfers.GetArea(filter);
+        List<WasteTransfers.AreaTreeListRow> data = QueryLayer.WasteTransfers.GetCountries(filter).ToList();
 
-        WasteTransferAreaTreeListRowComparer c = new WasteTransferAreaTreeListRowComparer(filter.AreaFilter);
-        data.Sort(c);
-
-        ViewState[BASERESULT] = data;
+        sortResult(data);
+        ViewState[RESULT] = data;
         
         this.lvWasteTransferArea.DataSource = data;
         this.lvWasteTransferArea.DataBind();
 
-        // reset tree structure
-        TreeStructure = new Dictionary<string, bool>();
     }
 
 
@@ -88,26 +76,61 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
                 }
                 else
                 {
-                    string code = command;
-                    bool expanded = TreeListHelper.GetExpanded(TreeStructure, code);
-                    TreeListHelper.SetExpanded(TreeStructure, code, !expanded);
-
-                    List<WasteTransfers.WasteTreeListRow> baseResult = ViewState[BASERESULT] as List<WasteTransfers.WasteTreeListRow>;
-
-                    List<WasteTransfers.WasteTreeListRow> data = QueryLayer.WasteTransfers.GetAreaTree(TreeStructure, SearchFilter, baseResult);
-                    WasteTransferAreaTreeListRowComparer c = new WasteTransferAreaTreeListRowComparer(SearchFilter.AreaFilter);
-                    data.Sort(c);
-
-                    this.lvWasteTransferArea.DataSource = data;
-                    this.lvWasteTransferArea.DataBind();
-
-                    // notify that content has changed (print)
-                    if (ContentChanged != null)
-                        ContentChanged.Invoke(null, EventArgs.Empty);
+                    toggleExpanded(rowindex);
                 }
             }
         }
     }
+
+
+    private void toggleExpanded(int rowindex)
+    {
+        List<WasteTransfers.AreaTreeListRow> data = ViewState[RESULT] as List<WasteTransfers.AreaTreeListRow>;
+        WasteTransfers.AreaTreeListRow row = data[rowindex];
+
+        //toggle expansion
+        row.IsExpanded = !row.IsExpanded;
+
+        //get data from database, if not already loaded
+        if (row.HasChildren && row.IsExpanded && !data.Any(r => r.Level == row.Level + 1 && r.ParentCode == row.Code))
+        {
+            if (row.Level == 0)
+            {
+                var subareas = WasteTransfers.GetSubAreas(SearchFilter, new List<string> { row.CountryCode });
+                addToResult(subareas);
+            }
+
+        }
+
+        this.lvWasteTransferArea.DataSource = data;
+        this.lvWasteTransferArea.DataBind();
+
+
+        // notify that content has changed (print)
+        if (ContentChanged != null)
+            ContentChanged.Invoke(null, EventArgs.Empty);
+    }
+
+    //add data to list. Sort and save new list in viewstate.
+    private void addToResult(IEnumerable<WasteTransfers.AreaTreeListRow> rows)
+    {
+        List<WasteTransfers.AreaTreeListRow> data = ViewState[RESULT] as List<WasteTransfers.AreaTreeListRow>;
+        data.AddRange(rows);
+        sortResult(data);
+        ViewState[RESULT] = data;
+
+
+    }
+
+    private void sortResult(List<WasteTransfers.AreaTreeListRow> data)
+    {
+        if (data != null && data.Count > 0)
+        {
+            WasteTransferAreaTreeListRowComparer c = new WasteTransferAreaTreeListRowComparer(SearchFilter.AreaFilter);
+            data.Sort(c);
+        }
+    }
+
 
     private void toggleTimeseries(ListViewCommandEventArgs e, int rowindex)
     {
@@ -175,6 +198,29 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
         this.lvWasteTransferArea.FindControl("divHeaderHWOC").Visible = ShowHWOC;
         this.lvWasteTransferArea.FindControl("divHeaderHWTotal").Visible = ShowHWTotal;
     }
+
+    //Rows will only be shown if parent is expanded (grand-parents must be expanded too)
+    protected void rows_OnItemDataBound(object sender, ListViewItemEventArgs e)
+    {
+        ListViewDataItem dataItem = e.Item as ListViewDataItem;
+        if (dataItem == null) return; //safe check
+
+        int rowindex = dataItem.DataItemIndex;
+
+        WasteTransfers.AreaTreeListRow row = dataItem.DataItem as WasteTransfers.AreaTreeListRow;
+        List<WasteTransfers.AreaTreeListRow> data = ViewState[RESULT] as List<WasteTransfers.AreaTreeListRow>;
+
+        //Countries need not to be considered. Will always be visible
+        bool collapsed = false;
+        if (row.Level > 0)
+        {
+            //is country collapsed?
+            collapsed = !data.Single(d => d.CountryCode == row.CountryCode && d.Level == 0).IsExpanded;
+        }
+
+        dataItem.Visible = !collapsed;
+    }
+
 
     //only show non-HW if selected in filter
     protected bool ShowNonHW
@@ -265,92 +311,92 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 
     protected string GetFacilities(object obj)
     {
-        return NumberFormat.Format(((WasteTransfers.WasteTreeListRow)obj).Facilities);
+        return NumberFormat.Format(((WasteTransfers.WasteTransferRow)obj).Facilities);
     }
 
     protected string GetHWICTotal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWICTotal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWICTotal();
     }
     protected string GetHWICRecovery(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWICRecovery();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWICRecovery();
     }
     protected string GetHWICDisposal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWICDisposal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWICDisposal();
     }
     protected string GetHWICUnspec(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWICUnspec();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWICUnspec();
     }
     protected string GetHWICToolTip(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).ToolTipHWIC();
+        return ((WasteTransfers.WasteTransferRow)obj).ToolTipHWIC();
     }
 
     protected string GetHWOCTotal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWOCTotal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWOCTotal();
     }
     protected string GetHWOCRecovery(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWOCRecovery();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWOCRecovery();
     }
     protected string GetHWOCDisposal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWOCDisposal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWOCDisposal();
     }
     protected string GetHWOCUnspec(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWOCUnspec();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWOCUnspec();
     }
     protected string GetHWOCToolTip(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).ToolTipHWOC();
+        return ((WasteTransfers.WasteTransferRow)obj).ToolTipHWOC();
     }
 
 
     protected string GetHWTotal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWTotal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWTotal();
     }
     protected string GetHWRecovery(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWRecovery();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWRecovery();
     }
     protected string GetHWDisposal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWDisposal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWDisposal();
     }
     protected string GetHWUnspec(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatHWUnspec();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatHWUnspec();
     }
     protected string GetHWToolTip(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).ToolTipHW();
+        return ((WasteTransfers.WasteTransferRow)obj).ToolTipHW();
     }
 
     protected string GetNONHWTotal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatNONHWTotal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatNONHWTotal();
     }
     protected string GetNONHWRecovery(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatNONHWRecovery();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatNONHWRecovery();
     }
     protected string GetNONHWDisposal(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatNONHWDisposal();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatNONHWDisposal();
     }
     protected string GetNONHWUnspec(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).FormatNONHWUnspec();
+        return ((WasteTransfers.WasteTransferRow)obj).FormatNONHWUnspec();
     }
     protected string GetNONHWToolTip(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow)obj).ToolTipNONHW();
+        return ((WasteTransfers.WasteTransferRow)obj).ToolTipNONHW();
     }
     protected string GetToolTipTimeSeries()
     {
@@ -359,7 +405,7 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 
     protected bool ShowFacilityLink(object obj)
     {
-        return ((WasteTransfers.WasteTreeListRow )obj).AllowFacilityLink();
+        return ((WasteTransfers.AreaTreeListRow)obj).AllowFacilityLink();
     }
     #endregion
 
@@ -398,7 +444,7 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 
             Response.End();
         }
-        catch (Exception exception)
+        catch (Exception)
         {
 
         }
