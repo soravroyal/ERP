@@ -103,8 +103,9 @@ namespace EPRTR.ResourceProviders
             }
             else
             {
+                resourceValue = string.Format("[DUPLICATE: {0}.{1}]", this.resourceType, resourceKey);
                 // if > 1 row returned, log an error, we shouldn't have > 1 value for a resourceKey!
-                throw new DataException(String.Format(Thread.CurrentThread.CurrentUICulture, Resource.RM_DuplicateResourceFound, resourceKey));
+                //throw new DataException(String.Format(Thread.CurrentThread.CurrentUICulture, Resource.RM_DuplicateResourceFound, resourceKey));
             }
 
             return resourceValue;
@@ -203,6 +204,11 @@ namespace EPRTR.ResourceProviders
             {
                 Dictionary<string, string> resCacheByCulture = new Dictionary<string, string>();
                 resourceCache.Add(culture, resCacheByCulture);
+
+                if(culture.Equals(defaultResourceCulture))
+                {
+                    resourceCache.Add(CultureInfo.InvariantCulture.Name, resCacheByCulture);
+                }
 
                 IEnumerable<StringResource> cultureResources = res.Where(m => m.CultureCode.Equals(culture));
                 foreach (StringResource r in cultureResources)
