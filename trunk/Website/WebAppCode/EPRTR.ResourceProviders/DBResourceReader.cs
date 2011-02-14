@@ -24,9 +24,9 @@ namespace EPRTR.ResourceProviders
    public class DBResourceReader : DisposableBaseType, IResourceReader, IEnumerable<KeyValuePair<string, object>> 
    {
 
-       private ListDictionary resourceDictionary;
+       private IDictionary resourceDictionary;
 
-       public DBResourceReader(ListDictionary resourceDictionary)
+       public DBResourceReader(IDictionary resourceDictionary)
        {
            Debug.WriteLine("DBResourceReader()");
 
