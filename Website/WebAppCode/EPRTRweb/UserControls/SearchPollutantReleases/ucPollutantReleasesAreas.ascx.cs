@@ -357,7 +357,8 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
                 isConfidentialityAffected);
 
             // Create Body
-            var rows = PollutantReleases.GetAreaTree(filter);
+            List<PollutantReleases.AreaTreeListRow> rows = PollutantReleases.GetAreaTree(filter).ToList();
+            sortResult(rows);
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
@@ -367,6 +368,7 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 
             Response.Write(topheader + rowHeader);
 
+            
             foreach (var item in rows)
             {
                 string row = csvformat.GetPollutantReleaseAreaRow(item, filter);

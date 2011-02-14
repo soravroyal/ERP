@@ -426,7 +426,8 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
                 isConfidentialityAffected);
 
             // Create Body
-            var rows = WasteTransfers.GetAreaTree(filter);
+            List<WasteTransfers.AreaTreeListRow> rows = WasteTransfers.GetAreaTree(filter).ToList();
+            sortResult(rows);
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);

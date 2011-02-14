@@ -290,7 +290,8 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
                 isConfidentialityAffected);
 
             // Create Body
-            var rows = PollutantTransfers.GetAreaTree(filter);
+            List<PollutantTransfers.AreaTreeListRow> rows = PollutantTransfers.GetAreaTree(filter).ToList();
+            sortResult(rows);
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
