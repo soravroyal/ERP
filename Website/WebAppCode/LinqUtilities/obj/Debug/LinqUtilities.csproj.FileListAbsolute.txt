@@ -1,0 +1,5 @@
+C:\Projects\Customer\COM\EPRTR\trunk\Website\WebAppCode\LinqUtilities\bin\Debug\LinqUtilities.dll
+C:\Projects\Customer\COM\EPRTR\trunk\Website\WebAppCode\LinqUtilities\bin\Debug\LinqUtilities.pdb
+C:\Projects\Customer\COM\EPRTR\trunk\Website\WebAppCode\LinqUtilities\obj\Debug\ResolveAssemblyReference.cache
+C:\Projects\Customer\COM\EPRTR\trunk\Website\WebAppCode\LinqUtilities\obj\Debug\LinqUtilities.dll
+C:\Projects\Customer\COM\EPRTR\trunk\Website\WebAppCode\LinqUtilities\obj\Debug\LinqUtilities.pdb
