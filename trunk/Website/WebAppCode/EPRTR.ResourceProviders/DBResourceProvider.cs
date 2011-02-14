@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Collections;
 using System.Diagnostics;
 using System.Collections.Specialized;
+using System.Configuration;
+using System.Web.Configuration;
 
 namespace EPRTR.ResourceProviders
 {
@@ -28,6 +30,8 @@ namespace EPRTR.ResourceProviders
         // resource cache
         private IDictionary resourceCache;
 
+        private CultureInfo defaultCulture = CultureInfo.GetCultureInfo("en-GB");
+
         /// <summary>
         /// Constructs this instance of the provider 
         /// supplying a resource type for the instance. 
@@ -37,6 +41,8 @@ namespace EPRTR.ResourceProviders
         {
             this.classKey = classKey;
             this.dalc = new StringResourcesLinq(classKey);
+
+
         }
 
 
@@ -62,13 +68,10 @@ namespace EPRTR.ResourceProviders
                 throw new ArgumentNullException("resourceKey");
             }
 
-            string cultureName = null;
-            if (culture != null)
-                cultureName = culture.Name;
-            else
-                cultureName = CultureInfo.CurrentUICulture.Name;
+            if (culture == null)
+                culture = CultureInfo.CurrentUICulture;
 
-            return this.GetObjectInternal(resourceKey, cultureName);
+            return this.GetObjectInternal(resourceKey, culture);
 
         }
 
@@ -115,10 +118,14 @@ namespace EPRTR.ResourceProviders
         /// <param name="CultureName"></param>
         /// <returns></returns>
 
-        object GetObjectInternal(string resourceKey, string cultureName)
+        private object GetObjectInternal(string resourceKey, CultureInfo culture)
         {
+            if (culture == null)
+            {
+                culture = CultureInfo.InvariantCulture;
+            }
 
-            IDictionary Resources = this.getResourceCache(cultureName);
+            IDictionary Resources = this.getResourceCache(culture.Name);
 
             object value = null;
 
@@ -136,10 +143,18 @@ namespace EPRTR.ResourceProviders
             //    return GetObjectInternal(resourceKey, cultureName.Substring(0, 2));
             //}
 
-            // *** If the value is still null get the invariant value
+            if (value == null && !string.IsNullOrEmpty(culture.Name))
+            {
+                // *** try again with fall back culture
+                return GetObjectInternal(resourceKey, culture.Parent);
+            }
+
+            // *** If the value is still null get the default value
+
+            
             if (value == null)
             {
-                Resources = this.getResourceCache("");
+                Resources = this.getResourceCache(defaultCulture.Name);
                 if (Resources == null)
                     value = null;
                 else
@@ -152,7 +167,7 @@ namespace EPRTR.ResourceProviders
             // *** let's add a marker that the value is missing
             // *** this also allows the pre-compiler to work and never return null
 
-            if (value == null && string.IsNullOrEmpty(cultureName))
+            if (value == null && string.IsNullOrEmpty(culture.Name))
             {
                 // *** No entry there
                 value = string.Format("[{0}.{1}]", this.classKey, resourceKey);
@@ -260,14 +275,11 @@ namespace EPRTR.ResourceProviders
         {
             string ResourceKey = ConstructFullKey(implicitKey);
 
-            string CultureName = null;
 
-            if (culture != null)
-                CultureName = culture.Name;
-            else
-                CultureName = CultureInfo.CurrentUICulture.Name;
+            if (culture == null)
+                culture = CultureInfo.CurrentUICulture;
 
-            return this.GetObjectInternal(ResourceKey, CultureName);
+            return this.GetObjectInternal(ResourceKey, culture);
 
         }
 
