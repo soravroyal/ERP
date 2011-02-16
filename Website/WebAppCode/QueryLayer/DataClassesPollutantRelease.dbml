@@ -17,16 +17,19 @@
       <Column Name="PercentAccidentalAir" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="MethodTypeDesignationAir" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
       <Column Name="MethodTypeCodeAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MethodCodeAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="QuantityWater" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="QuantityAccidentalWater" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PercentAccidentalWater" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="MethodTypeDesignationWater" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
       <Column Name="MethodTypeCodeWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MethodCodeWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="QuantitySoil" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="QuantityAccidentalSoil" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="PercentAccidentalSoil" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="MethodTypeDesignationSoil" Type="System.String" DbType="NVarChar(4000)" CanBeNull="true" />
       <Column Name="MethodTypeCodeSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MethodCodeSoil" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitAccidentalAir" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnitWater" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />

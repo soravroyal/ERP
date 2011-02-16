@@ -1,6 +1,4 @@
 using System.Configuration;
-using QueryLayer.Properties;
-
 namespace QueryLayer
 {
     partial class DataClassesPollutantReleaseDataContext

@@ -1215,13 +1215,13 @@ namespace QueryLayer
             switch (medium)
             {
                 case MediumFilter.Medium.Air:
-                    func = s => "XXX"; //s.MethodTypeCodeAir;
+                    func = s => s.MethodCodeAir;
                     break;
                 case MediumFilter.Medium.Water:
-                    func = s => "XXX"; // s.MethodTypeCodeWater;
+                    func = s => s.MethodCodeWater;
                     break;
                 case MediumFilter.Medium.Soil:
-                    func = s => "XXX"; //s.MethodTypeCodeSoil;
+                    func = s => s.MethodCodeSoil;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("medium", "Illegal medium");
