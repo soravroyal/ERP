@@ -50,8 +50,8 @@ namespace QueryLayer
 		{
 			OnCreated();
 		}
-
-        public DataClassesPollutantReleaseDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		
+		public DataClassesPollutantReleaseDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -98,6 +98,8 @@ namespace QueryLayer
 		
 		private string _MethodTypeCodeAir;
 		
+		private string _MethodCodeAir;
+		
 		private System.Nullable<double> _QuantityWater;
 		
 		private System.Nullable<double> _QuantityAccidentalWater;
@@ -108,6 +110,8 @@ namespace QueryLayer
 		
 		private string _MethodTypeCodeWater;
 		
+		private string _MethodCodeWater;
+		
 		private System.Nullable<double> _QuantitySoil;
 		
 		private System.Nullable<double> _QuantityAccidentalSoil;
@@ -117,6 +121,8 @@ namespace QueryLayer
 		private string _MethodTypeDesignationSoil;
 		
 		private string _MethodTypeCodeSoil;
+		
+		private string _MethodCodeSoil;
 		
 		private string _UnitAir;
 		
@@ -420,6 +426,22 @@ namespace QueryLayer
 			}
 		}
 		
+		[Column(Storage="_MethodCodeAir", DbType="NVarChar(255)")]
+		public string MethodCodeAir
+		{
+			get
+			{
+				return this._MethodCodeAir;
+			}
+			set
+			{
+				if ((this._MethodCodeAir != value))
+				{
+					this._MethodCodeAir = value;
+				}
+			}
+		}
+		
 		[Column(Storage="_QuantityWater", DbType="Float")]
 		public System.Nullable<double> QuantityWater
 		{
@@ -500,6 +522,22 @@ namespace QueryLayer
 			}
 		}
 		
+		[Column(Storage="_MethodCodeWater", DbType="NVarChar(255)")]
+		public string MethodCodeWater
+		{
+			get
+			{
+				return this._MethodCodeWater;
+			}
+			set
+			{
+				if ((this._MethodCodeWater != value))
+				{
+					this._MethodCodeWater = value;
+				}
+			}
+		}
+		
 		[Column(Storage="_QuantitySoil", DbType="Float")]
 		public System.Nullable<double> QuantitySoil
 		{
@@ -576,6 +614,22 @@ namespace QueryLayer
 				if ((this._MethodTypeCodeSoil != value))
 				{
 					this._MethodTypeCodeSoil = value;
+				}
+			}
+		}
+		
+		[Column(Storage="_MethodCodeSoil", DbType="NVarChar(255)")]
+		public string MethodCodeSoil
+		{
+			get
+			{
+				return this._MethodCodeSoil;
+			}
+			set
+			{
+				if ((this._MethodCodeSoil != value))
+				{
+					this._MethodCodeSoil = value;
 				}
 			}
 		}

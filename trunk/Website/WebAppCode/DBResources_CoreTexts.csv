@@ -28,7 +28,7 @@ InsertUpdate|Common|MethodBasisCode|en-GB|Method Basis Code
 InsertUpdate|Common|MethodBasisName|en-GB|Method Basis Name
 InsertUpdate|Common|MethodTypeCode|en-GB|Method Type Code
 InsertUpdate|Common|MethodTypeName|en-GB|Method Type Name
-InsertUpdate|Common|MethodTypeName|en-GB|Method Designation
+InsertUpdate|Common|MethodDesignation|en-GB|Method Designation
 
 --National ID in facility details
 InsertUpdate|Facility|InYear|en-GB|(in {0})
