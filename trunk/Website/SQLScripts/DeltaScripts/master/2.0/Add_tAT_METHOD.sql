@@ -43,3 +43,4 @@ from(
 		having COUNT(mu.MethodListID) > 1
 )i
 
+--select * from EPRTRmaster.dbo.tAT_METHOD where MethodCode like '%|%' order by 4

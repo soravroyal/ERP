@@ -19,10 +19,9 @@ go
 
 :r $(basedir)\Add_fAT_GETMETHODDESIGNATION_TYPE.sql
 go
-
-:r $(basedir)\Add_MethodCode_MethodDesignation.sql
-go
 :r $(basedir)\Add_tAT_METHOD.sql
+go
+:r $(basedir)\Add_MethodCode_MethodDesignation.sql
 go
 
 
