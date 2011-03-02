@@ -24,6 +24,9 @@ go
 :r $(basedir)\Add_MethodCode_MethodDesignation.sql
 go
 
+:r $(basedir)\AddSerbia.sql
+go
+
 
 --Uncomment this when released (will only insert version no. once) :
 /*
