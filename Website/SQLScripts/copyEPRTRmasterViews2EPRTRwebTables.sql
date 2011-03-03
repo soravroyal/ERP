@@ -1012,6 +1012,12 @@ go
 */
 --select * from EPRTRmaster.dbo.POLLUTANTRELEASEANDTRANSFERREPORT prtr
 
+if object_id('EPRTRweb.dbo.LATEST_DATAIMPORT')is not null DROP TABLE EPRTRweb.dbo.LATEST_DATAIMPORT
+
+select ReportingYear, LOV_CountryID, ForReview, Published
+into EPRTRweb.dbo.LATEST_DATAIMPORT	
+from EPRTRmaster.dbo.vAT_POLLUTANTRELEASEANDTRANSFERREPORT
+
 
 
 
