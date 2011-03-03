@@ -38,3 +38,11 @@ InsertUpdate|Common|NUTSRegion|en-GB|NUTS Region
 
 --remove dublicate resources (that are no longer used anyway)
 Delete|Library|PollutantPageContent
+
+--Add Serbia as reporting country
+InsertUpdate|RS-1|LOV_RIVERBASINDISTRICT|en-GB|Serbia
+InsertUpdate|RS11|LOV_NUTSREGION|en-GB|City of Belgrade
+InsertUpdate|RS12|LOV_NUTSREGION|en-GB|Region of Vojvodina
+InsertUpdate|RS21|LOV_NUTSREGION|en-GB|Region of Sumadija and Western Serbia
+InsertUpdate|RS22|LOV_NUTSREGION|en-GB|Region of South and Easth Serbia
+InsertUpdate|RS23|LOV_NUTSREGION|en-GB|Region of Kosovo and Metohia
