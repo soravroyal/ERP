@@ -459,10 +459,14 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
         foreach (var item in rows)
         {
             string row = csvformat.GetAreaOverviewPollutantsRow(item);
-            Response.Write(row);
-        }
 
-        Response.Write(rowHeader);
+            if (AreaOverview.AOPollutantTreeListRow.CODE_TOTAL.Equals(item.Code))
+            {
+                Response.Write(rowHeader);
+            }
+            Response.Write(row);
+
+        }
 
         Response.End();
     }

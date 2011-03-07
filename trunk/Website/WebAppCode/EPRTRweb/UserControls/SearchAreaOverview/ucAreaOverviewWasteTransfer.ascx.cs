@@ -281,10 +281,16 @@ public partial class ucAreaOverviewWasteTransfer : System.Web.UI.UserControl
         foreach (var item in rows)
         {
             string row = csvformat.GetAreaOverviewWasteTransferRow(item);
+
+            if (AreaOverview.AOWasteTreeListRow.CODE_TOTAL.Equals(item.Code))
+            {
+                Response.Write(Environment.NewLine);
+                Response.Write(rowHeader);
+            }
             Response.Write(row);
         }
 
-        Response.Write(rowHeader);
+        
 
         Response.End();
 

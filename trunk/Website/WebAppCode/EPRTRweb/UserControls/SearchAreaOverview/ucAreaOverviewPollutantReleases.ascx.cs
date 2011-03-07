@@ -478,10 +478,15 @@ public partial class ucAreaOverviewPollutantReleases : System.Web.UI.UserControl
         foreach (var item in rows)
         {
             string row = csvformat.GetAreaOverviewPollutantsRow(item);
+
+            if (AreaOverview.AOPollutantTreeListRow.CODE_TOTAL.Equals(item.Code))
+            {
+                Response.Write(rowHeader);
+            }
+
             Response.Write(row);
         }
 
-        Response.Write(rowHeader);
 
         Response.End();
     }

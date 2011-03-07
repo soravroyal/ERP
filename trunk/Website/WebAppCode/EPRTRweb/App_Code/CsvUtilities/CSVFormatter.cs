@@ -824,7 +824,7 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
-            int noAcivityCols = 3;
+            int noAcivityCols = 2;
 
             //pollutant names
             result += addEmptyCols(noAcivityCols); //to align with pollutant data below
@@ -1083,7 +1083,6 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
-            result += Resources.GetGlobal("Common", "Level") + listSeparator;
             result += Resources.GetGlobal("Common", "Sector") + listSeparator;
             result += Resources.GetGlobal("Common", "Activity") + listSeparator;
             result += Resources.GetGlobal("Common", "Subactivity") + listSeparator;
@@ -1101,29 +1100,29 @@ namespace EPRTR.CsvUtilities
             // Level 1: Activity
             // Level 2: Subactivity
 
-            string pollutantLevelStr = string.Empty;
-            if (r.Level == 0)
-            {
-                if (ActivityTreeListRow.CODE_TOTAL.Equals(r.SectorCode))
-                {
-                    pollutantLevelStr = Resources.GetGlobal("Common", "Total");
-                }
-                else
-                {
-                    pollutantLevelStr = Resources.GetGlobal("Common", "Sector");
-                }
-            }
-            else if (r.Level == 1)
-            {
-                pollutantLevelStr = Resources.GetGlobal("Common", "Activity");
-            }
-            else if (r.Level == 2)
-            {
-                pollutantLevelStr = Resources.GetGlobal("Common", "Subactivity");
-            }
+            //string pollutantLevelStr = string.Empty;
+            //if (r.Level == 0)
+            //{
+            //    if (ActivityTreeListRow.CODE_TOTAL.Equals(r.SectorCode))
+            //    {
+            //        pollutantLevelStr = Resources.GetGlobal("Common", "Total");
+            //    }
+            //    else
+            //    {
+            //        pollutantLevelStr = Resources.GetGlobal("Common", "Sector");
+            //    }
+            //}
+            //else if (r.Level == 1)
+            //{
+            //    pollutantLevelStr = Resources.GetGlobal("Common", "Activity");
+            //}
+            //else if (r.Level == 2)
+            //{
+            //    pollutantLevelStr = Resources.GetGlobal("Common", "Subactivity");
+            //}
 
-            // add level
-            result += AddSimple(pollutantLevelStr);
+            //// add level
+            //result += AddSimple(pollutantLevelStr);
 
             // always add sector 
             result += AddSimple(LOVResources.AnnexIActivityName(r.SectorCode));
