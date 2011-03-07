@@ -128,6 +128,33 @@ namespace QueryLayer
             return PollutantReleases.GetPollutantCodes(prFilter);
         }
 
+
+
+        /// <summary>
+        /// return full list of pollutant releases with all rows expanded for the pollutant group given, level 0. 
+        /// For each row added, the pollutant list will be initialized with the pollutantCodes given
+        /// </summary>
+        public static IEnumerable<AOPollutantTreeListRow> GetPollutantReleaseActivityTree(AreaOverviewSearchFilter filter, MediumFilter.Medium medium, int pollutantGroupID, List<string> pollutantCodes)
+        {
+            IEnumerable<AOPollutantTreeListRow> sectors = GetPollutantReleaseSectors(filter, medium, pollutantGroupID, pollutantCodes);
+
+            List<string> sectorCodes = sectors.Where(p => p.HasChildren).Select(p => p.SectorCode).ToList();
+            IEnumerable<AOPollutantTreeListRow> activities = GetPollutantReleaseActivities(filter, medium, pollutantGroupID, sectorCodes, pollutantCodes).ToList();
+
+            List<string> activityCodes = activities.Where(p => p.HasChildren).Select(p => p.ActivityCode).ToList();
+            IEnumerable<AOPollutantTreeListRow> subactivities = GetPollutantReleaseSubActivities(filter, medium, pollutantGroupID, activityCodes, pollutantCodes).ToList();
+
+            //create result with full tree
+            IEnumerable<AOPollutantTreeListRow> result = sectors.Union(activities).Union(subactivities)
+                                                               .OrderBy(s => s.SectorCode)
+                                                               .ThenBy(s => s.ActivityCode)
+                                                               .ThenBy(s => s.SubactivityCode);
+
+            return result;
+        }
+
+
+
         /// <summary>
         /// return total list of pollutant releases for the medium and pollutant group given, level 0. 
         /// For each row added, the pollutant list will be initialized with the pollutantCodes given
@@ -583,7 +610,16 @@ namespace QueryLayer
         public static bool IsPollutantReleaseAffectedByConfidentiality(AreaOverviewSearchFilter filter)
         {
             int pollutantGroupID = PollutantFilter.AllGroupsID; // include all pollutant groups
-            PollutantReleaseSearchFilter prFilter = convertToPollutantReleaseSearchFilter(filter,null,pollutantGroupID);
+            return IsPollutantReleaseAffectedByConfidentiality(filter, null, pollutantGroupID);
+        }
+
+
+        /// <summary>
+        /// return true if confidentiality might effect pollutant release result
+        /// </summary>
+        public static bool IsPollutantReleaseAffectedByConfidentiality(AreaOverviewSearchFilter filter, MediumFilter.Medium? medium, int pollutantGroupID)
+        {
+            PollutantReleaseSearchFilter prFilter = convertToPollutantReleaseSearchFilter(filter, medium, pollutantGroupID);
             return PollutantReleases.IsAffectedByConfidentiality(prFilter);
         }
 
@@ -593,9 +629,18 @@ namespace QueryLayer
         public static bool IsPollutantTransferAffectedByConfidentiality(AreaOverviewSearchFilter filter)
         {
             int pollutantGroupID = PollutantFilter.AllGroupsID; // include all pollutant groups
+            return IsPollutantTransferAffectedByConfidentiality(filter, pollutantGroupID);
+        }
+
+        /// <summary>
+        /// return true if confidentiality might effect pollutant transfer result
+        /// </summary>
+        public static bool IsPollutantTransferAffectedByConfidentiality(AreaOverviewSearchFilter filter, int pollutantGroupID)
+        {
             PollutantTransfersSearchFilter ptFilter = convertToPollutantTransferSearchFilter(filter, pollutantGroupID);
             return PollutantTransfers.IsAffectedByConfidentiality(ptFilter);
         }
+
 
         /// <summary>
         /// return true if confidentiality might effect waste result
