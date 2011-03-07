@@ -8,6 +8,7 @@ using EPRTR.Localization;
 using QueryLayer;
 using QueryLayer.Filters;
 using QueryLayer.Utilities;
+using System.Text.RegularExpressions;
 
 namespace EPRTR.CsvUtilities
 {
@@ -871,6 +872,11 @@ namespace EPRTR.CsvUtilities
             foreach (LOV_POLLUTANT pollutant in pollutants)
             {
                 string shortName = LOVResources.PollutantNameShort(pollutant.Code);
+
+                //remove html formatting
+                Regex regex = new Regex("<[^<>]*>", RegexOptions.IgnoreCase | RegexOptions.Multiline);
+                shortName = regex.Replace(shortName, "").Trim();
+
                 result += AddSimple(string.Format("{0} - {1}", shortName, facilitiesStr));
                 result += AddSimple(string.Format("{0} - {1}", shortName, quantityStr));
                 result += AddSimple(string.Format("{0} - {1}", shortName, unitStr));

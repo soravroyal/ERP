@@ -95,33 +95,12 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
     {
         List<LOV_POLLUTANT> orderedPollutants = getOrderedPollutants(filter, pollutantGroupID);
 
-        //List<string> pollutantCodes = AreaOverview.GetPollutantTransferPollutantCodes(filter, pollutantGroupID);
-
         Dictionary<string, string> pollutantHeaders = new Dictionary<string, string>();
 
         foreach (LOV_POLLUTANT p in orderedPollutants)
         {
             pollutantHeaders.Add(p.Code, LOVResources.PollutantNameShort(p.Code));
         }
-
-        ////create dictionary with short pollutant names. Keep confidential in grpoup out until after sorting.
-        //string confCode = ListOfValues.GetPollutant(pollutantGroupID).Code;
-        //foreach (string code in pollutantCodes)
-        //{
-        //    if (!confCode.Equals(code))
-        //    {
-        //        pollutantHeaders.Add(code, LOVResources.PollutantNameShort(code));
-        //    }
-        //}
-
-        ////order by translated name
-        //pollutantHeaders = pollutantHeaders.OrderBy(h => h.Value).ToDictionary(k => k.Key, v => v.Value);
-
-        ////add confidential in group last.
-        //if(pollutantCodes.Contains(confCode))
-        //{
-        //    pollutantHeaders.Add(confCode, LOVResources.PollutantNameShort(confCode));
-        //}
 
         ViewState[COLHEADER] = pollutantHeaders;
     }
@@ -456,14 +435,11 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
 
         // Create Header
         var filter = SearchFilter;
-
-        //TODO handle confidentiality
-        bool isConfidentialityAffected = false;
-        //bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
-
         int pollutantGroupID = getPollutantGroupID();
         List<string> pollutantCodes = getOrderedPollutantCodes();
 
+        bool isConfidentialityAffected = AreaOverview.IsPollutantTransferAffectedByConfidentiality(filter, pollutantGroupID);
+        
         Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetAreaoverviewPollutantTransferSearchHeader(filter, pollutantGroupID, isConfidentialityAffected);
 
         // Create Body

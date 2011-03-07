@@ -91,31 +91,37 @@ public partial class ucAreaOverviewPollutantReleases : System.Web.UI.UserControl
     //create pollutant headers, order by name and save in view state
     private void preparePollutantHeaders(AreaOverviewSearchFilter filter, MediumFilter.Medium medium, int pollutantGroupID)
     {
-        List<string> pollutantCodes = AreaOverview.GetPollutantReleasePollutantCodes(filter, medium, pollutantGroupID);
+        List<LOV_POLLUTANT> orderedPollutants = getOrderedPollutants(filter, medium, pollutantGroupID);
 
         Dictionary<string, string> pollutantHeaders = new Dictionary<string, string>();
 
-        //create dictionary with short pollutant names. Keep confidential in grpoup out until after sorting.
-        string confCode = ListOfValues.GetPollutant(pollutantGroupID).Code;
-        foreach (string code in pollutantCodes)
+        foreach (LOV_POLLUTANT p in orderedPollutants)
         {
-            if (!confCode.Equals(code))
-            {
-                pollutantHeaders.Add(code, LOVResources.PollutantNameShort(code));
-            }
-        }
-
-        //order by translated name
-        pollutantHeaders = pollutantHeaders.OrderBy(h => h.Value).ToDictionary(k => k.Key, v => v.Value);
-        
-        //add confidential in group last.
-        if(pollutantCodes.Contains(confCode))
-        {
-            pollutantHeaders.Add(confCode, LOVResources.PollutantNameShort(confCode));
+            pollutantHeaders.Add(p.Code, LOVResources.PollutantNameShort(p.Code));
         }
 
         ViewState[COLHEADER] = pollutantHeaders;
     }
+
+    private List<LOV_POLLUTANT> getOrderedPollutants(AreaOverviewSearchFilter filter, MediumFilter.Medium medium, int pollutantGroupID)
+    {
+        List<string> pollutantCodes = AreaOverview.GetPollutantReleasePollutantCodes(filter, medium, pollutantGroupID);
+
+        IEnumerable<LOV_POLLUTANT> pollutants = ListOfValues.Pollutants(pollutantGroupID).Where(p => pollutantCodes.Contains(p.Code));
+
+        //sort by short name
+        List<LOV_POLLUTANT> orderedPollutants = pollutants.OrderBy(p => LOVResources.PollutantNameShort(p.Code)).ToList();
+
+        //Add confidential in group to the end of the list.
+        LOV_POLLUTANT confPollutant = ListOfValues.GetPollutant(pollutantGroupID);
+        if (pollutantCodes.Contains(confPollutant.Code))
+        {
+            orderedPollutants.Add(confPollutant);
+        }
+
+        return orderedPollutants;
+    }
+
 
     private void populateMediumSelector()
     {
@@ -442,45 +448,42 @@ public partial class ucAreaOverviewPollutantReleases : System.Web.UI.UserControl
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        try
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        // Create Header
+        var filter = SearchFilter;
+        int pollutantGroupID = getPollutantGroupID();
+        List<string> pollutantCodes = getOrderedPollutantCodes();
+        MediumFilter.Medium medium = this.ucMediumSelector.SelectedMedium;
+
+        bool isConfidentialityAffected = AreaOverview.IsPollutantReleaseAffectedByConfidentiality(filter,medium, pollutantGroupID);
+
+        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetAreaoverviewPollutantReleaseSearchHeader(filter, pollutantGroupID, medium, isConfidentialityAffected);
+
+        // Create Body
+        List<AreaOverview.AOPollutantTreeListRow> rows = AreaOverview.GetPollutantReleaseActivityTree(filter, medium, pollutantGroupID, pollutantCodes).ToList();
+        sortData(rows);
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string pollutantinfoHeader = csvformat.GetAreaOverviewPollutantInfoHeader(getOrderedPollutants(filter, medium, pollutantGroupID));
+        string rowHeader = csvformat.GetAreaOverviewPollutantDataHeader(getOrderedPollutants(filter, medium, pollutantGroupID));
+
+        Response.WriteUtf8FileHeader("EPRTR_Areaoverview_PollutantReleases_List");
+
+        Response.Write(topheader + pollutantinfoHeader + rowHeader);
+
+
+        foreach (var item in rows)
         {
-            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-            CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-            // Create Header
-            var filter = SearchFilter;
-
-            //bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
-
-            //Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantReleaseSearchHeader(
-            //    filter,
-            //    isConfidentialityAffected);
-
-            //// Create Body
-            //List<PollutantReleases.AreaTreeListRow> rows = PollutantReleases.GetAreaTree(filter).ToList();
-            //sortResult(rows);
-
-            //// dump to file
-            //string topheader = csvformat.CreateHeader(header);
-            //string rowHeader = csvformat.GetPollutantReleaseAreaHeader(filter);
-
-            //Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Area_List");
-
-            //Response.Write(topheader + rowHeader);
-
-
-            //foreach (var item in rows)
-            //{
-            //    string row = csvformat.GetPollutantReleaseAreaRow(item, filter);
-            //    Response.Write(row);
-            //}
-
-            //Response.End();
+            string row = csvformat.GetAreaOverviewPollutantsRow(item);
+            Response.Write(row);
         }
-        catch (Exception)
-        {
 
-        }
+        Response.Write(rowHeader);
+
+        Response.End();
     }
 
 }
