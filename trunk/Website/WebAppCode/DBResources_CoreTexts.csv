@@ -39,7 +39,6 @@ InsertUpdate|Common|NUTSRegion|en-GB|NUTS Region
 InsertUpdate|Pollutant|CASnumber|en-GB|CAS number
 InsertUpdate|Pollutant|RegulationNumber|en-GB|Regulation number
 
-
 --remove dublicate resources (that are no longer used anyway)
 Delete|Library|PollutantPageContent
 
