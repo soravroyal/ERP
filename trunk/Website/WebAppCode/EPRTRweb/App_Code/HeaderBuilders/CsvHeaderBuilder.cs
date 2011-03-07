@@ -167,6 +167,43 @@ namespace EPRTR.HeaderBuilders
 
 
         /// <summary>
+        /// returns a dictionary with sheet headers <key, value> for Area overview search
+        /// </summary>
+        public static Dictionary<string, string> GetAreaoverviewPollutantTransferSearchHeader(
+            AreaOverviewSearchFilter filter, int pollutantGroupID,
+            bool confidentialityAffected)
+        {
+            Dictionary<string, string> header = makeHeader();
+            addLegalRegulation(header,filter.YearFilter.Year);
+            addYear(header, filter.YearFilter);
+            addArea(header, filter.AreaFilter);
+            addPollutantGroup(header, pollutantGroupID);
+
+            addConfidentiality(header, confidentialityAffected);
+            return header;
+        }
+
+
+        /// <summary>
+        /// returns a dictionary with sheet headers <key, value> for Area overview search
+        /// </summary>
+        public static Dictionary<string, string> GetAreaoverviewPollutantReleaseSearchHeader(
+            AreaOverviewSearchFilter filter, int pollutantGroupID, MediumFilter.Medium medium,
+            bool confidentialityAffected)
+        {
+            Dictionary<string, string> header = makeHeader();
+            addLegalRegulation(header, filter.YearFilter.Year);
+            addYear(header, filter.YearFilter);
+            addArea(header, filter.AreaFilter);
+            addPollutantGroup(header, pollutantGroupID);
+            addMedium(header, medium);
+
+            addConfidentiality(header, confidentialityAffected);
+            return header;
+        }
+
+
+        /// <summary>
         /// returns a dictionary with sheet headers <key, value> for pollutant releases time series search
         /// </summary>
         public static Dictionary<string, string> GetTsPollutantReleasesSearchHeader(

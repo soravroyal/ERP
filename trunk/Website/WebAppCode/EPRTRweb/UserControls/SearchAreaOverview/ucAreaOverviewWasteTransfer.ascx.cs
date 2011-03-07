@@ -12,6 +12,8 @@ using EPRTR.Localization;
 using EPRTR.Enums;
 using EPRTR.HeaderBuilders;
 using EPRTR.Comparers;
+using System.Globalization;
+using EPRTR.CsvUtilities;
 
 public partial class ucAreaOverviewWasteTransfer : System.Web.UI.UserControl
 {
@@ -250,5 +252,48 @@ public partial class ucAreaOverviewWasteTransfer : System.Web.UI.UserControl
 
     #endregion
 
+
+    public void DoSaveCSV(object sender, EventArgs e)
+    {
+        try
+        {
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+            // Create Header
+            var filter = SearchFilter;
+
+            //bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
+
+            //Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantReleaseSearchHeader(
+            //    filter,
+            //    isConfidentialityAffected);
+
+            //// Create Body
+            //List<PollutantReleases.AreaTreeListRow> rows = PollutantReleases.GetAreaTree(filter).ToList();
+            //sortResult(rows);
+
+            //// dump to file
+            //string topheader = csvformat.CreateHeader(header);
+            //string rowHeader = csvformat.GetPollutantReleaseAreaHeader(filter);
+
+            //Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Area_List");
+
+            //Response.Write(topheader + rowHeader);
+
+
+            //foreach (var item in rows)
+            //{
+            //    string row = csvformat.GetPollutantReleaseAreaRow(item, filter);
+            //    Response.Write(row);
+            //}
+
+            //Response.End();
+        }
+        catch (Exception)
+        {
+
+        }
+    }
 
 }

@@ -64,6 +64,13 @@ public partial class ucAreaOverviewSheet : System.Web.UI.UserControl
         set { ViewState[TOTAL] = value; }
     }
 
+    protected Sheets.AreaOverview Sheet
+    {
+        get { return (Sheets.AreaOverview)ViewState["sheet"]; }
+        set { ViewState["sheet"] = value; }
+    }
+
+
     #endregion
 
     protected void Page_Load(object sender, EventArgs e)
@@ -82,6 +89,8 @@ public partial class ucAreaOverviewSheet : System.Web.UI.UserControl
 
         if (this.ucSheetSubHeader.AlertClick == null)
             this.ucSheetSubHeader.AlertClick = new EventHandler(alertClick);
+
+        this.ucDownloadPrint.DoSave = new EventHandler(DoSaveCSV);
 
         if (this.ucAreaOverviewPollutantReleases.ContentChanged == null)
             this.ucAreaOverviewPollutantReleases.ContentChanged = new EventHandler(contentChanged);
@@ -203,40 +212,53 @@ public partial class ucAreaOverviewSheet : System.Web.UI.UserControl
 
         if (command.Equals(Sheets.IndustrialActivity.PollutantReleases.ToString()))
         {
+            Sheet = Sheets.AreaOverview.PollutantReleases;
             this.litHeadline.Text = Resources.GetGlobal("AreaOverview", "AreaOverviewPollutantReleases");
             this.ucAreaOverviewPollutantReleases.Visible = true;
             this.ucAreaOverviewPollutantReleases.Populate(filter);
             txt = Resources.GetGlobal("Pollutant", "AllValuesAreYearlyReleases");
+
+            this.ucDownloadPrint.Show(true, true);
 
             bool prConf = getPollutantReleaseConfidentialityAffected();
             alert = prConf ? Resources.GetGlobal("Common", "ConfidentialityAlertLink") : string.Empty;
         }
         else if (command.Equals(Sheets.IndustrialActivity.PollutantTransfers.ToString()))
         {
+            Sheet = Sheets.AreaOverview.PollutantTransfers;
             this.litHeadline.Text = Resources.GetGlobal("AreaOverview", "AreaOverviewPollutantTransfers");
             this.ucAreaOverviewPollutantTransfers.Visible = true;
             this.ucAreaOverviewPollutantTransfers.Populate(filter);
             txt = Resources.GetGlobal("Pollutant", "AllValuesAreYearlyTransfers");
+
+            this.ucDownloadPrint.Show(true, true);
 
             bool ptConf = getPollutantTransferConfidentialityAffected();
             alert = ptConf ? Resources.GetGlobal("Common", "ConfidentialityAlertLink") : string.Empty;
         }
         else if (command.Equals(Sheets.IndustrialActivity.WasteTransfers.ToString()))
         {
+            Sheet = Sheets.AreaOverview.WasteTransfers;
             this.litHeadline.Text = Resources.GetGlobal("AreaOverview", "AreaOverviewWasteTransfers");
             this.ucAreaOverviewWasteTransfer.Visible = true;
             this.ucAreaOverviewWasteTransfer.Populate(filter);
             txt = Resources.GetGlobal("WasteTransfers", "AllValuesAreYearlyTransfers");
-
+            
+            this.ucDownloadPrint.Show(true, true);
+            
             bool wtConf = getWasteTransferConfidentialityAffected();
             alert = wtConf ? Resources.GetGlobal("Common", "ConfidentialityAlertLink") : string.Empty;
         }
         else if (command.Equals(Sheets.IndustrialActivity.Confidentiality.ToString()))
         {
+            Sheet = Sheets.AreaOverview.Confidentiality;
             this.litHeadline.Text = Resources.GetGlobal("AreaOverview", "AreaOverviewConfidential");
             this.ucAreaOverviewConfidentiality.Visible = true;
             bool conf = getAnyConfidentialityAffected();
             alert = conf ? Resources.GetGlobal("Common", "ConfidentialityAlert") : string.Empty;
+
+            this.ucDownloadPrint.Show(false, true);
+
             this.ucAreaOverviewConfidentiality.Populate(filter);
             
         }
@@ -246,7 +268,6 @@ public partial class ucAreaOverviewSheet : System.Web.UI.UserControl
 
         // activate print
         this.ucDownloadPrint.Visible = true; 
-        this.ucDownloadPrint.Show(false, true);
         this.ucDownloadPrint.SetPrintControl(this);
     }
 
@@ -276,6 +297,26 @@ public partial class ucAreaOverviewSheet : System.Web.UI.UserControl
         this.ucAreaOverviewWasteTransfer.Visible = false;
         this.ucAreaOverviewConfidentiality.Visible = false;
     }
+
+
+    public void DoSaveCSV(object sender, EventArgs e)
+    {
+        switch (Sheet)
+        {
+            case Sheets.AreaOverview.PollutantReleases:
+                this.ucAreaOverviewPollutantReleases.DoSaveCSV(this, EventArgs.Empty);
+                break;
+            case Sheets.AreaOverview.PollutantTransfers:
+                this.ucAreaOverviewPollutantTransfers.DoSaveCSV(this, EventArgs.Empty);
+                break;
+            case Sheets.AreaOverview.WasteTransfers:
+                this.ucAreaOverviewWasteTransfer.DoSaveCSV(this, EventArgs.Empty);
+                break;
+            default:
+                break;
+        }
+    }
+
 
     /// <summary>
     /// update the printable control

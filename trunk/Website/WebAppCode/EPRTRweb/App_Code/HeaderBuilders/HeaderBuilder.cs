@@ -79,13 +79,25 @@ namespace EPRTR.HeaderBuilders
         }
 
 
-        //creates header for regulation used in reporting and adds to dictionary
+        //creates header for regulation (unformal) used in reporting and adds to dictionary
         protected static void addRegulation(Dictionary<string, string> header, int reportingYear)
         {
             string key = Resources.GetGlobal("Common", "Regulation");
 
             string code = ListOfValues.GetRegulationCode(reportingYear);
             string value = LOVResources.RegulationName(code);
+
+            header.Add(key, value);
+        }
+
+
+        //creates header for regulation (legal name) used in reporting and adds to dictionary
+        protected static void addLegalRegulation(Dictionary<string, string> header, int reportingYear)
+        {
+            string key = Resources.GetGlobal("Common", "Regulation");
+
+            string code = ListOfValues.GetRegulationCode(reportingYear);
+            string value = LOVResources.LegalRegulationName(code);
 
             header.Add(key, value);
         }
@@ -381,6 +393,19 @@ namespace EPRTR.HeaderBuilders
                 header.Add(key, value);
             }
         }
+
+        //creates header for Pollutant group and adds to dictionary
+        protected static void addPollutantGroup(Dictionary<string, string> header, int pollutantGroupId)
+        {
+            if (pollutantGroupId != null)
+            {
+                string key = Resources.GetGlobal("Common", "PollutantGroup");
+                string value = LOVResources.PollutantGroupName(pollutantGroupId);
+
+                header.Add(key, value);
+            }
+        }
+
         /// <summary>
         ///Creates header for number of facilities and adds to dictionary. Includes both total count in search and specific count. 
         /// </summary>

@@ -427,7 +427,7 @@ namespace QueryLayer
         /// Return all pollutants with a given parentID. 
         /// <param name="parentId">parentID null will return main pollutant groups</param>
         /// </summary>
-        private static IEnumerable<LOV_POLLUTANT> Pollutants(int? parentId)
+        public static IEnumerable<LOV_POLLUTANT> Pollutants(int? parentId)
         {
             IEnumerable<LOV_POLLUTANT> pollutants = getLovPollutantCache()
                                                     .Where(m => object.Equals(m.ParentID, parentId))
