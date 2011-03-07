@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --
---	Delta script creating at new table METHOD table and importing data
+--	Delta script creating at new METHOD table
 --
 --	WOS, Atkins 0202201
 --
@@ -17,30 +17,3 @@ CREATE TABLE EPRTRmaster.dbo.tAT_METHOD(
 CONSTRAINT [MethodID] PRIMARY KEY CLUSTERED ([MethodID] ASC)) ON [PRIMARY]
 go
  
-insert into EPRTRmaster.dbo.tAT_METHOD (MethodListID,MethodCode,MethodDesignation)
-select
-	mu.MethodListID,
-	lov.Code,
-	mu.MethodDesignation
-from METHODUSED mu
-inner join LOV_METHODTYPE lov
-on mu.LOV_MethodTypeID = lov.LOV_MethodTypeID
-where mu.MethodListID in (
-	select mu.MethodListID from METHODUSED mu
-	group by mu.MethodListID
-	having COUNT(mu.MethodListID) = 1
-	)
-go 
-
-insert into EPRTRmaster.dbo.tAT_METHOD (MethodListID,MethodCode,MethodDesignation)
-select
-	MethodListID, 
-	EPRTRmaster.dbo.fAT_GETMETHODTYPE(MethodListID),
-	EPRTRmaster.dbo.fAT_GETMETHODDESIGNATION(MethodListID)
-from(
-		select mu.MethodListID from METHODUSED mu
-		group by mu.MethodListID
-		having COUNT(mu.MethodListID) > 1
-)i
-
---select * from EPRTRmaster.dbo.tAT_METHOD where MethodCode like '%|%' order by 4
