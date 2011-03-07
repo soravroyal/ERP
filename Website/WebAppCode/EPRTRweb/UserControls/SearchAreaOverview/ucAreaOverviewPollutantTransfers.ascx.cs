@@ -16,6 +16,8 @@ using EPRTR.Enums;
 using StylingHelper;
 using System.Collections;
 using EPRTR.Comparers;
+using System.Globalization;
+using EPRTR.CsvUtilities;
 
 public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserControl
 {
@@ -53,9 +55,9 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
     /// </summary>
     public void Populate(AreaOverviewSearchFilter filter)
     {
-        SearchFilter =  filter;
+        SearchFilter = filter;
 
-        bool noresult =  (AreaOverview.GetFacilityCountPollutantTransfer(filter) == 0);
+        bool noresult = (AreaOverview.GetFacilityCountPollutantTransfer(filter) == 0);
 
         // no result, remove radio buttons
         this.divPollutantGroup.Visible = !noresult;
@@ -68,7 +70,7 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
     private void loadData()
     {
         int pollutantGroupID = getPollutantGroupID();
-        
+
         //prepare headers
         preparePollutantHeaders(SearchFilter, pollutantGroupID);
 
@@ -91,30 +93,56 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
     //create pollutant headers, order by name and save in view state
     private void preparePollutantHeaders(AreaOverviewSearchFilter filter, int pollutantGroupID)
     {
-        List<string> pollutantCodes = AreaOverview.GetPollutantTransferPollutantCodes(filter, pollutantGroupID);
+        List<LOV_POLLUTANT> orderedPollutants = getOrderedPollutants(filter, pollutantGroupID);
+
+        //List<string> pollutantCodes = AreaOverview.GetPollutantTransferPollutantCodes(filter, pollutantGroupID);
 
         Dictionary<string, string> pollutantHeaders = new Dictionary<string, string>();
 
-        //create dictionary with short pollutant names. Keep confidential in grpoup out until after sorting.
-        string confCode = ListOfValues.GetPollutant(pollutantGroupID).Code;
-        foreach (string code in pollutantCodes)
+        foreach (LOV_POLLUTANT p in orderedPollutants)
         {
-            if (!confCode.Equals(code))
-            {
-                pollutantHeaders.Add(code, LOVResources.PollutantNameShort(code));
-            }
+            pollutantHeaders.Add(p.Code, LOVResources.PollutantNameShort(p.Code));
         }
 
-        //order by translated name
-        pollutantHeaders = pollutantHeaders.OrderBy(h => h.Value).ToDictionary(k => k.Key, v => v.Value);
-        
-        //add confidential in group last.
-        if(pollutantCodes.Contains(confCode))
-        {
-            pollutantHeaders.Add(confCode, LOVResources.PollutantNameShort(confCode));
-        }
+        ////create dictionary with short pollutant names. Keep confidential in grpoup out until after sorting.
+        //string confCode = ListOfValues.GetPollutant(pollutantGroupID).Code;
+        //foreach (string code in pollutantCodes)
+        //{
+        //    if (!confCode.Equals(code))
+        //    {
+        //        pollutantHeaders.Add(code, LOVResources.PollutantNameShort(code));
+        //    }
+        //}
+
+        ////order by translated name
+        //pollutantHeaders = pollutantHeaders.OrderBy(h => h.Value).ToDictionary(k => k.Key, v => v.Value);
+
+        ////add confidential in group last.
+        //if(pollutantCodes.Contains(confCode))
+        //{
+        //    pollutantHeaders.Add(confCode, LOVResources.PollutantNameShort(confCode));
+        //}
 
         ViewState[COLHEADER] = pollutantHeaders;
+    }
+
+    private List<LOV_POLLUTANT> getOrderedPollutants(AreaOverviewSearchFilter filter, int pollutantGroupID)
+    {
+        List<string> pollutantCodes = AreaOverview.GetPollutantTransferPollutantCodes(filter, pollutantGroupID);
+
+        IEnumerable<LOV_POLLUTANT> pollutants = ListOfValues.Pollutants(pollutantGroupID).Where(p => pollutantCodes.Contains(p.Code));
+
+        //sort by short name
+        List<LOV_POLLUTANT> orderedPollutants = pollutants.OrderBy(p => LOVResources.PollutantNameShort(p.Code)).ToList();
+
+        //Add confidential in group to the end of the list.
+        LOV_POLLUTANT confPollutant = ListOfValues.GetPollutant(pollutantGroupID);
+        if (pollutantCodes.Contains(confPollutant.Code))
+        {
+            orderedPollutants.Add(confPollutant);
+        }
+
+        return orderedPollutants;
     }
 
     private void populatePollutantGroups()
@@ -295,7 +323,7 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
 
         //Sectors need not to be considered. Will always be visible
         bool collapsed = false;
-        if(row.Level > 0)
+        if (row.Level > 0)
         {
             //is sector collapsed?
             collapsed = !data.Single(d => d.SectorCode == row.SectorCode && d.Level == 0).IsExpanded;
@@ -420,6 +448,49 @@ public partial class ucAreaOverviewPollutantTransfers : System.Web.UI.UserContro
     }
 
     #endregion
+
+    public void DoSaveCSV(object sender, EventArgs e)
+    {
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        // Create Header
+        var filter = SearchFilter;
+
+        //TODO handle confidentiality
+        bool isConfidentialityAffected = false;
+        //bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
+
+        int pollutantGroupID = getPollutantGroupID();
+        List<string> pollutantCodes = getOrderedPollutantCodes();
+
+        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetAreaoverviewPollutantTransferSearchHeader(filter, pollutantGroupID, isConfidentialityAffected);
+
+        // Create Body
+        List<AreaOverview.AOPollutantTreeListRow> rows = AreaOverview.GetPollutantTransferActivityTree(filter, pollutantGroupID, pollutantCodes).ToList();
+        sortData(rows);
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string pollutantinfoHeader = csvformat.GetAreaOverviewPollutantInfoHeader(getOrderedPollutants(filter, pollutantGroupID));
+        string rowHeader = csvformat.GetAreaOverviewPollutantDataHeader(getOrderedPollutants(filter, pollutantGroupID));
+
+        Response.WriteUtf8FileHeader("EPRTR_Areaoverview_PollutantTransfers_List");
+
+        Response.Write(topheader + pollutantinfoHeader+rowHeader);
+
+
+        foreach (var item in rows)
+        {
+            string row = csvformat.GetAreaOverviewPollutantsRow(item);
+            Response.Write(row);
+        }
+
+        Response.Write(rowHeader);
+
+        Response.End();
+    }
+
 
 }
 

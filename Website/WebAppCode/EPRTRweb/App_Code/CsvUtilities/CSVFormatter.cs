@@ -813,7 +813,94 @@ namespace EPRTR.CsvUtilities
 
         #endregion
 
+        #region Areaoverview
 
+
+        /**
+         * return header with additional info (e.g. CAS number) of pollutants
+         */
+        public string GetAreaOverviewPollutantInfoHeader(List<LOV_POLLUTANT> pollutants)
+        {
+            string result = string.Empty;
+
+            int noAcivityCols = 3;
+
+            //pollutant names
+            result += addEmptyCols(noAcivityCols); //to align with pollutant data below
+            result += AddSimple(Resources.GetGlobal("Pollutant", "PollutantName") + ":");
+            foreach (LOV_POLLUTANT pollutant in pollutants)
+            {
+                result += AddSimple(LOVResources.PollutantName(pollutant.Code));
+                result += listSeparator;
+                result += listSeparator;
+            }
+            result += Environment.NewLine;
+
+            //CAS number
+            result += addEmptyCols(noAcivityCols); //to align with pollutant data below
+            result += AddSimple(Resources.GetGlobal("Pollutant", "CASnumber") + ":");
+            foreach (LOV_POLLUTANT pollutant in pollutants)
+            {
+                result += AddValue(pollutant.CAS);
+                result += listSeparator;
+                result += listSeparator;
+            }
+            result += Environment.NewLine;
+
+
+            return result;
+        }
+
+
+        /**
+         * return header for pollutant data columns incl. activity tree headers
+         */
+        public string GetAreaOverviewPollutantDataHeader(List<LOV_POLLUTANT> pollutants)
+        {
+            string result = string.Empty;
+
+            //column headers for activity and pollutant data
+            result += Environment.NewLine;
+
+            result += addActivityTreeHeaderCols();
+
+            string quantityStr = Resources.GetGlobal("Common", QUANTITY_KEY_STR);
+            string unitStr = Resources.GetGlobal("Common", "Unit");
+            string facilitiesStr = Resources.GetGlobal("Common", "Facilities");
+
+            foreach (LOV_POLLUTANT pollutant in pollutants)
+            {
+                string shortName = LOVResources.PollutantNameShort(pollutant.Code);
+                result += AddSimple(string.Format("{0} - {1}", shortName, facilitiesStr));
+                result += AddSimple(string.Format("{0} - {1}", shortName, quantityStr));
+                result += AddSimple(string.Format("{0} - {1}", shortName, unitStr));
+            }
+            result += Environment.NewLine;
+
+            return result;
+        }
+
+
+        public string GetAreaOverviewPollutantsRow(AreaOverview.AOPollutantTreeListRow r)
+        {
+
+            string result = string.Empty;
+
+            result += addActivityTreeCols(r);
+
+            foreach (var p in r.PollutantList)
+            {
+                result += AddValue(p.Facilities);
+                result += AddValue(p.Quantity);
+                result += AddSimple(p.Unit);
+            }
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
+        #endregion
 
         #region pollutant release activity / area
 
@@ -933,11 +1020,8 @@ namespace EPRTR.CsvUtilities
             string result = string.Empty;
 
             result += Resources.GetGlobal("Common", "Level") + listSeparator;
-            result += Resources.GetGlobal("Common", "SectorCode") + listSeparator;
             result += Resources.GetGlobal("Common", "Sector") + listSeparator;
-            result += Resources.GetGlobal("Common", "ActivityCode") + listSeparator;
             result += Resources.GetGlobal("Common", "Activity") + listSeparator;
-            result += Resources.GetGlobal("Common", "SubactivityCode") + listSeparator;
             result += Resources.GetGlobal("Common", "Subactivity") + listSeparator;
 
             return result;
@@ -977,35 +1061,29 @@ namespace EPRTR.CsvUtilities
             // add level
             result += AddSimple(pollutantLevelStr);
 
-            // always add sector code and name
-            result += AddSimple(r.SectorCode);
+            // always add sector 
             result += AddSimple(LOVResources.AnnexIActivityName(r.SectorCode));
 
 
             if (r.ActivityCode != null)
             {
-                result += AddSimple(r.ActivityCode);
                 result += AddSimple(LOVResources.AnnexIActivityName(r.ActivityCode));
 
                 if (r.SubactivityCode != null)
                 {
-                    result += AddSimple(r.SubactivityCode);
                     result += AddSimple("      " + LOVResources.AnnexIActivityName(r.SubactivityCode));
                 }
                 else
                 {
                     // if no subactivity code is present (level == 1) 
-                    // add empty cols for activity (quantity and unit)
-                    result += AddSimple(" ");
+                    // add empty cols for activity
                     result += AddSimple(" ");
                 }
             }
             else
             {
                 // if no activity code present (level == 0) 
-                // add empty cols for activity and subactivity (quantity and unit)
-                result += AddSimple(" ");
-                result += AddSimple(" ");
+                // add empty cols for activity and subactivity
                 result += AddSimple(" ");
                 result += AddSimple(" ");
 
@@ -1479,6 +1557,18 @@ namespace EPRTR.CsvUtilities
         private string AddText(string element)
         {
             return string.Format("\"{0}\"", element) + listSeparator;
+        }
+
+        //adds empty columns
+        private string addEmptyCols(int noColumns)
+        {
+            string result = string.Empty;
+            for (int i = 0; i < noColumns; i++)
+            {
+                result += listSeparator;
+            }
+
+            return result;
         }
 
         # endregion

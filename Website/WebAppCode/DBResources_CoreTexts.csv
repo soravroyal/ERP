@@ -37,7 +37,8 @@ InsertUpdate|Facility|InYear|en-GB|(in {0})
 --new CSV downloads
 InsertUpdate|Common|NUTSRegion|en-GB|NUTS Region
 InsertUpdate|Pollutant|CASnumber|en-GB|CAS number
-InsertUpdate|Pollutant|RegulationNumber|en-GB|Regulation number
+Delete|Pollutant|RegulationNumber
+InsertUpdate|LOV_REGULATION|EPRTR.legal|en-GB|Regulation (EC) 166/2006
 
 --remove dublicate resources (that are no longer used anyway)
 Delete|Library|PollutantPageContent

@@ -264,7 +264,31 @@ namespace QueryLayer
         }
 
         /// <summary>
-        /// return total list of pollutant transfers for the medium and pollutant group given, level 0. 
+        /// return full list of pollutant transfers with all rows expanded for the pollutant group given, level 0. 
+        /// For each row added, the pollutant list will be initialized with the pollutantCodes given
+        /// </summary>
+        public static IEnumerable<AOPollutantTreeListRow> GetPollutantTransferActivityTree(AreaOverviewSearchFilter filter, int pollutantGroupID, List<string> pollutantCodes)
+        {
+            IEnumerable<AOPollutantTreeListRow> sectors = GetPollutantTransferSectors(filter, pollutantGroupID, pollutantCodes);
+
+            List<string> sectorCodes = sectors.Where(p => p.HasChildren).Select(p => p.SectorCode).ToList();
+            IEnumerable<AOPollutantTreeListRow> activities = GetPollutantTransferActivities(filter, pollutantGroupID, sectorCodes, pollutantCodes).ToList();
+
+            List<string> activityCodes = activities.Where(p => p.HasChildren).Select(p => p.ActivityCode).ToList();
+            IEnumerable<AOPollutantTreeListRow> subactivities = GetPollutantTransferSubActivities(filter, pollutantGroupID, activityCodes, pollutantCodes).ToList();
+
+            //create result with full tree
+            IEnumerable<AOPollutantTreeListRow> result = sectors.Union(activities).Union(subactivities)
+                                                               .OrderBy(s => s.SectorCode)
+                                                               .ThenBy(s => s.ActivityCode)
+                                                               .ThenBy(s => s.SubactivityCode);
+
+            return result;
+        }
+
+
+        /// <summary>
+        /// return total list of pollutant transfers for the pollutant group given, level 0. 
         /// For each row added, the pollutant list will be initialized with the pollutantCodes given
         /// </summary>
         public static List<AOPollutantTreeListRow> GetPollutantTransferSectors(AreaOverviewSearchFilter filter, int pollutantGroupID, List<string> pollutantCodes)

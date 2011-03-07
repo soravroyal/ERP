@@ -214,6 +214,15 @@ namespace EPRTR.Localization
 
 
         /// <summary>
+        /// Gets the name of a Pollutant group based on the id
+        /// </summary>
+        public static string PollutantGroupName(int id)
+        {
+            LOV_POLLUTANT group = ListOfValues.GetPollutant(id);
+            return PollutantGroupName(group.Code);
+        }
+
+        /// <summary>
         /// Gets the short name of a Pollutant based on the code. 
         /// If the code corresponds to a pollutant group, the name for confidnetiality within the group is returned
         /// </summary>
@@ -272,12 +281,21 @@ namespace EPRTR.Localization
 
         #region LOVRegulation
         /// <summary>
-        /// Gets the name of a Regulation based on the code
+        /// Gets the unformal name of a Regulation based on the code
         /// </summary>
         public static string RegulationName(string code)
         {
             return GetResource("LOV_REGULATION", code);
         }
+
+        /// <summary>
+        /// Gets the legal name of a Regulation based on the code
+        /// </summary>
+        public static string LegalRegulationName(string code)
+        {
+            return GetResource("LOV_REGULATION", code+".legal");
+        }
+        
         #endregion
 
        #region Private methods
