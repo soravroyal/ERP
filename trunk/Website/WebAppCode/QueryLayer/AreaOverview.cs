@@ -512,6 +512,30 @@ namespace QueryLayer
 
         }
 
+
+        /// <summary>
+        /// return full activity tree with all rows expanded
+        /// </summary>
+        public static IEnumerable<AreaOverview.AOWasteTreeListRow> GetWasteTransferActivityTree(AreaOverviewSearchFilter filter)
+        {
+            IEnumerable<AreaOverview.AOWasteTreeListRow> sectors = GetWasteTransferSectors(filter).ToList();
+
+            List<string> sectorCodes = sectors.Where(p => p.HasChildren).Select(p => p.SectorCode).ToList();
+            IEnumerable<AreaOverview.AOWasteTreeListRow> activities = GetWasteTransferActivities(filter, sectorCodes).ToList();
+
+            List<string> activityCodes = activities.Where(p => p.HasChildren).Select(p => p.ActivityCode).ToList();
+            IEnumerable<AreaOverview.AOWasteTreeListRow> subactivities = GetWasteTransferSubActivities(filter, activityCodes).ToList();
+
+            //create result with full tree.
+            IEnumerable<AreaOverview.AOWasteTreeListRow> result = sectors.Union(activities).Union(subactivities)
+                                                               .OrderBy(s => s.SectorCode)
+                                                               .ThenBy(s => s.ActivityCode)
+                                                               .ThenBy(s => s.SubactivityCode);
+
+            return result;
+        }
+
+
         /// <summary>
         /// return total list of waste transfers, level 0. 
         /// </summary>

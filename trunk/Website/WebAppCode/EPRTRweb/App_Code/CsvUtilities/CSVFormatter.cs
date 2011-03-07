@@ -906,6 +906,64 @@ namespace EPRTR.CsvUtilities
         }
 
 
+        public string GetAreaOverviewWasteTransferHeader()
+        {
+            string result = string.Empty;
+
+            //activity tree headers
+            result += addActivityTreeHeaderCols();
+
+            
+            string quantityStr = Resources.GetGlobal("Common", QUANTITY_KEY_STR);
+            string unitStr = Resources.GetGlobal("Common", UNIT_KEY_STR);
+            string facilityStr = Resources.GetGlobal("Common", "Facilities");
+
+
+            foreach (var type in new List<WasteTypeFilter.Type>() { 
+                WasteTypeFilter.Type.HazardousCountry, 
+                WasteTypeFilter.Type.HazardousTransboundary, 
+                WasteTypeFilter.Type.Hazardous,
+                WasteTypeFilter.Type.NonHazardous
+            })
+            {
+                string typeStr = Resources.GetGlobal("LOV_WASTETYPE", EnumUtil.GetStringValue(type));
+                result += AddText(string.Format("{0} - {1}", typeStr, facilityStr));
+                result += AddText(string.Format("{0} - {1}", typeStr, quantityStr));
+                result += AddText(string.Format("{0} - {1}", typeStr, unitStr));
+            }
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+        public string GetAreaOverviewWasteTransferRow(AreaOverview.AOWasteTreeListRow r)
+        {
+
+            string result = string.Empty;
+
+            result += addActivityTreeCols(r);
+
+            result += AddValue(r.GetFacilities(AreaOverview.CODE_HWIC));
+            result += AddValue(r.GetQuantity(AreaOverview.CODE_HWIC));
+            result += AddValue(r.GetUnit(AreaOverview.CODE_HWIC));
+
+            result += AddValue(r.GetFacilities(AreaOverview.CODE_HWOC));
+            result += AddValue(r.GetQuantity(AreaOverview.CODE_HWOC));
+            result += AddValue(r.GetUnit(AreaOverview.CODE_HWOC));
+
+            result += AddValue(r.GetFacilities(AreaOverview.CODE_HW));
+            result += AddValue(r.GetQuantity(AreaOverview.CODE_HW));
+            result += AddValue(r.GetUnit(AreaOverview.CODE_HW));
+
+            result += AddValue(r.GetFacilities(AreaOverview.CODE_NONHW));
+            result += AddValue(r.GetQuantity(AreaOverview.CODE_NONHW));
+            result += AddValue(r.GetUnit(AreaOverview.CODE_NONHW));
+
+            result += Environment.NewLine;
+            return result;
+        }
+
+
         #endregion
 
         #region pollutant release activity / area

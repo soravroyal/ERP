@@ -165,6 +165,7 @@ namespace EPRTR.HeaderBuilders
             return header;
         }
 
+#region AreaOverview
 
         /// <summary>
         /// returns a dictionary with sheet headers <key, value> for Area overview search
@@ -202,6 +203,23 @@ namespace EPRTR.HeaderBuilders
             return header;
         }
 
+
+        /// <summary>
+        /// returns a dictionary with sheet headers <key, value> for Area overview search
+        /// </summary>
+        public static Dictionary<string, string> GetAreaoverviewWasteTransferSearchHeader(
+            AreaOverviewSearchFilter filter, bool confidentialityAffected)
+        {
+            Dictionary<string, string> header = makeHeader();
+            addLegalRegulation(header, filter.YearFilter.Year);
+            addYear(header, filter.YearFilter);
+            addArea(header, filter.AreaFilter);
+
+            addConfidentiality(header, confidentialityAffected);
+            return header;
+        }
+
+#endregion
 
         /// <summary>
         /// returns a dictionary with sheet headers <key, value> for pollutant releases time series search
