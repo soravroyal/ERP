@@ -255,45 +255,39 @@ public partial class ucAreaOverviewWasteTransfer : System.Web.UI.UserControl
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        try
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        // Create Header
+        var filter = SearchFilter;
+
+        bool isConfidentialityAffected = AreaOverview.IsWasteAffectedByConfidentiality(filter);
+
+        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetAreaoverviewWasteTransferSearchHeader(filter, isConfidentialityAffected);
+
+        // Create Body
+        List<AreaOverview.AOWasteTreeListRow> rows = AreaOverview.GetWasteTransferActivityTree(filter).ToList();
+        sortResult(rows);
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string rowHeader = csvformat.GetAreaOverviewWasteTransferHeader();
+
+        Response.WriteUtf8FileHeader("EPRTR_Areaoverview_WasteTransfers_List");
+
+        Response.Write(topheader + rowHeader);
+
+
+        foreach (var item in rows)
         {
-            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-            CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-            // Create Header
-            var filter = SearchFilter;
-
-            //bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
-
-            //Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantReleaseSearchHeader(
-            //    filter,
-            //    isConfidentialityAffected);
-
-            //// Create Body
-            //List<PollutantReleases.AreaTreeListRow> rows = PollutantReleases.GetAreaTree(filter).ToList();
-            //sortResult(rows);
-
-            //// dump to file
-            //string topheader = csvformat.CreateHeader(header);
-            //string rowHeader = csvformat.GetPollutantReleaseAreaHeader(filter);
-
-            //Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Area_List");
-
-            //Response.Write(topheader + rowHeader);
-
-
-            //foreach (var item in rows)
-            //{
-            //    string row = csvformat.GetPollutantReleaseAreaRow(item, filter);
-            //    Response.Write(row);
-            //}
-
-            //Response.End();
+            string row = csvformat.GetAreaOverviewWasteTransferRow(item);
+            Response.Write(row);
         }
-        catch (Exception)
-        {
 
-        }
+        Response.Write(rowHeader);
+
+        Response.End();
+
     }
 
 }
