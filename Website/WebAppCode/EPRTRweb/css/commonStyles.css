@@ -181,3 +181,7 @@ Must be of the form indentLevel# where # is the level number starting with 0.*/
     padding-top:5px;
 }
 
+.spacer
+{
+	clear:left;
+}

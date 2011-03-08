@@ -77,6 +77,19 @@
 {
 	width:127px;
 }
+.searchOption_mediumLegend {
+	clear: left;
+	float: left;
+	width: 25%;
+	margin-top: 10px;
+}
+
+.searchOption_mediumCriteria {
+	clear: none;
+	float: left;
+	margin-top: 10px;
+}
+
 
 .cpeTextLabel
 {
