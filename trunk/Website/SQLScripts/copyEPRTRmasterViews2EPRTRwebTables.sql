@@ -22,7 +22,12 @@
 --	Initialize help tables
 ------------------------------------------------------------------------------
 
-if (select COUNT(*) from EPRTRmaster.dbo.tAT_METHOD) = 0 exec EPRTRmaster.dbo.pAT_METHOD
+if ((
+	select count(DISTINCT MethodListID) from EPRTRmaster.dbo.tAT_METHOD
+	) < (
+	select count(DISTINCT MethodListID) from EPRTRmaster.dbo.METHODUSED
+	))
+exec EPRTRmaster.dbo.pAT_METHOD
 
 truncate table EPRTRmaster.dbo.tAT_ACTIVITYSEARCH_POLLUTANTRELEASE
 exec EPRTRmaster.dbo.pAT_ACTIVITYSEARCH_POLLUTANTRELEASE
