@@ -38,7 +38,7 @@
                 <%--content--%>
                 <asp:Panel ID="plPollutantContent" runat="server" CssClass="cpeContent">
                     <eprtr:PollutantSearchOption ID="ucPollutantSearchOption" IncludeAll="true"  runat="server" />
-                    <eprtr:MediumSearchOption ID="ucMediumSearchOption" IncludeTransfers="true" runat="server" />
+                    <eprtr:MediumSearchOption ID="ucMediumSearchOption" IncludeTransfers="true" IncludeAccidental="true" runat="server" />
                 </asp:Panel>
           </asp:Panel>
 

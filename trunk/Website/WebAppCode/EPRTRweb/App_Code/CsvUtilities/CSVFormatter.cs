@@ -1160,7 +1160,7 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
-            result += Resources.GetGlobal("Common", "Level") + listSeparator;
+            //result += Resources.GetGlobal("Common", "Level") + listSeparator;
             result += Resources.GetGlobal("Common", "CountryCode") + listSeparator;
             result += Resources.GetGlobal("Common", "Country") + listSeparator;
 
@@ -1187,32 +1187,32 @@ namespace EPRTR.CsvUtilities
             // Level 0: Country
             // Level 1: NUTS/RBD
 
-            string pollutantLevelStr = string.Empty;
-            if (r.Level == 0)
-            {
-                if (AreaTreeListRow.CODE_TOTAL.Equals(r.CountryCode))
-                {
-                    pollutantLevelStr = Resources.GetGlobal("Common", "Total");
-                }
-                else
-                {
-                    pollutantLevelStr = Resources.GetGlobal("Common", "Country");
-                }
-            }
-            else if (r.Level == 1)
-            {
-                if (isRbd)
-                {
-                    pollutantLevelStr = Resources.GetGlobal("Common", "RiverBasinDistrict");
-                }
-                else
-                {
-                    pollutantLevelStr = Resources.GetGlobal("Common", "NUTSRegion");
-                }
-            }
+            //string pollutantLevelStr = string.Empty;
+            //if (r.Level == 0)
+            //{
+            //    if (AreaTreeListRow.CODE_TOTAL.Equals(r.CountryCode))
+            //    {
+            //        pollutantLevelStr = Resources.GetGlobal("Common", "Total");
+            //    }
+            //    else
+            //    {
+            //        pollutantLevelStr = Resources.GetGlobal("Common", "Country");
+            //    }
+            //}
+            //else if (r.Level == 1)
+            //{
+            //    if (isRbd)
+            //    {
+            //        pollutantLevelStr = Resources.GetGlobal("Common", "RiverBasinDistrict");
+            //    }
+            //    else
+            //    {
+            //        pollutantLevelStr = Resources.GetGlobal("Common", "NUTSRegion");
+            //    }
+            //}
 
             // add level
-            result += AddSimple(pollutantLevelStr);
+            //result += AddSimple(pollutantLevelStr);
 
             // always add country code and name
             result += AddSimple(r.CountryCode);
@@ -1236,7 +1236,7 @@ namespace EPRTR.CsvUtilities
             else
             {
                 // if no country code present (level == 0) 
-                // add empty cols for region (quantity and unit)
+                // add empty cols for region (code and name)
                 result += AddSimple(" ");
                 result += AddSimple(" ");
 
