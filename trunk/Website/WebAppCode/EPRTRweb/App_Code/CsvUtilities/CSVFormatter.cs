@@ -9,6 +9,7 @@ using QueryLayer;
 using QueryLayer.Filters;
 using QueryLayer.Utilities;
 using System.Text.RegularExpressions;
+using QueryLayer.Enums;
 
 namespace EPRTR.CsvUtilities
 {
@@ -128,13 +129,13 @@ namespace EPRTR.CsvUtilities
             result += AddSimple(r.TransferTo);
             result += AddText(LOVResources.CountryName(r.TransferTo));
             result += AddValue(r.Total);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
             result += AddValue(r.Recovery);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
             result += AddValue(r.Disposal);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
             result += AddValue(r.UnSpecified);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
             result += AddSimple(r.Facilities);
             result += Environment.NewLine;
             return result;
@@ -195,9 +196,9 @@ namespace EPRTR.CsvUtilities
             result += AddText(pollutantName);
             result += AddSimple(medium);
             result += AddValue(r.Quantity);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityAccidental);
-            result += AddSimple(r.QuantityAccidentalUnit);
+            result += AddUnit(r.QuantityAccidentalUnit);
             result += AddPercentage(r.AccidentalPercent);
             result += AddValue(r.Facilities);
             result += AddValue(r.Countries);
@@ -233,7 +234,7 @@ namespace EPRTR.CsvUtilities
             string result = AddValue(r.Year);
             result += AddText(pollutantName);
             result += AddValue(r.Quantity);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.Facilities);
             result += AddValue(r.Countries);
             result += Environment.NewLine;
@@ -264,13 +265,13 @@ namespace EPRTR.CsvUtilities
             string result = AddValue(r.Year);
             result += AddText(LOVResources.WasteTypeName(EnumUtil.GetStringValue(r.WasteType)));
             result += AddValue(r.QuantityTotal);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityRecovery);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityDisposal);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityUnspec);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.Facilities);
             result += AddValue(r.Countries);
             result += Environment.NewLine;
@@ -317,9 +318,9 @@ namespace EPRTR.CsvUtilities
             result += AddText(pollutantName);
             result += AddSimple(medium);
             result += AddValue(r.Quantity);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityAccidental);
-            result += AddSimple(r.QuantityAccidentalUnit);
+            result += AddUnit(r.QuantityAccidentalUnit);
             result += AddPercentage(r.AccidentalPercent);
             result += Environment.NewLine;
             return result;
@@ -351,7 +352,7 @@ namespace EPRTR.CsvUtilities
             string result = AddValue(r.Year);
             result += AddText(pollutantName);
             result += AddValue(r.Quantity);
-            result += AddSimple(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += Environment.NewLine;
             return result;
         }
@@ -398,11 +399,11 @@ namespace EPRTR.CsvUtilities
             result += AddValue(r.QuantityTotal);
             result += AddSimple(r.QuantityUnit);
             result += AddValue(r.QuantityRecovery);
-            result += AddValue(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityDisposal);
-            result += AddValue(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += AddValue(r.QuantityUnspec);
-            result += AddValue(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
             result += Environment.NewLine;
             return result;
         }
@@ -448,9 +449,9 @@ namespace EPRTR.CsvUtilities
             result += AddText(LOVResources.CountryName(r.CountryCode));
 
             result += AddValue(r.QuantityTotal, r.ConfidentialIndicator);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
             result += AddValue(r.QuantityAccidental, r.ConfidentialIndicator);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
             result += AddPercentage(r.PercentageAccidental, r.ConfidentialIndicator);
 
             result += AddSimple(r.MethodBasisCode);
@@ -563,7 +564,7 @@ namespace EPRTR.CsvUtilities
             result += AddText(LOVResources.CountryName(r.CountryCode));
 
             result += AddValue(r.Quantity, r.ConfidentialIndicator);
-            result += AddValue(r.QuantityUnit);
+            result += AddUnit(r.QuantityUnit);
 
             result += AddSimple(r.MethodBasisCode);
             result += AddText(LOVResources.MethodBasisName(r.MethodBasisCode));
@@ -616,13 +617,13 @@ namespace EPRTR.CsvUtilities
                 r.ConfidentialIndicatorDisposal ||
                 r.ConfidentialIndicatorUnspecified);
 
-            result += AddSimple(r.QuantityCommonUnit);
+            result += AddUnit(r.QuantityCommonUnit);
             result += AddValue(r.QuantityRecovery, r.ConfidentialIndicatorRecovery);
-            result += AddSimple(r.QuantityCommonUnit);
+            result += AddUnit(r.QuantityCommonUnit);
             result += AddValue(r.QuantityDisposal, r.ConfidentialIndicatorDisposal);
-            result += AddSimple(r.QuantityCommonUnit);
+            result += AddUnit(r.QuantityCommonUnit);
             result += AddValue(r.QuantityUnspecified, r.ConfidentialIndicatorUnspecified);
-            result += AddSimple(r.QuantityCommonUnit);
+            result += AddUnit(r.QuantityCommonUnit);
 
             result += AddSimple(r.Url);
             result += Environment.NewLine;
@@ -683,13 +684,13 @@ namespace EPRTR.CsvUtilities
             // add actual values
             result += AddValue(r.QuantityAir);
             result += AddValue(r.AccidentalAir);
-            result += AddSimple(r.UnitAir);
+            result += AddUnit(r.UnitAir);
             result += AddValue(r.QuantityWater);
             result += AddValue(r.AccidentalWater);
-            result += AddSimple(r.UnitWater);
+            result += AddUnit(r.UnitWater);
             result += AddValue(r.QuantitySoil);
             result += AddValue(r.AccidentalSoil);
-            result += AddSimple(r.UnitSoil);
+            result += AddUnit(r.UnitSoil);
 
             result += Environment.NewLine;
             return result;
@@ -720,7 +721,7 @@ namespace EPRTR.CsvUtilities
 
             // add actual values
             result += AddValue(r.Quantity);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
 
             result += Environment.NewLine;
             return result;
@@ -806,7 +807,7 @@ namespace EPRTR.CsvUtilities
             result += AddPercentage(r.UnspecifiedPercent);
             result += AddValue(r.TotalQuantity);
 
-            result += AddValue(r.Unit);
+            result += AddUnit(r.Unit);
 
             result += Environment.NewLine;
             return result;
@@ -898,7 +899,7 @@ namespace EPRTR.CsvUtilities
             {
                 result += AddValue(p.Facilities);
                 result += AddValue(p.Quantity);
-                result += AddSimple(p.Unit);
+                result += AddUnit(p.Unit);
             }
 
             result += Environment.NewLine;
@@ -945,19 +946,19 @@ namespace EPRTR.CsvUtilities
 
             result += AddValue(r.GetFacilities(AreaOverview.CODE_HWIC));
             result += AddValue(r.GetQuantity(AreaOverview.CODE_HWIC));
-            result += AddValue(r.GetUnit(AreaOverview.CODE_HWIC));
+            result += AddUnit(r.GetUnit(AreaOverview.CODE_HWIC));
 
             result += AddValue(r.GetFacilities(AreaOverview.CODE_HWOC));
             result += AddValue(r.GetQuantity(AreaOverview.CODE_HWOC));
-            result += AddValue(r.GetUnit(AreaOverview.CODE_HWOC));
+            result += AddUnit(r.GetUnit(AreaOverview.CODE_HWOC));
 
             result += AddValue(r.GetFacilities(AreaOverview.CODE_HW));
             result += AddValue(r.GetQuantity(AreaOverview.CODE_HW));
-            result += AddValue(r.GetUnit(AreaOverview.CODE_HW));
+            result += AddUnit(r.GetUnit(AreaOverview.CODE_HW));
 
             result += AddValue(r.GetFacilities(AreaOverview.CODE_NONHW));
             result += AddValue(r.GetQuantity(AreaOverview.CODE_NONHW));
-            result += AddValue(r.GetUnit(AreaOverview.CODE_NONHW));
+            result += AddUnit(r.GetUnit(AreaOverview.CODE_NONHW));
 
             result += Environment.NewLine;
             return result;
@@ -1059,19 +1060,19 @@ namespace EPRTR.CsvUtilities
             {
                 result += AddValue(r.QuantityAir);
                 result += AddValue(r.AccidentalAir);
-                result += AddSimple(r.UnitAir);
+                result += AddUnit(r.UnitAir);
             }
             if (filter.ReleasesToWater)
             {
                 result += AddValue(r.QuantityWater);
                 result += AddValue(r.AccidentalWater);
-                result += AddSimple(r.UnitWater);
+                result += AddUnit(r.UnitWater);
             }
             if (filter.ReleasesToSoil)
             {
                 result += AddValue(r.QuantitySoil);
                 result += AddValue(r.AccidentalSoil);
-                result += AddSimple(r.UnitSoil);
+                result += AddUnit(r.UnitSoil);
             }
 
             return result;
@@ -1316,7 +1317,7 @@ namespace EPRTR.CsvUtilities
 
             // add actual values
             result += AddValue(r.Quantity);
-            result += AddSimple(r.Unit);
+            result += AddUnit(r.Unit);
 
             return result;
         }
@@ -1330,11 +1331,21 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
+            string[] headerrows = addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
+
+            result += addEmptyCols(3); //activity cols.
+            result += headerrows[0];
+            result += Environment.NewLine;
+
+            result += addEmptyCols(3); //activity cols.
+            result += headerrows[1];
+            result += Environment.NewLine;
+
             //activity tree headers
             result += addActivityTreeHeaderCols();
-            result += addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
-
+            result += headerrows[2];
             result += Environment.NewLine;
+
             return result;
         }
 
@@ -1354,10 +1365,21 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
-            result += addAreaTreeHeaderCols(filter.AreaFilter);
-            result += addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
+            string[] headerrows = addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
+            result += addEmptyCols(4); //area cols.
+            result += headerrows[0];
             result += Environment.NewLine;
+
+            result += addEmptyCols(4); //area cols.
+            result += headerrows[1];
+            result += Environment.NewLine;
+
+
+            result += addAreaTreeHeaderCols(filter.AreaFilter);
+            result += headerrows[2];
+            result += Environment.NewLine;
+
             return result;
         }
 
@@ -1376,13 +1398,18 @@ namespace EPRTR.CsvUtilities
 
 
 
-        private string addWasteTransferHeaderCols(WasteTypeFilter typeFilter, WasteTreatmentFilter treatmentFilter)
+        private string[] addWasteTransferHeaderCols(WasteTypeFilter typeFilter, WasteTreatmentFilter treatmentFilter)
         {
-            string result = string.Empty;
+            string header1 = string.Empty;
+            string header2 = string.Empty;
+            string header3 = string.Empty;
 
             //facility headers
-            result += AddSimple(Resources.GetGlobal("Common", "Facilities"));
+            header1 += addEmptyCols(1);
+            header2 += addEmptyCols(1);
+            header3 += AddSimple(Resources.GetGlobal("Common", "Facilities"));
 
+            //waste headers
             foreach (var type in new List<WasteTypeFilter.Type>() { 
                 WasteTypeFilter.Type.HazardousCountry, 
                 WasteTypeFilter.Type.HazardousTransboundary, 
@@ -1392,6 +1419,8 @@ namespace EPRTR.CsvUtilities
             {
                 if (typeFilter.InludesWasteType(type))
                 {
+                    string strType = EnumUtil.GetStringValue(type);
+
                     if (type.Equals(WasteTypeFilter.Type.Hazardous) && !typeFilter.InludesAllHazardousWasteType())
                     {
                         continue;
@@ -1400,7 +1429,9 @@ namespace EPRTR.CsvUtilities
                     //add total col per type
                     if (treatmentFilter.IncludesAll())
                     {
-                        result += AddSimple(getQuantityHeaderWaste(type, null));
+                        header1 += AddSimple(strType);
+                        header2 += AddSimple(Resources.GetGlobal("Common", "Total"));
+                        header3 += AddSimple(getQuantityHeaderWaste(type, null));
                     }
 
                     //add treatment col for type 
@@ -1412,15 +1443,23 @@ namespace EPRTR.CsvUtilities
                     {
                         if (treatmentFilter.InludesTreatment(treatment))
                         {
-                            result += AddSimple(getQuantityHeaderWaste(type, treatment));
+                            string strTreatment = LOVResources.WasteTreatmentName(EnumUtil.GetStringValue(treatment));
+
+                            header1 += AddSimple(strType);
+                            header2 += AddSimple(strTreatment);
+                            header3 += AddSimple(getQuantityHeaderWaste(type, treatment));
                         }
 
                     }
-                    result += AddSimple(getUnitHeaderWaste(type));
+
+                    //unit
+                    header1 += AddSimple(strType);
+                    header2 += AddSimple(Resources.GetGlobal("Common", "Unit"));
+                    header3 += AddSimple(getUnitHeaderWaste(type));
                 }
             }
 
-            return result;
+            return new string[]{header1,header2,header3};
         }
 
         /// <summary>
@@ -1479,7 +1518,7 @@ namespace EPRTR.CsvUtilities
                 {
                     result += AddValue(r.QuantityUnspecHWIC);
                 }
-                result += AddSimple(r.UnitCodeHWIC);
+                result += AddUnit(r.UnitCodeHWIC);
             }
 
             //HWOC
@@ -1501,7 +1540,7 @@ namespace EPRTR.CsvUtilities
                 {
                     result += AddValue(r.QuantityUnspecHWOC);
                 }
-                result += AddSimple(r.UnitCodeHWOC);
+                result += AddUnit(r.UnitCodeHWOC);
             }
 
             //HW total
@@ -1523,7 +1562,7 @@ namespace EPRTR.CsvUtilities
                 {
                     result += AddValue(r.QuantityUnspecSum);
                 }
-                result += AddSimple(r.UnitCodeSum);
+                result += AddUnit(r.UnitCodeSum);
             }
 
             //NON-HW
@@ -1545,7 +1584,7 @@ namespace EPRTR.CsvUtilities
                 {
                     result += AddValue(r.QuantityUnspecNONHW);
                 }
-                result += AddSimple(r.UnitCodeNONHW);
+                result += AddUnit(r.UnitCodeNONHW);
             }
 
 
@@ -1616,6 +1655,18 @@ namespace EPRTR.CsvUtilities
 
             return result;
         }
+
+
+        private string AddUnit(QuantityUnit element)
+        {
+            return AddUnit(EnumUtil.GetStringValue(element));
+        }
+
+        private string AddUnit(string unitCode)
+        {
+            return string.Format("{0}", LOVResources.UnitName(unitCode)) + listSeparator;
+        }
+        
 
         private string AddText(string element)
         {
