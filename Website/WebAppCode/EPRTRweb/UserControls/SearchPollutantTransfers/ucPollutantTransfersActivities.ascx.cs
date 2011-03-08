@@ -331,6 +331,13 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
             foreach (var item in rows)
             {
                 string row = csvformat.GetPollutantTransferActivityRow(item);
+
+                if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(rowHeader);
+                }
+
                 Response.Write(row);
             }
 

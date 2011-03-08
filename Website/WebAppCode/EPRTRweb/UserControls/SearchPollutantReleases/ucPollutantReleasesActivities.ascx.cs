@@ -407,6 +407,13 @@ public partial class ucPollutantReleasesActivities : System.Web.UI.UserControl
             foreach (var item in rows)
             {
                 string row = csvformat.GetPollutantReleaseActivityRow(item, filter);
+
+                if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(rowHeader);
+                }
+
                 Response.Write(row);
             }
 
