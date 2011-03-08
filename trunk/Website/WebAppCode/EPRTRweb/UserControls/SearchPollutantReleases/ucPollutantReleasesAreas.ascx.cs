@@ -372,6 +372,13 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
             foreach (var item in rows)
             {
                 string row = csvformat.GetPollutantReleaseAreaRow(item, filter);
+
+                if (AreaTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(rowHeader);
+                }
+
                 Response.Write(row);
             }
 

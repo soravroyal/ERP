@@ -481,6 +481,13 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
             foreach (var item in rows)
             {
                 string row = csvformat.GetWasteTransferActivityRow(item,filter);
+
+                if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(rowHeader);
+                }
+
                 Response.Write(row);
             }
 
