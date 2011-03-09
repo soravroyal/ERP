@@ -47,6 +47,9 @@ namespace EPRTR.Utilities
         private static string MEDIUM_SOIL = "MediumSoil";
         private static string MEDIUM_WASTEWASTER = "MediumWasteWater";
 
+        //accidental
+        private static string ACCIDENTAL = "Accidental";
+
         //waste
         private static string WASTETYPE_HWIC = "HazardousWasteCountry";
         private static string WASTETYPE_HWOC = "HazardousWasteTransboundary";
@@ -87,6 +90,9 @@ namespace EPRTR.Utilities
                 // Medium
                 result += SerializeToUrl(filter.MediumFilter);
 
+                // Accidental
+                result += SerializeToUrl(filter.AccidentalFilter);
+
                 // Activity
                 result += SerializeToUrl(filter.ActivityFilter);
 
@@ -120,6 +126,7 @@ namespace EPRTR.Utilities
                    HasYearFilter(request) ||
                    HasPollutantFilter(request) ||
                    HasMediumFilter(request) ||
+                   HasAccidentalFilter(request) ||
                    HasActivityFilter(request) ||
                    HasWasteTypeFilter(request) ||
                    HasWasteReceiverFilter(request) ||
@@ -858,6 +865,55 @@ namespace EPRTR.Utilities
         }
 
         #endregion
+
+
+        // --------------------------------------------------------------------------------------------------------------------
+        // Accidental filter
+        // --------------------------------------------------------------------------------------------------------------------
+        #region AccidentalFilter
+
+        private static string SerializeToUrl(AccidentalFilter filter)
+        {
+            string result = String.Empty;
+            if (filter != null)
+            {
+                result += addParameter(ACCIDENTAL, filter.AccidentalOnly ? 1 : 0);
+            }
+
+            return result;
+        }
+
+        public static AccidentalFilter GetAccidentalFilter(HttpRequest request)
+        {
+            if (HasAccidentalFilter(request))
+            {
+                AccidentalFilter filter = new AccidentalFilter();
+                filter.AccidentalOnly = toBool(request.QueryString[ACCIDENTAL]);
+                return filter;
+            }
+            return null;
+        }
+
+        public static bool HasAccidentalFilter(HttpRequest request)
+        {
+            if (request == null)
+                return false;
+
+            List<string> names = new List<string> { ACCIDENTAL};
+            return hasAny(request, names);
+        }
+
+        /// <summary>
+        /// GetMediumFilter
+        /// </summary>
+        public static AccidentalFilter GetAccidentalFilter(bool accidentalOnly)
+        {
+            AccidentalFilter filter = new AccidentalFilter(accidentalOnly);
+            return filter;
+        }
+
+        #endregion
+
 
         // --------------------------------------------------------------------------------------------------------------------
         // WasteType filter

@@ -17,6 +17,7 @@ namespace QueryLayer.Filters
 		public ActivityFilter ActivityFilter { get; set; }
 		public PollutantFilter PollutantFilter { get; set; }
         public MediumFilter MediumFilter { get; set; }
+        public AccidentalFilter AccidentalFilter { get; set; } 
 		public WasteTypeFilter WasteTypeFilter { get; set; }
         public WasteTreatmentFilter WasteTreatmentFilter { get; set; }
         public WasteReceiverFilter WasteReceiverFilter { get; set; }
@@ -37,6 +38,7 @@ namespace QueryLayer.Filters
             clone.ActivityFilter = this.ActivityFilter != null ? this.ActivityFilter.Clone() as ActivityFilter : null;
             clone.PollutantFilter = this.PollutantFilter != null ? this.PollutantFilter.Clone() as PollutantFilter : null;
             clone.MediumFilter = this.MediumFilter != null ? this.MediumFilter.Clone() as MediumFilter : null;
+            clone.AccidentalFilter = this.AccidentalFilter != null ? this.AccidentalFilter.Clone() as AccidentalFilter : null;
             clone.WasteTypeFilter = this.WasteTypeFilter != null ? this.WasteTypeFilter.Clone() as WasteTypeFilter: null;
             clone.WasteTreatmentFilter = this.WasteTreatmentFilter != null ? this.WasteTreatmentFilter.Clone() as WasteTreatmentFilter : null;
             clone.WasteReceiverFilter = this.WasteReceiverFilter != null ? this.WasteReceiverFilter.Clone() as WasteReceiverFilter : null; 

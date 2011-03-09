@@ -481,6 +481,20 @@ namespace EPRTR.HeaderBuilders
             addMedium(header, new MediumFilter(medium));
         }
 
+
+        //creates header for accidental option and adds to dictionary
+        protected static void addAccidental(Dictionary<string, string> header, AccidentalFilter filter)
+        {
+            if (filter != null)
+            {
+                if (filter.AccidentalOnly)
+                {
+                    header.Add(Resources.GetGlobal("Common", "AccidentalOnly"), Resources.GetGlobal("Common", "Yes"));
+                }
+            }
+        }
+
+
         //creates header for waste type and adds to dictionary
         protected static void addWasteType(Dictionary<string, string> header, WasteTypeFilter filter)
         {

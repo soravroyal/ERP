@@ -41,18 +41,20 @@ public partial class ucAdvancedPollutantSearchOption : System.Web.UI.UserControl
     }
 
 
-    public void PopulateFilters(out PollutantFilter pollutantFilter, out MediumFilter mediumFilter)
+    public void PopulateFilters(out PollutantFilter pollutantFilter, out MediumFilter mediumFilter, out AccidentalFilter accidentalFilter)
     {
 
         if (!isCollapsed())
         {
             pollutantFilter = this.ucPollutantSearchOption.PopulateFilter();
             mediumFilter = this.ucMediumSearchOption.PopulateFilter();
+            accidentalFilter = this.ucAccidentalSearchOption.PopulateFilter();
         }
         else
         {
             pollutantFilter = null;
             mediumFilter = null;
+            accidentalFilter= null;
         }
 
     }
