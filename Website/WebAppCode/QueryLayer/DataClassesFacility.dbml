@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="EPRTRweb" Class="DataClassesFacilityDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sdkcga6302;Initial Catalog=EPRTRweb;User ID=sa" SettingsObjectName="QueryLayer.Properties.Settings" SettingsPropertyName="EPRTRwebConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.FACILITYDETAIL_ACTIVITY" Member="FACILITYDETAIL_ACTIVITies">
     <Type Name="FACILITYDETAIL_ACTIVITY">
       <Column Name="FacilityReportID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -146,6 +147,48 @@
       <Column Name="LOV_ConfidentialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.FACILITYSEARCH_MAINACTIVITY" Member="FACILITYSEARCH_MAINACTIVITies">
+    <Type Name="FACILITYSEARCH_MAINACTIVITY">
+      <Column Name="FacilityReportID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FacilityName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FacilityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NationalID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ParentCompanyName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ReportingYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(511)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CountryCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LOV_CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RiverBasinDistrictCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LOV_RiverBasinDistrictID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="NUTSLevel2RegionCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LOV_NUTSRLevel1ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_NUTSRLevel2ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_NUTSRLevel3ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IASectorCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IAActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IASubActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IPPCSectorCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IPPCActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="IPPCSubActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LOV_IASectorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_IAActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_IASubActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NACESectorCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NACEActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NACESubActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LOV_NACESectorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_NACEActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LOV_NACESubActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IAReportedActivityCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="IPPCReportedActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NACEReportedActivityCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ConfidentialIndicator" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ConfidentialCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="LOV_ConfidentialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.FACILITYSEARCH_ALL" Member="FACILITYSEARCH_ALLs">
     <Type Name="FACILITYSEARCH_ALL">
       <Column Name="FacilityReportID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -159,11 +202,12 @@
       <Column Name="LOV_MediumID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LOV_ConfidentialityIDPollutant" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ConfidentialCodePollutant" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Accidental" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="IDWaste" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LOV_WasteTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="WasteTypeCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="LOV_WasteTreatmentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="WasteTreatmentCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="WasteTreatmentCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="WHPCountryCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="WHPCountryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ConfidentialIndicatorWaste" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -209,50 +253,8 @@
       <Column Name="ObjectID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DistinctID" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="FacilitySearchName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="CitySearchName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="ParentCompanySearchName" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.FACILITYSEARCH_MAINACTIVITY" Member="FACILITYSEARCH_MAINACTIVITies">
-    <Type Name="FACILITYSEARCH_MAINACTIVITY">
-      <Column Name="FacilityReportID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="FacilityName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FacilityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NationalID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ParentCompanyName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ReportingYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Address" Type="System.String" DbType="NVarChar(511)" CanBeNull="true" />
-      <Column Name="City" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="CountryCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LOV_CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="RiverBasinDistrictCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="LOV_RiverBasinDistrictID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="NUTSLevel2RegionCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LOV_NUTSRLevel1ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_NUTSRLevel2ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_NUTSRLevel3ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IASectorCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="IAActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="IASubActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="IPPCSectorCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="IPPCActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="IPPCSubActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LOV_IASectorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_IAActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_IASubActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NACESectorCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NACEActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NACESubActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LOV_NACESectorID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_NACEActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LOV_NACESubActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IAReportedActivityCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="IPPCReportedActivityCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="NACEReportedActivityCode" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ConfidentialIndicator" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ConfidentialCode" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="LOV_ConfidentialityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CitySearchName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ParentCompanySearchName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>
