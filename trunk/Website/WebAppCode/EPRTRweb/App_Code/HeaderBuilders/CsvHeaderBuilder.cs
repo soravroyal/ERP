@@ -49,6 +49,7 @@ namespace EPRTR.HeaderBuilders
             addActivity(header, filter.ActivityFilter);
             addPollutant(header, filter.PollutantFilter);
             addMedium(header, filter.MediumFilter);
+            addAccidental(header, filter.AccidentalFilter);
             addWasteType(header, filter.WasteTypeFilter);
             addWasteTreatment(header, filter.WasteTreatmentFilter);
 

@@ -50,9 +50,11 @@ public partial class ucFacilitySearch : System.Web.UI.UserControl
         //pollutant filters
         PollutantFilter pollutantFilter;
         MediumFilter mediumFilter;
-        this.ucAdvancedPollutantSearchOption.PopulateFilters(out pollutantFilter, out mediumFilter);
+        AccidentalFilter accidentalFilter;
+        this.ucAdvancedPollutantSearchOption.PopulateFilters(out pollutantFilter, out mediumFilter, out accidentalFilter);
         filter.PollutantFilter = pollutantFilter;
         filter.MediumFilter = mediumFilter;
+        filter.AccidentalFilter = accidentalFilter;
 
         WasteTypeFilter wasteTypeFilter;
         WasteTreatmentFilter wasteTreatmentFilter;

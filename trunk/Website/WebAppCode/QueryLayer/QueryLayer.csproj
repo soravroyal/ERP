@@ -113,6 +113,7 @@
     <Compile Include="Filters\ActivityFilter.cs" />
     <Compile Include="Filters\AreaFilter.cs" />
     <Compile Include="Filters\AreaOverviewSearchFilter.cs" />
+    <Compile Include="Filters\AccidentalFilter.cs" />
     <Compile Include="Filters\FilterConverter.cs" />
     <Compile Include="Filters\WasteTransferTimeSeriesFilter.cs" />
     <Compile Include="Filters\PollutantReleasesTimeSeriesFilter.cs" />

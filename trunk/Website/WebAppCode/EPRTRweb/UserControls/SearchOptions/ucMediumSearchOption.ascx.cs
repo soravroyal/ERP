@@ -5,7 +5,6 @@ using QueryLayer.Filters;
 public partial class ucMediumSearchOption : System.Web.UI.UserControl
 {
     private bool includeTransfers = false;
-    private bool includeAccidental = false;
 
     private MediumFilter Filter{ get; set; }
         
@@ -14,7 +13,6 @@ public partial class ucMediumSearchOption : System.Web.UI.UserControl
         if (!IsPostBack)
         {
             this.plTransfers.Visible = includeTransfers;
-            this.plAccidental.Visible = includeAccidental;
 
             Filter = LinkSearchBuilder.GetMediumFilter(Request);
             setSelectedMediums();
@@ -41,16 +39,6 @@ public partial class ucMediumSearchOption : System.Web.UI.UserControl
         set { includeTransfers = value; }
     }
 
-
-    /// <value>
-    /// If true accidental releases will be included in the search options. 
-    /// Default is false.
-    /// </value>
-    public bool IncludeAccidental
-    {
-        get { return includeAccidental; }
-        set { includeAccidental = value; }
-    }
     
     /// <summary>
     /// PopulateFilter

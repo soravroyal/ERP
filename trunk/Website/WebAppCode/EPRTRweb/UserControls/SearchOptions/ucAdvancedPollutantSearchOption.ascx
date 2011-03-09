@@ -3,6 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <%@ Register Src="~/UserControls/SearchOptions/ucPollutantSearchOption.ascx" TagName="PollutantSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchOptions/ucMediumSearchOption.ascx" TagName="MediumSearchOption" TagPrefix="eprtr" %>
+<%@ Register Src="~/UserControls/SearchOptions/ucAccidentalSearchOption.ascx" TagName="AccidentalSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
 
 <asp:UpdatePanel ID="upPollutant" runat="server"  >
@@ -39,6 +40,9 @@
                 <asp:Panel ID="plPollutantContent" runat="server" CssClass="cpeContent">
                     <eprtr:PollutantSearchOption ID="ucPollutantSearchOption" IncludeAll="true"  runat="server" />
                     <eprtr:MediumSearchOption ID="ucMediumSearchOption" IncludeTransfers="true" IncludeAccidental="true" runat="server" />
+                    <br />
+                    <eprtr:AccidentalSearchOption ID="ucAccidentalSearchOption" runat="server" />
+                    <div class="spacer"></div>
                 </asp:Panel>
           </asp:Panel>
 
