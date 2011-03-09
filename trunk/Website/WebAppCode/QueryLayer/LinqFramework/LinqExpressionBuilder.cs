@@ -67,10 +67,15 @@ namespace QueryLayer.LinqFramework
                 if (pollutant != null)
                     facilitySearchExpression = Expression.And(facilitySearchExpression, pollutant);
 
-                // PollutantReleaseMedium expression
-                Expression pollutantReleaseMedium = GetLinqExpressionMedium(filter.MediumFilter, parameter);
-                if (pollutantReleaseMedium != null)
-                    facilitySearchExpression = Expression.And(facilitySearchExpression, pollutantReleaseMedium);
+                // PollutantMedium expression
+                Expression pollutantMedium = GetLinqExpressionMedium(filter.MediumFilter, parameter);
+                if (pollutantMedium != null)
+                    facilitySearchExpression = Expression.And(facilitySearchExpression, pollutantMedium);
+
+                // Accidental expression
+                Expression accidental = GetLinqExpressionAccidental(filter.AccidentalFilter, parameter);
+                if (accidental != null)
+                    facilitySearchExpression = Expression.And(facilitySearchExpression, accidental);
 
                 // WasteTransferType expression
                 Expression wasteTransferType = GetLinqExpressionWasteTransferType(filter.WasteTypeFilter, parameter, true);
@@ -472,6 +477,33 @@ namespace QueryLayer.LinqFramework
 
 			return mediumExpression;
 		}
+
+
+
+
+
+    		/// <summary>
+        /// Returns a "Where" Expression based on the contents of the AccidentalFilter passed to this method
+		/// </summary>
+        /// <param name="filter">A AccidentalFilter object</param>
+		/// <param name="parameter">The ParameterExpression object</param>
+		/// <returns>An Expression containing the "Where" part of a LINQ-statement</returns>
+        public static Expression GetLinqExpressionAccidental(AccidentalFilter filter, ParameterExpression parameter)
+		{
+			Expression accidentalExpression = null;
+
+			if (filter == null)
+			{
+				return null;
+			}
+            else if (filter.AccidentalOnly)
+            {
+                accidentalExpression = GetEqualsExpr(parameter, "Accidental", 1);
+            }
+
+            return accidentalExpression;
+
+        }
 
         /// <summary>
         /// GetLinqExpressionWasteTransferSearch
