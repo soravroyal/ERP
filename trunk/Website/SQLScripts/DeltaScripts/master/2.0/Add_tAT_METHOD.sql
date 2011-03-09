@@ -9,6 +9,7 @@
 use EPRTRmaster
 
 if object_id('EPRTRmaster.dbo.tAT_METHOD')is not null DROP TABLE EPRTRmaster.dbo.tAT_METHOD
+go
 CREATE TABLE EPRTRmaster.dbo.tAT_METHOD(
 	[MethodID] [int] IDENTITY(1,1) NOT NULL,
 	[MethodListID] [int] NOT NULL,
@@ -29,7 +30,9 @@ go
 --
 --------------------------------------------------------------------------------
 
-create procedure [dbo].[pAT_METHOD]
+if object_id('dbo.pAT_METHOD')is not null DROP procedure dbo.pAT_METHOD
+go
+create procedure dbo.pAT_METHOD
 as 
 begin
 

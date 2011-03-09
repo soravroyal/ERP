@@ -16,14 +16,15 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 
 :r $(basedir)\..\..\common\AddVersion.sql
 go
-
 :r $(basedir)\Add_fAT_GETMETHODDESIGNATION_TYPE.sql
 go
 :r $(basedir)\Add_tAT_METHOD.sql
 go
 :r $(basedir)\Add_MethodCode_MethodDesignation.sql
 go
+:r $(basedir)\ChangeViewsFACILITYSEARCH.sql
 
+go
 :r $(basedir)\AddSerbia.sql
 go
 
