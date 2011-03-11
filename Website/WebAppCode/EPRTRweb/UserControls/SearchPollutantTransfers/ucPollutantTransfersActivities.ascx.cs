@@ -322,11 +322,11 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetPollutantTransferActivityHeader();
+            string[] colHeaderRows = csvformat.GetPollutantTransferActivityColHeaderRows();
 
             Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Activity_List");
 
-            Response.Write(topheader + rowHeader);
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
 
             foreach (var item in rows)
             {
@@ -335,7 +335,7 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
                 if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
                 {
                     Response.Write(Environment.NewLine);
-                    Response.Write(rowHeader);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1]);
                 }
 
                 Response.Write(row);

@@ -22,9 +22,13 @@ namespace EPRTR.CsvUtilities
         private CultureInfo csvCulture;
 
         private const string NOTHING_REPORTED = "-";
-        const string QUANTITY_KEY_STR = "Quantity";
-        const string QUANTITY_ACCIDENTAL_KEY_STR = "AccidentalQuantity";
-        const string UNIT_KEY_STR = "QuantityUnit";
+        private const string QUANTITY_KEY_STR = "Quantity";
+        private const string QUANTITY_ACCIDENTAL_KEY_STR = "AccidentalQuantity";
+        private const string UNIT_KEY_STR = "QuantityUnit";
+
+        private const int NUMBER_ACTIVITYCOLS = 3;
+        private const int NUMBER_AREACOLS = 4;
+
 
         public CSVFormatter(string delimiter)
         {
@@ -969,15 +973,24 @@ namespace EPRTR.CsvUtilities
 
         #region pollutant release activity / area
 
-        public string GetPollutantReleaseActivityHeader(PollutantReleaseSearchFilter filter)
+        /// <summary>
+        /// returns an array with two rows containing column headers for pollutant releases activity CSV columns.
+        /// </summary>
+        public string[] GetPollutantReleaseActivityColHeaderRows(PollutantReleaseSearchFilter filter)
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty };
+            
+            string[] prColRows = getPollutantReleaseColHeaderRows(filter.MediumFilter);
 
-            result += addActivityTreeHeaderCols();
-            result += addPollutantReleaseHeaderCols(filter.MediumFilter);
+            //first row
+            colHeaders[0] += addEmptyCols(NUMBER_ACTIVITYCOLS);
+            colHeaders[0] += prColRows[0] + Environment.NewLine;
 
-            result += Environment.NewLine;
-            return result;
+            //second row
+            colHeaders[1] += addActivityTreeHeaderCols();
+            colHeaders[1] += prColRows[1] + Environment.NewLine;
+
+            return colHeaders;
         }
 
 
@@ -993,16 +1006,24 @@ namespace EPRTR.CsvUtilities
             return result;
         }
 
-
-        public string GetPollutantReleaseAreaHeader(PollutantReleaseSearchFilter filter)
+        /// <summary>
+        /// returns an array with two rows containing column headers for pollutant releases area CSV columns.
+        /// </summary>
+        public string[] GetPollutantReleaseAreaColHeaderRows(PollutantReleaseSearchFilter filter)
         {
-            string result = string.Empty;
 
-            result += addAreaTreeHeaderCols(filter.AreaFilter);
-            result += addPollutantReleaseHeaderCols(filter.MediumFilter);
+            string[] colHeaders = new string[] { string.Empty, string.Empty };
+            string[] prColRows = getPollutantReleaseColHeaderRows(filter.MediumFilter);
 
-            result += Environment.NewLine;
-            return result;
+            //first row
+            colHeaders[0] += addEmptyCols(NUMBER_AREACOLS);
+            colHeaders[0] += prColRows[0] + Environment.NewLine;
+
+            //second row
+            colHeaders[1] += addAreaTreeHeaderCols(filter.AreaFilter);
+            colHeaders[1] += prColRows[1] + Environment.NewLine;
+
+            return colHeaders;
         }
 
 
@@ -1019,16 +1040,22 @@ namespace EPRTR.CsvUtilities
         }
 
 
-        private string addPollutantReleaseHeaderCols(MediumFilter filter)
+        /// <summary>
+        /// returns an array with two rows containing column headers for pollutant releases columns.
+        /// </summary>
+        private string[] getPollutantReleaseColHeaderRows(MediumFilter filter)
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty };
 
             //facility headers
             string facilities = Resources.GetGlobal("Common", "Facilities");
             string accidental = Resources.GetGlobal("Common", "Accidental");
-            result += facilities + listSeparator;
-            result += string.Format("{0} - {1}", facilities, accidental) + listSeparator;
 
+            colHeaders[0] += addEmptyCols(2); //facility cols
+            colHeaders[1] += facilities + listSeparator;
+            colHeaders[1] += string.Format("{0} - {1}", facilities, accidental) + listSeparator;
+
+            //pollutant data headers
             foreach (var medium in new List<MediumFilter.Medium>() { 
                 MediumFilter.Medium.Air, 
                 MediumFilter.Medium.Water, 
@@ -1037,12 +1064,19 @@ namespace EPRTR.CsvUtilities
             {
                 if (filter.InludesMedium(medium))
                 {
-                    result += AddSimple(GetColumnHeaderByMedium(QUANTITY_KEY_STR, medium));
-                    result += AddSimple(GetColumnHeaderByMedium(QUANTITY_ACCIDENTAL_KEY_STR, medium));
-                    result += AddSimple(GetColumnHeaderByMedium(UNIT_KEY_STR, medium));
+                    string mediumStr = LOVResources.MediumName(EnumUtil.GetStringValue(medium));
+
+                    colHeaders[0] += AddSimple(mediumStr);
+                    colHeaders[1] += AddSimple(GetColumnHeaderByMedium(QUANTITY_KEY_STR, medium));
+
+                    colHeaders[0] += AddSimple(mediumStr);
+                    colHeaders[1] += AddSimple(GetColumnHeaderByMedium(QUANTITY_ACCIDENTAL_KEY_STR, medium));
+                    
+                    colHeaders[0] += AddSimple(mediumStr);
+                    colHeaders[1] += AddSimple(GetColumnHeaderByMedium(UNIT_KEY_STR, medium));
                 }
             }
-            return result;
+            return colHeaders;
         }
 
 
@@ -1096,35 +1130,6 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
-
-            // Level 0: Sector
-            // Level 1: Activity
-            // Level 2: Subactivity
-
-            //string pollutantLevelStr = string.Empty;
-            //if (r.Level == 0)
-            //{
-            //    if (ActivityTreeListRow.CODE_TOTAL.Equals(r.SectorCode))
-            //    {
-            //        pollutantLevelStr = Resources.GetGlobal("Common", "Total");
-            //    }
-            //    else
-            //    {
-            //        pollutantLevelStr = Resources.GetGlobal("Common", "Sector");
-            //    }
-            //}
-            //else if (r.Level == 1)
-            //{
-            //    pollutantLevelStr = Resources.GetGlobal("Common", "Activity");
-            //}
-            //else if (r.Level == 2)
-            //{
-            //    pollutantLevelStr = Resources.GetGlobal("Common", "Subactivity");
-            //}
-
-            //// add level
-            //result += AddSimple(pollutantLevelStr);
-
             // always add sector 
             result += AddSimple(LOVResources.AnnexIActivityName(r.SectorCode));
 
@@ -1161,7 +1166,6 @@ namespace EPRTR.CsvUtilities
         {
             string result = string.Empty;
 
-            //result += Resources.GetGlobal("Common", "Level") + listSeparator;
             result += Resources.GetGlobal("Common", "CountryCode") + listSeparator;
             result += Resources.GetGlobal("Common", "Country") + listSeparator;
 
@@ -1185,35 +1189,6 @@ namespace EPRTR.CsvUtilities
             string result = string.Empty;
 
             bool isRbd = filter.TypeRegion.Equals(AreaFilter.RegionType.RiverBasinDistrict);
-            // Level 0: Country
-            // Level 1: NUTS/RBD
-
-            //string pollutantLevelStr = string.Empty;
-            //if (r.Level == 0)
-            //{
-            //    if (AreaTreeListRow.CODE_TOTAL.Equals(r.CountryCode))
-            //    {
-            //        pollutantLevelStr = Resources.GetGlobal("Common", "Total");
-            //    }
-            //    else
-            //    {
-            //        pollutantLevelStr = Resources.GetGlobal("Common", "Country");
-            //    }
-            //}
-            //else if (r.Level == 1)
-            //{
-            //    if (isRbd)
-            //    {
-            //        pollutantLevelStr = Resources.GetGlobal("Common", "RiverBasinDistrict");
-            //    }
-            //    else
-            //    {
-            //        pollutantLevelStr = Resources.GetGlobal("Common", "NUTSRegion");
-            //    }
-            //}
-
-            // add level
-            //result += AddSimple(pollutantLevelStr);
 
             // always add country code and name
             result += AddSimple(r.CountryCode);
@@ -1251,15 +1226,26 @@ namespace EPRTR.CsvUtilities
 
         #region pollutant transfer activity/ area
 
-        public string GetPollutantTransferActivityHeader()
+
+        /// <summary>
+        /// returns an array with two rows containing column headers for pollutant transfer activity CSV columns.
+        /// </summary>
+        public string[] GetPollutantTransferActivityColHeaderRows()
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty };
 
-            result += addActivityTreeHeaderCols();
-            result += addPollutantTransferHeaderCols();
+            string[] ptColRows = getPollutanTransferColHeaderRows();
 
-            result += Environment.NewLine;
-            return result;
+            //first row
+            colHeaders[0] += addEmptyCols(NUMBER_ACTIVITYCOLS);
+            colHeaders[0] += ptColRows[0] + Environment.NewLine;
+
+            //second row
+            colHeaders[1] += addActivityTreeHeaderCols();
+            colHeaders[1] += ptColRows[1] + Environment.NewLine;
+
+            return colHeaders;
+
         }
 
         public string GetPollutantTransferActivityRow(PollutantTransfers.ActivityTreeListRow r)
@@ -1275,15 +1261,24 @@ namespace EPRTR.CsvUtilities
         }
 
 
-        public string GetPollutantTransferAreaHeader(PollutantTransfersSearchFilter filter)
+        /// <summary>
+        /// returns an array with two rows containing column headers for pollutant transfer area CSV columns.
+        /// </summary>
+        public string[] GetPollutantTransferAreaColHeaderRows(PollutantTransfersSearchFilter filter)
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty };
 
-            result += addAreaTreeHeaderCols(filter.AreaFilter);
-            result += addPollutantTransferHeaderCols();
+            string[] ptColRows = getPollutanTransferColHeaderRows();
 
-            result += Environment.NewLine;
-            return result;
+            //first row
+            colHeaders[0] += addEmptyCols(NUMBER_AREACOLS);
+            colHeaders[0] += ptColRows[0] + Environment.NewLine;
+
+            //second row
+            colHeaders[1] += addAreaTreeHeaderCols(filter.AreaFilter);
+            colHeaders[1] += ptColRows[1] + Environment.NewLine;
+
+            return colHeaders;
         }
 
 
@@ -1299,16 +1294,21 @@ namespace EPRTR.CsvUtilities
             return result;
         }
 
-        private string addPollutantTransferHeaderCols()
+        private string[] getPollutanTransferColHeaderRows()
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty };
+            string mediumStr = LOVResources.MediumName(EnumUtil.GetStringValue(MediumFilter.Medium.WasteWater));
+            
+            colHeaders[0] += addEmptyCols(1);
+            colHeaders[1] += Resources.GetGlobal("Common", "Facilities") + listSeparator;
 
-            result += Resources.GetGlobal("Common", "Facilities") + listSeparator;
+            colHeaders[0] += AddSimple(mediumStr);
+            colHeaders[1] += Resources.GetGlobal("Common", "Quantity") + listSeparator;
 
-            result += Resources.GetGlobal("Common", "Quantity") + listSeparator;
-            result += Resources.GetGlobal("Common", "QuantityUnit") + listSeparator;
+            colHeaders[0] += AddSimple(mediumStr);
+            colHeaders[1] += Resources.GetGlobal("Common", "QuantityUnit") + listSeparator;
 
-            return result;
+            return colHeaders;
         }
 
         private string addPollutantTransferCols(PollutantTransfers.PollutantTransferRow r)
@@ -1327,26 +1327,26 @@ namespace EPRTR.CsvUtilities
 
         #region waste transfer activity / area
 
-        public string GetWasteTransferActivityHeader(WasteTransferSearchFilter filter)
+        /// <summary>
+        /// returns an array with three rows containing column headers for pollutant transfer activity CSV columns.
+        /// </summary>
+        public string[] GetWasteTransferActivityColHeaderRows(WasteTransferSearchFilter filter)
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty, string.Empty };
 
-            string[] headerrows = addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
+            string[] wtColrows = getWasteTransferColHeaderRows(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
-            result += addEmptyCols(3); //activity cols.
-            result += headerrows[0];
-            result += Environment.NewLine;
+            colHeaders[0] += addEmptyCols(NUMBER_ACTIVITYCOLS); //activity cols.
+            colHeaders[0] += wtColrows[0] + Environment.NewLine;
 
-            result += addEmptyCols(3); //activity cols.
-            result += headerrows[1];
-            result += Environment.NewLine;
+            colHeaders[1] += addEmptyCols(NUMBER_ACTIVITYCOLS); //activity cols.
+            colHeaders[1] += wtColrows[1] + Environment.NewLine;
 
             //activity tree headers
-            result += addActivityTreeHeaderCols();
-            result += headerrows[2];
-            result += Environment.NewLine;
+            colHeaders[2] += addActivityTreeHeaderCols();
+            colHeaders[2] += wtColrows[2] + Environment.NewLine;
 
-            return result;
+            return colHeaders;
         }
 
         public string GetWasteTransferActivityRow(WasteTransfers.ActivityTreeListRow r, WasteTransferSearchFilter filter)
@@ -1361,26 +1361,26 @@ namespace EPRTR.CsvUtilities
             return result;
         }
 
-        public string GetWasteTransferAreaHeader(WasteTransferSearchFilter filter)
+        /// <summary>
+        /// returns an array with three rows containing column headers for pollutant transfer area CSV columns.
+        /// </summary>
+        public string[] GetWasteTransferAreaColHeaderRows(WasteTransferSearchFilter filter)
         {
-            string result = string.Empty;
+            string[] colHeaders = new string[] { string.Empty, string.Empty, string.Empty };
 
-            string[] headerrows = addWasteTransferHeaderCols(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
+            string[] wtColrows = getWasteTransferColHeaderRows(filter.WasteTypeFilter, filter.WasteTreatmentFilter);
 
-            result += addEmptyCols(4); //area cols.
-            result += headerrows[0];
-            result += Environment.NewLine;
+            colHeaders[0] += addEmptyCols(NUMBER_AREACOLS); //area cols.
+            colHeaders[0] += wtColrows[0] + Environment.NewLine;
 
-            result += addEmptyCols(4); //area cols.
-            result += headerrows[1];
-            result += Environment.NewLine;
+            colHeaders[1] += addEmptyCols(NUMBER_AREACOLS); //area cols.
+            colHeaders[1] += wtColrows[1] + Environment.NewLine;
 
 
-            result += addAreaTreeHeaderCols(filter.AreaFilter);
-            result += headerrows[2];
-            result += Environment.NewLine;
+            colHeaders[2] += addAreaTreeHeaderCols(filter.AreaFilter);
+            colHeaders[2] += wtColrows[2] + Environment.NewLine;
 
-            return result;
+            return colHeaders;
         }
 
 
@@ -1398,7 +1398,7 @@ namespace EPRTR.CsvUtilities
 
 
 
-        private string[] addWasteTransferHeaderCols(WasteTypeFilter typeFilter, WasteTreatmentFilter treatmentFilter)
+        private string[] getWasteTransferColHeaderRows(WasteTypeFilter typeFilter, WasteTreatmentFilter treatmentFilter)
         {
             string header1 = string.Empty;
             string header2 = string.Empty;
