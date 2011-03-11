@@ -23,6 +23,8 @@ go
 :r $(basedir)\Add_MethodCode_MethodDesignation.sql
 go
 :r $(basedir)\ChangeViewsFACILITYSEARCH.sql
+go
+:r $(basedir)\CreateView_vAT_ExtraxtForDG_ENV.sql
 
 go
 :r $(basedir)\AddSerbia.sql
