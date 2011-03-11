@@ -35,6 +35,7 @@ namespace QueryLayer
     partial void DeleteFACILITYSEARCH_MAINACTIVITY(FACILITYSEARCH_MAINACTIVITY instance);
     #endregion
 		
+		
 		public DataClassesFacilityDataContext(string connection) : 
 				base(connection, mappingSource)
 		{

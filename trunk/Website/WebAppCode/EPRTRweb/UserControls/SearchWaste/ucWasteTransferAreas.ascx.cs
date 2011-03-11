@@ -431,11 +431,11 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetWasteTransferAreaHeader(filter);
+            string[] colHeaderRows = csvformat.GetWasteTransferAreaColHeaderRows(filter);
 
             Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Area_List");
 
-            Response.Write(topheader + rowHeader);
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
 
             foreach (var item in rows)
             {
@@ -444,7 +444,7 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
                 if (AreaTreeListRow.CODE_TOTAL.Equals(item.Code))
                 {
                     Response.Write(Environment.NewLine);
-                    Response.Write(rowHeader);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
                 }
 
                 Response.Write(row);

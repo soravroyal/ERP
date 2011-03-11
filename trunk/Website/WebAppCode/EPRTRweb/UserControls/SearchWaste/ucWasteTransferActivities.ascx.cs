@@ -472,11 +472,11 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetWasteTransferActivityHeader(filter);
+            string[] colHeaderRows = csvformat.GetWasteTransferActivityColHeaderRows(filter);
 
             Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Activity_List");
 
-            Response.Write(topheader + rowHeader);
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
 
             foreach (var item in rows)
             {
@@ -485,7 +485,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
                 if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
                 {
                     Response.Write(Environment.NewLine);
-                    Response.Write(rowHeader);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
                 }
 
                 Response.Write(row);

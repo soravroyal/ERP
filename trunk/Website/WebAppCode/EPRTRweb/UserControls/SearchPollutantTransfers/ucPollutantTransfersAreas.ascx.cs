@@ -295,11 +295,11 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 
             // dump to file
             string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetPollutantTransferAreaHeader(filter);
+            string[] colHeaderRows = csvformat.GetPollutantTransferAreaColHeaderRows(filter);
 
             Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Area_List");
 
-            Response.Write(topheader + rowHeader);
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
 
             foreach (var item in rows)
             {
@@ -308,7 +308,7 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
                 if (AreaTreeListRow.CODE_TOTAL.Equals(item.Code))
                 {
                     Response.Write(Environment.NewLine);
-                    Response.Write(rowHeader);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1]);
                 }
 
                 Response.Write(row);
