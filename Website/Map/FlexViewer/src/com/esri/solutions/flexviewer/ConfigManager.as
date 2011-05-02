@@ -62,8 +62,8 @@ package com.esri.solutions.flexviewer
 						urlPrefix = urlPrefix + "/";
 					}
 	            } 
-	            configFileName = "config_mapsearch_ex.xml"
-				//configFileName = "config_diffuse_emissions_air_ex.xml"
+	           configFileName = "config_mapsearch_ex.xml"
+				 //configFileName = "config_diffuse_emissions_air_ex.xml"
 					if ( appParameters["configfile"] != null){
 	          	  configFileName = appParameters["configfile"];
 	            }
