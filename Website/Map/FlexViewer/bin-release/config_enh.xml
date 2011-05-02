@@ -32,7 +32,7 @@
 		<basemaps menu="menuMap">
 			<mapservice label="Street Map" type="tiled" visible="true" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_highway.png" >http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer</mapservice>
 			<mapservice label="Satellite" type="tiled" visible="false" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_satellite.png" url="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"></mapservice>
-			<mapservice label="River Basin Districts" type="tiled" visible="false" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_RBD_layer.png" overlay="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_RBDs/MapServer" overlaytype="dynamic" overlayalpha="0.6" legend="com/esri/solutions/flexviewer/assets/images/legends/EPRTR_RBD_legend.png" >http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer</mapservice>
+			<mapservice label="River Basin Districts" type="tiled" visible="false" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_RBD_layer.png" overlay="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_RBDs/MapServer" overlaytype="dynamic" overlayalpha="0.6" legend="com/esri/solutions/flexviewer/assets/images/legends/EPRTR_RBD_legend.png" >http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer</mapservice>
 		</basemaps>
 		<!--basemaps menu="menuMap">
 			<mapservice label="Street Map" type="tiled" visible="true" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_highway.png">http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer</mapservice>
@@ -60,52 +60,52 @@
 				</layers>			
 			</mapservice-->
 			
-			<mapservice label="9 Other activities" id="sector9" iconShape="triangle" iconSize="10" iconColor="0xFF009D" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector9/MapServer" >
+			<mapservice label="9 Other activities" id="sector9" iconShape="triangle" iconSize="10" iconColor="0xFF009D" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector9/MapServer" >
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '9' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector8" label="8 Animal and vegetable products from the food and beverage sector" iconShape="triangle" iconSize="10" iconColor="0xE6E600" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector8/MapServer">
+			<mapservice id="sector8" label="8 Animal and vegetable products from the food and beverage sector" iconShape="triangle" iconSize="10" iconColor="0xE6E600" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector8/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '8' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector7" label="7 Intensive livestock production and aquaculture" iconShape="triangle" iconSize="10" iconColor="0xA80000" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector7/MapServer">
+			<mapservice id="sector7" label="7 Intensive livestock production and aquaculture" iconShape="triangle" iconSize="10" iconColor="0xA80000" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector7/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '7' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector6" label="6 Paper and wood production processing" iconShape="triangle" iconSize="10" iconColor="0x8400A8" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector6/MapServer">
+			<mapservice id="sector6" label="6 Paper and wood production processing" iconShape="triangle" iconSize="10" iconColor="0x8400A8" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector6/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '6' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector5" label="5 Waste and waste water management" iconShape="triangle" iconSize="10" iconColor="0x55FF00" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector5/MapServer">
+			<mapservice id="sector5" label="5 Waste and waste water management" iconShape="triangle" iconSize="10" iconColor="0x55FF00" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector5/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '5' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector4" label="4 Chemical industry" iconShape="triangle" iconSize="10" iconColor="0x000000" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector4/MapServer">
+			<mapservice id="sector4" label="4 Chemical industry" iconShape="triangle" iconSize="10" iconColor="0x000000" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector4/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '4' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice  id="sector3" label="3 Mineral industry" iconShape="triangle" iconSize="10" iconColor="0xFF5500" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector3/MapServer">
+			<mapservice  id="sector3" label="3 Mineral industry" iconShape="triangle" iconSize="10" iconColor="0xFF5500" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector3/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '3' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector2" label="2 Production and processing of metals" iconShape="triangle" iconSize="10" iconColor="0x00E6A9" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector2/MapServer">
+			<mapservice id="sector2" label="2 Production and processing of metals" iconShape="triangle" iconSize="10" iconColor="0x00E6A9" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector2/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '2' AND CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 				</layers>
 			</mapservice>
-			<mapservice id="sector1" label="1 Energy sector" iconShape="triangle" iconSize="10" iconColor="0x267300" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector1/MapServer">
+			<mapservice id="sector1" label="1 Energy sector" iconShape="triangle" iconSize="10" iconColor="0x267300" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector1/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where IASectorCode = '1' [wherevalue])  AND CoordinateStatusCode &lt;&gt; 'MISSING'"></layer>
 				</layers>
 			</mapservice>
-			<!--mapservice id="sector1" label="1 Energy sector" iconShape="triangle" iconSize="10" iconColor="0x267300" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector1_leveltest/MapServer">
+			<!--mapservice id="sector1" label="1 Energy sector" iconShape="triangle" iconSize="10" iconColor="0x267300" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB/EPRTR_Sector1_leveltest/MapServer">
 				<layers>
 						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from FACILITYSEARCH_ALL where CoordinateStatusCode &lt;&gt; 'MISSING' [wherevalue])"></layer>
 						<layer id="1" visible="false" definition="IASectorCode = '0'"></layer>
@@ -115,7 +115,7 @@
 				</layers>
 			</mapservice-->		
 			
-			<!--mapservice label="E-PRTR Facilities test" iconShape="circle" iconSize="10" iconColor="0x005CE6" type="dynamic" visible="true" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/facilityReportTest/MapServer">
+			<!--mapservice label="E-PRTR Facilities test" iconShape="circle" iconSize="10" iconColor="0x005CE6" type="dynamic" visible="true" alpha="1" url="http://sdkcga6307/ArcGIS/rest/services/facilityReportTest/MapServer">
 					<layers>
 						<layer id="0" iconShape="circle" iconSize="10" iconColor="0x005CE6" visible="true" definition="FacilityReportID=1"></layer>
 						<layer id="1" iconShape="rectangle" iconSize="10" iconColor="0x8000E6" visible="true" definition=""></layer>
@@ -140,7 +140,7 @@
 		<widget label="Overview Map" widgetresourcefile="OverviewMapWidgetStrings" preload="true" invisbtns="close" icon="com/esri/solutions/flexviewer/assets/images/icons/i_overview.png" menu="menuWidgets" config="com/esri/solutions/flexviewer/widgets/OverviewMapWidget.xml">com/esri/solutions/flexviewer/widgets/OverviewMapWidget.swf</widget>	
 		<widget label="Bookmarks" preload="true" widgetresourcefile="BookmarkWidgetStrings"  invisbtns="close" icon="com/esri/solutions/flexviewer/assets/images/icons/i_bookmark.png"  config="com/esri/solutions/flexviewer/widgets/BookmarkWidget.xml">com/esri/solutions/flexviewer/widgets/BookmarkWidget.swf</widget>	
 		<widget label="Layer List" invisbtns="close" widgetresourcefile="FilterAllWidgetStrings"  preload="true" icon="com/esri/solutions/flexviewer/assets/images/icons/i_layers.png"  menu="menuWidgets"  config="com/esri/solutions/flexviewer/widgets/FilterLiveMapsWidget_search.xml">com/esri/solutions/flexviewer/widgets/FilterLiveMapsWidget.swf</widget>
-		<widget label="Search" invisbtns="close" preload="true"  widgetresourcefile="SearchAllWidgetStrings" icon="com/esri/solutions/flexviewer/assets/images/icons/i_search.png" menu="menuWidgets" config="com/esri/solutions/flexviewer/widgets/SearchWidget.xml" baserestserverurl="http://discomap.eea.europa.eu/ArcGIS/rest/services/PRTR_WEB">com/esri/solutions/flexviewer/widgets/SearchWidgetAllLayers.swf</widget>
+		<widget label="Search" invisbtns="close" preload="true"  widgetresourcefile="SearchAllWidgetStrings" icon="com/esri/solutions/flexviewer/assets/images/icons/i_search.png" menu="menuWidgets" config="com/esri/solutions/flexviewer/widgets/SearchWidget.xml" baserestserverurl="http://sdkcga6307/ArcGIS/rest/services/PRTR_WEB">com/esri/solutions/flexviewer/widgets/SearchWidgetAllLayers.swf</widget>
 		<widget label="Print and Download"  widgetresourcefile="PrintWidgetStrings"  icon="com/esri/solutions/flexviewer/assets/images/icons/i_print_download.png" menu="menuWidgets" invisbtns="close" preload="true" config="com/esri/solutions/flexviewer/widgets/PrintWidget.xml">com/esri/solutions/flexviewer/widgets/PrintWidget.swf</widget>
 		<!--widget label="Draw" invisbtns="close"icon="com/esri/solutions/flexviewer/assets/images/icons/i_draw.png" menu="menuWidgets" config="com/esri/solutions/flexviewer/widgets/DrawWidget.xml">com/esri/solutions/flexviewer/widgets/DrawWidget.swf</widget-->	
 		<!--widget label="About" icon="com/esri/solutions/flexviewer/assets/images/icons/i_about.png" menu="menuHelp" config="com/esri/solutions/flexviewer/widgets/AboutWidget.xml">com/esri/solutions/flexviewer/widgets/AboutWidget.swf</widget-->
