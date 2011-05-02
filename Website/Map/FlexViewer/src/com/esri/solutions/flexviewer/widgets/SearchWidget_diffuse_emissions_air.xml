@@ -1,0 +1,307 @@
+<?xml version="1.0" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<configuration>
+	<layers>
+		<layer>
+			<name>Facilities</name>
+			<url>Air/EprtrFacilities_Dyna_WGS84/MapServer/0</url>
+			<otherurls>
+				<otherurl ignoreIfNotvisible="true">
+					<ignoreIfNotvisible>true</ignoreIfNotvisible>					
+					<url>Internal/EprtrRBDs_Dyna_WGS84/MapServer/0</url>
+					<fields>CTY_ID,NAME,EU_MS</fields>
+					<titlefield>NAME</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>				
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/0</url>
+					<fields>v_12_Ind_NOx_Pollutant_name,v_12_Ind_NOx_Emi5km</fields>
+					<titlefield>v_12_Ind_NOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/1</url>
+					<fields>v_72_Resi_NOx_v1_Pollutant_name,v_72_Resi_NOx_v1_Emi5km_v1</fields>
+					<titlefield>v_72_Resi_NOx_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/2</url>
+					<fields>v_22_Road_NOx_Pollutant_name,v_22_Road_NOx_Emi5km</fields>
+					<titlefield>v_22_Road_NOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/3</url>
+					<fields>v_52_Nat_nav_NOx_Pollutant_name,v_52_Nat_nav_NOx_Emi5km</fields>
+					<titlefield>v_52_Nat_nav_NOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/4</url>
+					<fields>v_32_LTO_NOx_Pollutant_name,v_32_LTO_NOx_Emi5km</fields>
+					<titlefield>v_32_LTO_NOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl> 
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/5</url>
+					<fields>v_11_Ind_SOx_Pollutant_name,v_11_Ind_SOx_Emi5km</fields>
+					<titlefield>v_11_Ind_SOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/6</url>
+					<fields>v_71_Resi_SOx_v1_Pollutant_name,v_71_Resi_SOx_v1_Emi5km_v1</fields>
+					<titlefield>v_71_Resi_SOx_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/7</url>
+					<fields>v_21_Road_SOx_Pollutant_name,v_21_Road_SOx_Emi5km</fields>
+					<titlefield>v_21_Road_SOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/8</url>
+					<fields>v_51_Nat_nav_SOx_Pollutant_name,v_51_Nat_nav_SOx_Emi5km</fields>
+					<titlefield>v_51_Nat_nav_SOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/9</url>
+					<fields>v_31_LTO_SOx_Pollutant_name,v_31_LTO_SOx_Emi5km</fields>
+					<titlefield>v_31_LTO_SOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/10</url>
+					<fields>v_13_Ind_PM10_Pollutant_name,v_13_Ind_PM10_Emi5km</fields>
+					<titlefield>v_13_Ind_PM10_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/11</url>
+					<fields>v_73_Resi_PM10_v1_Pollutant_name,v_73_Resi_PM10_v1_Emi5km_v1</fields>
+					<titlefield>v_73_Resi_PM10_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/12</url>
+					<fields>v_23_Road_PM10_Pollutant_name,v_23_Road_PM10_Emi5km</fields>
+					<titlefield>v_23_Road_PM10_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/13</url>
+					<fields>v_53_Nat_nav_PM10_Pollutant_name,v_53_Nat_nav_PM10_Emi5km</fields>
+					<titlefield>v_53_Nat_nav_PM10_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/14</url>
+					<fields>v_33_LTO_PM10_Pollutant_name,v_33_LTO_PM10_Emi5km</fields>
+					<titlefield>v_33_LTO_PM10_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/15</url>
+					<fields>v_62_Agri_PM10_v1_Pollutant_name,v_62_Agri_PM10_v1_Emi5km_v1</fields>
+					<titlefield>v_62_Agri_PM10_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl> 
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/16</url>
+					<fields>v_61_Agri_NH3_v1_Pollutant_name,v_61_Agri_NH3_v1_Emi5km_v1</fields>
+					<titlefield>v_61_Agri_NH3_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/17</url>
+					<fields>v_14_Ind_CO_Pollutant_name,v_14_Ind_CO_Emi5km</fields>
+					<titlefield>v_14_Ind_CO_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/18</url>
+					<fields>v_74_Resi_CO_v1_Pollutant_name,v_74_Resi_CO_v1_Emi5km_v1</fields>
+					<titlefield>v_74_Resi_CO_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/19</url>
+					<fields>v_24_Road_CO_Pollutant_name,v_24_Road_CO_Emi5km</fields>
+					<titlefield>v_24_Road_CO_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/20</url>
+					<fields>v_54_Nat_nav_CO_Pollutant_name,v_54_Nat_nav_CO_Emi5km</fields>
+					<titlefield>v_54_Nat_nav_CO_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/21</url>
+					<fields>v_34_LTO_CO_Pollutant_name,v_34_LTO_CO_Emi5km</fields>
+					<titlefield>v_34_LTO_CO_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+					<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/22</url>
+					<fields>v_15_Ind_CO2_Pollutant_name,v_15_Ind_CO2_Emi5km</fields>
+					<titlefield>v_15_Ind_CO2_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/23</url>
+					<fields>v_75_Resi_CO2_v1_Pollutant_name,v_75_Resi_CO2_v1_Emi5km_v1</fields>
+					<titlefield>v_75_Resi_CO2_v1_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				
+					<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/24</url>
+					<fields>v_25_Road_CO2_Pollutant_name,v_25_Road_CO2_Emi5km</fields>
+					<titlefield>v_25_Road_CO2_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/25</url>
+					<fields>v_55_Nat_nav_CO2_Pollutant_name,v_55_Nat_nav_CO2_Emi5km</fields>
+					<titlefield>v_55_Nat_nav_CO2_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				
+					<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/26</url>
+					<fields>Pollutant_name,Emi5km</fields>
+					<titlefield>Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/27</url>
+					<fields>v_42_Int_ship_NOx_Pollutant_name,v_42_Int_ship_NOx_Emi5km</fields>
+					<titlefield>v_42_Int_ship_NOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				
+				´<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/28</url>
+					<fields>v_41_Int_ship_SOx_Pollutant_name,v_41_Int_ship_SOx_Emi5km</fields>
+					<titlefield>v_41_Int_ship_SOx_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/29</url>
+					<fields>v_43_Int_ship_PM10_Pollutant_name,v_43_Int_ship_PM10_Emi5km</fields>
+					<titlefield>v_43_Int_ship_PM10_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				
+				´<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/30</url>
+					<fields>v_44_Int_ship_CO_Pollutant_name,v_44_Int_ship_CO_Emi5km</fields>
+					<titlefield>v_44_Int_ship_CO_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				<otherurl queryIfNotvisible="false">					
+					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/31</url>
+					<fields>v_45_Int_ship_CO2_Pollutant_name,v_45_Int_ship_CO2_Emi5km</fields>
+					<titlefield>v_45_Int_ship_CO2_Pollutant_name</titlefield>
+					<returngeometry>false</returngeometry>
+					<drawselection>point</drawselection>
+				</otherurl>
+				
+				
+			</otherurls>			
+			<expression>upper(FacilityName) LIKE upper('%[value]%') OR upper(City) LIKE upper('%[value]%') OR upper(PostalCode) = upper('[value]')</expression>
+			<textsearchlabel>Search by facility name, city or postal code:</textsearchlabel>
+			<graphicalsearchlabel>Use one of the graphical search tools to select facilities</graphicalsearchlabel>
+			<fields>FacilityName,Address,City,PostalCode,Country,FacilityReportID,IASectorCode</fields>
+			<textfields>FacilityName,Address,City,PostalCode,Country,FacilityReportID,IASectorCode</textfields>
+			<fieldaliases>CTY_ID:Country,NAME:,EU_MS:Is EU member state,RDB_NAME:River Basin District,AGRN_DIV_A:kg N/ha RBD land area/year,AGRP_DIV_A:kg P/ha RBD land area/year,SPEC_AGRN:kg N/ha agricultural land area/year,SPEC_AGRP:kg P/ha agricultural land area/year,NDATA_TYPE:Load location,YEAR_:Year,_SNAP2.NOx:NOx emissions from non-industrial combustion t/year ,_SNAP7.NOx:NOx emissions from road transport t/year ,_SNAP8.NOx:NOx emissions from other mobile sources t/year ,_SNAP2.SO2:SO2 emissions from non-industrial combustion t/year ,_SNAP7.SO2:SO2 emissions from road transport t/year ,_SNAP8.SO2:SO2 emissions from other mobile sources t/year ,_SNAP2.CO:CO emissions from non-industrial combustion t/year ,_SNAP7.CO:CO emissions from road transport t/year ,_SNAP8.CO:CO emissions from other mobile sources t/year ,_SNAP2.PM10:PM10 emissions from non-industrial combustion t/year ,_SNAP7.PM10:PM10 emissions from road transport t/year ,_SNAP8.PM10:PM10 emissions from other mobile sources t/year ,_SNAP10.PM10:PM10 emissions from agricultural sources t/year  ,_SNAP10.NH3:NH3 emissions from agricultural sources t/year,v_12_Ind_NOx_Emi5km:Emission,v_12_Ind_NOx_Pollutant_name:NOx emissions from diffuse industrial releases, t/grid,v_22_Road_NOx_Emi5km:Emission,v_72_Resi_NOx_v1_Emi5km_v1:Emission,v_52_Nat_nav_NOx_Emi5km:Emission,v_32_LTO_NOx_Emi5km:Emission,v_11_Ind_SOx_Emi5km:Emission,v_71_Resi_SOx_v1_Emi5km_v1:Emission,v_21_Road_SOx_Emi5km:Emission,v_51_Nat_nav_SOx_Emi5km:Emission,v_31_LTO_SOx_Emi5km:Emission,v_13_Ind_PM10_Emi5km:Emission,v_73_Resi_PM10_v1_Emi5km_v1:Emission,v_23_Road_PM10_Emi5km:Emission,v_53_Nat_nav_PM10_Emi5km:Emission,v_33_LTO_PM10_Emi5km:Emission,v_62_Agri_PM10_v1_Emi5km_v1:Emission,v_61_Agri_NH3_v1_Emi5km_v1:Emission,v_14_Ind_CO_Emi5km:Emission,v_74_Resi_CO_v1_Emi5km_v1:Emission,v_24_Road_CO_Emi5km:Emission,v_54_Nat_nav_CO_Emi5km:Emission,v_34_LTO_CO_Emi5km:Emission,v_15_Ind_CO2_Emi5km:Emission,v_75_Resi_CO2_v1_Emi5km_v1:Emission,v_25_Road_CO2_Emi5km:Emission,v_55_Nat_nav_CO2_Emi5km:Emission,Emi5km:Emission,v_42_Int_ship_NOx_Emi5km:Emission,v_41_Int_ship_SOx_Emi5km:Emission,v_43_Int_ship_PM10_Emi5km:Emission,v_44_Int_ship_CO_Emi5km:Emission,v_45_Int_ship_CO2_Emi5km:Emission</fieldaliases>
+			<!--v_12_Ind_NOx_Emi5km:,v_12_Ind_NOx_Pollutant_name:,v_72_Resi_NOx_v1_Pollutant_name:NOx emissions from non-industrial combustion t/year-->
+			<valuealiases>
+				<valuealias field="IASectorCode">1:1 Energy sector,2:2 Production and processing of metals,3:3 Mineral industry,4:4 Chemical industry,5:5 Waste and waste water management,6:6 Paper and wood production processing,7:7 Intensive livestock production and aquaculture,8:8 Animal and vegetable products from the food and beverage sector,9:9 Other activities,EPER_1:EPER 1 Energy Industries,EPER_2:EPER 2 Production and processing of metals,EPER_3:EPER 3 Mineral Industry,EPER_4:EPER 4 Chemical industry,EPER_5:EPER 5 Waste management,EPER_6:EPER 6 Other industrial activities</valuealias>
+				<valuealias field="v_12_Ind_NOx_Pollutant_name">NOx:NOx emissions from diffuse industrial releases, t/grid</valuealias>
+				<valuealias field="_SNAP7.SECTOR">S7:Road transport</valuealias>
+				<valuealias field="_SNAP10.SECTOR">S10:Agriculture</valuealias>
+				<valuealias field="_SNAP8.SECTOR">S8:Other mobile sources and machinery</valuealias>				
+				
+			</valuealiases>
+			<uniformfields>false</uniformfields>
+			<excludefromtextsearch>EprtrRBDs_Dyna_WGS84/MapServer/0</excludefromtextsearch>
+			<titlefield>FacilityName</titlefield>
+			<linkfield></linkfield>
+			<linktext>Show facility details</linktext>
+			<prelinkfield>FacilityReportID</prelinkfield>
+			<prelink></prelink>
+		</layer>
+		<!--layer>
+			<name>Facilities</name>
+			<url>EprtrRBDs_Dyna_WGS84/MapServer/0</url>
+					
+			<expression>upper(NAME) LIKE upper('%[value]%')</expression>
+			<textsearchlabel>Search by rbd name:</textsearchlabel>
+			<graphicalsearchlabel>Use one of the graphical search tools to select on map</graphicalsearchlabel>
+			<fields>CTY_ID,NAME,EU_MS</fields>
+			<textfields>CTY_ID,NAME,EU_MS</textfields>
+			<fieldaliases>CTY_ID:Country,NAME:,EU_MS:Is EU member state</fieldaliases>
+			<uniformfields>false</uniformfields>
+			<excludefromtextsearch></excludefromtextsearch>
+			<titlefield>NAME</titlefield>
+			<linkfield></linkfield>
+			<linktext></linktext>
+			<prelinkfield></prelinkfield>
+			<prelink></prelink>
+		</layer-->
+	</layers>
+	<labels>
+		<selectionlabel>Selected Features</selectionlabel>
+	</labels>	
+	<zoomscale>50000</zoomscale>
+</configuration>

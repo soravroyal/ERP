@@ -127,6 +127,7 @@
 			
 			private var queryGeom:Geometry;
 			
+			private var clickedPoint:Geometry;
 			private var queryExpr:String;
 			
 			private var queryFields:String;
@@ -589,6 +590,7 @@
 			//query features graphical
 			private function queryFeaturesGraphical(graphic:Graphic):void
 			{
+				clickedPoint = null;
 				var geom:Geometry = graphic.geometry;				
 				lastInfoData = null;
 				CursorManager.setBusyCursor(); 
@@ -596,6 +598,7 @@
 				if(geom.type == Geometry.MAPPOINT )
 				{					
 				      			
+			        clickedPoint = geom;    			
  					var mapWidth:Number = map.extent.width;
 					//Divide width in map units by width in pixels
 					var pixelWidth:Number = mapWidth/map.width;	
@@ -898,6 +901,12 @@
 					var hasQueryFieldAliases:Boolean = queryFieldAliases != null;
 					var valueAliases:Object = queryValueAliases;
 					var hasValueAlias:Boolean = false;
+					
+					
+					//if(clickedPoint && LayerDetailsObj[mapLayerUrl][layerId]["result"]["geometryType"] != Geometry.MAPPOINT){
+					if((clickedPoint && !gra.geometry) || (clickedPoint && gra.geometry && gra.geometry.type != Geometry.MAPPOINT)){
+						point = new MapPoint(MapPoint(clickedPoint).x,MapPoint(clickedPoint).y);
+					}
 					
     		        for (fld in obj)
     		        {
