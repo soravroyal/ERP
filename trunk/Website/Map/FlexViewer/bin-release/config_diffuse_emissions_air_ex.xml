@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="config_enh.xsd">
+	<userinterface>
+		<collapsewidgets>true</collapsewidgets>
+		<hidewidgetscontrol>false</hidewidgetscontrol>
+		<banner>visible</banner>
+		<title>E-PRTR</title>
+		<locale>en_GB</locale>
+		<subtitle>The European Pollutant Release and Transfer Register</subtitle>
+		<logo>com/esri/solutions/flexviewer/assets/images/icons/eprtrimagelogo_small.png</logo>
+		<!-- http://localhost/ google map key: 
+			<findlocation inputtext="Find location.." noresulttext="No results" searchtext="Find" cleartext="Clear result">ABQIAAAAA1acrdbJJPhJK7NdgNERGBT2yXp_ZAY8_ufC3CFXhHIE1NvwkxS1kwpbnUMweJ-vXqNQzO77QCScNQ</findlocation>
+		-->
+		<!-- http://prtr.ec.europa.eu/ google map key: 	-->
+			<findlocation inputtext="Find location.." noresulttext="No results" searchtext="Find" cleartext="Clear result">ABQIAAAAA1acrdbJJPhJK7NdgNERGBQP9DYj1SGFg6FM-rqk8vMgigJ1RBSHXcG5VbvJ5me6pgaERQCc7FgAPg</findlocation>
+		<!-- -->
+		<stylesheet>com/esri/solutions/flexviewer/themes/lighterside/style.swf</stylesheet>
+		<menus>
+			<menu id="menuMap" target="standaloneMenu" visible="true" icon="com/esri/solutions/flexviewer/assets/images/icons/i_globe.png">Background Map</menu>
+			<menu id="menuNav" target="customMenu" visible="true" icon="com/esri/solutions/flexviewer/assets/images/icons/i_nav.png">Navigation</menu>
+			<menu id="menuWidgets" visible="false" icon="com/esri/solutions/flexviewer/assets/images/icons/i_widget.png">Tools</menu>
+			<menu id="menuTools" visible="true" icon="com/esri/solutions/flexviewer/assets/images/icons/i_widget.png">Tools</menu>
+		</menus>
+	</userinterface>
+	<map initialExtent="-32.2 12.4 54.59 86.92" fullExtent="-32.2 12.4 54.59 86.92" showzoomslider="true" scrollwheelzoomenabled="true" lodminlevel="">
+		<basemaps menu="menuMap">
+			<mapservice label="Street Map" type="tiled" visible="true" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_highway.png" >http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer</mapservice>
+			<mapservice label="Satellite" type="tiled" visible="false" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_satellite.png" url="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer"></mapservice>
+			<mapservice label="River Basin Districts Street" type="tiled" visible="false" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_RBDstreet_layer.png" overlay="http://discomap.eea.europa.eu/ArcGIS/rest/services/Internal/EprtrRBDs_Dyna_WGS84/MapServer" overlaytype="dynamic" overlayalpha="0.6" legend="com/esri/solutions/flexviewer/assets/images/legends/[locale]/EPRTR_RBD_legend.png" >http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer</mapservice>
+			<mapservice label="River Basin Districts" type="tiled" visible="false" alpha="1" icon="com/esri/solutions/flexviewer/assets/images/icons/i_RBD_layer.png" overlay="http://discomap.eea.europa.eu/ArcGIS/rest/services/Internal/EprtrRBDs_Dyna_WGS84/MapServer" overlaytype="dynamic" overlayalpha="0.6" legend="com/esri/solutions/flexviewer/assets/images/legends/[locale]/EPRTR_RBD_legend.png" >http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_ShadedRelief_World_2D/MapServer</mapservice>
+		</basemaps>
+
+		<livemaps>
+			<mapservice id="air" label="Diffuse Emmissions to Air" type="dynamic" visible="false" alpha="0.6" url="http://localhost/ArcGIS/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer" >
+				<layers>
+					<layer id="0" visible="true" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/0.PNG"></layer>
+					<layer id="1" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/1.PNG"></layer>
+					<layer id="2"  visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/2.PNG"></layer>					
+					<layer id="3" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/3.PNG"></layer>
+					<layer id="4" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/4.PNG"></layer>
+					<layer id="5" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/5.PNG"></layer>					
+					<layer id="6" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/6.PNG"></layer>
+					<layer id="7"  visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/7.PNG"></layer>
+					<layer id="8" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/8.PNG"></layer>					
+					<layer id="9" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/9.PNG"></layer>
+					<layer id="10" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/10.PNG"></layer>
+					<layer id="11" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/11.PNG"></layer>
+					<layer id="12" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/12.PNG"></layer>					
+					<layer id="13" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/13.PNG"></layer>
+					<layer id="14" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/14.PNG"></layer>
+					<layer id="15" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/15.PNG"></layer>
+					<layer id="16" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/16.PNG"></layer>
+					<layer id="17"  visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/17.PNG"></layer>
+					<layer id="18" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/18.PNG"></layer>
+					<layer id="19" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/19.PNG"></layer>
+					<layer id="20" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/20.PNG"></layer>
+					<layer id="21" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/21.PNG"></layer>
+					<layer id="22"  visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/22.PNG"></layer>
+					<layer id="23" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/23.PNG"></layer>
+					<layer id="24" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/24.PNG"></layer>
+					<layer id="25" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/25.PNG"></layer>
+					<layer id="26" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/26.PNG"></layer>
+					<layer id="27" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/27.PNG"></layer>
+					<layer id="28" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/28.PNG"></layer>
+					<layer id="29" visible="false"  legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/29.PNG"></layer>
+					<layer id="30" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/30.PNG"></layer>
+					<layer id="31" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/31.PNG"></layer>
+				</layers>
+			</mapservice>
+			<mapservice id="facilities" label="Point Sources (facilities)" type="dynamic" visible="false" alpha="1" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer" legend="com/esri/solutions/flexviewer/assets/images/legends/[locale]/EPRTR_facilities_legend.png">
+				<layers>
+						<layer id="0" visible="true" definition="FacilityReportID IN (select FacilityReportID from dbo.POLLUTANTRELEASE [wherevalue])  AND CoordinateStatusCode &lt;&gt; 'MISSING'"></layer>
+				</layers>
+			</mapservice>
+		</livemaps>
+	</map>
+	<navtools>
+		<navtool label="Zoom In" icon="com/esri/solutions/flexviewer/assets/images/icons/i_zoomin.png" menu="menuNav">zoomin</navtool>
+		<navtool label="Zoom Out" icon="com/esri/solutions/flexviewer/assets/images/icons/i_zoomout.png" menu="menuNav">zoomout</navtool>
+		<navtool label="Full Extent" icon="com/esri/solutions/flexviewer/assets/images/icons/i_zoomfull.png" menu="menuNav">zoomfull</navtool>
+		<navtool label="Zoom to Previous" icon="com/esri/solutions/flexviewer/assets/images/icons/i_zoomprevious.png" menu="menuNav">zoomprevious</navtool>
+		<navtool label="Pan" icon="com/esri/solutions/flexviewer/assets/images/icons/i_pan.png" menu="menuNav">pan</navtool>
+		<navtool label="Select" icon="com/esri/solutions/flexviewer/assets/images/icons/i_info_bubble.png" menu="menuNav">pointsearch</navtool>
+	</navtools>
+	<widgets>
+		<widget label="Overview Map" widgetresourcefile="OverviewMapWidgetStrings" preload="false" icon="com/esri/solutions/flexviewer/assets/images/icons/i_overview.png" menu="menuTools" config="com/esri/solutions/flexviewer/widgets/OverviewMapWidget.xml">com/esri/solutions/flexviewer/widgets/OverviewMapWidget.swf</widget>	
+		<widget label="Bookmarks" preload="false" widgetresourcefile="BookmarkWidgetStrings"  invisbtns="close" icon="com/esri/solutions/flexviewer/assets/images/icons/i_bookmark.png" menu="menuTools" config="com/esri/solutions/flexviewer/widgets/BookmarkWidget.xml">com/esri/solutions/flexviewer/widgets/BookmarkWidget.swf</widget>	
+		<widget label="Layer List" invisbtns="close" widgetresourcefile="FilterAllWidgetStrings" preload="maximized" icon="com/esri/solutions/flexviewer/assets/images/icons/i_layers.png"  menu="menuWidgets"  config="com/esri/solutions/flexviewer/widgets/FilterLiveMapsWidget_diffuse.xml">com/esri/solutions/flexviewer/widgets/FilterLiveMapsWidget.swf</widget>
+		<widget label="Search" invisbtns="close" widgetresourcefile="SearchAllWidgetStrings" preload="minimized" icon="com/esri/solutions/flexviewer/assets/images/icons/i_search.png" menu="menuWidgets" config="com/esri/solutions/flexviewer/widgets/SearchWidget_diffuse_emissions_air.xml" baserestserverurl="http://localhost/ArcGIS/rest/services">com/esri/solutions/flexviewer/widgets/SearchWidgetAllLayers.swf</widget>
+		<widget label="Find Location"  preload="false" widgetresourcefile="GazetteerWidgetStrings" icon="com/esri/solutions/flexviewer/assets/images/icons/i_gazetteer2.png" menu="menuTools" config="eu/europa/eea/widgets/Gazetteer/GazetteerWidget.xml" >eu/europa/eea/widgets/Gazetteer/GazetteerWidget.swf</widget>
+		<widget label="Print and Download" widgetresourcefile="PrintWidgetStrings" icon="com/esri/solutions/flexviewer/assets/images/icons/i_print_download.png" menu="menuTools" preload="minimized" config="com/esri/solutions/flexviewer/widgets/PrintWidget.xml">com/esri/solutions/flexviewer/widgets/PrintWidget.swf</widget>
+		<widget label="ga"  preload="true" icon="com/esri/solutions/flexviewer/assets/images/icons/i_search.png" menu="menuHelp" config="com/esri/solutions/flexviewer/widgets/GoogleAnalyticsWidget.xml" >com/esri/solutions/flexviewer/widgets/GoogleAnalyticsWidget.swf</widget>
+		</widgets>
+	<links>
+		</links>
+	<proxytype>php</proxytype>
+	<!-- apache|jsp|asp|php -->
+</configuration>
+
+
