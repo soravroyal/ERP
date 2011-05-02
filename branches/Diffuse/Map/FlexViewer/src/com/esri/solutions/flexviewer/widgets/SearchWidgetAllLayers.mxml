@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<BaseWidget xmlns:esri			="http://www.esri.com/2008/ags" 
+			xmlns				="com.esri.solutions.flexviewer.*" 
+			xmlns:mx			="http://www.adobe.com/2006/mxml" 
+			xmlns:mxeffects		="com.adobe.ac.mxeffects.*"
+			xmlns:widgets		="com.esri.solutions.flexviewer.widgets.*"
+			x					="600" 
+			y					="300"  
+			widgetConfigLoaded	="init()">
+	
+	
+	<mx:Script>
+		<![CDATA[
+			import eu.europa.eea.classes.SelfIntersect;
+
+			import mx.controls.Image;
+			import com.esri.ags.layers.ArcGISTiledMapServiceLayer;
+			import com.esri.ags.layers.Field;
+			import com.esri.ags.layers.LayerDetails;
+			import mx.core.Application;
+			//import com.esri.ags.events.GeometryServiceEvent;
+			//import com.esri.ags.tasks.GeometryService;
+			import com.esri.ags.layers.DynamicMapServiceLayer;
+            import mx.events.CloseEvent;
+            import mx.managers.PopUpManager;
+
+			
+			import com.esri.ags.layers.ArcGISDynamicMapServiceLayer;
+			import com.esri.ags.events.DrawEvent;
+			import com.esri.ags.geometry.Extent;
+			import com.esri.ags.geometry.Geometry;
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.geometry.Polygon;
+			import com.esri.ags.geometry.Polyline;
+			import com.esri.ags.Graphic;
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.esri.ags.layers.Layer;
+			import com.esri.ags.Map;
+			import com.esri.ags.SpatialReference;
+			import com.esri.ags.symbol.PictureMarkerSymbol;
+			import com.esri.ags.symbol.SimpleFillSymbol;
+			import com.esri.ags.symbol.SimpleLineSymbol;
+			import com.esri.ags.tasks.FeatureSet;
+			import com.esri.ags.tasks.Query;
+			import com.esri.ags.tasks.QueryTask;
+			import com.esri.ags.tasks.BufferParameters;
+			import com.esri.ags.toolbars.Draw;
+			import com.esri.solutions.flexviewer.SiteContainer;
+			import com.esri.solutions.flexviewer.utils.WidgetEffects;
+			import mx.collections.*;
+			import mx.controls.Alert;
+			import mx.rpc.AsyncResponder; 
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.events.FaultEvent;
+			import mx.managers.CursorManagerPriority;
+   			import mx.managers.CursorManager;
+			import flash.events.IOErrorEvent;
+			import com.esri.solutions.flexviewer.components.toc.utils.MapUtil;
+			
+			import flash.external.ExternalInterface;
+			import dk.atkins.MapCursors;
+			import com.esri.ags.layers.LayerInfo;			
+						
+			//labels
+			private var graphicalsearchLabel:String;
+			
+			private var textsearchLabel:String;
+			
+			private var resultsLabel:String;
+			
+			[Bindable]
+			private var layerLabel:String;
+			
+			private var nolayerLabel:String;
+			
+			[Bindable]	
+			private var submitLabel:String;	
+			
+			[Bindable]
+			private var pointLabel:String;
+			
+			[Bindable]
+			private var lineLabel:String;
+			
+			[Bindable]
+			private var rectangleLabel:String;
+			
+			[Bindable]
+			private var polygonLabel:String;
+			
+			[Bindable]
+			private var clearLabel:String;	
+			
+			private var loadingLabel:String;	
+			
+			private var selectionLabel:String;
+			
+			private var alertSelectionTitle:String;
+			
+			private var alertSelectionText:String;
+			
+			private var topTwentySelectionText:String;
+			
+			[Bindable]
+			private var msgVisible:Boolean = false;
+			
+			private var zoomScale:Number = 5000;
+			
+			private var configSearchGraphical:Array;
+			
+			private var configSearchText:Array;
+			
+			private var queryLayer:String;
+			
+			private var queryGeom:Geometry;
+			
+			private var queryExpr:String;
+			
+			private var queryFields:String;
+			
+			private var queryTitleField:String;
+			
+			private var queryLinkField:String;
+			
+			private var queryPreLinkField:String;
+			
+			private var queryPreLink:String;
+			
+			private var queryLinkText:String;
+			
+			private var queryFieldAliases:Object;
+			
+			private var queryValueAliases:Object;
+			
+			private var queryReturnGeometry:Boolean;
+			
+			private var queryDrawSelection:String;
+			
+			private var queryExcludeFromTextSearch:Object;
+			
+			private var graphicsLayer:GraphicsLayer;
+			
+			private var graphicPointSym:PictureMarkerSymbol;
+			
+			private var graphicLineSym:SimpleLineSymbol = new SimpleLineSymbol("solid", 0xFF0000, 0.8, 2);
+			
+			private var graphicPolySym:SimpleFillSymbol = new SimpleFillSymbol("solid", 0xFF0000, 0.5, graphicLineSym);
+			
+			private var timer:Timer;
+			
+			private var recAC:ArrayCollection = new ArrayCollection();
+			
+			private var appurl:String = mx.core.Application.application.url.slice(0,mx.core.Application.application.url.lastIndexOf("/"));
+				
+			private const ICON_URL:String = appurl + "/com/esri/solutions/flexviewer/assets/images/icons/";
+			
+			private var directsearch:Boolean;
+			
+			private var graphicIcon:String = ICON_URL + "BulbGrey.png";
+			
+			
+			private var lastInfoData:Object;
+			
+			
+			//<fieldaliases>FacilityName:'',Address:'',City:'',PostalCode:'',Country:'',IASectorCode:'Sector'</fieldaliases>
+			
+			[Embed(source="/com/esri/solutions/flexviewer/assets/images/icons/BulbGrey.png")]			
+			[Bindable]
+			public var graphicIconCls:Class;
+			
+			private function init():void
+			{
+				//graphicPointSym = new PictureMarkerSymbol(widgetIcon, 30, 30);
+				graphicPointSym = new PictureMarkerSymbol(graphicIconCls, 20, 30,0,2);
+				
+				graphicsLayer = new GraphicsLayer();
+				graphicsLayer.symbol = graphicPointSym;
+				map.addLayer(graphicsLayer);
+				if (configXML)
+				{
+					//labels
+					setText();
+					/*graphicalsearchLabel = configXML.labels.graphicalsearchlabel || "Graphical Search";
+					textsearchLabel = configXML.labels.textsearchlabel || "Text Search";
+					resultsLabel = configXML.labels.resultslabel || "Results";
+					layerLabel = configXML.labels.layerlabel || "Search Layer:";
+					nolayerLabel = configXML.labels.nolayerlabel || "No search layer defined.";
+					submitLabel = configXML.labels.submitlabel || "Search";
+					pointLabel = configXML.labels.pointlabel || "Select by Point";
+					lineLabel = configXML.labels.linelabel || "Select by Line";
+					rectangleLabel = configXML.labels.rectanglelabel || "Select by Rectangle";
+					polygonLabel = configXML.labels.polygonlabel || "Select by Polygon";
+					clearLabel = configXML.labels.clearlabel || "Clear";
+					loadingLabel = configXML.labels.loadinglabel || "Loading...";
+					selectionLabel = configXML.labels.selectionlabel || "Features Selected:";
+					alertSelectionTitle = configXML.labels.alertselectiontitle || "Selection";
+					alertSelectionText = configXML.labels.alertselectiontext || "Selection returned no results";
+					topTwentySelectionText = configXML.labels.toptwentyselectiontext || " (top 20 in list)";
+					*/
+					
+					configSearchGraphical = [];
+					configSearchText = [];
+					var lyrList:XMLList = configXML..layer;
+					for (var i:Number = 0; i < lyrList.length(); i++)
+					{
+						var lyrURL:String = lyrList[i].url;
+						var lyrOtherURLs:XMLList = XMLList(lyrList[i].otherurls.otherurl);
+						var lyrLabel:String = resourceManager.getString(widgetResourceFile, lyrList[i].name.toLowerCase()) || lyrList[i].name;
+						var lyrName:String = lyrList[i].name;
+						var lyrTextLabel:String = lyrList[i].textsearchlabel;
+						var lyrGraphicalLabel:String = lyrList[i].graphicalsearchlabel;
+						var lyrExpr:String = lyrList[i].expression;
+						var lyrFields:String = lyrList[i].fields;
+						var lyrTextFields:String = lyrList[i].textfields;
+						var lyrTitleField:String = lyrList[i].titlefield;
+						var lyrLinkField:String = lyrList[i].linkfield;
+						var lyrPreLinkField:String = lyrList[i].prelinkfield;
+						var lyrPreLink:String = lyrList[i].prelink;
+						var lyrLinkText:String = lyrList[i].linktext;
+						var lyrFieldAliasesArr:Array = lyrList[i].fieldaliases.toString().split(",");
+						var lyrFieldAliases:Object;
+						var lyrValueAliasesList:XMLList = lyrList[i].valuealiases;
+						var lyrValueAliases:Object;
+						var lyrUniformFields:String = lyrList[i].uniformfields;
+						var lyrExcludeFromTextSearch:String =  lyrList[i].excludefromtextsearch;
+						var lyrDrawSelection:String = lyrList[i].drawselection.toString();
+						var lyrReturnGeometry:Boolean;
+						if(lyrList[i].returngeometry.toString()){
+							lyrReturnGeometry = lyrList[i].returngeometry == "true";
+						}else {
+							lyrReturnGeometry = true;
+						};
+						
+						if(lyrList[i].fieldaliases.toString() != ""){
+							lyrFieldAliases = new Object();
+							for(var index:int = 0; index < lyrFieldAliasesArr.length; index++){
+								var temp:Array = lyrFieldAliasesArr[index].toString().split(":");
+								lyrFieldAliases[temp[0]] = new Object();
+								lyrFieldAliases[temp[0]]["value"] = temp[1];
+								lyrFieldAliases[temp[0]]["index"] = index;
+							}
+							
+						}
+						lyrValueAliases = new Object();
+						for(var k:int = 0; k < lyrValueAliasesList.valuealias.length(); k++){
+							var valuefield:String = lyrValueAliasesList.valuealias[k].@field.toString();
+							lyrValueAliases[valuefield] = new Object();
+							var tempA:Array = lyrValueAliasesList.valuealias[k].toString().split(",");
+							for(var l:int = 0; l < tempA.length; l++){
+								var tempB:Array = tempA[l].toString().split(":");
+								lyrValueAliases[valuefield][tempB[0]] = tempB[1];
+							}
+							
+						}
+						
+						var searchLayer:Object = 
+						{
+							url: lyrURL,
+							otherurls: lyrOtherURLs,
+							label: lyrLabel,
+							name: lyrName,
+							textlabel: lyrTextLabel,
+							graphicallabel: lyrGraphicalLabel,
+							expr: lyrExpr,
+							fields: lyrFields,
+							textfields: lyrTextFields,
+							titlefield: lyrTitleField,
+							linkfield: lyrLinkField,
+							prelinkfield: lyrPreLinkField,
+							prelink: lyrPreLink,
+							linktext: lyrLinkText,
+							fieldaliases: lyrFieldAliases,
+							valuealiases: lyrValueAliases,
+							uniformfields: lyrUniformFields,
+							excludefromtextsearch: lyrExcludeFromTextSearch,
+							returngeometry: lyrReturnGeometry,
+							drawselection: lyrDrawSelection
+						}
+						configSearchGraphical.push(searchLayer);
+						if (lyrExpr)
+							configSearchText.push(searchLayer);
+					}
+					
+					if (Number(configXML.zoomscale) > 0)
+						zoomScale = Number(configXML.zoomscale);					
+				}
+				
+				wTemplate.addTitlebarButton(ICON_URL + "i_table.png", resultsLabel, showStateResults, "result");
+				if (configSearchText.length)
+					wTemplate.addTitlebarButton(ICON_URL + "i_searchtext.png", textsearchLabel, showStateTextSearch, "text");
+					wTemplate.addTitlebarButton(ICON_URL + "i_searchgraphical.png", graphicalsearchLabel, showStateGraphicalSearch, "graphic");
+				
+				//Setup Text Search
+				if (configSearchText.length)
+				{
+					cboLayerText.dataProvider = configSearchText;
+					txtLabelText.text = resourceManager.getString(widgetResourceFile, 'textsearchlabel_'+configSearchText[0].name.toLowerCase()) || configSearchText[0].textlabel;
+					if (configSearchText.length == 1)
+					{
+						boxText.visible = false;
+						boxText.includeInLayout = false;
+					}
+				}
+				else
+				{
+					boxText.visible = false;
+					txtLabelText.text = nolayerLabel;
+				}
+				
+				//Setup Graphical Search
+				if (configSearchGraphical.length)
+				{
+					cboLayerGraphical.dataProvider = configSearchGraphical;
+					txtLabelGraphical.text = resourceManager.getString(widgetResourceFile, 'graphicalsearchlabel_'+configSearchGraphical[0].name.toLowerCase()) || configSearchGraphical[0].graphicallabel;
+					if (configSearchGraphical.length == 1)
+					{
+						boxGraphical.visible = false;
+						boxGraphical.includeInLayout = false;
+					}
+				}
+				else
+				{
+					boxGraphical.visible = false;
+					//txtLabelGraphical.text = nolayerLabel;
+					txtLabelGraphical.text = resourceManager.getString(widgetResourceFile, 'nolayerLabel') || nolayerLabel;
+		
+				}
+				ExternalInterface.addCallback("queryFeatures", queryFeaturesDirect);
+				ExternalInterface.addCallback("queryFeaturesControl", queryFeaturesControlDirect);
+				ExternalInterface.addCallback("clearSelection", clear);
+				
+				
+			}			
+			
+			private function searchLayerChangedText():void
+			{
+				var i:Number = cboLayerText.selectedIndex;
+				//txtLabelText.text = configSearchText[i].textlabel;
+				txtLabelText.text = resourceManager.getString(widgetResourceFile, 'textsearchlabel_'+configSearchText[i].name) || configSearchText[i].textlabel;
+			}
+			
+			private function searchLayerChangedGraphical():void
+			{
+				var i:Number = cboLayerGraphical.selectedIndex;
+				txtLabelGraphical.text = resourceManager.getString(widgetResourceFile, 'graphicalsearchlabel_'+configSearchGraphical[i].name) || configSearchGraphical[i].graphicallabel;
+			}
+						
+			public function activateSearchTool(value:String):void
+			{
+				var cursors:MapCursors = MapCursors.getInstance();						
+				CursorManager.removeAllCursors();
+					
+	    		cursors.showCursor("crosshair");
+				var status:String;
+				switch (value)
+				{
+					case Draw.MAPPOINT:
+					{
+						
+						status = pointLabel;
+						break;
+					}
+					
+					case Draw.POLYLINE:
+					{
+						status = lineLabel;
+						break;
+					}
+						
+					case Draw.EXTENT:
+					{
+						status = rectangleLabel;
+						break;
+					}
+					
+					case Draw.POLYGON:
+					{
+						status = polygonLabel;
+						break;
+					}
+				}
+				setMapAction(value, status, searchDrawEnd);;		
+			}			
+			
+			private function searchDrawEnd(event:DrawEvent):void
+			{
+				var graphic:Graphic = event.graphic;
+				//var geom:Geometry = event.graphic.geometry;
+				queryFeaturesGraphical(graphic);
+			}
+
+			
+			private function queryFeaturesDirect(_queryLayers:String,_queryExpr:String,_queryFields:String,_queryTitleField:String,_queryLinkField:String,_queryPreLinkField:String = "",_queryPreLink:String="", _queryLinkText:String = ""):void
+			{		
+				directsearch = true;
+				var queryLayers:Array = _queryLayers.split(",");
+				queryExpr = _queryExpr;
+				queryFields = _queryFields;
+				queryTitleField = _queryTitleField;
+				queryLinkField = _queryLinkField;
+				queryPreLinkField = _queryPreLinkField;
+				queryPreLink = _queryPreLink;
+				queryLinkText =_queryLinkText;
+				
+				setTextExcludedLayers();
+				
+				ExternalInterface.call("sendToJavaScript","queryLayers " + queryLayers);
+				queryFeatures(queryLayers,queryExpr,queryFields,queryTitleField,queryLinkField,queryPreLinkField,queryPreLink);
+			}
+			
+			private function queryFeaturesControlDirect(_queryLayer:String,_queryValue:String):void
+			{		
+				txtSearch.text = _queryValue;	
+				for(var j:int = 0; j< cboLayerText.dataProvider.length; j++){
+					if (cboLayerText.dataProvider[j].label == _queryLayer){						
+						cboLayerText.selectedIndex = j;
+						break;
+					}
+				}
+				queryFeaturesText();
+				
+			}
+			
+			private function setTextExcludedLayers():void{
+				var i:Number = cboLayerText.selectedIndex;
+				var arr_queryExcludeFromTextSearch:Array = configSearchText[i].excludefromtextsearch.split(",");
+				queryExcludeFromTextSearch = new Object()
+				for(var h:int = 0; h < arr_queryExcludeFromTextSearch.length; h++){
+					queryExcludeFromTextSearch[arr_queryExcludeFromTextSearch[h]] = true;
+				}
+			}
+					
+			private function queryFeaturesText():void
+			{
+				directsearch = false;
+				var i:Number = cboLayerText.selectedIndex;
+				var queryLayers:Array = configSearchText[i].url.toString().split(",");;
+				
+				setTextExcludedLayers();
+				
+				queryExpr = configSearchText[i].expr;
+				queryFields = configSearchText[i].textfields;
+				queryTitleField = configSearchText[i].titlefield;
+				queryLinkField = configSearchText[i].linkfield;
+				queryPreLinkField = configSearchText[i].prelinkfield;
+				queryPreLink = configSearchText[i].prelink;
+				queryLinkText = resourceManager.getString(widgetResourceFile, 'linktext_'+configSearchText[i].name.toLowerCase()) || configSearchText[i].linktext;
+				queryFieldAliases = configSearchText[i].fieldaliases;
+				queryValueAliases = configSearchText[i].valuealiases;
+				queryReturnGeometry = configSearchText[i].returngeometry;
+				queryDrawSelection = configSearchText[i].drawselection;
+				
+				queryFeatures(queryLayers,queryExpr,queryFields,queryTitleField,queryLinkField,queryPreLinkField,queryPreLink);
+			}
+			//
+			//query features text
+			private function queryFeatures(queryLayers:Array,queryExpr:String,queryFields:String,queryTitleField:String,queryLinkField:String,queryPreLinkField:String,queryPreLink:String):void
+			{
+				var counter:int = 0;
+				lastInfoData = null;
+				if(queryLayers){
+					queryLayer = queryLayers[0];
+					recAC.removeAll();
+					graphicsLayer.clear();
+					wRepeater.dataProvider = null;
+				} 
+				
+				if ((queryLayer) && (txtSearch.text || directsearch))
+				{
+					for(var h:int = 0; h< queryLayers.length; h++){
+						queryLayer = queryLayers[h];						
+						if(!queryExcludeFromTextSearch[queryLayer] ){
+							var baserestserverurl:String = getBaseRestServerUrl();
+							if(queryLayer.search("http") && baserestserverurl != ""){
+								if(baserestserverurl.lastIndexOf("/") == baserestserverurl.length-1){
+									baserestserverurl = baserestserverurl.slice(0,baserestserverurl.length-1);
+								}
+								queryLayer = baserestserverurl + "/" + queryLayer;
+							}
+							var queryTask:QueryTask = new QueryTask(queryLayer);
+							var query:Query = new Query();
+							var _layer:Layer;
+							var mapLayerUrl:String= queryLayer.slice(0,queryLayer.lastIndexOf("/"));
+							_layer = MapUtil.getLayerByURL(mapLayerUrl,map);
+							
+							var performQuery:Boolean = false;		
+							if(_layer && _layer is ArcGISDynamicMapServiceLayer){	
+								if(ArcGISDynamicMapServiceLayer(_layer).visible && ArcGISDynamicMapServiceLayer(_layer).visibleLayers.contains(Number(layerId))){
+									performQuery = true;
+								}
+							}else if (_layer && _layer is ArcGISTiledMapServiceLayer){
+								if(ArcGISTiledMapServiceLayer(_layer).visible && ArcGISTiledMapServiceLayer(_layer).visibleLayers.contains(Number(layerId))){
+									performQuery = true;
+								}
+							}
+													
+							var _filter:String = "";					
+							var layerId:String= queryLayer.slice(queryLayer.lastIndexOf("/")+1,queryLayer.length);
+					
+							if(performQuery){						
+							
+								if(_layer is ArcGISDynamicMapServiceLayer) _filter = ArcGISDynamicMapServiceLayer(_layer).layerDefinitions[queryLayer.charAt(queryLayer.length-1)];		
+							
+								//replace all occurences of [value]
+								var pattern:RegExp = /\[value\]/g;
+								var expr:String = queryExpr.replace(pattern, txtSearch.text);
+								//var expr:String = queryExpr.replace("[value]", txtSearch.text);
+								if(_filter && _filter != ""){
+									_filter = "(" + expr + ") AND (" + _filter + " )";
+								}else _filter = expr;
+								query.where = _filter;
+								query.outFields = queryFields.split(",");
+								query.returnGeometry = true;
+								query.outSpatialReference = map.spatialReference;
+								CursorManager.setBusyCursor();
+								queryTask.execute(query, new AsyncResponder(onResult, onFault));  
+								showMessage(loadingLabel, true);
+								showStateResults(null);  
+							}else counter ++;
+						} 
+						else {
+							//exclude layer from text search
+							counter ++;
+						}
+					}
+		              
+		          	// on result
+					function onResult(featureSet:FeatureSet, token:Object = null):void                
+					{   
+						counter++;
+						try
+						{
+							
+							
+							var recAC:ArrayCollection = createRecordData(featureSet);
+							addSharedData(widgetTitle, recAC);
+							var recACLength:Number = 0;
+							if(recAC)recACLength = recAC.length;
+							//wRepeater.dataProvider = recAC;
+							//showMessage(selectionLabel + " " + featureSet.features.length, false);
+							showMessage(selectionLabel + " " + recACLength, false);
+							
+							if (recAC && counter == queryLayers.length){
+									if(recACLength > 21){
+										//too many items crashes list and are confusing anyway
+										recAC.source.splice(20,recAC.source.length - 20);
+										showMessage(selectionLabel + " " + recACLength + " " + topTwentySelectionText, false);										
+									}
+									 wRepeater.dataProvider = recAC;
+									 if(recACLength == 0){									 	
+									 	showAlert(alertSelectionText,alertSelectionTitle);
+									 }
+									// setMapNavigation(null, null);
+									 showInfoWindow(lastInfoData);
+									 CursorManager.removeAllCursors();
+								}
+							 
+							}
+						
+						catch (error:Error)
+						{
+							showMessage(error.message, false);
+						}	
+				  	}
+						
+					//on fault
+					function onFault(info:Object, token:Object = null) : void
+					{   
+						counter++;                 
+						showMessage(info.toString(), false); 
+						showAlert(info.toString(),"Selection fault");        
+					}
+				}  
+			}				
+						
+			//query features graphical
+			private function queryFeaturesGraphical(graphic:Graphic):void
+			{
+				var geom:Geometry = graphic.geometry;				
+				lastInfoData = null;
+				CursorManager.setBusyCursor(); 
+				//buffer on mappoint search
+				if(geom.type == Geometry.MAPPOINT )
+				{					
+				      			
+ 					var mapWidth:Number = map.extent.width;
+					//Divide width in map units by width in pixels
+					var pixelWidth:Number = mapWidth/map.width;	
+					var dist:Number = 10*pixelWidth;	
+         			       			
+			       // create polygon around mappoint to use as geometry for search 
+			        queryGeom = new Polygon();
+					var lu:MapPoint =  new MapPoint(MapPoint(geom).x - dist/2, MapPoint(geom).y + dist/2)
+					var ll:MapPoint =  new MapPoint(MapPoint(geom).x - dist/2, MapPoint(geom).y  - dist/2)
+					var ru:MapPoint =  new MapPoint(MapPoint(geom).x + dist/2, MapPoint(geom).y  + dist/2)
+					var rl:MapPoint =  new MapPoint(MapPoint(geom).x + dist/2, MapPoint(geom).y  - dist/2)
+			      	Polygon(queryGeom).rings = [[lu,ru,rl,ll,lu]];
+			        queryGeom.spatialReference = map.spatialReference;
+			        
+				}				
+				else
+				{
+					queryGeom = geom;
+					if(geom.type == Geometry.POLYGON )
+					{ 
+						var selfIntersect:Boolean = SelfIntersect.checkPolygonSelfIntersect(Polygon(geom));
+	
+						if(selfIntersect)
+						{
+							Alert.show("Self-intersecting polygons not allowed - redraw selection area", "Selection area error",4|Alert.NONMODAL);
+							return
+						}				
+					
+					}
+				}
+				queryFeaturesGraphicalGeom();
+			}
+			private function queryFeaturesGraphicalGeom():void
+			{ 
+				var counter:int = 0;
+				var i:Number = cboLayerGraphical.selectedIndex;
+				var querySpatialRel:String = "esriSpatialRelIntersects";
+				var queryLayers:Array = configSearchGraphical[i].url.toString().split(",");
+				
+				
+				var queryOtherUrls:XMLList = configSearchGraphical[i].otherurls;
+				
+				
+				var baserestserverurl:String = getBaseRestServerUrl();
+				if(baserestserverurl != ""){
+					if(baserestserverurl.lastIndexOf("/") == baserestserverurl.length-1){
+						baserestserverurl = baserestserverurl.slice(0,baserestserverurl.length-1);
+					}					
+				}
+				var theOtherUrls:Array = [];
+				var queryOtherLayersObj :Object = new Object();
+				for(var h:int = 0; h < queryOtherUrls.length(); h++){
+					//var urlNode:XMLNode = queryOtherUrls[h];
+					var queryOtherUrlsArr:Array = String(queryOtherUrls[h].url).split(",");
+					var baseurl: String  = "";
+					for(var j:int = 0; j < queryOtherUrlsArr.length; j++){
+						if(String(queryOtherUrlsArr[j]).search("http") && baserestserverurl != ""){							
+								baseurl = baserestserverurl;
+							}
+						if(baseurl != "")
+						{
+							baseurl = baseurl + "/";
+						}
+						if(!queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]]){
+							queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]] = new Object();
+						}
+						queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]].fields = queryOtherUrls[h].fields;
+						queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]].titlefield = queryOtherUrls[h].titlefield.toString();
+						if(queryOtherUrls[h].returngeometry.toString().length > 0){
+							queryOtherLayersObj[baseurl +  queryOtherUrlsArr[j]].returngeometry = queryOtherUrls[h].returngeometry.toString() == "true";
+						} else{
+							queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]].returngeometry = true;
+						}
+						queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]].drawselection = queryOtherUrls[h].drawselection.toString();
+						queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]].ignoreIfNotvisible = XMLList(queryOtherUrls[h]).attribute("ignoreIfNotvisible").toString() == "true";
+						queryOtherLayersObj[baseurl + queryOtherUrlsArr[j]].queryIfNotvisible = XMLList(queryOtherUrls[h]).attribute("queryIfNotvisible").toString() == "true";
+						theOtherUrls.push(queryOtherUrlsArr[j]);
+				
+					}
+				
+				}
+				
+					 
+				queryLayers = queryLayers.concat(theOtherUrls);
+						
+				//recAC.removeAll();
+				//graphicsLayer.clear();
+				
+				clear();
+								
+				if(queryLayers){
+					queryLayer = queryLayers[0];					
+					
+				} //queryLayer = configSearchGraphical[i].url;
+				
+				queryFields = configSearchGraphical[i].fields;
+				queryTitleField = configSearchGraphical[i].titlefield;
+				queryLinkField = configSearchGraphical[i].linkfield;
+				queryPreLinkField = configSearchGraphical[i].prelinkfield;
+				queryPreLink = configSearchGraphical[i].prelink;
+				queryLinkText = resourceManager.getString(widgetResourceFile, 'linktext_'+configSearchGraphical[i].name.toLowerCase()) || configSearchGraphical[i].linktext || configSearchGraphical[i].linktext;			
+				queryFieldAliases = configSearchGraphical[i].fieldaliases;
+				queryValueAliases = configSearchGraphical[i].valuealiases;
+				queryReturnGeometry = configSearchGraphical[i].returngeometry;
+				queryDrawSelection = configSearchText[i].drawselection;
+				
+				if (queryLayer)
+				{					
+					for(var k:int = 0; k< queryLayers.length; k++)
+					{						
+						queryLayer = queryLayers[k];					
+					
+						if(queryLayer.search("http") && baserestserverurl != ""){							
+							queryLayer = baserestserverurl + "/" + queryLayer;
+						}						
+						
+						/************************************/
+						//var _layer:ArcGISDynamicMapServiceLayer;
+						var _layer:Layer;
+						var mapLayerUrl:String= queryLayer.slice(0,queryLayer.lastIndexOf("/"));
+						var layerId:String= queryLayer.slice(queryLayer.lastIndexOf("/")+1,queryLayer.length);
+						var ignoreIfNotVisible:Boolean = false;
+						var queryIfNotVisible:Boolean = false;
+						if(queryOtherLayersObj[queryLayer]){
+							queryTitleField = queryOtherLayersObj[queryLayer].titlefield;
+							ignoreIfNotVisible = queryOtherLayersObj[queryLayer].ignoreIfNotvisible;
+							queryIfNotVisible = queryOtherLayersObj[queryLayer].queryIfNotvisible;
+							queryReturnGeometry = queryOtherLayersObj[queryLayer].returngeometry;
+							queryDrawSelection = queryOtherLayersObj[queryLayer].drawselection;
+						}
+						_layer = MapUtil.getLayerByURL(mapLayerUrl,map,ignoreIfNotVisible);
+						
+						var performQuery:Boolean = false;		
+						if(_layer && _layer is ArcGISDynamicMapServiceLayer){	
+							if((ArcGISDynamicMapServiceLayer(_layer).visible && ArcGISDynamicMapServiceLayer(_layer).visibleLayers.contains(Number(layerId))) || queryIfNotVisible){
+								performQuery = true;
+							}
+						}else if (_layer && _layer is ArcGISTiledMapServiceLayer){
+							if((ArcGISTiledMapServiceLayer(_layer).visible && ArcGISTiledMapServiceLayer(_layer).visibleLayers.contains(Number(layerId))) || queryIfNotVisible){
+								performQuery = true;
+							}
+						}
+						//var concatenated:String = getConcatenatedLayerDefinitions(mapLayerUrl);
+						
+						
+						var concatenated:String = getConcatenatedLayerDefinitionsEPRTR(mapLayerUrl);
+						
+						if(concatenated != "")performQuery = true;			
+						if(performQuery)
+						{
+							/************************************/
+							var queryTask:QueryTask = new QueryTask(queryLayer);
+							var query:Query = new Query();
+							/************************************/
+							if(_layer is ArcGISDynamicMapServiceLayer){
+								var _filter:String = "";
+								_filter = ArcGISDynamicMapServiceLayer(_layer).layerDefinitions[queryLayer.charAt(queryLayer.length-1)];							
+								if(concatenated != "")_filter = concatenated;
+								if(_filter && _filter != "")
+								{
+									query.where = _filter;
+								}						
+							}
+							/************************************/
+							
+							
+							
+							query.geometry = queryGeom;
+							
+							if(queryOtherLayersObj[queryLayer])
+							{
+								query.outFields = String(queryOtherLayersObj[queryLayer].fields).split(",");
+								queryTitleField = queryOtherLayersObj[queryLayer].titlefield;
+							}else
+							{
+								query.outFields = queryFields.split(",");							
+							}
+							
+							query.returnGeometry =queryReturnGeometry// true; //
+							query.spatialRelationship = querySpatialRel;
+							query.outSpatialReference = map.spatialReference;
+							queryTask.execute(query, new AsyncResponder(onResult, onFault,queryTitleField));  
+							showMessage(loadingLabel, true); 
+							CursorManager.removeAllCursors();						
+							CursorManager.setBusyCursor(); 
+							showStateResults(null);   
+						}
+						else
+						{
+							counter++;
+						} 
+						
+					}
+		              
+		          	// on result
+					function onResult(featureSet:FeatureSet, token:Object = null):void                
+					{   
+						counter++;
+						
+						try
+						{								
+								var recAC:ArrayCollection = createRecordData(featureSet, token);
+								var recACLength:Number = 0;
+								if(recAC)recACLength = recAC.length;
+								//show results in list after they are returned from all layers
+								if (counter == queryLayers.length)
+								{
+									addSharedData(widgetTitle, recAC);
+									showMessage(selectionLabel + " " + recACLength, false); 
+									
+									if(recAC.length > 21)
+									{
+										//too many items crashes list and are confusing anyway
+										recAC.source.splice(20,recAC.source.length - 20);
+										showMessage(selectionLabel + " " + recACLength + " " + topTwentySelectionText, false); 
+									}
+									 wRepeater.dataProvider = recAC;
+									 if(recAC.length == 0)
+									 {									 	
+									 	showAlert(alertSelectionText,alertSelectionTitle);
+									 }
+									 CursorManager.removeAllCursors();
+									 //setMapNavigation(null, null);
+									  showInfoWindow(lastInfoData);
+								}
+								
+							//showMessage(selectionLabel + " " + featureSet.features.length, false);
+							
+						}
+						catch (error:Error)
+						{
+							showMessage(error.message, false);
+						}
+				  	}
+					function onFault(info:Object, token:Object = null) : void
+					{  
+						counter++;                
+						showMessage(info.toString(), false);
+						showAlert(info.toString() + "\nLayer: " + queryTask.url ,"Selection fault");           
+					}
+						
+				}	
+			}  
+			
+					
+			//on buffer fault
+			private	function onFault(info:Object, token:Object = null) : void
+			{  
+				                 
+				showMessage(info.toString(), false);
+				showAlert(info.toString(),"Selection fault");           
+			}
+			
+			private function showAlert(content:String,title:String):Alert{
+				var resultAlert:Alert = Alert.show(content,title,4|Alert.NONMODAL,null,closeAlert);
+			 	var alertTimer:Timer = new Timer(3000, 1);
+				alertTimer.addEventListener(TimerEvent.TIMER_COMPLETE, removeAlert);
+				alertTimer.reset();
+				alertTimer.start();
+			 	function closeAlert(evt:CloseEvent):void{
+			 		alertTimer.stop();
+			 	}
+			 	function removeAlert():void{									 		
+			 		PopUpManager.removePopUp(resultAlert);
+			 	}
+			 	return resultAlert;
+			}
+			//create record data
+			private function createRecordData(featureSet:FeatureSet, _queryTitleField:Object = null):ArrayCollection
+			{
+				//CursorManager.setBusyCursor(); 
+				//graphicsLayer.clear();
+				//var recAC:ArrayCollection = new ArrayCollection();
+				if(_queryTitleField)
+				{
+					queryTitleField = _queryTitleField.toString();
+				}
+				if (!queryTitleField)
+						queryTitleField = featureSet.displayFieldName;
+				//var icon:String = widgetIcon;
+				var icon:String = graphicIcon;
+				
+				/*avoid timeoiut if too many results are returned*/
+				var counter:int = 0;
+										
+				for each (var gra:Graphic in featureSet.features)                    
+				{   
+					counter++;
+					//if(counter > 40) break;
+					var obj:Object = gra.attributes;
+					var fld:String;
+					var value:String;
+					var title:String;
+					var content:String = "";
+					var contentArr:ArrayCollection = new ArrayCollection();
+					var link:String = "";
+					var linktext:String = queryLinkText;
+					var point:MapPoint = getGeomCenter(gra);
+					var fldAliases:Object = queryFieldAliases || featureSet.fieldAliases;
+					var hasQueryFieldAliases:Boolean = queryFieldAliases != null;
+					var valueAliases:Object = queryValueAliases;
+					var hasValueAlias:Boolean = false;
+					
+    		        for (fld in obj)
+    		        {
+    		        	hasValueAlias = valueAliases[fld] != null;
+    		        	if(obj[fld]){
+	    		        	value = obj[fld].toString();
+	    		        	
+	    		        	var localeValueAlias:String = resourceManager.getString("LookupSearchAllWidgetStrings", 'valuealias_' + fld + "_" + value);
+    		        		
+	    		        	if(localeValueAlias){
+	    		        		value = localeValueAlias;
+	    		        	} 
+	    		        	else if(hasValueAlias && valueAliases[fld][value] != null)
+	    		        	{
+	    		        		value = valueAliases[fld][value];
+	    		        	} 
+	    		        	
+	    		        	
+	    		        	if (fld.toUpperCase() == queryTitleField.toUpperCase())
+	    		        	{
+						   		title = value;
+							   	if (!title)
+									title = widgetTitle;
+	    		        	}
+							else if (fld.toUpperCase() == queryLinkField.toUpperCase())
+							{
+								link = value;
+							}
+							else
+							{	
+								if (fld.toUpperCase() != queryTitleField.toUpperCase())
+								{
+									var fieldalias:String = resourceManager.getString(widgetResourceFile, 'fieldalias_' +fld);
+									if(!hasQueryFieldAliases){										
+										content += fldAliases[fld] + ": " + value + "\n";
+									}
+									else if(fieldalias){
+										
+										var theFieldTitle:String = fieldalias;
+										if  (theFieldTitle != ""){
+											theFieldTitle += ": ";
+										} 										
+									
+										if(!fldAliases[fld] || (fldAliases[fld] && fldAliases[fld]["index"] >= contentArr.length)){
+											contentArr.addItem(theFieldTitle + value);
+										}
+										else {
+											contentArr.addItemAt(theFieldTitle + value,fldAliases[fld]["index"]);
+										}
+									}
+									else if(fldAliases[fld] != null){
+																			
+	 									var theTitle:String = fldAliases[fld]["value"];
+										if  (theTitle != ""){
+											theTitle += ": ";
+										} 	
+										if(fldAliases[fld]["index"] >= contentArr.length){
+											contentArr.addItem(theTitle + value);
+										}
+										else{
+											contentArr.addItemAt(theTitle + value,fldAliases[fld]["index"]);
+										}	
+										
+									}
+								}
+							}
+							if (fld.toUpperCase() == queryPreLinkField.toUpperCase())
+							{
+								link = queryPreLink + value;
+							}
+			        	}//end if(obj[fld])
+		   			}
+					
+					for(var k:int = 0; k < contentArr.length;k++){
+						if(contentArr[k] != undefined && contentArr[k] != "undefined" && contentArr[k] != "" && contentArr[k] != "NA" ){
+							content += contentArr[k] + "\n";									
+						}
+						
+					}
+					
+					if(!link){
+						linktext = "";
+					}
+					
+					var infoData:Object = 
+					{
+						icon: graphicIconCls, 
+						title: title, 
+						content: content, 
+						link: link, 
+						linktext: linktext,
+						point: point,
+						geometry: gra.geometry
+					};  
+             			lastInfoData = infoData
+						recAC.addItem(infoData);
+             		
+					//***
+					gra.addEventListener(MouseEvent.ROLL_OVER, mouseOverGraphic)
+					gra.attributes = infoData;
+					if(gra.geometry){
+						switch (gra.geometry.type)
+		           		{
+		           			
+		               		case Geometry.POLYLINE:
+		               		{
+		               			gra.symbol = graphicLineSym;
+		               			break;
+		               		}
+		               		
+		               		case Geometry.POLYGON:
+		               		{
+		               			gra.symbol = graphicPolySym;
+		               			gra.autoMoveToTop = false;
+		               			break;
+		               		}
+		             	}
+		             	var pointgra:Graphic = new Graphic(point);
+		             	if(queryDrawSelection == "point"){
+		             		pointgra.addEventListener(MouseEvent.ROLL_OVER, mouseOverGraphic)
+		             		pointgra.attributes = infoData;
+			             	graphicsLayer.add(pointgra);			             	
+			             	
+		             	}
+		             	else if(!queryDrawSelection || queryDrawSelection == "true"){
+			             	graphicsLayer.add(gra);
+			             	if(gra.geometry.type == Geometry.POLYGON){	             	
+			             		graphicsLayer.setChildIndex(gra,0);
+			             	}
+		             	}
+	   				}
+				}
+			    
+			    return recAC;
+			}		
+		
+			private function getVisibleLayersByUrl(url):Object
+			{
+				var layersObj:Object = new Object();
+				
+				var agdsLayer:ArcGISDynamicMapServiceLayer;
+				
+				for each (var layerId:String in map.layerIds)
+				{
+					var layer:Layer = map.getLayer(layerId);
+					if(layer is ArcGISDynamicMapServiceLayer)
+					{
+						agdsLayer = ArcGISDynamicMapServiceLayer(layer);					
+						if (agdsLayer.url == url){
+							
+							if(visible && agdsLayer.visible)
+							{
+								layersObj[layerId] = agdsLayer;							
+							}						
+						}
+					}
+				}
+				return layersObj;
+				
+			}
+			private function getConcatenatedLayerDefinitions(url):String
+			{
+				var concatenatedDef:String = "";
+				
+				var agdsLayer:ArcGISDynamicMapServiceLayer;
+				var counturl:int = 0;
+				for each (var layerId:String in map.layerIds)
+				{
+					var layer:Layer = map.getLayer(layerId);
+					if(layer is ArcGISDynamicMapServiceLayer)
+					{
+						agdsLayer = ArcGISDynamicMapServiceLayer(layer);					
+						if (agdsLayer.url == url){
+							counturl ++;
+							if(visible && agdsLayer.visible)
+							{
+								if(concatenatedDef != "")
+								{
+									concatenatedDef += " OR ";
+								}
+								concatenatedDef += agdsLayer.layerDefinitions[0];								
+							}						
+						}
+					}
+				}
+				if(counturl > 2)return concatenatedDef;
+				else return "";
+				
+			}
+			private function getConcatenatedLayerDefinitionsEPRTR(url):String
+			{
+				var concatenatedDef:String = "";
+				var sectorCodes:String = "";
+				
+				var agdsLayer:ArcGISDynamicMapServiceLayer;
+				var counturl:int = 0;
+				for each (var layerId:String in map.layerIds)
+				{
+					var layer:Layer = map.getLayer(layerId);
+					if(layer is ArcGISDynamicMapServiceLayer)
+					{
+						agdsLayer = ArcGISDynamicMapServiceLayer(layer);					
+						if (agdsLayer.url == url){
+							counturl ++;
+							if(visible && agdsLayer.visible)
+							{
+								if(concatenatedDef == "")
+								{
+									concatenatedDef = agdsLayer.layerDefinitions[0];
+								}
+								//else
+								//{ // append sector codes
+									var pattern:RegExp = /IASectorCode/i;
+									
+									//get index in concatenatedDef - get next AND - split in two removing the text between
+									//and insert LIKE ('sectorCode','[sectorCode]')
+									
+									
+									var layerdef:String = String(agdsLayer.layerDefinitions[0]);
+									var codeFieldIndex:int = layerdef.indexOf("IASectorCode");
+									var codeIndex:int = layerdef.indexOf("'",codeFieldIndex);
+									var codeEndIndex:int = layerdef.indexOf("'",codeIndex+1);
+									var code:String = layerdef.substring(codeIndex,codeEndIndex);
+									
+									if(sectorCodes != "")sectorCodes += ",";
+									sectorCodes += code + "'";
+								//}
+															
+							}						
+						}
+					}
+				}
+				if(concatenatedDef != "" && concatenatedDef && concatenatedDef.search("IASectorCode") != -1)
+				{
+					var defSplit:Array = concatenatedDef.split("IASectorCode");
+					
+					var firstPart:String = defSplit[0];
+					var secondPart:String = defSplit[1];
+					//slice after for 2nd occurance of ' to find where sector code where clause part ends
+					secondPart = secondPart.slice(secondPart.indexOf("'",secondPart.search("'")+1)+1, secondPart.length);
+					
+					concatenatedDef = firstPart + " IASectorCode IN (" + sectorCodes + ") " + secondPart;
+				}
+				if(counturl > 2)return concatenatedDef;
+				else return "";
+				
+			}
+			//get geom center
+			private function getGeomCenter(gra:Graphic):MapPoint
+			{
+				if(!gra.geometry) return null;
+				var pt:MapPoint;
+	           	switch (gra.geometry.type)
+	           	{
+	               case Geometry.MAPPOINT:
+	               {
+	                    pt = gra.geometry as MapPoint;
+	                    break;
+	               }
+	               
+	               case Geometry.POLYLINE:
+	               {
+	               		var pl:Polyline = gra.geometry as Polyline;
+	               		var pathCount:Number = pl.paths.length;
+	               		var pathIndex:int = int((pathCount / 2) - 1);
+	               		var midPath:Array = pl.paths[pathIndex];
+	               		var ptCount:Number = midPath.length;
+	               		var ptIndex:int = int((ptCount / 2) - 1);
+	               		pt = pl.getPoint(pathIndex, ptIndex);
+	               		break;
+	               }
+	               
+	               case Geometry.POLYGON:
+	               {
+	                    var poly:Polygon = gra.geometry as Polygon;
+	               		pt = poly.extent.center;
+	                    break;
+	               }
+	            }
+				return pt;
+			}
+			
+						
+			 		
+			//mouse over graphic
+			private function mouseOverGraphic(event:MouseEvent):void
+			{
+				var gra:Graphic = event.currentTarget as Graphic;
+				var infoData:Object = gra.attributes;
+				this.showInfoWindow(infoData);
+			}			
+			
+			private function clear():void
+			{
+				graphicsLayer.clear();
+				recAC.removeAll();
+				clearMessage();
+				txtSearch.text = "";
+				wRepeater.dataProvider = null;
+				this.showInfoWindow(null);
+			}			
+			
+			private var hitimer:uint;
+								
+			private function mouseOverRecord(event:MouseEvent):void
+			{
+				var infoData:Object = event.currentTarget.infoData;
+				clearTimeout(hitimer);
+				hitimer = setTimeout(showHighlight, 800, [infoData]);
+			}			
+			
+			private function mouseOutRecord():void
+			{
+				clearTimeout(hitimer);
+				this.showInfoWindow(null);
+			}			
+			
+			private function clickRecord(event:MouseEvent):void
+			{
+				var infoData:Object = event.currentTarget.infoData;
+				var pt:MapPoint = infoData.point;
+				if (map.scale > zoomScale)
+					map.scale = zoomScale;
+				map.centerAt(pt);
+			}			
+			
+			private function showHighlight(params:Array):void
+			{
+				var infoData:Object = params[0];
+				var pt:MapPoint = infoData.point;
+				//if (!map.extent.contains(pt))
+				//	map.centerAt(pt);
+				this.showInfoWindow(params[0]);
+			}			
+			
+			private function showMessage(msg:String, swfVisible:Boolean):void
+			{
+				txtMessage.text = msg;
+				swfMessage.visible = swfVisible;
+				msgVisible = true;
+			}			
+			
+			private function clearMessage():void
+			{
+				msgVisible = false;
+			}
+								
+			private function widgetClosedHandler(event:Event):void
+			{
+				graphicsLayer.visible = false;
+				this.showInfoWindow(null);
+				setMapNavigation(null, null);
+			}
+						
+			private function widgetOpenedHandler(event:Event):void
+			{
+				graphicsLayer.visible = true;
+			}
+						
+			private function showStateGraphicalSearch(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 0, 400);
+			}
+			
+			private function showStateTextSearch(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 1, 400);
+			}				
+						
+			private function showStateResults(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 2, 400);
+			}
+			override public function updateLocale(value:String):void{
+   				super.updateLocale(value);
+			
+   				//add specific print widget texts here    	
+				setText();		
+			}
+			
+			private function setText():void{
+				
+				//title
+				if(resourceManager.getString(widgetResourceFile, 'widgettitle'))wTemplate.setTitle(resourceManager.getString(widgetResourceFile, 'widgettitle'));
+			
+				//labels
+				graphicalsearchLabel = resourceManager.getString(widgetResourceFile, 'graphicalsearchLabel') || "Graphical Search";
+				textsearchLabel = resourceManager.getString(widgetResourceFile, 'textsearchLabel') || "Text Search";
+				resultsLabel = resourceManager.getString(widgetResourceFile, 'resultsLabel') || "Results";
+				layerLabel =resourceManager.getString(widgetResourceFile, 'layerLabel') || "Search Layer:";
+				nolayerLabel = resourceManager.getString(widgetResourceFile, 'nolayerLabel')|| "No search layer defined.";
+				submitLabel = resourceManager.getString(widgetResourceFile, 'submitLabel') || "Search";
+				pointLabel =resourceManager.getString(widgetResourceFile, 'pointLabel')|| "Select by Point";
+				lineLabel = resourceManager.getString(widgetResourceFile, 'lineLabel') || "Select by Line";
+				rectangleLabel = resourceManager.getString(widgetResourceFile, 'rectangleLabel') || "Select by Rectangle";
+				polygonLabel = resourceManager.getString(widgetResourceFile, 'polygonLabel') || "Select by Polygon";
+				clearLabel = resourceManager.getString(widgetResourceFile, 'clearLabel') || "Clear";
+				loadingLabel =resourceManager.getString(widgetResourceFile, 'loadingLabel') || "Loading...";
+				selectionLabel =resourceManager.getString(widgetResourceFile, 'selectionLabel') || "Features Selected:";
+				alertSelectionTitle = resourceManager.getString(widgetResourceFile, 'alertSelectionTitle') || "Selection";
+				alertSelectionText = resourceManager.getString(widgetResourceFile, 'alertSelectionText') || "Selection returned no results";
+				topTwentySelectionText = resourceManager.getString(widgetResourceFile, 'topTwentySelectionText') || " (top 20 in list)";
+				
+				//text
+				if(configSearchGraphical){
+					var i:Number = cboLayerGraphical.selectedIndex;
+					txtLabelGraphical.text = resourceManager.getString(widgetResourceFile, 'graphicalsearchlabel_'+configSearchGraphical[i].name.toLowerCase()) || configSearchGraphical[i].graphicallabel;		
+					if(configSearchGraphical.length != 1 && !boxGraphical.visible){
+						txtLabelGraphical.text = nolayerLabel;
+					}
+				}
+				if(configSearchText){
+					var j:Number = cboLayerText.selectedIndex;				
+					txtLabelText.text = resourceManager.getString(widgetResourceFile, 'textsearchlabel_'+configSearchText[i].name.toLowerCase()) || configSearchText[i].textlabel;		
+					if(configSearchText.length != 1 && !boxText.visible)txtLabelText.text = nolayerLabel;
+				}
+				
+				//buttons				
+				if(wTemplate.titleBar.getChildByName("graphic"))Image(wTemplate.titleBar.getChildByName("graphic")).toolTip = graphicalsearchLabel;
+				if(wTemplate.titleBar.getChildByName("text"))Image(wTemplate.titleBar.getChildByName("text")).toolTip = textsearchLabel;
+				if(wTemplate.titleBar.getChildByName("result"))Image(wTemplate.titleBar.getChildByName("result")).toolTip = resultsLabel;
+				
+			}
+			
+			
+		]]>
+	</mx:Script>	
+	<mx:Metadata>
+        [ResourceBundle("SearchAllWidgetStrings")]
+        [ResourceBundle("LookupSearchAllWidgetStrings")]
+    </mx:Metadata> 
+	
+	
+	<WidgetTemplate id="wTemplate" widgetClosed="widgetClosedHandler(event)" widgetOpened="widgetOpenedHandler(event)">
+		<mx:ViewStack id="viewStack" width="100%" height="100%" creationPolicy="all" paddingTop="4">
+			<mx:VBox width="100%" height="100%" verticalGap="4" horizontalAlign="center">
+				<mx:HBox id="boxGraphical" horizontalAlign="center" width="100%" horizontalGap="15">
+					<mx:Label id="lblLayerGraphical" text="{layerLabel}" styleName="WidgetText" />
+					<mx:ComboBox id="cboLayerGraphical" change="searchLayerChangedGraphical()"/>
+				</mx:HBox>
+				<mx:Text id="txtLabelGraphical" text="" styleName="WidgetText" width="100%" textAlign="center"/>
+				<mx:HBox horizontalAlign="center" width="100%" horizontalGap="15">
+					<mx:Image click="{activateSearchTool(Draw.MAPPOINT)}" source="com/esri/solutions/flexviewer/assets/images/icons/i_draw_point.png" useHandCursor="true" buttonMode="true" toolTip="{pointLabel}" width="40" height="40"/>
+					<!--mx:Image click="{activateSearchTool(Draw.POLYLINE)}" source="com/esri/solutions/flexviewer/assets/images/icons/i_draw_line.png" useHandCursor="true" buttonMode="true" toolTip="{lineLabel}" width="40" height="40"/-->
+					<mx:Image click="{activateSearchTool(Draw.EXTENT)}" source="com/esri/solutions/flexviewer/assets/images/icons/i_draw_rect.png" useHandCursor="true" buttonMode="true" toolTip="{rectangleLabel}" width="40" height="40"/>
+					<mx:Image click="{activateSearchTool(Draw.POLYGON)}" source="com/esri/solutions/flexviewer/assets/images/icons/i_draw_poly.png" useHandCursor="true" buttonMode="true" toolTip="{polygonLabel}" width="40" height="40"/>
+					<mx:Image click="clear()" source="com/esri/solutions/flexviewer/assets/images/icons/i_clear.png" useHandCursor="true" buttonMode="true" toolTip="{clearLabel}" width="40" height="40"/>
+				</mx:HBox>
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%" verticalGap="4" horizontalAlign="center">
+				<mx:HBox id="boxText" horizontalAlign="center" width="100%" horizontalGap="15">
+					<mx:Label id="lblLayerText" text="{layerLabel}" styleName="WidgetText" />
+					<mx:ComboBox id="cboLayerText" change="searchLayerChangedText()"/>
+				</mx:HBox>
+				<mx:Text id="txtLabelText" text="" styleName="WidgetText" width="100%" textAlign="center"/>
+				<mx:TextInput id="txtSearch" width="90%"  enter="queryFeaturesText()" />
+				<mx:HBox horizontalAlign="center" width="100%">
+					<mx:Button label="{submitLabel}" click="queryFeaturesText()"/>
+					<mx:Button label="{clearLabel}" click="clear()"/>
+				</mx:HBox>
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%" verticalGap="1">
+				<mx:HBox id="boxMessage" visible="{msgVisible}" includeInLayout="{msgVisible}" width="100%">
+					<mx:SWFLoader id="swfMessage" source="com/esri/solutions/flexviewer/assets/flash/loader.swf" visible="false" />
+					<mx:Text id="txtMessage" text="" styleName="WidgetText" width="90%"/>
+				</mx:HBox>
+				<mx:Repeater id="wRepeater">
+					<widgets:RecordData infoData="{wRepeater.currentItem}" mouseOver="mouseOverRecord(event)" mouseOut="mouseOutRecord()" click="clickRecord(event)"/>
+				</mx:Repeater>
+			</mx:VBox>
+		</mx:ViewStack>
+	</WidgetTemplate>
+	
+</BaseWidget>

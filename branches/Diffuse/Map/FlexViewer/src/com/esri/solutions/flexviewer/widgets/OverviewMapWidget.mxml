@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<BaseWidget	xmlns				="com.esri.solutions.flexviewer.*" 
+			xmlns:esri			="http://www.esri.com/2008/ags" 
+			xmlns:mx			="http://www.adobe.com/2006/mxml" 
+			xmlns:mxeffects		="com.adobe.ac.mxeffects.*"
+			xmlns:widgets		="com.esri.solutions.flexviewer.widgets.*"
+			x					="600" 
+			y					="300" 
+			widgetConfigLoaded	="init()">
+	
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.esri.ags.events.ExtentEvent;
+			import com.esri.ags.geometry.Extent;
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.Graphic;
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.esri.ags.layers.ArcGISDynamicMapServiceLayer;
+			import com.esri.ags.layers.ArcGISTiledMapServiceLayer;
+			import com.esri.ags.symbol.SimpleFillSymbol;
+			import com.esri.ags.symbol.SimpleLineSymbol;
+			import com.esri.ags.Map;
+			import flash.events.MouseEvent;
+			import mx.controls.Alert;			
+			
+			private var overviewMode:String;
+			
+			private var graphicLineSym:SimpleLineSymbol = new SimpleLineSymbol("solid", 0xFF0000, 0.8, 3);
+			
+			private var graphicPolySym:SimpleFillSymbol = new SimpleFillSymbol(null, 0xFF0000, 0.01, graphicLineSym);
+			
+			private var graphicsLayer:GraphicsLayer;
+			
+			private var ovGraphic:Graphic;
+			
+			private var xOff:Number;
+			
+    		private var yOff:Number;
+    
+			private function init():void
+			{
+				if (configXML)
+				{
+					setText();
+					var type:String = configXML.mapservice.@type;
+					var url:String = configXML.mapservice;
+					overviewMode = configXML.mapservice.@mode;
+					
+					switch (type.toLowerCase())
+					{
+						case "tiled":
+						{
+							var tiledlayer:ArcGISTiledMapServiceLayer = new ArcGISTiledMapServiceLayer(url);
+							tiledlayer.alpha = alpha;
+							ovMap.addLayer(tiledlayer);
+							break;
+						}
+							
+						case "dynamic":
+						{
+							var dynlayer:ArcGISDynamicMapServiceLayer = new ArcGISDynamicMapServiceLayer(url);
+							dynlayer.alpha = alpha;
+							ovMap.addLayer(dynlayer);
+							break;
+						}
+					}
+								        
+					graphicsLayer = new GraphicsLayer();
+					graphicsLayer.symbol = graphicPolySym;
+					ovMap.addLayer(graphicsLayer);
+					
+					ovGraphic = new Graphic();
+					ovGraphic.geometry = map.extent;
+					
+					if(currentState == "maximized" || currentState == null){
+						ovGraphic.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+						ovGraphic.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+					}
+					graphicsLayer.add(ovGraphic);
+					if(currentState == "maximized" || currentState == null){
+						map.addEventListener(ExtentEvent.EXTENT_CHANGE, setOverviewExtent);
+						updateOverviewExtent();
+					}
+				}
+			}			
+			
+			private function setOverviewExtent(event:ExtentEvent):void
+			{
+				ovGraphic.geometry = map.extent;
+				if (overviewMode == "dynamic")
+					ovMap.extent = map.extent.expand(3);
+			}			
+			
+			private function updateOverviewExtent():void
+			{
+				ovGraphic.geometry = map.extent;
+				if (overviewMode == "dynamic")
+					ovMap.extent = map.extent.expand(3);
+			}			
+			
+			private function mouseDownHandler(event:MouseEvent):void 
+		    {
+		    	var ext:Extent = ovGraphic.geometry as Extent;
+		    	var mPt:MapPoint = ovMap.toMapFromStage(event.stageX, event.stageY);
+		    	xOff = ext.center.x - mPt.x;
+		        yOff = ext.center.y - mPt.y;
+		        ovGraphic.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			}		         
+		            
+			private function mouseMoveHandler(event:MouseEvent):void 
+		   	{
+		   		var mPt:MapPoint = ovMap.toMapFromStage(event.stageX, event.stageY);
+		    	var tempX:Number = mPt.x + xOff;
+				var tempY:Number = mPt.y + yOff; 
+				var ext:Extent = ovGraphic.geometry as Extent;
+				var newext:Extent = new Extent(tempX - ext.width / 2, tempY - ext.height/ 2, tempX + ext.width / 2, tempY + ext.height / 2);
+		    	ovGraphic.geometry = newext;
+		    	if (!event.buttonDown)
+		    		ovGraphic.removeEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler); 
+			}		        
+		        
+		    private function mouseUpHandler(event:MouseEvent):void 
+		    {
+		    	map.extent = ovGraphic.geometry as Extent;
+		    	ovGraphic.removeEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);    
+		    }		    
+		    
+		    private function widgetOpenedHandler(event:Event):void
+			{				
+				if(!ovGraphic.hasEventListener(MouseEvent.MOUSE_DOWN)){
+					ovGraphic.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+					ovGraphic.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+				}			
+				map.addEventListener(ExtentEvent.EXTENT_CHANGE, setOverviewExtent);
+				setTimeout(updateOverviewExtent, 1000);
+			}			
+			
+		    private function widgetClosedHandler(event:Event):void
+			{
+				map.removeEventListener(ExtentEvent.EXTENT_CHANGE, setOverviewExtent);
+			}			
+			
+			private function widgetMinimizedHandler(event:Event):void
+			{
+				map.removeEventListener(ExtentEvent.EXTENT_CHANGE, setOverviewExtent);
+			}
+			
+			override public function updateLocale(value:String):void{
+   				super.updateLocale(value);
+			
+   				//add specific  widget texts here  
+   				setText()  	
+					
+			}
+			private function setText():void{
+				//title
+				if(resourceManager.getString(widgetResourceFile, 'widgettitle')){				
+					wTemplate.setTitle(resourceManager.getString(widgetResourceFile, 'widgettitle'));
+				}
+			}	
+				
+		]]>
+	</mx:Script>	
+	<mx:Metadata>
+        [ResourceBundle("OverviewMapWidgetStrings")]
+    </mx:Metadata> 
+
+	<WidgetTemplate id="wTemplate" widgetClosed="widgetClosedHandler(event)" widgetOpened="widgetOpenedHandler(event)" widgetMinimized="widgetMinimizedHandler(event)">
+		<esri:Map	id							="ovMap" 
+					width						="100%"
+					height						="100%"
+					panArrowsVisible			="false" 
+					zoomSliderVisible			="false" 
+					logoVisible					="false" 
+					scaleBarVisible				="false" 
+					panEnabled					="false"
+					clickRecenterEnabled		="false"
+					doubleClickZoomEnabled		="false"
+				 	keyboardNavigationEnabled	="false"
+				 	rubberbandZoomEnabled		="false"
+					scrollWheelZoomEnabled		="false">
+		</esri:Map>
+	</WidgetTemplate>
+	
+</BaseWidget>

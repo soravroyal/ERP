@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:VBox	xmlns:mx	="http://www.adobe.com/2006/mxml" 
+			verticalGap	="0" 
+			width		="100%">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.esri.ags.layers.Layer;
+			import com.esri.ags.Map;	
+					
+				
+			private var _layer:Layer;
+			
+			public function get layer():Layer
+			{
+				return _layer;
+			}
+			
+			public function set layer(value:Layer):void
+			{
+				_layer = value;
+				layerLabel.text = resourceManager.getString("FilterAllWidgetStrings", layer.id) || layer.name;
+				slider.value = layer.alpha;
+				resourceManager.addEventListener(Event.CHANGE,updateLocale);
+			}				
+						
+			//set layer alpha
+	        private function setLayerAlpha():void
+	        {
+	        	layer.alpha = slider.value;
+	        }        
+        
+	        private function sldrDataTipFormatter(value:Number):String 
+		    { 
+		    	return int(value * 100) + "%"; 
+		    }
+		    private function updateLocale(event:Event):void{
+		    		layerLabel.text = resourceManager.getString("FilterAllWidgetStrings", layer.id) || layer.name;
+		    }
+		
+		]]>
+	</mx:Script>	
+	<mx:Metadata>
+        [ResourceBundle("FilterAllWidgetStrings")]
+    </mx:Metadata> 
+	
+	<mx:Text id="layerLabel" styleName="RecordText" fontWeight="bold" width="90%" truncateToFit="true"/>
+	<mx:HSlider id="slider" minimum="0" maximum="1" width="80%" change="setLayerAlpha()" dataTipFormatFunction="sldrDataTipFormatter" liveDragging="true"/>
+	
+</mx:VBox>

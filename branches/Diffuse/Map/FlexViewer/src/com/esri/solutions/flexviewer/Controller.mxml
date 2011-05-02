@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:Canvas	xmlns:mx				="http://www.adobe.com/2006/mxml" 
+	       	xmlns:comp				="com.esri.solutions.flexviewer.components.*" 
+	       	horizontalScrollPolicy	="off" 
+	       	verticalScrollPolicy	="off"
+	       	creationComplete		="init()">
+
+	<mx:Script>
+		<![CDATA[
+				
+			import com.esri.ags.geometry.Extent;
+			import com.esri.ags.layers.Layer;
+			import com.esri.ags.Map;		
+			import com.esri.solutions.flexviewer.AppEvent;
+			import com.esri.solutions.flexviewer.components.ControllerMenu;
+			import com.esri.solutions.flexviewer.components.CustomControllerMenu;
+			import com.esri.solutions.flexviewer.components.StandAloneControllerMenu;
+			import mx.collections.ArrayCollection;
+			
+			import mx.core.Application;
+			
+			[Bindable]
+			public var map:Map;
+			
+			[Bindable]
+			public var status:String;
+			
+			private var configData:ConfigData;
+						
+			//init
+			private function init():void
+			{
+				SiteContainer.addEventListener(AppEvent.CONFIG_LOADED, config);
+				SiteContainer.addEventListener(AppEvent.MAP_LOADED, initMap);
+				SiteContainer.addEventListener(AppEvent.SET_STATUS, setStatus);
+			}
+			
+			//config
+		    private function config(event:AppEvent):void
+		    {      
+		    	configData = event.data as ConfigData;
+		    	configureBanner();
+		    	configureMenus();
+		    }
+			    
+		    //configure banner
+		    private function configureBanner():void
+		    {
+		    	for (var i:int = 0; i < configData.configUI.length; i++)
+		        {
+		        	var id:String = configData.configUI[i].id;
+		        	var value:String =  configData.configUI[i].value;
+		        	var obj:Object =  configData.configUI[i];
+		        	switch (id)
+		        	{
+		        		case "banner":
+		        		{
+		        			if (value == "visible")
+		        			{
+		        				banner.visible = true;
+		        				banner.width = 450;
+		        				menuContainer.setStyle("left",30);
+		        				//menuContainer.setStyle("left",81);
+		        				menuContainer.y = banner.height - 10 ;
+		        			}
+		        			else if (value == "partvisible")
+		        			{
+		        				banner.styleName = null;
+		        				banner.visible = true;
+		        				banner.titlebox.visible = false;
+		        				banner.titlebox.includeInLayout = false;
+		        				banner.logoCanvas.visible = false;
+		        				banner.gazetteerHBox.percentWidth = 0;
+		        				banner.gazetteerHBox.styleName = "ControllerGazetteer";
+		        				banner.logoCanvas.includeInLayout = false;
+		        				banner.height = 65;
+		        				
+		        				menuContainer.y = banner.height - 23;
+		        			}
+		        			else
+		        			{
+		        				banner.visible = false;
+		        				banner.height = 20;
+		        				menuContainer.y = banner.height - 20;
+		        			}
+		        			break;
+		        		}
+		        	
+		        		case "title":
+		        		{
+		        			banner.title = value;
+		        			break;
+		        		}
+		        		
+		        		case "subtitle":
+		        		{
+		        			banner.subtitle = value;
+		        			break;
+		        		}
+		        			
+		        		case "logo":
+		        		{
+		        			if (value != "")
+		        			{
+		        				banner.logo = value;
+		        			}	        			
+		        			break
+		        		}
+		        		case "findlocation":
+		        		{
+		        			if (value != "")
+		        			{
+		        				banner.gazetteer.settings = obj;
+		        			}	        			
+		        			break
+		        		}
+		        	}
+		        } 
+		    }
+		    
+		    
+		    //configure menus
+		    private function configureMenus():void
+		    {
+		    	for (var i:Number = 0; i < configData.configMenus.length; i++)
+		        {
+		        	var menuId:String = configData.configMenus[i].id;
+					var menuLabel:String = configData.configMenus[i].label;
+					var menuIcon:String = configData.configMenus[i].icon;
+					var menuItems:Array = configData.configMenus[i].items;
+					if(configData.configMenus[i].target == "customMenu"){
+						var customControllerMenu:CustomControllerMenu = new CustomControllerMenu();
+						customControllerMenu.id = menuId;
+						customControllerMenu.menuLabel = menuLabel;
+						//customControllerMenu.menuImage = menuIcon;
+						customControllerMenu.menuCollection = new ArrayCollection(menuItems);
+						customMenuContainer.addChild(customControllerMenu);
+					}else if (configData.configMenus[i].target == "standaloneMenu"){
+						var standAloneControllerMenu:StandAloneControllerMenu = new StandAloneControllerMenu();
+						standAloneControllerMenu.id = menuId;
+						standAloneControllerMenu.menuLabel = menuLabel;
+						standAloneControllerMenu.menuImage = menuIcon;
+						standAloneControllerMenu.menuCollection = new ArrayCollection(menuItems);
+						menuContainer.addChild(standAloneControllerMenu);
+					}else{
+						var controllerMenu:ControllerMenu = new ControllerMenu();
+						controllerMenu.id = menuId;
+						controllerMenu.menuLabel = menuLabel;
+						controllerMenu.menuImage = menuIcon;
+						controllerMenu.menuCollection = new ArrayCollection(menuItems);
+						menuContainer.addChild(controllerMenu);
+					}
+					
+		        }
+		        var bw:Number = configData.configMenus.length * 90;
+		        if (bw > banner.minWidth) 
+		        	banner.width = bw;
+		    }
+		    
+			//init map
+			private function initMap(event:AppEvent):void
+			{
+				map = event.data as Map;
+				if(map.zoomSliderVisible){
+					customMenuContainer.y = 305;
+				}
+			}
+			
+			//set status
+	    	private function setStatus(event:AppEvent):void
+	    	{
+	    		status = event.data as String;
+	    	}	
+		
+		]]>
+	</mx:Script>
+	
+	<comp:Banner id="banner" status="{status}" visible="false"/>
+	<mx:HBox id="customMenuContainer" horizontalGap="-25" y="105"  left="0"/>
+	<mx:HBox id="menuContainer" left="0"/>
+	
+	
+</mx:Canvas>
