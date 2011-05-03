@@ -12,8 +12,8 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 :out upgrade.log
 
 -- Include deltascripts here
-:r$(basedir)\..\..\common\AddVersion.sql
-go
+--:r$(basedir)\..\..\common\AddVersion.sql
+--go
 
 --Uncomment this when released (will only insert version no. once) :
 /*

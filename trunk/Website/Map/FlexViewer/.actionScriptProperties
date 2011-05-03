@@ -31,3 +31,4 @@
     <buildCSSFileEntry destPath="bin-debug" sourcePath="src/com/esri/solutions/flexviewer/themes/lighterside/style.css"/>
   </buildCSSFiles>
 </actionScriptProperties>
+
