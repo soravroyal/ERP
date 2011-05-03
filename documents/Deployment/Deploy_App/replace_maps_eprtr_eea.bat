@@ -61,12 +61,15 @@ cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_ts_pollut
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_ts_pollutantrelease_ex.xml" "services/Internal" "services/Test"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_ts_pollutantrelease_result.xml" "services/Internal" "services/Test"
 
+cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_emissions_air_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
+cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_emissions_air_result.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_air_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_air_result.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_water_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_water_result.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 
 rem update of eprtrreview-maps with regards to google search license key
+cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_emissions_air_ex.xml" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBQP9DYj1SGFg6FM-rqk8vMgigJ1RBSHXcG5VbvJ5me6pgaERQCc7FgAPg" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBTwqcV4DUuFpXoDDxcq42tGWfpXOxSpmeioGpEuGpyeA4ws71HBLX54Jg"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_air_ex.xml" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBQP9DYj1SGFg6FM-rqk8vMgigJ1RBSHXcG5VbvJ5me6pgaERQCc7FgAPg" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBTwqcV4DUuFpXoDDxcq42tGWfpXOxSpmeioGpEuGpyeA4ws71HBLX54Jg"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_diffuse_water_ex.xml" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBQP9DYj1SGFg6FM-rqk8vMgigJ1RBSHXcG5VbvJ5me6pgaERQCc7FgAPg" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBTwqcV4DUuFpXoDDxcq42tGWfpXOxSpmeioGpEuGpyeA4ws71HBLX54Jg"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb\Map\config_facilitylevels_ex.xml" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBQP9DYj1SGFg6FM-rqk8vMgigJ1RBSHXcG5VbvJ5me6pgaERQCc7FgAPg" "ABQIAAAAA1acrdbJJPhJK7NdgNERGBTwqcV4DUuFpXoDDxcq42tGWfpXOxSpmeioGpEuGpyeA4ws71HBLX54Jg"
@@ -101,6 +104,8 @@ cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_wastetran
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\testconfig.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_diffuse_air_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_diffuse_air_result.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
+cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_diffuse_emissions_air_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
+cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_diffuse_emissions_air_result.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_diffuse_water_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_diffuse_water_result.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb\Map\config_ts_wastetransfer_ex.xml" "http://sdkcga6307/ArcGIS/rest/services" "http://discomap.eea.europa.eu/ArcGIS/rest/services"
