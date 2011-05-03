@@ -1,1 +1,1 @@
-select * from dbo.LOV_MEDIUM --
+select * from dbo.LOV_MEDIUM

@@ -1,30 +1,19 @@
 /*
-Upgrading MASTER database from ver 2.0
+Upgrading CMS database from ver 1.9 (prior to version in DB)
 */
 
 --set new version number
 :Setvar major 2
-:Setvar minor 1
+:Setvar minor 0
 
 PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 
 :On Error exit
 :out upgrade.log
 
-
 -- Include deltascripts here
-
-:r $(basedir)\..\..\common\AddVersion.sql
+:r$(basedir)\..\..\common\AddVersion.sql
 go
-
-:r $(basedir)\Add_fAT_GETMETHODDESIGNATION_TYPE.sql
-go
-
-:r $(basedir)\Add_MethodCode_MethodDesignation.sql
-go
-:r $(basedir)\Add_tAT_METHOD.sql
-go
-
 
 --Uncomment this when released (will only insert version no. once) :
 /*

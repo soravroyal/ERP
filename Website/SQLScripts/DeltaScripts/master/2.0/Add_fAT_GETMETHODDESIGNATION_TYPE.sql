@@ -3,12 +3,7 @@
 --	Delta script adding functions to EPRTRmaster
 --
 --	WOS, Atkins 0202201
---------------------------------------------------------------------------------
---	Changelog
 --
---	ISNULL(mu.MethodDesignation,'') added, so an empty instance will also
---	put a seperator in the return string
---	WOS, Atkins 0202215
 --------------------------------------------------------------------------------
 
 
@@ -22,7 +17,7 @@ RETURNS NVARCHAR(4000)
 AS 
 BEGIN 
     DECLARE @r VARCHAR(4000) 
-    SELECT @r = ISNULL(@r+'|', '') + ISNULL(mu.MethodDesignation,'')
+    SELECT @r = ISNULL(@r+'|', '') + mu.MethodDesignation
     FROM METHODUSED mu
     WHERE mu.MethodListID = @mlID 
     RETURN @r 
@@ -40,7 +35,7 @@ RETURNS NVARCHAR(255)
 AS 
 BEGIN 
     DECLARE @r VARCHAR(255) 
-    SELECT @r = ISNULL(@r+'|', '') + ISNULL(lov.Code,'')
+    SELECT @r = ISNULL(@r+'|', '') + lov.Code
     FROM METHODUSED mu
     inner join LOV_METHODTYPE lov
 	on mu.LOV_MethodTypeID = lov.LOV_MethodTypeID        
@@ -49,3 +44,4 @@ BEGIN
 END 
 GO 
 
+--select * from METHODUSED where MethodListID = 110225
