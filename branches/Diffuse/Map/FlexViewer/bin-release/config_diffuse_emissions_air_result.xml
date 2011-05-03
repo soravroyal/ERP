@@ -38,7 +38,7 @@
 		</basemaps>
 
 		<livemaps>
-			<mapservice id="air" label="Diffuse Emmissions to Air" type="dynamic" visible="false" alpha="0.6" url="http://localhost/ArcGIS/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer" >
+			<mapservice id="air" label="Diffuse Emmissions to Air" type="dynamic" visible="false" alpha="0.6" url="http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer" >
 				<layers>					
 					<layer id="0" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/0.PNG"></layer>
 					<layer id="1" visible="false" legend="com/esri/solutions/flexviewer/assets/images/legends/air/diffuse/1.PNG"></layer>
