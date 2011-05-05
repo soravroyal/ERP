@@ -19,18 +19,34 @@ namespace EPRTR.DiffuseSources
         private const string CODE_PHOSPHORUS = "TOTAL - PHOSPHORUS";
 
         // pollutant reltated to air
-        private const string CODE_NOX = "NOX";
-        private const string CODE_SOX = "SOX";
         private const string CODE_CO = "CO";
+        private const string CODE_CO2 = "CO2";
+        private const string CODE_NH3 = "NH3"; 
+        private const string CODE_NOX = "NOX";
         private const string CODE_PM10 = "PM10";
-        private const string CODE_NH3 = "NH3";
+        private const string CODE_SO2 = "SOX";
+        
 
-
+        //Industrial Activity codes for point sources
+        private static List<string> CODES_INDUSTRIAL = new List<string>() { };
+        private static List<string> CODES_NON_INDUSTRIAL = new List<string>() { "1.(c)" };
+        private static List<string> CODES_ROAD = new List<string>() { };
         private static List<string> CODES_AGRICULTURE = new List<string>() { "7.(a)" };
-        private static List<string> CODES_NON_INDUSTRIAL_COMBUSTION = new List<string>() { "1.(c)" };
+        private static List<string> CODES_DOMESTIC_SHIPPING = new List<string>() { };
+        private static List<string> CODES_DOMESTIC_AVIATION = new List<string>() { };
+        private static List<string> CODES_INTERNATIONAL_AVIATION = new List<string>() { };
         private static List<string> CODES_EMPTY = new List<string>() { };
 
+        //diffuse sector codes
+        private const string SECTOR_CODE_INDUSTRIAL = "IndustrialReleases";
+        private const string SECTOR_CODE_NON_INDUSTRIAL = "NonIndustrialCombustion";
+        private const string SECTOR_CODE_ROAD = "RoadTransport";
+        private const string SECTOR_CODE_AGRICULTURE = "Agriculture";
+        private const string SECTOR_CODE_DOMESTIC_SHIPPING = "DomesticShipping";
+        private const string SECTOR_CODE_DOMESTIC_AVIATION= "DomesticAviation";
+        private const string SECTOR_CODE_INTERNATIONAL_SHIPPING = "InternationalShipping";
 
+        private static List<string> sectorList = null;
 
         #region definition of maps
 
@@ -42,31 +58,60 @@ namespace EPRTR.DiffuseSources
             {
                 mapList = new Dictionary<string, Map>();
 
+                #region water
                 mapList.addMap("water:::0::4::5", "wnrbd", MediumFilter.Medium.Water, CODE_NITROGEN, CODES_AGRICULTURE, 2007);
                 mapList.addMap("water:::0::3::5", "wnaggr", MediumFilter.Medium.Water, CODE_NITROGEN, CODES_AGRICULTURE, 2007);
                 
                 mapList.addMap("water:::0::1::5", "wprbd", MediumFilter.Medium.Water, CODE_PHOSPHORUS, CODES_AGRICULTURE, 2007);
                 mapList.addMap("water:::0::2::5", "wpaggr", MediumFilter.Medium.Water, CODE_PHOSPHORUS, CODES_AGRICULTURE, 2007);
+                #endregion
 
+                #region air
+                string prefix = MediumFilter.Medium.Air.ToString()+"_"+CODE_NOX+"_";
+                mapList.addMap("air:::0", prefix+SECTOR_CODE_INDUSTRIAL, MediumFilter.Medium.Air, CODE_NOX, CODES_INDUSTRIAL, 2007);
+                mapList.addMap("air:::1", prefix+SECTOR_CODE_NON_INDUSTRIAL, MediumFilter.Medium.Air, CODE_NOX, CODES_NON_INDUSTRIAL, 2007);
+                mapList.addMap("air:::2", prefix + SECTOR_CODE_ROAD, MediumFilter.Medium.Air, CODE_NOX, CODES_ROAD, 2007);
+                mapList.addMap("air:::3", prefix + SECTOR_CODE_DOMESTIC_SHIPPING, MediumFilter.Medium.Air, CODE_NOX, CODES_DOMESTIC_SHIPPING, 2007);
+                mapList.addMap("air:::4", prefix + SECTOR_CODE_DOMESTIC_AVIATION, MediumFilter.Medium.Air, CODE_NOX, CODES_DOMESTIC_AVIATION, 2007);
+                mapList.addMap("air:::27", prefix + SECTOR_CODE_INTERNATIONAL_SHIPPING, MediumFilter.Medium.Air, CODE_NOX, CODES_INTERNATIONAL_AVIATION, 2007);
 
-                mapList.addMap("air:::0", "AirNOx_NonIndustrialCombustion", MediumFilter.Medium.Air, CODE_NOX, CODES_NON_INDUSTRIAL_COMBUSTION, 2007);
-                mapList.addMap("air:::1", "AirNOx_RoadTransport", MediumFilter.Medium.Air, CODE_NOX, CODES_EMPTY, 2007);
-                mapList.addMap("air:::2", "AirNOx_OtherMobileSources", MediumFilter.Medium.Air, CODE_NOX, CODES_AGRICULTURE, 2007);
+                prefix = MediumFilter.Medium.Air.ToString() + "_" + CODE_SO2 + "_";
+                mapList.addMap("air:::5", prefix + SECTOR_CODE_INDUSTRIAL, MediumFilter.Medium.Air, CODE_SO2, CODES_INDUSTRIAL, 2007);
+                mapList.addMap("air:::6", prefix + SECTOR_CODE_NON_INDUSTRIAL, MediumFilter.Medium.Air, CODE_SO2, CODES_NON_INDUSTRIAL, 2007);
+                mapList.addMap("air:::7", prefix + SECTOR_CODE_ROAD, MediumFilter.Medium.Air, CODE_SO2, CODES_ROAD, 2007);
+                mapList.addMap("air:::8", prefix + SECTOR_CODE_DOMESTIC_SHIPPING, MediumFilter.Medium.Air, CODE_SO2, CODES_DOMESTIC_SHIPPING, 2007);
+                mapList.addMap("air:::9", prefix + SECTOR_CODE_DOMESTIC_AVIATION, MediumFilter.Medium.Air, CODE_SO2, CODES_DOMESTIC_AVIATION, 2007);
+                mapList.addMap("air:::28", prefix + SECTOR_CODE_INTERNATIONAL_SHIPPING, MediumFilter.Medium.Air, CODE_SO2, CODES_INTERNATIONAL_AVIATION, 2007);
 
-                mapList.addMap("air:::3", "AirSO2_NonIndustrialCombustion", MediumFilter.Medium.Air, CODE_SOX, CODES_NON_INDUSTRIAL_COMBUSTION, 2007);
-                mapList.addMap("air:::4", "AirSO2_RoadTransport", MediumFilter.Medium.Air, CODE_SOX, CODES_AGRICULTURE, 2007);
-                mapList.addMap("air:::5", "AirSO2_OtherMobileSources", MediumFilter.Medium.Air, CODE_SOX, CODES_AGRICULTURE, 2007);
+                prefix = MediumFilter.Medium.Air.ToString() + "_" + CODE_PM10 + "_";
+                mapList.addMap("air:::10", prefix + SECTOR_CODE_INDUSTRIAL, MediumFilter.Medium.Air, CODE_PM10, CODES_INDUSTRIAL, 2007);
+                mapList.addMap("air:::11", prefix + SECTOR_CODE_NON_INDUSTRIAL, MediumFilter.Medium.Air, CODE_PM10, CODES_NON_INDUSTRIAL, 2007);
+                mapList.addMap("air:::12", prefix + SECTOR_CODE_ROAD, MediumFilter.Medium.Air, CODE_PM10, CODES_ROAD, 2007);
+                mapList.addMap("air:::13", prefix + SECTOR_CODE_DOMESTIC_SHIPPING, MediumFilter.Medium.Air, CODE_PM10, CODES_DOMESTIC_SHIPPING, 2007);
+                mapList.addMap("air:::14", prefix + SECTOR_CODE_DOMESTIC_AVIATION, MediumFilter.Medium.Air, CODE_PM10, CODES_DOMESTIC_AVIATION, 2007);
+                mapList.addMap("air:::15", prefix + SECTOR_CODE_AGRICULTURE, MediumFilter.Medium.Air, CODE_PM10, CODES_AGRICULTURE, 2007);
+                mapList.addMap("air:::29", prefix + SECTOR_CODE_INTERNATIONAL_SHIPPING, MediumFilter.Medium.Air, CODE_PM10, CODES_INTERNATIONAL_AVIATION, 2007);
 
-                mapList.addMap("air:::6", "AirCO_NonIndustrialCombustion", MediumFilter.Medium.Air, CODE_CO, CODES_NON_INDUSTRIAL_COMBUSTION, 2007);
-                mapList.addMap("air:::7", "AirCO_RoadTransport", MediumFilter.Medium.Air, CODE_CO, CODES_AGRICULTURE, 2007);
-                mapList.addMap("air:::8", "AirCO_OtherMobileSources", MediumFilter.Medium.Air, CODE_CO, CODES_AGRICULTURE, 2007);
+                prefix = MediumFilter.Medium.Air.ToString() + "_" + CODE_NH3 + "_";
+                mapList.addMap("air:::16", prefix + SECTOR_CODE_AGRICULTURE, MediumFilter.Medium.Air, CODE_NH3, CODES_AGRICULTURE, 2007);
 
-                mapList.addMap("air:::9", "AirPM10_NonIndustrialCombustion", MediumFilter.Medium.Air, CODE_PM10, CODES_AGRICULTURE, 2007);
-                mapList.addMap("air:::10", "AirPM10_RoadTransport", MediumFilter.Medium.Air, CODE_PM10, CODES_AGRICULTURE, 2007);
-                mapList.addMap("air:::11", "AirPM10_OtherMobileSources", MediumFilter.Medium.Air, CODE_PM10, CODES_AGRICULTURE, 2007);
-                mapList.addMap("air:::12", "AirPM10_Agriculture", MediumFilter.Medium.Air, CODE_PM10, CODES_AGRICULTURE, 2007);
+                prefix = MediumFilter.Medium.Air.ToString() + "_" + CODE_CO + "_";
+                mapList.addMap("air:::17", prefix + SECTOR_CODE_INDUSTRIAL, MediumFilter.Medium.Air, CODE_CO, CODES_INDUSTRIAL, 2007);
+                mapList.addMap("air:::18", prefix + SECTOR_CODE_NON_INDUSTRIAL, MediumFilter.Medium.Air, CODE_CO, CODES_NON_INDUSTRIAL, 2007);
+                mapList.addMap("air:::19", prefix + SECTOR_CODE_ROAD, MediumFilter.Medium.Air, CODE_CO, CODES_ROAD, 2007);
+                mapList.addMap("air:::20", prefix + SECTOR_CODE_DOMESTIC_SHIPPING, MediumFilter.Medium.Air, CODE_CO, CODES_DOMESTIC_SHIPPING, 2007);
+                mapList.addMap("air:::21", prefix + SECTOR_CODE_DOMESTIC_AVIATION, MediumFilter.Medium.Air, CODE_CO, CODES_DOMESTIC_AVIATION, 2007);
+                mapList.addMap("air:::30", prefix + SECTOR_CODE_INTERNATIONAL_SHIPPING, MediumFilter.Medium.Air, CODE_CO, CODES_INTERNATIONAL_AVIATION, 2007);
 
-                mapList.addMap("air:::13", "AirNH3_Agriculture", MediumFilter.Medium.Air, CODE_NH3, CODES_AGRICULTURE, 2007);
+                prefix = MediumFilter.Medium.Air.ToString() + "_" + CODE_CO2 + "_";
+                mapList.addMap("air:::22", prefix + SECTOR_CODE_INDUSTRIAL, MediumFilter.Medium.Air, CODE_CO2, CODES_INDUSTRIAL, 2007);
+                mapList.addMap("air:::23", prefix + SECTOR_CODE_NON_INDUSTRIAL, MediumFilter.Medium.Air, CODE_CO2, CODES_NON_INDUSTRIAL, 2007);
+                mapList.addMap("air:::24", prefix + SECTOR_CODE_ROAD, MediumFilter.Medium.Air, CODE_CO2, CODES_ROAD, 2007);
+                mapList.addMap("air:::25", prefix + SECTOR_CODE_DOMESTIC_SHIPPING, MediumFilter.Medium.Air, CODE_CO2, CODES_DOMESTIC_SHIPPING, 2007);
+                mapList.addMap("air:::26", prefix + SECTOR_CODE_DOMESTIC_AVIATION, MediumFilter.Medium.Air, CODE_CO2, CODES_DOMESTIC_AVIATION, 2007);
+                mapList.addMap("air:::31", prefix + SECTOR_CODE_INTERNATIONAL_SHIPPING, MediumFilter.Medium.Air, CODE_CO2, CODES_INTERNATIONAL_AVIATION, 2007);
+
+                #endregion
             }
             return mapList;
         }
@@ -193,9 +238,25 @@ namespace EPRTR.DiffuseSources
 
         public static Map[] GetMaps(MediumFilter.Medium medium, string sector)
         {
-            return getMapList().Values.Where(m => m.Medium == medium && m.CmsLayerId.Contains(sector)).ToArray<Map>();
+            return getMapList().Values.Where(m => m.Medium == medium && m.CmsLayerId.EndsWith(sector)).ToArray<Map>();
         }
 
+
+        public static List<string> GetSectors()
+        {
+            if (sectorList == null)
+            {
+                sectorList = new List<string>();
+                sectorList.Add(SECTOR_CODE_INDUSTRIAL);
+                sectorList.Add(SECTOR_CODE_NON_INDUSTRIAL);
+                sectorList.Add(SECTOR_CODE_ROAD);
+                sectorList.Add(SECTOR_CODE_DOMESTIC_SHIPPING);
+                sectorList.Add(SECTOR_CODE_DOMESTIC_AVIATION);
+                sectorList.Add(SECTOR_CODE_INTERNATIONAL_SHIPPING);
+                sectorList.Add(SECTOR_CODE_AGRICULTURE);
+            }
+            return sectorList;
+        }
 
 
         private static string getCMSText(string layerId, string key)

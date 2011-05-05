@@ -12,13 +12,7 @@
         <asp:Literal runat="server" Text="<%$ Resources:DiffuseSources,AvailableSectors %>" />
         <br />
         <asp:DropDownList CssClass="searchOption_ddlSectorDiffuse" ID="ddlSelectSector" runat="server"
-            OnSelectedIndexChanged="OnSelectedIndexChanged_Sector" AutoPostBack="true">
-            <asp:ListItem Text="<%$ Resources:DiffuseSources,SelectSector %>" Value="SelectSector" Selected="True"  />
-            <asp:ListItem Text="<%$ Resources:DiffuseSources,NonIndustrialCombustion %>" Value="NonIndustrialCombustion" />
-            <asp:ListItem Text="<%$ Resources:DiffuseSources,RoadTransport %>" Value="RoadTransport" />
-            <asp:ListItem Text="<%$ Resources:DiffuseSources,OtherMobileSources %>" Value="OtherMobileSources" />
-            <asp:ListItem Text="<%$ Resources:DiffuseSources,Agriculture %>" Value="Agriculture" />
-        </asp:DropDownList>
+            OnSelectedIndexChanged="OnSelectedIndexChanged_Sector" AutoPostBack="true"/>
     </div>
     <div id="divAvailableLayers" runat="server">
         <asp:Literal ID="litAvailableLayers" runat="server" Text="<%$ Resources:DiffuseSources,AvailableLayers %>"  />

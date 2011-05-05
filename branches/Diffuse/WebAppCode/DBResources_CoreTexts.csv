@@ -1,68 +1,13 @@
 ---Action(ResourceType,ResourceKey,CultureCode,ResourceValue)   Action can either be InsertUpdate or Delete
 ---If you need to comment out a line begin the line with at least two dashes "--"
 ---InsertUpdate|ResourceType|ResourceKey|CultureCode|ResourceValue
---
--- delete old EPER activity keys on all languages
-Delete|LOV_ANNEXIACTIVITY|EPER_1
-Delete|LOV_ANNEXIACTIVITY|EPER_1.1
-Delete|LOV_ANNEXIACTIVITY|EPER_1.2
-Delete|LOV_ANNEXIACTIVITY|EPER_1.3
-Delete|LOV_ANNEXIACTIVITY|EPER_1.4
-Delete|LOV_ANNEXIACTIVITY|EPER_2
-Delete|LOV_ANNEXIACTIVITY|EPER_2.1/2.2/2.3/2.4/2.5/2.6
-Delete|LOV_ANNEXIACTIVITY|EPER_3
-Delete|LOV_ANNEXIACTIVITY|EPER_3.1/3.3/3.4/3.5
-Delete|LOV_ANNEXIACTIVITY|EPER_3.2
-Delete|LOV_ANNEXIACTIVITY|EPER_4
-Delete|LOV_ANNEXIACTIVITY|EPER_4.1
-Delete|LOV_ANNEXIACTIVITY|EPER_4.2/4.3
-Delete|LOV_ANNEXIACTIVITY|EPER_4.4/4.6
-Delete|LOV_ANNEXIACTIVITY|EPER_4.5
-Delete|LOV_ANNEXIACTIVITY|EPER_5
-Delete|LOV_ANNEXIACTIVITY|EPER_5.1/5.2
-Delete|LOV_ANNEXIACTIVITY|EPER_5.3/5.4
-Delete|LOV_ANNEXIACTIVITY|EPER_6
-Delete|LOV_ANNEXIACTIVITY|EPER_6.1
-Delete|LOV_ANNEXIACTIVITY|EPER_6.2
-Delete|LOV_ANNEXIACTIVITY|EPER_6.3
-Delete|LOV_ANNEXIACTIVITY|EPER_6.4
-Delete|LOV_ANNEXIACTIVITY|EPER_6.5
-Delete|LOV_ANNEXIACTIVITY|EPER_6.6
-Delete|LOV_ANNEXIACTIVITY|EPER_6.7
-Delete|LOV_ANNEXIACTIVITY|EPER_6.8
---
--- add new EPER activity keys in english
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_1|en-GB|1 Energy industries
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_1.1|en-GB|1.1 Combustion installations > 50 MW
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_1.2|en-GB|1.2 Mineral oil and gas refineries
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_1.3|en-GB|1.3 Coke ovens
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_1.4|en-GB|1.4 Coal gasification and liquefaction plants
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_2|en-GB|2 Production and processing of metals
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_2.1/2.2/2.3/2.4/2.5/2.6|en-GB|2.1/2.2/2.3/2.4/2.5/2.6 Metal industry
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_3|en-GB|3 Mineral industry
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_3.1/3.3/3.4/3.5|en-GB|3.1/3.3/3.4/3.5 Cement, lime, glass, mineral substances or ceramic products
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_3.2|en-GB|3.2 Production of asbestos and asbestos based products
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_4|en-GB|4 Chemical industry
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_4.1|en-GB|4.1 Basic organic chemicals
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_4.2/4.3|en-GB|4.2/4.3 Basic inorganic chemicals or fertilisers
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_4.4/4.6|en-GB|4.4/4.6 Biocides and explosives
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_4.5|en-GB|4.5 Pharmaceutical products
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_5|en-GB|5 Waste management
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_5.1/5.2|en-GB|5.1/5.2 Disposal/recovery of hazardous or municipal waste
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_5.3/5.4|en-GB|5.3/5.4 Disposal of non-hazardous waste and landfills
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6|en-GB|6 Other activities
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.1|en-GB|6.1 Pulp, paper or board production
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.2|en-GB|6.2 Pretreatment of fibres or textiles
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.3|en-GB|6.3 Tanning of hides and skins
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.4|en-GB|6.4 Slaughterhouses, milk, animal and vegetable raw materials
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.5|en-GB|6.5 Disposal or recycling of animal carcasses and animal waste
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.6|en-GB|6.6 Poultry, pigs and sows
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.7|en-GB|6.7 Surface treatment or products using organic solvents
-InsertUpdate|LOV_ANNEXIACTIVITY|EPER_6.8|en-GB|6.8 Production of carbon or graphite
---
---add missing EPER text
-InsertUpdate|Pollutant|AllValuesAreYearlyTransferEPER|en-GB|All values are yearly direct emissions
+-- Delete|ResourceType|ResourceKey
 
---update facility popup title
-Delete|Common|FacilityPopupTitle
-InsertUpdate|Common|FacilityPopupTitle|en-GB|E-PRTR Facility Details - {0}
+--Add new diffuse sectors
+
+InsertUpdate|DiffuseSources|IndustrialReleases|en-GB|Industrial releases
+InsertUpdate|DiffuseSources|NonIndustrialCombustion|en-GB|Non-industrial combustion
+InsertUpdate|DiffuseSources|DomesticShipping|en-GB|Domestic shipping
+InsertUpdate|DiffuseSources|DomesticAviation|en-GB|Domestic aviation
+InsertUpdate|DiffuseSources|InternationalAviation|en-GB|International aviation
+
