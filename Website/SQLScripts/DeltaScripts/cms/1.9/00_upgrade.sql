@@ -14,9 +14,11 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 -- Include deltascripts here
 :r$(basedir)\..\..\common\AddVersion.sql
 go
+:r$(basedir)\DiffuseAir.sql
+go
+
 
 --Uncomment this when released (will only insert version no. once) :
-/*
 IF NOT EXISTS (SELECT * FROM tAT_version WHERE Major_version = $(major) AND Minor_version = $(minor))
 	INSERT INTO tAT_version(Major_version, Minor_version) VALUES ($(major), $(minor));
-*/
+
