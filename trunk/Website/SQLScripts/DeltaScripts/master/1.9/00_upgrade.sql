@@ -18,7 +18,7 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 go
 
 --Uncomment this when released (will only insert version no. once) :
-/*
+
 IF NOT EXISTS (SELECT * FROM tAT_version WHERE Major_version = $(major) AND Minor_version = $(minor))
 	INSERT INTO tAT_version(Major_version, Minor_version) VALUES ($(major), $(minor));
-*/
+
