@@ -54,7 +54,7 @@ namespace EPRTR.Utilities
                     configfile = "config_diffuse_water_result.xml";
                     break;
                 case Global.MainSearchPages.DiffuseAir:
-                    configfile = "config_diffuse_air_result.xml";
+                    configfile = "config_diffuse_emissions_air_result.xml";
                     break;
                 case Global.MainSearchPages.TimeSeriesPollutantReleases:
                     configfile = "config_ts_pollutantrelease_result.xml";
@@ -150,7 +150,7 @@ namespace EPRTR.Utilities
                     configfile = "config_diffuse_water_ex.xml";
                     break;
                 case Global.MainSearchPages.DiffuseAir:
-                    configfile = "config_diffuse_air_ex.xml";
+                    configfile = "config_diffuse_emissions_air_ex.xml";
                     break;
                 case Global.MainSearchPages.TimeSeriesPollutantReleases:
                     configfile = "config_ts_pollutantrelease_ex.xml";
