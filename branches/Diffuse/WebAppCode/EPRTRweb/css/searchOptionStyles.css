@@ -221,4 +221,15 @@
 }
 
 
+table.verticalRadioList input
+ {    
+      float: left;
+ }
+
+ table.verticalRadioList label
+ {    
+      margin-left: 25px;
+      display: block;
+ }
+
 

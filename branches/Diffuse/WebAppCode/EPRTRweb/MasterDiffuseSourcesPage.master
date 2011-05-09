@@ -18,7 +18,7 @@
         <asp:Literal ID="litAvailableLayers" runat="server" Text="<%$ Resources:DiffuseSources,AvailableLayers %>"  />
         <br />
         <asp:RadioButtonList ID="rblMaps" RepeatDirection="Vertical" OnSelectedIndexChanged="OnSelectedMapChanged"
-            AutoPostBack="true" runat="server" />
+            AutoPostBack="true" runat="server" CssClass="verticalRadioList"/>
     </div>    
         
     <div id ="divEnlarge" visible="false" runat="server">
