@@ -25,7 +25,7 @@
 
     <%-- sheet panel --%>
       <div class="layout_sheet_content">
-        <asp:Panel ID="diffuseSourcesContent" runat="server" Width="100%">
+        <asp:Panel ID="diffuseSourcesContent"  class="diffuseContent" runat="server" Width="100%">
             <br />
             <asp:Literal ID="lbDiffuseContent" Text="" Mode="Transform" runat="server"></asp:Literal>
             <br /> 

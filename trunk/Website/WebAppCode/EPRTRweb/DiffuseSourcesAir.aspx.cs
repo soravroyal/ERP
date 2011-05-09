@@ -17,7 +17,7 @@ public partial class DiffuseSourcesAir : BasePage
             ((MasterDiffuseSourcesPage)this.Master).Headline = Resources.GetGlobal("DiffuseSources", "DiffuseSourcesAirPageHeader");
             ((MasterDiffuseSourcesPage)this.Master).SubHeadline = CMSTextCache.CMSText("DiffuseSources", "aSubheadline");
 
-            ((MasterDiffuseSourcesPage)this.Master).SetMapList(MediumFilter.Medium.Air);
+            ((MasterDiffuseSourcesPage)this.Master).PopulateMaps(MediumFilter.Medium.Air);
 
             ((MasterDiffuseSourcesPage)this.Master).ShowMapPanel(Global.MainSearchPages.DiffuseAir);
         }

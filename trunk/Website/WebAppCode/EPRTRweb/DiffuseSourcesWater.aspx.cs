@@ -18,7 +18,7 @@ public partial class DiffuseSourcesWater : BasePage
             ((MasterDiffuseSourcesPage)this.Master).Headline = Resources.GetGlobal("DiffuseSources", "DiffuseSourcesWaterPageHeader");
             ((MasterDiffuseSourcesPage)this.Master).SubHeadline =  CMSTextCache.CMSText("DiffuseSources", "wSubheadline");
 
-            ((MasterDiffuseSourcesPage)this.Master).SetMapList(MediumFilter.Medium.Water);
+            ((MasterDiffuseSourcesPage)this.Master).PopulateMaps(MediumFilter.Medium.Water);
 
             ((MasterDiffuseSourcesPage)this.Master).ShowMapPanel(Global.MainSearchPages.DiffuseWater);
         }

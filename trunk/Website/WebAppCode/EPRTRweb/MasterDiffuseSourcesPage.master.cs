@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Web.UI.WebControls;
 using EPRTR.DiffuseSources;
-using QueryLayer.Filters;
+using EPRTR.Localization;
 using EPRTR.Utilities;
+using QueryLayer.Filters;
 
 public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
 {
@@ -21,9 +22,8 @@ public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
             script += "} catch(err) {  } ";
 
             this.btnEnlarge.OnClientClick = script;
-
-            this.ddlSelectSector.SelectedIndex = 0;
         }
+        
     }
 
     /// <summary>
@@ -49,22 +49,28 @@ public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
         ((MasterSearchPage)this.Master).ShowMapPanel(page);
     }
 
+    public void PopulateMaps(MediumFilter.Medium medium)
+    {
+        if (MediumFilter.Medium.Air == medium)
+        {
+            litSector.Visible = true;
+            populateSectors();
+        }
+        else
+        {
+            litSector.Visible = false;
+        }
+        
+        setMapList(medium);
+    }
 
-    public void SetMapList(MediumFilter.Medium medium)
+    private void setMapList(MediumFilter.Medium medium)
     {
         string sectorId = "";
 
         if (MediumFilter.Medium.Air == medium)
         {
-            //ddlSelectSector.Visible = true;
-            litSector.Visible = true;
-            
             sectorId = this.ddlSelectSector.SelectedValue;
-        }
-        else
-        {
-            //ddlSelectSector.Visible = false;
-            litSector.Visible = false;
         }
 
         DiffuseSources.Map[] maps = DiffuseSources.GetMaps(medium, sectorId);
@@ -91,6 +97,19 @@ public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
             divAvailableLayers.Visible = false;
         }
 
+    }
+
+    private void populateSectors()
+    {
+        this.ddlSelectSector.Items.Clear();
+
+        this.ddlSelectSector.Items.Add(new ListItem(Resources.GetGlobal("DiffuseSources", "SelectSector"), "SelectSector"));
+        foreach (string sector in DiffuseSources.GetSectors())
+        {
+            this.ddlSelectSector.Items.Add(new ListItem(Resources.GetGlobal("DiffuseSources", sector),sector));
+        }
+
+        this.ddlSelectSector.SelectedIndex = 0;
     }
 
     protected void OnSelectedMapChanged(object sender, EventArgs args)
@@ -138,7 +157,7 @@ public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
     {
         var sectorId = this.ddlSelectSector.SelectedValue;
 
-        SetMapList(MediumFilter.Medium.Air);
+        setMapList(MediumFilter.Medium.Air);
         //hide sheet and clear map
         this.ucDiffuseSourcesSheet.Visible = false;
         updateFlashMap("");
