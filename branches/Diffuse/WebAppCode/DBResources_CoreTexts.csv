@@ -11,3 +11,42 @@ InsertUpdate|DiffuseSources|DomesticShipping|en-GB|Domestic shipping
 InsertUpdate|DiffuseSources|DomesticAviation|en-GB|Domestic aviation
 InsertUpdate|DiffuseSources|InternationalShipping|en-GB|International shipping
 
+
+InsertUpdate|FilterAllWidgetStrings|NOXindu|en-GB|NOX emissions from diffuse industrial releases, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|NOXnonindu|en-GB|NOX emissions from non-industrial combustion, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|NOXroad|en-GB|NOX emissions from road transport, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|NOXdomship|en-GB|NOX emissions from domestic shipping, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|NOXdomav|en-GB|NOX emissions from domestic aviation, [t/grid]
+
+InsertUpdate|FilterAllWidgetStrings|SO2indu|en-GB|SO2 emissions from diffuse industrial releases, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|SO2nonindu|en-GB|SO2 emissions from non-industrial combustion, [t/grid] 
+InsertUpdate|FilterAllWidgetStrings|SO2road|en-GB|SO2 emissions from road transport, [t/grid]  
+InsertUpdate|FilterAllWidgetStrings|SO2domship|en-GB|SO2 emissions from domestic shipping, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|SO2domav|en-GB|SO2 emissions from domestic aviation, [t/grid]
+
+InsertUpdate|FilterAllWidgetStrings|PM10indu|en-GB|PM10 emissions from diffuse industrial releases, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|PM10nonindu|en-GB|PM10 emissions from non-industrial combustion, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|PM10road|en-GB|PM10 emissions from road transport, [t/grid] 
+InsertUpdate|FilterAllWidgetStrings|PM10domship|en-GB|PM10 emissions from domestic shipping, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|PM10domav|en-GB|PM10 emissions from domestic aviation, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|PM10agr|en-GB|PM10 emissions from agriculture, [t/grid] 
+
+InsertUpdate|FilterAllWidgetStrings|NH3agr|en-GB|NH3 emissions from agriculture [t/grid] 
+    
+InsertUpdate|FilterAllWidgetStrings|COindu|en-GB|CO emissions from diffuse industrial releases, [t/grid] 
+InsertUpdate|FilterAllWidgetStrings|COnonindu|en-GB|CO emissions from non-industrial combustion, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|COroad|en-GB|CO emissions from road transport, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|COdomship|en-GB|CO emissions from domestic shipping, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|COdomav|en-GB|CO emissions from domestic aviation, [t/grid]
+	
+InsertUpdate|FilterAllWidgetStrings|CO2indu|en-GB|CO2 emissions from diffuse industrial releases, [kt/grid]
+InsertUpdate|FilterAllWidgetStrings|CO2nonindu|en-GB|CO2 emissions from non-industrial combustion, [kt/grid] 
+InsertUpdate|FilterAllWidgetStrings|CO2road|en-GB|CO2 emissions from road transport, [kt/grid] 
+InsertUpdate|FilterAllWidgetStrings|CO2domship|en-GB|CO2 emissions from domestic shipping, [kt/grid] 
+InsertUpdate|FilterAllWidgetStrings|CO2domav|en-GB|CO2 emissions from domestic aviation, [kt/grid]
+	
+InsertUpdate|FilterAllWidgetStrings|NOXinship|en-GB|NOX emissions from international shipping, [t/grid] 
+InsertUpdate|FilterAllWidgetStrings|SO2inship|en-GB|SO2 emissions from international shipping, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|PM10inship|en-GB|PM10 emissions from international shipping, [t/grid] 
+InsertUpdate|FilterAllWidgetStrings|COinship|en-GB|CO emissions from international shipping, [t/grid]
+InsertUpdate|FilterAllWidgetStrings|CO2inship|en-GB|CO2 emissions from international shipping, [kt/grid]
