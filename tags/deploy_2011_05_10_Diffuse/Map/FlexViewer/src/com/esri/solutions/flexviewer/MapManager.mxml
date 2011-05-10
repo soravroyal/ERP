@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:Canvas	xmlns:mx				="http://www.adobe.com/2006/mxml"
+	       	xmlns:esri				="http://www.esri.com/2008/ags"  
+	       	width					="100%" 
+	       	height					="100%"  
+	       	horizontalScrollPolicy	="off" 
+	       	verticalScrollPolicy	="off"
+	       	creationComplete		="init()">
+
+	<mx:Script>
+		<![CDATA[
+			import com.esri.ags.layers.ArcIMSMapServiceLayer;
+			import com.esri.solutions.flexviewer.utils.Hashtable;
+			import com.esri.solutions.flexviewer.AppUtil;
+			import com.esri.solutions.flexviewer.widgets.FilterLiveMapsWidget;
+			import com.esri.ags.controls.navigationClasses.NavigationSlider;
+			import mx.controls.Image;
+		
+			import com.esri.ags.events.DrawEvent;
+			import com.esri.ags.events.ExtentEvent;
+			import com.esri.ags.events.LayerEvent;
+			import com.esri.ags.events.MapEvent;
+			import com.esri.ags.geometry.Extent;
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.esri.ags.layers.ArcGISTiledMapServiceLayer;
+			import com.esri.ags.layers.ArcGISDynamicMapServiceLayer;
+			import com.esri.ags.layers.Layer;
+			import com.esri.ags.layers.LayerInfo;
+			import com.esri.ags.Map;
+			import com.esri.ags.toolbars.Navigation;
+			import com.esri.ags.toolbars.Draw;
+			import com.esri.solutions.flexviewer.AppEvent;
+			import mx.controls.Alert;
+			import mx.collections.ArrayCollection;
+			import mx.managers.CursorManager;
+			import mx.managers.CursorManagerPriority;
+			import dk.atkins.MapCursors;
+			
+			
+			import flash.external.ExternalInterface;
+			
+			import mx.core.Application;
+							
+			private var configData:ConfigData;
+			
+			private var map:Map;
+			
+			private var defaultstatus:String;
+			
+			private var infoPopup: InfoPopup;
+			
+			private var navToolbar:Navigation;
+			
+			private var drawToolbar:Draw;
+			
+			private var drawEndFunction:Function;
+			
+			private var fullExtent:Extent;
+			
+			private var initialExtent:Extent;
+			
+			private var iconSettings:Object;
+			
+			private var layerLinkSettings:Object;
+			
+			private var layerLegendSettings:Object;
+			
+			private var layerDefinitions:Array;
+			
+			//private var visibleLayers:ArrayCollection;
+			private var visibleLayers:Object;
+			
+			private var showZoomSlider:Boolean = true;
+			
+			private var scrollWheelZoomEnabled:Boolean = false;
+			
+			private var currentCursor:String;
+			private var currentCursorClass:Class;
+			private var cursors:MapCursors;
+			private var navIsRelatedObject:Boolean;
+			private var navWasLastsRelatedObject:Boolean = false;
+			
+			private var layerLabels:Object = new Object();
+			
+			private var erroredLayers:ArrayCollection;
+			
+			private var lodminlevel:Number;
+					
+			//init
+			private function init():void
+			{
+				SiteContainer.addEventListener(AppEvent.CONFIG_LOADED, config);
+				SiteContainer.addEventListener(AppEvent.SET_MAP_NAVIGATION, changeNavigationbyMenu);
+                SiteContainer.addEventListener(AppEvent.BASEMAP_MENU_CLICKED, basemapMenuClicked);
+				//SiteContainer.addEventListener(AppEvent.SET_MAP_NAVIGATION, changeNavigationbyWidget);
+				SiteContainer.addEventListener(AppEvent.SET_MAP_ACTION, enableMapAction);
+				SiteContainer.addEventListener(AppEvent.SHOW_INFOWINDOW, widgetShowInfo);
+				cursors = MapCursors.getInstance();
+				
+				ExternalInterface.addCallback("getExtent", getExtent);
+				ExternalInterface.addCallback("setExtent", setExtent);
+			}
+
+			//config
+		    private function config(event:AppEvent):void
+		    {      
+		    	if(event)configData = event.data as ConfigData;
+
+		    	map = new Map();
+		    	map.id = "map";		    			    	
+		    	if(configData.configMapSettings["showzoomslider"] != null){
+					showZoomSlider = configData.configMapSettings["showzoomslider"];
+				}
+				if(configData.configMapSettings["scrollwheelzoomenabled"] != null){
+					scrollWheelZoomEnabled = configData.configMapSettings["scrollwheelzoomenabled"];
+				}
+				if(configData.configMapSettings["lodminlevel"] != null){
+					lodminlevel = Number(configData.configMapSettings["lodminlevel"]);
+				}
+				
+		    	map.zoomSliderVisible = showZoomSlider;
+		    	map.scrollWheelZoomEnabled = scrollWheelZoomEnabled;
+		    	map.addEventListener(MouseEvent.MOUSE_OVER, showToolCursor);
+		    	map.addEventListener(MouseEvent.MOUSE_OUT, hideToolCursor);
+		    	map.addEventListener(MapEvent.LOAD, mapLoadComplete);
+		    	this.addChild(map);
+		        SiteContainer.dispatchEvent(new AppEvent(AppEvent.MAP_LOADED, false, false, map));
+		        
+		        var infoContainer:Canvas = new Canvas();
+		        infoContainer.percentWidth = 100;
+		        infoContainer.percentHeight = 100;
+		        infoContainer.horizontalScrollPolicy = "off";
+		        infoContainer.verticalScrollPolicy = "off";
+		        this.addChild(infoContainer);
+		        infoPopup = new InfoPopup();
+		        infoPopup.map = map;
+		        
+		        if(configData.configMapSettings["infopopupmapsizelimit"] != null){
+					infoPopup.mapSizeLimit = Number(configData.configMapSettings["infopopupmapsizelimit"]);
+				}
+		       
+		        infoContainer.addChild(infoPopup);
+		       
+		        navToolbar = new Navigation();
+		        navToolbar.map = map;
+		        		        
+		        drawToolbar = new Draw();
+		        drawToolbar.map = map;
+		        drawToolbar.addEventListener(DrawEvent.DRAW_END, onDrawEnd);
+		        
+		        getDefaultStatus();
+		        
+		        var i:int = 0;
+		       
+		        for (i = 0; i < configData.configExtents.length; i++)
+		        {
+		        	var id:String = configData.configExtents[i].id;
+		        	var ext:String = configData.configExtents[i].extent;
+		        	var extArray:Array = ext.split(" ");
+		        	var extent:Extent = new Extent(Number(extArray[0]), Number(extArray[1]), Number(extArray[2]), Number(extArray[3]));
+		        	if (id == "full")
+		        	{
+		        		fullExtent = extent;
+		        	}
+		        	if (id == "initial")
+		        	{
+		        		initialExtent = extent;
+		        		map.extent = extent;
+		        	}
+		        }
+		     
+			      	
+				for (i = 0; i < configData.configMap.length; i++)
+		        {
+		        	var lyrid:String  = configData.configMap[i].id;
+		        	var label:String  = configData.configMap[i].label;
+		        	var legend:String  = configData.configMap[i].legend;
+		        	var type:String = configData.configMap[i].type;
+		        	var url:String =  configData.configMap[i].url;
+		        	var visible:Boolean = configData.configMap[i].visible;
+		        	var alpha:Number = Number(configData.configMap[i].alpha);
+		        	var turnoff:String = configData.configMap[i].turnOff;
+		        	
+		        	layerLabels[lyrid] = label;
+		        	
+		        	if(!iconSettings) iconSettings = new Object();
+		        	if(!layerLinkSettings) layerLinkSettings = new Object();
+		        	if(!layerLegendSettings) layerLegendSettings = new Object();
+		        	
+		        	if(configData.configMap[i].iconShape){
+		        		if(!iconSettings[lyrid]) iconSettings[lyrid] = new Object();
+	        			iconSettings[lyrid]["iconShape"] = configData.configMap[i].iconShape;
+	        			iconSettings[lyrid]["iconSize"] = Number(configData.configMap[i].iconSize);
+	        			iconSettings[lyrid]["iconColor"] = configData.configMap[i].iconColor;
+	        		}
+        			if(configData.configMap[i].layerLink){
+		        		if(!layerLinkSettings[lyrid]) layerLinkSettings[lyrid] = new Object();
+	        			layerLinkSettings[lyrid]["layerLink"] = configData.configMap[i].layerLink;
+	        		}
+        			//if a static legend image is defined - show it in layer widget
+        			var pattern:int = lyrid.search("_o");
+    				if(visible && legend != "" && lyrid.search("_o") == -1){		    				
+    					 AppUtil.setLegendImage("add",label,legend,lyrid);		    					
+    				}
+        			
+        			
+        					        	
+		        	var layerSettings:XMLList = configData.configMap[i].layerSettings;
+		        	
+		        	if (!visibleLayers) visibleLayers = new Object();
+		        	
+		        	//Layer definitions and visibillity settings:
+			       	var str:String = layerSettings.layer.toXMLString();
+			      	
+			      	
+		        	if(str != ""){
+		        		layerDefinitions = new Array();
+						visibleLayers[lyrid] = new ArrayCollection();
+		        		var staticlayerDefinitions:Array = new Array();
+						for each (var prop:XML in layerSettings.layer)
+						{
+						    if(Boolean(prop.@visible.toString() == "true")){
+			        			visibleLayers[lyrid].addItem(Number(prop.@id)); // add id
+			        		}
+			        		//add empty strings for each preceeding layer with no definition
+			        		while(Number(prop.@id) > layerDefinitions.length){
+			        			layerDefinitions.push("");
+			        			staticlayerDefinitions.push("");
+			        		}
+			        		var wherevalue:String = "";
+			        		var concatenatestr:String = " AND "
+			        		if(prop.@definition.toString().toLowerCase().indexOf(" where ") == -1 ) concatenatestr = ' WHERE ';
+			        		if(configData.configParams["cofilter"]) wherevalue = concatenatestr + configData.configParams["cofilter"];
+			        		layerDefinitions[Number(prop.@id)] = prop.@definition.toString().replace("[wherevalue]", wherevalue);
+			        		staticlayerDefinitions[Number(prop.@id)] = prop.@definition;
+			        		//icon settings
+			        		if(prop.@iconShape.toString() != ""){
+			        			if(!iconSettings[lyrid]) iconSettings[lyrid] = new Object();
+			        			iconSettings[lyrid][prop.@id] = new Object();
+			        			iconSettings[lyrid][prop.@id]["iconShape"] = prop.@iconShape.toString();
+			        			if(prop.@iconSize.toString() != "")iconSettings[lyrid][prop.@id]["iconSize"] = Number(prop.@iconSize);
+			        			if(prop.@iconColor.toString() != "")iconSettings[lyrid][prop.@id]["iconColor"] = Number(prop.@iconColor);
+			        		}
+			        		if(prop.@link.toString() != ""){
+			        			if(!layerLinkSettings[lyrid]) layerLinkSettings[lyrid] = new Object();
+			        			layerLinkSettings[lyrid][prop.@id] = new Object();
+			        			layerLinkSettings[lyrid][prop.@id]["layerLink"] = prop.@link.toString();
+			        		}
+			        		if(prop.@cofilter.toString() != ""){
+			        			if(!layerLinkSettings[lyrid]) layerLinkSettings[lyrid] = new Object();
+			        			if(!layerLinkSettings[lyrid][prop.@id])layerLinkSettings[lyrid][prop.@id] = new Object();
+			        			layerLinkSettings[lyrid][prop.@id]["cofilter"] = prop.@cofilter.toString();
+			        		}
+			        		if(prop.@legend.toString() != ""){
+			        			if(!layerLegendSettings[lyrid]) layerLegendSettings[lyrid] = new Object();
+			        			if(!layerLegendSettings[lyrid][prop.@id])layerLegendSettings[lyrid][prop.@id] = new Object();
+			        			layerLegendSettings[lyrid][prop.@id]["legend"] = prop.@legend.toString();
+			        		}
+						} 	
+			        	Application.application.staticLayerDefinitions.add(lyrid,staticlayerDefinitions);
+		        	}
+		        	else layerDefinitions = new Array();
+		        	
+		        	configData.configLayerLegends = layerLegendSettings;
+		        	configData.configDynLayerIcons = iconSettings;
+		        	configData.configLayerLink = layerLinkSettings;
+		        	
+			        switch (type.toLowerCase())
+					{
+						case "tiled":
+						{
+							if(!erroredLayers || !erroredLayers.contains(label)){						
+								var tiledlayer:ArcGISTiledMapServiceLayer = new ArcGISTiledMapServiceLayer(url);
+							
+								if(lyrid != "")tiledlayer.id = lyrid;
+								else tiledlayer.id = label;
+								tiledlayer.name = label;
+								tiledlayer.visible = visible;
+								tiledlayer.alpha = alpha;
+								tiledlayer.addEventListener(LayerEvent.LOAD_ERROR,errorLoadedMapserviceLayer);
+								map.addLayer(tiledlayer);	
+							}						
+							break;
+						}
+							
+						case "dynamic":
+						{
+							var dynlayer:ArcGISDynamicMapServiceLayer = new ArcGISDynamicMapServiceLayer(url);
+							if(visibleLayers[lyrid]) dynlayer.visibleLayers = visibleLayers[lyrid];
+							dynlayer.addEventListener(LayerEvent.LOAD,loadedDynamicMapServiceLayer);
+							dynlayer.addEventListener(LayerEvent.LOAD_ERROR,errorLoadedMapserviceLayer);						
+							dynlayer.id = lyrid;
+							dynlayer.name = label;
+							dynlayer.visible = visible; 
+							dynlayer.alpha = alpha;
+							dynlayer.layerDefinitions = layerDefinitions;
+							map.addLayer(dynlayer);							
+							break;
+						}
+						case "ims":
+						{
+							var imsurl:String = url.split("?serviceName=")[0];
+							var imsservice:String = url.split("?serviceName=")[1];
+							var imslayer:ArcIMSMapServiceLayer = new ArcIMSMapServiceLayer(imsurl,imsservice);
+							if(visibleLayers[lyrid]) imslayer.visibleLayers = visibleLayers[lyrid];
+							imslayer.addEventListener(LayerEvent.LOAD_ERROR,errorLoadedMapserviceLayer);						
+							imslayer.id = lyrid;
+							imslayer.name = label;
+							imslayer.visible = visible; 
+							imslayer.alpha = alpha;
+							map.addLayer(imslayer);							
+							break;
+						}
+					}
+					
+		        }
+				
+				
+				  
+		        map.panArrowsVisible = false;
+		    	map.logoVisible = false;	
+		    	
+		    }
+		    private function showToolCursor(e:MouseEvent):void{
+		
+		    	if(e.relatedObject){
+		    		navIsRelatedObject =  e.relatedObject.toString().search("avigation") > 0;
+		    	}else navIsRelatedObject = false;
+		    	
+		    	if((currentCursor && CursorManager.currentCursorID == CursorManager.NO_CURSOR) && !navIsRelatedObject){
+		    		
+		    		cursors.showCursor(currentCursor);	
+		    	}
+		    	
+		    }
+		    
+		    private function hideToolCursor(e:MouseEvent):void{
+		    	//remember cursor when rolling out of map (e.g. zoom in)
+		    	currentCursor =  cursors.getCursor();	
+		    	CursorManager.removeAllCursors();	
+		    	
+		    	// when rolling out navigation slider control the cursor must change,
+		    	// but be careful, the MOUSE_OUT event  is also thrown at leaving zoomin btn on slider 
+		    	if(e.relatedObject){
+		    		navIsRelatedObject =  e.relatedObject.toString().search("avigation") > 0;		    		
+		    		if(!navIsRelatedObject && navWasLastsRelatedObject){
+		    			showToolCursor(e)
+		    		} 
+		    		navWasLastsRelatedObject = navIsRelatedObject;
+		    	}else showToolCursor(e);
+		    }
+		    
+		    //get default status
+		    private function getDefaultStatus():void
+		    {
+		    	for (var i:Number = 0; i < configData.configMenus.length; i++)
+		        {
+		        	var menuItems:Array = configData.configMenus[i].items;
+					for (var j:Number = 0; j < menuItems.length; j++)
+					{
+						var action:String = menuItems[j].action;
+						var label:String = menuItems[j].label;
+						var value:String = menuItems[j].value;
+						if ((action == "navtool") && (value == Navigation.PAN))
+						{
+							defaultstatus = value;
+							SiteContainer.dispatchEvent(new AppEvent(AppEvent.SET_STATUS, false, false, defaultstatus));
+							break;
+						}
+					}
+		        }
+		    }
+		    
+	    	//map load complete
+	    	private function mapLoadComplete(event:MapEvent):void
+	    	{	    		
+	    		SiteContainer.dispatchEvent(new AppEvent(AppEvent.LAYER_LOADED, false, false, null));	
+	    		var basemap:ArcGISTiledMapServiceLayer = ArcGISTiledMapServiceLayer(getVisibleBasemap());
+               if(basemap){ 
+	                Application.application.copyright_lbl.text = basemap.copyright; //"Copyright:"; 
+	                Application.application.copyright_lbl.width = Application.application.copyright_lbl.measureText(Application.application.copyright_lbl.text).width + 10;
+			    	Application.application.copyright_lbl.x = Application.application.width - Application.application.copyright_lbl.width;
+               }
+              if(lodminlevel && map.lods){
+              	map.lods = map.lods.slice(0,lodminlevel);
+              } 
+		    		    
+		    //	Application.application.copyright_lbl.text = "Copyright: " + basemap.copyright;  		
+	    	}
+
+	    	
+	    	private function errorLoadedMapserviceLayer(event:LayerEvent):void{
+	    		if(!erroredLayers){
+	    			erroredLayers = new ArrayCollection();
+	    		}
+	    		if(event.layer.id == '0'){
+	    			map = new Map();
+	    			erroredLayers.addItem(event.layer.name);
+	    			config(null);
+	    		}
+	    	}
+	    	// when a dynamic layer is loaded and layer visibility should be set
+	    	private function loadedDynamicMapServiceLayer(event:LayerEvent):void{
+	    		var la:ArcGISDynamicMapServiceLayer = ArcGISDynamicMapServiceLayer(event.layer);
+				la.name = layerLabels[la.id]; 
+	    		/*if(la.layerDefinitions){
+	    			for (var j: int = 0; j < la.layerDefinitions.length; j++){
+	    				la.layerDefinitions[j] = la.layerDefinitions[j] += " AND " + layerDefinitions[j];
+	    			}
+	    		}
+				else{
+					la.layerDefinitions = layerDefinitions;
+				} */
+				
+				if(visibleLayers[la.id]){
+					
+					//set visibility after load if visible layers are defined in config
+					setVisibilityLayerInfos(la);
+				}
+				if(la.visible)
+				{
+					for(var i:int = 0; i < la.visibleLayers.length; i++)
+					{
+						if(configData.configLayerLegends[la.id] && configData.configLayerLegends[la.id][i])
+						{
+							AppUtil.setLegendImage("add", "", configData.configLayerLegends[la.id][i].legend,la.id,i.toString());
+						}
+					}
+				}
+				
+	    		
+	    	}
+	    	//set layer visibility 
+	    	private function setVisibilityLayerInfos(vislayer:ArcGISDynamicMapServiceLayer):void{
+   		
+	    		var layerInfoArray:Array =  vislayer.layerInfos;
+	    		for(var j:int = 0; j < layerInfoArray.length; j++){
+	    			if(visibleLayers[vislayer.id]){
+		    			if(visibleLayers[vislayer.id].contains(LayerInfo(layerInfoArray[j]).id)){
+		    				LayerInfo(layerInfoArray[j]).defaultVisibility = true;
+		    			}else{
+		    				LayerInfo(layerInfoArray[j]).defaultVisibility = false;
+		    			}
+	    			}
+		    		if(iconSettings[vislayer.id]){
+		    			if(iconSettings[vislayer.id][layerInfoArray[j].id]){
+		    				iconSettings[vislayer.id][LayerInfo(layerInfoArray[j]).name] = iconSettings[vislayer.id][layerInfoArray[j].id];		
+		    			}
+		    		}
+	    		}
+	    		vislayer.removeEventListener(LayerEvent.LOAD,loadedDynamicMapServiceLayer);
+    		}
+	    	    
+	    	//nav tool clicked
+	    	private function changeNavigationbyWidget(event:AppEvent):void
+	    	{
+	    		if (event.data)
+	    		{
+	    		     changeNavigation(event.data.tool, event.data.status);
+	    		}
+	    		else 
+	    		{
+	    			changeNavigation(null,null);
+	    		}
+	    	}
+
+
+            private function changeNavigationbyMenu(event:AppEvent):void
+            {
+                if (event.data)
+                {
+                     changeNavigation(event.data.tool, event.data.status);
+                }
+                else 
+                {
+                    changeNavigation(null,null);
+                }
+            }
+	    	// center and zoom map on click when zoom tool is active.
+	    	private function onMapZoomInClick(event:MouseEvent):void      { 
+	    		if(SiteContainer.getInstance().controller.status && SiteContainer.getInstance().controller.status.toLowerCase() == "zoomin") {
+	    			var mapPoint:MapPoint = map.toMapFromStage(event.stageX, event.stageY);                
+	    			map.centerAt(mapPoint);  				 	
+					map.zoomIn();
+	    		}
+			}
+			private	function onMapZoomOutClick(event:MouseEvent):void      {
+				if(SiteContainer.getInstance().controller.status && SiteContainer.getInstance().controller.status.toLowerCase() == "zoomout") {
+					var mapPointOut:MapPoint = map.toMapFromStage(event.stageX, event.stageY);
+					map.centerAt(mapPointOut);
+					map.zoomOut(); 
+				}
+					   				 	
+			}
+	    	private function changeNavigation(tool:String, status:String):void	    	{	
+	    		
+	    		cursors.removeCursors();
+	    		map.removeEventListener(MouseEvent.CLICK,onMapZoomInClick);
+	    		map.removeEventListener(MouseEvent.CLICK,onMapZoomOutClick);
+	    		switch (tool)
+	    		{
+	    			case Navigation.ZOOM_IN:
+	    			{	    				   				
+	    				navToolbar.deactivate();
+	    				drawToolbar.deactivate();
+	    				navToolbar.activate(tool);
+	    				cursors.showCursor("zoomin");
+	    				if(!status)status = "zoomin"				
+	    				SiteContainer.setStatus(status);
+	    				map.addEventListener(MouseEvent.CLICK, onMapZoomInClick);
+	    				break;
+	    			}
+	    			
+	    			case Navigation.ZOOM_OUT:
+	    			{	 
+	    				navToolbar.deactivate();
+	    				drawToolbar.deactivate();
+	    				navToolbar.activate(tool);
+	    				cursors.showCursor("zoomout");
+	    				if(!status) status = "zoomout"
+	    				SiteContainer.setStatus(status);
+	    				map.addEventListener(MouseEvent.CLICK, onMapZoomOutClick);	    				
+	    				break;
+	    			}
+	    			
+	    			case SiteContainer.NAVIGATION_ZOOM_FULL:
+	    			{
+	    				if (fullExtent)
+	    				{
+	    					map.extent = fullExtent;
+	    				}
+	    				else
+	    				{
+	    					navToolbar.zoomToFullExtent();
+	    				}
+	    				SiteContainer.setStatus( status);
+	    				break;
+	    			}
+	    			case SiteContainer.NAVIGATION_ZOOM_INITIAL:
+	    			{
+	    				if (initialExtent)
+	    				{
+	    					map.extent = initialExtent;
+	    				}
+	    				else
+	    				{
+	    					navToolbar.zoomToFullExtent();
+	    				}
+	    				SiteContainer.setStatus( status);
+	    				break;
+	    			}
+	    			case SiteContainer.NAVIGATION_ZOOM_PREVIOUS:
+	    			{
+	    				navToolbar.zoomToPrevExtent();
+	    				SiteContainer.setStatus( status);
+	    				break;
+	    			}
+	    			
+	    			case SiteContainer.NAVIGATION_ZOOM_NEXT:
+	    			{
+	    				navToolbar.zoomToNextExtent();
+	    				SiteContainer.setStatus( status);
+	    				break;
+	    			}
+	    			
+	    			case Navigation.PAN:
+	    			{
+	    				
+	    				drawToolbar.deactivate();
+	    				navToolbar.activate(tool);
+	    				navToolbar.deactivate();
+	    				//map.cursorManager.removeAllCursors();
+	    				//cursors.removeCursors();
+	    				SiteContainer.setStatus( status);
+	    				break;
+	    			}
+	    			
+	    			default:
+	    			{
+	    				
+	    				drawToolbar.deactivate();
+	    				navToolbar.activate(Navigation.PAN);
+	    				navToolbar.deactivate();
+	    				//map.cursorManager.removeAllCursors();
+	    				//cursors.removeCursors();
+	    				SiteContainer.setStatus(defaultstatus);
+	    				break;
+	    			}
+	    		}
+	    		
+
+	    	}
+	    	
+	    	//draw tool clicked
+	    	private function enableMapAction(event:AppEvent):void
+	    	{
+	    		var data:Object = event.data;
+	    		var tool:String = data.tool;
+	    		var status:String = data.status;
+	    		drawEndFunction = data.handler;
+	    		navToolbar.deactivate();
+	    		drawToolbar.activate(tool);	
+	    		map.zoomSliderVisible = showZoomSlider;
+	    		SiteContainer.setStatus( status);		
+	    	}
+	    	
+	    	private function onDrawEnd(event:DrawEvent):void
+	    	{
+	    		drawEndFunction(event);
+	    	}
+	    		    	
+	    	//basemap menu clicked
+	    	private function basemapMenuClicked(event:AppEvent):void
+	    	{
+	    		var id:String = event.data as String;
+	    		var configBasemaps:Array = configData.configBasemaps;
+	    		for (var i:Number = 0; i < configBasemaps.length; i++)
+	    		{	
+	    			
+	    			var lyrid:String  = configBasemaps[i].id;
+	    			var lyr:Layer = map.getLayer(lyrid);
+		    		if (lyr != null)
+		    		{
+		    			if (configBasemaps[i].id == id || configBasemaps[i].id == id+"_o")
+	    				{			
+	    					lyr.visible = true;
+		    				
+		    				//if a static legend image is defined - show it in layer widget
+		    				if(configBasemaps[i].legend && configBasemaps[i].id != id+"_o"){		    				
+		    					 AppUtil.setLegendImage("add",configBasemaps[i].label,configBasemaps[i].legend,configBasemaps[i].id);		    					
+		    				} 
+		    				if(lyr is ArcGISTiledMapServiceLayer){
+		    					Application.application.copyright_lbl.text = ArcGISTiledMapServiceLayer(lyr).copyright;
+		    					Application.application.copyright_lbl.width = Application.application.copyright_lbl.measureText(Application.application.copyright_lbl.text).width + 10;
+		    					Application.application.copyright_lbl.x = Application.application.width - Application.application.copyright_lbl.width;  
+		    				}
+		    				
+		    				
+		    				
+		    			}
+		    			else
+		    			{
+		    				lyr.visible = false;
+		    				//if a static legend image was defined - remove it from layer widget
+		    				if(configBasemaps[i].legend  && configBasemaps[i].id != id+"_o"){ 		    				
+		    					 AppUtil.setLegendImage("remove",configBasemaps[i].label,"",configBasemaps[i].id);
+		    				}
+		    			}
+		    		}
+	    		}
+	    	}
+	    	
+		    private function widgetShowInfo(event:AppEvent):void
+		    {
+		    	infoPopup.infoData = event.data;
+		    }
+		    
+		    public function setExtent(xminimum:Object,ymin:Number = 0,xmax:Number = 0,ymax:Number = 0):void{
+		    	var xmin:Number;
+		    	if(xminimum != null && xminimum != ""){
+			    	if (isNaN(Number(xminimum))){
+			    		try{
+				    		var extent_arr : Array = String(xminimum).split(",")
+					    	xmin = Number(extent_arr[0]);
+					    	ymin = Number(extent_arr[1]);
+					    	xmax = Number(extent_arr[2]);
+					    	ymax = Number(extent_arr[3]);
+					    }catch(e:Error){
+					    	trace("error setting extent: " + e.message);
+					    }
+			    	}else {
+			    		xmin = Number(xminimum);
+			    	}
+			    	map.extent = new Extent(xmin,ymin,xmax,ymax);
+			    }
+		    	
+		    }
+		    public function getExtent():String{
+		    	var extentstring:String = map.extent.xmin.toString() + "," + map.extent.ymin.toString() + "," + map.extent.xmax.toString() + "," + map.extent.ymax.toString();
+		    	return extentstring;
+		    }
+		    
+		    private function getVisibleBasemap():Layer
+			{
+				var baselayer:Layer;
+				for (var i:Number = 0; i < configData.configBasemaps.length; i++)
+		        {
+		        	baselayer = map.getLayer(configData.configBasemaps[i]["id"]);
+		        	if(baselayer && baselayer.visible && baselayer is ArcGISTiledMapServiceLayer){
+		        		return baselayer;
+		        	}
+		        }
+				return null;
+			}		    
+		    		    
+		]]>
+	</mx:Script>	
+            
+
+
+</mx:Canvas>

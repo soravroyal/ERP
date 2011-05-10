@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<BaseWidget	xmlns:esri			="http://www.esri.com/2008/ags" 
+			xmlns				="com.esri.solutions.flexviewer.*" 
+			xmlns:mx			="http://www.adobe.com/2006/mxml" 
+			xmlns:mxeffects		="com.adobe.ac.mxeffects.*"
+			xmlns:widgets		="com.esri.solutions.flexviewer.widgets.*"
+			x					="600" 
+			y					="300" 
+			widgetConfigLoaded	="init()">
+	
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Image;
+		
+			import com.esri.ags.geometry.Extent;
+			import com.esri.solutions.flexviewer.utils.WidgetEffects;
+			import flash.net.SharedObject;
+			import mx.collections.ArrayCollection;
+			import mx.controls.Alert;
+						
+			//labels
+			private var bookmarksLabel:String;
+			
+			private var addbookmarksLabel:String;
+			
+			[Bindable]
+			private var addLabel:String;
+			
+			[Bindable]
+			private var submitLabel:String;
+			
+			private var errorLabel:String;
+			
+			[Bindable]
+			private var bookmarkAC:ArrayCollection;
+			
+			private var bookmarkSO:SharedObject;
+			
+			private const BOOKMARKS:String = "bookmarks";
+			
+			private var appurl:String = mx.core.Application.application.url.slice(0,mx.core.Application.application.url.lastIndexOf("/"));
+				
+			private const ICON_URL:String = appurl +"/"+ "com/esri/solutions/flexviewer/assets/images/icons/";
+							
+			private function init():void
+			{
+				if (configXML)
+				{
+					
+				}
+				//labels
+				setText();
+				wTemplate.addTitlebarButton(ICON_URL + "i_bookmark_add.png", addbookmarksLabel, showStateAdd, "addbtn");
+				wTemplate.addTitlebarButton(ICON_URL + "i_bookmark.png", bookmarksLabel, showStateBookmarks,"bookmarksbtn");
+				
+				bookmarkAC = new ArrayCollection();
+            	bookmarkSO = SharedObject.getLocal(BOOKMARKS);
+            	if (bookmarkSO.size > 0) {
+	                bookmarkAC = getBookmarks();
+	                if (bookmarkAC.length == 0)
+	                	loadBookmarks();
+	            }
+	            else
+	            {
+	            	loadBookmarks();
+	            }
+			}			
+			
+			private function showStateBookmarks(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 0, 400);
+			}				
+						
+			private function showStateAdd(event:MouseEvent):void
+			{
+				WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 1, 400);
+			}			
+			
+			private function loadBookmarks():void
+			{
+				if (configXML)
+				{
+					var bookmarkList:XMLList = configXML..bookmark;
+					for (var i:Number = 0; i < bookmarkList.length(); i++)
+					{
+						var icon:String = appurl + "/" + widgetIcon;
+						var name:String = bookmarkList[i].@name;
+						var localekey:String = "bookmark_" + bookmarkList[i].@name.toString().toLowerCase().split(" ").join("_");
+						var extent:String = bookmarkList[i];
+						var extArray:Array = extent.split(" ");
+						var bookmark:Object = 
+						{
+							recicon: icon, 
+							name: name,
+							xmin: Number(extArray[0]), 
+							ymin: Number(extArray[1]), 
+							xmax: Number(extArray[2]), 
+							ymax: Number(extArray[3]),
+							staticbookmark: true,
+							localekey : localekey
+						
+						}
+						bookmarkAC.addItem(bookmark);
+					}
+					updateBookmarks();
+				}
+			}			
+			
+			private function getBookmarks():ArrayCollection 
+			{
+            	return bookmarkSO.data[BOOKMARKS];
+        	}
+
+			private function addBookmark():void 
+			{
+		    	var name:String = txtName.text;
+		    	if (name)
+		    	{
+		    		var icon:String = widgetIcon;
+					var ext:Extent = map.extent;
+					var bookmark:Object = 
+					{
+						recicon: icon, 
+						name: name,
+						xmin: ext.xmin, 
+						ymin: ext.ymin, 
+						xmax: ext.xmax, 
+						ymax: ext.ymax
+					}
+					bookmarkAC.addItem(bookmark);
+			        updateBookmarks();
+			        txtName.text = "";
+			        WidgetEffects.flipWidget(this, viewStack, "selectedIndex", 0, 400);
+		    	}
+		     	else
+			    {
+			    	Alert.show(errorLabel);
+				}
+		    }
+
+			public function removeBookmark(event:Event):void 
+			{
+				var id:int = event.currentTarget.recid
+		        bookmarkAC.removeItemAt(id);
+		        updateBookmarks();
+		    }
+
+		    private function updateBookmarks():void 
+		    {
+		        bookmarkSO.data[BOOKMARKS] = bookmarkAC;
+		        bookmarkSO.flush();
+		    }
+
+			private function clickRecord(event:MouseEvent):void
+			{
+				var bookmark:Object = event.currentTarget.bookmark;
+				var ext:Extent = new Extent(bookmark.xmin, bookmark.ymin, bookmark.xmax, bookmark.ymax);
+				map.extent = ext;
+			}
+			
+			override public function updateLocale(value:String):void{
+   				super.updateLocale(value);
+			
+   				//add specific print widget texts here    	
+				setText();		
+			}
+			
+			private function setText():void{
+				
+				//title
+				
+				if(resourceManager.getString(widgetResourceFile, 'widgettitle'))wTemplate.setTitle(resourceManager.getString(widgetResourceFile, 'widgettitle'));
+			
+				//widget labels:
+				bookmarksLabel = resourceManager.getString(widgetResourceFile, 'bookmarksLabel') || "Bookmarks:";
+				addbookmarksLabel = resourceManager.getString(widgetResourceFile, 'addbookmarksLabel')  || "Add Bookmarks";				
+				addLabel = resourceManager.getString(widgetResourceFile, 'addLabel') || "Add current extent as bookmark named:";
+				submitLabel = resourceManager.getString(widgetResourceFile, 'submitLabel') || "Add Bookmark";	
+				errorLabel = resourceManager.getString(widgetResourceFile, 'errorLabel') || "Please enter a name for the bookmark.";
+
+				//buttons
+								
+				if(wTemplate.titleBar.getChildByName("addbtn"))Image(wTemplate.titleBar.getChildByName("addbtn")).toolTip = addbookmarksLabel;
+				if(wTemplate.titleBar.getChildByName("bookmarksbtn"))Image(wTemplate.titleBar.getChildByName("bookmarksbtn")).toolTip = bookmarksLabel;
+				
+		
+			}
+				
+			]]>
+	</mx:Script>	
+	<mx:Metadata>
+        [ResourceBundle("BookmarkWidgetStrings")]
+    </mx:Metadata> 
+
+	<WidgetTemplate id="wTemplate">
+		<mx:ViewStack id="viewStack" width="100%" height="170" creationPolicy="all">
+			<mx:VBox width="100%" height="100%" verticalGap="1">
+				<mx:Repeater id="wRepeater" dataProvider="{bookmarkAC}">
+					<widgets:RecordBookmark recid="{wRepeater.currentIndex}" bookmark="{wRepeater.currentItem}" click="clickRecord(event)" bookmarkDelete="removeBookmark(event)"/>
+				</mx:Repeater>
+			</mx:VBox>
+			<mx:VBox width="100%" height="100%" verticalGap="10" paddingTop="10">
+				<mx:Label text="{addLabel}" styleName="WidgetText" width="100%" />
+				<mx:TextInput id="txtName" width="100%" />
+				<mx:HBox horizontalAlign="center" width="100%">
+					<mx:Button label="{submitLabel}" click="addBookmark()"/>
+				</mx:HBox>
+			</mx:VBox>
+		</mx:ViewStack>
+	</WidgetTemplate>
+	
+</BaseWidget>
