@@ -20,7 +20,7 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
     private const string FILTER = "pollutantTansfersActivityFilter";
     private const string RESULT = "pollutantTansfersActivityResult";
     public EventHandler ContentChanged;
-    
+
     protected void Page_Load(object sender, EventArgs e)
     {
     }
@@ -34,7 +34,7 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
         set { ViewState[FILTER] = value; }
     }
 
-        
+
     /// <summary>
     /// Fill table according to filter
     /// </summary>
@@ -45,11 +45,11 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
 
         sortResult(data);
         ViewState[RESULT] = data;
-        
-        this.lvPollutantTransfers.DataSource = data; 
+
+        this.lvPollutantTransfers.DataSource = data;
         this.lvPollutantTransfers.DataBind();
     }
-    
+
     /// <summary>
     /// Item row click
     /// </summary>
@@ -159,7 +159,7 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
     {
         // create facility search filter from activity search criteria
         FacilitySearchFilter filter = FilterConverter.ConvertToFacilitySearchFilter(SearchFilter);
-        
+
         // create new activity filter
         filter.ActivityFilter = getActivityFilter(e);
         LinkSearchRedirecter.ToFacilitySearch(Response, filter);
@@ -174,7 +174,7 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
         IndustrialActivitySearchFilter filter = FilterConverter.ConvertToIndustrialActivitySearchFilter(SearchFilter);
 
         // Change activity filter
-        filter.ActivityFilter =getActivityFilter(e);
+        filter.ActivityFilter = getActivityFilter(e);
 
         LinkSearchRedirecter.ToIndustrialActivity(Response, filter, Sheets.IndustrialActivity.PollutantTransfers);
     }
@@ -282,7 +282,7 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
     {
         return ((PollutantTransfers.ActivityTreeListRow)obj).ToolTip();
     }
-    
+
     protected string GetToolTipActivitySearch()
     {
         return Resources.GetGlobal("Common", "LinkSearchActivity");
@@ -303,50 +303,43 @@ public partial class ucPollutantTransfersActivities : System.Web.UI.UserControl
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        try
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        // Create Header
+        var filter = SearchFilter;
+
+        bool isConfidentialityAffected = PollutantTransfers.IsAffectedByConfidentiality(filter);
+
+        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantTransferSearchHeader(
+            filter,
+            isConfidentialityAffected);
+
+        // Create Body
+        var rows = PollutantTransfers.GetActivityTree(filter);
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string[] colHeaderRows = csvformat.GetPollutantTransferActivityColHeaderRows();
+
+        Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Activity_List");
+
+        Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
+
+        foreach (var item in rows)
         {
-            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-            CSVFormatter csvformat = new CSVFormatter(csvCulture);
+            string row = csvformat.GetPollutantTransferActivityRow(item);
 
-            // Create Header
-            var filter = SearchFilter;
-
-            bool isConfidentialityAffected = PollutantTransfers.IsAffectedByConfidentiality(filter);
-
-            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantTransferSearchHeader(
-                filter,
-                isConfidentialityAffected);
-
-            // Create Body
-            var rows = PollutantTransfers.GetActivityTree(filter);
-
-            // dump to file
-            string topheader = csvformat.CreateHeader(header);
-            string[] colHeaderRows = csvformat.GetPollutantTransferActivityColHeaderRows();
-
-            Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Activity_List");
-
-            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
-
-            foreach (var item in rows)
+            if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
             {
-                string row = csvformat.GetPollutantTransferActivityRow(item);
-
-                if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
-                {
-                    Response.Write(Environment.NewLine);
-                    Response.Write(colHeaderRows[0] + colHeaderRows[1]);
-                }
-
-                Response.Write(row);
+                Response.Write(Environment.NewLine);
+                Response.Write(colHeaderRows[0] + colHeaderRows[1]);
             }
 
-            Response.End();
+            Response.Write(row);
         }
-        catch (Exception exception)
-        {
 
-        }
+        Response.End();
     }
 
 }
