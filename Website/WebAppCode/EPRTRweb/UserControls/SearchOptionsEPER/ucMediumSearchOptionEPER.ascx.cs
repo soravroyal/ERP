@@ -4,7 +4,6 @@ using QueryLayer.Filters;
 
 public partial class ucMediumSearchOptionEPER : System.Web.UI.UserControl
 {
-    private bool includeTransfers = false;
 
     private MediumFilter Filter{ get; set; }
         
@@ -12,7 +11,6 @@ public partial class ucMediumSearchOptionEPER : System.Web.UI.UserControl
     {
         if (!IsPostBack)
         {
-           // this.plTransfers.Visible = includeTransfers;
 
             Filter = LinkSearchBuilder.GetMediumFilter(Request);
             setSelectedMediums();

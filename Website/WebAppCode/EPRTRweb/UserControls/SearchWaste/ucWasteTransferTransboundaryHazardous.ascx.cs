@@ -78,41 +78,34 @@ public partial class ucWasteTransferTransboundaryHazardous : System.Web.UI.UserC
     /// </summary>
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        try
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        bool ConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(SearchFilter);
+
+        // Create Header
+        Dictionary<string, string> header = CsvHeaderBuilder.GetWasteTransfersSearchHeader(
+            SearchFilter,
+            ConfidentialityAffected);
+
+        IEnumerable<WasteTransfers.TransboundaryHazardousWasteData> wastedata =
+            WasteTransfers.GetTransboundaryHazardousWasteData(
+            SearchFilter,
+            ConfidentialityAffected);
+
+        Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Transboundary_Hazardous");
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string wasteHeader = csvformat.GetWasteHeader();
+
+        Response.Write(topheader + wasteHeader);
+        foreach (var v in wastedata)
         {
-            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-            CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-            bool ConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(SearchFilter);
-
-            // Create Header
-            Dictionary<string, string> header = CsvHeaderBuilder.GetWasteTransfersSearchHeader(
-                SearchFilter,
-                ConfidentialityAffected);
-
-            IEnumerable<WasteTransfers.TransboundaryHazardousWasteData> wastedata = 
-                WasteTransfers.GetTransboundaryHazardousWasteData(
-                SearchFilter,
-                ConfidentialityAffected);
-
-            Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Transboundary_Hazardous");
-
-            // dump to file
-            string topheader = csvformat.CreateHeader(header);
-            string wasteHeader = csvformat.GetWasteHeader();
-
-            Response.Write(topheader + wasteHeader);
-            foreach (var v in wastedata)
-            {
-                string row = csvformat.GetWasteRow(v);
-                Response.Write(row);
-            }
-            Response.End();
+            string row = csvformat.GetWasteRow(v);
+            Response.Write(row);
         }
-        catch(Exception exception)
-        {
-
-        }
+        Response.End();
     }
 
 

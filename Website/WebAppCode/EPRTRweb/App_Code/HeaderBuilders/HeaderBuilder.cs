@@ -397,13 +397,10 @@ namespace EPRTR.HeaderBuilders
         //creates header for Pollutant group and adds to dictionary
         protected static void addPollutantGroup(Dictionary<string, string> header, int pollutantGroupId)
         {
-            if (pollutantGroupId != null)
-            {
-                string key = Resources.GetGlobal("Common", "PollutantGroup");
-                string value = LOVResources.PollutantGroupName(pollutantGroupId);
+            string key = Resources.GetGlobal("Common", "PollutantGroup");
+            string value = LOVResources.PollutantGroupName(pollutantGroupId);
 
-                header.Add(key, value);
-            }
+            header.Add(key, value);
         }
 
         /// <summary>

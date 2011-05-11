@@ -244,42 +244,36 @@ public partial class ucIndustrialActivityWasteTransfer : System.Web.UI.UserContr
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        try
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        // Create Header
+        IndustrialActivitySearchFilter filter = SearchFilter;
+
+        bool isConfidentialityAffected = IndustrialActivity.IsWasteAffectedByConfidentiality(filter);
+
+        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetIndustrialActivitySearchHeader(
+            filter,
+            isConfidentialityAffected);
+
+        // Create Body
+        var rows = IndustrialActivity.GetWasteTransfers(filter);
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string rowHeader = csvformat.GetIndustrialActivityWasteTransfersHeader();
+
+        Response.WriteUtf8FileHeader("EPRTR_Industrial_Activity_Waste_Transfer_List");
+
+        Response.Write(topheader + rowHeader);
+
+        foreach (var item in rows)
         {
-            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-            CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-            // Create Header
-            IndustrialActivitySearchFilter filter = SearchFilter;
-
-            bool isConfidentialityAffected = IndustrialActivity.IsWasteAffectedByConfidentiality(filter);
-
-            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetIndustrialActivitySearchHeader(
-                filter,
-                isConfidentialityAffected);
-
-            // Create Body
-            var rows = IndustrialActivity.GetWasteTransfers(filter);
-
-            // dump to file
-            string topheader = csvformat.CreateHeader(header);
-            string rowHeader = csvformat.GetIndustrialActivityWasteTransfersHeader();
-
-            Response.WriteUtf8FileHeader("EPRTR_Industrial_Activity_Waste_Transfer_List");
-
-            Response.Write(topheader + rowHeader);
-
-            foreach (var item in rows)
-            {
-                string row = csvformat.GetIndustrialActivityWasteTransfersRow(item);
-                Response.Write(row);
-            }
-
-            Response.End();
+            string row = csvformat.GetIndustrialActivityWasteTransfersRow(item);
+            Response.Write(row);
         }
-        catch(Exception exception)
-        {
 
-        }
+        Response.End();
     }
+    
 }

@@ -453,50 +453,43 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
     /// </summary>
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        try
+        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+        CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+        // Create Header
+        var filter = SearchFilter;
+
+        bool isConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(filter);
+
+        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetWasteTransfersSearchHeader(
+            filter,
+            isConfidentialityAffected);
+
+        // Create Body
+        var rows = WasteTransfers.GetActivityTree(filter);
+
+        // dump to file
+        string topheader = csvformat.CreateHeader(header);
+        string[] colHeaderRows = csvformat.GetWasteTransferActivityColHeaderRows(filter);
+
+        Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Activity_List");
+
+        Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
+
+        foreach (var item in rows)
         {
-            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-            CSVFormatter csvformat = new CSVFormatter(csvCulture);
+            string row = csvformat.GetWasteTransferActivityRow(item, filter);
 
-            // Create Header
-            var filter = SearchFilter;
-
-            bool isConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(filter);
-
-            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetWasteTransfersSearchHeader(
-                filter,
-                isConfidentialityAffected);
-
-            // Create Body
-            var rows = WasteTransfers.GetActivityTree(filter);
-
-            // dump to file
-            string topheader = csvformat.CreateHeader(header);
-            string[] colHeaderRows = csvformat.GetWasteTransferActivityColHeaderRows(filter);
-
-            Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Activity_List");
-
-            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
-
-            foreach (var item in rows)
+            if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
             {
-                string row = csvformat.GetWasteTransferActivityRow(item,filter);
-
-                if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
-                {
-                    Response.Write(Environment.NewLine);
-                    Response.Write(colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
-                }
-
-                Response.Write(row);
+                Response.Write(Environment.NewLine);
+                Response.Write(colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
             }
 
-            Response.End();
+            Response.Write(row);
         }
-        catch (Exception exception)
-        {
 
-        }
+        Response.End();
     }
 
 }
