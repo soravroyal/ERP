@@ -183,8 +183,8 @@
 				</otherurl>
 					<otherurl queryIfNotvisible="false">					
 					<url>Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer/22</url>
-					<fields>v_15_Ind_CO2_Pollutant_name,v_15_Ind_CO2_Emi5km</fields>
-					<titlefield>v_15_Ind_CO2_Pollutant_name</titlefield>
+					<fields>Pollutant_name,Emi5km_v1</fields>
+					<titlefield>Pollutant_name</titlefield>
 					<returngeometry>false</returngeometry>
 					<drawselection>point</drawselection>
 				</otherurl>
