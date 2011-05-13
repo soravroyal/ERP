@@ -352,15 +352,18 @@ namespace QueryLayer
         {
             int reportingYear;
             int facilityReportId;
+            int facilityId;
 
-            internal FacilityReportingYear(int year, int facilityReportId)
+            internal FacilityReportingYear(int year, int facilityReportId, int facilityId)
             {
                     this.reportingYear = year;
                     this.facilityReportId = facilityReportId;
+                    this.facilityId = facilityId;
              }
 
             public int ReportingYear { get { return this.reportingYear; } }
             public int FacilityReportId { get { return this.facilityReportId; } }
+            public int FacilityId { get { return this.facilityId; } }
         }
 
 
@@ -370,7 +373,7 @@ namespace QueryLayer
             DataClassesFacilityDataContext db = getDataContext();
             IEnumerable<FacilityReportingYear> res = from r in db.FACILITYDETAIL_DETAILs
                                                      where r.FacilityID == facilityId && (r.ReportingYear == 2001 || r.ReportingYear == 2004)
-                                                     select new FacilityReportingYear(r.ReportingYear, r.FacilityReportID);
+                                                     select new FacilityReportingYear(r.ReportingYear, r.FacilityReportID, facilityId);
 
             res = res.OrderBy(p => p.ReportingYear);
             return res;
@@ -382,7 +385,7 @@ namespace QueryLayer
             DataClassesFacilityDataContext db = getDataContext();
             IEnumerable<FacilityReportingYear> res = from r in db.FACILITYDETAIL_DETAILs
                                                      where r.FacilityID == facilityId //&& (r.ReportingYear != 2001 && r.ReportingYear != 2004)
-                                                     select new FacilityReportingYear(r.ReportingYear, r.FacilityReportID);
+                                                     select new FacilityReportingYear(r.ReportingYear, r.FacilityReportID, facilityId);
 
             res = res.OrderBy(p => p.ReportingYear);
             return res;
