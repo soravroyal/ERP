@@ -17,6 +17,9 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 :r $(basedir)\..\..\common\AddVersion.sql
 go
 
+:r$(basedir)\Update_all_EPER_CO2_reportings.sql
+go
+
 --Uncomment this when released (will only insert version no. once) :
 
 IF NOT EXISTS (SELECT * FROM tAT_version WHERE Major_version = $(major) AND Minor_version = $(minor))
