@@ -1,0 +1,32 @@
+﻿/* Master page
+-------------------------------------------------------------- */
+.langSelector
+{   
+    top:1px;
+    left:-4px;
+    margin-left:2px;
+    position:relative;
+}
+
+.langDropPanelClass
+{
+	z-index: 100;
+	
+	visibility: visible;
+	display:none;
+	 
+	position: absolute; 
+	display: block; 
+	left: 2px; 
+	top: 14px;
+}
+
+.menu_sub_item a:visited 
+{
+	color: #AA8162;
+}
+
+.menu_sub_item a:active
+{
+	color: #AA8162;
+}
