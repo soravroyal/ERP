@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Created with Liquid XML Studio 6.1.17.0 - FREE Community Edition (http://www.liquid-technologies.com)-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="userinterface" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>the userinterface element defines the information that will be shown at the branding area where company logo, application title, menu, etc reside.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="collapsewidgets" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>This tag allows set the preloaded widgets to be collapsed in the dock initially.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="hidewidgetscontrol" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>This tag allows set the visibility of the widget control.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="banner" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>This tag allows set the banner to be visible or invisible in the case the application is embedded in another web application.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="title" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>This main title of the deployed application.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="subtitle" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>A subtitle for the application.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="logo" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>A logo, such as a company logo, can be placed on the branding area. The logo can be either JPG or PNG file in the size of 40x40.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="stylesheet" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The URL point to the compiled stylesheet as the runtime loadable theme swf.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="menus" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The menus shown on the control bar. Currently the Site Starter support four menu, Map, Navigation, Tools(widgets) and Help.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="menu" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:simpleContent>
+													<xs:extension base="xs:string">
+														<xs:attribute name="id" type="xs:string" use="optional">
+															<xs:annotation>
+																<xs:documentation>The menu ID is a unique string will be used internally for Site Starter container.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="visible" type="xs:boolean" use="optional">
+															<xs:annotation>
+																<xs:documentation>A menu can be turned on or off.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="icon" type="xs:string" use="optional">
+															<xs:annotation>
+																<xs:documentation>the 40x40 icon used on the controller bar.</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+														<xs:attribute name="target" type="xs:string" use="optional">
+															<xs:annotation>
+																<xs:documentation>The target menu controller- if target='customMenu' the menu will be loaded into a list always shown (no mouse over effect).</xs:documentation>
+															</xs:annotation>
+														</xs:attribute>
+													</xs:extension>
+												</xs:simpleContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="map" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>The map tag contains all the maps used within the Site Starter application.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="basemaps" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>The based map is the map that cannot be set to be invisible.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="mapservice" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="MapServiceType"/>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="menu" type="xs:string" use="optional">
+										<xs:annotation>
+											<xs:documentation/>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="livemaps" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Live maps are the map layers (map services) from ArcGIS Map Services. They maps and their layers can be toggled on and of. The transparency level can be adjusted as well.</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="mapservice" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="MapServiceType"/>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="initialExtent" type="xs:string"/>
+						<xs:attribute name="fullExtent" type="xs:string"/>
+						<xs:attribute name="showzoomslider" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Show the zoom slider.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="scrollwheelzoomenabled" type="xs:boolean">
+							<xs:annotation>
+								<xs:documentation>Enable zoom on scroll wheel.</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+						<xs:attribute name="lodminlevel" type="xs:integer">
+							<xs:annotation>
+								<xs:documentation>Set the minimum allowed LOD level</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="navtools" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="navtool" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attributeGroup ref="MenuItemAttribute"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="widgets" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>All the widgets deployed to the Site Starter will be configured here.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="widget" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attributeGroup ref="MenuItemAttribute"/>
+											<xs:attribute name="config" type="xs:string">
+												<xs:annotation>
+													<xs:documentation>the URL points to the widget configuration file. It could be relative path if the widget is deployed on the same web server as the Site Starter is.</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="preload" type="PreloadType">
+												<xs:annotation>
+													<xs:documentation>Indicates if the widget is preloaded into the Site Starter application once the application is initialized. Otherwise, the widget will be loaded on-demand.</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="invisbtns">
+												<xs:annotation>
+													<xs:documentation>Indicates buttons (commaseparated list) to be set to invisible e.g the close btn: invisbtns="close"</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+											<xs:attribute name="baserestserverurl">
+												<xs:annotation>
+													<xs:documentation>base url to the server with rest services</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="links" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Links contains all the URL links shown on the Help menu.</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="link" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attributeGroup ref="MenuItemAttribute"/>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="proxytype" type="ProxytypeValues"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="MapServiceType" mixed="true">
+		<xs:sequence>
+			<xs:element name="layers" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Layer settings</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="layer" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attributeGroup ref="LayerItemAttribute"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="label" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The label used on the menu item.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="id" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The id of the layer.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="type" type="MapServiceChoiceType">
+			<xs:annotation>
+				<xs:documentation>The type of the may, tiled or dynamic.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="visible" type="xs:boolean">
+			<xs:annotation>
+				<xs:documentation>The initial visibility of the map, true or false.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="alpha" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>the initial transparancy level.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="icon" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>A 20x20 icon for the use on the menu.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="overlay" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>the url of an overlay layer</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="overlaytype" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>the type of the overlay layer, tiled or dynamic.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="overlayalpha" type="xs:float">
+			<xs:annotation>
+				<xs:documentation>the initial transparancy level of the overlay layer.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="legend" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Url to static legend image to be loaded into layer widget when showing layer.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="link" type="xs:string"/>
+		<xs:attribute name="iconShape" type="IconShapeType"/>
+		<xs:attribute name="iconSize" type="xs:integer"/>
+		<xs:attribute name="iconColor" type="xs:string"/>
+		<xs:attribute name="url" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>The mapservice url</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="turnoff" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>Id of other mapservice to turn off when turning this on</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:simpleType name="MapServiceChoiceType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="tiled"/>
+			<xs:enumeration value="dynamic"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IconShapeType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="circle"/>
+			<xs:enumeration value="line"/>
+			<xs:enumeration value="rectangle"/>
+			<xs:enumeration value="triangle"/>
+			<xs:enumeration value="circleOutline"/>
+			<xs:enumeration value="rectangleOutline"/>
+			<xs:enumeration value="triangleOutline"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PreloadType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="true"/>
+			<xs:enumeration value="false"/>
+			<xs:enumeration value="minimized"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:attributeGroup name="MenuItemAttribute">
+		<xs:attribute name="label" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>This menu </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="icon" type="xs:string"/>
+		<xs:attribute name="menu" type="MenuNameType"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="LayerItemAttribute">
+		<xs:attribute name="id" type="xs:integer">
+			<xs:annotation>
+				<xs:documentation>layer attributes </xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="visible" type="xs:boolean"/>
+		<xs:attribute name="link" type="xs:string"/>
+		<xs:attribute name="iconShape" type="IconShapeType"/>
+		<xs:attribute name="iconSize" type="xs:integer"/>
+		<xs:attribute name="iconColor" type="xs:string"/>
+		<xs:attribute name="definition" type="xs:string"/>
+		<xs:attribute name="cofilter" type="xs:string">
+			<xs:annotation>
+				<xs:documentation>filter to set on layers when turning this layer on</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:simpleType name="MenuNameType">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="menuNav"/>
+			<xs:enumeration value="menuMap"/>
+			<xs:enumeration value="menuHelp"/>
+			<xs:enumeration value="menuWidgets"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProxytypeValues">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="apache"/>
+			<xs:enumeration value="jsp"/>
+			<xs:enumeration value="asp"/>
+			<xs:enumeration value="php"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,224 @@
+﻿/*--------------------------------------------------------------------------------------------------------------*/
+/*-- Styles for presenting search options on search and time serie spages                                     --*/
+/*--------------------------------------------------------------------------------------------------------------*/
+
+.searchOption_area {
+	clear: none;
+	float: left;
+	width: 63%;
+	margin-top: 10px;
+}
+
+.searchOption_year {
+	clear: none;
+	float: right;
+	width: 28%;
+	margin-top: 10px;
+}
+
+.searchOption_pollutant {
+	clear: none;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.searchOption_activity {
+	clear: none;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.searchOption_waste {
+	clear: none;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.searchOption_wasteLegend {
+	clear: left;
+	float: left;
+	width: 25%;
+}
+
+.searchOption_wasteCriteria {
+	clear: none;
+	float: left;
+	margin-bottom: 10px;
+}
+
+#searchOption_wasteReceiver
+{
+	clear: left;
+}
+
+#searchOption_facilityname {
+	clear: none;
+	float: left;
+	width: 60%;
+	margin-top: 10px;
+}
+
+#searchOption_facilityname input
+{
+	width:203px;
+}
+
+#searchOption_town {
+	clear: none;
+	float: right;
+	width: 38%;
+	margin-top: 10px;
+}
+
+#searchOption_town input
+{
+	width:127px;
+}
+
+.cpeTextLabel
+{
+	color:Gray;
+	float: right;
+	clear:none;
+}
+
+.cpeTextLabel2
+{
+	color:Gray;
+	float: left;
+	clear:none;
+}
+
+.cpeContent
+{
+	width:100%;
+}
+
+.panelIcons
+{
+	position:relative;
+	top: -1.5em;
+}
+
+.collapseIcon
+{
+	float: right;
+	margin-left: .5em;
+}
+
+.infoIcon
+{
+	float:right;
+}
+
+.searchHelpIcon
+{
+	position:relative;
+	top: 1px;
+	left: 8px;
+	border: solid 1 gray;
+}
+
+
+.plButton {
+	clear: none;
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+}
+
+.search_button {
+	float: right;
+	margin-top:10px;
+}
+
+.search_indicator {
+	float: left;
+	margin-top:7px;
+	visibility:hidden;
+}
+
+/* ADDED BY MOB - couldnt find a better spot for these */
+
+/* search pages
+-------------------------------------------------------------- */
+.info_box_search {
+	padding: 5px;
+	clear: both;
+	margin-left: 25px;
+}
+.info_box_search_headline {
+	float: left;
+	clear: left;
+	margin-bottom: 20px;	
+}
+.info_box_search_text {
+	float: left;
+	clear: left;
+		
+}
+.map_box {
+	float: right;
+	width: 400px;
+	border:solid 1px #ADC7AD;
+	/*background-color:#DDDDDD;*/
+	/*border-top: 1px solid #999999;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	border-left: 1px solid #999999;*/
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+.search_form {
+	background-color:  #FFFFFF;
+	clear: left;
+	float: left;
+	width: 345px;
+	margin-left: 25px;
+	border: 1px solid #ADC7AD;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+
+
+
+/* this section is only related to the Radio button list 
+   used to switch between Waste types and Mediums
+ */
+.SelectorList table	
+{
+	line-height:1.5;
+}
+
+.SelectorList td
+{
+	padding-right:6px;
+	margin:-2px;	
+	vertical-align:top;
+}
+
+.WasteTypeSelectorLabel 
+{
+	width:130px;
+}
+
+
+/* Diffuse emission sector selector */
+.searchOption_selectSectorDiffuse
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.searchOption_ddlSectorDiffuse
+{
+	width:220px;
+}
+
+
+
