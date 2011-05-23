@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+        InitialTargets="CreateDatabase;Build;CreateDox">
+    <Target Name="CreateDatabase">
+        <Message Text="[*** (Re)creating database ******]" />
+        <Exec Command="runsql.cmd" WorkingDirectory="..\SQLScripts" ContinueOnError="false">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+    </Target>
+    <Target Name="Build" DependsOnTargets="CreateDatabase">
+        <Message Text="[*** Starting build *************]" />
+        <MSBuild Projects="EPRTRweb.sln" Properties="Configuration=Debug" />
+    </Target>
+    <Target Name="CreateDox" DependsOnTargets="Build">
+        <Message Text="[*** Generating documentation ***]" />
+        <Exec Command="create_doxygen.cmd" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+    </Target>
+</Project>
+!-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+        InitialTargets="Build;CreateDox;CreateSitemap;UpdateCoreTexts">
+    <Target Name="Build">
+        <Message Text="[*** Starting build *************]" />
+        <MSBuild Projects="EPRTRweb.sln" Properties="Configuration=Debug" />
+    </Target>
+    <Target Name="CreateDox" DependsOnTargets="Build">
+        <Message Text="[*** Generating documentation ***]" />
+        <Exec Command="create_doxygen.cmd" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+    </Target>
+	<Target Name="CreateSitemap" DependsOnTargets="Build">
+        <Message Text="[*** Generating sitemap ***]" />
+        <Exec Command="create_sitemap.cmd" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+    </Target>
+	<Target Name="UpdateCoreTexts">
+        <Message Text="[*** Updating core texts in CMS Database ******]" />
+        <Exec Command="Import_CoreTexts.bat" ContinueOnError="true">
+            <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
+        </Exec>
+    </Target>
+	
+	
+	
+</Project>
