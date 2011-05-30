@@ -9,6 +9,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using EPRTR.Localization;
 using System.Threading;
+using Microsoft.Practices.EnterpriseLibrary.Logging;
 
 /// <summary>
 /// Summary description for BasePage
@@ -37,6 +38,7 @@ public class BasePage : System.Web.UI.Page
         System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureCode);
         Thread.CurrentThread.CurrentCulture = culture;
         Thread.CurrentThread.CurrentUICulture = culture;
+
 
         base.InitializeCulture();
     }

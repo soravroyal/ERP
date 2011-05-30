@@ -33,40 +33,85 @@
   
     void Application_Error(object sender, EventArgs e) 
     {
-        /*bool enableErrorLog = ConfigurationManager.AppSettings["EnableEventErrorLog"].ToString().ToLower().Equals("true");
+        bool enableErrorLog = ConfigurationManager.AppSettings["EnableEventErrorLog"].ToString().ToLower().Equals("true");
         if (enableErrorLog)
       
         {
           // Log error to the Event Log
           if (HttpContext.Current.Server.GetLastError() != null)
           {
-            string eventLog = "WebEPRTR";
-            //string eventSource = "www.eprtr.ec.europa.eu";
-            string eventSource = "WebEPRTR";
-            string errMessage = "";
+              string errMessage = "";
+              Exception exception = Server.GetLastError();
+              errMessage = "Message:\r\n" + exception.Message + "\r\n\r\n";
+              errMessage += "Source:\r\n" + exception.Source + "\r\n\r\n";
+              errMessage += "Target site:\r\n" + exception.TargetSite.ToString() + "\r\n\r\n";
+              errMessage += "Stack trace:\r\n" + exception.StackTrace + "\r\n\r\n";
 
-            Exception exception = Server.GetLastError();
-            errMessage = "Message:\r\n" + exception.Message + "\r\n\r\n";
-            errMessage += "Source:\r\n" + exception.Source + "\r\n\r\n";
-            errMessage += "Target site:\r\n" + exception.TargetSite.ToString() + "\r\n\r\n";
-            errMessage += "Stack trace:\r\n" + exception.StackTrace + "\r\n\r\n";
+              if (exception.InnerException != null)
+                  errMessage += "InnerException:\r\n" + exception.StackTrace + "\r\n\r\n";
 
-            if (exception.InnerException != null)
-              errMessage += "InnerException:\r\n" + exception.StackTrace + "\r\n\r\n";
+              
+              Microsoft.Practices.EnterpriseLibrary.Logging.LogEntry enlog = new LogEntry();
+              enlog.EventId = 999;
+              enlog.Message = errMessage;
+              enlog.Severity = System.Diagnostics.TraceEventType.Error;
+              enlog.Priority = 1;
+              Logger.Write(enlog);
 
-            // make sure the Eventlog Exists
-            if (!System.Diagnostics.EventLog.SourceExists(eventSource))
-              System.Diagnostics.EventLog.CreateEventSource(eventSource, eventLog);
+              //HttpContext.Current.Server.ClearError();
+              //HttpContext.Current.Request.
 
-            // make new log
-            System.Diagnostics.EventLog log = new System.Diagnostics.EventLog(eventLog);
-            log.Source = eventSource;
-            log.WriteEntry("ERROR: " + eventSource + "\r\n\r\n" + errMessage, System.Diagnostics.EventLogEntryType.Error);
+              //HttpContext.Current.Server.Transfer(Request.Url.ToString());
+              
+            //string eventLog = "WebEPRTR";
+            ////string eventSource = "www.eprtr.ec.europa.eu";
+            //string eventSource = "WebEPRTR";
+            //string errMessage = "";
+
+            //Exception exception = Server.GetLastError();
+            //errMessage = "Message:\r\n" + exception.Message + "\r\n\r\n";
+            //errMessage += "Source:\r\n" + exception.Source + "\r\n\r\n";
+            //errMessage += "Target site:\r\n" + exception.TargetSite.ToString() + "\r\n\r\n";
+            //errMessage += "Stack trace:\r\n" + exception.StackTrace + "\r\n\r\n";
+
+            //if (exception.InnerException != null)
+            //  errMessage += "InnerException:\r\n" + exception.StackTrace + "\r\n\r\n";
+
+            //// make sure the Eventlog Exists
+            //if (!System.Diagnostics.EventLog.SourceExists(eventSource))
+            //  System.Diagnostics.EventLog.CreateEventSource(eventSource, eventLog);
+
+            //// make new log
+            //System.Diagnostics.EventLog log = new System.Diagnostics.EventLog(eventLog);
+            //log.Source = eventSource;
+            //log.WriteEntry("ERROR: " + eventSource + "\r\n\r\n" + errMessage, System.Diagnostics.EventLogEntryType.Error);
           }
         }
-        */
+        
         // display error page
       //HttpContext.Current.Server.Transfer("ErrorPage.aspx");
+
+        
+        HttpCookie reloads = Request.Cookies["Reloads"];
+        if (reloads == null)
+        {
+            reloads = new HttpCookie("Reloads", "0");
+        }
+
+        int numberOfReloads = int.Parse(reloads.Value);
+
+        if (numberOfReloads < 2)
+        {
+            reloads.Value = (numberOfReloads + 1).ToString();
+            reloads.Expires = DateTime.Now.AddSeconds(10);
+            Response.Cookies.Add(reloads);
+            HttpContext.Current.Server.ClearError();
+
+            //Response.AddHeader("REFRESH", "1;URL=" + Request.Url.AbsolutePath);
+            Response.Redirect(Request.Url.AbsolutePath);
+        }
+
+
     }
 
     void Application_BeginRequest(object sender, EventArgs e)
