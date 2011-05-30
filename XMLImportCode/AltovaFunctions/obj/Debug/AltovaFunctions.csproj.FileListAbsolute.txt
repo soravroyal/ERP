@@ -1,9 +1,0 @@
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\bin\Debug\AltovaFunctions.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\bin\Debug\AltovaFunctions.pdb
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\bin\Debug\Altova.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\bin\Debug\AltovaXML.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\bin\Debug\Altova.pdb
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\bin\Debug\AltovaXML.pdb
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\obj\Debug\ResolveAssemblyReference.cache
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\obj\Debug\AltovaFunctions.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaFunctions\obj\Debug\AltovaFunctions.pdb
