@@ -18,26 +18,29 @@ public class BasePage : System.Web.UI.Page
 {
     protected override void InitializeCulture()
     {
-         // retrieve cookie
-        HttpCookie prevCulture = Request.Cookies["Culture"];
+
+        //hes: temporary removed 2011-05-30
+
+        // // retrieve cookie
+        //HttpCookie prevCulture = Request.Cookies["Culture"];
         
-        string cultureCode = CultureResolver.Resolve(Request);
+        //string cultureCode = CultureResolver.Resolve(Request);
 
-        // culture has changed write new cookie
-        if (prevCulture == null 
-            || prevCulture.Value != cultureCode)
-        {
-            AddCultureCookie(cultureCode);
-        }
+        //// culture has changed write new cookie
+        //if (prevCulture == null 
+        //    || prevCulture.Value != cultureCode)
+        //{
+        //    AddCultureCookie(cultureCode);
+        //}
 
         
-        AddCsvCultureCookie(Thread.CurrentThread.CurrentCulture.ToString());
+        //AddCsvCultureCookie(Thread.CurrentThread.CurrentCulture.ToString());
 
-        this.UICulture = cultureCode;
-        this.Culture = cultureCode;
-        System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureCode);
-        Thread.CurrentThread.CurrentCulture = culture;
-        Thread.CurrentThread.CurrentUICulture = culture;
+        //this.UICulture = cultureCode;
+        //this.Culture = cultureCode;
+        //System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureCode);
+        //Thread.CurrentThread.CurrentCulture = culture;
+        //Thread.CurrentThread.CurrentUICulture = culture;
 
 
         base.InitializeCulture();
