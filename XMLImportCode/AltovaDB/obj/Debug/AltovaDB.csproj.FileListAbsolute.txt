@@ -1,7 +1,0 @@
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\bin\Debug\AltovaDB.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\bin\Debug\AltovaDB.pdb
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\bin\Debug\Altova.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\bin\Debug\Altova.pdb
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\obj\Debug\ResolveAssemblyReference.cache
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\obj\Debug\AltovaDB.dll
-C:\1_Projekter\6_E-PRTR\XML-import\output\AltovaDB\obj\Debug\AltovaDB.pdb
