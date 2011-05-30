@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" enableLocalization="true" >
+
+  <siteMapNode roles="all,admin">
+
+    <!-- Home/About -->
+    <siteMapNode url="~/Home.aspx" title="$resources:Web.sitemap,Home" description="" roles="all"/>
+    <siteMapNode url="~/pgAbout.aspx" title="$resources:Web.sitemap,AboutEPRTR" description="" roles="all"/>
+
+    <!-- Search -->
+    <siteMapNode url="" title="$resources:Web.sitemap,SearchEPRTRData" description="SearchMenu" roles="all">
+      <siteMapNode url="~/FacilityLevels.aspx" title="$resources:Web.sitemap,SearchFacilityLevel"  description="" roles="all" />
+      <siteMapNode url="~/IndustialActivity.aspx" title="$resources:Web.sitemap,SearchIndustrialActivity"  description="" roles="all" />
+      <siteMapNode url="~/AreaOverview.aspx" title="$resources:Web.sitemap,AreaOverview"  description="" roles="all" />
+      <siteMapNode url="~/PollutantReleases.aspx" title="$resources:Web.sitemap,SearchPollutantReleases"  description="" roles="all" />
+      <siteMapNode url="~/PollutantTransfers.aspx" title="$resources:Web.sitemap,SearchPollutantTransfers"  description="" roles="all" />
+      <siteMapNode url="~/WasteTransfer.aspx" title="$resources:Web.sitemap,SearchWasteTransfers"  description="" roles="all" />
+      <siteMapNode url="~/MapSearch.aspx" title="$resources:Web.sitemap,SearchMapSearch"  description="" roles="all" />
+    </siteMapNode>
+
+    <!-- Search EPER-->
+    <siteMapNode url="" title="$resources:Web.sitemap,SearchEPERData" description="" roles="all">
+      <siteMapNode url="~/FacilityLevelsEPER.aspx" title="$resources:Web.sitemap,SearchFacilityLevel"  description="" roles="all" />
+      <siteMapNode url="~/PopupLibraryPollutantsGuideEPER.aspx" title="$resources:Web.sitemap,SearchEPERPollutant"  description="" roles="all" />
+      <siteMapNode url="~/PopupLibraryActivitiesGuideEPER.aspx" title="$resources:Web.sitemap,SearchEPERActivities"  description="" roles="all" />
+    </siteMapNode>
+    
+    <!-- Time series -->
+    <siteMapNode url="" title="$resources:Web.sitemap,TimeSeries"  description="" roles="all">
+      <siteMapNode url="~/TimeSeriesPollutantReleases.aspx" title="$resources:Web.sitemap,TimePollutantReleases" description="" roles="all"/>
+      <siteMapNode url="~/TimeSeriesPollutantTransfers.aspx" title="$resources:Web.sitemap,TimePollutantTransfers" description="" roles="all"/>
+      <siteMapNode url="~/TimeSeriesWasteTransfers.aspx" title="$resources:Web.sitemap,TimeWasteTransfers" description="" roles="all"/>
+    </siteMapNode>
+
+    <!-- Diffuse Sources -->
+    <siteMapNode url="" title="$resources:Web.sitemap,DiffuseSources" description="" roles="all" >
+      <siteMapNode url="~/pgDiffuseSourcesApproach.aspx" title="$resources:Web.sitemap,DiffuseSourcesApproach" description="" roles="all" />
+      <siteMapNode url="~/DiffuseSourcesWater.aspx" title="$resources:Web.sitemap,DiffuseSourcesWater" description="" roles="all" />
+      <siteMapNode url="~/DiffuseSourcesAir.aspx" title="$resources:Web.sitemap,DiffuseSourcesAir" description="" roles="all" />
+    </siteMapNode>
+    
+    <siteMapNode url="~/pgFAQ.aspx" title="$resources:Web.sitemap,QuestionsToEPRTR" description="" roles="all"/>
+    <!-- Commented out until first review report is available in 2011 
+    <siteMapNode url="" title="$resources:Web.sitemap,EPRTRReview"  description="" roles="all">
+        <siteMapNode url="~/pgReviewFactSheet.aspx" title="$resources:Web.sitemap,EPRTRReviewFactsheet" description="" roles="all"/>
+        <siteMapNode url="~/pgReviewReport.aspx" title="$resources:Web.sitemap,EPRTRReviewReport" description="" roles="all"/>
+    </siteMapNode> -->
+    
+    <!-- Download -->
+    <siteMapNode url="" title="$resources:Web.sitemap,Download"  description="" roles="all">
+      <siteMapNode url="~/pgDownloadDataSet.aspx" title="$resources:Web.sitemap,DownloadDataSet"  description="" roles="all" />
+      <siteMapNode url="~/pgDownloadGuidance.aspx" title="$resources:Web.sitemap,DownloadGuidance" description="" roles="all" />
+    </siteMapNode>
+
+    <!-- Static pagesm links -->
+    <siteMapNode url="" title="$resources:Web.sitemap,Links"  description="" roles="all">
+      <siteMapNode url="~/pgLinksNationalRegisters.aspx" title="$resources:Web.sitemap,LinksNationalRegisters"  description="" roles="all"/>
+      <siteMapNode url="~/pgLinksEUinternational.aspx" title="$resources:Web.sitemap,LinksEUinternational"  description="" roles="all"/>
+      <siteMapNode url="~/pgLinksResearchProjects.aspx" title="$resources:Web.sitemap,LinksResearchProjects"  description="" roles="all"/>
+    </siteMapNode>
+
+    <!-- Static pagesm library -->
+    <siteMapNode url="" title="$resources:Web.sitemap,Library" description="" roles="all">
+      <siteMapNode url="~/pgLibraryGlossary.aspx" title="$resources:Web.sitemap,LibraryGlossary" description="" roles="all"/>
+      <siteMapNode url="~/pgLibraryActivities.aspx" title="$resources:Web.sitemap,LibraryActivities" description="" roles="all"/>
+      <siteMapNode url="~/pgLibraryPollutants.aspx" title="$resources:Web.sitemap,LibraryPollutants" description="" roles="all"/>
+      <siteMapNode url="~/pgLibraryWaste.aspx" title="$resources:Web.sitemap,LibraryWaste" description=""  roles="all" />
+    </siteMapNode>
+
+    <!-- meetings, community, news, feedback -->
+    <siteMapNode url="~/pgEventsAndMeetings.aspx" title="$resources:Web.sitemap,EventsAndMeetings" description="" roles="all"/>
+    <!--<siteMapNode url="~/pgPeopleCommunity.aspx" title="$resources:Web.sitemap,PeopleCommunity" description="" roles="all"/>-->
+    <!--<siteMapNode url="~/pgNews.aspx" title="$resources:Web.sitemap,NewsArchive" description="" roles="all"/>-->
+    <siteMapNode url="~/pgFeedback.aspx" title="$resources:Web.sitemap,Feedback" description="" roles="all"/>
+
+  </siteMapNode>
+
+</siteMap>

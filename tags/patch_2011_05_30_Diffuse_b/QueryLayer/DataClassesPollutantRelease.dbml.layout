@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 11.375" name="DataClassesPollutantRelease">
+  <DataContextMoniker Name="/DataClassesPollutantReleaseDataContext" />
+  <nestedChildShapes>
+    <classShape Id="eb49436e-9d0f-4181-87db-b510c64d4430" absoluteBounds="2.625, 1.375, 2, 9.8065616861979148">
+      <DataClassMoniker Name="/DataClassesPollutantReleaseDataContext/POLLUTANTRELEASE" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a0853d7f-b21c-42ae-9d6d-dcde889b6423" absoluteBounds="2.6399999999999997, 1.835, 1.9700000000000002, 9.2465616861979161" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
