@@ -1,6 +1,7 @@
 USE [EPRTRxml]
 SET QUOTED_IDENTIFIER ON
 GO
+
 ------------------------------------------------------------------------------------------
 --	The following script copies data from the EPRTRxml to the EPRTRmaster Database		--
 --                                                                                      --
@@ -37,9 +38,7 @@ GO
 ------------------------------------------------------------------------------------------
 
 -- "add_aux_columns" needs to be called first in order to that the SP can compile
-
-
-exec [dbo].[add_aux_columns] @action = 'add'
+-- exec [dbo].[add_aux_columns] @action = 'add'
 
 IF EXISTS (SELECT * FROM EPRTRxml.sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[import_xml]') AND type in (N'P'))
 drop procedure [dbo].[import_xml]
@@ -57,10 +56,10 @@ begin
 	--declare @pCDRUploaded nvarchar(250)
 	--declare @pCDRReleased nvarchar(250)
 	--declare @pResubmitReason nvarchar(max)
-	--set @pCDRURL = 'http://cdr.eionet.europa.eu/it/eu/eprtrdat/envsksja/EPRTR_2007_IT_v2.xml'
+	--set @pCDRURL = '-----------'
 	--set @pCDRUploaded = '2009-07-01 12:59:00'
 	--set @pCDRReleased = '2009-07-01 12:59:25'
-	--set @pResubmitReason = 'second import'
+	--set @pResubmitReason = 'performance test only'
 
 	------------------------------------------------------------------------------------------
 	------------------------------ Add auxilary columns --------------------------------------														
@@ -68,7 +67,6 @@ begin
 
 	-- resets all auxilary columns
 	exec [dbo].[add_aux_columns] @action = 'add'
-
 
 	------------------------------------------------------------------------------------------
 	--------------- Unifying CountryIDs for Greece and United Kingdom ------------------------														
@@ -126,13 +124,19 @@ begin
 
 	--select * from EPRTRmaster.dbo.POLLUTANTRELEASEANDTRANSFERREPORT 
 
-
 	------------------------------------------------------------------------------------------
 	------------------------------------- fill ADDRESS ---------------------------------------
 	------------------------------------------------------------------------------------------
 
 	insert into EPRTRmaster.dbo.ADDRESS			
-	(StreetName,BuildingNumber,City,PostalCode,LOV_CountryID,xmlCompetentID)
+	(
+		StreetName,
+		BuildingNumber,
+		City,
+		PostalCode,
+		LOV_CountryID,
+		xmlCompetentID
+	)
 	select 
 		a.StreetName as StreetName,
 		a.BuildingNumber as BuildingNumber,
@@ -187,7 +191,6 @@ begin
 		EPRTRmaster.dbo.LOV_COUNTRY b
 		on a.CountryID = b.Code	
 
-
 	------------------------------------------------------------------------------------------
 	----------------------------- fill COMPETENTAUTHORITYPARTY -------------------------------
 	------------------------------------------------------------------------------------------
@@ -235,30 +238,61 @@ begin
 	where	
 		pxml.ReportingYear <> fxml.PrevReportingYear 
 
+
+	--update #HAS_PREVIOUS_ID
+	--set FacilityID = frep.FacilityID
+	--from 
+	--	EPRTRmaster.dbo.FACILITYREPORT frep
+	--inner join
+	--	EPRTRmaster.dbo.vAT_POLLUTANTRELEASEANDTRANSFERREPORT prtr
+	--on	frep.PollutantReleaseAndTransferReportID = prtr.PollutantReleaseAndTransferReportID
+	--inner join
+	--	EPRTRmaster.dbo.LOV_COUNTRY c
+	--on	c.LOV_CountryID = prtr.LOV_CountryID
+	--inner join
+	--	EPRTRxml.dbo.FacilityReport fxml
+	--on	fxml.PrevReportingYear = prtr.ReportingYear 
+	--and	fxml.PrevNationalID = frep.NationalID
+	--inner join
+	--	EPRTRxml.dbo.POLLUTANTRELEASEANDTRANSFERREPORT pxml
+	--on	fxml.PollutantReleaseAndTransferReportID = pxml.PollutantReleaseAndTransferReportID
+	--and c.Code = pxml.CountryID
+	--inner join
+	--	#HAS_PREVIOUS_ID hpi
+	--on hpi.FacilityReportID = fxml.FacilityReportID
+	--where 
+	--	pxml.ReportingYear <> fxml.PrevReportingYear 
+
 	update #HAS_PREVIOUS_ID
-	set FacilityID = frep.FacilityID
-	from 
-		EPRTRmaster.dbo.FACILITYREPORT frep
-	inner join
-		EPRTRmaster.dbo.vAT_POLLUTANTRELEASEANDTRANSFERREPORT prtr
-	on	frep.PollutantReleaseAndTransferReportID = prtr.PollutantReleaseAndTransferReportID
-	inner join
-		EPRTRmaster.dbo.LOV_COUNTRY c
-	on	c.LOV_CountryID = prtr.LOV_CountryID
+	set FacilityID = m.FacilityID
+	from (
+		select distinct
+			frep.FacilityID,
+			frep.NationalID, 
+			prtr.ReportingYear,
+			c.Code
+		from 
+			EPRTRmaster.dbo.FACILITYREPORT frep
+		inner join
+			EPRTRmaster.dbo.vAT_POLLUTANTRELEASEANDTRANSFERREPORT prtr
+		on	frep.PollutantReleaseAndTransferReportID = prtr.PollutantReleaseAndTransferReportID
+		inner join
+			EPRTRmaster.dbo.LOV_COUNTRY c
+		on	c.LOV_CountryID = prtr.LOV_CountryID
+	)m
 	inner join
 		EPRTRxml.dbo.FacilityReport fxml
-	on	fxml.PrevReportingYear = prtr.ReportingYear 
-	and	fxml.PrevNationalID = frep.NationalID
+	on	fxml.PrevNationalID = m.NationalID
 	inner join
 		EPRTRxml.dbo.POLLUTANTRELEASEANDTRANSFERREPORT pxml
 	on	fxml.PollutantReleaseAndTransferReportID = pxml.PollutantReleaseAndTransferReportID
-	and c.Code = pxml.CountryID
+	and m.Code = pxml.CountryID
 	inner join
 		#HAS_PREVIOUS_ID hpi
 	on hpi.FacilityReportID = fxml.FacilityReportID
 	where 
-		pxml.ReportingYear <> fxml.PrevReportingYear 
-
+		fxml.PrevReportingYear = m.ReportingYear
+	and pxml.ReportingYear <> fxml.PrevReportingYear 
 
 	-- Detecting facilities in the new report that reference 
 	-- the same previous facility and setting these to null
@@ -270,7 +304,6 @@ begin
 	from #HAS_PREVIOUS_ID a
 	group by facilityid
 	having count(1) > 1) 
-
 
 	-- Detecting facilities which have been reported before, 
 	-- either with same NationalID or a changed NationalID
@@ -321,7 +354,6 @@ begin
 		a.xmlFacilityReportID as xmlFacilityReportID
 	from EPRTRmaster.dbo.XMLFACILITY a
 		
-		
 	----------------------------------------------------------------------------------------
 	-------------------------------- fill PRODUCTIONVOLUME -----------------------------------
 	------------------------------------------------------------------------------------------
@@ -339,7 +371,6 @@ begin
 		on unit.Code = fr.QuantityUnitCode 		
 
 	--select * from EPRTRmaster.dbo.PRODUCTIONVOLUME
-
 
 	------------------------------------------------------------------------------------------
 	-------------------------------- fill FACILITYREPORT -------------------------------------
@@ -437,7 +468,6 @@ begin
 		on  pv.xmlFacilityReportID = fr.FacilityReportID
 	where ca.xmlCompetentAuthorityPartyID is not null
 
-
 	--select * from EPRTRmaster.dbo.FACILITYREPORT where PollutantReleaseAndTransferReportID = 72
 
 	------------------------------------------------------------------------------
@@ -479,7 +509,6 @@ begin
 	where frep.LOV_StatusID = @LOV_UNDEFINED and
 	frep.xmlFacilityReportID is not null
 
-
 	------------------------------------------------------------------------------
 	--	Geo-coding of river basin districts
 	------------------------------------------------------------------------------
@@ -508,15 +537,14 @@ begin
 	where frep.LOV_StatusID in (@LOV_UNDEFINED, @LOV_VALID)
 	and frep.xmlFacilityReportID is not null
 
-
 	--select GeographicalCoordinate.ToString(),* from EPRTRmaster.dbo.FACILITYREPORT f
 	--inner join EPRTRmaster.dbo.POLLUTANTRELEASEANDTRANSFERREPORT pt
 	--on f.PollutantReleaseAndTransferReportID = pt.PollutantReleaseAndTransferReportID
 	--and LOV_CountryID = 213 order by 3
 
-	------------------------------------------------------------------------------------------
-	---------------------------------------- fill FACILITYLOG -------------------------------------														
-	--------------------------------------------------------------------------------------------
+--	------------------------------------------------------------------------------------------
+--	---------------------------------------- fill FACILITYLOG -------------------------------------														
+--	--------------------------------------------------------------------------------------------
 
 	insert into EPRTRmaster.dbo.FACILITYLOG
 	(FacilityID, NationalID,ReportingYear,FacilityreportID)
@@ -532,7 +560,6 @@ begin
 	where a.xmlFacilityReportID is not null
 
 	--select * from EPRTRmaster.dbo.FACILITYLOG
-
 
 	--------------------------------------------------------------------------------------------
 	---------------------------------------- fill ACTIVITY -------------------------------------														
@@ -557,12 +584,11 @@ begin
 
 	--select * from EPRTRmaster.dbo.ACTIVITY
 
-
 	--------------------------------------------------------------------------------------------
 	----------------------------------- fill METHODLIST and METHODUSED ----------------------------------
 	--------------------------------------------------------------------------------------------
 
---Processing PollutantRelease
+	--Processing PollutantRelease
 	insert into EPRTRmaster.dbo.XMLMETHODLIST
 	(xmlPollutantReleaseID)
 	select
@@ -592,9 +618,7 @@ begin
 		EPRTRmaster.dbo.LOV_METHODTYPE c
 		on c.Code = a.MethodUsed
 
-
-
---Processing PollutantTransfer
+	--Processing PollutantTransfer
 	insert into EPRTRmaster.dbo.XMLMETHODLIST
 	(xmlPollutantTransferID)
 	select
@@ -624,7 +648,7 @@ begin
 		EPRTRmaster.dbo.LOV_METHODTYPE c
 		on c.Code = a.MethodUsed
 
---Processing WasteTransfer
+	--Processing WasteTransfer
 	insert into EPRTRmaster.dbo.XMLMETHODLIST
 	(xmlWasteTransferID)
 	select
@@ -660,6 +684,25 @@ begin
 	--(select MethodListID from EPRTRmaster.dbo.METHODLIST where xmlPollutantReleaseID is not null) 
 	--*/
 
+	declare @XMLIDs table(
+		MethodListID int,
+		xmlPollutantTransferID int,
+		xmlPollutantReleaseID int,
+		xmlWasteTransferID int
+	)
+		
+	insert into @XMLIDs
+	select 
+		MethodListID,
+		xmlPollutantTransferID,
+		xmlPollutantReleaseID,
+		xmlWasteTransferID
+	from 
+		EPRTRmaster.dbo.METHODLIST ml
+	where xmlPollutantTransferID > 0
+	or xmlPollutantReleaseID > 0
+	or xmlWasteTransferID > 0
+
 	--------------------------------------------------------------------------------------------
 	----------------------------------- fill POLLUTANTRELEASE ----------------------------------
 	--------------------------------------------------------------------------------------------
@@ -671,10 +714,20 @@ begin
     set AccidentalQuantityUnitCode = 'KGM' where AccidentalQuantityUnitCode is null
     
 	insert into EPRTRmaster.dbo.POLLUTANTRELEASE
-	(FacilityReportID,LOV_MediumID,LOV_PollutantID,
-	LOV_MethodBasisID,MethodListID,TotalQuantity,
-	LOV_TotalQuantityUnitID,AccidentalQuantity,LOV_AccidentalQuantityUnitID,
-	ConfidentialIndicator,LOV_ConfidentialityID,RemarkText)
+	(
+		FacilityReportID,
+		LOV_MediumID,
+		LOV_PollutantID,
+		LOV_MethodBasisID,
+		MethodListID,
+		TotalQuantity,
+		LOV_TotalQuantityUnitID,
+		AccidentalQuantity,
+		LOV_AccidentalQuantityUnitID,
+		ConfidentialIndicator,
+		LOV_ConfidentialityID,
+		RemarkText
+	)
 	select
 		frm.FacilityReportID as FacilityReportID,
 		m.LOV_MediumID as LOV_MediumID,
@@ -705,16 +758,16 @@ begin
 		EPRTRmaster.dbo.LOV_Confidentiality con
 		on  con.Code = pr.ConfidentialCode
 	inner join
-		EPRTRmaster.dbo.LOV_UNIT unit1
-		on unit1.Code = pr.TotalQuantityUnitCode
-	inner join
-		EPRTRmaster.dbo.LOV_UNIT unit2
-		on unit2.Code = pr.AccidentalQuantityUnitCode
-	inner join
 		EPRTRmaster.dbo.LOV_METHODBASIS mb
 		on	mb.Code = pr.MethodBasisCode
 	left join
-		EPRTRmaster.dbo.METHODLIST ml
+		EPRTRmaster.dbo.LOV_UNIT unit1
+		on unit1.Code = pr.TotalQuantityUnitCode
+	left join
+		EPRTRmaster.dbo.LOV_UNIT unit2
+		on unit2.Code = pr.AccidentalQuantityUnitCode
+	left join
+		@XMLIDs ml
 		on ml.xmlPollutantReleaseID = pr.PollutantReleaseID
 
 	/*
@@ -731,9 +784,17 @@ begin
 
 
 	insert into EPRTRmaster.dbo.POLLUTANTTRANSFER
-	(FacilityReportID,LOV_PollutantID,LOV_MethodBasisID,
-	MethodListID,Quantity,LOV_QuantityUnitID,
-	ConfidentialIndicator,LOV_ConfidentialityID,RemarkText)
+	(
+		FacilityReportID,
+		LOV_PollutantID,
+		LOV_MethodBasisID,
+		MethodListID,
+		Quantity,
+		LOV_QuantityUnitID,
+		ConfidentialIndicator,
+		LOV_ConfidentialityID,
+		RemarkText
+	)
 	select
 		frm.FacilityReportID as FacilityReportID,
 		p.LOV_PollutantID as LOV_PollutantID,
@@ -758,21 +819,21 @@ begin
 		EPRTRmaster.dbo.LOV_METHODBASIS mb
 		on	mb.Code = pt.MethodBasisCode
 	left join
-		EPRTRmaster.dbo.METHODLIST ml
-		on ml.xmlPollutantTransferID = pt.PollutantTransferID
-	inner join
 		EPRTRmaster.dbo.LOV_UNIT unit
 		on unit.Code = pt.QuantityUnitCode
 	left join
 		EPRTRmaster.dbo.LOV_Confidentiality con
 		on  con.Code = pt.ConfidentialCode
+	left join
+		@XMLIDs ml
+	on ml.xmlPollutantTransferID = pt.PollutantTransferID
+
+
 
 	/*
 	select * from EPRTRmaster.dbo.POLLUTANTTRANSFER where FacilityReportID in
 	(select FACILITYREPORTID from EPRTRmaster.dbo.FACILITYREPORT where xmlFacilityReportID is not null)
 	*/
-
-
 
 	--------------------------------------------------------------------------------------------
 	----------------------------------- fill WASTEHANDLERPARTY ---------------------------------
@@ -795,66 +856,34 @@ begin
 	where wt.WasteHandlerPartyName is not null   
 	    
 
-	------------------------------------------------------------------------------------------
-	--------------------------------- fill WASTETRANSFER ---------------------------------
-	------------------------------------------------------------------------------------------
+--	------------------------------------------------------------------------------------------
+--	--------------------------------- fill WASTETRANSFER ---------------------------------
+--	------------------------------------------------------------------------------------------
 
 	update EPRTRxml.dbo.WASTETRANSFER
 	set QuantityUnitCode = 'TNE' where QuantityUnitCode is null
-
---	delete from EPRTRmaster.dbo.WASTETRANSFER
---	where FacilityReportID in (
---		select frm.FacilityReportID as FacilityReportID
---	from EPRTRxml.dbo.WASTETRANSFER wt
---	inner join
---		EPRTRxml.dbo.FACILITYREPORT frx
---		on wt.FacilityReportID = frx.FacilityReportID
---	inner join 
---		EPRTRmaster.dbo.FACILITYREPORT frm
---		on	frm.xmlFacilityReportID = frx.FacilityReportID
---	inner join
---		EPRTRmaster.dbo.LOV_WASTETYPE wtype
---		on	wtype.Code = wt.WasteTypeCode
---	left join
---		EPRTRmaster.dbo.LOV_WASTETREATMENT wtreat
---		on	wtreat.Code = wt.WasteTreatmentCode
---	left join
---		EPRTRmaster.dbo.LOV_METHODBASIS mb
---		on	mb.Code = wt.MethodBasisCode
---	left join
---		EPRTRmaster.dbo.METHODLIST ml
---		on ml.xmlWasteTransferID = wt.WasteTransferID
---	inner join
---		EPRTRmaster.dbo.LOV_UNIT unit
---		on unit.Code = wt.QuantityUnitCode
---	left join
---		EPRTRmaster.dbo.WASTEHANDLERPARTY whp
---		on whp.xmlWasteTransferID = wt.WasteTransferID
---	left join
---		EPRTRmaster.dbo.LOV_Confidentiality con
---		on  con.Code = wt.ConfidentialCode
---)
-
---alter table EPRTRmaster.dbo.WASTETRANSFER ADD mbID int null
---go
---update EPRTRmaster.dbo.WASTETRANSFER set mbID = LOV_MethodBasisID
---go
---alter table EPRTRmaster.dbo.WASTETRANSFER drop column mbID
---go
 
 	declare @estimated int
 	set @estimated = (select LOV_MethodBasisID from EPRTRmaster.dbo.LOV_METHODBASIS where Code = 'E')
 
 	insert into EPRTRmaster.dbo.WASTETRANSFER
-	(FacilityReportID,LOV_WasteTypeID,LOV_WasteTreatmentID,
-	LOV_MethodBasisID,MethodListID,Quantity,
-	LOV_QuantityUnitID,WasteHandlerPartyID,ConfidentialIndicator,
-	LOV_ConfidentialityID,RemarkText)
+	(
+		FacilityReportID,
+		LOV_WasteTypeID,
+		LOV_WasteTreatmentID,
+		LOV_MethodBasisID,
+		MethodListID,
+		Quantity,
+		LOV_QuantityUnitID,
+		WasteHandlerPartyID,
+		ConfidentialIndicator,
+		LOV_ConfidentialityID,
+		RemarkText
+	)
 	select
 		frm.FacilityReportID as FacilityReportID,
 		wtype.LOV_WasteTypeID as LOV_WasteTypeID,
 		wtreat.LOV_WasteTreatmentID as LOV_WasteTreatmentID,
-		--isnull(mb.LOV_MethodBasisID,@estimated) as LOV_MethodBasisID,  --removed 11-08-2009
 		mb.LOV_MethodBasisID as LOV_MethodBasisID,
 		ml.MethodListID as MethodListID,
 		wt.Quantity as Quantity,
@@ -870,9 +899,6 @@ begin
 	inner join 
 		EPRTRmaster.dbo.FACILITYREPORT frm
 		on	frm.xmlFacilityReportID = frx.FacilityReportID
-	inner join
-		EPRTRmaster.dbo.LOV_WASTETYPE wtype
-		on	wtype.Code = wt.WasteTypeCode
 	left join
 		EPRTRmaster.dbo.LOV_WASTETREATMENT wtreat
 		on	wtreat.Code = wt.WasteTreatmentCode
@@ -880,17 +906,20 @@ begin
 		EPRTRmaster.dbo.LOV_METHODBASIS mb
 		on	mb.Code = wt.MethodBasisCode
 	left join
-		EPRTRmaster.dbo.METHODLIST ml
-		on ml.xmlWasteTransferID = wt.WasteTransferID
-	inner join
-		EPRTRmaster.dbo.LOV_UNIT unit
-		on unit.Code = wt.QuantityUnitCode
-	left join
 		EPRTRmaster.dbo.WASTEHANDLERPARTY whp
 		on whp.xmlWasteTransferID = wt.WasteTransferID
 	left join
 		EPRTRmaster.dbo.LOV_Confidentiality con
 		on  con.Code = wt.ConfidentialCode
+	inner join
+		EPRTRmaster.dbo.LOV_WASTETYPE wtype
+		on	wtype.Code = wt.WasteTypeCode
+	left join
+		EPRTRmaster.dbo.LOV_UNIT unit
+		on unit.Code = wt.QuantityUnitCode
+	left join 
+		@XMLIDs ml
+	on ml.xmlWasteTransferID = wt.WasteTransferID
 
 	-- If the same report with identical CDRReleased date gets uploadet twice, then 
 	-- the CDRReleased timestamp of the first uploade gets set back by one minute. 
@@ -931,7 +960,6 @@ begin
 	) m
 	on m.PollutantReleaseAndTransferReportID = p.PollutantReleaseAndTransferReportID
 
-
 	--Update POLLUTANTRELEASEANDTRANSFERREPORT table with CDRReleasedDate
 
 	update EPRTRmaster.dbo.POLLUTANTRELEASEANDTRANSFERREPORT 
@@ -970,3 +998,4 @@ begin
 	print 'Data successfully exported to EPRTRmaster'
 
 END
+GO
