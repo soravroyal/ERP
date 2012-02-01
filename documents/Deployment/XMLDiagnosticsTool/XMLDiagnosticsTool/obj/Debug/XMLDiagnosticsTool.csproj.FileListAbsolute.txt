@@ -1,0 +1,8 @@
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\bin\Debug\XMLDiagnosticsTool.exe
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\bin\Debug\XMLDiagnosticsTool.pdb
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\obj\Debug\ResolveAssemblyReference.cache
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\obj\Debug\XMLDiagnosticsTool.Form1.resources
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\obj\Debug\XMLDiagnosticsTool.Properties.Resources.resources
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\obj\Debug\XMLDiagnosticsTool.csproj.GenerateResource.Cache
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\obj\Debug\XMLDiagnosticsTool.exe
+C:\Work\SW-Work\XMLDiagnosticsTool\XMLDiagnosticsTool\obj\Debug\XMLDiagnosticsTool.pdb
