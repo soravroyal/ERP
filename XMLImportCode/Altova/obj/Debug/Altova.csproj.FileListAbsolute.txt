@@ -1,0 +1,5 @@
+C:\1_Projekter\6_E-PRTR\XML-import\output\Altova\bin\Debug\Altova.dll
+C:\1_Projekter\6_E-PRTR\XML-import\output\Altova\bin\Debug\Altova.pdb
+C:\1_Projekter\6_E-PRTR\XML-import\output\Altova\obj\Debug\ResolveAssemblyReference.cache
+C:\1_Projekter\6_E-PRTR\XML-import\output\Altova\obj\Debug\Altova.dll
+C:\1_Projekter\6_E-PRTR\XML-import\output\Altova\obj\Debug\Altova.pdb

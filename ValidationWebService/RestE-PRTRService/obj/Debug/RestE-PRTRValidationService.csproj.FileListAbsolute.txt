@@ -1,0 +1,14 @@
+D:\E-PRTRService\RestE-PRTRService\bin\RestE-PRTRService.dll
+D:\E-PRTRService\RestE-PRTRService\bin\RestE-PRTRService.pdb
+D:\E-PRTRService\RestE-PRTRService\bin\QueryLayer.dll
+D:\E-PRTRService\RestE-PRTRService\bin\QueryLayer.pdb
+D:\E-PRTRService\RestE-PRTRService\obj\Debug\ResolveAssemblyReference.cache
+D:\E-PRTRService\RestE-PRTRService\obj\Debug\RestE-PRTRService.dll
+D:\E-PRTRService\RestE-PRTRService\obj\Debug\RestE-PRTRService.pdb
+D:\ValidationWebService\RestE-PRTRService\bin\RestE-PRTRService.dll
+D:\ValidationWebService\RestE-PRTRService\bin\RestE-PRTRService.pdb
+D:\ValidationWebService\RestE-PRTRService\bin\QueryLayer.dll
+D:\ValidationWebService\RestE-PRTRService\bin\QueryLayer.pdb
+D:\ValidationWebService\RestE-PRTRService\obj\Debug\ResolveAssemblyReference.cache
+D:\ValidationWebService\RestE-PRTRService\obj\Debug\RestE-PRTRService.dll
+D:\ValidationWebService\RestE-PRTRService\obj\Debug\RestE-PRTRService.pdb

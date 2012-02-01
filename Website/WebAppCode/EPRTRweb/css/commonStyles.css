@@ -1,0 +1,187 @@
+﻿/* These styles are modified from the technical specification to look as much as possible as the demonstration site */
+.ExtendTable
+{
+    width:100%;
+}
+
+#expand_btn
+{
+   float:right;
+}
+.expandbutton
+{
+    margin-top:2px;
+    margin-right:2px;
+    margin-bottom:1px;
+}
+
+#expand_btn_mapsearch
+{
+   float:right;
+}
+.expandbutton_mapsearch
+{
+    margin-top:2px;
+    margin-right:0px;
+    margin-bottom:1px;
+}
+
+#paddingSet
+{
+    padding-left:10px;
+    padding-bottom:10px;    
+}
+#resultSizeDefine table tr td
+{
+	text-decoration:underline;
+}
+.padCol
+{
+	padding-left: 10px;
+	border-bottom: solid 0 transparent;
+}
+
+.StaticPageStyle a
+{
+    width:60%;
+    
+    white-space:pre-wrap;
+    
+}
+.StaticPageStyle
+{
+    padding-left:40px;
+    width:60%;
+    overflow:visible;
+    white-space:normal;   
+    text-align:justify; 
+}
+
+.noResult
+{
+}
+/*-----------------------------------------*/
+/*-- These are for any common listviews  --*/
+/*-----------------------------------------*/
+.generalListStyle_headerRow_Extended 
+{
+    width:100%;    
+}
+
+.TableExtend
+{
+    width:100%;    
+}
+
+.generalListStyle_headerRow th
+{
+	/*white-space: pre; /* preserve the header, looks better, if it obstructs something, write a special style for it. */
+	border-bottom: solid 1px black;
+	border-right: Solid 0px Transparent;
+	border-left: Solid 0px Transparent;
+	border-top: solid 1px black;
+	background-color:#EEEDE8;
+	vertical-align:top;
+}
+
+.generalListStyle_row td
+{
+	border-bottom: solid 1px #999999;
+	background-color:Transparent;
+	vertical-align:top;
+}
+
+.thirdGeneralListStyle_headerRow th
+{
+	/*white-space: pre; /* preserve the header, looks better, if it obstructs something, write a special style for it. */
+	border-bottom: solid 1px black;
+	border-right: Solid 0px Transparent;
+	border-left: Solid 0px Transparent;
+	border-top: solid 1px black;
+	background-color:#C2C4C4;
+	vertical-align:top;
+}
+
+.thirdGeneralListStyle_headerRow td
+{
+	border-bottom: solid 1px #999999;
+	background-color:Transparent;
+	vertical-align:top;
+}
+
+
+.Hide
+{
+	display:none;
+}
+/*--------------------------------------------------------------------------------------------------------------*/
+/*-- These are common styles. Changing these may effect multiple usercontrols, pages or components in generel --*/
+/*--------------------------------------------------------------------------------------------------------------*/
+
+
+/* used in haz waste recieving countries list to remove 'link' appearance of TOTAL and CONF rows */ 
+a[disabled]
+{
+	color:Black;
+}
+
+/*styles for indentation in treelists. 
+Must be of the form indentLevel# where # is the level number starting with 0.*/
+.indentLevel0
+{
+	color:Black;
+}
+
+.indentLevel1
+{
+	left:15px;
+	position:relative;
+}
+
+.indentLevel2
+{
+	left:30px;
+	position:relative;
+}
+
+/* Styling of rows for different levels in TreeLists*/
+/*Must be of the form TreeLevel# where # is the level number starting with 0.*/
+
+.TreeLevel0
+{
+	color:#272B36;
+}
+
+.TreeLevel0 a /*Color must be set to work in IE*/
+{
+	color:#272B36;
+}
+
+.TreeLevel1
+{
+	color:#74625b;
+}
+.TreeLevel1 a /*Color must be set to work in IE*/
+{
+	color:#74625b;
+}
+
+.TreeLevel2
+{
+	color:#4d6f56; /*#576264;*/
+}
+.TreeLevel2 a /*Color must be set to work in IE*/
+{
+	color:#4d6f56;
+}
+
+#specialButtonPlacement
+{
+    padding-right:5px;
+    padding-top:5px;
+}
+
+.spacer
+{
+	clear:left;
+}

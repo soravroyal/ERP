@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<actionScriptProperties analytics="false" mainApplicationPath="index.mxml" projectUUID="9bd85db3-557a-45f6-a712-eb63d220aade" version="6">
+  <compiler additionalCompilerArguments="-locale en_US fr_FR en_GB es_ES nl_NL it_IT de_DE ro_RO pl_PL da_DK -allow-source-path-overlap=true" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersionCheck="false" includeNetmonSwc="false" outputFolderPath="bin-debug" rootURL="http://localhost/EPRTRflexviewer" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+    <compilerSourcePath>
+      <compilerSourcePathEntry kind="1" linkType="1" path="src/com/esri/solutions/flexviewer/nls/{locale}"/>
+    </compilerSourcePath>
+    <libraryPath defaultLinkType="1">
+      <libraryPathEntry kind="4" path=""/>
+      <libraryPathEntry kind="1" linkType="1" path="libs"/>
+    </libraryPath>
+    <sourceAttachmentPath/>
+  </compiler>
+  <applications>
+    <application path="index.mxml"/>
+  </applications>
+  <modules>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/FilterLiveMapsWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/FilterLiveMapsWidget.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/PrintWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/PrintWidget.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/BookmarkWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/BookmarkWidget.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/layerLegendData.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/layerLegendData.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/OverviewMapWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/OverviewMapWidget.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/LegendData.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/LegendData.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/SearchWidgetAllLayers.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/SearchWidgetAllLayers.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/ThinFilterLiveMapsWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/ThinFilterLiveMapsWidget.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/ThinPrintWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/ThinPrintWidget.mxml"/>
+    <module application="src/index.mxml" destPath="com/esri/solutions/flexviewer/widgets/GoogleAnalyticsWidget.swf" optimize="true" sourcePath="src/com/esri/solutions/flexviewer/widgets/GoogleAnalyticsWidget.mxml"/>
+    <module application="src/index.mxml" destPath="eu/europa/eea/widgets/Gazetteer/GazetteerWidget.swf" optimize="true" sourcePath="src/eu/europa/eea/widgets/Gazetteer/GazetteerWidget.mxml"/>
+  </modules>
+  <buildCSSFiles>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="src/com/esri/solutions/sitestarter/themes/darkangel/style.css"/>
+    <buildCSSFileEntry destPath="bin-debug" sourcePath="src/com/esri/solutions/flexviewer/themes/lighterside/style.css"/>
+  </buildCSSFiles>
+</actionScriptProperties>
