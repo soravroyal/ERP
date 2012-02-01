@@ -1,0 +1,1033 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  ======================================================================  -->
+<!--  =====      Pollutant Release and Transfer Report Schema Module                                   =====  -->
+<!--  ======================================================================  -->
+<!-- 
+    Schema agency: The European Commision
+    Schema version: 2.0
+    Schema date:     2008-12-11
+    Revision:             $Revision: 6199 $
+    Revision date:      $Date: 2008-12-10 15:55:05 +0100 (Wed, 10 Dec 2008) $
+  -->
+<xsd:schema xmlns:rsm="urn:eu:com:env:prtr:data:standard:2" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:eu:com:env:prtr:data:standard:2" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+    <!--  =======================================================================  -->
+    <!--  =====  Element Declarations                                                                                         =====  -->
+    <!--  =======================================================================  -->
+    <!--  =====  Root Element                                                                                                    =====  -->
+    <!--  =======================================================================  -->
+    <xsd:element name="PollutantReleaseAndTransferReport" type="rsm:PollutantReleaseAndTransferReportType"/>
+    <!--  ======================================================================= -->
+    <!--  =====  Type Definitions                                                                                                =====  -->
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: PollutantReleaseAndTransferReportType                                       ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="PollutantReleaseAndTransferReportType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Reporting of the E-PRTR data
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ReportingYear">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The calendar year for which data on releases of pollutants and off-site transfers is gathered. Must be in the interval [2007; this year].
+                    </xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleType>
+                    <xsd:restriction base="rsm:ReportingYearType">
+                        <xsd:minInclusive value="2007"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="CountryID" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The Member State reporting.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CoordinateSystemID" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The coordinate system used in reporting of coordinates of the facilities.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RemarkText" type="rsm:LongTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Textual remark from MS. Will not be published on the web-site.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CompetentAuthorityParty" type="rsm:CompetentAuthorityPartyType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        One or more competent authorities in charge to respond to requests from the public.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FacilityReport" type="rsm:FacilityReportType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        A facility report for each facility reporting E-PRTR data
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: CompetentAuthorityPartyType                                                      ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="CompetentAuthorityPartyType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                    Describes details about the the competent authority in charge to respond to requests from the public 
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Name" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The name of the competent authority
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Address" type="rsm:CompetentAuthorityAddressType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The address of the competent authority.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TelephoneCommunication" type="rsm:TelecommunicationCommunicationType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The phone number
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FaxCommunication" type="rsm:TelecommunicationCommunicationType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The fax number
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="EmailCommunication" type="rsm:EmailCommunicationType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The e-mail address.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ContactPersonName" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Name of contact person. If reported, data will be published.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: FacilityReportType                                                                      ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="FacilityReportType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Holds the reporting for a given facility
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="NationalID" type="rsm:NationalIDType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The national Identification of the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PreviousNationalID" type="rsm:PreviousNationalIDType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The previously reported national identification of the facility
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ParentCompanyName" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Name of the parent company, i.e. the company that owns or controls the company operating the facility. Required unless confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FacilityName" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Name of the facility (operator or owner). Required unless confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Address" type="rsm:FacilityAddressType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The address of the facility. Required unless confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="GeographicalCoordinate" type="rsm:GeographicalCoordinateType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The coordinates of the location of the facility should be expressed in longitude and latitude coordinates giving a precision of the order of at least +/- 500 meters and referring to the geographical centre of the site of the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RiverBasinDistrictID" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the river basin district according to according to Article 3(1) of Directive 2000/60/EC ("Water Framework Directive").
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NACEMainEconomicActivityCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the NACE code according to the NACE 2 revision and thereby the main economic activity. 
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MainEconomicActivityName" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The main economic activity corresponding to the NACE code in plain text.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CompetentAuthorityPartyName" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the competent authority in MS for public requests. Must correspond to the name of one of the CompetentAuthorityParty elements.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProductionVolume" type="rsm:ProductionVolumeType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The total production volume related to the main activity of the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TotalIPPCInstallationQuantity" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The total number of IPPC installations covered by the facility
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="OperationHours" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The number of operating hours in reporting year.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TotalEmployeeQuantity" type="xsd:nonNegativeInteger" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The number of employees.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NutsRegionID" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the region that the facility belongs to as defined by NUTS.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="WebsiteCommunication" type="rsm:WebsiteCommunicationType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The website address of the facility. Will be published even if protection of voluntary data is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PublicInformation" type="rsm:LongTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Additional information to be published on web site as-is (e.g. e-mail, contact person etc.). Will be published even if protection of voluntary data is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialIndicator" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Indicates if confidentiality for mandatory data is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialCode" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2). Required if confidentiality is claimed for mandatory data.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ProtectVoluntaryData" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Indicates if voluntary data should be protected or not. In this case all voluntary data of the facility is considered protected with a few exceptions at stated in the descriptions of the individual elements. true marks protection, false marks no protection.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RemarkText" type="rsm:LongTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Textual remark, e.g. information in changes of the history of the facility, elaboration on the reason for confidentiality etc. Will not be published even if protection of voluntary data is not claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Activity" type="rsm:ActivityType" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The reported Annex I activities of the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PollutantRelease" type="rsm:PollutantReleaseType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The reported releases of pollutants to air/water/land reported for the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PollutantTransfer" type="rsm:PollutantTransferType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The reported off-site transfer of pollutants in waste-water for the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="WasteTransfer" type="rsm:WasteTransferType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The reported off-site transfer of waste for the facility.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: NationalIDType                                                                            ===== -->
+    <!-- ======================================================================= -->
+    <xsd:simpleType name="NationalIDType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The national Identification of a facility
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="rsm:TextType"/>
+    </xsd:simpleType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: PreviousNationalIDType                                                                ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="PreviousNationalIDType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The previously reported national identification of a facility.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="NationalID" type="rsm:NationalIDType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The previously reported national identification. If the national identification has not changed or the facility has not previously been reported, this must correspond to the current national identification.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ReportingYear" type="rsm:ReportingYearType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+The reporting year of which the previous national identification was reported. If the facility has not previously been reported, this must correspond to the current reporting year.                        
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: ActivityType                                                                                ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="ActivityType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                    A reported E-PRTR Annex I Activity for a facility.
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="RankingNumeric" type="xsd:positiveInteger">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Consecutive ranking of the activities starting with 1. The activity with ranking = 1 shall be the main PRTR activity.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AnnexIActivityCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the Annex I activity according to Regulation 166/2006 Annex I.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: PollutantReleaseType                                                                  ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="PollutantReleaseType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                    Describes releases of pollutant to air/water/land
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="MediumCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the environmental medium (air, water, land). 
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PollutantCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the pollutant. If confidentiality is claimed the pollutant group must be reported instead of the individual pollutant.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MethodBasisCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the basis of the main method used (M/C/E).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MethodUsed" type="rsm:MethodUsedType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the calculation and measurement method(s) used for determination of the total quantity. Required if method basis is M or C and confidentiality is not claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="TotalQuantity" type="rsm:PollutantMassQuantityType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Total quantity including accidental quantity [kg/year]. Values below threshold are considered voluntary and will not be published.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AccidentalQuantity" type="rsm:PollutantMassQuantityType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Accidental quantity [kg/year].
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialIndicator" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialCode" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2). For releases of pollutants the legal reasons for confidentiality are restricted to Article 4(2)(b), (c) and (e). Required if confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RemarkText" type="rsm:LongTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Textual remark, e.g. elaboration on the reason for confidentiality. Will not be published.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: PollutantTransferType                                                                  ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="PollutantTransferType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                    Describes off-site transfer of pollutant in waste-waster
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="PollutantCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the pollutant. If confidentiality is claimed the pollutant group must be reported instead of the individual pollutant.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MethodBasisCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the basis of the main method used (M/C/E).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MethodUsed" type="rsm:MethodUsedType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the calculation and measurement method(s) used for determination of the quantity. Required if method basis is M or C and confidentiality is not claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Quantity" type="rsm:PollutantMassQuantityType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Total quantity [kg/year]. Values below threshold are considered voluntary and will not be published.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialIndicator" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialCode" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2). Required if confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RemarkText" type="rsm:LongTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Textual remark, e.g. elaboration on the reason for confidentiality. Will not be published.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: WasteTransferType                                                                      ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="WasteTransferType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                    Describes off-site transfer of waste (except in waste-waster)
+                </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="WasteTypeCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the type of waste (non-hazardous, hazardous within country and hazardous outside country).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="WasteTreatmentCode" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the waste treatment operation (recovery or disposal). Required unless confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Quantity" type="rsm:WasteMassQuantityType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Quantity [t/year]. Required unless confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MethodBasisCode" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the basis of the main method used (M/C/E).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MethodUsed" type="rsm:MethodUsedType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the calculation and measurement method(s) used for determination of the quantity. Required if method basis is M or C and confidentiality is not claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialIndicator" type="xsd:boolean">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ConfidentialCode" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2). Required if confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="RemarkText" type="rsm:LongTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Textual remark, e.g. elaboration on the reason for confidentiality. Will not be published.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="WasteHandlerParty" type="rsm:WasteHandlerPartyType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the recoverer/disposer of the waste. Required for transfer of hazardous waste outside the country unless confidentiality is claimed.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: MethodUsedType                                                                        ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="MethodUsedType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Describes a measurement/calculation method used for determination of quantities of pollutants and waste
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="MethodTypeCode" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Identifies the type of method used (CEN/ISO, ETS, etc.). Notice that the method type “WEIGH” (i.e. weighing) only is allowed for waste transfer.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Designation" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        A short designation or description of the method used. Required for some method types as indicated in the list of legal method type codes.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: WasteHandlerPartyType                                                                      ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="WasteHandlerPartyType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Recoverer/Disposer of hazardous waste transfered outside the country
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Name" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        Name of recoverer/disposer. Required unless confidentiality is claimed for the WasteTransfer element 
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Address" type="rsm:AddressType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The address of the recoverer/disposer. Required unless confidentiality is claimed for the WasteTransfer 
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="SiteAddress" type="rsm:AddressType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The address of the actual recoverer/disposer site. Required unless confidentiality is claimed for the WasteTransfer element.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: CompetentAuthorityAddressType                                                  ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="CompetentAuthorityAddressType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The addres for a competent authority. The country is assumed to correspond to the country reporting
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:restriction base="rsm:AddressType">
+                <xsd:sequence>
+                    <xsd:element name="StreetName" type="rsm:TextType">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The street name.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BuildingNumber" type="rsm:TextType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The building number. If reported, data will be published..
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="CityName" type="rsm:TextType">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The Town/village.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PostcodeCode" type="rsm:ShortTextType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The postal code. If reported, data will be published.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: FacilityAddressType                                                                    ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="FacilityAddressType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The format for addresses for facilities. The country is assumed to correspond to the country reporting
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent>
+            <xsd:restriction base="rsm:AddressType">
+                <xsd:sequence>
+                    <xsd:element name="StreetName" type="rsm:TextType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The street name of the facility. Required unless confidentiality is claimed.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="BuildingNumber" type="rsm:TextType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The building number of the facility.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="CityName" type="rsm:TextType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The Town/village of the facility. Required unless confidentiality is claimed.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="PostcodeCode" type="rsm:ShortTextType" minOccurs="0">
+                        <xsd:annotation>
+                            <xsd:documentation xml:lang="en">
+                                The Postal code of the facility. Required unless confidentiality is claimed.
+                            </xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:restriction>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <!-- ======================================================================= -->
+    <!-- ===== Type Definition: AddressType                                                                        ===== -->
+    <!-- ======================================================================= -->
+    <xsd:complexType name="AddressType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The base format for addresses in PRTR.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="StreetName" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The name, expressed as text, of a street in the address.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BuildingNumber" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The building number, expressed as text, in the address.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CityName" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The name, expressed as text, of the city, town or village in the address.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PostcodeCode" type="rsm:ShortTextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The postcode, expressed as text, if the address.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="CountryID" type="rsm:TextType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The unique identifier of a country in the structured address (Reference ISO 3166 and UN/ECE Rec 3).
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: TelecommunicationCommunicationType                                ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="TelecommunicationCommunicationType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Information necessary to establish an electronic telecommunication connection for the purpose of a telephone or facsimile exchange.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="CompleteNumberText" type="rsm:ShortTextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The text string of characters that make up the complete number for this telecommunication.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: EmailCommunicationType                                                    ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="EmailCommunicationType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                An address for the delivery of electronic mail.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="EmailURIID" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The Uniform Resource Identifier (URI) for this email communication. Must contain an @
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: WebsiteCommunicationType                                                 ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="WebsiteCommunicationType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                An address for the exchange of information from and to a website over the Internet.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="WebsiteURIID" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The Uniform Resource Identifier (URI) of this website communication. Must start with “http://”.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: GeographicalCoordinateType                                                ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="GeographicalCoordinateType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The latitude and longitude of a place, by which its relative situation on the globe is known.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="LongitudeMeasure">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:float">
+                        <xsd:minInclusive value="-180"/>
+                        <xsd:maxInclusive value="180"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+            <xsd:element name="LatitudeMeasure">
+                <xsd:simpleType>
+                    <xsd:restriction base="xsd:float">
+                        <xsd:minInclusive value="-90"/>
+                        <xsd:maxInclusive value="90"/>
+                    </xsd:restriction>
+                </xsd:simpleType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: ProductionVolumeType                                                        ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="ProductionVolumeType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                The production volume.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="ProductName" type="rsm:TextType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The product/product group.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Quantity" type="rsm:ProductionVolumeQuantityType">
+                <xsd:annotation>
+                    <xsd:documentation xml:lang="en">
+                        The total volume. The unit must be given in attribute unitCode.
+                    </xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: ProductionVolumeQuantityType                                           ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="ProductionVolumeQuantityType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Production volume quantity. Units must be given in unitCode attribute.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="rsm:QuantityType">
+                <xsd:attribute name="unitCode" type="rsm:ShortTextType" use="required">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                            The UN/ECE Recommendation 20 code identifying the unit for this quantity, such as “KGM” for kilograms.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: PollutantMassQuantityType                                                  ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="PollutantMassQuantityType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Pollutant mass quantity. Must be reported in kilograms with three significant digits.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="rsm:QuantityType">
+                <xsd:attribute name="unitCode" type="rsm:ShortTextType" fixed="KGM">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                            The quantity of pollutants must be reported in kilograms.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: WasteMassQuantityType                                                     ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="WasteMassQuantityType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                Waste mass quantity. Must be reported in tonnes with three significant digits.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:restriction base="rsm:QuantityType">
+                <xsd:attribute name="unitCode" type="rsm:ShortTextType" fixed="TNE">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                            The quantity of waste must be reported in tonnes
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:restriction>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: QuantityType                                                                      ===== -->
+    <!-- =================================================================== -->
+    <xsd:complexType name="QuantityType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+                A data type for quantities
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:simpleContent>
+            <xsd:extension base="rsm:QuantityContentType">
+                <xsd:attribute name="unitCode" type="rsm:ShortTextType" use="optional">
+                    <xsd:annotation>
+                        <xsd:documentation xml:lang="en">
+                            The UN/ECE Recommendation 20 code identifying the unit for this quantity, such as “KGM” for kilograms.
+                        </xsd:documentation>
+                    </xsd:annotation>
+                </xsd:attribute>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    <!-- =======================================================================  -->
+    <!-- ===== Type Definition: TextType                                                                                    ===== -->
+    <!-- ======================================================================= -->
+    <xsd:simpleType name="TextType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="255"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- =======================================================================  -->
+    <!-- ===== Type Definition: ShortTextType                                                                             ===== -->
+    <!-- ======================================================================= -->
+    <xsd:simpleType name="ShortTextType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="50"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- =======================================================================  -->
+    <!-- ===== Type Definition: LongTextType                                                                             ===== -->
+    <!-- ======================================================================= -->
+    <xsd:simpleType name="LongTextType">
+        <xsd:restriction base="xsd:string">
+            <xsd:minLength value="1"/>
+            <xsd:maxLength value="1000000"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: QuantityContentType                                                           ===== -->
+    <!-- =================================================================== -->
+    <xsd:simpleType name="QuantityContentType">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:minInclusive value="0"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <!-- =================================================================== -->
+    <!-- ===== Type Definition: ReportingYearType                                                              ===== -->
+    <!-- =================================================================== -->
+    <xsd:simpleType name="ReportingYearType">
+        <xsd:annotation>
+            <xsd:documentation xml:lang="en">
+        The reporting year must be reported with 4 digits. The first reporting year was 2001 (EPER)
+    </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:integer">
+            <xsd:totalDigits value="4"/>
+            <xsd:minInclusive value="2001"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

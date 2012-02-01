@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<configuration>
+	<labels>
+		<visibilitylabel>Layer Visibility</visibilitylabel>
+		<transparencylabel>Layer Transparency</transparencylabel>
+		<filterlabel>Layer Filter</filterlabel>
+		<!--layerlabels>E-PRTR Facilities test:Faciliteter;filtered:USA Test Filter lag</layerlabels-->
+	</labels>
+	<filtergroups>
+		<group label="Year">
+			<filter type="combobox" datafield="ReportingYear" data="2007,2008,2009" datajsfunction="getReportYear" condition="AND" selected="2009"/>
+		</group>
+		<!--group label="Release">
+			<filter id ="air" type="checkbox" label="Air" data="air&gt;0" condition="OR" selected="true"/>
+			<filter  id ="soil" type="checkbox" label="Soil" data="soil&gt;0" condition="OR" selected="true"/>
+			<filter  id ="water" type="checkbox" label="Water" data="water&gt;0" condition="OR" selected="true"/>
+		</group>
+		<group label="Transfer">
+			<filter type="checkbox" label="Waste water" data="wastewater&gt;0" condition="OR" selected="true"/>
+			<filter type="checkbox" label="Hasardous waste" data="Hasardouswaste&gt;0" condition="OR" selected="true"/>
+			<filter type="checkbox" label="Non-hazardous waste" data="NonHazardousWaste&gt;0" condition="OR" selected="true"/>
+		</group-->
+	</filtergroups>
+	<excludemaplayersfromfilter>water,air</excludemaplayersfromfilter>
+	<showlayers>false</showlayers>
+	<excludealllayers>false</excludealllayers>
+	<zoomtofilter>true</zoomtofilter>
+</configuration>
