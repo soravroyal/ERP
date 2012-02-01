@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="EPRTRmaster" Class="DataClassesFacilityDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=OIZ;Initial Catalog=EPRTRmaster;User ID=eper" SettingsObjectName="QueryLayer.Properties.Settings" SettingsPropertyName="EPRTRmasterConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.VALIDATION_FACILITY" Member="VALIDATION_FACILITY">
+    <Type Name="VALIDATION_FACILITY">
+      <Column Name="NationalID" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ReportingYear" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="LOV_CountryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FacilityID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
