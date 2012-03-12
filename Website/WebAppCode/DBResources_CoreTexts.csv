@@ -4,13 +4,5 @@
 -- Delete|ResourceType|ResourceKey
 
 --New RBDs for Norway
-InsertUpdate|LOV_RIVERBASINDISTRICT|NOBAR|en-GB|The Barents Sea
-InsertUpdate|LOV_RIVERBASINDISTRICT|NONOS|en-GB|The Norwegian Sea
-InsertUpdate|LOV_RIVERBASINDISTRICT|NONS|en-GB|The North Sea
-
---New RBDs for Greece
-InsertUpdate|LOV_RIVERBASINDISTRICT|GR15|en-GB|North Aegean Sea
-
---Missing NACE codes
-InsertUpdate|LOV_NACEACTIVITY|46.63|en-GB|46.63 Wholesale of mining, construction and civil engineering machinery
-InsertUpdate|LOV_NACEACTIVITY|46.64|en-GB|46.64 Wholesale of machinery for the textile industry and of sewing and knitting machines
+InsertUpdate|LOV_RIVERBASINDISTRICT|NO5105|en-GB|Hordaland
+InsertUpdate|LOV_RIVERBASINDISTRICT|NO5106|en-GB|Sogn og Fjordane
