@@ -1,10 +1,10 @@
 /*
-Upgrading MASTER database from ver 2.3
+Upgrading MASTER database from ver 3.0
 */
 
 --set new version number
-:Setvar major 2
-:Setvar minor 4
+:Setvar major 3
+:Setvar minor 1
 
 PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 
