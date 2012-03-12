@@ -22,4 +22,8 @@ rem update from ver 2.2
 SET basedir=2.2
 sqlcmd -i %basedir%\00_upgrade.sql
 
+rem update from ver 2.3
+SET basedir=2.3
+sqlcmd -i %basedir%\00_upgrade.sql
+
 PAUSE
