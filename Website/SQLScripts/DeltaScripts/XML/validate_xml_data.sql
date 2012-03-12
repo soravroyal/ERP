@@ -36,6 +36,19 @@ begin
 
 	exec EPRTRxml.dbo.SP_FindPreviousReferences
 
+	insert into #HAS_PREVIOUS_ID
+	select 
+		a.FacilityReportID,0,1,null,null
+	from EPRTRxml.dbo.FacilityReport a
+	inner join
+		EPRTRxml.dbo.PollutantReleaseAndTransferReport b
+	on	a.PollutantReleaseAndTransferReportID = b.PollutantReleaseAndTransferReportID
+	and b.reportingyear = a.prevreportingyear	
+	where FacilityReportID not in (
+		select  FacilityReportID 
+		from #HAS_PREVIOUS_ID
+	)
+
 	if (select count(1) from #HAS_PREVIOUS_ID where Err_NoPrevNatIdFound = 1) = 0 
 	print('All previous nationalIDs can be found in E-PRTR database')
 	else
