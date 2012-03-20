@@ -6,3 +6,6 @@
 --New RBDs for Norway
 InsertUpdate|LOV_RIVERBASINDISTRICT|NO5105|en-GB|Hordaland
 InsertUpdate|LOV_RIVERBASINDISTRICT|NO5106|en-GB|Sogn og Fjordane
+
+--New RBDs for SI
+InsertUpdate|LOV_RIVERBASINDISTRICT|SI_RBD_2|en-GB|North Adriatic

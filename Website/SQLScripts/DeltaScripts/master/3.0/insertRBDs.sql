@@ -31,3 +31,16 @@ select
 	max(LOV_CountryID) 
 from LOV_COUNTRY where Code = 'NO'	
 
+if (
+	select COUNT(*) 
+	from LOV_RIVERBASINDISTRICT
+	where Code = 'SI_RBD_2'
+	) = 0
+insert into LOV_RIVERBASINDISTRICT
+select
+	'SI_RBD_2',
+	'North Adriatic',
+	2007,
+	null,
+	max(LOV_CountryID) 
+from LOV_COUNTRY where Code = 'SI'	
