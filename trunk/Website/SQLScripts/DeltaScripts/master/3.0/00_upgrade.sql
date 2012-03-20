@@ -13,7 +13,7 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 
 -- Include deltascripts here
 
-:r $(basedir)\insertRBDinNorway.sql
+:r $(basedir)\insertRBDs.sql
 go
 
 
