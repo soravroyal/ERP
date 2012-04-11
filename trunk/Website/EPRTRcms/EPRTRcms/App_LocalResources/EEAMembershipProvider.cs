@@ -157,7 +157,7 @@ namespace TestLogin
             EEAServices myService = new EEAServices();
             myService.Url = "http://dataconnector.eea.europa.eu/SoapServices/Services.asmx";
 
-            string role = "/l=Europe/o=Eionet/ou=Roles/cn=eprtr/cn=eprtr-eprtrcms";
+            string role = "/l=Europe/o=Eionet/ou=Roles/cn=eprtr/cn=extranet-eprtr-eprtrcms";
             
             object mylogin = new object();
             mylogin = myService.LDAPAuthenticationCheck(user, password, path, role);
