@@ -1,0 +1,7 @@
+# The config file must be placed in the same directory as the XML files to be imported and named 00_config.txt
+# year, country code, country name, cdrURL, cdrUploaded, cdrReleased, resubmit reason
+#
+# Rows starting with # will be neglegted in the import
+#
+#2010,BG,Bulgaria,http://cdr.eionet.europa.eu/bg/eu/eprtrdat/envt36pwa,2012-04-06 08:32:07, 2012-04-06 10:36:22, ""
+2010,LV,Latvia,http://cdr.eionet.europa.eu/lv/eu/eprtrdat/envt3sdpw,2012-04-03 14:06:27, 2012-04-03 16:07:46, ""
