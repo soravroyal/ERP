@@ -13,14 +13,14 @@ SET doValidate=false
 
 SET sqlscript_dir=%basedir%\SQLScripts
 SET mapforce_dir=%basedir%\MAPFORCE
-SET config=%data_dir%\00_config.txt
+SET config=%data_dir%\00_config.csv
 
 rem start importing all files as defined in config file
 if not exist %data_dir%\logs mkdir %data_dir%\logs
 
 SETLOCAL EnableDelayedExpansion
 
-for /f "eol=# tokens=1,2,3,4,5,6,7 delims=," %%a in (%config%) do (
+for /f "eol=# tokens=1,2,3,4,5,6,7 delims=;" %%a in (%config%) do (
 
 	SET title=%%c %%a
 	SET filename=%%b_EPRTR-%%a.xml
