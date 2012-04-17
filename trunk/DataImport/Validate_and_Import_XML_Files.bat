@@ -9,7 +9,7 @@ SET basedir=D:\EPRTR\DataImport
 SET data_dir=D:\EPRTR\XML_DOWNLOAD\submission_2012_04_15
 
 rem set singleMode true/false to indicate if one file should be imported at the time
-SET singleMode=true
+SET singleMode=false
 rem set doValidate true/false to indicate if validations are to be performed or not 
 SET doValidate=true
 
