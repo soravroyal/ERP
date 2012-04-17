@@ -30,7 +30,6 @@ rem echo cdrDescription %cdrDescription%
 SET sqlscript_dir=%basedir%\SQLScripts
 SET mapforce_dir=%basedir%\MAPFORCE
 
-
 rem Recreating EPRTRxml database
 call %sqlscript_dir%\recreate_EPRTRxml.bat %sqlscript_dir%
 
