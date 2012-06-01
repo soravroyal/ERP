@@ -120,6 +120,16 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
                                        LOVResources.NutsRegionName(fac.NUTSRegionLevel2Code)));
             }
         }
+        else
+        {
+            // ALways add geo-coded value if MS reported not existing
+            if (!string.IsNullOrEmpty(fac.NUTSRegionLevel2Code))
+            {
+                elements.Add(new FacilityDetailElement(
+                                       Resources.GetGlobal("Facility", "NUTS"),
+                                       LOVResources.NutsRegionName(fac.NUTSRegionLevel2Code)));
+            }
+        }
 
         //Add both reported and geo-coded value - if they differ.
         if (fac.RiverBasinDistrictSourceCode != fac.RiverBasinDistrictCode)

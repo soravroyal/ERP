@@ -93,13 +93,21 @@
     -khtml-border-radius: 5px;
     
 }
-
+.newsImage a, a:hover
+{
+    text-decoration:none;
+}
+/*
 .newsImage a, a:focus
 {
-    color:White;
     cursor:pointer;
+    color:#0e4baf;
 }
-
+.newsImage a, a:visited
+{
+    cursor:pointer;
+    color:#000099;
+}*/
 .news_box 
 {
 	background-color: #FFFFCA; 

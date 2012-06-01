@@ -6,7 +6,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- 
+ <title></title>
+    <link rel="alternate" type="application/rss+xml" href="http://localhost:3633/EPRTRweb/news.rss" title="News rss feed" />
     <link rel="SHORTCUT ICON" href="images/favicon.ico" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/typography.css" rel="stylesheet" type="text/css" />
@@ -99,11 +100,12 @@
             </tr>
         </table>
     </div>
-    <table border="0" align="center" cellpadding="0" cellspacing="0" class="page_container">
-       
+   
+
+    <table border="0" align="center" cellpadding="0" cellspacing="0" class="page_container">  
         <tr>
             <td align="left">
-                <form id="masterform" runat="server">
+              <form id="masterform" runat="server">
                 <div>
                     <%-- Declare script manager for ajax --%>
                     <asp:ScriptManager ID="ScriptManagerMaster" AllowCustomErrorsRedirect="true" runat="server"
@@ -187,8 +189,9 @@
                     </asp:ContentPlaceHolder>
                 </div>
                 </form>
-            </td>
+           </td>
         </tr>
     </table>
+   
 </body>
 </html>

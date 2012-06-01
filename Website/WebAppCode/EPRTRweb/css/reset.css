@@ -22,7 +22,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 body { 
-  line-height: 1.5; 
+  line-height: 1.5;
 }
 
 /* Tables still need 'cellspacing="0"' in the markup. */
