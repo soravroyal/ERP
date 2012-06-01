@@ -68,7 +68,7 @@
     </siteMapNode>
 
     <!-- meetings, community, news, feedback -->
-    <siteMapNode url="~/pgEventsAndMeetings.aspx" title="$resources:Web.sitemap,EventsAndMeetings" description="" roles="all"/>
+    <!--<siteMapNode url="~/pgEventsAndMeetings.aspx" title="$resources:Web.sitemap,EventsAndMeetings" description="" roles="all"/>-->
     <!--<siteMapNode url="~/pgPeopleCommunity.aspx" title="$resources:Web.sitemap,PeopleCommunity" description="" roles="all"/>-->
     <!--<siteMapNode url="~/pgNews.aspx" title="$resources:Web.sitemap,NewsArchive" description="" roles="all"/>-->
     <siteMapNode url="~/pgFeedback.aspx" title="$resources:Web.sitemap,Feedback" description="" roles="all"/>

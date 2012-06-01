@@ -14,6 +14,7 @@
     display: inline-block;
 }
 
+
 .langDropPanelClass
 {
 	border : solid 1px black;
@@ -50,6 +51,7 @@
 	border-left-width: 1px;
 	border-left-style: solid;
 	border-left-color: #CCCCCC;
+	margin:0 auto;
 }
 
 /* Top bar
@@ -231,6 +233,7 @@
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	color: #000000;
+	font-size: 10pt;
 }
 /*.info_area a
 {

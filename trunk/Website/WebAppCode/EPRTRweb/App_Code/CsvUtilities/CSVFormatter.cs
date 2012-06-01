@@ -1208,14 +1208,22 @@ namespace EPRTR.CsvUtilities
 
 			if (r.RegionCode != null)
 			{
-				result += AddSimple(r.RegionCode);
-
-				if (isRbd)
-				{
+                if (isRbd)
+                {
+				    result += AddSimple(r.RegionCode);
 					result += AddSimple(LOVResources.RiverBasinDistrictName(r.RegionCode));
 				}
 				else
 				{
+                    // IF UNKNOWN CODE add "-"
+                    if (r.RegionCode.ToLower().Equals("unknown"))
+                    {
+                        result += AddSimple("-");
+                    }
+                    else
+                    {
+                        result += AddSimple(r.RegionCode);
+                    }
 					result += AddSimple(LOVResources.NutsRegionName(r.RegionCode));
 				}
 

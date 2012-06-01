@@ -16,7 +16,8 @@ public partial class pgNews : BasePage
             newsArchivePresenter.DataSource = News.GetNonTopNews(cultureCode);
             newsArchivePresenter.DataBind();
 
-            this.PageContent.Text = CMSTextCache.CMSText("Static", "NewsPageContent");
+            // Dummy text not needed
+            //this.PageContent.Text = CMSTextCache.CMSText("Static", "NewsPageContent");
         }
     }
 

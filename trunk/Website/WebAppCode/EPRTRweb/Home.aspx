@@ -20,6 +20,9 @@
                   <div id="news_icon" class="newsImage"  runat="server">
                     <asp:HyperLink runat="server" Text="<%$ Resources:Static, NewsIconText %>"></asp:HyperLink>
                   </div>
+       
+                <asp:HyperLink ID="rssFeedLink" runat="server" href="news.rss"><asp:image runat="server" CssClass="RssFeedImage" ToolTip="Rss news feed" AlternateText="Rss feed" ImageUrl="~/images/Feed-icon.png" /></asp:HyperLink>
+       
                 <br />
                 <table width="100%">
                     <asp:Repeater ID="repeaterNews" runat="server" OnItemCommand="lnkNewsItem_Click">
