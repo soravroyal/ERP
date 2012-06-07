@@ -7,9 +7,9 @@ ERASE "C:\Inetpub\wwwroot\EPRTRpublic\EPRTRweb" /q /s
 ERASE "C:\Inetpub\wwwroot\EPRTRcms" /q /s
 echo Copy EPRTRweb folder
 echo on
-XCOPY "\\sdkcga6302\c$\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\Inetpub\wwwroot\EPRTRreview\EPRTRweb" /S
-XCOPY "\\sdkcga6302\c$\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\Inetpub\wwwroot\EPRTRpublic\EPRTRweb" /S
-XCOPY "\\sdkcga6302\c$\E-PRTR_CMS_DEPLOY\EPRTRcms" "C:\Inetpub\wwwroot\EPRTRcms" /S
+XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\Inetpub\wwwroot\EPRTRreview\EPRTRweb" /S
+XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\Inetpub\wwwroot\EPRTRpublic\EPRTRweb" /S
+XCOPY "\\sdkcga6302\E-PRTR_CMS_DEPLOY\EPRTRcms" "C:\Inetpub\wwwroot\EPRTRcms" /S
 echo off
 echo CONNECTIONSTRINGS ect. IN WEB.CONFIG FIL is updated 
 call replace_webconfig_eprtr.bat
