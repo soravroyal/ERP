@@ -1,0 +1,1 @@
+sqlcmd -Q "EXEC EPRTRcms.dbo.import_coretexts_from_textfile @ppath = N'C:\E-PRTR', @pfile = N'DBResources_CoreTexts.csv'" 

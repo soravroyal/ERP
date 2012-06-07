@@ -1,0 +1,11 @@
+﻿---Action(ResourceType,ResourceKey,CultureCode,ResourceValue)   Action can either be InsertUpdate or Delete
+---If you need to comment out a line begin the line with at least two dashes "--"
+---InsertUpdate|ResourceType|ResourceKey|CultureCode|ResourceValue
+-- Delete|ResourceType|ResourceKey
+
+--New RBDs for Norway
+InsertUpdate|LOV_RIVERBASINDISTRICT|NO5105|en-GB|Hordaland
+InsertUpdate|LOV_RIVERBASINDISTRICT|NO5106|en-GB|Sogn og Fjordane
+
+--New RBDs for SI
+InsertUpdate|LOV_RIVERBASINDISTRICT|SI_RBD_2|en-GB|North Adriatic
