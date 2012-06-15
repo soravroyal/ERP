@@ -8,7 +8,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div style="width: 649px">
+    <div style="width: 649px;margin:0 auto;">
         <br />
         <div style="font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 0.8em;">
             <asp:Literal ID="LoginHeaderText" runat="server" Text="<%$ Resources:Common, LoginHeaderText%>" />

@@ -71,27 +71,34 @@
 {
 	text-decoration: none;
 }
+
+.newsLink
+{
+  min-width:100%;
+  background-color:#AC8367;  
+    display:inline-block;
+}
 .newsImage
 {
 	top:22px;
-    
     padding-top: 1px;
 	padding-right: 3px;
 	padding-bottom: 1px;
 	padding-left: 3px;
-	background-color:#AC8367;
-	text-align:center;
+  	background-color:#AC8367;   
+
+	text-align:left;
 	vertical-align:middle;
-	display: inline-block;
 	font-size: 1.2em;	
 	color:White;
 	font-weight:bold;
-	
+    min-width:100%;
+
 	border-radius: 5px;
 	-moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     -khtml-border-radius: 5px;
-    
+
 }
 .newsImage a, a:hover
 {

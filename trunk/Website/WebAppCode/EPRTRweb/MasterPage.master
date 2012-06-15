@@ -161,7 +161,7 @@
                                         ExpandImageToolTip="<%$ Resources:Common,ToolTipExpand %>"
                                         CollapseImageToolTip="<%$ Resources:Common,ToolTipCollapse %>">
                                         <LevelStyles>
-                                            <asp:TreeNodeStyle CssClass="menu_item" />
+                                            <asp:TreeNodeStyle  CssClass="menu_item" />
                                             <asp:TreeNodeStyle CssClass="menu_sub_item" />
                                         </LevelStyles>
                                         <SelectedNodeStyle CssClass="menu_selected" />
