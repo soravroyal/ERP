@@ -95,7 +95,8 @@ namespace Feed.Rss
                             wXML.WriteElementString("title",item.TitleText);
                             wXML.WriteElementString("link", siteurl+"pgnews.aspx?newsID=" + item.NewsId);
                             wXML.WriteElementString("description", item.ContentText);
-                            wXML.WriteElementString("pubDate", item.NewsDate.Day +" "+ mfi.GetMonthName(item.NewsDate.Month) + " " + item.NewsDate.Year);
+                            wXML.WriteElementString("pubDate", item.NewsDate.ToString("o"));//  item.NewsDate.Year +"/"+item.NewsDate.Month + "/" + item.NewsDate.Day+" "+item.NewsDate.Hour+":"+item.NewsDate.Minute+":"+item.NewsDate.Second);
+                            //wXML.WriteElementString("pubDate", item.NewsDate.Day +" "+ mfi.GetMonthName(item.NewsDate.Month) + " " + item.NewsDate.Year);
                         wXML.WriteEndElement();
                     }
                     wXML.WriteEndElement();
