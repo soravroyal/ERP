@@ -10,6 +10,7 @@ public partial class Home : BasePage
     {
         if (!IsPostBack)
         {
+
             this.litTextBody.Text = CMSTextCache.CMSText("Static", "HomeWelcomeText");
             int maxNumItems = Int32.Parse(ConfigurationManager.AppSettings["MaxNumberOfNewsItemsOnHomePage"]);
             string cultureCode = CultureResolver.Resolve(Request);

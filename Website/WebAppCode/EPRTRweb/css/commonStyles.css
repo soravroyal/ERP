@@ -186,12 +186,7 @@ Must be of the form indentLevel# where # is the level number starting with 0.*/
 	clear:left;
 }
 
-.RssFeedImage
-{
-float:right;
-    /*float:right;
-    margin-right:160px;*/
-}
+
 
 /* unvisited link */
 a:link 
