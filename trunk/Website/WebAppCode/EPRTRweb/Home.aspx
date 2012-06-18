@@ -17,17 +17,13 @@
             </div>
 
             <%--News panel--%>
-            <div class="news_area" runat="server">
-                  <div id="news_icon" class="newsImage"  runat="server">
-          
-                     <asp:HyperLink runat="server" Text="<%$ Resources:Static, NewsIconText %>"></asp:HyperLink>
-                    <asp:HyperLink ID="rssFeedLink" runat="server" href="news.rss"><asp:image ID="Image1" runat="server" CssClass="RssFeedImage" ToolTip="Rss news feed" AlternateText="Rss feed" ImageUrl="~/images/Feed-icon.png" /></asp:HyperLink>
-                 
-                  </div>
-       
-                
-       
-                <br />
+            <div class="news_area" runat="server">       
+                  <div id="news_icon" runat="server" class="newsImage">
+                    <asp:Label class="newsheaderlbl" runat="server" Text="<%$ Resources:Static, NewsIconText %>" />
+                    <asp:HyperLink CssClass="RssFeedImage" ID="rssFeedLink" runat="server" href="news.rss"><asp:image ID="Image1" CssClass="rssImage" runat="server"  ToolTip="Rss news feed" AlternateText="Rss feed" ImageUrl="~/images/Feed-icon.png" /></asp:HyperLink>
+               </div>
+           
+            
                 <table width="100%">
                     <asp:Repeater ID="repeaterNews" runat="server" OnItemCommand="lnkNewsItem_Click">
                         <ItemTemplate>
