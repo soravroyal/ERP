@@ -744,7 +744,7 @@ public class GenerateRDF {
 
             Class.forName(driver).newInstance();
             Connection con = DriverManager.getConnection(dbUrl, userName, password);
-            GenerateRDF r = new GenerateRDF(System.out, con, rdfPropFilename);
+            GenerateRDF r = new GenerateRDF(new PrintStream(System.out, true, "UTF-8"), con, rdfPropFilename);
 
             if (unusedArgs.size() == 0) {
                 tables = r.getAllTables();
