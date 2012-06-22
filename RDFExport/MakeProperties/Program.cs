@@ -16,14 +16,41 @@ namespace MakeProperties
             Password=tmggis;
             Trusted_Connection=False;";
 
-        const String QUERY_TABLE_LIST = @"
-            SELECT NAME FROM sys.objects
-            WHERE TYPE_DESC='VIEW' AND
-                  NAME LIKE 'PUBLISH_%'
-                  OR
-                  TYPE_DESC='USER_TABLE' AND
-                  NAME LIKE 'LOV_%'
-            ORDER BY NAME";
+        static string[] ExportableTables = new string[]
+        {
+            "LOV_AnnexIActivity",
+		    "LOV_AreaGroup", 
+		    "LOV_Confidentiality",
+		    "LOV_CoordinateSystem",
+		    "LOV_Country",
+		    "LOV_CountryAreaGroup",
+		    "LOV_Medium",
+		    "LOV_MethodBasis",
+		    "LOV_MethodType",
+		    "LOV_NACEActivity",
+		    "LOV_NUTSRegion",
+		    "LOV_Pollutant",
+		    "LOV_PollutantThreshold",
+		    "LOV_RiverBasinDistrict",
+		    "LOV_Status",
+		    "LOV_Unit",
+		    "LOV_WasteThreshold",
+		    "LOV_WasteTreatment",
+		    "LOV_WasteType",
+		    "PUBLISH_Activity",
+		    "PUBLISH_Eper2EPRTR_AnnexIActivity",
+		    "PUBLISH_Eper2EPRTR_NACEActivity",
+		    "PUBLISH_FacilityID_Changes",
+		    "PUBLISH_FacilityReport",
+		    "PUBLISH_PollutantRelease",
+		    "PUBLISH_PollutantReleaseAndTransferReport",
+		    "PUBLISH_PollutantReleaseMethodUsed",
+		    "PUBLISH_PollutantTransfer",
+		    "PUBLISH_PollutantTransferMethodUsed",
+		    "PUBLISH_UploadedReports",
+		    "PUBLISH_WasteTransfer",
+		    "PUBLISH_WasteTransferMethodUsed"
+        };
 
         static AliasColumn[] AliasColumns = new AliasColumn[] 
         {
@@ -167,40 +194,24 @@ namespace MakeProperties
             {
                 conn.Open();
 
-                List<String> exportableTables = GetExporableTables(conn);
                 StringBuilder propertiesContents = new StringBuilder();
-                propertiesContents.Append(CreateTableListProperty(exportableTables));
+                propertiesContents.Append(CreateTableListProperty(ExportableTables));
                 propertiesContents.Append("\n\n");
-                propertiesContents.Append(CreateQueryListProperties(conn, exportableTables));
+                propertiesContents.Append(CreateQueryListProperties(conn, ExportableTables));
                 WritePropertiesFile(propertiesContents.ToString());
 
                 conn.Close();
             }
         }
 
-        static List<String> GetExporableTables(SqlConnection conn)
-        {
-            SqlCommand cmd = new SqlCommand(QUERY_TABLE_LIST, conn);
-            SqlDataReader reader = cmd.ExecuteReader();
-            
-            List<string> exportableTables = new List<string>();
-            while (reader.Read())
-            {
-                exportableTables.Add(reader.GetString(0));
-            }
-
-            reader.Close();
-            return exportableTables;
-        }
-
-        static string CreateTableListProperty(List<string> tables)
+        static string CreateTableListProperty(string[] tables)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("tables = ");
-            for (int i = 0; i < tables.Count; i++)
+            for (int i = 0; i < tables.Length; i++)
             {
-                sb.Append(ToClassName(tables[i]));
-                if (i < tables.Count - 1)
+                sb.Append(TrimTablePrefix(tables[i]));
+                if (i < tables.Length - 1)
                 {
                     sb.Append(" \\\n\t\t");
                 }
@@ -208,13 +219,13 @@ namespace MakeProperties
             return sb.ToString();
         }
 
-        static string CreateQueryListProperties(SqlConnection conn, List<string> tables)
+        static string CreateQueryListProperties(SqlConnection conn, string[] tables)
         {
             StringBuilder sb = new StringBuilder();
             foreach (string table in tables)
             {
                 string className = ToClassName(table);
-                sb.Append(string.Format("{0}.class = {0}\n", className));
+                sb.Append(string.Format("{0}.class = {1}\n", className, TrimTablePrefix(table)));
                 sb.Append(string.Format("{0}.query = {1}\n", className, CreateTableQuery(conn, table)));
                 sb.Append("\n");
             }
@@ -234,7 +245,17 @@ namespace MakeProperties
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                columnNames.Add(reader.GetString(0));
+                string columnName = reader.GetString(0);
+                if (columnName.ToUpper().StartsWith("LOV_"))
+                {
+                    columnName = string.Format("{0} as {1}",
+                        columnName, char.ToLower(columnName[4]) + columnName.Substring(5));
+                }
+                else
+                {
+                    columnName = char.ToLower(columnName[0]) + columnName.Substring(1);
+                }
+                columnNames.Add(columnName);
             }
             reader.Close();
 
@@ -288,16 +309,22 @@ namespace MakeProperties
             }
         }
 
+        static string TrimTablePrefix(string tableName)
+        {
+            return tableName.Replace("LOV_", string.Empty)
+                            .Replace("PUBLISH_", string.Empty);
+        }
+
         static string ToClassName(string tableName)
         {
-            string className = tableName.Replace("LOV_", string.Empty)
-                                        .Replace("PUBLISH_", string.Empty);
+            string className = TrimTablePrefix(tableName);
+
             if (string.IsNullOrEmpty(className))
             {
                 return string.Empty;
             }
 
-            return char.ToUpper(className[0]) + className.Substring(1).ToLower();
+            return char.ToLower(className[0]) + className.Substring(1);
         }
     }
 }
