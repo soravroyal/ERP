@@ -9,3 +9,13 @@ InsertUpdate|LOV_RIVERBASINDISTRICT|NO5106|en-GB|Sogn og Fjordane
 
 --New RBDs for SI
 InsertUpdate|LOV_RIVERBASINDISTRICT|SI_RBD_2|en-GB|North Adriatic
+
+
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|de-DE|Fragen zu E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|en-GB|Questions to E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|es-ES|Preguntas para el E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|fr-FR|Questions E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|it-IT|Domande frequenti sull'E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|nl-NL|Vragen aan E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|pl-PL|Pytania dot. E-PRTR
+InsertUpdate|Web.sitemap|QuestionsToEPRTR|ro-RO|Întrebări pentru E-PRTR
