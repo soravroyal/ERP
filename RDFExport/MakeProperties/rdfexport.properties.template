@@ -2,12 +2,12 @@
 # The prefix for all rdf:abouts and rdf:resources to make them into URLs. Follows xml:base rules.
 # It is recommended to end the string with '/'
 #
-baseurl=http://rdfdata.eionet.europa.eu/eprtr/
+baseurl=http://prtr.ec.europa.eu/rdf/
 
 #
 # Vocabulary is added as the empty namespace the rdf:RDF element
 #
-vocabulary=http://rdfdata.eionet.europa.eu/eprtr/ontology/
+vocabulary=http://prtr.ec.europa.eu/rdf/schema.rdf
 
 #
 # These namespaces are automatically added to the rdf:RDF element
@@ -42,11 +42,15 @@ objectproperty.forMedium = medium
 objectproperty.parentGroup = pollutant
 objectproperty.forPollutant = pollutant
 #objectproperty.casReference = http://rdfdata.eionet.europa.eu/cas
-objectproperty.facilityReport = facilityreport
+objectproperty.facilityReport = facilityReport
 objectproperty.forFacility = facility
-objectproperty.parentType = wastetype
-objectproperty.forWasteType = wastetype
+objectproperty.parentType = wasteType
+objectproperty.forWasteType = wasteType
+objectproperty.forWasteTreatment = wasteTreatment
 objectproperty.forMethod = methodBasis
+objectproperty.methodType = methodType
+objectproperty.annexIActivity = annexIActivity
+objectproperty.unit = unit
 
 
 # TODO Clarify those:
