@@ -46,10 +46,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AliasColumn.cs" />
+    <Compile Include="DatabaseTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Makefile.template">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="rdfexport.properties.template">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
