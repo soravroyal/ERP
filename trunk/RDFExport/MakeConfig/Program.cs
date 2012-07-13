@@ -33,7 +33,7 @@ namespace MakeProperties
             new DatabaseTable("Facility", "FacilityID", true),
 		    new DatabaseTable("PUBLISH_Activity"),
 		    new DatabaseTable("PUBLISH_Eper2EPRTR_AnnexIActivity"),
-		    new DatabaseTable("PUBLISH_Eper2EPRTR_NACEActivity"),
+		    new DatabaseTable("PUBLISH_Eper2EPRTR_NACEActivity", "EPER_Code"),
 		    new DatabaseTable("PUBLISH_FacilityID_Changes"),
 		    new DatabaseTable("PUBLISH_FacilityReport"),
 		    new DatabaseTable("PUBLISH_PollutantRelease"),
