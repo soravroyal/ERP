@@ -2,7 +2,7 @@
 
 extract: compile
 	del *.rdf *.zip /f
-	java -cp $(CLASSPATH) GenerateRDF  {LookupTables} > lookuptables.rdf
+	java -cp $(CLASSPATH) GenerateRDF -olookuptables.rdf {LookupTables}
 	{rdfExportTables}
 	zip -r rdf_export . -i \*.rdf
 	del *.rdf /f

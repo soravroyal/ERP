@@ -114,9 +114,9 @@ namespace MakeProperties
                 {
                     rdfExportTables.Append(rdfExportTablesSeparator);
                     rdfExportTablesSeparator = "\n\t";
-                    rdfExportTables.Append(String.Format("java -cp $(CLASSPATH) GenerateRDF {0} > {1}.rdf",
-                        EprtrDatabase.ToClassName(databaseTable.TableName),
-                        EprtrDatabase.TrimTablePrefix(databaseTable.TableName)));
+                    rdfExportTables.Append(String.Format("java -cp $(CLASSPATH) GenerateRDF -o{0}.rdf {1}",
+                        EprtrDatabase.TrimTablePrefix(databaseTable.TableName),
+                        EprtrDatabase.ToClassName(databaseTable.TableName)));
                 }
             }
 
