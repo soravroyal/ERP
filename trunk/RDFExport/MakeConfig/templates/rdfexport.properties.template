@@ -7,7 +7,7 @@ baseurl=http://prtr.ec.europa.eu/rdf/
 #
 # Vocabulary is added as the empty namespace the rdf:RDF element
 #
-vocabulary=http://prtr.ec.europa.eu/rdf/schema.rdf
+vocabulary=http://prtr.ec.europa.eu/rdf/schema.rdf#
 
 #
 # These namespaces are automatically added to the rdf:RDF element
