@@ -12,27 +12,21 @@ namespace MakeProperties
         {
             new AliasColumn
             {
-                TableName = "PUBLISH_Activity",
-                ColumnName = "FacilityReportID",
-                ForeignPropertyName = "facilityReport"
+                TableName = "LOV_ANNEXIACTIVITY",
+                ColumnName = "ParentID",
+                ForeignPropertyName = "parentANNEXIActivity"
             },
             new AliasColumn
             {
-                TableName = "PUBLISH_Activity",
-                ColumnName = "AnnexIActivityCode",
-                ForeignPropertyName = "annexIActivity"
+                TableName = "LOV_NACEACTIVITY",
+                ColumnName = "ParentID",
+                ForeignPropertyName = "parentNACEActivity"
             },
             new AliasColumn
             {
-                TableName = "PUBLISH_FACILITYREPORT",
-                ColumnName = "RBDSourceCode",
-                ForeignPropertyName = "forRBD"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_FACILITYREPORT",
-                ColumnName = "NUTSRegionSourceCode",
-                ForeignPropertyName = "forNUTS"
+                TableName = "LOV_NUTSREGION",
+                ColumnName = "ParentID",
+                ForeignPropertyName = "parentNUTSRegion"
             },
             new AliasColumn
             {
@@ -42,141 +36,21 @@ namespace MakeProperties
             },
             new AliasColumn
             {
-                TableName = "PUBLISH_FACILITYID_CHANGES",
-                ColumnName = "CountryCode",
-                ForeignPropertyName = "inCountry"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_FACILITYREPORT",
-                ColumnName = "CountryCode",
-                ForeignPropertyName = "inCountry"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTRELEASEANDTRANSFERREPORT",
-                ColumnName = "CountryCode",
-                ForeignPropertyName = "inCountry"
-            },
-            new AliasColumn
-            {
                 TableName = "LOV_RIVERBASINDISTRICT",
                 ColumnName = "Code",
                 ForeignPropertyName = "'owl:sameAs->http://rdfdata.eionet.europa.eu/wise/rbd'"
             },
             new AliasColumn
             {
-                TableName = "PUBLISH_POLLUTANTRELEASE",
-                ColumnName = "ReleaseMediumCode",
-                ForeignPropertyName = "forMedium"
-            },
-            new AliasColumn
-            {
                 TableName = "LOV_POLLUTANT",
                 ColumnName = "ParentID",
-                ForeignPropertyName = "parentGroup"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTRELEASE",
-                ColumnName = "PollutantCode",
-                ForeignPropertyName = "forPollutant"
+                ForeignPropertyName = "parentPollutant"
             },
             new AliasColumn
             {
                 TableName = "LOV_POLLUTANTTHRESHOLD",
                 ColumnName = "LOV_PollutantID",
                 ForeignPropertyName = "forPollutant"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTTRANSFER",
-                ColumnName = "PollutantCode",
-                ForeignPropertyName = "forPollutant"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTRELEASE",
-                ColumnName = "FacilityReportID",
-                ForeignPropertyName = "facilityReport"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTTRANSFER",
-                ColumnName = "FacilityReportID",
-                ForeignPropertyName = "facilityReport"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTTRANSFER",
-                ColumnName = "MethodBasisCode",
-                ForeignPropertyName = "methodBasis"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTTRANSFER",
-                ColumnName = "QuantityUnitCode",
-                ForeignPropertyName = "unit"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFER",
-                ColumnName = "FacilityReportID",
-                ForeignPropertyName = "facilityReport"
-            }, 
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFERMETHODUSED",
-                ColumnName = "MethodTypeCode",
-                ForeignPropertyName = "methodType"
-            }, 
-            new AliasColumn
-            {
-                TableName = "PUBLISH_FACILITYREPORT",
-                ColumnName = "FacilityID",
-                ForeignPropertyName = "forFacility"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTRELEASE",
-                ColumnName = "FacilityID",
-                ForeignPropertyName = "forFacility"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTTRANSFER",
-                ColumnName = "FacilityID",
-                ForeignPropertyName = "forFacility"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFER",
-                ColumnName = "FacilityID",
-                ForeignPropertyName = "forFacility"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFER",
-                ColumnName = "WasteTypeCode",
-                ForeignPropertyName = "forWasteType"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFER",
-                ColumnName = "WasteTreatment",
-                ForeignPropertyName = "forWasteTreatment"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFER",
-                ColumnName = "MethodBasisCode",
-                ForeignPropertyName = "forMethod"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_WASTETRANSFER",
-                ColumnName = "QuantityUnitCode",
-                ForeignPropertyName = "unit"
             },
             new AliasColumn
             {
@@ -189,12 +63,6 @@ namespace MakeProperties
                 TableName = "LOV_WASTETHRESHOLD",
                 ColumnName = "LOV_WasteTypeID",
                 ForeignPropertyName = "forWasteType"
-            },
-            new AliasColumn
-            {
-                TableName = "PUBLISH_POLLUTANTRELEASE",
-                ColumnName = "MethodBasisCode",
-                ForeignPropertyName = "forMethod"
             }
         };
 
@@ -324,7 +192,8 @@ namespace MakeProperties
         public static string TrimTablePrefix(string tableName)
         {
             return tableName.Replace("LOV_", string.Empty)
-                            .Replace("PUBLISH_", string.Empty);
+                            .Replace("PUBLISH_", string.Empty)
+                            .Replace("RDF_", string.Empty);
         }
 
         public static string ToClassName(string tableName)
