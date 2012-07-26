@@ -34,16 +34,20 @@ datatype.decimal = xsd:double
 datatype.float = xsd:double
 datatype.real = xsd:double
 
-objectproperty.forRBD = http://rdfdata.eionet.europa.eu/wise/rbd
-objectproperty.forNUTS = http://ec.europa.eu/eurostat/ramon/rdfdata/nuts2008
+#objectproperty.forRBD = http://rdfdata.eionet.europa.eu/wise/rbd
+objectproperty.forRBD = riverBasinDistrict
+#objectproperty.forNUTS = http://ec.europa.eu/eurostat/ramon/rdfdata/nuts2008
+objectproperty.forNUTS = nUTSRegion
 #objectproperty.inCountry = country
 objectproperty.inCountry = http://ec.europa.eu/eurostat/ramon/rdfdata/countries
 objectproperty.forMedium = medium
-objectproperty.parentGroup = pollutant
+objectproperty.parentPollutant = pollutant
 objectproperty.forPollutant = pollutant
 #objectproperty.casReference = http://rdfdata.eionet.europa.eu/cas
 objectproperty.facilityReport = facilityReport
 objectproperty.forFacility = facility
+objectproperty.oldFacility = facility
+objectproperty.newFacility = facility
 objectproperty.parentType = wasteType
 objectproperty.forWasteType = wasteType
 objectproperty.forWasteTreatment = wasteTreatment
@@ -51,6 +55,14 @@ objectproperty.forMethod = methodBasis
 objectproperty.methodType = methodType
 objectproperty.annexIActivity = annexIActivity
 objectproperty.unit = unit
+objectproperty.nACEActivity = nACEActivity
+objectproperty.forPollutantRelease = pollutantRelease
+objectproperty.forPollutantTransfer = pollutantTransfer
+objectproperty.forWasteTransfer = wasteTransfer
+objectproperty.parentANNEXIActivity = annexIActivity
+objectproperty.parentNACEActivity = nACEActivity
+objectproperty.parentNUTSRegion = nUTSRegion
+
 
 
 # TODO Clarify those:
