@@ -45,6 +45,8 @@ objectproperty.parentPollutant = pollutant
 objectproperty.forPollutant = pollutant
 #objectproperty.casReference = http://rdfdata.eionet.europa.eu/cas
 objectproperty.facilityReport = facilityReport
+objectproperty.hasReport = facilityReport
+objectproperty.inReport = facilityReport
 objectproperty.forFacility = facility
 objectproperty.oldFacility = facility
 objectproperty.newFacility = facility
@@ -62,6 +64,8 @@ objectproperty.forWasteTransfer = wasteTransfer
 objectproperty.parentANNEXIActivity = annexIActivity
 objectproperty.parentNACEActivity = nACEActivity
 objectproperty.parentNUTSRegion = nUTSRegion
+objectproperty.competentAuthority = competentAuthority
+objectproperty.confidentiality = confidentiality
 
 
 
