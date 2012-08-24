@@ -12,57 +12,15 @@ namespace MakeProperties
         {
             new AliasColumn
             {
-                TableName = "LOV_ANNEXIACTIVITY",
-                ColumnName = "ParentID",
-                ForeignPropertyName = "parentANNEXIActivity"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_NACEACTIVITY",
-                ColumnName = "ParentID",
-                ForeignPropertyName = "parentNACEActivity"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_NUTSREGION",
-                ColumnName = "ParentID",
-                ForeignPropertyName = "parentNUTSRegion"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_MEDIUM",
+                TableName = "RDF_MEDIUM",
                 ColumnName = "Code",
                 ForeignPropertyName = "id"
             },
             new AliasColumn
             {
-                TableName = "LOV_RIVERBASINDISTRICT",
+                TableName = "RDF_RIVERBASINDISTRICT",
                 ColumnName = "Code",
                 ForeignPropertyName = "'owl:sameAs->http://rdfdata.eionet.europa.eu/wise/rbd'"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_POLLUTANT",
-                ColumnName = "ParentID",
-                ForeignPropertyName = "parentPollutant"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_POLLUTANTTHRESHOLD",
-                ColumnName = "LOV_PollutantID",
-                ForeignPropertyName = "forPollutant"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_WASTETYPE",
-                ColumnName = "ParentID",
-                ForeignPropertyName = "parentType"
-            },
-            new AliasColumn
-            {
-                TableName = "LOV_WASTETHRESHOLD",
-                ColumnName = "LOV_WasteTypeID",
-                ForeignPropertyName = "forWasteType"
             }
         };
 
@@ -99,7 +57,18 @@ namespace MakeProperties
             {
                 string className = ToClassName(table.TableName);
                 sb.Append(string.Format("{0}.class = {1}\n", className, TrimTablePrefix(table.TableName)));
-                sb.Append(string.Format("{0}.query = {1}\n", className, GetTableQuery(table)));
+                if (className.Equals("facility", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    sb.Append(string.Format("{0}.query1 = {1}\n", className, GetTableQuery(table)));
+                    sb.Append(string.Format(
+                        "\n{0}.query2 = SELECT f.FacilityID, r.FacilityReportID AS hasReport \\\n " +
+                        "FROM dbo.Facility f \\\n JOIN dbo.FacilityReport AS r \\\n   " +
+                        "ON r.FacilityID = f.FacilityID\n", className, GetTableQuery(table)));
+                }
+                else
+                {
+                    sb.Append(string.Format("{0}.query = {1}\n", className, GetTableQuery(table)));
+                }
                 sb.Append("\n");
             }
             return sb.ToString();
@@ -127,6 +96,11 @@ namespace MakeProperties
                 else
                 {
                     columnName = char.ToLower(columnName[0]) + columnName.Substring(1);
+                }
+
+                if (columnName.Contains(":"))
+                {
+                    columnName = String.Format("\"{0}\"", columnName);
                 }
                 columnNames.Add(columnName);
             }
