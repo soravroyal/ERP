@@ -824,3 +824,51 @@ FROM dbo.LOV_WasteType wt1
 LEFT JOIN dbo.LOV_WasteType wt2
 	ON wt1.ParentID = wt2.LOV_WasteTypeID
 GO
+
+IF EXISTS 
+	(
+		SELECT TABLE_NAME FROM INFORMATION_SCHEMA.VIEWS
+		WHERE TABLE_NAME = 'RDF_FACILITY'
+	)
+    DROP VIEW RDF_FACILITY;
+GO
+
+CREATE VIEW dbo.RDF_FACILITY AS
+SELECT f.FacilityID 
+	,CASE 
+		WHEN ConfidentialIndicator = 1
+			AND fr.FacilityName IS NULL
+			THEN 'CONFIDENTIAL'
+		ELSE fr.FacilityName
+		END AS FacilityName
+	,CASE 
+		WHEN ConfidentialIndicator = 1
+			AND f_address.StreetName IS NULL
+			THEN 'CONFIDENTIAL'
+		ELSE f_address.StreetName
+		END AS StreetName
+	,f_address.BuildingNumber
+	,CASE 
+		WHEN ConfidentialIndicator = 1
+			AND f_address.City IS NULL
+			THEN 'CONFIDENTIAL'
+		ELSE f_address.City
+		END AS City
+	,CASE 
+		WHEN ConfidentialIndicator = 1
+			AND f_address.PostalCode IS NULL
+			THEN 'CONFIDENTIAL'
+		ELSE f_address.PostalCode
+		END AS PostalCode
+	,country.Code AS inCountry
+	,fr.ConfidentialIndicator
+FROM dbo.Facility f
+LEFT JOIN dbo.FacilityReport fr ON
+	f.FacilityID = fr.FacilityID
+LEFT JOIN dbo.ADDRESS AS f_address
+	ON fr.AddressID = f_address.AddressID
+INNER JOIN dbo.vAT_POLLUTANTRELEASEANDTRANSFERREPORT AS prtr
+	ON prtr.PollutantReleaseAndTransferReportID = fr.PollutantReleaseAndTransferReportID
+LEFT JOIN dbo.LOV_COUNTRY AS country
+	ON prtr.LOV_CountryID = country.LOV_CountryID
+GO
