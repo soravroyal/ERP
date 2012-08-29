@@ -30,7 +30,7 @@ namespace MakeProperties
 		    // TODO: new DatabaseTable("LOV_WasteThreshold", ??),
 		    new DatabaseTable("RDF_WasteTreatment", "Code", true),
 		    new DatabaseTable("RDF_WasteType", "Code", true),
-            new DatabaseTable("Facility", "FacilityID", true),
+            new DatabaseTable("RDF_Facility"),
 		    new DatabaseTable("RDF_Activity"),
             new DatabaseTable("RDF_CompetentAuthority"),
 		    //new DatabaseTable("RDF_Eper2EPRTR_AnnexIActivity"),
