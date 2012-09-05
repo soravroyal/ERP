@@ -537,7 +537,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_ANNEXIACTIVITY AS
-SELECT a1.Code
+SELECT a1.Code AS ID
+	,a1.Code
 	,a1.Name
 	,a1.StartYear
 	,a1.EndYear
@@ -558,7 +559,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_AREAGROUP AS
-SELECT Code
+SELECT Code AS ID
+	,Code
     ,Name
 	,Code + ' - ' + Name AS 'rdfs:label'
 FROM dbo.LOV_AREAGROUP
@@ -573,7 +575,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_CONFIDENTIALITY AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -590,7 +593,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_COORDINATESYSTEM AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -607,7 +611,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_COUNTRY AS
-SELECT Code
+SELECT Code as ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -624,7 +629,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_MEDIUM AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -641,7 +647,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_METHODBASIS AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -658,7 +665,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_METHODTYPE AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -675,12 +683,12 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_NACEActivity AS
-SELECT n1.Code
+SELECT n1.Code as ID
+	,n1.Code
 	,n1.Name
 	,n1.StartYear
 	,n1.EndYear
 	,n2.Code AS parentNACEActivity
-	,n1.NaceCodeID
 	,n1.Section
 	,n1.SubSection
 	,n1.Code + ' - ' + n1.Name AS 'rdfs:label'
@@ -698,7 +706,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_POLLUTANT AS
-SELECT p1.Code
+SELECT p1.Code AS ID
+	,p1.Code
 	,p1.Name
 	,p1.StartYear
 	,p1.EndYear
@@ -737,7 +746,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_UNIT AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -754,7 +764,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_RIVERBASINDISTRICT AS
-SELECT rbd.Code
+SELECT rbd.Code AS ID
+	,rbd.Code
 	,rbd.Name
 	,rbd.StartYear
 	,rbd.EndYear
@@ -774,7 +785,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_NUTSREGION AS
-SELECT nuts1.Code
+SELECT nuts1.Code AS ID
+	,nuts1.Code
 	,nuts1.Name
 	,nuts1.StartYear
 	,nuts1.EndYear
@@ -797,7 +809,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_WASTETREATMENT AS
-SELECT Code
+SELECT Code AS ID
+	,Code
 	,Name
 	,StartYear
 	,EndYear
@@ -814,7 +827,8 @@ IF EXISTS
 GO
 
 CREATE VIEW dbo.RDF_WASTETYPE AS
-SELECT wt1.Code
+SELECT wt1.Code AS ID
+	,wt1.Code
 	,wt1.Name
 	,wt1.StartYear
 	,wt1.EndYear
