@@ -1,10 +1,10 @@
 /*
-Upgrading MASTER database from ver 3.0
+Upgrading MASTER database from ver 3.2
 */
 
 --set new version number
 :Setvar major 3
-:Setvar minor 1
+:Setvar minor 3
 
 PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 
@@ -13,7 +13,7 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 
 -- Include deltascripts here
 
-:r $(basedir)\insertRBDs.sql
+:r $(basedir)\insertNUTS.sql
 go
 
 
