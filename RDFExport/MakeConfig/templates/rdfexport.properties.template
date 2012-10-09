@@ -47,6 +47,7 @@ objectproperty.forPollutant = pollutant
 objectproperty.facilityReport = facilityReport
 objectproperty.hasReport = facilityReport
 objectproperty.inReport = facilityReport
+objectproperty.latestReport = facilityReport
 objectproperty.forFacility = facility
 objectproperty.oldFacility = facility
 objectproperty.newFacility = facility
