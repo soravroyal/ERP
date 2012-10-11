@@ -9,6 +9,7 @@ The RDFExport utility exports the EPRTR database to RDF format. The utility uses
 * Cleanup and copy rdf_export.zip to .
 
 Prerequisites for running RDFExport:
+* Install JDK, make sure %JAVA_HOME% is pointing to it.
 * Install gnuwin from http://gnuwin32.sourceforge.net/.
 * Ensure msbuild directory is correct in RDFExport.bat.
 * Ensure EPRTR database parameters are correct in RDFExport.bat.
