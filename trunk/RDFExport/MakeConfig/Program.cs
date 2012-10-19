@@ -71,7 +71,7 @@ namespace MakeProperties
             }
 
             // Generate Makefile
-            WriteMakeFile(ExportableTables);
+            WriteMakeFile(ExportableTables, argsParser.ZipOutput);
 
             // Generate Database properties file
             WriteDbPropertiesFile(argsParser.Server, argsParser.DbName,
@@ -91,7 +91,7 @@ namespace MakeProperties
             }
         }
 
-        static void WriteMakeFile(DatabaseTable[] databaseTables)
+        static void WriteMakeFile(DatabaseTable[] databaseTables, Boolean zipOutput)
         {
             TextReader tr = new StreamReader(@"templates\Makefile.template");
             string templateFileContents = tr.ReadToEnd();
@@ -114,14 +114,21 @@ namespace MakeProperties
                 {
                     rdfExportTables.Append(rdfExportTablesSeparator);
                     rdfExportTablesSeparator = "\n\t";
-                    rdfExportTables.Append(String.Format("java -cp $(CLASSPATH) GenerateRDF -o{0}.rdf {1}",
+                    rdfExportTables.Append(String.Format("java -cp $(CLASSPATH) GenerateRDF -o{0}.rdf {1}{2}",
                         EprtrDatabase.TrimTablePrefix(databaseTable.TableName),
-                        EprtrDatabase.ToClassName(databaseTable.TableName)));
+                        EprtrDatabase.ToClassName(databaseTable.TableName),
+                        zipOutput ? " -z" : string.Empty));
                 }
             }
 
+            StringBuilder lookupTablesStr = new StringBuilder();
+            lookupTablesStr.Append(lookupTables.ToString());
+            if (zipOutput)
+            {
+                lookupTablesStr.Append(" -z");
+            }
             templateFileContents = templateFileContents.Replace(
-                "{LookupTables}", lookupTables.ToString());
+                "{LookupTables}", lookupTablesStr.ToString());
             templateFileContents = templateFileContents.Replace(
                 "{rdfExportTables}", rdfExportTables.ToString());
 

@@ -12,6 +12,7 @@ namespace MakeProperties
         public string User;
         public string Password;
         public bool ShowHelp;
+        public bool ZipOutput;
 
         private string[] Args;
         private OptionSet OptionSet;
@@ -37,7 +38,9 @@ namespace MakeProperties
                    v => User = v },
                 { "p|password=", 
                    "Database password.",
-                   v => Password = v }};
+                   v => Password = v },
+                { "z|zip",  "Zip the output.", 
+                   v => ZipOutput = v != null }};
         }
 
         public void Parse()
