@@ -306,7 +306,8 @@ public class GenerateRDF {
 	 * @param value
 	 *            from database.
 	 */
-	private void writeProperty(RDFField property, Object value) {
+	private void writeProperty(RDFField property, Object value)
+			throws IOException {
 		String typelangAttr = "";
 
 		if (value == null) {
@@ -323,8 +324,16 @@ public class GenerateRDF {
 				output(StringHelper.escapeXml(encodedValue));
 				output("\"/>\n");
 			} else {
+				// Handle the case of ->countries or ->http://...
+				// If the ref-segment contains a colon then it can't be a
+				// fragment
+				// http://www.w3.org/TR/REC-xml-names/#NT-NCName
+				String refSegment = property.datatype.substring(2);
 				output(" rdf:resource=\"");
-				output(property.datatype.substring(2));
+				if (baseurl == null && refSegment.indexOf(":") == -1) {
+					output("#");
+				}
+				output(refSegment);
 				output("/");
 				output(StringHelper.escapeXml(encodedValue));
 				output("\"/>\n");
@@ -437,7 +446,7 @@ public class GenerateRDF {
 	 * @throws SQLException
 	 *             if there is a database problem.
 	 */
-	public void exportTable(String table) throws SQLException {
+	public void exportTable(String table) throws SQLException, IOException {
 		exportTable(table, null);
 	}
 
@@ -455,7 +464,7 @@ public class GenerateRDF {
 	 *             if there is a database problem.
 	 */
 	public void exportTable(String table, String identifier)
-			throws SQLException {
+			throws SQLException, IOException {
 		String voc = props.getProperty(table.concat(".vocabulary"));
 		if (voc != null) {
 			setVocabulary(voc);
@@ -603,7 +612,7 @@ public class GenerateRDF {
 	 *             - if the SQL database is not available
 	 */
 	private void runQuery(String segment, String sql, String rdfClass)
-			throws SQLException {
+			throws SQLException, IOException {
 		Statement stmt = null;
 		String currentId = null;
 		Boolean firstTime = true;
@@ -670,7 +679,7 @@ public class GenerateRDF {
 	 *             - if the SQL database is not available
 	 */
 	private void runAttributes(String segment, String sql, String rdfClass)
-			throws SQLException {
+			throws SQLException, IOException {
 		Statement stmt = null;
 		String currentId = null;
 		Boolean firstTime = true;

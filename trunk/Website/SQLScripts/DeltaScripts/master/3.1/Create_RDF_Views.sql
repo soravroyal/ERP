@@ -74,8 +74,16 @@ SELECT fr.FacilityReportID
 	,prtr.CdrReleased
 	,prtr.Published
 	,f_country.Code AS inCountry
-	,fr.GeographicalCoordinate.STY AS "geo:lat"
-	,fr.GeographicalCoordinate.STX AS "geo:long"
+	,CASE 
+		WHEN fr.GeographicalCoordinate.STY = 0 
+			THEN NULL
+		ELSE fr.GeographicalCoordinate.STY
+		END AS "geo:lat"
+	,CASE 
+		WHEN fr.GeographicalCoordinate.STX = 0 
+			THEN NULL
+		ELSE fr.GeographicalCoordinate.STX
+		END AS "geo:long"
 	,rbd.Code AS forRBD
 	,nuts.Code AS forNUTS
 	,nace.Code as nACEActivity
@@ -685,13 +693,13 @@ GO
 CREATE VIEW dbo.RDF_NACEActivity AS
 SELECT n1.Code as ID
 	,n1.Code
-	,n1.Name
+	,RTRIM(LTRIM(n1.Name)) AS Name
 	,n1.StartYear
 	,n1.EndYear
 	,n2.Code AS parentNACEActivity
 	,n1.Section
 	,n1.SubSection
-	,n1.Code + ' - ' + n1.Name AS 'rdfs:label'
+	,n1.Code + ' - ' + RTRIM(LTRIM(n1.Name)) AS 'rdfs:label'
 FROM dbo.LOV_NACEActivity n1
 LEFT JOIN dbo.LOV_NACEActivity AS n2
 	ON n1.ParentID = n2.LOV_NACEActivityID
@@ -787,12 +795,12 @@ GO
 CREATE VIEW dbo.RDF_NUTSREGION AS
 SELECT nuts1.Code AS ID
 	,nuts1.Code
-	,nuts1.Name
+	,RTRIM(LTRIM(nuts1.Name)) as Name
 	,nuts1.StartYear
 	,nuts1.EndYear
 	,nuts2.Code AS parentNUTSRegion
 	,country.Code AS inCountry
-	,nuts1.Code + ' - ' + nuts1.Name AS 'rdfs:label'
+	,nuts1.Code + ' - ' + RTRIM(LTRIM(nuts1.Name)) AS 'rdfs:label'
   FROM dbo.LOV_NUTSREGION nuts1
 LEFT JOIN dbo.LOV_COUNTRY AS country
 	ON nuts1.LOV_CountryID = country.LOV_CountryID
@@ -880,6 +888,16 @@ SELECT f.FacilityID
 	,fr.ConfidentialIndicator
 	,ROW_NUMBER() OVER (PARTITION BY f.FacilityID ORDER BY prtr.Published DESC) dest_rank
 	,fr.FacilityReportID
+	,CASE 
+		WHEN fr.GeographicalCoordinate.STY = 0 
+			THEN NULL
+		ELSE fr.GeographicalCoordinate.STY
+		END AS "geo:lat"
+	,CASE 
+		WHEN fr.GeographicalCoordinate.STX = 0 
+			THEN NULL
+		ELSE fr.GeographicalCoordinate.STX
+		END AS "geo:long"	
 FROM dbo.Facility f
 LEFT JOIN dbo.FacilityReport fr ON
 	f.FacilityID = fr.FacilityID
@@ -900,7 +918,9 @@ SELECT
 	PostalCode,
 	inCountry,
 	ConfidentialIndicator,
-	FacilityReportID AS latestReport
+	FacilityReportID AS latestReport,
+	"geo:lat",
+	"geo:long"
 FROM SUB_QUERY
 WHERE dest_rank=1
 GO
