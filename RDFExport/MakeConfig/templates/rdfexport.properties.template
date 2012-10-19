@@ -33,6 +33,7 @@ datatype.datetime = xsd:dateTime
 datatype.decimal = xsd:double
 datatype.float = xsd:double
 datatype.real = xsd:double
+datatype.bit = xsd:boolean
 
 #objectproperty.forRBD = http://rdfdata.eionet.europa.eu/wise/rbd
 objectproperty.forRBD = riverBasinDistrict
