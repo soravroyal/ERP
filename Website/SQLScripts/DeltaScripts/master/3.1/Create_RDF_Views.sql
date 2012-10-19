@@ -850,7 +850,7 @@ GO
 CREATE VIEW dbo.RDF_FACILITY AS
 WITH SUB_QUERY AS 
 (
-SELECT f.FacilityID 
+SELECT f.FacilityID
 	,CASE 
 		WHEN ConfidentialIndicator = 1
 			AND fr.FacilityName IS NULL
@@ -891,7 +891,8 @@ LEFT JOIN dbo.LOV_COUNTRY AS country
 	ON prtr.LOV_CountryID = country.LOV_CountryID
 )
 SELECT
-	FacilityID,
+	FacilityID AS ID,
+	FacilityID AS facilityID,
 	FacilityName,
 	StreetName,
 	BuildingNumber,
