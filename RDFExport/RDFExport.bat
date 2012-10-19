@@ -14,7 +14,7 @@ ECHO Making configuration properties for GenerateRDF
 cd Build
 
 :: Set EPRTR database parameters (-s: sever, -db: database name, -u: user, -p: password)
-MakeConfiguration -s SDKCGA6332 -db EPRTRMaster -u gis -p tmggis
+MakeConfiguration -s SDKCGA6332 -db EPRTRMaster -u gis -p tmggis -z
 
 cd ..
 

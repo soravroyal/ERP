@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -39,6 +40,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.TreeSet;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * A struct to hold a complex type. No need to do data encapsulation.
@@ -522,6 +524,38 @@ public class GenerateRDF {
 			}
 		}
 	}
+	
+    /**
+     * Looks for 'class' and 'query' properties from the rdf properties file like this:
+     *
+     * <pre>
+     *  class = bibo:Document
+     *  query = SELECT NULL AS 'id', \
+     *    'GEMET RDF file' AS 'rdfs:label', \
+     *    'Søren Roug' AS 'dcterms:creator', \
+     * 'http://creativecommons.org/licenses/by/2.5/dk/' AS 'dcterms:licence->'
+     *
+     * <pre>
+     * When found, {@code <bibo:Document rdf:about="">} section with given properties will be exported.
+     * @throws IOException
+     * @throws SQLException
+     */
+    public void exportDocumentInformation() throws IOException, SQLException {
+        TreeSet<String> sortedProps = new TreeSet<String>(props.stringPropertyNames());
+        String rdfClass = null;
+        String query = null;
+        for (String prop : sortedProps) {
+            if (prop.trim().equalsIgnoreCase("class")) {
+                rdfClass = props.getProperty(prop);
+            }
+            if (prop.trim().equalsIgnoreCase("query")) {
+                query = props.getProperty(prop);
+            }
+        }
+        if (query != null && query.length() > 0 && rdfClass != null && rdfClass.length() > 0) {
+            runQuery("", query, rdfClass);
+        }
+    }	
 
 	/**
 	 * Add namespace to table.
@@ -830,6 +864,7 @@ public class GenerateRDF {
 		String identifier = null;
 		String rdfPropFilename = "rdfexport.properties";
 		String dbPropFilename = "database.properties";
+		Boolean zipIt = false;
 		String outputFile = null;
 
 		unusedArgs = new ArrayList<String>(args.length);
@@ -852,7 +887,9 @@ public class GenerateRDF {
 				identifier = args[a].substring(2);
 			} else if (args[a].startsWith("-o")) {
 				outputFile = args[a].substring(2);
-			} else {
+			} else if (args[a].equals("-z")) {
+                zipIt = true;
+            } else {
 				unusedArgs.add(args[a]);
 			}
 		}
@@ -865,10 +902,20 @@ public class GenerateRDF {
 			String userName = props.getProperty("user");
 			String password = props.getProperty("password");
 
-			Writer outputWriter = outputFile == null ? new PrintWriter(
-					System.out, true) : new BufferedWriter(
-					new OutputStreamWriter(new FileOutputStream(outputFile),
-							"UTF-8"));
+			OutputStream outStream = null;
+			Writer outputWriter = null;
+			
+			if (outputFile == null) {
+				outputWriter = new PrintWriter(
+					System.out, true);
+			} else {
+				outStream = new FileOutputStream(outputFile);
+				if (zipIt) {
+					outStream = new GZIPOutputStream(outStream);
+				}
+				outputWriter = new BufferedWriter(
+					new OutputStreamWriter(outStream, "UTF-8"));
+			}
 
 			Class.forName(driver).newInstance();
 			Connection con = DriverManager.getConnection(dbUrl, userName,
@@ -887,8 +934,15 @@ public class GenerateRDF {
 			for (String table : tables) {
 				r.exportTable(table, identifier);
 			}
+			r.exportDocumentInformation();
+			
 			r.close();
 			con.close();
+			
+			if (outStream != null && zipIt) {
+				GZIPOutputStream g = (GZIPOutputStream) outStream;
+                g.finish();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

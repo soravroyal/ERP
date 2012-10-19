@@ -13,3 +13,4 @@ Prerequisites for running RDFExport:
 * Install gnuwin from http://gnuwin32.sourceforge.net/.
 * Ensure msbuild directory is correct in RDFExport.bat.
 * Ensure EPRTR database parameters are correct in RDFExport.bat.
+* Use flag -z on MakeConfiguration to gzip each item in the output.
