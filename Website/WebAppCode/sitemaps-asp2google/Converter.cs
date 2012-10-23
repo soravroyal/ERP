@@ -107,10 +107,10 @@ namespace SitemapConverter
             using (XmlWriter writer = XmlWriter.Create(googleSitemap, settings))
             {
                 writer.WriteStartDocument();
-                writer.WriteStartElement("urlset", "http://www.google.com/schemas/sitemap/0.84");
+                writer.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
 
                 writer.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-                writer.WriteAttributeString("xsi", "schemaLocation", null, "http://www.google.com/schemas/sitemap/0.84 http://www.google.com/schemas/sitemap/0.84/sitemap.xsd");
+                writer.WriteAttributeString("xsi", "schemaLocation", null, "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
 
                 var languageList = ListOfValues.GetAllCultureCodes();
 
