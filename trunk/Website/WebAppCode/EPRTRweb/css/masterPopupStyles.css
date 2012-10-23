@@ -56,11 +56,11 @@
 }
 
 .EU_flag {
-	background-image: url('../images/EU_flag.gif');
+	background: url('../images/eu_newlogo.png') no-repeat center;
 	float: right;
 	height: 52px;
 	width: 80px;
-	margin-right: 15px;
+	margin-right: 10px;
 	clear: none;
 	margin-top: -40px;
 }
