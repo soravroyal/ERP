@@ -218,6 +218,7 @@ package dk.atkins
 					cmb.dataProvider = dataprovider;
 					cmb.addEventListener(ListEvent.CHANGE , filterComboBoxChange);
 					cmb.selectedIndex = selectedIndex;
+					filterComboBoxChange(null, cmb)
 					
 					Controls_arr.addItem({item:box.addChild(cmb),localekey:"filteritem_"+_label});
 				break;
@@ -228,8 +229,8 @@ package dk.atkins
 
 		}
 		
-		private function filterComboBoxChange(e:ListEvent):void{
-			var cbox:ComboBox =ComboBox(e.currentTarget);
+		private function filterComboBoxChange(e:ListEvent, cbox:ComboBox = null):void{
+			if(!cbox)cbox = ComboBox(e.currentTarget);
 			setFilterArrays(cbox.selectedItem.label, true);
 			//remove other items selection flags
 			for(var i:int = 0; i <  cbox.dataProvider.length; i ++){
