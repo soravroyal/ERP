@@ -112,7 +112,7 @@ package dk.atkins
 			    	}
 			    	hbox.addChild(vbox);
 			    	var spacer:Spacer = new Spacer();
-			    	spacer.height = 8;
+			    	spacer.height = 1;
 			    	this.addChild(spacer);
 			    	this.addChild(hbox);
 			    }
@@ -215,6 +215,9 @@ package dk.atkins
 							AND_arrayCol.addItem(comObj);
 						} 
 					}
+					//all/no filter option 
+					dataprovider.addItem({label:"All years", data:null});
+					if(selected == "all") selectedIndex = dataprovider.length -1;
 					cmb.dataProvider = dataprovider;
 					cmb.addEventListener(ListEvent.CHANGE , filterComboBoxChange);
 					cmb.selectedIndex = selectedIndex;
@@ -268,7 +271,7 @@ package dk.atkins
 			var filter_string:String = "";
 			for(var i:int = 0; i < OR_arrayCol.length;i++){
 				var or_item:FilterItem = FilterItem(OR_arrayCol.getItemAt(i));
-				if(or_item.selected){
+				if(or_item.selected && or_item.data){
 					if( filter_string != "") filter_string += " OR ";
 					filter_string +=  or_item.data;
 				} 
@@ -278,7 +281,7 @@ package dk.atkins
 			for(var j:int = 0; j < AND_arrayCol.length;j++){
 				
 				var item:FilterItem = FilterItem(AND_arrayCol.getItemAt(j));				
-				if(item.selected){
+				if(item.selected  && item.data){
 					if( filter_string != "") filter_string += " AND ";
 						filter_string +=  item.data;
 				}				
