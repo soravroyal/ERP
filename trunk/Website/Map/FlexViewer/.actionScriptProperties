@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties analytics="false" mainApplicationPath="index.mxml" projectUUID="9bd85db3-557a-45f6-a712-eb63d220aade" version="6">
-  <compiler additionalCompilerArguments="-locale en_US fr_FR en_GB es_ES nl_NL it_IT de_DE ro_RO pl_PL da_DK -allow-source-path-overlap=true" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.5" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersionCheck="false" includeNetmonSwc="false" outputFolderPath="bin-debug" rootURL="http://localhost/EPRTRflexviewer" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
+<actionScriptProperties analytics="false" mainApplicationPath="index.mxml" projectUUID="9bd85db3-557a-45f6-a712-eb63d220aade" version="10">
+  <compiler additionalCompilerArguments="-locale en_US fr_FR en_GB es_ES nl_NL it_IT de_DE ro_RO pl_PL da_DK -allow-source-path-overlap=true" autoRSLOrdering="false" copyDependentFiles="true" flexSDK="Flex 3.6A" fteInMXComponents="false" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="false" htmlPlayerVersionCheck="false" includeNetmonSwc="false" outputFolderPath="bin-debug" removeUnusedRSL="true" rootURL="http://localhost/EPRTRflexviewer" sourceFolderPath="src" strict="true" targetPlayerVersion="0.0.0" useApolloConfig="false" useDebugRSLSwfs="true" verifyDigests="true" warn="true">
     <compilerSourcePath>
       <compilerSourcePathEntry kind="1" linkType="1" path="src/com/esri/solutions/flexviewer/nls/{locale}"/>
     </compilerSourcePath>
@@ -30,4 +30,5 @@
     <buildCSSFileEntry destPath="bin-debug" sourcePath="src/com/esri/solutions/sitestarter/themes/darkangel/style.css"/>
     <buildCSSFileEntry destPath="bin-debug" sourcePath="src/com/esri/solutions/flexviewer/themes/lighterside/style.css"/>
   </buildCSSFiles>
+  <flashCatalyst validateFlashCatalystCompatibility="false"/>
 </actionScriptProperties>
