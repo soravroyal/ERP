@@ -139,7 +139,7 @@
 					}
 					includeSingleLayersStr = configXML.includesinglelayers.text().toString();
 					filterGroups = configXML.filtergroups;
-					layerfilter.filterGroups = configXML.filtergroups;
+					//layerfilter.filterGroups = configXML.filtergroups;
 					showLayersInTOC = configXML.showlayers == 'true';
 					zoomToFilter = configXML.zoomtofilter == 'true';
 					openTreeInitially = configXML.opentoconstart == 'true';

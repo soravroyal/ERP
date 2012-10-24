@@ -20,27 +20,27 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import com.esri.ags.events.LayerEvent;
-			import mx.core.Application;
-			import dk.atkins.filterChangeEvent;
-			import com.esri.ags.layers.Layer;
-			import com.esri.ags.layers.ArcGISDynamicMapServiceLayer;
-			import com.esri.ags.layers.LayerInfo;			
-			import com.esri.ags.events.MapEvent;
 			import com.esri.ags.Map;
+			import com.esri.ags.events.LayerEvent;
+			import com.esri.ags.events.MapEvent;
+			import com.esri.ags.layers.ArcGISDynamicMapServiceLayer;
+			import com.esri.ags.layers.Layer;
+			import com.esri.ags.layers.LayerInfo;
 			import com.esri.solutions.flexviewer.ConfigData;
-			import com.esri.solutions.flexviewer.utils.WidgetEffects;
-			
-			import mx.collections.*;
-	
-			import flash.external.ExternalInterface;
 			import com.esri.solutions.flexviewer.components.toc.utils.MapUtil;
 			import com.esri.solutions.flexviewer.components.toccustom.TOCCustom;
-			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomMapLayerItem;		
-			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomLayerInfoItem;		
 			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomItem;
+			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomLayerInfoItem;
+			import com.esri.solutions.flexviewer.components.toccustom.toccustomclasses.TocCustomMapLayerItem;
+			import com.esri.solutions.flexviewer.utils.WidgetEffects;
 			
 			import dk.atkins.ZoomUtil;
+			import dk.atkins.filterChangeEvent;
+			
+			import flash.external.ExternalInterface;
+			
+			import mx.collections.*;
+			import mx.core.Application;
 			
 			
 			[Bindable]
@@ -59,6 +59,8 @@
 			private var _filterGroups:XMLList;
 			
 			public var initializedComplete:Boolean = false;
+			
+			private var curDefinition:String;
 			
 			public function init():void{
 				initializedComplete = true;
@@ -97,7 +99,16 @@
 			//set filters on all layers when filtercontrols are changed
 			private function setDefinition(evt:filterChangeEvent):void{
 				var definition:String = evt.data.toString();
-				setAllLayersDefinition(definition);
+				if(_toc.map){
+					setAllLayersDefinition(definition);
+				}
+				else{
+					_toc.addEventListener("mapChanged", mapChangedHandler);
+					curDefinition = definition;
+				}				
+			}
+			private  function mapChangedHandler(e:Event) {
+				setAllLayersDefinition(curDefinition);
 				
 			}
 			private function setFilter(filter:String, _select:String = "true"):void{				
