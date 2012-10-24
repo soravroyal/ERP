@@ -26,7 +26,6 @@ namespace EPRTR.ResourceProviders
                 {
                     /////////No cache... implement new SqlCacheDependeny//////////
                     //1. Get connstring from DataContext
-                    //string connStr = "Data Source=SDKCGA6302.rdg.bane.dk;Initial Catalog=EPRTRcms;User ID=sa;Password=tmggis"; //dc.Connection.ConnectionString;
                     string connStr = dc.Connection.ConnectionString;
                     //2. Get SqlCommand from DataContext and the LinqQuery
                      string sqlCmd = dc.GetCommand(q).CommandText;
