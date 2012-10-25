@@ -58,6 +58,8 @@
 			//labels
 			[Bindable]
 			private var visibilityLabel:String;
+			[Bindable]
+			private var allItemsLabel:String;
 			
 			[Bindable]
 			private var transparencyLabel:String;
@@ -699,6 +701,7 @@
 				legendLabel = resourceManager.getString(widgetResourceFile, 'legendLabel')  || "Other Legends";
 				transparencyLabel = resourceManager.getString(widgetResourceFile, 'transparencyLabel')|| "Layer Transparency"; 	
 				visibilityLabel = resourceManager.getString(widgetResourceFile, 'visibilityLabel') || "Layer Visibility";
+				allItemsLabel =  resourceManager.getString(widgetResourceFile, 'allItemsLabel') || "All years";
 				
 				//buttons			
 					
@@ -739,7 +742,7 @@
 			<mx:Canvas id="vbox" width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
 				<mx:VBox width="100%" height="100%">
 					<mx:Label text="{filterLabel}" styleName="WidgetText" width="100%" includeInLayout="{showFilter}" visible="{showFilter}"/>
-					<widgets:LayerFilter id="layerfilter"  includeInLayout="{showFilter}" visible="{showFilter}" toc="{toc}" filterGroups="{filterGroups}" basemaps="{getBasemaps()}" excludeMapLayersFromFilter="{excludeMapLayersFromFilterObj}" zoomToFilter="{zoomToFilter}"/>
+					<widgets:LayerFilter id="layerfilter"  includeInLayout="{showFilter}" visible="{showFilter}" toc="{toc}" filterGroups="{filterGroups}" basemaps="{getBasemaps()}" excludeMapLayersFromFilter="{excludeMapLayersFromFilterObj}" zoomToFilter="{zoomToFilter}" allItemsLabel="{allItemsLabel}"/>
 							
 					<mx:Label text="{visibilityLabel}" styleName="WidgetText" width="100%"/>
 					<toccomp:TOCCustom id="toc" width="100%" height="100%" showLayersInMapservice="{showLayersInTOC}" excludeLayersInMapservice="{excludeMapLayersInTOCobj}" setLayersDefinition="{layerfilter.setAllLayersDefinition}" setLayersVisibility="{this.setLayersVisibility}" doubleClickEnabled="{!keepTOCCollapsed}"  />				

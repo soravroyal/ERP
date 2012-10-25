@@ -48,7 +48,7 @@
 				}
 				
 				
-				ExternalInterface.call("console.log", "[Widget] Map Google Analytics Widget initialize.  pagetracker name: " + pageTracker);			
+				ExternalInterface.call("console.log", "[Widget] Map Google Analytics Widget initialize.  Pagetracker name: " + pageTracker);			
 				
 				if(map && pageTracker != ""){
 					map.addEventListener(MapMouseEvent.MAP_CLICK, mapAction);				
