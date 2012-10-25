@@ -29,6 +29,7 @@ package dk.atkins
 		private var AND_arrayCol:ArrayCollection = new ArrayCollection();
 		private var Controls_arr:ArrayCollection = new ArrayCollection();
 		private var _definitionFilter:String;
+		private var _allItemsLabel:String = "All";
 		
 		/**
 		* Constructor
@@ -117,6 +118,10 @@ package dk.atkins
 			    	this.addChild(hbox);
 			    }
 			}
+		public function set allItemsLabel(value:String)
+		{
+			_allItemsLabel = value;
+		}
 		/**
 			* Turns a filter on/off by creating a new layer definition string
 			*
@@ -216,7 +221,7 @@ package dk.atkins
 						} 
 					}
 					//all/no filter option 
-					dataprovider.addItem({label:"All years", data:null});
+					dataprovider.addItem({label:_allItemsLabel, data:null});
 					if(selected == "all") selectedIndex = dataprovider.length -1;
 					cmb.dataProvider = dataprovider;
 					cmb.addEventListener(ListEvent.CHANGE , filterComboBoxChange);
