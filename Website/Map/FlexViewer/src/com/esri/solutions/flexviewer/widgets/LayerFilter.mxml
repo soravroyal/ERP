@@ -53,6 +53,9 @@
 			public var excludeMapLayersFromFilter:Object;
 			
 			[Bindable]
+			public var allItemsLabel;
+			
+			[Bindable]
 			public var zoomToFilter:Boolean = false;
 			
 			private var _toc:TOCCustom;
@@ -407,7 +410,7 @@
 	</mx:Script>
 	
 	<mx:VBox>
-		<atkins:LayerFilterControls id="filterControls"  filterChange="{setDefinition(event)}" /> 
+		<atkins:LayerFilterControls id="filterControls"  filterChange="{setDefinition(event)}" allItemsLabel="{allItemsLabel}" /> 
 		<!--mx:Button label="setlayerdef" click="{setAllLayersDefinition(def.text)}" />
 		<mx:Button label="removelayerdef" click="{removeAllLayersDefinition()}" />
 		<mx:TextInput id="def"  text="FacilityName LIKE '%CHIVASSO%'" /-->

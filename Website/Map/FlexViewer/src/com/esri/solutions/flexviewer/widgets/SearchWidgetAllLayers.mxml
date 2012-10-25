@@ -565,6 +565,7 @@
 									 	showAlert(alertSelectionText,alertSelectionTitle);
 									 }
 									// setMapNavigation(null, null);
+									 
 									 showInfoWindow(lastInfoData);
 									 CursorManager.removeAllCursors();
 								}
@@ -883,7 +884,7 @@
 				
 				/*avoid timeoiut if too many results are returned*/
 				var counter:int = 0;
-										
+				var showid:int = 0;						
 				for each (var gra:Graphic in featureSet.features)                    
 				{   
 					counter++;
@@ -1001,7 +1002,16 @@
 						point: point,
 						geometry: gra.geometry
 					};  
-             			lastInfoData = infoData
+					
+					ExternalInterface.call("console.log","if(showid: "+showid + " < Number(gra.attributes[queryPreLinkField])): " + Number(gra.attributes[queryPreLinkField]));
+					if(gra.attributes[queryPreLinkField] && showid < Number(gra.attributes[queryPreLinkField])){
+						showid = Number(gra.attributes[queryPreLinkField]);
+						ExternalInterface.call("console.log"," setting infodata");
+						
+						lastInfoData = infoData
+					}
+					
+             			if(!lastInfoData) lastInfoData = infoData;
 						recAC.addItem(infoData);
              		
 					//***
