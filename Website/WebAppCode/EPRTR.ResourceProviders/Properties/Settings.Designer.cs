@@ -22,25 +22,5 @@ namespace EPRTR.ResourceProviders.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SDKCGA6302.rdg.bane.dk;Initial Catalog=EPRTRcms;User ID=sa")]
-        public string EPRTRcmsConnectionString {
-            get {
-                return ((string)(this["EPRTRcmsConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=sdkcga6302;Initial Catalog=EPRTRweb;User ID=sa")]
-        public string EPRTRwebConnectionString1 {
-            get {
-                return ((string)(this["EPRTRwebConnectionString1"]));
-            }
-        }
     }
 }
