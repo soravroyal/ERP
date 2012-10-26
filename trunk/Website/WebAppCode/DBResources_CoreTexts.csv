@@ -30,3 +30,4 @@ InsertUpdate|MAP_FilterAllWidgetString|allItemsLabel|en-GB|All years
 
 --FacilityDetails Page
 InsertUpdate|Common|FacilityDetailTitle|en-GB|Facility details: {0}
+InsertUpdate|Common|FacilityDetailTitleNotFound|en-GB|Facility was not found!
