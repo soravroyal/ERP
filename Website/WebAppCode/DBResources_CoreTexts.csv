@@ -24,3 +24,9 @@ InsertUpdate|Web.sitemap|QuestionsToEPRTR|ro-RO|Întrebări pentru E-PRTR
 --New NUTS for NO
 InsertUpdate|LOV_NUTSREGION|NOZZ|en-GB|Extra-Regio1
 InsertUpdate|LOV_NUTSREGION|NOZZZ|en-GB|Extra-Regio2
+
+--New Map legend
+InsertUpdate|MAP_FilterAllWidgetString|allItemsLabel|en-GB|All years
+
+--FacilityDetails Page
+InsertUpdate|Common|FacilityDetailTitle|en-GB|Facility details: {0}
