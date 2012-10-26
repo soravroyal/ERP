@@ -17,7 +17,7 @@ public partial class FacilityDetails : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        string facilityReportId = "361176"; // Request.Params["FacilityReportId"];
+        string facilityReportId = Request.Params["FacilityReportId"];
         string facilityId = Request.Params["FacilityId"];
         string reportingYear = Request.Params["ReportingYear"];
 
@@ -26,40 +26,43 @@ public partial class FacilityDetails : System.Web.UI.Page
             ucFacilitySheet.Visible = false;
             ucFacilitySheetEPER.Visible = false;
 
+            //load facility basics
             if (!String.IsNullOrEmpty(facilityReportId))
             {
                 int facRepId = Convert.ToInt32(facilityReportId);
                 FacilityBasic = Facility.GetFacilityBasic(facRepId);
-
-                populateSheet(facilityReportId);
             }
             else if (!String.IsNullOrEmpty(facilityId) && !String.IsNullOrEmpty(reportingYear))
             {
                 int facId = Convert.ToInt32(facilityId);
                 int year = Convert.ToInt32(reportingYear);
                 FacilityBasic = Facility.GetFacilityBasic(facId, year);
-
-                populateSheet(facilityId, reportingYear);
             }
 
+            //pouplate
             populateTitle();
+            populateSheet();
         }
+        
     }
 
-    private void populateSheet(string facilityReportId)
+    private void populateSheet()
     {
         try
         {
-            bool eper = isEPER();
-            if (eper)
+            if (FacilityBasic != null)
             {
-                this.ucFacilitySheetEPER.Populate(facilityReportId);
+                bool eper = isEPER();
+                if (eper)
+                {
+                    this.ucFacilitySheetEPER.Populate(FacilityBasic.FacilityID.ToString(), FacilityBasic.ReportingYear.ToString());
+                }
+                else
+                {
+                    this.ucFacilitySheet.Populate(FacilityBasic.FacilityID.ToString(), FacilityBasic.ReportingYear.ToString());
+                }
+                hideSheets(eper);
             }
-            else
-            {
-                this.ucFacilitySheet.Populate(facilityReportId);
-            }
-            hideSheets(eper);
         }
         catch
         {
@@ -68,34 +71,13 @@ public partial class FacilityDetails : System.Web.UI.Page
     }
 
 
-    private void populateSheet(string facilityId, string reportingYear)
-    {
-        try
-        {
-
-            populateTitle();
-
-            bool eper = isEPER();
-            if (eper)
-            {
-                this.ucFacilitySheetEPER.Populate(facilityId, reportingYear);
-            }
-            else
-            {
-                this.ucFacilitySheet.Populate(facilityId, reportingYear);
-            }
-            hideSheets(eper);
-        }
-        catch
-        { //do nothing
-        }
-    }
-
     private void populateTitle()
     {
-        if (FacilityBasic != null) lbHeadline.Text = FacilityBasic.FacilityName;
+        String name = FacilityBasic != null ? FacilityBasic.FacilityName : "";
 
-        this.Title = lbHeadline.Text;
+        lbHeadline.Text = !String.IsNullOrEmpty(name) ? string.Format(Resources.GetGlobal("Common", "FacilityDetailTitle"), name) : Resources.GetGlobal("Common", "FacilityDetailTitleNotFound");
+
+        this.Title = name;
     }
 
 

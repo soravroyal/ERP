@@ -12,22 +12,22 @@ public partial class PopupFacilityDetails : BasePage
         string facilityId = Request.Params["FacilityId"];
         string reportingYear = Request.Params["ReportingYear"];
 
-				if (!IsPostBack)
-				{
-					ucFacilitySheet.Visible = false;
-					ucFacilitySheetEPER.Visible = false;
+        if (!IsPostBack)
+        {
+            ucFacilitySheet.Visible = false;
+            ucFacilitySheetEPER.Visible = false;
 
-					if (!String.IsNullOrEmpty(facilityReportId))
-					{
-						this.Title = string.Format(Resources.GetGlobal("Common", "FacilityPopupTitle"), "FacilityReportId=" + facilityReportId);
-						populateSheet(facilityReportId);
-					}
-					else if (!String.IsNullOrEmpty(facilityId) && !String.IsNullOrEmpty(reportingYear))
-					{
-						this.Title = string.Format(Resources.GetGlobal("Common", "FacilityPopupTitle"), "FacilityId=" + facilityId + "&ReportingYear=" + reportingYear);
-						populateSheet(facilityId, reportingYear);
-					}
-				} 
+            if (!String.IsNullOrEmpty(facilityReportId))
+            {
+                this.Title = string.Format(Resources.GetGlobal("Common", "FacilityPopupTitle"), "FacilityReportId=" + facilityReportId);
+                populateSheet(facilityReportId);
+            }
+            else if (!String.IsNullOrEmpty(facilityId) && !String.IsNullOrEmpty(reportingYear))
+            {
+                this.Title = string.Format(Resources.GetGlobal("Common", "FacilityPopupTitle"), "FacilityId=" + facilityId + "&ReportingYear=" + reportingYear);
+                populateSheet(facilityId, reportingYear);
+            }
+        }
     }
 
     private void populateSheet(string facilityReportId)
