@@ -184,6 +184,17 @@
 	border-left: 1px solid #D6BAA5;
 }
 
+#facilityDetailsPage div.look_sheet_level1 {
+	background-color:#FFFFFF;
+	border: 1px solid #ADC7AD;
+}
+
+#facilityDetailsPage .look_sheet_level2
+{
+	background-color:#EEEEEE;
+}
+
+
 /*-------------------------------------------------------------------------------------------*/
 /*-- Misc. styles                                  --*/
 /*-------------------------------------------------------------------------------------------*/
