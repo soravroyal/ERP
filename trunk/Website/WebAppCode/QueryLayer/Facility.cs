@@ -14,8 +14,9 @@ namespace QueryLayer
     /// </summary>
     public class FacilityRow
     {
-        public FacilityRow(int facilityReportId, string facilityName, string postalCode, string address, string city, string activityCode, string countryCode, bool confidentialIndicator)
+        public FacilityRow(int facilityId, int facilityReportId, string facilityName, string postalCode, string address, string city, string activityCode, string countryCode, bool confidentialIndicator, int reportingYear)
         {
+            this.facilityId = facilityId;
             this.facilityReportId = facilityReportId;
             this.facilityName = facilityName;
             this.postalCode = postalCode;
@@ -24,8 +25,15 @@ namespace QueryLayer
             this.activityCode = activityCode;
             this.countryCode = countryCode;
             this.confidentialIndicator = confidentialIndicator;
+            this.reportingYear = reportingYear;
         }
 
+        private int facilityId;
+        public int FacilityId
+        {
+            get { return this.facilityId; }
+            set { this.facilityId = value; }
+        }
         private int facilityReportId;
         public int FacilityReportId
         {
@@ -75,6 +83,12 @@ namespace QueryLayer
             get { return confidentialIndicator; }
             set { confidentialIndicator = value; }
         }
+        private int reportingYear;
+        public int ReportingYear
+        {
+            get { return reportingYear; }
+            set { reportingYear = value; }
+        }
     }
     
     /// <summary>
@@ -107,14 +121,16 @@ namespace QueryLayer
                 IQueryable<FACILITYSEARCH_MAINACTIVITY> distinctFacilities = getDistinctFacilities(db, lambda);
                 dataDistinct = distinctFacilities.orderBy(column, descending)
                     .Skip(startRowIndex).Take(maxRows)
-                    .Select<FACILITYSEARCH_MAINACTIVITY, FacilityRow>(v => new FacilityRow(v.FacilityReportID,
+                    .Select<FACILITYSEARCH_MAINACTIVITY, FacilityRow>(v => new FacilityRow(v.FacilityID,
+                                                                                           v.FacilityReportID,
                                                                                            v.FacilityName,
                                                                                            v.PostalCode,
                                                                                            v.Address,
                                                                                            v.City,
                                                                                            v.IAActivityCode,
                                                                                            v.CountryCode,
-                                                                                           v.ConfidentialIndicator));
+                                                                                           v.ConfidentialIndicator,
+                                                                                           v.ReportingYear));
             }
             
             //add rows to result. Speedup paging by adding empty rows at the start and end of list.
