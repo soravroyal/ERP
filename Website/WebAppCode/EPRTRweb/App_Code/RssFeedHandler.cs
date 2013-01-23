@@ -10,6 +10,7 @@ using System.Net;
 using QueryLayer;
 using EPRTR.Formatters;
 using System.Configuration;
+using System.Globalization;
 
 namespace Feed.Rss
 {
@@ -80,24 +81,32 @@ namespace Feed.Rss
                 xmlstream = new MemoryStream();
                 wXML = XmlWriter.Create(xmlstream, settings);
                 wXML.WriteStartDocument();
-                // C:\Projekter\Petr\Code\Website\WebAppCode\EPRTRweb\UserControls\SearchFacility\ucFacilityListResult.ascx.cs
                 wXML.WriteStartElement("rss");
                 wXML.WriteAttributeString("version", "2.0");
+                wXML.WriteAttributeString("xmlns", "atom",null,"http://www.w3.org/2005/Atom");
                     wXML.WriteStartElement("channel");
                     wXML.WriteElementString("title", "E-PRTR news");
-                    wXML.WriteElementString("link", siteurl);
+
+                    wXML.WriteStartElement("atom", "link", null);
+                    wXML.WriteAttributeString("href", siteurl + "news.rss");
+                    wXML.WriteAttributeString("rel", "self");
+                    wXML.WriteAttributeString("type", "application/rss+xml");
+                    wXML.WriteEndElement();
                     wXML.WriteElementString("description", "Top news for E-PRTR");
                     wXML.WriteElementString("language", cultureCode);
-                    //wXML.WriteElementString("pubDate", "Thu, 27 Apr 2006");
                     foreach (News.NewsItem item in listItems)
-                    {
+                    { 
                         wXML.WriteStartElement("item");
                             wXML.WriteElementString("title",item.TitleText);
-                            wXML.WriteElementString("link", siteurl+"pgnews.aspx?newsID=" + item.NewsId);
+                            string url = siteurl + "pgnews.aspx?newsID=" + item.NewsId;
+                            wXML.WriteElementString("link", url);
                             wXML.WriteElementString("description", item.ContentText);
-                            wXML.WriteElementString("pubDate", item.NewsDate.ToString("o"));//  item.NewsDate.Year +"/"+item.NewsDate.Month + "/" + item.NewsDate.Day+" "+item.NewsDate.Hour+":"+item.NewsDate.Minute+":"+item.NewsDate.Second);
-                            //wXML.WriteElementString("pubDate", item.NewsDate.Day +" "+ mfi.GetMonthName(item.NewsDate.Month) + " " + item.NewsDate.Year);
-                        wXML.WriteEndElement();
+                            // Unique url for item
+                            wXML.WriteElementString("guid", url);
+                            // Wed, 27 Jun 2012 10:05:00 +0200
+                            string format = "ddd, d MMM yyyy HH:mm:ss zzz";
+                            wXML.WriteElementString("pubDate", item.NewsDate.ToString(format, CultureInfo.CreateSpecificCulture("en-US")));
+                         wXML.WriteEndElement();
                     }
                     wXML.WriteEndElement();
                 wXML.WriteEndElement();
@@ -111,7 +120,7 @@ namespace Feed.Rss
                     xml = reader.ReadToEnd();
                 }
                 return xml;
-            }catch(Exception)
+            }catch(Exception e) 
             {
                 return null;
             }
@@ -135,8 +144,6 @@ namespace Feed.Rss
             set { _description = value; }
         }
 
-    
-
         public RssItem this[int index]
         {
             get
@@ -155,26 +162,6 @@ namespace Feed.Rss
             private string _link;
             private string _pubDate;
             private string _guid;
-
-            /*internal RssItem(Facility fac, string linkFormat, string guidFormat)
-            {
-          
-                string itemId;
-                itemId = fac.Id.ToString();
-                _title = fac.Name;
-                _subCat = fac.LongDescription;
-                _description = fac.ShortDescription;
-                _pubDate = fac.LastEdited.ToShortDateString();
-                // The linkFormat argument provides the URL of the 
-                // item's document.
-                _link = string.Format(linkFormat, itemId);
-                // The guidFormat argument provides the string that uniquely identifies
-                // the item for RSS readers.
-                _guid = string.Format(guidFormat, itemId);
-              
-            }*/
-
-     
 
             public string Title
             {
@@ -205,8 +192,6 @@ namespace Feed.Rss
                 get { return (_guid); }
                 set { _guid = value; }
             }
-
         }
-
     }
 }
