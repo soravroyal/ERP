@@ -1,0 +1,175 @@
+﻿/*----------------------------------------------------------*/
+/*-- The news are not presented correctly in IE version 7 --*/
+/*-- These styles will fix this                           --*/
+/*----------------------------------------------------------*/
+#contentBorderSettings
+{
+    border:1px dotted black;
+    padding:5px;
+}
+#timeStamp
+{
+    clear:left;
+}
+
+#PanelContentStyle
+{
+    background-color:#F7F7F7;
+}
+
+#PanelHeaderStyle
+{
+    clear:both;
+    color:Blue;
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+#contentPanelArea
+{
+    text-decoration: none; 
+    background-color: #F7F7F7; 
+    margin-bottom:15px;
+    position:relative;
+    clear: both; 
+    float: left;
+    width: 400px;
+    margin-top:10px;
+}
+
+#topNews
+{
+    margin-top:34px;
+    clear:left;
+}
+
+#OtherNews
+{
+    margin-top:17px;
+    clear:left;
+}
+
+#homeContent
+{
+    padding-left:40px;
+    width:55%;
+    float:left;
+    text-align:justify;
+}
+
+.news_area 
+{
+	text-decoration: none;
+	clear: right;
+	float: right;
+	width: 35%;
+	vertical-align:top;	
+	position:relative;
+	z-index: 1;
+}
+.news_area table
+{
+	text-decoration: none;
+}
+
+.newsLink
+{
+  min-width:100%;
+  background-color:#AC8367;  
+  display:inline-block;
+}
+.newsImage
+{
+
+    background-color:#AC8367;
+    padding-top: 1px;
+	padding-right: 3px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+	text-align:left;
+	vertical-align:middle;
+	font-size: 1.2em;	
+	color:White;
+	font-weight:bold;
+    min-width:100%;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+/*
+    padding-top: 1px;
+	padding-right: 3px;
+	padding-bottom: 1px;
+	padding-left: 3px;
+  	background-color:#AC8367 !important;
+	text-align:left;
+	vertical-align:middle;
+	font-size: 1.2em;	
+	color:White;
+	font-weight:bold;
+    min-width:100% !important;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+*/
+}
+.newsheaderlbl
+{
+    min-width:100%;    
+}
+.RssFeedImage
+{
+    margin-left:175px;
+    display:inline-block; 
+    
+}
+.rssImage
+{
+
+    height: 26px;
+    width: 26px;
+}
+
+.newsImage a, a:hover
+{
+    text-decoration:none;
+}
+/*
+.newsImage a, a:focus
+{
+    cursor:pointer;
+    color:#0e4baf;
+}
+.newsImage a, a:visited
+{
+    cursor:pointer;
+    color:#000099;
+}*/
+
+.news_box 
+{
+	background-color: #FFFFCA; 
+}
+
+.news_box td 
+{
+    border: 1px dotted #999999;
+    text-decoration: none;
+	padding-top: 2px;
+	padding-left: 1px;
+	padding-bottom: 2px;
+}
+
+.news_head 
+{
+    width:90%;
+	font-size: 0.9em;
+	color: #666666;
+}
+.news_head td
+{
+	vertical-align: bottom;
+	padding-top:4px;
+	padding-top: 20px;
+}

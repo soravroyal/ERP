@@ -1,0 +1,41 @@
+Instructions:
+---------------------------------
+Run the following sql scripts (in the 'Scripts to run' section) then add them below to show that they have been run.
+
+
+Scripts to run:
+-----------------
+
+Master
+sqlcmd -i %basedir%\UpdateDec2010\CreateViewsVALIDATION_FACILITY
+
+CMS  [none]
+
+Scripts that have been run:
+----------------------------
+
+Master [none]
+sqlcmd -i %basedir%\master\deleteActivities.sql
+
+CMS [none]
+sqlcmd -i %basedir%\cmsBilbomatica\Patch_UPDATE1_NACE_Sections_Subsections.sql
+sqlcmd -i %basedir%\cmsBilbomatica\Patch_UPDATE2_Activity_EPER_text.sql
+
+CMS (At Atkins on 23 Sept 2010)
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_UPDATE_ActivityText.sql
+
+Master (At Atkins on 10 Sept 2010)
+sqlcmd -i %basedir%\master\CreateViewsWASTETRANSFER.sql
+sqlcmd -i %basedir%\master\AddColumn2LOV_POLLUTANT.sql
+sqlcmd -i %basedir%\master\add2columns.sql
+
+CMS (At Atkins on 10 Sept 2010)
+sqlcmd -i %basedir%\cms\EPRTRcmsDiffuseAir.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_INSERT1_tAT_Resourcekey.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_INSERT2_ReviseResourceKey.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_INSERT3_tAT_ResourceValue.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_INSERT4_ReviseResourceValue.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_UPDATE1_tAT_ResourceValue.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_UPDATE2_tAT_ResourceValue.sql
+sqlcmd -i %basedir%\cmsBilbomatica\CMS_UPDATE_MissingTexts.sql
+

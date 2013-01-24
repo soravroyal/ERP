@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+//
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<BaseWidget	
+			xmlns				="com.esri.solutions.flexviewer.*" 
+			xmlns:mx			="http://www.adobe.com/2006/mxml" 
+			xmlns:widgets		="com.esri.solutions.flexviewer.widgets.*"
+			verticalGap	="0" 
+			width		="100%"
+			widgetConfigLoaded="init()">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.esri.ags.events.ZoomEvent;
+			import com.esri.ags.events.MapMouseEvent;
+			import mx.core.Application;
+			import com.esri.ags.events.MapEvent;
+			import com.esri.ags.Map;
+			import flash.external.ExternalInterface;	
+			import com.google.analytics.GATracker;
+            import com.google.analytics.AnalyticsTracker;
+			
+			[Bindable]
+			public var pageTrackerCategory:String = "Flex";
+			
+			private var _pageTracker:String;
+			
+			private var tracker:AnalyticsTracker;
+			
+			public function init():void{			
+				
+				if (configXML){
+					//get pageTracker id from widget config
+					if (configXML.pagetracker != ""){
+						pageTracker = configXML.pagetracker;
+					}
+					if (configXML && configXML.pagetrackercategory != ""){
+						pageTrackerCategory = configXML.pagetrackercategory;
+					}
+				}
+				else if(Application.application.parameters["pagetracker"] != null){
+					pageTracker = Application.application.parameters["pagetracker"];
+				}
+				
+				
+				ExternalInterface.call("console.log", "[Widget] Map Google Analytics Widget initialize.  Pagetracker name: " + pageTracker);			
+				
+				if(map && pageTracker != ""){
+					map.addEventListener(MapMouseEvent.MAP_CLICK, mapAction);				
+					map.addEventListener(MapEvent.LAYER_ADD, mapAction);				
+					map.addEventListener(MapEvent.LAYER_REMOVE, mapAction);				
+					map.addEventListener(MapEvent.LAYER_REMOVE_ALL, mapAction);		
+					map.addEventListener(MapEvent.LAYER_REORDER, mapAction);
+					map.addEventListener(ZoomEvent.ZOOM_END,mapAction);
+					map.addEventListener(MapEvent.LOAD,mapAction);
+				} 
+				
+			}
+			
+			public function get pageTracker():String
+			{
+				return _pageTracker;
+			}
+			
+			public function set pageTracker(value:String):void
+			{
+				_pageTracker =  value;
+				tracker = new GATracker( this, _pageTracker, "AS3", false );
+
+			}
+			private function mapAction(event:Event):void{
+				var tracked:Boolean = false;
+				tracked = tracker.trackEvent(pageTrackerCategory,event.type, "Map " +event.type);					
+				
+				ExternalInterface.call("console.log", "[Widget] Google Analytics trackEvent: " + event.type + " succes: " + tracked);
+			}
+		]]>
+	</mx:Script>
+	
+	
+</BaseWidget>
