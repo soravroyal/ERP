@@ -31,29 +31,34 @@ declare @Fsql1 nvarchar(max) = '
 	  declare @l_3 int = LEN(@r_2);
 
 --* loop
-	  -- Temp String reduced for every span we discover
-	  declare @s_t nvarchar(max)=@lf_2 ;
-	  declare @l_t int = LEN(@s_t) ;
-	  declare @pi_t int = 0 ;
-	  declare @r_t nvarchar(max) = RIGHT(@r_2, (@l_3-@pi_3)) ;
- 
-	  WHILE PATINDEX(''%<SPAN%'', UPPER(@s_t)) > 0
-		BEGIN 
-		-- * We know that the first end span belongs another span
-		-- * Counter + 1
-		-- * String set to be @lf_2 minus start span 
-		set @s_t = RIGHT(@s_t, (@l_t - PATINDEX(''%<SPAN%'', UPPER(@s_t)))) ; 
-		set @l_t = LEN(@s_t);
-		set @s_t = RIGHT(@s_t, (@l_t - PATINDEX(''%>%'', UPPER(@s_t)))) ;
-		--* Add string part uptil next end span
-		--* we add to @pi_3
-		set @pi_t = PATINDEX(''%</SPAN>%'',UPPER(@r_t))-1 ;
-	    set @pi_3 = @pi_3 + @pi_t ;
-	    set @lf_2 = LEFT(@r_2,(@pi_3-1));
-	    set @s_t = @s_t + LEFT(@r_t,(@pi_t-1));
-				
-		END;
+        -- Temp String reduced for every span we discover
+        declare @s_t nvarchar(max)=@lf_2 ;
+        declare @pi_t int = 0 ;
+        declare @r_t nvarchar(max) = RIGHT(@r_2, (@l_3-@pi_3)+1) ;
+        declare @l_t int = LEN(@r_t) ;
+        set @lf_2 = ''''
 
+        WHILE PATINDEX(''%<SPAN%'', UPPER(@s_t)) > 0
+            BEGIN 
+            -- * We know that the first end span belongs another span
+            -- * String set to be @lf_2 minus start span 
+            -- Move </SPAN> from rt to st
+			set @lf_2 = @lf_2 + @s_t + ''</SPAN>''-- LEFT(@r_t,(@pi_t-1));
+			set @r_t = RIGHT(@r_t,(LEN(@r_t)-7))
+
+            -- to be evaluated next time
+            set @pi_t = PATINDEX(''%</SPAN%'', UPPER(@r_t))
+            set @s_t = LEFT(@r_t,@pi_t-1);-- RIGHT(@r_t, (@l_t - @pi_t)) ; 
+            set @r_t = RIGHT(@r_t, (LEN(@r_t)-@pi_t)+1) 
+
+            --* Add string part uptil next end span
+            --* we add to @pi_3
+			set @pi_3 = @pi_3 + 7 + @pi_t ;
+          
+--          set @s_t = @s_t + LEFT(@r_t,(@pi_t-1));
+            END;
+
+		if (@lf_2 = '''') set @lf_2 = @s_t ;
 	  -- String part incl. the span
 	  declare @r_3 nvarchar(max) = RIGHT(@r_2, (@l_3-@pi_3));
 	  -- String part excl. the span
