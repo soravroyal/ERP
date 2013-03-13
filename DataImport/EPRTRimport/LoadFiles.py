@@ -144,7 +144,7 @@ class EPRTRimport():
                 with open(_dir, 'wb') as f:  
                     writer = csv.writer(f, delimiter=';',quoting=csv.QUOTE_NONE, escapechar = '\\')
         #            writer.writerows(someiterable)        #spamWriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])    
-                    writer.writerow(['year','country code','Country','CDR url','Released','Reported','Description','Envelope','Files','Remark']) 
+                    writer.writerow(['#year','country code','Country','CDR url','Released','Reported','Description','Envelope','Files','Remark']) 
                     for _eo in self.envColl:
                         _name = '%s_EPRTR-%s.xml' % (_eo.env_countrycode,_eo.env_year)
                         self.copyXML(_eo.env_path, _name)
