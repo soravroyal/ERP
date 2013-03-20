@@ -43,8 +43,11 @@ class Config():
     impUrls.append('http://cdr.eionet.europa.eu/de/eu/eprtrdat/envuscptw/XML3_DE_Korr7_2008.xml')
     impUrls.append('http://cdr.eionet.europa.eu/de/eu/eprtrdat/envuszyfq/XML3_DE_Korr4_2009.xml')
 
+    impUrls.append('http://cdr.eionet.europa.eu/gb/eu/eprtrdat/envuth3qg/ALLDATA_2010_output_2.xml')
+
+
     def __init__(self):
-        self.path = 'D:\Projects\EEA\EPRTR\DataImport\XML_Import\Resubmission_2013_02_28'
+        self.path = 'E:\Projects\EPRTR\DataImport\XML_Import\Resubmission_2013_02_28'
         self.cdr_path = 'http://cdr.eionet.europa.eu/loggedin'
         self.cdr_user = 'hjelmmor'
         self.cdr_pass = 'technical85'
