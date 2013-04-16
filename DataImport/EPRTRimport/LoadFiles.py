@@ -17,6 +17,7 @@ import datetime
 from lxml import etree
 import traceback
 import operator
+import _mssql
 
 
 class eobj():
@@ -47,27 +48,86 @@ class EPRTRimport():
         self.conf = Config()
         self.envColl = []
         self.countries = {}
+        self.impUrls = []
 
         return
 
     def copyXML(self,path, name):
         _url = None
-        req = urllib2.Request(path)
-        base64string = base64.encodestring(
-                        '%s:%s' % (self.conf.cdr_user, self.conf.cdr_pass))[:-1]
-        authheader =  "Basic %s" % base64string
-        req.add_header("Authorization", authheader)
-        try:
-            _url = urllib2.urlopen(req)
-        except IOError, e:
-            # here we shouldn't fail if the username/password is right
-            print "It looks like the username or password is wrong."
-            sys.exit(1)
         _outp = os.path.join(self.conf.path,name)
-        output = open( _outp,'wb')
-        output.write(_url.read())
-        output.close()
+        if not os.path.exists(_outp):
+            req = urllib2.Request(path)
+            base64string = base64.encodestring(
+                            '%s:%s' % (self.conf.cdr_user, self.conf.cdr_pass))[:-1]
+            authheader =  "Basic %s" % base64string
+            req.add_header("Authorization", authheader)
+            try:
+                _url = urllib2.urlopen(req)
+            except IOError, e:
+                # here we shouldn't fail if the username/password is right
+                print "It looks like the username or password is wrong."
+                sys.exit(1)
+            output = open( _outp,'wb')
+            output.write(_url.read())
+            output.close()
 #        del _url
+
+    def recreateEprtrXMLdb(self):
+        try: 
+            conn = _mssql.connect(server=self.sp['server'], user=self.sp['user'], password=self.sp['passw'], database=self.sp['database'])
+
+        except:
+            messages = "Unexpected error in recreating the XML database: %s" % sys.exc_info()[0]
+            tb = sys.exc_info()[2]
+            tbinfo = traceback.format_tb(tb)[0]
+            messages += "PYTHON ERRORS:\nTraceback info:\n" + tbinfo + "\nError Info:\n" + str(sys.exc_info()[1])
+            print messages
+
+        #SET sqlscript_dir=%basedir%\SQLScripts
+        #rem Recreating EPRTRxml database
+        #call %sqlscript_dir%\recreate_EPRTRxml.bat %sqlscript_dir%
+
+#SET basedir=%1
+#
+#REM Clear existing database:
+#SET SQLCMDDBNAME=master
+#sqlcmd -Q "ALTER DATABASE EPRTRxml SET SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE EPRTRxml;"
+#sqlcmd -Q "CREATE DATABASE EPRTRxml COLLATE Latin1_General_CI_AS;"
+#
+#REM Create database structure:
+#SET SQLCMDDBNAME=EPRTRxml
+#sqlcmd -i %basedir%\CreateTables_EPRTRxml.sql
+#sqlcmd -i %basedir%\CreateReferences_EPRTRxml.sql
+#sqlcmd -i %basedir%\Add_aux_cols_4_xmlimport.sql
+#sqlcmd -i %basedir%\SP_FindPreviousReferences.sql
+#sqlcmd -i %basedir%\copyXMLdata2EPRTR.sql
+#sqlcmd -i %basedir%\EPRTRXML_validate_procedure.sql        
+        return
+
+    def importXMLintoXMLdb(self):
+        #SET mapforce_dir=%basedir%\MAPFORCE
+        #
+        
+        #rem Importing xml file into EPRTRxml database 
+        #call %mapforce_dir%\EPRTR_Import_CMD.exe "%data_dir%\%filename%" %SQLCMDSERVER% %SQLCMDUSER% %SQLCMDPASSWORD%
+        #
+        return
+
+    def validateXMLdb(self):
+#if "%doValidate%"=="true" (
+#  SET SQLCMDDBNAME=EPRTRxml
+#  echo Validating data
+#  sqlcmd -Q "EXEC EPRTRxml.dbo.validate_xml_data"
+#  echo -----------------------------------------------
+#)
+        return
+    def copyXml2Master(self):
+#echo Copying data from xml to master
+#sqlcmd -i %sqlscript_dir%\reset_cols_4_xmlimport.sql
+#sqlcmd -Q "EXEC EPRTRxml.dbo.import_xml @pCDRURL=N'%cdrUrl%',@pCDRUploaded=N'%cdrUploaded%', @pCDRReleased=N'%cdrReleased%', @pResubmitReason='%cdrDescription%';"
+#echo -----------------------------------------------
+        return
+
 
     def readEnvelope(self, path):
 #        http://cdr.eionet.europa.eu/pl/eu/eprtrdat/envutc3xg/xml
@@ -126,7 +186,33 @@ class EPRTRimport():
             return 0
 
     def go(self):
-        for _u in self.conf.impUrls:
+        try:
+        #=======================================================================
+        # Load URL's from csv'
+        #=======================================================================
+            if not os.path.isfile(self.conf.subpath):
+                print 'The file %s does not exist!' % self.conf.subpath
+                return
+            with open(self.conf.subpath, 'rb') as csvf:
+                reader = csv.reader(csvf, delimiter=';', quoting=csv.QUOTE_NONE)
+                for row in reader:
+                    try:
+                        self.impUrls.append(str(row[0]).replace('/manage_document', ''))
+                    except Exception, e:
+                        print e
+                        continue
+            print '%s links found in file: %s' % (len(self.impUrls),csvf)
+        except:
+            messages = "Unexpected error in reading parsing the XML: %s" % sys.exc_info()[0]
+            tb = sys.exc_info()[2]
+            tbinfo = traceback.format_tb(tb)[0]
+            messages += "PYTHON ERRORS:\nTraceback info:\n" + tbinfo + "\nError Info:\n" + str(sys.exc_info()[1])
+            print messages
+        
+        #=======================================================================
+        # Read envelopes
+        #=======================================================================
+        for _u in self.impUrls:
             _b = self.readEnvelope(_u)
         
         print 'loaded %s envelopes' % len(self.envColl)
@@ -140,7 +226,10 @@ class EPRTRimport():
             print 'Loaded %s county names from %s'% (len(self.countries), self.conf.countrypath)
 
             try:            
+                
                 _dir = os.path.join(self.conf.path,'00_config.csv')
+                if os.path.isfile(_dir):
+                    os.remove(_dir)
                 with open(_dir, 'wb') as f:  
                     writer = csv.writer(f, delimiter=';',quoting=csv.QUOTE_NONE, escapechar = '\\')
         #            writer.writerows(someiterable)        #spamWriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])    
