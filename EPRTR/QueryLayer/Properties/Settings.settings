@@ -5,34 +5,34 @@
     <Setting Name="EPRTRcmsConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=OIZ;Initial Catalog=EPRTRcms;User ID=sa;Password=hellfire&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.1.221;Initial Catalog=EPRTRcms;User ID=sa;Password=saretex1&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=OIZ;Initial Catalog=EPRTRcms;User ID=sa;Password=hellfire</Value>
+      <Value Profile="(Default)">Data Source=192.168.1.221;Initial Catalog=EPRTRcms;User ID=sa;Password=saretex1</Value>
     </Setting>
     <Setting Name="EPRTRwebConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=OIZ;Initial Catalog=EPRTRpublic;User ID=sa;Password=hellfire&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.1.221;Initial Catalog=EPRTRpublic;User ID=sa;Password=saretex1&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=OIZ;Initial Catalog=EPRTRpublic;User ID=sa;Password=hellfire</Value>
+      <Value Profile="(Default)">Data Source=192.168.1.221;Initial Catalog=EPRTRpublic;User ID=sa;Password=saretex1</Value>
     </Setting>
     <Setting Name="EPRTRresourceConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=OIZ;Initial Catalog=EPRTRcms;User ID=sa;Password=hellfire&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.1.221;Initial Catalog=EPRTRcms;User ID=sa;Password=saretex1&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=OIZ;Initial Catalog=EPRTRcms;User ID=sa;Password=hellfire</Value>
+      <Value Profile="(Default)">Data Source=192.168.1.221;Initial Catalog=EPRTRcms;User ID=sa;Password=saretex1</Value>
     </Setting>
     <Setting Name="EPRTRwebConnectionString1" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-  &lt;ConnectionString&gt;Data Source=OIZ;Initial Catalog=EPRTRweb;User ID=sa;Password=hellfire&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.1.221;Initial Catalog=EPRTRweb;User ID=sa;Password=saretex1&lt;/ConnectionString&gt;
   &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=OIZ;Initial Catalog=EPRTRweb;User ID=sa;Password=hellfire</Value>
+      <Value Profile="(Default)">Data Source=192.168.1.221;Initial Catalog=EPRTRweb;User ID=sa;Password=saretex1</Value>
     </Setting>
   </Settings>
 </SettingsFile>
