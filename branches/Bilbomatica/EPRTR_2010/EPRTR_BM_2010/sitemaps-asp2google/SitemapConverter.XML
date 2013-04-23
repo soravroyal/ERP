@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SitemapConverter</name>
+    </assembly>
+    <members>
+        <member name="T:SitemapConverter.Converter">
+            <summary>
+            Converts ASP.NET sitemap to google sitemap
+            </summary>
+        </member>
+        <member name="M:SitemapConverter.Converter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SitemapConverter.Converter"/> class.
+            </summary>
+            <param name="domain">The domain name.</param>
+        </member>
+        <member name="M:SitemapConverter.Converter.Process(System.String,System.String)">
+            <summary>
+            Processes the specified ASP.NET sitemap, and generates google's sitemap.
+            </summary>
+            <param name="aspNetSitemap">The ASP.NET sitemap.</param>
+            <param name="googleSitemap">The google sitemap.</param>
+            <returns>true on success</returns>
+        </member>
+        <member name="T:SitemapConverter.Converter.Url">
+            <summary>
+            Class to hold information about the url.
+            </summary>
+            <remarks>Currently contains only the url itself.</remarks>
+        </member>
+        <member name="M:SitemapConverter.Converter.Url.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SitemapConverter.Converter.Url"/> class.
+            </summary>
+            <param name="location">The url.</param>
+        </member>
+        <member name="P:SitemapConverter.Converter.Url.Location">
+            <summary>
+            Gets or sets the url.
+            </summary>
+            <value>The URL.</value>
+        </member>
+        <member name="T:SitemapConverter._form">
+            <summary>
+            Main form
+            </summary>
+        </member>
+        <member name="F:SitemapConverter._form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SitemapConverter._form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SitemapConverter._form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SitemapConverter._form.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:SitemapConverter._form.StartProcessing(System.String,System.String,System.String)">
+            <summary>
+            Starts the processing.
+            </summary>
+            <param name="aspSitemap">The ASP sitemap.</param>
+            <param name="domain">The domain.</param>
+            <param name="googleSitemap">The google sitemap.</param>
+        </member>
+        <member name="T:SitemapConverter.ExtractedUrlDelegate">
+            <summary>
+             
+            </summary>
+            <param name="url"></param>
+        </member>
+        <member name="T:SitemapConverter.AspSitemapProcessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SitemapConverter.AspSitemapProcessor.Process(System.String,SitemapConverter.ExtractedUrlDelegate)">
+            <summary>
+            Starts the specified filename.
+            </summary>
+            <param name="filename">The filename.</param>
+            <param name="receiver">The receiver of extracted urls.</param>
+        </member>
+        <member name="M:SitemapConverter.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:SitemapConverter.Properties.Resources">
+            <summary>
+              Clase de recurso con establecimiento inflexible de tipos, para buscar cadenas traducidas, etc.
+            </summary>
+        </member>
+        <member name="P:SitemapConverter.Properties.Resources.ResourceManager">
+            <summary>
+              Devuelve la instancia de ResourceManager almacenada en caché utilizada por esta clase.
+            </summary>
+        </member>
+        <member name="P:SitemapConverter.Properties.Resources.Culture">
+            <summary>
+              Reemplaza la propiedad CurrentUICulture del subproceso actual para todas las
+              búsquedas de recursos mediante esta clase de recurso con establecimiento inflexible de tipos.
+            </summary>
+        </member>
+    </members>
+</doc>
