@@ -8,7 +8,6 @@ GO
 SET QUOTED_IDENTIFIER OFF
 GO
 
-
 create procedure [dbo].[validate_xml_data]
 as
 begin

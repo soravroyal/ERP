@@ -5,8 +5,8 @@ USE [EPRTRxml]
 -- Create date: 16.01.2012
 -- =============================================
 
-if object_id('dbo.SP_FindPreviousReferences')is not null DROP procedure dbo.SP_FindPreviousReferences
-go
+if object_id('dbo.SP_FindPreviousReferences')is not null DROP procedure dbo.SP_FindPreviousReferences ;
+
 CREATE procedure SP_FindPreviousReferences
 AS
 BEGIN
