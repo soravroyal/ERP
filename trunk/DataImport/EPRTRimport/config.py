@@ -43,7 +43,6 @@ class Config():
         #=======================================================================
         # Submission filepaths 
         #=======================================================================
-        self.basepath = 'D:\Projects\EEA\EPRTR\DataImport' # Main folder inside which we'll find the SQLscripts and Mapforce folder
         self.path = 'D:\Projects\EEA\EPRTR\DataImport\XML_Import\Submission_2013_04' #Where xml and log files are stored
 
         #===============================================================================
@@ -59,8 +58,8 @@ class Config():
 #         self.subpath = os.path.join(self.path,'submissionlinks.csv') #Not used
         self.curr = os.path.dirname(__file__) #Current path
         self.batpath = os.path.join(self.curr,'Validate_and_Import_XML_File.bat') #Path to the bat file used for validation
-        self.sqlpath = os.path.join(self.basepath,'SQLScripts') # Folder in which to find all the sql files
-        self.mapfpath = os.path.join(self.basepath,'MAPFORCE','EPRTR_Import_CMD.exe') # path to EPRTR_Import_CMD.exe
+        self.sqlpath = os.path.join(self.curr,'SQLScripts') # Folder in which to find all the sql files
+#         self.mapfpath = os.path.join(self.curr,'MAPFORCE','EPRTR_Import_CMD.exe') # path to EPRTR_Import_CMD.exe
         #=======================================================================
         # USED namespaces
         # Used when accessing the envelope
