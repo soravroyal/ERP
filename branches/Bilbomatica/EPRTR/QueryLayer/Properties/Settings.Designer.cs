@@ -26,7 +26,7 @@ namespace QueryLayer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OIZ;Initial Catalog=EPRTRcms;User ID=sa;Password=hellfire")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.221;Initial Catalog=EPRTRcms;User ID=sa;Password=saretex1")]
         public string EPRTRcmsConnectionString {
             get {
                 return ((string)(this["EPRTRcmsConnectionString"]));
@@ -36,7 +36,8 @@ namespace QueryLayer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OIZ;Initial Catalog=EPRTRpublic;User ID=sa;Password=hellfire")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.221;Initial Catalog=EPRTRpublic;User ID=sa;Password=saretex" +
+            "1")]
         public string EPRTRwebConnectionString {
             get {
                 return ((string)(this["EPRTRwebConnectionString"]));
@@ -46,7 +47,7 @@ namespace QueryLayer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OIZ;Initial Catalog=EPRTRcms;User ID=sa;Password=hellfire")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.221;Initial Catalog=EPRTRcms;User ID=sa;Password=saretex1")]
         public string EPRTRresourceConnectionString {
             get {
                 return ((string)(this["EPRTRresourceConnectionString"]));
@@ -56,7 +57,7 @@ namespace QueryLayer.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OIZ;Initial Catalog=EPRTRweb;User ID=sa;Password=hellfire")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.1.221;Initial Catalog=EPRTRweb;User ID=sa;Password=saretex1")]
         public string EPRTRwebConnectionString1 {
             get {
                 return ((string)(this["EPRTRwebConnectionString1"]));
