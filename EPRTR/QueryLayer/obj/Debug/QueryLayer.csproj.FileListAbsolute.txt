@@ -1,0 +1,8 @@
+C:\Proyectos\EPRTR\QueryLayer\bin\Debug\QueryLayer.dll.config
+C:\Proyectos\EPRTR\QueryLayer\bin\Debug\QueryLayer.dll
+C:\Proyectos\EPRTR\QueryLayer\bin\Debug\QueryLayer.pdb
+C:\Proyectos\EPRTR\QueryLayer\bin\Debug\LinqUtilities.dll
+C:\Proyectos\EPRTR\QueryLayer\bin\Debug\LinqUtilities.pdb
+C:\Proyectos\EPRTR\QueryLayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR\QueryLayer\obj\Debug\QueryLayer.dll
+C:\Proyectos\EPRTR\QueryLayer\obj\Debug\QueryLayer.pdb

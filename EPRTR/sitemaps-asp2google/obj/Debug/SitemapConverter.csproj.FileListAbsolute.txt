@@ -1,0 +1,15 @@
+C:\Proyectos\EPRTR\sitemaps-asp2google\SitemapConverter.exe.config
+C:\Proyectos\EPRTR\sitemaps-asp2google\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR\sitemaps-asp2google\obj\Debug\SitemapConverter._form.resources
+C:\Proyectos\EPRTR\sitemaps-asp2google\obj\Debug\SitemapConverter.Properties.Resources.resources
+C:\Proyectos\EPRTR\sitemaps-asp2google\obj\Debug\SitemapConverter.csproj.GenerateResource.Cache
+C:\Proyectos\EPRTR\sitemaps-asp2google\obj\Debug\SitemapConverter.exe
+C:\Proyectos\EPRTR\sitemaps-asp2google\bin\Debug\SitemapConverter.XML
+C:\Proyectos\EPRTR\sitemaps-asp2google\obj\Debug\SitemapConverter.pdb
+C:\Proyectos\EPRTR\sitemaps-asp2google\SitemapConverter.exe
+C:\Proyectos\EPRTR\sitemaps-asp2google\SitemapConverter.pdb
+C:\Proyectos\EPRTR\sitemaps-asp2google\SitemapConverter.XML
+C:\Proyectos\EPRTR\sitemaps-asp2google\QueryLayer.dll
+C:\Proyectos\EPRTR\sitemaps-asp2google\LinqUtilities.dll
+C:\Proyectos\EPRTR\sitemaps-asp2google\QueryLayer.pdb
+C:\Proyectos\EPRTR\sitemaps-asp2google\LinqUtilities.pdb

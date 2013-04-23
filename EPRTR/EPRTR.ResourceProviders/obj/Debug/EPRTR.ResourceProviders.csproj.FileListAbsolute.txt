@@ -1,0 +1,10 @@
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll.config
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.pdb
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.dll
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.pdb
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.Properties.Resource.resources
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.csproj.GenerateResource.Cache
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.dll
+C:\Proyectos\EPRTR\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.pdb
