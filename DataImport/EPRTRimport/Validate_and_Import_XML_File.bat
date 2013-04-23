@@ -10,6 +10,7 @@ SET cdrUrl=%~6
 SET cdrUploaded=%~7
 SET cdrReleased=%~8
 SET cdrDescription=%~9
+rem uses shift to read properties 10, 11, 12
 shift
 SET SQLCMDSERVER=%~9
 shift
@@ -39,7 +40,7 @@ SET mapforce_dir=%basedir%\MAPFORCE
 rem Recreating EPRTRxml database
 rem call %sqlscript_dir%\recreate_EPRTRxml.bat %sqlscript_dir%
 
-echo Test: %mapforce_dir% "%data_dir%\%filename%" %SQLCMDSERVER% %SQLCMDUSER% %SQLCMDPASSWORD%
+rem echo Test: %mapforce_dir% "%data_dir%\%filename%" %SQLCMDSERVER% %SQLCMDUSER% %SQLCMDPASSWORD%
 
 rem Importing xml file into EPRTRxml database 
 call %mapforce_dir%\EPRTR_Import_CMD.exe "%data_dir%\%filename%" %SQLCMDSERVER% %SQLCMDUSER% %SQLCMDPASSWORD%

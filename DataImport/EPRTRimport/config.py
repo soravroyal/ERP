@@ -9,12 +9,17 @@ class Config():
 
     def __init__(self):
         #=======================================================================
-        # IMPORTENT VALIDATE?
+        # IMPORTANT VALIDATE?
         # Set to True if the import has to create validations logs 
         #=======================================================================
         self.validate = True
         #=======================================================================
-        # Importent - Date filter  
+        # IMPORTANT LIMITED?
+        # Set to a number if you want this import limited  
+        #=======================================================================
+        self.limited = None  
+        #=======================================================================
+        # IMPORTANT - Date filter  
         # minReportingDate - only Submissions reported after this date (yyyy-mm-dd)
         # maxReportingDate - only Submissions reported before this date (yyyy-mm-dd)
         # If None filter will be ignored 
@@ -22,7 +27,7 @@ class Config():
         self.minReportingDate = '2013-01-01'
         self.maxReportingDate = None
         #=======================================================================
-        # IMPORTENT  - CDR path and credentials
+        # IMPORTANT  - CDR path and credentials
         #=======================================================================
         self.cdrserver = "http://cdr.eionet.europa.eu/" #CDR path
         self.obligation = "http://rod.eionet.europa.eu/obligations/538" # E-PRTR obligation url
@@ -32,7 +37,7 @@ class Config():
         self.cdr_pass = 'technical85' #CDR eionet password
         
         #=======================================================================
-        # SQL Connection params
+        # IMPORTANT SQL Connection params
         # Server name and credentials for creating EPRTRxml and accessing the EPRTRmaster db
         #=======================================================================
         self.sp = {}
@@ -41,9 +46,9 @@ class Config():
         self.sp['passw'] = "tmggis"
         
         #=======================================================================
-        # Submission filepaths 
+        # IMPORTANT Submission folder path 
         #=======================================================================
-        self.path = 'D:\Projects\EEA\EPRTR\DataImport\XML_Import\Submission_2013_04' #Where xml and log files are stored
+        self.path = 'D:\Projects\EEA\EPRTR\DataImport\XML_Import\Submission_test' #Where xml and log files are stored
 
         #===============================================================================
         #

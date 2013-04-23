@@ -1,9 +1,7 @@
 USE [EPRTRxml]
-go
 
 IF EXISTS (SELECT * FROM EPRTRxml.sys.objects WHERE object_id = OBJECT_ID(N'[EPRTRxml].[dbo].[add_aux_columns]'))
-drop procedure [dbo].[add_aux_columns]
-go
+drop procedure [dbo].[add_aux_columns];
 
 create procedure [dbo].[add_aux_columns]
 	@action nvarchar(10)

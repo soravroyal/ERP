@@ -14,6 +14,7 @@ import datetime
 import csv
 
 class cdrEnvelope(object):
+    name = None
     description = None
     startyear = None
     locality = None
@@ -90,6 +91,7 @@ class dbfunc():
             return 1
         except _mssql.MssqlDatabaseException,e:
             messages = 'MssqlDatabaseException raised\n' 
+            messages += 'File: %s' %  sqlpath
             messages += ' message: %s\n' % e.message 
             messages += ' number: %s\n' % e.number 
             messages += ' severity: %s\n' % e.severity 
@@ -115,7 +117,7 @@ class dbfunc():
     #===========================================================================
     def recreateXMLDB(self):
         try:
-            print 'Deletes existing EPRTRxml database!'
+#             print 'Deletes existing EPRTRxml database!'
             conn = _mssql.connect(server=self.conf.sp['server'], user=self.conf.sp['user'], password=self.conf.sp['passw'], database='')
             _sql = "IF DB_ID('{0}') IS NOT NULL BEGIN ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE; DROP DATABASE {0}; END;".format(self.conf.xmldb['name'])
             conn.execute_non_query(_sql)
@@ -126,7 +128,7 @@ class dbfunc():
             _lst = list(self.conf.xmldb['files'])
             for _fls in _lst:
                 if not self.readSqlFile(conn, os.path.join(self.conf.sqlpath,_fls)): return 0
-                print 'The sql file %s was executed successfully!' % _fls#
+#                 print 'The sql file %s was executed successfully!' % _fls#
             #REM Create database structure:
             #SET SQLCMDDBNAME=EPRTRxml
             #sqlcmd -i %basedir%\CreateTables_EPRTRxml.sql
@@ -256,10 +258,10 @@ class dbfunc():
 #        http://cdr.eionet.europa.eu/pl/eu/eprtrdat/envutc3xg/xml
 #        _envPath = os.path.dirname(path) +'/xml'
         req = urllib2.Request(path+'/xml')
-        base64string = base64.encodestring(
-                        '%s:%s' % (self.conf.cdr_user, self.conf.cdr_pass))[:-1]
-        authheader =  "Basic %s" % base64string
-        req.add_header("Authorization", authheader)
+#         base64string = base64.encodestring(
+#                         '%s:%s' % (self.conf.cdr_user, self.conf.cdr_pass))[:-1]
+#         authheader =  "Basic %s" % base64string
+#         req.add_header("Authorization", authheader)
         try:
             _url = urllib2.urlopen(req)
         except IOError, e:
@@ -276,8 +278,10 @@ class dbfunc():
                 if "file" in child.tag:
                     if child.get('type') == "text/xml":
                         env.xmlfilepath = child.get('link') 
-                        env.xmlfilename = child.get('name') 
-                        env.restricted = True if (child.get('restricted') == 'yes') else False
+                        env.xmlfilename = child.get('name')
+                        env.restricted = True if (str(child.get('restricted')).lower() == 'yes') else False
+                        if path == 'http://cdr.eionet.europa.eu/ie/eu/eprtrdat/envuwwvcg': 
+                            print env.xmlfilename, ' - ',child.get('restricted'),' - ',str(env.restricted) 
                         env.uploaded = str(child.get('uploaded')).replace('Z','') 
                         break
  
@@ -377,13 +381,17 @@ class dbfunc():
             print messages
             return 0
 
+    #===========================================================================
+    # This function writes a status csv file in the log folder summerizing which files that has been imported and some meta data 
+    #===========================================================================
     def writecsv(self):
         try:
             _csv = os.path.join(self.conf.path,'logs','eprtrimport_%s.csv'% (datetime.datetime.now().strftime("%Y_%m_%d_%H%M")))
             with open(_csv, 'wb') as f:  
                 writer = csv.writer(f, delimiter=';',quoting=csv.QUOTE_NONE, escapechar = '\\')
     #            writer.writerows(someiterable)        #spamWriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])    
-                writer.writerow(['#Year','Country code','Country','CDR url','Released','Uploaded','Description','Envelope','Files','Restricted']) 
+                writer.writerow(['#Year','Country code','Country','CDR url','Released','Uploaded','Description','Envelope','Files','Logfile','Restricted']) 
+                _c = 0
                 for _env in self.envs:
                     _l = []
                     _l.append(_env.startyear)
@@ -395,8 +403,12 @@ class dbfunc():
                     _l.append(_env.description)
                     _l.append(_env.title)
                     _l.append(_env.xmlfilename)
+                    _l.append(_env.name + '.log')
                     _l.append(_env.restricted)
-                    writer.writerow(_l) 
+                    writer.writerow(_l)
+                    _c += 1 
+                    if self.conf.limited is not None and _c >= self.conf.limited: break
+
             return 1
         except:
             messages = "Unexpected error in recreating the XML database: %s" % sys.exc_info()[0]
@@ -458,25 +470,30 @@ class dbfunc():
         if not self.requestSubmissions():
             print 'Error in requesting E-PRTR submissions!'
             return 0
+        _c = 0
         for _env in self.envs:
-            _name = '%s_EPRTR-%s.xml' % (_env.country_code,_env.startyear)
-            if not os.path.exists(os.path.join(self.conf.path,'logs',_name + '.log')):
+            _env.name = '%s_EPRTR-%s.xml' % (_env.country_code,_env.startyear)
+            if not os.path.exists(os.path.join(self.conf.path,'logs',_env.name + '.log')):
                 print '** - treats the %s %s %s' % (_env.country_code,_env.startyear,_env.url)
                 if not self.readEnvelope(_env.url, _env):
                     print 'Error in reading the envelope!'
                     return 0
-                if not self.copyXML(_env.xmlfilepath, _name):
-                    print 'Error in copying the xml to local folder!'
-                    return 0
-                if not self.recreateXMLDB():
-                    print 'Error in resetting the EprtrXml database!'
-                    return 0
-                if not self.callexebat(_name, _env):
-                    print 'Error in reading the envelope!'
-                    return 0
+#                 if not self.copyXML(_env.xmlfilepath, _env.name):
+#                     print 'Error in copying the xml to local folder!'
+#                     return 0
+#                 if not self.recreateXMLDB():
+#                     print 'Error in resetting the EprtrXml database!'
+#                     return 0
+#                 if not self.callexebat(_env.name, _env):
+#                     print 'Error in reading the envelope!'
+#                     return 0
+            _c += 1
+            if self.conf.limited is not None and _c >= self.conf.limited: break
+                
         if not self.writecsv():
-            print 'Error in reading the envelope!'
+            print 'Error in writing status csv file!'
             return 0
+        print 'EPRTR files successfully imported!'
         
 if __name__ == '__main__':
     ei = dbfunc()

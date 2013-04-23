@@ -43,8 +43,7 @@ GO
 
 
 IF EXISTS (SELECT * FROM EPRTRxml.sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[import_xml]') AND type in (N'P'))
-drop procedure [dbo].[import_xml]
-go
+drop procedure [dbo].[import_xml] ;
 
 create procedure [dbo].[import_xml]
 	@pCDRURL nvarchar(250),
@@ -681,12 +680,6 @@ begin
 		EPRTRmaster.dbo.LOV_METHODTYPE c
 		on c.Code = a.MethodUsed
 
-	/*
-	--select * from EPRTRmaster.dbo.METHODLIST where xmlPollutantReleaseID is not null
-	--select * from EPRTRmaster.dbo.METHODUSED where MethodListID in
-	--(select MethodListID from EPRTRmaster.dbo.METHODLIST where xmlPollutantReleaseID is not null) 
-	--*/
-
 	declare @XMLIDs table(
 		MethodListID int,
 		xmlPollutantTransferID int,
@@ -773,11 +766,6 @@ begin
 		@XMLIDs ml
 		on ml.xmlPollutantReleaseID = pr.PollutantReleaseID
 
-	/*
-	select * from EPRTRmaster.dbo.POLLUTANTRELEASE where FacilityReportID in
-	(select FACILITYREPORTID from EPRTRmaster.dbo.FACILITYREPORT where xmlFacilityReportID is not null)
-	*/
-
 	--------------------------------------------------------------------------------------------
 	----------------------------------- fill POLLUTANTTRANSFER ---------------------------------
 	--------------------------------------------------------------------------------------------
@@ -830,13 +818,6 @@ begin
 	left join
 		@XMLIDs ml
 	on ml.xmlPollutantTransferID = pt.PollutantTransferID
-
-
-
-	/*
-	select * from EPRTRmaster.dbo.POLLUTANTTRANSFER where FacilityReportID in
-	(select FACILITYREPORTID from EPRTRmaster.dbo.FACILITYREPORT where xmlFacilityReportID is not null)
-	*/
 
 	--------------------------------------------------------------------------------------------
 	----------------------------------- fill WASTEHANDLERPARTY ---------------------------------
