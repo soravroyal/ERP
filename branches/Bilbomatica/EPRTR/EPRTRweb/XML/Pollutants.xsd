@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="pollutants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="pollutantGroups">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="pullutant_Group">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="pollutant">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="pollutant_no" type="xs:unsignedInt" />
+                          <xs:element name="pllutant_name" type="xs:string" />
+                          <xs:element name="IUPAC_Name" minOccurs="0" type="xs:string" />
+                          <xs:element name="synonyms" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="0" maxOccurs="unbounded" name="synonym" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="description" type="xs:string" />
+                          <xs:element name="main_uses" type="xs:string" />
+                          <xs:element name="main_methods_of_release" type="xs:string" />
+                          <xs:element name="cas_no" minOccurs="0" type="xs:string" />
+                          <xs:element name="ec_no" minOccurs="0" type="xs:string" />
+                          <xs:element name="chemspider">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="id" type="xs:unsignedInt" />
+                                <xs:element name="url" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="chemdata_id" minOccurs="0" maxOccurs="1" type="xs:unsignedInt" />
+                          <xs:element name="molecular_formula" type="xs:string" />
+                          <xs:element name="jmol" minOccurs="0" type="xs:string" />
+                          <xs:element name="mole_image" minOccurs="0" type="xs:string" />
+                          <xs:element name="smiles_code" type="xs:string" />
+                          <xs:element name="pollutant_group_info" minOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="group_member" minOccurs="1" maxOccurs="unbounded">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="pollutantName" type="xs:string"/>
+                                      <xs:element name="polluantno" type="xs:int"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="classifications">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="classification" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="r_phrases" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="r_phrase" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="s_phrases" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="s_phrase" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="clp" minOccurs="0" >
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="clp_Phrase" type="xs:string"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="ghs" minOccurs="0" >
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="ghs_Phrase" type="xs:string"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="properties" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="state" type="xs:string" minOccurs="0"/>
+                                <xs:element name="melt_freeze_point" type="xs:string" minOccurs="0"/>
+                                <xs:element name="boiling_point" type="xs:string" minOccurs="0"/>
+                                <xs:element name="vapour_pressure" type="xs:string" minOccurs="0"/>
+                                <xs:element name="water_solubility" type="xs:string" minOccurs="0"/>
+                                <xs:element name="partition_coeff" type="xs:string" minOccurs="0"/>
+                                <xs:element name="dissocation_const" type="xs:string" minOccurs="0"/>
+                                <xs:element name="ph" type="xs:string" minOccurs="0"/>
+                                <xs:element name="flammable_limits" type="xs:string" minOccurs="0"/>
+                                <xs:element name="flash_point" type="xs:string" />
+                                <xs:element name="autoignition_temp" type="xs:string" minOccurs="0"/>
+                                <xs:element name="density" type="xs:string" minOccurs="0"/>
+                                <xs:element name="vapour_density" minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="health_and_environment" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="toxicity" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" type="xs:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="WEL_OEL" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="bioaccumulation" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" type="xs:string" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="carcinogenicity" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="mutagenicity" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="persistence" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="aquatic_tox_lc50" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="aquatic_tox_lclod" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="aquatic_tox_ec50" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="aquatic_tox_lg50" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="biological_ox_demand" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="marine_tox" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="phrase" minOccurs="0"/>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:integer" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
