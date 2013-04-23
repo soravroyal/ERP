@@ -11,6 +11,7 @@ import base64
 from xml.etree.ElementTree import parse
 import StringIO
 import datetime
+import csv
 
 class cdrEnvelope(object):
     description = None
@@ -355,7 +356,7 @@ class dbfunc():
     #===========================================================================
     def callexebat(self,name,env):
         try:
-            _str = '"%s" > %s %s %s %s ' % (self.conf.batpath,os.path.join(self.conf.path,'logs',name + '.log'),self.conf.basepath,self.conf.path,'true' if self.conf.validate else 'false')
+            _str = '"%s" > %s %s %s %s ' % (self.conf.batpath,os.path.join(self.conf.path,'logs',name + '.log'),self.conf.curr,self.conf.path,'true' if self.conf.validate else 'false')
 #            Validate_and_Import_XML_File.bat > %data_dir%\logs\!filename!.log %basedir%  %data_dir%  %doValidate% 
             _str += '"%s" %s "%s" "%s" "%s" "%s"' % (env.title,name,env.url,env.uploaded if (env.uploaded is not None and env.uploaded is not '') else env.releasedate,env.releasedate,env.description)
 #             "!title!"  !filename!  "!cdrUrl!"  "!cdrUploaded!"  "!cdrReleased!"  "!cdrDescription!"
@@ -367,6 +368,35 @@ class dbfunc():
                 print line
                 retval = p.wait()
 #                call Validate_and_Import_XML_File.bat > %data_dir%\logs\!filename!.log %basedir%  %data_dir%  %doValidate%  "!title!"  !filename!  "!cdrUrl!"  "!cdrUploaded!"  "!cdrReleased!"  "!cdrDescription!"
+            return 1
+        except:
+            messages = "Unexpected error in recreating the XML database: %s" % sys.exc_info()[0]
+            tb = sys.exc_info()[2]
+            tbinfo = traceback.format_tb(tb)[0]
+            messages += "PYTHON ERRORS:\nTraceback info:\n" + tbinfo + "\nError Info:\n" + str(sys.exc_info()[1])
+            print messages
+            return 0
+
+    def writecsv(self):
+        try:
+            _csv = os.path.join(self.conf.path,'logs','eprtrimport_%s.csv'% (datetime.datetime.now().strftime("%Y_%m_%d_%H%M")))
+            with open(_csv, 'wb') as f:  
+                writer = csv.writer(f, delimiter=';',quoting=csv.QUOTE_NONE, escapechar = '\\')
+    #            writer.writerows(someiterable)        #spamWriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])    
+                writer.writerow(['#Year','Country code','Country','CDR url','Released','Uploaded','Description','Envelope','Files','Restricted']) 
+                for _env in self.envs:
+                    _l = []
+                    _l.append(_env.startyear)
+                    _l.append(_env.country_code)
+                    _l.append(_env.country_name)
+                    _l.append(_env.url)
+                    _l.append(_env.releasedate)
+                    _l.append(_env.uploaded)
+                    _l.append(_env.description)
+                    _l.append(_env.title)
+                    _l.append(_env.xmlfilename)
+                    _l.append(_env.restricted)
+                    writer.writerow(_l) 
             return 1
         except:
             messages = "Unexpected error in recreating the XML database: %s" % sys.exc_info()[0]
@@ -444,6 +474,9 @@ class dbfunc():
                 if not self.callexebat(_name, _env):
                     print 'Error in reading the envelope!'
                     return 0
+        if not self.writecsv():
+            print 'Error in reading the envelope!'
+            return 0
         
 if __name__ == '__main__':
     ei = dbfunc()
