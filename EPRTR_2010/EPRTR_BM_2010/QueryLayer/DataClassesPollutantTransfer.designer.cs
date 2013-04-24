@@ -32,11 +32,11 @@ namespace QueryLayer
     partial void OnCreated();
     #endregion
 		
-		public DataClassesPollutantTransferDataContext() : 
-				base(global::QueryLayer.Properties.Settings.Default.EPRTRwebConnectionString1, mappingSource)
-		{
-			OnCreated();
-		}
+        //public DataClassesPollutantTransferDataContext() : 
+        //        base(global::QueryLayer.Properties.Settings.Default.EPRTRwebConnectionString1, mappingSource)
+        //{
+        //    OnCreated();
+        //}
 		
 		public DataClassesPollutantTransferDataContext(string connection) : 
 				base(connection, mappingSource)

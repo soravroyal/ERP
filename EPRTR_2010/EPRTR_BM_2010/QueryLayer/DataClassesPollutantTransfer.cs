@@ -5,11 +5,11 @@ namespace QueryLayer
 {
     partial class DataClassesPollutantTransferDataContext
     {
-        //public DataClassesPollutantTransferDataContext()
-        //    : this(ConfigurationManager.ConnectionStrings["QueryLayer.Properties.Settings.EPRTRwebConnectionString"].ConnectionString)
-        //{
-        //    OnCreated();
-        //}
+        public DataClassesPollutantTransferDataContext()
+            : this(ConfigurationManager.ConnectionStrings["QueryLayer.Properties.Settings.EPRTRwebConnectionString"].ConnectionString)
+        {
+            OnCreated();
+        }
 
     }
 }

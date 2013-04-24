@@ -8,3 +8,8 @@ D:\Trabajo\Aplicaciones\EPRTR_BM\LinqUtilities\bin\Debug\LinqUtilities.pdb
 D:\Trabajo\Aplicaciones\EPRTR_BM\LinqUtilities\obj\Debug\ResolveAssemblyReference.cache
 D:\Trabajo\Aplicaciones\EPRTR_BM\LinqUtilities\obj\Debug\LinqUtilities.dll
 D:\Trabajo\Aplicaciones\EPRTR_BM\LinqUtilities\obj\Debug\LinqUtilities.pdb
+C:\Proyectos\EPRTR_BM_2010\LinqUtilities\bin\Debug\LinqUtilities.dll
+C:\Proyectos\EPRTR_BM_2010\LinqUtilities\bin\Debug\LinqUtilities.pdb
+C:\Proyectos\EPRTR_BM_2010\LinqUtilities\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR_BM_2010\LinqUtilities\obj\Debug\LinqUtilities.dll
+C:\Proyectos\EPRTR_BM_2010\LinqUtilities\obj\Debug\LinqUtilities.pdb

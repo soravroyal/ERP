@@ -35,11 +35,11 @@ namespace QueryLayer
     partial void DeleteFACILITYSEARCH_MAINACTIVITY(FACILITYSEARCH_MAINACTIVITY instance);
     #endregion
 		
-		public DataClassesFacilityDataContext() : 
-				base(global::QueryLayer.Properties.Settings.Default.EPRTRwebConnectionString1, mappingSource)
-		{
-			OnCreated();
-		}
+        //public DataClassesFacilityDataContext() : 
+        //        base(global::QueryLayer.Properties.Settings.Default.EPRTRwebConnectionString1, mappingSource)
+        //{
+        //    OnCreated();
+        //}
 		
 		public DataClassesFacilityDataContext(string connection) : 
 				base(connection, mappingSource)
