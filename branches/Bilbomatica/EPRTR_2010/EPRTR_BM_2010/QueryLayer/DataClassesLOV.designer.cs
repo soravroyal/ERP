@@ -32,11 +32,11 @@ namespace QueryLayer
     partial void OnCreated();
     #endregion
 		
-		public DataClassesLOVDataContext() : 
-				base(global::QueryLayer.Properties.Settings.Default.EPRTRwebConnectionString1, mappingSource)
-		{
-			OnCreated();
-		}
+        //public DataClassesLOVDataContext() : 
+        //        base(global::QueryLayer.Properties.Settings.Default.EPRTRwebConnectionString, mappingSource)
+        //{
+        //    OnCreated();
+        //}
 		
 		public DataClassesLOVDataContext(string connection) : 
 				base(connection, mappingSource)

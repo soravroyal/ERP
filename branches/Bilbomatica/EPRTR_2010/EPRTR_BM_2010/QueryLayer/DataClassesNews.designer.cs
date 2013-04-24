@@ -38,11 +38,11 @@ namespace QueryLayer
     partial void DeleteNewsValue(NewsValue instance);
     #endregion
 		
-		public DataClassesNewsDataContext() : 
-				base(global::QueryLayer.Properties.Settings.Default.EPRTRcmsConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
+        //public DataClassesNewsDataContext() : 
+        //        base(global::QueryLayer.Properties.Settings.Default.EPRTRcmsConnectionString, mappingSource)
+        //{
+        //    OnCreated();
+        //}
 		
 		public DataClassesNewsDataContext(string connection) : 
 				base(connection, mappingSource)
