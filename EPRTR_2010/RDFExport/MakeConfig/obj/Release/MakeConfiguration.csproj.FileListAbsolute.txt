@@ -1,0 +1,23 @@
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\bin\Release\templates\database.properties.template
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\bin\Release\templates\Makefile.template
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\bin\Release\templates\rdfexport.properties.template
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\bin\Release\MakeConfiguration.exe
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\bin\Release\MakeConfiguration.pdb
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\bin\Release\NDesk.Options.dll
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\obj\Release\ResolveAssemblyReference.cache
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\obj\Release\MakeConfiguration.exe
+D:\Trabajo\Aplicaciones\E-PRTR\Documentacion Inicial\RDFExport\MakeConfig\obj\Release\MakeConfiguration.pdb
+C:\Proyectos\RDFExport\MakeConfig\bin\Release\templates\database.properties.template
+C:\Proyectos\RDFExport\MakeConfig\bin\Release\templates\Makefile.template
+C:\Proyectos\RDFExport\MakeConfig\bin\Release\templates\rdfexport.properties.template
+C:\Proyectos\RDFExport\MakeConfig\bin\Release\MakeConfiguration.exe
+C:\Proyectos\RDFExport\MakeConfig\bin\Release\MakeConfiguration.pdb
+C:\Proyectos\RDFExport\MakeConfig\bin\Release\NDesk.Options.dll
+C:\Proyectos\RDFExport\Build\templates\database.properties.template
+C:\Proyectos\RDFExport\Build\templates\Makefile.template
+C:\Proyectos\RDFExport\Build\templates\rdfexport.properties.template
+C:\Proyectos\RDFExport\Build\MakeConfiguration.exe
+C:\Proyectos\RDFExport\Build\MakeConfiguration.pdb
+C:\Proyectos\RDFExport\MakeConfig\obj\Release\ResolveAssemblyReference.cache
+C:\Proyectos\RDFExport\MakeConfig\obj\Release\MakeConfiguration.exe
+C:\Proyectos\RDFExport\MakeConfig\obj\Release\MakeConfiguration.pdb
