@@ -131,7 +131,8 @@ namespace SitemapConverter
                             //writer.WriteEndElement();
 
                             //Only for en-GB culture
-                            
+                            //We don't need references from the sitemap to the same page in all languages. 
+                            //Only English is needed
                             if (lang == "en-GB")
                             {
                                 writer.WriteStartElement("url");

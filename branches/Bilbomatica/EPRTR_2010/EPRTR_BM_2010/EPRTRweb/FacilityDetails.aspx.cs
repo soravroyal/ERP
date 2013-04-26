@@ -39,6 +39,11 @@ public partial class FacilityDetails : System.Web.UI.Page
                 FacilityBasic = Facility.GetFacilityBasic(facId, year);
             }
             //RRP START-18-04-2013
+            //Code to create a bookmarkable link for the latest report for a facility without the year.
+            //The problem with the year is that we can expect links to facilities from other websites to be unchanged effectively forever. 
+            //Therefore they will link to pages that are become more and more obsolete.
+            //With this link, all external applications can access to the 
+            //Facility details without the year parameter. The URL access to the last documented year.
             else if (!String.IsNullOrEmpty(facilityId) && String.IsNullOrEmpty(reportingYear))
             {
                 int facId = Convert.ToInt32(facilityId);
