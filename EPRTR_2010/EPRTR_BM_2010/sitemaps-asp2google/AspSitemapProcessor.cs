@@ -45,6 +45,9 @@ namespace SitemapConverter
                                 receiver(url);
 
                                 //RRP START 18-04-2013
+                                //The Google sitemap.xml shall be updated to include URLs for all facility factsheets
+                                //We cant use the Web.sitemap file from the web site because this file creates the web site menu. 
+                                //So we cant add a new tag for the facility details.
                                 if (url == "~/FacilityLevels.aspx")
                                 {
                                     url = "~/FacilityDetails.aspx";
