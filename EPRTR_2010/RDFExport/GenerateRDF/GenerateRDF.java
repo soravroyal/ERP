@@ -343,7 +343,7 @@ public class GenerateRDF {
 
             output(" rdf:resource=\"");
             output(getFormattedValue(value));
-            output(">");
+            output("\">");
             output("</");
             output(property.name);
             output(">\n");
