@@ -332,24 +332,7 @@ public class GenerateRDF {
 		}
 		output(" <");
 		output(property.name);
-        //RRP START 24-04-2013
-        /**** Code to include a new property exported per facility in the RDF Export for facilities.*/
-        //We have added this new tag for Facility Details. With this link, all external applications can access to the 
-        //Facility details without the year parameter. The URL access to the last documented year.
-        //In the SQL-SERVER we have modified the view (RDF_FACILITY -- EPRTRmaster Database) to include a new column for this tag.
-        if (property.name.equals("foaf:isPrimaryTopicOf"))
-        {
-            String encodedValue = StringHelper.encodeURIComponent(value.toString(), "UTF-8");
-
-            output(" rdf:resource=\"");
-            output(getFormattedValue(value));
-            output("\">");
-            output("</");
-            output(property.name);
-            output(">\n");
-            return;
-        } //RRP END 24-04-2013
-        else if (property.datatype.startsWith("->")) 
+        if (property.datatype.startsWith("->")) 
         {
 			String encodedValue = StringHelper.encodeURIComponent(
 					value.toString(), "UTF-8");
