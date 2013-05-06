@@ -9,6 +9,10 @@ class Config():
 
     def __init__(self):
         #=======================================================================
+        # IMPORTANT Submission folder path (Working directory)
+        #=======================================================================
+        self.path = 'D:\Projects\EEA\EPRTR\DataImport\XML_Import\Submission_2013_04' #Where xml and log files are stored
+        #=======================================================================
         # IMPORTANT VALIDATE?
         # Set to True if the import has to create validations logs 
         #=======================================================================
@@ -44,11 +48,6 @@ class Config():
         self.sp['server'] = "sdkcga6332"
         self.sp['user'] = "gis"
         self.sp['passw'] = "tmggis"
-        
-        #=======================================================================
-        # IMPORTANT Submission folder path 
-        #=======================================================================
-        self.path = 'D:\Projects\EEA\EPRTR\DataImport\XML_Import\Submission_test' #Where xml and log files are stored
 
         #===============================================================================
         #
