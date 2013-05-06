@@ -478,15 +478,15 @@ class dbfunc():
                 if not self.readEnvelope(_env.url, _env):
                     print 'Error in reading the envelope!'
                     return 0
-#                 if not self.copyXML(_env.xmlfilepath, _env.name):
-#                     print 'Error in copying the xml to local folder!'
-#                     return 0
-#                 if not self.recreateXMLDB():
-#                     print 'Error in resetting the EprtrXml database!'
-#                     return 0
-#                 if not self.callexebat(_env.name, _env):
-#                     print 'Error in reading the envelope!'
-#                     return 0
+                if not self.copyXML(_env.xmlfilepath, _env.name):
+                    print 'Error in copying the xml to local folder!'
+                    return 0
+                if not self.recreateXMLDB():
+                    print 'Error in resetting the EprtrXml database!'
+                    return 0
+                if not self.callexebat(_env.name, _env):
+                    print 'Error in reading the envelope!'
+                    return 0
             _c += 1
             if self.conf.limited is not None and _c >= self.conf.limited: break
                 
