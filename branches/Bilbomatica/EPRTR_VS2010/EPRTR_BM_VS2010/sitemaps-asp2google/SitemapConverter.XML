@@ -4,28 +4,10 @@
         <name>SitemapConverter</name>
     </assembly>
     <members>
-        <member name="M:SitemapConverter.Program.Main(System.String[])">
-            <summary>
-            The main entry point for the application.
-            </summary>
-        </member>
         <member name="T:SitemapConverter._form">
             <summary>
             Main form
             </summary>
-        </member>
-        <member name="M:SitemapConverter._form.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:SitemapConverter._form.StartProcessing(System.String,System.String,System.String)">
-            <summary>
-            Starts the processing.
-            </summary>
-            <param name="aspSitemap">The ASP sitemap.</param>
-            <param name="domain">The domain.</param>
-            <param name="googleSitemap">The google sitemap.</param>
         </member>
         <member name="F:SitemapConverter._form.components">
             <summary>
@@ -44,23 +26,18 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:SitemapConverter.ExtractedUrlDelegate">
+        <member name="M:SitemapConverter._form.#ctor">
             <summary>
-             
-            </summary>
-            <param name="url"></param>
-        </member>
-        <member name="T:SitemapConverter.AspSitemapProcessor">
-            <summary>
-            
+            Default constructor
             </summary>
         </member>
-        <member name="M:SitemapConverter.AspSitemapProcessor.Process(System.String,SitemapConverter.ExtractedUrlDelegate)">
+        <member name="M:SitemapConverter._form.StartProcessing(System.String,System.String,System.String)">
             <summary>
-            Starts the specified filename.
+            Starts the processing.
             </summary>
-            <param name="filename">The filename.</param>
-            <param name="receiver">The receiver of extracted urls.</param>
+            <param name="aspSitemap">The ASP sitemap.</param>
+            <param name="domain">The domain.</param>
+            <param name="googleSitemap">The google sitemap.</param>
         </member>
         <member name="T:SitemapConverter.Properties.Resources">
             <summary>
@@ -114,6 +91,29 @@
             Gets or sets the url.
             </summary>
             <value>The URL.</value>
+        </member>
+        <member name="M:SitemapConverter.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:SitemapConverter.ExtractedUrlDelegate">
+            <summary>
+             
+            </summary>
+            <param name="url"></param>
+        </member>
+        <member name="T:SitemapConverter.AspSitemapProcessor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:SitemapConverter.AspSitemapProcessor.Process(System.String,SitemapConverter.ExtractedUrlDelegate)">
+            <summary>
+            Starts the specified filename.
+            </summary>
+            <param name="filename">The filename.</param>
+            <param name="receiver">The receiver of extracted urls.</param>
         </member>
     </members>
 </doc>
