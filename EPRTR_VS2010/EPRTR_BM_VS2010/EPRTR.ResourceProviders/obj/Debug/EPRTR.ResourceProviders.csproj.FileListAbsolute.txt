@@ -30,3 +30,14 @@ C:\Proyectos\EPRTR_BM_2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-Re
 C:\Proyectos\EPRTR_BM_2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-ResGen.write.1.tlog
 C:\Proyectos\EPRTR_BM_2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.dll
 C:\Proyectos\EPRTR_BM_2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.pdb
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll.config
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.pdb
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.dll
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.pdb
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.Properties.Resource.resources
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.dll
+C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.pdb

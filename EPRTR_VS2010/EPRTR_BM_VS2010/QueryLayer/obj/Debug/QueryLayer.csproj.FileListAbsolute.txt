@@ -22,3 +22,11 @@ C:\Proyectos\EPRTR_BM_2010\QueryLayer\bin\Debug\LinqUtilities.pdb
 C:\Proyectos\EPRTR_BM_2010\QueryLayer\obj\Debug\ResolveAssemblyReference.cache
 C:\Proyectos\EPRTR_BM_2010\QueryLayer\obj\Debug\QueryLayer.dll
 C:\Proyectos\EPRTR_BM_2010\QueryLayer\obj\Debug\QueryLayer.pdb
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\bin\Debug\QueryLayer.dll.config
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\bin\Debug\QueryLayer.dll
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\bin\Debug\QueryLayer.pdb
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\bin\Debug\LinqUtilities.dll
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\bin\Debug\LinqUtilities.pdb
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\obj\Debug\QueryLayer.dll
+C:\Proyectos\EPRTR_BM_VS2010\QueryLayer\obj\Debug\QueryLayer.pdb
