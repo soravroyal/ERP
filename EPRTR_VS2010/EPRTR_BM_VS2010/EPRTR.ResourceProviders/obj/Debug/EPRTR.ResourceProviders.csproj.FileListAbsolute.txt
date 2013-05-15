@@ -41,3 +41,16 @@ C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-
 C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-ResGen.write.1.tlog
 C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.dll
 C:\Proyectos\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll.config
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.Properties.Resource.resources
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\ResGen.read.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\ResGen.write.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.pdb

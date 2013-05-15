@@ -4,41 +4,6 @@
         <name>SitemapConverter</name>
     </assembly>
     <members>
-        <member name="T:SitemapConverter._form">
-            <summary>
-            Main form
-            </summary>
-        </member>
-        <member name="F:SitemapConverter._form.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:SitemapConverter._form.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:SitemapConverter._form.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
-        <member name="M:SitemapConverter._form.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="M:SitemapConverter._form.StartProcessing(System.String,System.String,System.String)">
-            <summary>
-            Starts the processing.
-            </summary>
-            <param name="aspSitemap">The ASP sitemap.</param>
-            <param name="domain">The domain.</param>
-            <param name="googleSitemap">The google sitemap.</param>
-        </member>
         <member name="T:SitemapConverter.Properties.Resources">
             <summary>
               Clase de recurso con establecimiento inflexible de tipos, para buscar cadenas traducidas, etc.
@@ -92,10 +57,40 @@
             </summary>
             <value>The URL.</value>
         </member>
-        <member name="M:SitemapConverter.Program.Main(System.String[])">
+        <member name="T:SitemapConverter._form">
             <summary>
-            The main entry point for the application.
+            Main form
             </summary>
+        </member>
+        <member name="F:SitemapConverter._form.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:SitemapConverter._form.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:SitemapConverter._form.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:SitemapConverter._form.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:SitemapConverter._form.StartProcessing(System.String,System.String,System.String)">
+            <summary>
+            Starts the processing.
+            </summary>
+            <param name="aspSitemap">The ASP sitemap.</param>
+            <param name="domain">The domain.</param>
+            <param name="googleSitemap">The google sitemap.</param>
         </member>
         <member name="T:SitemapConverter.ExtractedUrlDelegate">
             <summary>
@@ -114,6 +109,11 @@
             </summary>
             <param name="filename">The filename.</param>
             <param name="receiver">The receiver of extracted urls.</param>
+        </member>
+        <member name="M:SitemapConverter.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
         </member>
     </members>
 </doc>
