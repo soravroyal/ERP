@@ -18,3 +18,8 @@ C:\Proyectos\EPRTR_BM_VS2010\LinqUtilities\bin\Debug\LinqUtilities.pdb
 C:\Proyectos\EPRTR_BM_VS2010\LinqUtilities\obj\Debug\ResolveAssemblyReference.cache
 C:\Proyectos\EPRTR_BM_VS2010\LinqUtilities\obj\Debug\LinqUtilities.dll
 C:\Proyectos\EPRTR_BM_VS2010\LinqUtilities\obj\Debug\LinqUtilities.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\LinqUtilities\bin\Debug\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\LinqUtilities\bin\Debug\LinqUtilities.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\LinqUtilities\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\LinqUtilities\obj\Debug\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\LinqUtilities\obj\Debug\LinqUtilities.pdb

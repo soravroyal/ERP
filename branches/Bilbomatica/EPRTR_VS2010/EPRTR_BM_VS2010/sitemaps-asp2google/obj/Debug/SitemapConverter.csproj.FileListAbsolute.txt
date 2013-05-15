@@ -61,3 +61,21 @@ C:\Proyectos\EPRTR_BM_VS2010\sitemaps-asp2google\QueryLayer.dll
 C:\Proyectos\EPRTR_BM_VS2010\sitemaps-asp2google\LinqUtilities.dll
 C:\Proyectos\EPRTR_BM_VS2010\sitemaps-asp2google\QueryLayer.pdb
 C:\Proyectos\EPRTR_BM_VS2010\sitemaps-asp2google\LinqUtilities.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\SitemapConverter._form.resources
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\SitemapConverter.Properties.Resources.resources
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\GenerateResource-ResGen.read.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\ResGen.read.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\GenerateResource-ResGen.write.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\ResGen.write.1.tlog
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\SitemapConverter.exe.config
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\SitemapConverter.exe
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\bin\Debug\SitemapConverter.XML
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\obj\Debug\SitemapConverter.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\SitemapConverter.exe
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\SitemapConverter.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\SitemapConverter.XML
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\QueryLayer.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\QueryLayer.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\EPRTR_BM_VS2010\sitemaps-asp2google\LinqUtilities.pdb

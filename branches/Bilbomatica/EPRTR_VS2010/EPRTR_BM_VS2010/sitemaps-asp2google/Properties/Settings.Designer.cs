@@ -37,7 +37,7 @@ namespace SitemapConverter.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("prtr.ec.europa.eu")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://prtr.ec.europa.eu")]
         public string DomainName {
             get {
                 return ((string)(this["DomainName"]));
