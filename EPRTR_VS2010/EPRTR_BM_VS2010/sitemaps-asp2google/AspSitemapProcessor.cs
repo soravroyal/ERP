@@ -42,23 +42,19 @@ namespace SitemapConverter
                             string url = reader.GetAttribute("url");
                             
                             if (! string.IsNullOrEmpty(url))
-                            {
-                                // D30 START 16/05/2013 --> Add default language (English)
-                                url = url + "?lang=en-GB";
-                                // D30 END 16/05/2013 
+                            {                               
                                 receiver(url);
-
                                 //RRP START 18-04-2013
                                 //The Google sitemap.xml shall be updated to include URLs for all facility factsheets
                                 //We cant use the Web.sitemap file from the web site because this file creates the web site menu. 
                                 //So we cant add a new tag for the facility details.
-                                if (url == "~/FacilityLevels.aspx?lang=en-GB")
+                                if (url == "~/FacilityLevels.aspx")
                                 {
                                     // D30 START 16/05/2013
                                     // add all facilityIDs urls
                                     foreach (int id in listIDs)
                                     {
-                                        url = "~/FacilityDetails.aspx?FacilityId=" + id + "&lang=en-GB";
+                                        url = "~/FacilityDetails.aspx?FacilityId=" + id;
                                         receiver(url);
                                     }
                                     // D30 END 16/05/2013
