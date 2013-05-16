@@ -510,7 +510,18 @@ namespace QueryLayer
             return data;
         }
         
+        //D30 START 16/05/2013 
+        /// <summary>
+        /// Select distinct FacilityIDs
+        /// </summary
+        public static IEnumerable<int> GetFacilityDetailsID()
+        {
+              DataClassesFacilityDataContext db = getDataContext();
+              IEnumerable<int> data = db.FACILITYSEARCH_ALLs.Select(p => p.FacilityID).Distinct();
+              return data;
+        }
 
+        //D30 END 16/05/2013
         /// <summary>
         /// Get pollutant releases for a specific facility report and medium
         /// </summary>
