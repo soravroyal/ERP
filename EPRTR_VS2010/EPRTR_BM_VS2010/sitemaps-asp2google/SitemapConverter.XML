@@ -103,7 +103,7 @@
             
             </summary>
         </member>
-        <member name="M:SitemapConverter.AspSitemapProcessor.Process(System.String,SitemapConverter.ExtractedUrlDelegate)">
+        <member name="M:SitemapConverter.AspSitemapProcessor.Process(System.String,SitemapConverter.ExtractedUrlDelegate,System.Collections.IEnumerable)">
             <summary>
             Starts the specified filename.
             </summary>

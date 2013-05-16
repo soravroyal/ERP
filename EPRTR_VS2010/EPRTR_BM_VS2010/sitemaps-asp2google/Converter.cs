@@ -91,7 +91,8 @@ namespace SitemapConverter
         /// <returns>true on success</returns>
         public bool Process(string aspNetSitemap, string googleSitemap)
         {
-            AspSitemapProcessor.Process(aspNetSitemap, OnAspUrl);
+            IEnumerable<int> listFacilityIDs = Facility.GetFacilityDetailsID();
+            AspSitemapProcessor.Process(aspNetSitemap, OnAspUrl, listFacilityIDs);           
             SaveGoogleMap(googleSitemap);
             
             return true;
@@ -116,11 +117,14 @@ namespace SitemapConverter
 
                 foreach (Url url in _urls)
                 {
+                  
                     writer.WriteStartElement("url");
                     writer.WriteElementString("loc", url.Location);
                     writer.WriteEndElement();
 
-                    if (languageList.Count() > 1)
+                   //D30 START 16/05/2013 --> We don´t need languages     
+ 
+                  /* if (languageList.Count() > 1)
                     {
                         foreach (var lang in languageList)
                         {
@@ -141,7 +145,9 @@ namespace SitemapConverter
                             }
                             //RRP END 18-04-2013
                         }
-                    }
+                    }*/
+
+                    //D30 END 16/05/2013 
                 }
 
                 writer.WriteEndElement();
