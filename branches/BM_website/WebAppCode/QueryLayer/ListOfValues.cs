@@ -541,9 +541,6 @@ namespace QueryLayer
      
         #endregion
 
-              
-
-
         #region ReportingYear
         /// <summary>
         /// Return reporting years

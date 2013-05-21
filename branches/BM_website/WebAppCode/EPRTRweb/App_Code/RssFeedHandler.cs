@@ -23,6 +23,9 @@ namespace Feed.Rss
         {
             try
             {
+
+                // Create an instance of StreamWriter to write text to a file.
+                // The using statement also closes the StreamWriter.
                 string siteurl = context.Request.Url.AbsoluteUri;
                 siteurl = siteurl.Substring(0, siteurl.LastIndexOf("/") + 1);
                 string cachedRssFeed = "";
@@ -86,7 +89,9 @@ namespace Feed.Rss
                 wXML.WriteAttributeString("xmlns", "atom",null,"http://www.w3.org/2005/Atom");
                     wXML.WriteStartElement("channel");
                     wXML.WriteElementString("title", "E-PRTR news");
-
+                    //RRP INI 05/06/2013
+                    wXML.WriteElementString("link", siteurl);
+                    //RRP END 05/06/2013
                     wXML.WriteStartElement("atom", "link", null);
                     wXML.WriteAttributeString("href", siteurl + "news.rss");
                     wXML.WriteAttributeString("rel", "self");
@@ -103,10 +108,13 @@ namespace Feed.Rss
                             wXML.WriteElementString("description", item.ContentText);
                             // Unique url for item
                             wXML.WriteElementString("guid", url);
+                            //RRP INI 05/06/2013
                             // Wed, 27 Jun 2012 10:05:00 +0200
-                            string format = "ddd, d MMM yyyy HH:mm:ss zzz";
+                            //string format = "ddd, dd MMM yyyy HH:mm:ss zzz";
+                            string format = "ddd, dd MMM yyyy HH:mm:ss zz'00'";
+                            //RRP END 05/06/2013    
                             wXML.WriteElementString("pubDate", item.NewsDate.ToString(format, CultureInfo.CreateSpecificCulture("en-US")));
-                         wXML.WriteEndElement();
+                            wXML.WriteEndElement();
                     }
                     wXML.WriteEndElement();
                 wXML.WriteEndElement();
@@ -125,6 +133,7 @@ namespace Feed.Rss
                 return null;
             }
         }
+
 
         public string Title
         {

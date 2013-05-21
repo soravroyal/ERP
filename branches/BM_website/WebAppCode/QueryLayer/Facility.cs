@@ -353,6 +353,24 @@ namespace QueryLayer
 
         }
 
+
+        //RRP START 18-04-2013
+        /// <summary>
+        /// Returns Max Year of the facilityId
+        /// </summary>
+        public static int GetMaxYearFacilityId(int facilityId)
+        {
+            DataClassesFacilityDataContext db = getDataContext();
+
+            IEnumerable<int> data = from d in db.FACILITYDETAIL_DETAILs
+                                              where d.FacilityID == facilityId
+                                              select db.FACILITYDETAIL_DETAILs.Max(x => x.ReportingYear);
+
+            return data.FirstOrDefault();
+
+        }
+        //RRP END 18-04-2013
+
         #endregion //FacilityBasic
 
 
@@ -492,7 +510,18 @@ namespace QueryLayer
             return data;
         }
         
+        //D30 START 16/05/2013 
+        /// <summary>
+        /// Select distinct FacilityIDs
+        /// </summary
+        public static IEnumerable<int> GetFacilityDetailsID()
+        {
+              DataClassesFacilityDataContext db = getDataContext();
+              IEnumerable<int> data = db.FACILITYSEARCH_ALLs.Select(p => p.FacilityID).Distinct();
+              return data;
+        }
 
+        //D30 END 16/05/2013
         /// <summary>
         /// Get pollutant releases for a specific facility report and medium
         /// </summary>
