@@ -1,5 +1,0 @@
-C:\Proyectos\EPRTR\LinqUtilities\bin\Debug\LinqUtilities.dll
-C:\Proyectos\EPRTR\LinqUtilities\bin\Debug\LinqUtilities.pdb
-C:\Proyectos\EPRTR\LinqUtilities\obj\Debug\ResolveAssemblyReference.cache
-C:\Proyectos\EPRTR\LinqUtilities\obj\Debug\LinqUtilities.dll
-C:\Proyectos\EPRTR\LinqUtilities\obj\Debug\LinqUtilities.pdb
