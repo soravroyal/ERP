@@ -1,0 +1,227 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<pollutants>
+  <pollutant id="1">
+    <pollutant_name>Methane</pollutant_name>
+    <main_uses>As the major constituent of natural gas, methane is burned to directly heat homes and other commercial buildings. It is also used as a fuel in power stations to produce electricity. Methane is used widely in the chemical industry in the production of more complex chemical compounds.</main_uses>
+    <main_methods_of_release>Methane occurs naturally in the environment. One of the major sources is from the decomposition of plant and animal matter by methane producing bacteria. These occur in air-less environments such as marshes and the gut of some animals and landfills. Methane is also trapped in pockets within the earth's crust, and can be released during the mining of fossil fuels. On a global scale, the human activities that result in the most methane emission, in descending order of importance are: livestock farming, production of fossil fuels, wet rice cultivation, biomass burning, landfill and domestic sewage. </main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>-182.5</melt_freeze_point>
+    <boiling_point>-161.4</boiling_point>
+    <water_solubility>3.5ml / 100ml at 17 oC     24.2 mg/l at 20 oC</water_solubility>
+    <partition_coeff>1.09</partition_coeff>
+    <flammable_limits>~ 5-15%</flammable_limits>
+    <flash_point>-188</flash_point>
+    <autoignition_temp>537</autoignition_temp>
+    <density>0.0007168</density>
+    <vapour_density>0.55</vapour_density>
+    <toxicity>Essentially nontoxic; asphyxiant</toxicity>
+    <WEL_OEL>None</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient(LogKOW)</bioaccumulation>
+    <carcinogenicity>No data</carcinogenicity>
+    <mutagenicity>No data</mutagenicity>
+    <persistence>No data</persistence>
+    <aquatic_tox_lc50>No adverse effects expected</aquatic_tox_lc50>
+    <aquatic_tox_lclod>No adverse effects expected</aquatic_tox_lclod>
+    <aquatic_tox_ec50>No adverse effects expected</aquatic_tox_ec50>
+    <aquatic_tox_lg50>No adverse effects expected</aquatic_tox_lg50>
+    <biological_ox_demand>No adverse effects expected</biological_ox_demand>
+    <marine_tox>No adverse effects expected</marine_tox>
+    <description>Colourless, odourless  gas</description>
+  </pollutant>
+  <pollutant id="3">
+    <pollutant_name>Carbon Dioxide</pollutant_name>
+    <main_uses>Carbon dioxide has many uses, such as a coolant, fire extinguishing gas and preservative. The gas is also used to provide the bubbles in fizzy drinks. A minor use of the solid (frozen) form is to produce smoke effects in TV, film and theatre.</main_uses>
+    <main_methods_of_release>Carbon dioxide is released in large quantities from natural processes, notably respiration by living organisms. Releases from respiration are balanced by a similar quantity taken up by photosynthesis. Other natural sources of carbon dioxide include volcanoes, forest fires and evaporation from seawater. Man made carbon dioxide is produced by combustion processes and released to the atmosphere in chimney emissions from power stations, motor vehicles and other processes where fuels containing carbon are burnt. The concentration of carbon dioxide has increased by around 30% since the industrial revolution, mainly as a result of the combustion of fossil fuels.</main_methods_of_release>
+    <state>Gas</state>
+    <boiling_point>Sublimes -78.5</boiling_point>
+    <vapour_pressure>1 atm at 20 oC</vapour_pressure>
+    <water_solubility>88ml / 100ml at 20 oC</water_solubility>
+    <partition_coeff>0.83</partition_coeff>
+    <flash_point>Non-flammable</flash_point>
+    <autoignition_temp>n/a</autoignition_temp>
+    <density>0.0001976 at 0oC</density>
+    <vapour_density>1.53</vapour_density>
+    <toxicity>LC50 (inhalation, rat) 470000ppm/30M</toxicity>
+    <WEL_OEL>(8hr TWA) 5000ppm 9150 mg.m-3|(STEL 15min) 15000ppm 27400 mg.m-3</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>No data</carcinogenicity>
+    <mutagenicity>No data</mutagenicity>
+    <persistence>No data</persistence>
+    <aquatic_tox_lc50>No data</aquatic_tox_lc50>
+    <aquatic_tox_lclod>No data</aquatic_tox_lclod>
+    <aquatic_tox_ec50>No data</aquatic_tox_ec50>
+    <aquatic_tox_lg50>No data</aquatic_tox_lg50>
+    <biological_ox_demand>No data</biological_ox_demand>
+    <marine_tox>No data</marine_tox>
+    <description>Colourless, odourless  gas</description>
+  </pollutant>
+  <pollutant id="4">
+    <pollutant_name>Hydro-fluorocarbons (HFCs)</pollutant_name>
+    <main_uses>HFCs are mainly used as substitutes for CFCs (Chlorofluorocarbons) and HCFCs (ozone depleting substances) that are being phased out under the 1987 Montreal Protocol. Major uses are as refrigerants in refrigeration and air conditioning equipment and as agents for plastic thermal insulation foams (e.g. for refrigerated vehicle insulation). Minor uses include Metered Dose Inhalers (e.g. for asthma), blowing one component foam (e.g. for building work) and use as a propellant for industrial and technical aerosols. </main_uses>
+    <main_methods_of_release>Major releases of HFCs are from leakage from refrigeration equipment during operation and its end of life destruction. Minor releases arise from the use of HFC containing aerosols and Metered Dose Inhalers. HFC 23 is also produced as a by-product in HCFC 22 manufacture. There are no natural sources of releases to the environment. </main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>n/a</melt_freeze_point>
+    <boiling_point>n/a</boiling_point>
+    <vapour_pressure>n/a</vapour_pressure>
+    <water_solubility>n/a</water_solubility>
+    <partition_coeff>n/a</partition_coeff>
+    <dissocation_const>n/a</dissocation_const>
+    <ph>n/a</ph>
+    <flammable_limits>n/a</flammable_limits>
+    <flash_point>n/a</flash_point>
+    <autoignition_temp>n/a</autoignition_temp>
+    <density>n/a</density>
+    <vapour_density>n/a</vapour_density>
+    <toxicity>n/a</toxicity>
+    <WEL_OEL>n/a</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>n/a</carcinogenicity>
+    <mutagenicity>n/a</mutagenicity>
+    <persistence>n/a</persistence>
+    <aquatic_tox_lc50>n/a</aquatic_tox_lc50>
+    <aquatic_tox_lclod>n/a</aquatic_tox_lclod>
+    <aquatic_tox_ec50>n/a</aquatic_tox_ec50>
+    <aquatic_tox_lg50>n/a</aquatic_tox_lg50>
+    <biological_ox_demand>n/a</biological_ox_demand>
+    <marine_tox>n/a</marine_tox>
+    <description>Hydrofluorocarbons (HFCs) are a group of compounds containing carbon, fluorine and hydrogen (unlike hydrochlorofluorocarbons (HCFCs), which also contain chlorine). They are generally colourless and odourless gases at environmental temperatures and for the most part chemically un-reactive. </description>
+  </pollutant>
+  <pollutant id="4.1">
+    <pollutant_name>Trifluoromethane</pollutant_name>
+    <main_uses>HFCs are mainly used as substitutes for CFCs (Chlorofluorocarbons) and HCFCs (ozone depleting substances) that are being phased out under the 1987 Montreal Protocol. Major uses are as refrigerants in refrigeration and air conditioning equipment and as agents for plastic thermal insulation foams (e.g. for refrigerated vehicle insulation). Minor uses include Metered Dose Inhalers (e.g. for asthma), blowing one component foam (e.g. for building work) and use as a propellant for industrial and technical aerosols. </main_uses>
+    <main_methods_of_release>See above</main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>-155.1</melt_freeze_point>
+    <boiling_point>-82.1</boiling_point>
+    <vapour_pressure>no data</vapour_pressure>
+    <water_solubility>no data</water_solubility>
+    <partition_coeff>0.64</partition_coeff>
+    <dissocation_const>n/a</dissocation_const>
+    <flash_point>Non- flammable</flash_point>
+    <autoignition_temp>n/a</autoignition_temp>
+    <density>no data</density>
+    <vapour_density>no data</vapour_density>
+    <toxicity>Practically non-toxic</toxicity>
+    <WEL_OEL>None</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>No data</carcinogenicity>
+    <mutagenicity>No data</mutagenicity>
+    <persistence>No data</persistence>
+    <aquatic_tox_lc50>No data</aquatic_tox_lc50>
+    <aquatic_tox_lclod>No data</aquatic_tox_lclod>
+    <aquatic_tox_ec50>No data</aquatic_tox_ec50>
+    <aquatic_tox_lg50>No data</aquatic_tox_lg50>
+    <biological_ox_demand>No data</biological_ox_demand>
+    <marine_tox>No data</marine_tox>
+    <description>Hydrofluorocarbons (HFCs) are a group of compounds containing carbon, fluorine and hydrogen (unlike hydrochlorofluorocarbons (HCFCs), which also contain chlorine). They are generally colourless and odourless gases at environmental temperatures and for the most part chemically un-reactive. </description>
+  </pollutant>
+  <pollutant id="5">
+    <pollutant_name>Nitrous Oxide</pollutant_name>
+    <main_uses>As a weak anaesthetic gas, nitrous oxide has been in use since the 19th century in medicine and dentistry. It is used in the dairy industry as a mixing and foaming agent as it is non-flammable, bacteriostatic (stops bacteria from growing) and leaves no taste or odour. In motor sport it is used to speed engines and it is even used in diving to avoid nitrogen narcosis and other effects experienced in deep dives.</main_uses>
+    <main_methods_of_release>Nitrous oxide is produced both naturally-from a wide variety of biological sources in soil and water-and anthropogenically by a variety of agricultural, energy-related, industrial and waste management activities. Nitrous oxide is also produced naturally in soils through microbial processes of nitrification and denitrification. The two major sources of man-made nitrous oxide emissions are in general agricultural soils and the manufacture of adipic acid (a feedstock for nylon manufacture) and nitric acids. Lower level emissions arise from combustion processes in the power generation sector and from road transport. Of the emissions from agricultural soils the most significant sources are fertiliser application and leaching. Emissions from road transport are increasing as a result of the increasing number of petrol driven cars fitted with 3 way catalytic converters, since the converters produce significantly larger emissions of nitrous oxide. The contribution of road transport is minor but important because it is steadily growing in contrast to the other sectors which are declining. </main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>-90.8</melt_freeze_point>
+    <boiling_point>-88.5</boiling_point>
+    <vapour_pressure>no data</vapour_pressure>
+    <water_solubility>2.2mg/l</water_solubility>
+    <partition_coeff>no data</partition_coeff>
+    <density>no data</density>
+    <vapour_density>1.53</vapour_density>
+    <toxicity>No data</toxicity>
+    <WEL_OEL>OEL (8hr TWA)  100ppm 183 mg.m-3</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>IARC Cancer Review:Animal Inadequate Evidence </carcinogenicity>
+    <mutagenicity>DNA inhibition  Inhalation  Rodent - rat  75000 ppm/24H</mutagenicity>
+    <persistence>No data</persistence>
+    <aquatic_tox_lc50>No data</aquatic_tox_lc50>
+    <aquatic_tox_lclod>No data</aquatic_tox_lclod>
+    <aquatic_tox_ec50>No data</aquatic_tox_ec50>
+    <aquatic_tox_lg50>No data</aquatic_tox_lg50>
+    <biological_ox_demand>No data</biological_ox_demand>
+    <marine_tox>No data</marine_tox>
+    <description>Under normal environmental conditions dinitrogen oxide (more commonly known as nitrous oxide) is a colourless gas with a slight sweetish taste and odour. It is non flammable itself but will support combustion and is only slightly soluble in water. It has an anaesthetic and an analgesic property, offering pain relief when inhaled in sufficient amounts. In the 19th century it was termed 'laughing gas' after the amusing effects it had on people that inhaled it. </description>
+  </pollutant>
+  <pollutant id="9">
+    <pollutant_name>Perfluorocarbons (PFCs)</pollutant_name>
+    <main_uses>Usage of PFCs is mainly in the electronics sector in semiconductor manufacture, however there is also significant usage as refrigerants (mainly in blends with HFCs and HCFCs). There is also some minor use as environmental tracer gases, in some fire extinguishing systems and in certain cosmetics and medical applications.</main_uses>
+    <main_methods_of_release>Major releases are from the semiconductor industry, refrigeration sector (blending, filling, leakage and end of life destruction of equipment) and in PFC manufacture. There are also significant environmental releases from aluminium production. Other uses such as in fire extinguishing systems constitute relatively minor release. There are no natural sources of release to the environment.</main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>n/a</melt_freeze_point>
+    <boiling_point>n/a</boiling_point>
+    <vapour_pressure>n/a</vapour_pressure>
+    <water_solubility>n/a</water_solubility>
+    <partition_coeff>n/a</partition_coeff>
+    <dissocation_const>n/a</dissocation_const>
+    <ph>n/a</ph>
+    <flammable_limits>n/a</flammable_limits>
+    <flash_point>n/a</flash_point>
+    <autoignition_temp>n/a</autoignition_temp>
+    <density>n/a</density>
+    <vapour_density>n/a</vapour_density>
+    <toxicity>n/a</toxicity>
+    <WEL_OEL>n/a</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>n/a</carcinogenicity>
+    <mutagenicity>n/a</mutagenicity>
+    <persistence>n/a</persistence>
+    <aquatic_tox_lc50>n/a</aquatic_tox_lc50>
+    <aquatic_tox_lclod>n/a</aquatic_tox_lclod>
+    <aquatic_tox_ec50>n/a</aquatic_tox_ec50>
+    <aquatic_tox_lg50>n/a</aquatic_tox_lg50>
+    <biological_ox_demand>n/a</biological_ox_demand>
+    <marine_tox>n/a</marine_tox>
+    <description>Perfluorocarbons (PFCs) are man-made compounds containing just fluorine and carbon. They are generally colourless, odourless non-flammable gases at environmental temperatures and for the most part chemically un-reactive.</description>
+  </pollutant>
+  <pollutant id="9.1">
+    <pollutant_name>Octafluoropropane</pollutant_name>
+    <main_uses>Usage of PFCs is mainly in the electronics sector in semiconductor manufacture, however there is also significant usage as refrigerants (mainly in blends with HFCs and HCFCs). There is also some minor use as environmental tracer gases, in some fire extinguishing systems and in certain cosmetics and medical applications.</main_uses>
+    <main_methods_of_release>Major releases are from the semiconductor industry, refrigeration sector (blending, filling, leakage and end of life destruction of equipment) and in PFC manufacture. There are also significant environmental releases from aluminium production. Other uses such as in fire extinguishing systems constitute relatively minor release. There are no natural sources of release to the environment.</main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>-147.6</melt_freeze_point>
+    <boiling_point>-36.6</boiling_point>
+    <vapour_pressure>no data</vapour_pressure>
+    <water_solubility>no data</water_solubility>
+    <partition_coeff>no data</partition_coeff>
+    <flash_point>Non-flammable</flash_point>
+    <density>no data</density>
+    <vapour_density>1.29</vapour_density>
+    <toxicity>No data</toxicity>
+    <WEL_OEL>None</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>No data</carcinogenicity>
+    <mutagenicity>No data</mutagenicity>
+    <persistence>No data</persistence>
+    <aquatic_tox_lc50>No data</aquatic_tox_lc50>
+    <aquatic_tox_lclod>No data</aquatic_tox_lclod>
+    <aquatic_tox_ec50>No data</aquatic_tox_ec50>
+    <aquatic_tox_lg50>No data</aquatic_tox_lg50>
+    <biological_ox_demand>No data</biological_ox_demand>
+    <marine_tox>No data</marine_tox>
+    <description>Perfluorocarbons (PFCs) are man-made compounds containing just fluorine and carbon. They are generally colourless, odourless non-flammable gases at environmental temperatures and for the most part chemically un-reactive.</description>
+  </pollutant>
+  <pollutant id="10">
+    <pollutant_name>Sulphur hexafluoride</pollutant_name>
+    <main_uses>The major use of sulphur hexafluoride is in the electricity supply industry, where it is used as an electrical insulator in transformers and switch-gear, and in magnesium smelting because of its inertness. It also has some minor use in the semiconductor sector, as tracer gas for atmospheric analysis, in tennis balls, high performance vehicle tyres and in the cushioning soles of some trainers. </main_uses>
+    <main_methods_of_release>Sulphur hexafluoride is a man-made chemical not found naturally in the environment. The major sources of sulphur hexafluoride release include leakage from electrical switchgear, from magnesium smelting processes and use in semiconductor manufacture.</main_methods_of_release>
+    <state>Gas</state>
+    <melt_freeze_point>-50.8</melt_freeze_point>
+    <boiling_point>63.8</boiling_point>
+    <vapour_pressure>21400 hPa at 20 oC</vapour_pressure>
+    <water_solubility>0.04g/l</water_solubility>
+    <partition_coeff>1.68</partition_coeff>
+    <vapour_density>5.11</vapour_density>
+    <toxicity>Material acts as a simple asphyxiant by displacing air necessary for life.  In high concentrations may cause asphyxiation.</toxicity>
+    <WEL_OEL>(8hr TWA)  1000ppm 6070 mg.m-3|(STEL 15min) 1250ppm 7590 mg.m-3</WEL_OEL>
+    <bioaccumulation>See Partition Coefficient (LogKOW)</bioaccumulation>
+    <carcinogenicity>No data</carcinogenicity>
+    <mutagenicity>No data</mutagenicity>
+    <persistence>No data</persistence>
+    <aquatic_tox_lc50>No data</aquatic_tox_lc50>
+    <aquatic_tox_lclod>No data</aquatic_tox_lclod>
+    <aquatic_tox_ec50>No data</aquatic_tox_ec50>
+    <aquatic_tox_lg50>No data</aquatic_tox_lg50>
+    <biological_ox_demand>No data</biological_ox_demand>
+    <marine_tox>No data</marine_tox>
+    <description>At environmental temperatures sulphur hexafluoride is a colourless, odourless, non-toxic gas of high chemical stability and inertness. It is also non-flammable and about 5 times heavier than air - one of the heaviest known gases. </description>
+  </pollutant>
+</pollutants>

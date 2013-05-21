@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:Canvas	xmlns:mx			="http://www.adobe.com/2006/mxml" 
+			xmlns:flash			="flash.filters.*" 
+			currentState		="" 
+			creationComplete	="init()" >
+		
+	<mx:Script>
+		<![CDATA[
+			import com.esri.ags.Graphic;
+			import com.esri.ags.layers.GraphicsLayer;
+			import com.esri.ags.symbol.PictureMarkerSymbol;
+			import mx.events.ChildExistenceChangedEvent;
+			import mx.containers.VBox;
+		
+			import com.esri.ags.events.ExtentEvent;
+		    import com.esri.ags.events.PanEvent;
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.Map;
+			import com.esri.ags.geometry.Extent;
+		    import flash.display.Shape;
+		    import flash.display.Sprite;
+		    import flash.geom.Matrix;
+		    import flash.geom.Transform;
+		    
+		    private var olInfoPt:Point;
+		    private var reposition:Boolean = true;
+		    private var graphicPointSym:PictureMarkerSymbol;
+		    private var graphicsLayer:GraphicsLayer;
+		    
+		    [Embed(source="/com/esri/solutions/flexviewer/assets/images/icons/BulbGrey.png")]			
+			[Bindable]
+			public var graphicIconCls:Class;
+		    
+		    public var mapSizeLimit:Number = 400;
+		    
+		    private function init():void
+		    {
+		    	map.addEventListener(PanEvent.PAN_UPDATE, repositionInfo);
+		    	map.addEventListener(ExtentEvent.EXTENT_CHANGE, repositionInfo);
+		    	
+		    	//on small maps - keep infobox fixed in corners and add infosymbol to graphiclayer
+		    	graphicPointSym = new PictureMarkerSymbol(graphicIconCls, 40, 60, 0, 2);		    						
+				graphicsLayer = new GraphicsLayer();
+				graphicsLayer.symbol = graphicPointSym;
+				map.addLayer(graphicsLayer);			
+
+		    }
+			 
+			   
+		    private var _map:Map;
+		    
+		    public function set map(value:Map):void
+		    {
+		    	_map = value;
+		    }
+		    
+		    public function get map():Map
+		    {
+		    	return _map;
+		    }
+		    
+		    private var _infoData:Object;
+		    
+		    public function set infoData(value:Object):void
+		    {
+		    	_infoData = value;
+		    	if (value)
+		    	{
+		    		setInfoParameters();
+		    	}
+		    	else
+		    	{
+		    		currentState = "";
+		    	}
+		    }
+		    
+		    public function get infoData():Object
+		    {
+		    	return _infoData;
+		    }
+			
+			//set info parameters
+			private function setInfoParameters():void
+			{
+				positionInfo();
+				
+				infoIcon.source = infoData.icon;
+				infoTitle.text = infoData.title;
+				infoContent.text = infoData.content;
+				infoLinkText.text = infoData.linktext;
+				
+				//clear picture and link button
+				infoImage.source = "";
+				infoImage.height = 0;
+				infoImage.visible = false;
+				infoImage.includeInLayout = false;
+				infoLink.visible = false;
+				infoLink.includeInLayout = false;
+				infoLinkText.visible = false;
+				infoLinkText.includeInLayout = false;
+				
+				if (infoData.link)
+				{
+					var link:String = infoData.link as String;
+					var pos:Number = link.length - 4;
+					var sfx:String = link.substr(pos, 4).toLowerCase();
+					if ((sfx == ".jpg") || (sfx == ".png") || (sfx ==".gif"))
+					{
+						infoImage.source = link;
+						infoImage.height = 150;
+						infoImage.visible = true;
+						infoImage.includeInLayout = true;
+					}
+					else
+					{	
+						infoLink.visible = true;
+						infoLink.includeInLayout = true;
+						infoLink.addEventListener(MouseEvent.CLICK,showLink);
+					}
+				}
+				if(infoData.linktext){
+					infoLink.toolTip = infoData.linktext;										
+					infoLinkText.visible = true;
+					infoLinkText.includeInLayout = true
+					infoLinkText.addEventListener(MouseEvent.CLICK,showLink);
+				}
+				
+				//point icon based on direction
+				if (infoData.content)
+				{
+					var content:String = infoData.content;
+					if ((content.indexOf("BEARING: NE")!= -1) || (content.indexOf("BEARING: SE") != -1) || (content.indexOf("BEARING: E") != -1))
+					{
+						flipIcon("RIGHT");
+					}
+					else
+					{
+						flipIcon("LEFT");
+					}
+				}
+				
+			}
+			
+			//position info
+			public function positionInfo():void
+			{
+				if ((map.extent) && (infoData) && (infoData.point))
+				{
+					var pt:MapPoint = infoData.point;
+					var infoPt:Point = map.toScreen(pt);
+					var reg:String = "regLeft";
+					if (infoPt.x > map.width / 2)
+						reg = "regRight"; 
+					currentState = reg;
+					this.x = infoPt.x - (infoIconCanvas.x + 24);
+					this.y = infoPt.y - (infoIconCanvas.y + 45);
+					
+					olInfoPt = infoPt;
+					//nudgeMap(infoPt);
+					fixInfoBox(infoPt,pt);
+				}
+			}
+			
+			//reposition info
+			public function repositionInfo(event:Event):void
+			{
+				if ((map.extent) && (infoData) && (infoData.point))
+				{
+					var pt:MapPoint = infoData.point;
+					var infoPt:Point = map.toScreen(pt);
+					
+					if(reposition && checkExtent(pt))
+					{
+						var reg:String = "regLeft";
+						if (infoPt.x > map.width / 2)
+							reg = "regRight"; 
+						currentState = reg;
+						this.x = infoPt.x - (infoIconCanvas.x + 24);
+						this.y = infoPt.y - (infoIconCanvas.y + 45);
+					}
+				}
+			}
+			private var fixedStyle:String = "FixedLLInfoCanvas";
+			public function fixInfoBox(point:Point, mPoint:MapPoint):void
+			{
+				graphicsLayer.clear();
+				if(map.width < mapSizeLimit || map.height < mapSizeLimit)
+				{
+					map.reorderLayer(graphicsLayer.id, map.layerIds.length -1);						
+					reposition = false;
+					infoRule.visible = false;
+					infoIcon.visible = false;
+					currentState= "regLeft";
+					
+					var pointgra:Graphic = new Graphic(mPoint);
+					
+					graphicsLayer.add(pointgra);
+										
+					if(point.y > map.height - infoCanvas.height && point.x > map.width - infoCanvas.width)
+					{
+						fixedStyle = "FixedULInfoCanvas";
+					}
+					else if(point.y < map.x + infoCanvas.height && point.x > map.width - infoCanvas.width)
+					{
+						fixedStyle = "FixedLLInfoCanvas";
+					}
+					
+					this.styleName = fixedStyle
+					
+				}
+				else 
+				{
+					infoCanvas.x = 80;
+					reposition = true;
+					infoRule.visible = true;
+					infoIcon.visible = true;
+					this.styleName = "";
+				}
+				
+				
+			}
+			
+			public function nudgeMap(infoPt:Point = null):void
+			{
+					if(!infoPt)
+					{
+						infoPt = olInfoPt;
+					}
+					if(infoPt && reposition)
+					{
+						
+						olInfoPt = null;
+						var dx:Number = 0;
+						var dy:Number = 0;				
+						var mapWidth:Number = map.extent.width;
+						var nudge:Number;
+					    //Divide width in map units by width in pixels
+					    var pixelWidth:Number = mapWidth/map.width;
+						if(infoPt.y + infoCanvas.height > map.height)
+						{					
+							nudge = infoCanvas.height + 40;      
+							dy = -nudge*pixelWidth;
+						}
+						else if(infoPt.y - 60 < 0)
+						{
+							nudge = 60 - infoPt.y;	      
+							dy = nudge*pixelWidth;
+							
+						}						
+						 if(infoPt.x + infoContainer.width > map.width && currentState == "regLeft")
+						{
+							nudge = infoPt.x + infoContainer.width - map.width// infoCanvas.width;      
+							dx = nudge*pixelWidth;
+						}
+						else if(infoPt.x - infoContainer.width < 0 && currentState == "regRight" )
+						{
+							nudge = infoPt.x - infoContainer.width // infoCanvas.width;      
+							dx = nudge*pixelWidth;
+						}  					
+						map.extent = map.extent.offset(dx,dy);
+					}
+			}
+			
+			//close info
+			private function closeInfo():void
+			{
+				infoData = null;
+				graphicsLayer.clear();
+			}
+			
+			//show link
+			private function showLink(e:MouseEvent):void
+			{
+				//navigateToURL(new URLRequest(infoData.link));
+				//navigateToURL(new URLRequest(infoData.link));
+				e.stopPropagation();
+				var externalCallSucces:Boolean = true;
+				try{
+					ExternalInterface.call("sendToJavaScript","Clicked link");
+					externalCallSucces = ExternalInterface.call("openwin",infoData.link);
+					if(!externalCallSucces){
+						navigateToURL(new URLRequest(infoData.link));	
+					}
+				}catch(er:Error){
+					navigateToURL(new URLRequest(infoData.link));
+				}
+			}
+			private function checkExtent(point:MapPoint):Boolean
+			{
+				if(!map.extent.contains(point))
+				{
+					closeInfo();
+					return false
+				}
+				return true;
+			}
+			//flip icon
+			private function flipIcon(dir:String):void
+			{
+				var invertMatrix:Matrix = new Matrix(1,0,0);
+             	// set matrix to invert horizontally
+             	
+             	if (dir == "RIGHT")
+             	{
+	             	invertMatrix.scale(-1, 1);
+	             	// move matrix, so right is at left, and vice versa
+	             	invertMatrix.translate(40,0);
+             	}
+             	
+             	var iconTrans:Transform = new Transform(infoIcon);
+             	iconTrans.matrix = invertMatrix;
+			}
+			private function textChangeback():void
+			{
+				infoLinkText.setStyle("textDecoration", "none")
+			}
+			
+			
+			private function textChange():void
+			{
+				infoLinkText.setStyle("textDecoration", "underline")
+			}
+		
+		]]>
+	</mx:Script>
+	
+	<mx:states>
+		<mx:State name="regLeft">
+			<mx:SetProperty target="{infoContainer}" name="height" />
+			<mx:SetProperty target="{infoContainer}" name="width" />
+			<!--mx:SetProperty target="{infoGlow}" name="visible" value="true"/-->
+			<mx:SetProperty target="{infoIcon}" name="visible" value="true"/>
+			<mx:SetProperty target="{infoRule}" name="visible" value="true"/>
+			<mx:SetProperty target="{infoTitle}" name="visible" value="true"/>
+			<mx:SetProperty target="{infoContent}" name="visible" value="true"/>
+			<mx:SetProperty target="{infoRuleMouseOverArea}" name="visible" value="true"/>
+		</mx:State>
+		<mx:State name="regRight" basedOn="regLeft">
+			<mx:SetProperty target="{infoCanvas}" name="x" value="0"/>
+			<mx:SetProperty target="{infoRule}" name="x" value="200"/>
+			<mx:SetProperty target="{infoRuleMouseOverArea}" name="x" value="200"/>
+			<!--mx:SetProperty target="{infoGlow}" name="x" value="200"/-->
+			<mx:SetProperty target="{infoIconCanvas}" name="x" value="220"/>
+		</mx:State>
+	</mx:states>
+	
+			
+	<mx:transitions>
+		<mx:Transition id="maximize" fromState="" toState="*">
+			<mx:Resize duration="600" target="{infoContainer}" />
+		</mx:Transition>
+		<mx:Transition id="minimize" fromState="*" toState="">
+			<mx:Parallel>
+				<mx:Resize duration="300" target="{infoContainer}" />
+			</mx:Parallel>
+		</mx:Transition>
+		<mx:Transition id="regSwitch" fromState="*" toState="+">
+			<mx:Parallel>
+				<mx:Move duration="300" target="{infoCanvas}" />
+			</mx:Parallel>
+		</mx:Transition>
+	</mx:transitions>
+
+	<mx:Canvas id="infoContainer" x="0" y="0" width="0" height="0" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<mx:VBox id="infoRuleMouseOverArea" width="40" height="60" x="40" y="20" includeInLayout="false" visible="false"  backgroundColor="#FFFFFF" alpha="0">
+			
+		</mx:VBox>		
+		<mx:HRule id="infoRule" x="40" y="40" width="40" height="6" strokeColor="#FFFFFF" shadowColor="#ffffff" alpha="1" visible="false">			
+			<mx:filters>
+				<flash:GlowFilter color="#000000" alpha="0.3" blurX="5" blurY="5"/>
+			</mx:filters>
+		</mx:HRule>
+		<mx:Canvas id="infoCanvas" styleName="InfoCanvas" x="80" y="10" width="200" minHeight="60" horizontalScrollPolicy="off" verticalScrollPolicy="off" >
+			<mx:VBox width="100%" height="100%" verticalGap="0" verticalAlign="middle" horizontalAlign="left" paddingLeft="4" paddingRight="4" paddingTop="4" paddingBottom="4">
+				<mx:Text id="infoTitle" text="Title" width="100%" styleName="InfoTitle" visible="false"/>
+				<mx:Text id="infoContent" text="Content" width="100%" styleName="InfoText" visible="false" resize="nudgeMap()" />
+				<mx:Image id="infoImage" visible="false" includeInLayout="false" height="0"/>
+				<mx:HBox>
+					<mx:Label id="infoLinkText" styleName="InfoText" visible="false" includeInLayout="false" useHandCursor="true" mouseOver="textChange()"  mouseOut="textChangeback()"/>		
+					<mx:Image id="infoLink" source="com/esri/solutions/flexviewer/assets/images/widget/w_link.png"  visible="false" includeInLayout="false" useHandCursor="true" buttonMode="true"/>
+				</mx:HBox>
+			</mx:VBox>
+			<mx:HBox width="100%" horizontalAlign="right" paddingRight="2" paddingTop="2">
+				<mx:Image source="com/esri/solutions/flexviewer/assets/images/widget/w_close.png" alpha="0.7" useHandCursor="true" buttonMode="true" click="closeInfo()"/>
+			</mx:HBox>
+		</mx:Canvas>
+		<!--mx:SWFLoader id="infoGlow" x="0" y="0" width="80" height="80" source="com/esri/solutions/flexviewer/assets/flash/Red_glow.swf" visible="false"/-->
+		<mx:Canvas id="infoIconCanvas" x="20" y="20">
+			<mx:Image id="infoIcon" x="0" y="0" width="48" height="80" source="com/esri/solutions/flexviewer/assets/images/icons/i_pushpin.png" visible="false">
+				<mx:filters>
+					<flash:GlowFilter color="#000000" alpha="0.5" blurX="10" blurY="10"/>
+				</mx:filters>
+			</mx:Image>
+		</mx:Canvas>
+	</mx:Canvas>
+	
+</mx:Canvas>

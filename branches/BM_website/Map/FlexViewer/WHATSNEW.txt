@@ -1,0 +1,26 @@
+*****************************************************************************
+
+Flex Viewer - What's New - Changes in Build 11.20.08
+
+*****************************************************************************
+
+
+1. Preloading Widgets:
+----------------------
+
+The WidgetManagerDocked.mxml has been updated to allow preloading of multiple
+widgets.  To preload a widget, users can add the preload="true" attribute to any
+widget tag in the main config.xml file.
+
+Example:
+<widget preload="true" label="Overview Map" icon="com/esri/solutions/flexviewer/assets/images/icons/i_overview.png" menu="menuMap" config="com/esri/solutions/flexviewer/widgets/OverviewMapWidget.xml">com/esri/solutions/flexviewer/widgets/OverviewMapWidget.swf</widget>	
+	
+		
+		
+2. Filtering Results from Locate Widget:
+----------------------------------------
+
+The Locate widget now allows users to specify a minimum score parameter called
+"minscore" in the widget configuration file.  Any address candidates with a lower 
+score than the minimum score will not be displayer in the results.
+
