@@ -7,7 +7,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
  <title></title>
-    <link rel="alternate" type="application/rss+xml" href="http://localhost:3633/EPRTRweb/news.rss" title="News rss feed" />
+    <link rel="alternate" type="application/rss+xml" href="http://localhost:8032/EPRTRweb/news.rss" title="News rss feed" />
     <link rel="SHORTCUT ICON" href="images/favicon.ico" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/typography.css" rel="stylesheet" type="text/css" />

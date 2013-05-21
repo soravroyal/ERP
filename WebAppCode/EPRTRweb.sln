@@ -1,9 +1,16 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E133F33A-B790-412D-8A61-86357E29A310}"
+	ProjectSection(SolutionItems) = preProject
+		EPRTRweb.vsmdi = EPRTRweb.vsmdi
+		EPRTRweb1.vsmdi = EPRTRweb1.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EPRTRweb", "EPRTRweb\", "{2D922063-DCE2-470D-A296-955651DEFD8C}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFramework = "3.5"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv3.5"
 		ProjectReferences = "{8225010E-65FA-420F-9FB0-A481A93E446F}|QueryLayer.dll;{DA162131-A89C-46E6-84FC-829D64193DD4}|EPRTR.ResourceProviders.dll;{3B3166B8-A93C-4636-AB19-BAEEC9DA1709}|LinqUtilities.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/EPRTRweb"
 		Debug.AspNetCompiler.PhysicalPath = "EPRTRweb\"
@@ -19,14 +26,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EPRTRweb", "EPRTRweb\", "{2
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "3760"
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E133F33A-B790-412D-8A61-86357E29A310}"
-	ProjectSection(SolutionItems) = preProject
-		EPRTRweb.vsmdi = EPRTRweb.vsmdi
-		EPRTRweb1.vsmdi = EPRTRweb1.vsmdi
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		VWDPort = "2273"
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryLayer", "QueryLayer\QueryLayer.csproj", "{8225010E-65FA-420F-9FB0-A481A93E446F}"

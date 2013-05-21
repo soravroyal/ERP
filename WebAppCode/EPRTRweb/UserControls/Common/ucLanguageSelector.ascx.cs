@@ -17,10 +17,14 @@ public partial class UserControls_Common_ucLanguageSelector : System.Web.UI.User
         {
             if (showLangSelector)
             {
-                LangListView.DataSource = QueryLayer.ListOfValues.GetAllCultures();
+                //D30 START 22-04-2013
+                //The language selection box in the upper right corner is apparently not sorted. It would be preferable that it is sorted on language name.
+                //We have added the OrderBy sentence in the function which obtains all languages. We order by Name column.
+                //Original Code --- LangListView.DataSource = QueryLayer.ListOfValues.GetAllCultures();
+                LangListView.DataSource = QueryLayer.ListOfValues.GetAllCultures().OrderBy(x => x.Name);
+                //D30 END 22-04-2013
                 LangListView.DataBind();
             }
-
         }
 
         langSelector.Visible = showLangSelector && (LangListView.Items.Count > 1);
