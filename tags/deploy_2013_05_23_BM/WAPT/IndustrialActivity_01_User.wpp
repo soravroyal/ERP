@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Profile Version="60" ID="3255966c-bf21-468b-bb6e-d1b57436fb44">
+	<Name>IndustrialActivity_01_User</Name>
+	<LoadImages>TRUE</LoadImages>
+	<KeepAlive>TRUE</KeepAlive>
+	<IgnoreErrors>FALSE</IgnoreErrors>
+	<CheckTimeout>TRUE</CheckTimeout>
+	<Delays Type="0">
+		<From>0%2c0</From>
+		<To>0%2c0</To>
+	</Delays>
+	<Connection>-1</Connection>
+	<XForward Enabled="FALSE">
+		<Mask Enabled="TRUE">192.168.%24C1.%24C2</Mask>
+		<IPList/>
+	</XForward>
+	<Agent Enabled="TRUE">Mozilla%2f4.0+%28compatible%3b+MSIE+7.0%3b+Windows+NT+5.1%29</Agent>
+	<Authorization>
+		<Basic Enabled="FALSE"/>
+		<NTLM Enabled="FALSE"/>
+	</Authorization>
+	<Headers>
+		<Header>
+			<Name>Accept</Name>
+			<Value>text%2fhtml%2c+%2a%2f%2a</Value>
+		</Header>
+		<Header>
+			<Name>Accept-Language</Name>
+			<Value>en-us%2c+%2a</Value>
+		</Header>
+		<Header>
+			<Name>Accept-Encoding</Name>
+			<Value>compress%2c+gzip%2c+%2a</Value>
+		</Header>
+		<Header>
+			<Name>Pragma</Name>
+			<Value>no-cache</Value>
+		</Header>
+	</Headers>
+	<Cookies Enabled="FALSE"/>
+	<EncodeParams>TRUE</EncodeParams>
+	<CustomSeparators Enabled="FALSE" Params="&amp;" NameValue="="/>
+	<Main>
+		<Document ID="46c506d8-c377-4992-9c94-8545e03d64f2" Type="3">
+			<Name>Loop</Name>
+			<Description/>
+			<Iteration>1</Iteration>
+			<Document ID="8b0c4c1f-49d7-43d3-a9d4-d7be76163d78" Type="0">
+				<Name>page_1%3a+http%3a%2f%2fprtr-demo.eea.europa.eu%2f</Name>
+				<Description/>
+				<Request>
+					<Server>prtr-demo.eea.europa.eu</Server>
+					<Port>80</Port>
+					<Secure>FALSE</Secure>
+					<URI>%2f</URI>
+					<RecordedURI>%2f</RecordedURI>
+					<Method>1</Method>
+					<CodePage>65001</CodePage>
+					<Delay>
+						<From>0%2c0</From>
+						<To>0%2c0</To>
+					</Delay>
+					<Parameters/>
+					<Variables>
+						<Parameter Type="0">
+							<Name>__VIEWSTATE1</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>__VIEWSTATE</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTVALIDATION1</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>__EVENTVALIDATION</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+					</Variables>
+					<Headers>
+						<Header>
+							<Name>Accept</Name>
+							<Value>text%2fhtml%2c+%2a%2f%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Language</Name>
+							<Value>en-us%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Encoding</Name>
+							<Value>compress%2c+gzip%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Pragma</Name>
+							<Value>no-cache</Value>
+						</Header>
+					</Headers>
+				</Request>
+				<Validation On="FALSE">
+					<Mode>0</Mode>
+					<Text/>
+				</Validation>
+				<Images Load="TRUE"/>
+			</Document>
+			<Document ID="6d775a66-53a9-4ec6-bcca-913969ffa544" Type="0">
+				<Name>page_2%3a+http%3a%2f%2fprtr-demo.eea.europa.eu%2flogin.aspx%3fReturnUrl%3d%%2fhome.aspx</Name>
+				<Description/>
+				<Request>
+					<Server>prtr-demo.eea.europa.eu</Server>
+					<Port>80</Port>
+					<Secure>FALSE</Secure>
+					<URI>%2flogin.aspx%3fReturnUrl%3d%%2fhome.aspx</URI>
+					<RecordedURI>%2flogin.aspx%3fReturnUrl%3d%%2fhome.aspx</RecordedURI>
+					<Method>0</Method>
+					<CodePage>65001</CodePage>
+					<Delay>
+						<From>0%2c0</From>
+						<To>4%2c0</To>
+					</Delay>
+					<Parameters>
+						<Parameter Type="0">
+							<Name>__EVENTTARGET</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTARGUMENT</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__VIEWSTATE</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>__VIEWSTATE1</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTVALIDATION</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>__EVENTVALIDATION1</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>Login1%24UserName</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>hollemar</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>Login1%24Password</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>vodafone22</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>Login1%24LoginButton</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>Log+In</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+					</Parameters>
+					<Variables>
+						<Parameter Type="0">
+							<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState1</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode1</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__VIEWSTATE2</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>__VIEWSTATE</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTVALIDATION2</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>__EVENTVALIDATION</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+					</Variables>
+					<Headers>
+						<Header>
+							<Name>Accept</Name>
+							<Value>text%2fhtml%2c+%2a%2f%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Language</Name>
+							<Value>en-us%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Encoding</Name>
+							<Value>compress%2c+gzip%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Pragma</Name>
+							<Value>no-cache</Value>
+						</Header>
+					</Headers>
+				</Request>
+				<Validation On="FALSE">
+					<Mode>0</Mode>
+					<Text/>
+				</Validation>
+				<Images Load="TRUE">
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fE-PRTR.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2freview5.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec1_soil.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec2_nature.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec3_air.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec4_water.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dXXZQd2nIfQfEjsLYMJMVCg2%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dkqNpvQuspDxJG4WyblLM4bUx34ry2zE-9sNhVK3v-KA1%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dkqNpvQuspDxJG4WyblLM4e8bBM20x0WDv0E3eOFYcrQ1%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fnews_soil.gif</Image>
+				</Images>
+			</Document>
+			<Document ID="1a64d1ae-b47b-4d69-96d9-600904db3812" Type="0">
+				<Name>page_3%3a+http%3a%2f%2fprtr-demo.eea.europa.eu%2fhome.aspx</Name>
+				<Description/>
+				<Request>
+					<Server>prtr-demo.eea.europa.eu</Server>
+					<Port>80</Port>
+					<Secure>FALSE</Secure>
+					<URI>%2fhome.aspx</URI>
+					<RecordedURI>%2fhome.aspx</RecordedURI>
+					<Method>0</Method>
+					<CodePage>0</CodePage>
+					<Delay>
+						<From>0%2c0</From>
+						<To>1%2c0</To>
+					</Delay>
+					<Parameters>
+						<Parameter Type="0">
+							<Name>ctl00%24ScriptManagerMaster</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>ctl00%24ContentPlaceHolderMaster%24upTree%7cctl00%24ContentPlaceHolderMaster%24ContentMenu%24MenuTree</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState1</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode1</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTTARGET</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>ctl00%24ContentPlaceHolderMaster%24ContentMenu%24MenuTree</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTARGUMENT</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>tSearch+E-PRTR+data</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_PopulateLog</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__VIEWSTATE</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>__VIEWSTATE2</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTVALIDATION</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>__EVENTVALIDATION2</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__ASYNCPOST</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>true</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+					</Parameters>
+					<Variables/>
+					<Headers>
+						<Header>
+							<Name>X-MicrosoftAjax</Name>
+							<Value>Delta%3dtrue</Value>
+						</Header>
+						<Header>
+							<Name>Cache-Control</Name>
+							<Value>no-cache</Value>
+						</Header>
+						<Header>
+							<Name>Accept</Name>
+							<Value>text%2fhtml%2c+%2a%2f%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Language</Name>
+							<Value>en-us%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Encoding</Name>
+							<Value>compress%2c+gzip%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Pragma</Name>
+							<Value>no-cache</Value>
+						</Header>
+					</Headers>
+				</Request>
+				<Validation On="FALSE">
+					<Mode>0</Mode>
+					<Text/>
+				</Validation>
+				<Images Load="TRUE"/>
+			</Document>
+			<Document ID="d932c058-6c8a-478d-bcbe-70c79a2c5971" Type="0">
+				<Name>page_4%3a+http%3a%2f%2fprtr-demo.eea.europa.eu%2fIndustialActivity.aspx</Name>
+				<Description/>
+				<Request>
+					<Server>prtr-demo.eea.europa.eu</Server>
+					<Port>80</Port>
+					<Secure>FALSE</Secure>
+					<URI>%2fIndustialActivity.aspx</URI>
+					<RecordedURI>%2fIndustialActivity.aspx</RecordedURI>
+					<Method>1</Method>
+					<CodePage>65001</CodePage>
+					<Delay>
+						<From>0%2c0</From>
+						<To>27%2c0</To>
+					</Delay>
+					<Parameters/>
+					<Variables>
+						<Parameter Type="0">
+							<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState1</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode1</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__VIEWSTATE3</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>__VIEWSTATE</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTVALIDATION3</Name>
+							<Functions>
+								<Function Type="2">
+									<Name>__EVENTVALIDATION</Name>
+									<Index>1</Index>
+								</Function>
+							</Functions>
+						</Parameter>
+					</Variables>
+					<Headers>
+						<Header>
+							<Name>Accept</Name>
+							<Value>text%2fhtml%2c+%2a%2f%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Language</Name>
+							<Value>en-us%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Encoding</Name>
+							<Value>compress%2c+gzip%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Pragma</Name>
+							<Value>no-cache</Value>
+						</Header>
+					</Headers>
+				</Request>
+				<Validation On="FALSE">
+					<Mode>0</Mode>
+					<Text/>
+				</Validation>
+				<Images Load="TRUE">
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fE-PRTR.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2freview5.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec1_soil.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec2_nature.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec3_air.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2fec4_water.gif</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dXXZQd2nIfQfEjsLYMJMVCg2%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dkqNpvQuspDxJG4WyblLM4bUx34ry2zE-9sNhVK3v-KA1%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dkqNpvQuspDxJG4WyblLM4bTHRwDEd609gFKNeAtQ4Lc1%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fWebResource.axd%3fd%3dkqNpvQuspDxJG4WyblLM4e8bBM20x0WDv0E3eOFYcrQ1%26t%3d633852572000915436</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2finfo.png</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2falert.png</Image>
+					<Image Load="TRUE" Type="0">http%3a%2f%2fprtr-demo.eea.europa.eu%2fimages%2floader.gif</Image>
+				</Images>
+			</Document>
+			<Document ID="8dc8fcf8-58a6-45a0-910d-7392250e3735" Type="0">
+				<Name>page_5%3a+http%3a%2f%2fprtr-demo.eea.europa.eu%2fIndustialActivity.aspx</Name>
+				<Description/>
+				<Request>
+					<Server>prtr-demo.eea.europa.eu</Server>
+					<Port>80</Port>
+					<Secure>FALSE</Secure>
+					<URI>%2fIndustialActivity.aspx</URI>
+					<RecordedURI>%2fIndustialActivity.aspx</RecordedURI>
+					<Method>0</Method>
+					<CodePage>0</CodePage>
+					<Delay>
+						<From>0%2c0</From>
+						<To>0%2c0</To>
+					</Delay>
+					<Parameters>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ScriptManagerMaster</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24upIndustrialActivity%7cctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24btnSearch</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_ExpandState1</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_SelectedNode1</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTTARGET</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTARGUMENT</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00_ctl00_ContentPlaceHolderMaster_ContentMenu_MenuTree_PopulateLog</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__LASTFOCUS</Name>
+							<Functions>
+								<Function Type="8">
+									<Value/>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__VIEWSTATE</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>__VIEWSTATE3</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__EVENTVALIDATION</Name>
+							<Functions>
+								<Function Type="11">
+									<Name>__EVENTVALIDATION3</Name>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucAreaSearchOption%24cbFacilityCountry</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>-1</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucAreaSearchOption%24rblRegionType</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>1</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucAreaSearchOption%24cbRegion</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>-1</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucYearSearchOption%24cbReportYear</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>2007</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucActivitySearchOption%24rblActivityType</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>0</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucActivitySearchOption%24lbActivitySector</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>-1</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucActivitySearchOption%24lbActivities</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>-1</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24ucActivitySearchOption%24lbSubActivities</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>-1</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>__ASYNCPOST</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>true</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+						<Parameter Type="0">
+							<Name>ctl00%24ctl00%24ContentPlaceHolderMaster%24ContentInfoArea%24ContentSearchForm%24ucSearchOptions%24btnSearch</Name>
+							<Functions>
+								<Function Type="8">
+									<Value>Search</Value>
+								</Function>
+							</Functions>
+						</Parameter>
+					</Parameters>
+					<Variables/>
+					<Headers>
+						<Header>
+							<Name>X-MicrosoftAjax</Name>
+							<Value>Delta%3dtrue</Value>
+						</Header>
+						<Header>
+							<Name>Cache-Control</Name>
+							<Value>no-cache</Value>
+						</Header>
+						<Header>
+							<Name>Accept</Name>
+							<Value>text%2fhtml%2c+%2a%2f%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Language</Name>
+							<Value>en-us%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Accept-Encoding</Name>
+							<Value>compress%2c+gzip%2c+%2a</Value>
+						</Header>
+						<Header>
+							<Name>Pragma</Name>
+							<Value>no-cache</Value>
+						</Header>
+					</Headers>
+				</Request>
+				<Validation On="FALSE">
+					<Mode>0</Mode>
+					<Text/>
+				</Validation>
+				<Images Load="TRUE"/>
+			</Document>
+			<Document ID="24fd88a9-8a6a-4011-8232-8b911221a3a8" Type="1" EndID="46c506d8-c377-4992-9c94-8545e03d64f2">
+				<Name>End</Name>
+				<Description/>
+			</Document>
+		</Document>
+	</Main>
+	<Transactions/>
+</Profile>

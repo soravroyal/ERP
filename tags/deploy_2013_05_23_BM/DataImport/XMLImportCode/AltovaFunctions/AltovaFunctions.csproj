@@ -1,0 +1,44 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}</ProjectGuid>
+		<OutputType>Library</OutputType>
+		<AssemblyName>AltovaFunctions</AssemblyName>
+		<RootNamespace>AltovaFunctions</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System"/>
+		<Reference Include="System.Data"/>
+		<ProjectReference Include="..\Altova\Altova.csproj">
+			<Name>Altova</Name>
+			<Project>{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\AltovaXML\AltovaXML.csproj">
+			<Name>AltovaXML</Name>
+			<Project>{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}</Project>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.cs"/>
+		<Compile Include="Core.cs"/>
+		<Compile Include="Db.cs"/>
+		<Compile Include="Edifact.cs"/>
+		<Compile Include="Lang.cs"/>
+		<Compile Include="Xlsx.cs"/>
+	</ItemGroup>
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

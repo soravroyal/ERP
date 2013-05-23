@@ -1,0 +1,63 @@
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{71D36AFB-261C-FD4B-A023-29E15A60CBF4}</ProjectGuid>
+		<OutputType>Exe</OutputType>
+		<AssemblyName>eprtr</AssemblyName>
+		<RootNamespace>eprtr</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup>		
+		<Reference Include="System" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Xml" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Altova\Altova.csproj">
+			<Project>{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}</Project>
+			<Name>Altova</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\AltovaXML\AltovaXML.csproj">
+			<Project>{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}</Project>
+			<Name>AltovaXML</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\AltovaFunctions\AltovaFunctions.csproj">
+			<Project>{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}</Project>
+			<Name>AltovaFunctions</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\AltovaDB\AltovaDB.csproj">
+			<Project>{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}</Project>
+			<Name>AltovaDB</Name>
+		</ProjectReference>
+		<ProjectReference Include="..\EPRTRxml1\EPRTRxml1.csproj">
+			<Name>EPRTRxml1</Name>
+			<Project>{34AC3FBF-E553-6F4A-9BC3-AA7F3E442EEA}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\PollutantReleaseAndTransferReport\PollutantReleaseAndTransferReport.csproj">
+			<Name>PollutantReleaseAndTransferReport</Name>
+			<Project>{53C0DB81-4163-3649-B139-A4EFB3F69C73}</Project>
+		</ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="AssemblyInfo.cs"/>
+		<Compile Include="eprtrConsole.cs"/>
+		<Compile Include="eprtrMapToEPRTRxml1.cs"/>
+	</ItemGroup>
+
+	<Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:Canvas implements				="com.esri.solutions.flexviewer.IWidgetTemplate" 
+	       xmlns:mx					="http://www.adobe.com/2006/mxml" 
+	       xmlns:flash				="flash.filters.*"
+	       width					="440" 
+	       height					="200"
+	       horizontalScrollPolicy	="off" 
+	       verticalScrollPolicy		="off" 
+	       creationComplete			="init()">
+		
+	<mx:Script>
+		<![CDATA[
+			
+			import com.esri.ags.Map;
+			import flash.events.Event;
+			import flash.filters.GlowFilter;
+			import mx.containers.Canvas;
+			import mx.containers.HBox;
+			import mx.containers.VBox;
+			import mx.controls.HRule;
+			import mx.controls.Image;
+			import mx.controls.SWFLoader;
+			import mx.controls.Text;
+			import mx.resources.ResourceBundle;
+                        			
+			[Bindable]
+			private var mainCanvas:Canvas;
+			
+			[Bindable]
+			private var wCanvas:Canvas;
+			
+			[Bindable]
+			private var wTitlebar:HBox;
+			
+			private var wTitle:Text;			
+			
+			[Bindable]
+			private var wContent:VBox;
+			
+			[Bindable]
+			private var wIcon:Image;			
+					
+			[Bindable]
+			private var wAlarm:SWFLoader;
+			
+			private var widgetChildren:Array = [];
+				
+			private static const WIDGET_OPENED:String = "widgetOpened";
+			
+			private static const WIDGET_CLOSED:String = "widgetClosed";
+			
+			private static const WIDGET_MINIMIZED:String = "widgetMinimized";
+			
+			private var widgetTitle:String;
+			
+			public function setTitle(value:String):void
+			{
+				widgetTitle = value;
+				wTitle.text = value;
+			}
+			
+			private var widgetIcon:String;
+			
+			public function setIcon(value:String):void
+			{
+				widgetIcon = value;
+				wIcon.source = value;
+			}			
+			
+			public function setState(value:String):void
+			{
+				switch (value)
+				{
+					case BaseWidget.STATE_MAXIMIZED:
+					{
+					     maximizeWidget(null);
+					     break;
+					}
+					
+					case BaseWidget.STATE_MINIMIZED:
+					{
+					     minimizeWidget(null);
+					     break;
+					}
+					
+					case BaseWidget.STATE_CLOSED:
+					{
+					     closeWidget(null);
+					     break;
+					}
+					
+					default:
+					{
+					     maximizeWidget(null);
+					     break;
+					}
+				}
+			}
+			
+			public function getState():String
+			{
+				return currentState;
+			}
+						
+			private var _widgetAlarmOn:Boolean = false;
+			
+			public function set widgetAlarmOn(value:Boolean):void
+			{
+				_widgetAlarmOn = value;
+				wAlarm.visible = value;
+			}
+			
+			[Bindable]
+			public function get widgetAlarmOn():Boolean
+			{
+				return _widgetAlarmOn;
+			}			
+			
+			public function get titleBar():HBox
+			{
+				return wTitlebar;
+			}
+			public function addTitlebarButton(btnIcon:String, btnTip:String, btnFunction:Function, btnName:String = ""):Image
+			{
+				var btn:Image =  new Image();
+				btn.source = btnIcon;
+				btn.width = 20;
+				btn.height = 20;
+				btn.buttonMode = true;
+				btn.useHandCursor = true;
+				btn.toolTip = btnTip;
+				btn.name =  btnName;				
+				btn.addEventListener(MouseEvent.CLICK,btnFunction);
+				wTitlebar.addChildAt(btn,0);
+				return btn;
+			}			
+			
+			private function init():void
+			{
+				currentState = "maximized";
+				//currentState = "minimized";
+			}			
+			
+			private function minimizeWidget(event:MouseEvent):void
+			{
+				currentState = "minimized";
+				dispatchEvent(new Event(WIDGET_MINIMIZED));
+			}			
+			
+			private function maximizeWidget(event:MouseEvent):void
+			{
+				currentState = "maximized";
+				dispatchEvent(new Event(WIDGET_OPENED));
+			}			
+			
+			private function closeWidget(event:MouseEvent):void
+			{
+				currentState = "closed";
+				dispatchEvent(new Event(WIDGET_CLOSED));
+			}
+						
+			//create default widget
+			override protected function createChildren():void
+			{
+				
+				super.createChildren();
+				
+				mainCanvas = new Canvas();
+				mainCanvas.width = 0;
+				mainCanvas.height = 0;
+				addChildAt(mainCanvas, 0);
+				
+				wCanvas = new Canvas();
+				wCanvas.x = 40;
+				wCanvas.y = 0;
+				wCanvas.width = width - 40;
+				wCanvas.height = height;
+				wCanvas.horizontalScrollPolicy = "off";
+				wCanvas.verticalScrollPolicy = "off";
+				wCanvas.styleName = "WidgetCanvas"; 
+				mainCanvas.addChild(wCanvas);
+				
+				var vBox:VBox = new VBox();
+				vBox.setStyle("verticalGap",0);
+				vBox.setStyle("paddingLeft", 20);
+				vBox.setStyle("paddingRight", 20);
+				vBox.setStyle("paddingBottom", 10);
+				vBox.percentWidth = 100;
+				vBox.percentHeight = 100;
+				wCanvas.addChild(vBox);
+									
+				var titleBox:HBox = new HBox();
+				titleBox.setStyle("verticalAlign","middle");
+				titleBox.percentWidth = 100;
+				titleBox.height = 24;
+				vBox.addChild(titleBox);
+				
+				wTitle = new Text();
+				wTitle.text = widgetTitle;
+				wTitle.styleName = "WidgetTitle";
+				titleBox.addChild(wTitle);
+				
+				wTitlebar = new HBox();
+				wTitlebar.setStyle("horizontalGap",6);
+				wTitlebar.setStyle("verticalAlign","middle");
+				wTitlebar.setStyle("horizontalAlign","right");
+				wTitlebar.percentWidth = 100;
+				titleBox.addChild(wTitlebar);
+									
+				var wRule:HRule = new HRule();
+				wRule.percentWidth = 100;
+				wRule.height = 2;
+				wRule.alpha = 0.4;
+				wRule.styleName = "WidgetRule";
+				vBox.addChild(wRule);
+				
+				wContent = new VBox();
+				wContent.percentWidth = 100;
+				wContent.percentHeight = 100;
+				wContent.setStyle("verticalGap", 0);
+				wContent.setStyle("paddingTop", 2);
+				wContent.setStyle("paddingBottom", 2);
+				wContent.styleName = "WidgetContent";
+				vBox.addChild(wContent);
+				
+				wAlarm = new SWFLoader();
+				wAlarm.width = 80;
+				wAlarm.height = 80;
+				wAlarm.source = "com/esri/solutions/flexviewer/assets/flash/red_glow.swf";
+				wAlarm.visible = false;
+				mainCanvas.addChild(wAlarm);
+				
+				var glow:GlowFilter = new GlowFilter(0x000000, 0.5, 10, 10);
+			
+				wIcon = new Image();
+				wIcon.x = 20;
+				wIcon.y = 20;
+				wIcon.width = 40;
+				wIcon.height = 40;
+				wIcon.source = widgetIcon;
+				wIcon.useHandCursor = true;
+				wIcon.buttonMode = true;
+				wIcon.filters = [glow];
+				wIcon.visible = true;
+				wIcon.addEventListener(MouseEvent.CLICK, maximizeWidget);
+				mainCanvas.addChild(wIcon);
+				
+				addTitlebarButton("com/esri/solutions/flexviewer/assets/images/widget/w_close.png", resourceManager.getString('WidgetTemplateStrings', 'close'), closeWidget, "close");
+				addTitlebarButton("com/esri/solutions/flexviewer/assets/images/widget/w_mini.png", resourceManager.getString('WidgetTemplateStrings', 'minimize'), minimizeWidget, "min");
+				
+				
+				addWidgetChildren();
+			}			
+			
+			override public function addChild(child:DisplayObject):DisplayObject
+            {
+            	widgetChildren.push(child);
+            	return child; 
+            }            
+            
+            private function addWidgetChildren():void
+            {
+            	for each(var child:DisplayObject in widgetChildren)
+            	{
+            		wContent.addChild(child);
+            	}
+            }
+            
+            private function nlsString(nlsToken:String):String
+			{			
+				return resourceManager.getString('WidgetTemplateStrings', nlsToken);
+			}
+					
+                       
+		]]>
+	</mx:Script>
+	
+	<mx:Metadata>
+        [ResourceBundle("WidgetTemplateStrings")]
+    </mx:Metadata> 
+		
+	<mx:states>
+		<mx:State name="closed">
+			<mx:SetProperty target="{this}" name="height" value="0"/>
+			<mx:SetProperty target="{this}" name="width" value="0"/>
+		</mx:State>
+		<mx:State name="maximized">
+			<mx:SetProperty target="{this}" name="height" value="{height}"/>
+			<mx:SetProperty target="{this}" name="width" value="{width}"/>
+			<mx:SetProperty target="{mainCanvas}" name="height"/>
+			<mx:SetProperty target="{mainCanvas}" name="width"/>
+			<mx:SetProperty target="{wIcon}" name="buttonMode" value="false"/>
+		</mx:State>
+		<mx:State name="minimized">
+			<mx:SetProperty target="{this}" name="height" value="80"/>
+			<mx:SetProperty target="{mainCanvas}" name="height"/>
+			<mx:SetProperty target="{mainCanvas}" name="width"/>
+			<mx:SetProperty target="{wCanvas}" name="height" value="26"/>
+			<mx:SetProperty target="{wCanvas}" name="width" value="200"/>
+			<mx:SetProperty target="{wCanvas}" name="x" value="{width - 200}"/>
+			<mx:SetProperty target="{wCanvas}" name="y" value="27"/>
+			<mx:SetProperty target="{wAlarm}" name="visible" value="{widgetAlarmOn}"/>
+			<mx:SetProperty target="{wIcon}" name="visible" value="true"/>
+			<mx:SetProperty target="{wAlarm}" name="x" value="{width - 80}"/>			
+			<mx:SetProperty target="{wIcon}" name="x" value="{width - 60}"/>
+			<mx:SetProperty target="{wTitlebar}" name="visible" value="false"/>
+		</mx:State>
+	</mx:states>
+	
+	<mx:transitions>
+		<mx:Transition id="transMinimize" fromState="maximized" toState="minimized">
+			<mx:Sequence>
+				<mx:Parallel>
+					<mx:Resize duration="400" target="{wCanvas}" widthTo="0" heightTo="0"/>
+					<mx:Move duration="400" target="{wCanvas}" xTo="40" yTo="27"/>
+					<mx:Resize duration="400" target="{this}"/>
+				</mx:Parallel>
+				<mx:Parallel>
+					<mx:Move duration="400" target="{wIcon}" />
+					<mx:Move duration="400" target="{wAlarm}" />
+					<mx:Move duration="400" target="{wCanvas}" xTo="{width}" yTo="27"/>	
+				</mx:Parallel>
+				<mx:Parallel>
+					<mx:Move duration="200" target="{wCanvas}"/>
+					<mx:Resize duration="200" target="{wCanvas}"/>
+				</mx:Parallel>
+			</mx:Sequence>
+		</mx:Transition>
+		<mx:Transition id="transMaximize" fromState="minimized" toState="maximized">
+			<mx:Sequence>
+				<mx:Parallel>
+					<mx:Resize duration="200" target="{wCanvas}" widthTo="0" heightTo="0"/>
+					<mx:Move duration="200" target="{wCanvas}" xTo="{width - 40}" yTo="27"/>
+				</mx:Parallel>
+				<mx:Parallel>
+					<mx:Move duration="400" target="{wIcon}" />
+					<mx:Move duration="400" target="{wAlarm}" />
+					<mx:Move duration="400" target="{wCanvas}" xTo="40" yTo="27"/>
+				</mx:Parallel>
+				<mx:Parallel>
+					<mx:Resize duration="400" target="{this}"/>
+					<mx:Move duration="400" target="{wCanvas}"/>
+					<mx:Resize duration="400" target="{wCanvas}" />
+				</mx:Parallel>
+			</mx:Sequence>
+		</mx:Transition>
+		<mx:Transition id="transOpen" fromState="*" toState="maximized">
+			<mx:Parallel>
+				<mx:Resize duration="300" target="{mainCanvas}"/>
+				<mx:Fade duration="300" target="{mainCanvas}" alphaTo="1"/>
+				<mx:Resize duration="300" target="{this}"/>
+			</mx:Parallel>
+		</mx:Transition>
+		<mx:Transition id="transClose" fromState="maximized" toState="*">
+			<mx:Parallel>
+				<mx:Resize duration="300" target="{mainCanvas}"/>
+				<mx:Fade duration="300" target="{mainCanvas}" alphaTo="0"/>
+				<mx:Resize duration="300" target="{this}"/>
+			</mx:Parallel>
+		</mx:Transition>
+	</mx:transitions>
+
+	<mx:Metadata>
+    	[Event(name="widgetOpened", type="flash.events.Event")]
+    	[Event(name="widgetClosed", type="flash.events.Event")]
+    	[Event(name="widgetMinimized", type="flash.events.Event")]
+   </mx:Metadata>
+
+</mx:Canvas>

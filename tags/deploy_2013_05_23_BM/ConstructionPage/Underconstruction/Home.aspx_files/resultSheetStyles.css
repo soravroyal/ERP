@@ -1,0 +1,183 @@
+﻿/* Result sheets
+-------------------------------------------------------------- */
+
+#resultSheet_header
+{
+	width:50%;
+	margin-left:10px;
+	margin-top:10px;
+	clear:left;
+}
+#resultContentBoxStyler
+{
+	width:25%;
+	float:right;
+	position:relative;
+	top:-47px; /* Some odd bug will not allow normal positioning */
+}
+.result_area {
+	clear: left right;
+	float: left;
+	width: 775px;
+	margin-top: 10px;
+	margin-left: 25px;
+	margin-right: 5px;
+	margin-bottom: 0px;
+	background-color: #F7F7F7;
+	border: dotted 1px #000000;
+}
+
+.resultSheet_contentsBox {
+	float: right;
+	background-color: #FFFFFF;
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+	padding-bottom: 7px;
+	border-top: 1px solid #D6BAA5;
+	border-right: 1px solid #BE9170;
+	border-bottom: 1px solid #BE9170;
+	border-left: 1px solid #D6BAA5;
+}
+
+.contentsBox_item {
+	text-decoration: none;
+	color: #000099;
+	margin-left: 25px;
+	margin-right: 5px;
+	clear: left;
+	float: left;
+}
+
+/*.resultSheet_contentsBox a:focus, a:hover 
+{
+	color: Red; /* inherit;*
+}*/
+
+.contentsBox_item_selected {
+	color: #AA8162;
+}
+
+.subsheet 
+{
+	clear: left right;
+	float: left;
+	width:728px;
+	margin-top: 10px;
+	margin-left: 25px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+	background-color: #EEEEEE;
+	border: dotted 1px #000000;
+}
+
+.listHelp
+{
+	float: left;
+	clear: left;
+}
+
+.hometext_area {
+	width: 400px;
+	clear: left;
+	float: left;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+
+.news_area {
+	text-decoration: none;
+	clear: right;
+	float: right;
+	width: 300px;	
+	
+}
+.news_area table
+{
+	text-decoration: none;
+	float: right;
+}
+
+
+.news_box {
+	text-decoration: none;
+	background-color: #FFFFCA;
+	clear: left;
+	float: left;
+	width: 200px;
+	border: 1px dotted #999999;
+	margin-top: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 1px;
+	margin-bottom: 20px;
+}
+
+.news_head 
+{
+	font-size: 0.9em;
+	color: #666666;
+	clear: left;
+	float: left;
+}
+.news_head td
+{
+	vertical-align: bottom;
+}
+.news_box2 
+{
+	text-decoration: none;
+	background-color: #FFFFCA;
+	clear: left;
+	float: left;
+	width: 200px;
+	border: 1px dotted #999999;
+	margin-top: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	padding-left: 1px;
+	margin-bottom: 20px;
+}
+.news_head2
+{
+    font-size: 0.9em;
+	color: #666666;
+	clear: left;
+	float: left;
+    height:3em;
+}
+.news_head2 td
+{
+    vertical-align:bottom;
+}
+
+
+
+.news_banner {
+	font-size: 0.9em;
+	color: #666666;
+	clear: left;
+	float: left;
+	height: 20px;
+	vertical-align: bottom;
+	margin-bottom: 20px;
+	background-color:Aqua;
+}
+.TableView
+{
+	Width:100%; 
+	Height:100%;
+	border:none;
+	line-height: 20px;
+	width:95%;
+	background-color:Red;
+}
+.TableView tr td
+{
+	border-bottom:Solid 1px #999999;
+}
+.TableView tr th
+{
+	border-bottom:Solid 1px #999999;
+}
