@@ -1,0 +1,315 @@
+﻿/*---------------------------------------------------------------------------------*/
+/*-- These styles affect the columns content. Usually they set size and overflow --*/
+/*-- Note Header and none header styles should be identical concerning size      --*/ 
+/*---------------------------------------------------------------------------------*/
+#headerAccidental
+{
+    text-align:right;
+    width:75px;
+    overflow:hidden;
+}
+#headerAccidentalPercent
+{
+    width:90px;
+    overflow:hidden; 
+    text-align:right; 
+}
+#headerActivity
+{
+    width:65px; 
+    overflow:hidden;  
+    padding-left:10px; 
+}
+.columnActivityCode
+{
+    width:65px; 
+    overflow:hidden;  
+    text-align:center;
+ }
+.columnCountryCode
+{
+    width:60px; 
+    overflow:hidden; 
+    text-align:center;
+}
+
+#headerActivityCode
+{
+    width:75px;
+    overflow:hidden;
+    padding-left:5px;
+    text-align:center;
+}
+#headerActual
+{
+    width:100px;
+    overflow:hidden; 
+}
+#headerAddress
+{
+    width:225px;
+    overflow:hidden;
+    padding-left:10px;
+}
+
+#headerCountry
+{
+    width:70px;   
+    overflow:hidden; 
+}
+#headerCountryCode
+{
+    width:75px; 
+    overflow:hidden; 
+    text-align:center;
+}
+#headerFacility
+{
+    width:185px;
+    overflow:hidden;
+}
+#headerFacilityPT
+{
+    width:525px;
+    overflow:hidden;
+}
+#headerFacilityPR
+{
+    width:355px;
+    overflow:hidden;
+}
+#headerMethod
+{
+    width:75px;   
+    overflow:hidden;
+    padding-left:5px; 
+}
+#headerMethodUsed
+{
+    width:100px;  
+    overflow:hidden;  
+}
+#headerPollutantName
+{
+    width:125px;
+    overflow:hidden;
+}
+#headerPostalCode
+{
+    width:90px;
+}
+
+
+.columnFacilityName
+{
+	width:270px;
+}
+
+.columnQuantityTotal
+{
+	text-align:right;
+    white-space:nowrap;
+    width:83px;
+}
+.columnQuantityRecovery
+{
+	text-align:right;
+    white-space:nowrap;
+    width:77px;
+}
+.columnQuantityDisposal
+{
+	text-align:right;
+    white-space:nowrap;
+    width:77px;
+}
+.columnQuantityUnspecified
+{
+	text-align:right;
+    white-space:nowrap;
+	width:82px;
+}
+
+
+#headerReason
+{
+    width:80px;  
+    overflow:hidden;  
+}
+#headerReceivingCountry
+{
+    width:75px; 
+    overflow:hidden;
+}
+#headerRecoverer
+{
+    text-align:left;
+    width:125px;
+    overflow:hidden;
+}
+
+#headerTownVillage
+{
+    width:100px;
+    overflow:hidden;
+}
+
+#headerTreatment
+{
+    padding-left:5px;
+    width:80px;
+    overflow:hidden;
+}
+
+/* Waste Receiving - not sorted yet*/
+
+#headerWasteType
+{
+    width:170px;
+}
+#headerWasteReceivingCountry
+{
+    width:170px;
+}
+#headerWasteNFac
+{
+    width:120px;
+    white-space:nowrap;
+    text-align:right;
+}
+.headerWasteQT
+{
+    width:120px;
+    white-space:nowrap;
+    text-align:right;
+}
+.headerWasteQR
+{
+    width:120px;
+    white-space:nowrap;
+    text-align:right;
+}
+.headerWasteQD
+{
+    width:115px;
+    white-space:nowrap;
+    text-align:right;
+}
+.headerWasteU
+{
+    width:110px;
+    white-space:nowrap;
+    text-align:right;
+}
+#headerFromFacilityName
+{
+    width:150px;
+}
+
+#headerTreaterName
+{
+    width:100px;
+    overflow:hidden;
+}
+#headerTeaterAddress
+{
+    width:120px;
+}
+#headerSiteAddress
+{
+    width:120px;
+}
+#headerQuantity
+{
+    width:90px;
+    white-space:nowrap;
+    text-align:right;
+}
+
+
+
+/* Special settings for length fitting */
+
+#headerSpecialMethodUsed
+{
+    width:175px;  
+    overflow:hidden;  
+}
+#headerSpecialMethod
+{
+    width:175px;  
+    overflow:hidden;  
+}
+#headerSpecialTreatment
+{
+    width:175px;  
+    overflow:hidden;
+    padding-left:40px;
+}
+#headerPollutantMethod
+{
+    width:150px;  
+    overflow:hidden;
+    padding-left:100px;
+}
+#headerSpecialPollutantName
+{
+    width:205px;
+    overflow:hidden;
+}
+#headerFacilityWT
+{
+    width:295px;
+    overflow:hidden;
+}
+#FacilityWT
+{
+    width:295px;
+    overflow:hidden;
+}
+/* special lengths Ends */
+
+#thirdYearHeader
+{
+    width:206px;
+}
+
+#thirdPollutantHeader
+{
+    width:227px;
+}
+
+#thirdPollutantGroupHeader
+{
+    width:227px;
+}
+
+
+#thirdConfHeader
+{
+    width:220px;
+}
+#thirdConfQHeader
+{
+    width:220px;
+}
+
+/* special for timeseries menu */
+#headerTimeSeriesYear
+{
+    width:60px;
+    overflow:hidden; 
+    text-align:left; 
+}
+#headerTimeSeriesCountries
+{
+    width:150px;
+    overflow:hidden; 
+    text-align:right; 
+}
+#headerTimeSeriesFacilities
+{
+    width:200px;
+    overflow:hidden; 
+    text-align:right; 
+}

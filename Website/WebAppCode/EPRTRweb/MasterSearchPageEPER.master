@@ -1,0 +1,100 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPageEPER.master" AutoEventWireup="true"
+    EnableViewState="true" CodeFile="MasterSearchPageEPER.master.cs" Inherits="MasterSearchPageEPER" %>
+    
+<%@ Register TagPrefix="nfp" TagName="NoFlashPlayer" Src="~/UserControls/Common/ucNoFlashPlayer.ascx" %>
+
+<asp:Content ID="infoarea" EnableViewState="true" ContentPlaceHolderID="ContentInfoArea"
+    runat="server">
+    
+      
+            
+    <%--Java Script functions --%>
+    <script type="text/javasript" src="Charts/charts.js"></script>
+    <script type="text/javascript" src="Scripts/jsValidation.js"></script>
+
+    <%--Title and subtitle--%>
+    <div class="info_box_search">
+        <h1>
+            <asp:Literal ID="lbHeadline" Text="" runat="server" />
+        </h1>
+        <p>
+            <asp:ContentPlaceHolder ID="ContentSubHeadline" runat="server" />
+        </p>
+    </div>
+    <%--Map--%>
+    <div id="divMap" class="map_box" runat="server">
+        
+        <%--MAXIMIZE MAP --%>
+        <%-- asp:Panel ID="pnExpand" runat="server">
+          <div id="expand_btn">
+              <asp:ImageButton ID="btnExpand" ImageUrl="~/images/i_maximize.gif" runat="server" CssClass="expandbutton" ImageAlign="Right" Visible="true" ToolTip="<%$ Resources:Common,ShowExpandedMap %>" />
+          </div>
+        </asp:Panel--%>                    
+    
+        <%--<asp:Panel ID="pnExpand" runat="server">
+          <div id="expand_btn" ><asp:ImageButton ID="btnExpand" ImageUrl="~/images/info.png" runat="server" CssClass="expandbutton" ImageAlign="Right" Visible="true" ToolTip="<%$ Resources:Common,Legend %>" /></div>
+        </asp:Panel>--%>
+     
+        <asp:Panel ID="pnlResultMap" runat="server" Visible="true">
+            <div id="resultMapId" visible="true">
+            <nfp:NoFlashPlayer ID="NoFlashPlayer" runat="server" />
+            </div>
+        </asp:Panel>
+        
+        <div id="capaInfoMapa" class="capaInfoMapaLegend">
+        
+        
+        <div>
+        <table class="TablaLegend">
+        <tr>
+        <td colspan="4" style="padding:4px"><asp:Literal ID="Literal6" runat="server" Text="<%$ Resources:Common,TextLegend %>"></asp:Literal></td>
+        </tr>
+        <tr>
+        <td width="12px" valign="center" align="center"><img src="images/EI.png" style="padding:4px" /></td>
+        <td><asp:Literal ID="litActivities" runat="server" Text="<%$ Resources:LOV_ANNEXIACTIVITY,EPER_1 %>"></asp:Literal></td>
+        <td width="12px" valign="center" align="center"><img src="images/CI.png" style="padding:4px"/></td>
+        <td><asp:Literal ID="Literal1" runat="server" Text="<%$ Resources:LOV_ANNEXIACTIVITY,EPER_4 %>"></asp:Literal></td>
+        </tr>
+        <tr>
+        <td><img src="images/PP.png" style="padding:4px"/></td>
+        <td><asp:Literal ID="Literal2" runat="server" Text="<%$ Resources:LOV_ANNEXIACTIVITY,EPER_2 %>"></asp:Literal></td>
+        <td><img src="images/WM.png" style="padding:4px"/></td>
+        <td><asp:Literal ID="Literal3" runat="server" Text="<%$ Resources:LOV_ANNEXIACTIVITY,EPER_5 %>"></asp:Literal></td>
+        </tr>
+        <tr>
+        <td><img src="images/MI.png" style="padding:4px"/></td>
+        <td><asp:Literal ID="Literal4" runat="server" Text="<%$ Resources:LOV_ANNEXIACTIVITY,EPER_3 %>"></asp:Literal></td>
+        <td><img src="images/OA.png" style="padding:4px"/></td>
+        <td><asp:Literal ID="Literal5" runat="server" Text="<%$ Resources:LOV_ANNEXIACTIVITY,EPER_6 %>"></asp:Literal></td>
+        </tr>
+        </table>
+                <!--img src="images/EPERLegend.png" /-->
+        </div>
+        </div>
+    </div>
+    
+    
+    
+    <asp:UpdatePanel ID="upSearchControls" runat="server">
+        <ContentTemplate>
+            <%--Search options--%>
+            <div id="searchForm" class="search_form" runat="server">
+                <asp:ContentPlaceHolder ID="ContentSearchForm" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
+    
+
+    <asp:UpdatePanel ID="upResultArea" runat="server">
+        <ContentTemplate>
+            <%--Result area--%>
+            <div id="resultArea" class="layout_resultArea" visible="false" runat="server">
+                <asp:ContentPlaceHolder ID="ContentResultArea" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
+     
+    
+</asp:Content>
