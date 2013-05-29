@@ -473,7 +473,7 @@ wasteTransferMethodUsed.query = SELECT wasteTransferMethodUsedID \
 #RRP START
 pollutantthreshold.class = PollutantThreshold
 pollutantthreshold.query = SELECT [LOV_PollutantThresholdID] AS id \
-      ,[LOV_POLLUTANT].[LOV_PollutantID] AS forPollutant \
+      ,[LOV_POLLUTANT].[Code] AS forPollutant \
       ,[LOV_MEDIUM].[code] AS forMedium \
       ,[threshold] \
       ,[LOV_POLLUTANTTHRESHOLD].[startYear] \
