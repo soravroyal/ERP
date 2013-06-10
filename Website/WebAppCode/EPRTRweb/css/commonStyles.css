@@ -185,31 +185,3 @@ Must be of the form indentLevel# where # is the level number starting with 0.*/
 {
 	clear:left;
 }
-
-
-
-/* unvisited link */
-a:link 
-{
-    color:#0e4baf;
-    /* (or #2a6495)*/
-    text-decoration:none;
-}
-/* visited link */      
-a:visited 
-{
-    color:#000099;
-    text-decoration:none;
-}
-/* mouse over link */  
-a:hover 
-{
-    text-decoration:underline;
-}
-
-/* selected link */   
-a:active 
-{
-    color:#f5821f;
-}  
-

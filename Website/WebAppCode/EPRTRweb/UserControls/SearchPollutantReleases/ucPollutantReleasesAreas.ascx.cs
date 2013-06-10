@@ -41,7 +41,7 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
         SearchFilter = filter;
 
         List<PollutantReleases.AreaTreeListRow> data = QueryLayer.PollutantReleases.GetCountries(filter).ToList<PollutantReleases.AreaTreeListRow>();
-
+        
         sortResult(data);
         ViewState[RESULT] = data;
 
@@ -180,13 +180,13 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
         FacilitySearchFilter filter = FilterConverter.ConvertToFacilitySearchFilter(SearchFilter);
 
         // Search for country according to code
-        filter.AreaFilter = getAreaFilter(e);
+        filter.AreaFilter = getAreaFilter(e);                        
         // go to facility levels page
         LinkSearchRedirecter.ToFacilitySearch(Response, filter);
     }
 
-
-
+    
+    
     #region DataBinding methods
 
     //Hide headers dependend on filter selections.
@@ -342,64 +342,53 @@ public partial class ucPollutantReleasesAreas : System.Web.UI.UserControl
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-        CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-        // Create Header
-        var filter = SearchFilter;
-
-        bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
-
-        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantReleaseSearchHeader(
-            filter,
-            isConfidentialityAffected);
-
-        // Create Body
-        List<PollutantReleases.AreaTreeListRow> rows = PollutantReleases.GetAreaTree(filter).ToList();
-        sortResult(rows);
-
-        // dump to file
-        string topheader = csvformat.CreateHeader(header);
-        string[] colHeaderRows = csvformat.GetPollutantReleaseAreaColHeaderRows(filter);
-
-        Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Area_List");
-
-        Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
-
-        //all rows but total
-        foreach (var item in rows.Where(r => r.Code != ActivityTreeListRow.CODE_TOTAL))
-        {   
-            string row = csvformat.GetPollutantReleaseAreaRow(item, filter);
-            Response.Write(row);
-        }
-
-        //write total row
-
-        var totalRow = rows.SingleOrDefault(r => r.Code == ActivityTreeListRow.CODE_TOTAL);
-
-        if (totalRow == null)
+        try
         {
-            //find all rows on topLevel. if only one, use this as total row
-            var toplevelRows = rows.Where(r => r.Level == 0);
-            if (toplevelRows != null && toplevelRows.Count() == 1)
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
+
+            // Create Header
+            var filter = SearchFilter;
+
+            bool isConfidentialityAffected = PollutantReleases.IsAffectedByConfidentiality(filter);
+
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantReleaseSearchHeader(
+                filter,
+                isConfidentialityAffected);
+
+            // Create Body
+            List<PollutantReleases.AreaTreeListRow> rows = PollutantReleases.GetAreaTree(filter).ToList();
+            sortResult(rows);
+
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string[] colHeaderRows = csvformat.GetPollutantReleaseAreaColHeaderRows(filter);
+
+            Response.WriteUtf8FileHeader("EPRTR_Pollutant_Releases_Area_List");
+
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
+
+            
+            foreach (var item in rows)
             {
-                totalRow = toplevelRows.Single();
+                string row = csvformat.GetPollutantReleaseAreaRow(item, filter);
+
+                if (AreaTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1]);
+                }
+
+                Response.Write(row);
             }
-        }
 
-        //write total row if any is found
-        if (totalRow != null)
+            Response.End();
+        }
+        catch (Exception)
         {
-            Response.Write(Environment.NewLine);
-            Response.Write(csvformat.AddText(Resources.GetGlobal("Common", "Total")));
-            Response.Write(Environment.NewLine);
 
-            Response.Write(colHeaderRows[0] + colHeaderRows[1]);
-
-            string row = csvformat.GetPollutantReleaseAreaRow(totalRow, filter);
-            Response.Write(row);
         }
-
-        Response.End();
     }
+
+
 }

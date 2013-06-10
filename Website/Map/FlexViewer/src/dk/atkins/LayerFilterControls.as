@@ -29,7 +29,6 @@ package dk.atkins
 		private var AND_arrayCol:ArrayCollection = new ArrayCollection();
 		private var Controls_arr:ArrayCollection = new ArrayCollection();
 		private var _definitionFilter:String;
-		private var _allItemsLabel:String = "All";
 		
 		/**
 		* Constructor
@@ -113,15 +112,11 @@ package dk.atkins
 			    	}
 			    	hbox.addChild(vbox);
 			    	var spacer:Spacer = new Spacer();
-			    	spacer.height = 1;
+			    	spacer.height = 8;
 			    	this.addChild(spacer);
 			    	this.addChild(hbox);
 			    }
 			}
-		public function set allItemsLabel(value:String)
-		{
-			_allItemsLabel = value;
-		}
 		/**
 			* Turns a filter on/off by creating a new layer definition string
 			*
@@ -220,13 +215,9 @@ package dk.atkins
 							AND_arrayCol.addItem(comObj);
 						} 
 					}
-					//all/no filter option 
-					dataprovider.addItem({label:_allItemsLabel, data:null});
-					if(selected == "all") selectedIndex = dataprovider.length -1;
 					cmb.dataProvider = dataprovider;
 					cmb.addEventListener(ListEvent.CHANGE , filterComboBoxChange);
 					cmb.selectedIndex = selectedIndex;
-					filterComboBoxChange(null, cmb)
 					
 					Controls_arr.addItem({item:box.addChild(cmb),localekey:"filteritem_"+_label});
 				break;
@@ -237,8 +228,8 @@ package dk.atkins
 
 		}
 		
-		private function filterComboBoxChange(e:ListEvent, cbox:ComboBox = null):void{
-			if(!cbox)cbox = ComboBox(e.currentTarget);
+		private function filterComboBoxChange(e:ListEvent):void{
+			var cbox:ComboBox =ComboBox(e.currentTarget);
 			setFilterArrays(cbox.selectedItem.label, true);
 			//remove other items selection flags
 			for(var i:int = 0; i <  cbox.dataProvider.length; i ++){
@@ -276,7 +267,7 @@ package dk.atkins
 			var filter_string:String = "";
 			for(var i:int = 0; i < OR_arrayCol.length;i++){
 				var or_item:FilterItem = FilterItem(OR_arrayCol.getItemAt(i));
-				if(or_item.selected && or_item.data){
+				if(or_item.selected){
 					if( filter_string != "") filter_string += " OR ";
 					filter_string +=  or_item.data;
 				} 
@@ -286,7 +277,7 @@ package dk.atkins
 			for(var j:int = 0; j < AND_arrayCol.length;j++){
 				
 				var item:FilterItem = FilterItem(AND_arrayCol.getItemAt(j));				
-				if(item.selected  && item.data){
+				if(item.selected){
 					if( filter_string != "") filter_string += " AND ";
 						filter_string +=  item.data;
 				}				

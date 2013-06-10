@@ -5,7 +5,6 @@
 <%@ Register Src="~/UserControls/SearchOptions/ucWasteTreatmentSearchOption.ascx" TagName="WasteTreatmentSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchOptions/ucWasteReceiverSearchOption.ascx" TagName="WasteReceiverSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
-<%@ Register Src="~/UserControls/Common/ucMsgWasteValidation.ascx" TagName="msgWaste" TagPrefix="eprtr" %>
 
 <asp:UpdatePanel ID="upWaste" runat="server">
     <ContentTemplate>
@@ -40,7 +39,6 @@
                 <eprtr:WasteTypeSearchOption ID="ucWasteTypeSearchOption" runat="server" />
                 <eprtr:WasteTreatmentSearchOption ID="ucWasteTreatmenSearchOption" runat="server" />
                 <eprtr:WastereceiverSearchOption ID="ucWasteReceiverSearchOption" runat="server" />
-                <eprtr:msgWaste ID="ucMsgWaste" runat="server" /> 
             </asp:Panel>
         </asp:Panel>
 

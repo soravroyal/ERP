@@ -5,5 +5,5 @@ try
 {
   var pageTracker = _gat._getTracker("UA-10889584-1");
   pageTracker._trackPageview();
-}
-catch (err) { }
+} 
+catch(err) {}

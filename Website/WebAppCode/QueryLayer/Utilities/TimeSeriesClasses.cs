@@ -213,7 +213,6 @@ namespace QueryLayer.Utilities
         {
             public ComparisonWasteTransfer(int yearFrom, int yearTo)
             {
-
                 // single facility
                 this.YearFrom = yearFrom;
                 this.YearTo = yearTo;

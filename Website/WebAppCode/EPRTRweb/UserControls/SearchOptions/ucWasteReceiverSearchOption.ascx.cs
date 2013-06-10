@@ -5,7 +5,6 @@ using EPRTR.Localization;
 using EPRTR.Utilities;
 using QueryLayer;
 using QueryLayer.Filters;
-using EPRTR.Comparers;
 
 public partial class ucWasteReceiverSearchOption : System.Web.UI.UserControl
 {
@@ -30,12 +29,8 @@ public partial class ucWasteReceiverSearchOption : System.Web.UI.UserControl
 
         this.cbReceivingCountry.Items.Add(new ListItem(Resources.GetGlobal("Common", "AllReceivingCountries"), WasteReceiverFilter.AllCountriesID.ToString()));
 
-        List<ListItem> items = new List<ListItem>();
         foreach (RECEIVINGCOUNTRY c in countries)
-            items.Add(new ListItem(LOVResources.CountryName(c.Code), c.LOV_CountryID.ToString()));
-        items.Sort(new ListItemComparer());
-
-        this.cbReceivingCountry.Items.AddRange(items.ToArray());
+            this.cbReceivingCountry.Items.Add(new ListItem(LOVResources.CountryName(c.Code), c.LOV_CountryID.ToString()));
 
         setSelectedCountry();
 

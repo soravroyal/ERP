@@ -91,8 +91,7 @@ namespace SitemapConverter
         /// <returns>true on success</returns>
         public bool Process(string aspNetSitemap, string googleSitemap)
         {
-            IEnumerable<int> listFacilityIDs = Facility.GetFacilityDetailsID();
-            AspSitemapProcessor.Process(aspNetSitemap, OnAspUrl, listFacilityIDs);           
+            AspSitemapProcessor.Process(aspNetSitemap, OnAspUrl);
             SaveGoogleMap(googleSitemap);
             
             return true;
@@ -108,46 +107,28 @@ namespace SitemapConverter
             using (XmlWriter writer = XmlWriter.Create(googleSitemap, settings))
             {
                 writer.WriteStartDocument();
-                writer.WriteStartElement("urlset", "http://www.sitemaps.org/schemas/sitemap/0.9");
+                writer.WriteStartElement("urlset", "http://www.google.com/schemas/sitemap/0.84");
 
                 writer.WriteAttributeString("xmlns", "xsi", null, "http://www.w3.org/2001/XMLSchema-instance");
-                writer.WriteAttributeString("xsi", "schemaLocation", null, "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd");
+                writer.WriteAttributeString("xsi", "schemaLocation", null, "http://www.google.com/schemas/sitemap/0.84 http://www.google.com/schemas/sitemap/0.84/sitemap.xsd");
 
                 var languageList = ListOfValues.GetAllCultureCodes();
 
                 foreach (Url url in _urls)
                 {
-                  
                     writer.WriteStartElement("url");
                     writer.WriteElementString("loc", url.Location);
                     writer.WriteEndElement();
 
-                   //D30 START 16/05/2013 --> We don´t need languages     
- 
-                  /* if (languageList.Count() > 1)
+                    if (languageList.Count() > 1)
                     {
                         foreach (var lang in languageList)
                         {
-                            //RRP START 18-04-2013
-                            //Original code (All cultures)
-                            //writer.WriteStartElement("url");
-                            //writer.WriteElementString("loc", url.Location + "?lang=" + lang);
-                            //writer.WriteEndElement();
-
-                            //Only for en-GB culture
-                            //We don't need references from the sitemap to the same page in all languages. 
-                            //Only English is needed
-                            if (lang == "en-GB")
-                            {
-                                writer.WriteStartElement("url");
-                                writer.WriteElementString("loc", url.Location + "?lang=" + lang);
-                                writer.WriteEndElement();
-                            }
-                            //RRP END 18-04-2013
+                            writer.WriteStartElement("url");
+                            writer.WriteElementString("loc", url.Location + "?lang=" + lang);
+                            writer.WriteEndElement();
                         }
-                    }*/
-
-                    //D30 END 16/05/2013 
+                    }
                 }
 
                 writer.WriteEndElement();

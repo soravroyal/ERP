@@ -517,8 +517,6 @@ namespace EPRTR.HeaderBuilders
                 {
                     header.Add(Resources.GetGlobal("Common", "WasteTransfers"), value);
                 }
-
-							
             }
 
         }

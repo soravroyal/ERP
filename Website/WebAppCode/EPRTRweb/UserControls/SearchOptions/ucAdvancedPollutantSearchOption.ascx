@@ -5,7 +5,6 @@
 <%@ Register Src="~/UserControls/SearchOptions/ucMediumSearchOption.ascx" TagName="MediumSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchOptions/ucAccidentalSearchOption.ascx" TagName="AccidentalSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
-<%@ Register Src="~/UserControls/Common/ucMsgPRTvalidation.ascx" TagName="msgPRT" TagPrefix="eprtr" %>
 
 <asp:UpdatePanel ID="upPollutant" runat="server"  >
     <ContentTemplate>
@@ -35,19 +34,16 @@
                 <%--expand label--%>
                 <asp:Label ID="lblPollutant2" Text="<%$Resources:Common,CurrentlyNotIncluded%>" runat="server" CssClass="cpeTextLabel2"></asp:Label>
                 <asp:Label ID="lblPollutant" Text="<%$Resources:Common,Expand%>" runat="server" CssClass="cpeTextLabel"></asp:Label>
+
                 
                 <%--content--%>
-                
-                <asp:Panel ID="plPollutantContent" runat="server" CssClass="cpeContent" >
-											<eprtr:PollutantSearchOption ID="ucPollutantSearchOption" IncludeAll="true"  runat="server" />
-											<eprtr:MediumSearchOption ID="ucMediumSearchOption" IncludeTransfers="true" IncludeAccidental="true" runat="server" />
-											<div class="spacer"></div>
-											<eprtr:AccidentalSearchOption ID="ucAccidentalSearchOption" runat="server" />
-											<eprtr:msgPRT ID="ucMsgPRT" runat="server" />
-											<div class="spacer"></div>
+                <asp:Panel ID="plPollutantContent" runat="server" CssClass="cpeContent">
+                    <eprtr:PollutantSearchOption ID="ucPollutantSearchOption" IncludeAll="true"  runat="server" />
+                    <eprtr:MediumSearchOption ID="ucMediumSearchOption" IncludeTransfers="true" IncludeAccidental="true" runat="server" />
+                    <br />
+                    <eprtr:AccidentalSearchOption ID="ucAccidentalSearchOption" runat="server" />
+                    <div class="spacer"></div>
                 </asp:Panel>
-                
-                
           </asp:Panel>
 
 </ContentTemplate>

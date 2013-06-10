@@ -9,6 +9,7 @@
 <%@ Register Src="~/UserControls/SearchOptions/ucAdvancedWasteSearchOption.ascx" TagName="AdvancedWasteSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
 
+
 <asp:UpdatePanel ID="upSearchFacility" runat="server" UpdateMode="Conditional">
 
     <ContentTemplate>
@@ -53,5 +54,4 @@
     </Triggers>
 
 </asp:UpdatePanel>
-
 

@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.master"
     CodeFile="MapSearch.aspx.cs" Inherits="MapSearch" %>
-    <%@ Register TagPrefix="nfp" TagName="NoFlashPlayer" Src="~/UserControls/Common/ucNoFlashPlayer.ascx" %>
 
 <asp:Content ID="infoarea" ContentPlaceHolderID="ContentInfoArea" runat="server">
     <%--Java Script functions --%>
@@ -26,7 +25,6 @@
     <tr><td>
     <asp:Panel ID="mapSearchPanel" runat="server" Visible="true">
         <div id="mapSearch" visible="true">
-         <nfp:NoFlashPlayer ID="NoFlashPlayer" runat="server" />
         </div>
     </asp:Panel>
     </td>

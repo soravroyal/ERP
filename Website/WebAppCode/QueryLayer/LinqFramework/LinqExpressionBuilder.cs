@@ -587,13 +587,13 @@ namespace QueryLayer.LinqFramework
             else
             {
                 // Period expression
-								expr = GetLinqExpressionPeriod(filter.PeriodFilter, parameter);
+                expr = GetLinqExpressionPeriod(filter.PeriodFilter, parameter);
 
                 // Area expression
                 Expression area = GetLinqExpressionArea(filter.AreaFilter, parameter);
                 expr = CombineAnd(expr, area);
 
-								// WasteTransferType expression
+                // WasteTransferType expression
                 Expression wasteTransferType = GetLinqExpressionWasteTransferType(filter.WasteTypeFilter, parameter, hasWasteTypeCode);
                 expr = CombineAnd(expr, wasteTransferType);
 

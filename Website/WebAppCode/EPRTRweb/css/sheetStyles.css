@@ -164,7 +164,6 @@
 .look_sheet_level1 {
 	background-color:#EEEEEE;
 	border:dotted 1px black;
-	height:100%;
 }
 
 .look_sheet_level2
@@ -183,17 +182,6 @@
 	border-bottom: 1px solid #BE9170;
 	border-left: 1px solid #D6BAA5;
 }
-
-#facilityDetailsPage div.look_sheet_level1 {
-	background-color:#FFFFFF;
-	border: 1px solid #ADC7AD;
-}
-
-#facilityDetailsPage .look_sheet_level2
-{
-	background-color:#EEEEEE;
-}
-
 
 /*-------------------------------------------------------------------------------------------*/
 /*-- Misc. styles                                  --*/
@@ -241,14 +229,4 @@
 .diffuseContent h3
 {
 	color: #993300;
-}
-
-.disclaimerDiv
-{
-	margin-top:10px;
-}
-
-.printStyles
-{
-	overflow:hidden;
 }

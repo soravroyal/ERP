@@ -56,11 +56,11 @@
 }
 
 .EU_flag {
-	background: url('../images/eu_newlogo.png') no-repeat center;
+	background-image: url('../images/EU_flag.gif');
 	float: right;
 	height: 52px;
 	width: 80px;
-	margin-right: 10px;
+	margin-right: 15px;
 	clear: none;
 	margin-top: -40px;
 }
@@ -114,11 +114,9 @@
 	clear: none;
 	float: right;
 	height: 20px;
-	width: 240px;
+	width: 180px;
 	margin-top: 10px;
 	font-weight: bold;
-	text-align:right;
-	margin-right: 10px;
 }
 
 .info_area {
@@ -130,7 +128,7 @@
 	margin-bottom: 0px;
 	margin-left: 10px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10pt;
+	font-size: 10px;
 	color: #000000;
 }
 .info_area a

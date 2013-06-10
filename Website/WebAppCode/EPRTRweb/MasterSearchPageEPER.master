@@ -10,7 +10,6 @@
             
     <%--Java Script functions --%>
     <script type="text/javasript" src="Charts/charts.js"></script>
-    <script type="text/javascript" src="Scripts/jsValidation.js"></script>
 
     <%--Title and subtitle--%>
     <div class="info_box_search">

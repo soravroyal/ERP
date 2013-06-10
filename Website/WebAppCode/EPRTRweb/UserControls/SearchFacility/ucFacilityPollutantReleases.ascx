@@ -2,9 +2,9 @@
 
 <%@ Register Src="~/UserControls/SearchFacility/TimeSeries/ucFacilityPollutantReleasesTrendSheet.ascx" TagName="ucFacilityPollutantReleasesTrendSheet" TagPrefix="eprtr" %>
 
-<asp:Panel ID="facilityPollutantReleases" runat="server" Width="100%">
+<asp:Panel ID="facilityPollutantReleases" runat="server" Width="100%" Height="100%">
     
-    <div runat="server" class="printStyles">
+    <div>
     <h3><asp:Label ID="Label2" Text="<%$ Resources:Pollutant,ReleasesToAir %>" runat="server"></asp:Label></h3>
         <asp:ListView ID="lvFacilityPollutantReleasesAIR" runat="server" OnItemCommand="OnItemCommandAIR">
             <LayoutTemplate>

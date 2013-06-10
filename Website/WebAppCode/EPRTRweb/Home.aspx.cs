@@ -10,7 +10,6 @@ public partial class Home : BasePage
     {
         if (!IsPostBack)
         {
-
             this.litTextBody.Text = CMSTextCache.CMSText("Static", "HomeWelcomeText");
             int maxNumItems = Int32.Parse(ConfigurationManager.AppSettings["MaxNumberOfNewsItemsOnHomePage"]);
             string cultureCode = CultureResolver.Resolve(Request);
@@ -19,7 +18,7 @@ public partial class Home : BasePage
         }
         
         // add round corner to news icon on every page load
-        //System.Web.UI.ScriptManager.RegisterStartupScript(Page, typeof(string), "news_cornering", "$('span#" + news_icon.ClientID + "').corner('5px');", true);
+        System.Web.UI.ScriptManager.RegisterStartupScript(Page, typeof(string), "news_cornering", "$('span#" + news_icon.ClientID + "').corner('5px');", true);
 
     }
 

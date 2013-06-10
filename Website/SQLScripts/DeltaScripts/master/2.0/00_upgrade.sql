@@ -17,17 +17,17 @@ PRINT 'UPDATING: $(SQLCMDSERVER)\$(SQLCMDDBNAME) FROM VERSION $(basedir) . . .'
 :r $(basedir)\..\..\common\AddVersion.sql
 go
 
-:r $(basedir)\update_script_AllIn1.sql
+:r $(basedir)\Add_fAT_GETMETHODDESIGNATION_TYPE.sql
 go
 
-:r $(basedir)\update_script_AddAccidentalColumn.sql
+:r $(basedir)\Add_MethodCode_MethodDesignation.sql
+go
+:r $(basedir)\Add_tAT_METHOD.sql
 go
 
-:r $(basedir)\alter_WEB_RECEIVINGCOUNTRY.sql
-go
 
 --Uncomment this when released (will only insert version no. once) :
-
+/*
 IF NOT EXISTS (SELECT * FROM tAT_version WHERE Major_version = $(major) AND Minor_version = $(minor))
 	INSERT INTO tAT_version(Major_version, Minor_version) VALUES ($(major), $(minor));
-
+*/

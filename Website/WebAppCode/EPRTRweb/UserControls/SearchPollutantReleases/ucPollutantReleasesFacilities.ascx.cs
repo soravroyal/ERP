@@ -425,7 +425,7 @@ public partial class ucPollutantReleasesFacilities : System.Web.UI.UserControl
     public string GetCountryToolTip(object obj)
     {
         PollutantReleases.ResultFacility row = (PollutantReleases.ResultFacility)obj;
-        return LOVResources.CountryName(row.CountryCode);
+        return LOVResources.AnnexIActivityName(row.CountryCode);
     }
 
     #endregion

@@ -71,7 +71,7 @@ namespace EPRTR.ResourceProviders
             if (culture == null)
                 culture = CultureInfo.CurrentUICulture;
 
-            return this.getObjectInternal(resourceKey, culture);
+            return this.GetObjectInternal(resourceKey, culture);
 
         }
 
@@ -91,30 +91,34 @@ namespace EPRTR.ResourceProviders
 
             if (this.resourceCache == null)
             {
-                this.resourceCache = this.dalc.GetResources(); // new ListDictionary();
+                this.resourceCache = new ListDictionary();
             }
 
             IDictionary resources = this.resourceCache[cultureName] as IDictionary;
 
-            //if (resources == null)
-            //{
-            //    resources = this.dalc.GetResourcesByCulture(cultureName);
-            //    this.resourceCache[cultureName] = resources;
-            //}
+            if (resources == null)
+            {
+                resources = this.dalc.GetResourcesByCulture(cultureName);
+                this.resourceCache[cultureName] = resources;
+            }
 
             return resources;
+
         }
 
 
         /// <summary>
         /// Internal lookup method that handles retrieving a resource
-        /// by its resource id and culture. 
+        /// by its resource id and culture. Realistically this method
+        /// is always called with the culture being null or empty
+        /// but the routine handles resource fallback in case the
+        /// code is manually called.
         /// </summary>
         /// <param name="ResourceKey"></param>
         /// <param name="CultureName"></param>
         /// <returns></returns>
 
-        private object getObjectInternal(string resourceKey, CultureInfo culture)
+        private object GetObjectInternal(string resourceKey, CultureInfo culture)
         {
             if (culture == null)
             {
@@ -142,10 +146,12 @@ namespace EPRTR.ResourceProviders
             if (value == null && !string.IsNullOrEmpty(culture.Name))
             {
                 // *** try again with fall back culture
-                return getObjectInternal(resourceKey, culture.Parent);
+                return GetObjectInternal(resourceKey, culture.Parent);
             }
 
             // *** If the value is still null get the default value
+
+            
             if (value == null)
             {
                 Resources = this.getResourceCache(defaultCulture.Name);
@@ -154,6 +160,7 @@ namespace EPRTR.ResourceProviders
                 else
                     value = Resources[resourceKey];
             }
+
 
 
             // *** If the value is still null and we're at the invariant culture
@@ -272,7 +279,7 @@ namespace EPRTR.ResourceProviders
             if (culture == null)
                 culture = CultureInfo.CurrentUICulture;
 
-            return this.getObjectInternal(ResourceKey, culture);
+            return this.GetObjectInternal(ResourceKey, culture);
 
         }
 

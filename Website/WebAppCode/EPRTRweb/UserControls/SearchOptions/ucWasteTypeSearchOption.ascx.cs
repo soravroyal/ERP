@@ -12,12 +12,8 @@ public partial class ucWasteTypeSearchOption : System.Web.UI.UserControl
         {
             Filter = LinkSearchBuilder.GetWasteTypeFilter(Request);
             setSelectedValues();
-
-						chkWasteNonHazardous.Attributes.Add("onclick", "WTValidation()");
-						chkWasteHazardousCountry.Attributes.Add("onclick", "WTValidation()");
-						chkWasteHazardousTransboundary.Attributes.Add("onclick", "WTValidation()");
-				}
-		}
+        }
+    }
 
     private void setSelectedValues()
     {

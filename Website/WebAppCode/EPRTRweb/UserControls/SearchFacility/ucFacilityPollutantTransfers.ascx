@@ -3,9 +3,9 @@
 
 <%@ Register Src="~/UserControls/SearchFacility/TimeSeries/ucFacilityPollutantTransfersTrendSheet.ascx" TagName="TransferTrend" TagPrefix="eprtr" %>
 
-<asp:Panel ID="facilityPollutantTransfers" runat="server" Width="100%">
+<asp:Panel ID="facilityPollutantTransfers" runat="server" Width="100%" Height="100%">
 
-<div runat="server" class="printStyles">
+<div>
 <h3> <asp:Label ID="lbTransToWasteWater" Text="<%$Resources:Pollutant, TransferToWasteWater%>" runat="server" CssClass="Special"></asp:Label> </h3>
 <asp:ListView ID="lvFacilityPollutantTransfers" runat="server" OnItemCommand="OnItemCommand" >
 

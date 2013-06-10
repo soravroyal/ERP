@@ -20,7 +20,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
     private const string FILTER = "wasteTransferActivityFilter";
     private const string RESULT = "wasteTransferActivityResult";
     public EventHandler ContentChanged;
-
+ 
     protected void Page_Load(object sender, EventArgs e)
     {
     }
@@ -35,7 +35,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
         set { ViewState[FILTER] = value; }
     }
 
-
+    
     /// <summary>
     /// method to populate the listview
     /// </summary>
@@ -173,7 +173,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
     {
         // create facility search filter from activity search criteria
         FacilitySearchFilter filter = FilterConverter.ConvertToFacilitySearchFilter(SearchFilter);
-
+        
         // activity from code
         filter.ActivityFilter = getActivityFilter(e);
 
@@ -205,7 +205,7 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
 
         return LinkSearchBuilder.GetActivityFilter(SearchFilter.ActivityFilter, codes[0], codes[1]);
     }
-
+    
     #region DataBinding methods
 
     //Hide headers dependend on filter selections.
@@ -476,43 +476,18 @@ public partial class ucWasteTransferActivities : System.Web.UI.UserControl
 
         Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
 
-        //all rows but total
-        foreach (var item in rows.Where(r => r.Code != ActivityTreeListRow.CODE_TOTAL))
+        foreach (var item in rows)
         {
             string row = csvformat.GetWasteTransferActivityRow(item, filter);
-            Response.Write(row);
-        }
 
-        //write total row
-
-        var totalRow = rows.SingleOrDefault(r => r.Code == ActivityTreeListRow.CODE_TOTAL);
-
-        if (totalRow == null)
-        {
-            //find all rows on topLevel. if only one, use this as total row
-            var toplevelRows = rows.Where(r => r.Level == 0);
-            if (toplevelRows != null && toplevelRows.Count() == 1)
+            if (ActivityTreeListRow.CODE_TOTAL.Equals(item.Code))
             {
-                totalRow = toplevelRows.Single();
+                Response.Write(Environment.NewLine);
+                Response.Write(colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
             }
-        }
 
-        //write total row if any is found
-        if (totalRow != null)
-        {
-            Response.Write(Environment.NewLine);
-            Response.Write(csvformat.AddText(Resources.GetGlobal("Common", "Total")));
-            Response.Write(Environment.NewLine);
-
-
-            string[] totalColHeaderRows = csvformat.GetWasteTransferActivityColHeaderRows(filter);
-
-            Response.Write(totalColHeaderRows[0] + totalColHeaderRows[1]);
-
-            string row = csvformat.GetWasteTransferActivityRow(totalRow, filter);
             Response.Write(row);
         }
-
 
         Response.End();
     }

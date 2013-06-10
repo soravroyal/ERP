@@ -233,10 +233,10 @@ public partial class ucFacilityWasteTrendSheet : System.Web.UI.UserControl
             {
                 this.ucStackColumnTime.Visible = true;
 
-								Color[] colors = new Color[] { Global.ColorWasteRecovery, Global.ColorWasteDisposal, Global.ColorWasteUnspec };
+                Color[] colors = new Color[] { Global.ColorWasteRecovery, Global.ColorWasteDisposal, Global.ColorWasteUnspec };
                 ChartHatchStyle[] hatchStyles = new ChartHatchStyle[] { ChartHatchStyle.None, ChartHatchStyle.None, ChartHatchStyle.None };
-								string[] legendTexts = new string[]{Resources.GetGlobal("Common", "TreatmentRecovery"),
-																										Resources.GetGlobal("Common", "TreatmentDisposal"),
+                string[] legendTexts = new string[]{Resources.GetGlobal("Common", "TreatmentDisposal"),
+                                                    Resources.GetGlobal("Common", "TreatmentRecovery"),
                                                     Resources.GetGlobal("Common", "TreatmentUnspecified")};
 
 
@@ -251,7 +251,7 @@ public partial class ucFacilityWasteTrendSheet : System.Web.UI.UserControl
                     string[] tip = new string[] { String.Format("{0}: {1}", Resources.GetGlobal("Common", "Year"), v.Year),
                                                   String.Format("{0}: {1}", Resources.GetGlobal("Common", "Total"), QuantityFormat.Format(v.QuantityTotal, v.QuantityUnit)),
                                                   String.Format("{0}: {1}", Resources.GetGlobal("Common", "Recovery"), QuantityFormat.Format(v.QuantityRecovery, v.QuantityUnit)),
-																									String.Format("{0}: {1}", Resources.GetGlobal("Common", "Disposal"), QuantityFormat.Format(v.QuantityDisposal, v.QuantityUnit)),
+                                                  String.Format("{0}: {1}", Resources.GetGlobal("Common", "Disposal"), QuantityFormat.Format(v.QuantityDisposal, v.QuantityUnit)),
                                                   String.Format("{0}: {1}", Resources.GetGlobal("Common", "Unspec"), QuantityFormat.Format(v.QuantityUnspec, v.QuantityUnit))};
 
                     TimeSeriesUtils.BarData cd = new TimeSeriesUtils.BarData
@@ -280,17 +280,12 @@ public partial class ucFacilityWasteTrendSheet : System.Web.UI.UserControl
 
                 // Create chart
                 this.ucStackColumnCompare.Visible = true;
-							
-								ChartHatchStyle[] hatchStyles = new ChartHatchStyle[] { ChartHatchStyle.None, ChartHatchStyle.None, ChartHatchStyle.None };
+                Color[] colors = new Color[] { Global.ColorWasteRecovery, Global.ColorWasteDisposal, Global.ColorWasteUnspec};
+                ChartHatchStyle[] hatchStyles = new ChartHatchStyle[] { ChartHatchStyle.None, ChartHatchStyle.None, ChartHatchStyle.None };
 
-								//Color[] colors = new Color[] { Global.ColorWasteRecovery, Global.ColorWasteDisposal, Global.ColorWasteUnspec };
-								//string[] legendTexts = new string[]{Resources.GetGlobal("Common", "TreatmentDisposal"),
-								//                                    Resources.GetGlobal("Common", "TreatmentRecovery"),
-								//                                    Resources.GetGlobal("Common", "TreatmentUnspecified")};
-								Color[] colors = new Color[] { Global.ColorWasteRecovery, Global.ColorWasteDisposal, Global.ColorWasteUnspec };
-								string[] legendTexts = new string[]{Resources.GetGlobal("Common", "TreatmentRecovery"),
-																										Resources.GetGlobal("Common", "TreatmentDisposal"),
-																										Resources.GetGlobal("Common", "TreatmentUnspecified")};
+                string[] legendTexts = new string[]{Resources.GetGlobal("Common", "TreatmentDisposal"),
+                                                    Resources.GetGlobal("Common", "TreatmentRecovery"),
+                                                    Resources.GetGlobal("Common", "TreatmentUnspecified")};
 
                 this.ucStackColumnCompare.Initialize(colors.Length, StackColumnType.Comparison, WasteTransferTrend.CODE_TNE, colors, hatchStyles, legendTexts);
                 

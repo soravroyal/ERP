@@ -1,4 +1,4 @@
-cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRcms\web.config" "SDKCGA6302" "tetrasql"
+cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRcms\web.config" "SDKCGA6302.rdg.bane.dk" "tetrasql"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRcms\web.config" "allow users" "deny users"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRcms\web.config" "sa;" "gis;"
 cscript replace.vbs "C:\E-PRTR_Ori\EEA\EPRTRcms\web.config" "c:\a\eprtr\upload\" "\\goose\eprtrdocs\"

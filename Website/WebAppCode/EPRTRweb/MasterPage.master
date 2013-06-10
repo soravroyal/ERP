@@ -6,8 +6,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- <title></title>
-    <link rel="alternate" type="application/rss+xml" href="http://localhost:8032/EPRTRweb/news.rss" title="News rss feed" />
+ 
     <link rel="SHORTCUT ICON" href="images/favicon.ico" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
     <link href="css/typography.css" rel="stylesheet" type="text/css" />
@@ -16,30 +15,29 @@
     <link href="css/commonStyles.css" rel="stylesheet" type="text/css" />
     
     <link href="css/sheetStyles.css" rel="stylesheet" type="text/css" />
+    <%-- switch for IE browsers --%>
+    <![if IE]>
     <link href="css/searchOptionStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/newsStyle.css" rel="stylesheet" type="text/css" />
+    <link href="css/masterStyles.css" rel="stylesheet" type="text/css" />
+    <![endif]>
+    <%-- switch for not IE browsers --%>
+    <![if !IE]>
+    <link href="css/nonIEsearchOptionStyles.css" rel="stylesheet" type="text/css" />
+    <link href="css/newsStyleNonIE.css" rel="stylesheet" type="text/css" />
+    <link href="css/nonIEmasterStyles.css" rel="stylesheet" type="text/css" />
+    <![endif]>
     <link href="css/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
     <link href="css/columnStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
-    
-    <!--[if lt IE 9]>
-    <link href="css/searchOptionStylesIElt9.css" rel="stylesheet" type="text/css" />
-    <link href="css/newsStyleIElt9.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-
-    <!--[if lt IE 8]>
-    <link href="css/masterStylesIElt8.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-    
     <%--Java Script functions --%>
     <script type="text/javascript" src="Scripts/swfobject.js"></script>
     <script type="text/javascript" src="Scripts/map.js"></script>
     <script type="text/javascript" src="Scripts/PopupWindow.js"></script>
     <script type="text/javascript" src="Scripts/Cookies.js"></script>
     <script type="text/javascript" src="Scripts/jquery.js"></script>
-    <script type="text/javascript" src="Scripts/analytics.js"></script>
-
     <script type="text/javascript" src="Scripts/jquery.corner.js"></script>
+
     <script type="text/javascript" src="Charts/charts.js"></script>
     <script type="text/javascript">
 
@@ -100,12 +98,11 @@
             </tr>
         </table>
     </div>
-   
-
-    <table border="0" align="center" cellpadding="0" cellspacing="0" class="page_container">  
+    <table border="0" align="center" cellpadding="0" cellspacing="0" class="page_container">
+       
         <tr>
             <td align="left">
-              <form id="masterform" runat="server">
+                <form id="masterform" runat="server">
                 <div>
                     <%-- Declare script manager for ajax --%>
                     <asp:ScriptManager ID="ScriptManagerMaster" AllowCustomErrorsRedirect="true" runat="server"
@@ -140,16 +137,16 @@
                         <%-- Icons --%>
                         <div class="topBar2">
                             <asp:ContentPlaceHolder ID="ContentTop2" runat="server" />
-                            <div class="EU_flag" >
+                            <div class="EU_flag">
                             </div>
                             <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server" />
                             <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server" />
                             <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server" />
                             <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server" />
                             
-                            <div class="langSelector">
+                            <span class="langSelector">
                               <eprtr:ucLanguageSelector ID="LanguageSelector1" runat="server" /> 
-                            </div>
+                            </span>
                         </div>
                         <%-- Menu, bind to treeview to sitemap --%>
                         <asp:UpdatePanel ID="upTree" runat="server" UpdateMode="Conditional">
@@ -161,7 +158,7 @@
                                         ExpandImageToolTip="<%$ Resources:Common,ToolTipExpand %>"
                                         CollapseImageToolTip="<%$ Resources:Common,ToolTipCollapse %>">
                                         <LevelStyles>
-                                            <asp:TreeNodeStyle  CssClass="menu_item" />
+                                            <asp:TreeNodeStyle CssClass="menu_item" />
                                             <asp:TreeNodeStyle CssClass="menu_sub_item" />
                                         </LevelStyles>
                                         <SelectedNodeStyle CssClass="menu_selected" />
@@ -189,9 +186,8 @@
                     </asp:ContentPlaceHolder>
                 </div>
                 </form>
-           </td>
+            </td>
         </tr>
     </table>
-   
 </body>
 </html>

@@ -14,11 +14,6 @@ public partial class ucMediumSearchOptionEPER : System.Web.UI.UserControl
 
             Filter = LinkSearchBuilder.GetMediumFilter(Request);
             setSelectedMediums();
-
-            chkAir.Attributes.Add("onclick", "PRTValidation()");
-            chkSoil.Attributes.Add("onclick", "PRTValidation()");
-            chkWater.Attributes.Add("onclick", "PRTValidation()");
-
         }
     }
 

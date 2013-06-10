@@ -5,15 +5,12 @@
 .langSelector
 {
     float:right;
-    /*position:relative;*/
-    /*top:-26px;*/
-    /*left:-100px;*/
-    margin-left:2px;
+    position:relative;
+    top:-26px;
+    left:-100px;
     background:#C6EBF7;
     z-index : 100;
-    display: inline-block;
 }
-
 
 .langDropPanelClass
 {
@@ -25,7 +22,7 @@
 
 	display:none;
 	visibility: hidden;
-	z-index: 100;
+	
 	position: absolute; 
 	display: block; 
 	left: 2px; 
@@ -39,7 +36,7 @@
 	background-color: #FFFFFF;
 	width: 990px;
 	height: auto;
-	border-right-width: 2px;
+	border-right-width: 1px;
 	border-right-style: solid;
 	border-right-color: #CCCCCC;
 	border-bottom-width: 1px;
@@ -48,10 +45,9 @@
 	border-top-width: 1px;
 	border-top-style: solid;
 	border-top-color: #CCCCCC;
-	border-left-width: 2px;
+	border-left-width: 1px;
 	border-left-style: solid;
 	border-left-color: #CCCCCC;
-	margin:0 auto;
 }
 
 /* Top bar
@@ -104,29 +100,23 @@
 	}
 
 .E-PRTR_name {
-	font-size: 12px;
-	color: #ffffff;
+	font-size: 11px;
+	color: #000000;
 	text-decoration: none;
-	/*margin-top: 3px;*/
+	margin-top: 3px;
 	float: left;
 	width: 500px;
 	clear: left;
 }
 
 .EU_flag {
-	background: url('../images/eu_newlogo.png') no-repeat center;
+	background-image: url('../images/EU_flag.gif');
 	float: right;
 	height: 52px;
 	width: 80px;
-	margin-right: 10px;
+	margin-right: 15px;
 	clear: none;
 	margin-top: -40px;
-}
-
-.EU_flag #euLogo
-{
-	width: 100%;
-	height: 100%;
 }
 
 /* Bottom bar
@@ -158,7 +148,7 @@
 	clear: left;
 	float: left;
 	height: 10px;
-	width: 680px;
+	width: 700px;
 	margin-top: 3px;
 }
 
@@ -177,11 +167,9 @@
 	clear: none;
 	float: right;
 	height: 20px;
-	width: 240px;
+	width: 180px;
 	margin-top: 10px;
 	font-weight: bold;
-	text-align:right;
-	margin-right: 10px;
 }
 
 
@@ -197,48 +185,20 @@
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-left: 10px;
-	background: none repeat scroll 0 0 #F3F3F3;
-    border-radius: 10px 10px 10px 10px;
 }
-.menu_column td a
-{
-/*    border-style: dotted none none;
-    border-width: 1px medium medium;*/
-}
+
 .menu_item
 {
 	cursor:pointer;
 	color:Black;
-	font-size:10pt;
-
 }
-
 
 .menu_sub_item {
 	color: #AA8162;
+	/*color:Black;*/
 	padding-left: 4px;
 	padding-right: 4px;
-}
-
-.menu_sub_item a:visited 
-{
-	color: #AA8162;
-}
-
-.menu_sub_item a:active
-{
-	color: #AA8162;
-}
-.menu_item a:hover
-{
-    color: #FFFFFF;
-	background-color: #F6A800;
-}
-.menu_sub_item a:hover
-{
-	color: #FFFFFF;
-	background-color: #F6A800;
-}
+	}
 
 .menu_selected {
 	background-color: #BDEBF7;
@@ -251,14 +211,13 @@
 	clear: none;
 	float: left;
 	width: 800px;
-	margin-top: 20px;
+	margin-top: 60px;
 	margin-right: 10px;
 	margin-bottom: 0px;
 	margin-left: 0px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 	color: #000000;
-	font-size: 10pt;
 }
 /*.info_area a
 {

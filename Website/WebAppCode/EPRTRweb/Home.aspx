@@ -4,7 +4,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="infoarea" ContentPlaceHolderID="ContentInfoArea" runat="server">
-
     <%-- Home page content Title and text--%>
     <asp:UpdatePanel UpdateMode="Conditional" runat="server">
         <ContentTemplate>
@@ -17,13 +16,12 @@
             </div>
 
             <%--News panel--%>
-            <div class="news_area" runat="server">       
-                  <div id="news_icon" runat="server" class="newsImage">
-                    <asp:Label class="newsheaderlbl" runat="server" Text="<%$ Resources:Static, NewsIconText %>" />
-                    <asp:HyperLink CssClass="RssFeedImage" ID="rssFeedLink" runat="server" href="news.rss"><asp:image ID="Image1" CssClass="rssImage" runat="server"  ToolTip="Rss news feed" AlternateText="Rss feed" ImageUrl="~/images/Feed-icon.png" /></asp:HyperLink>
-               </div>
-           
-            
+            <div class="news_area" runat="server">
+                  <span id="news_icon" class="newsImage"  runat="server">
+                    <asp:HyperLink runat="server" Text="<%$ Resources:Static, NewsIconText %>"></asp:HyperLink>
+                  </span>
+                <br />
+                <br />
                 <table width="100%">
                     <asp:Repeater ID="repeaterNews" runat="server" OnItemCommand="lnkNewsItem_Click">
                         <ItemTemplate>

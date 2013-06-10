@@ -5,7 +5,7 @@ echo Delete EPRTRcms folder
 ERASE "C:\Inetpub\wwwroot\EPRTRcms" /q /s
 echo Copy EPRTRcms folder
 echo on
-XCOPY "\\sdkcga6302\E-PRTR_CMS_DEPLOY\EPRTRcms" "C:\Inetpub\wwwroot\EPRTRcms" /S
+XCOPY "\\sdkcga6302\c$\E-PRTR_CMS_DEPLOY\EPRTRcms" "C:\Inetpub\wwwroot\EPRTRcms" /S
 echo off
 echo CONNECTIONSTRINGS ect. IN WEB.CONFIG FIL is updated 
 call replace_webconfig_cms.bat

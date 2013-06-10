@@ -111,7 +111,7 @@ public partial class Print : BasePage
         html = html.Replace("type=\"image\"", "type=\"hidden\""); //remove time series icon and linksearch icon
         html = html.Replace("type=\"radio\"", "type=\"radio\" disabled=\"disabled\""); //disable radio buttons
         html = html.Replace("<select", "<select disabled=\"disabled\""); //disable dropdown buttons
-
+        
         // add top part, head, title and styling
         string top = "<html><head><title>" + Resources.GetGlobal("Common", "Title") + "</title>" + Environment.NewLine;
         top += "<link href='css/reset.css' rel='stylesheet' type='text/css' />" + Environment.NewLine;
@@ -125,7 +125,7 @@ public partial class Print : BasePage
         top += "<link href='css/cssPrint/facilityDetailsSpecifics.css' rel='stylesheet' type='text/css' />" + Environment.NewLine;
         top += "<link href='css/columnStyles.css' rel='stylesheet' type='text/css' />" + Environment.NewLine;
         top += "<link href='css/columnHeaderStyles.css' rel='stylesheet' type='text/css' />" + Environment.NewLine;
-				top += "</head><body style='overflow:hidden'>";
+        top += "</head><body>";
         top += Environment.NewLine;
 
         // print tag

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Database Name="EPRTRweb" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=SDKCGA6332;Initial Catalog=EPRTRpublic;User ID=sa" SettingsObjectName="QueryLayer.Properties.Settings" SettingsPropertyName="EPRTRwebConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=sdkcga6302;Initial Catalog=EPRTRweb;User ID=sa" SettingsObjectName="QueryLayer.Properties.Settings" SettingsPropertyName="EPRTRwebConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.POLLUTANTTRANSFER" Member="POLLUTANTTRANSFERs">
     <Type Name="POLLUTANTTRANSFER">
       <Column Name="FacilityReportID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

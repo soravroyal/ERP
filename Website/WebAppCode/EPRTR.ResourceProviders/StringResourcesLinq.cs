@@ -13,7 +13,6 @@ using System.Linq;
 using EPRTR.ResourceProviders.Properties;
 using System.Diagnostics;
 using LinqUtilities;
-using System.Collections;
 
 namespace EPRTR.ResourceProviders
 {
@@ -60,7 +59,7 @@ namespace EPRTR.ResourceProviders
             ListDictionary resourceDictionary = new ListDictionary();
 
             // set up LINQ expression and get resource from database
-            DBResourceDataClassesDataContext db = getDataContext();
+            DBResourceDataClassesDataContext db = new DBResourceDataClassesDataContext();
             IEnumerable<StringResource> res = db.StringResources.Where(m => m.CultureCode.Equals(cultureName) && m.ResourceType.Equals(this.resourceType));
 
             foreach (StringResource r in res)
@@ -76,49 +75,6 @@ namespace EPRTR.ResourceProviders
 
             return resourceDictionary;
         }
-
-
-        /// <summary>
-        /// Returns a dictionary type containing dictionaries for each culture with all resources for a particular resource type.
-        /// The resource type is based on this instance as passed to the constructor.
-        /// </summary>
-        /// <param name="resourceKey">The resource key to search for.</param>
-        /// <returns>If found, the dictionary contains dictibnalties with key/value pairs for each resource for each culture.</returns>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public ListDictionary GetResources()
-        {
-            Debug.WriteLine(String.Format("StringResourcesLinq.GetResources() for resourceType:{0}", this.resourceType));
-
-            // create the dictionary
-            ListDictionary resourceDictionary = new ListDictionary();
-
-            // set up LINQ expression and get resource from database
-            DBResourceDataClassesDataContext db = getDataContext();
-            IEnumerable<StringResource> res = db.StringResources.Where(m => m.ResourceType.Equals(this.resourceType));
-
-            foreach (StringResource r in res)
-            {
-                string culture = r.CultureCode;
-                string k = r.ResourceKey;
-                string v = r.ResourceValue;
-
-                IDictionary resources = resourceDictionary[culture] as IDictionary;
-                if (resources == null)
-                {
-                    resources = new ListDictionary();
-                    resourceDictionary[culture] = resources;
-                }
-
-                if (!resources.Contains(k))
-                {
-                    resources.Add(k, v);
-                }
-            }
-
-            return resourceDictionary;
-
-        }
-
 
 
         private static DBResourceDataClassesDataContext getDataContext()

@@ -15,19 +15,21 @@
     <link href="css/commonStyles.css" rel="stylesheet" type="text/css" />
     
     <link href="css/sheetStyles.css" rel="stylesheet" type="text/css" />
+    <%-- switch for IE browsers --%>
+    <![if IE]>
     <link href="css/searchOptionStyles.css" rel="stylesheet" type="text/css" />
+    <link href="css/newsStyle.css" rel="stylesheet" type="text/css" />
+    <link href="css/masterStyles.css" rel="stylesheet" type="text/css" />
+    <![endif]>
+    <%-- switch for not IE browsers --%>
+    <![if !IE]>
+    <link href="css/nonIEsearchOptionStyles.css" rel="stylesheet" type="text/css" />
+    <link href="css/newsStyleNonIE.css" rel="stylesheet" type="text/css" />
+    <link href="css/nonIEmasterStyles.css" rel="stylesheet" type="text/css" />
+    <![endif]>
     <link href="css/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
     <link href="css/columnStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
-    
-        <!--[if lt IE 9]>
-    <link href="css/searchOptionStylesIElt9.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-
-    <!--[if lt IE 8]>
-    <link href="css/masterStylesIElt8.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-
     <%--Java Script functions --%>
     <script type="text/javascript" src="Scripts/swfobject.js"></script>
     <script type="text/javascript" src="Scripts/map.js"></script>

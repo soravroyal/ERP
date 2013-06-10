@@ -12,7 +12,7 @@ using EPRTR.Comparers;
 using System.Globalization;
 using EPRTR.CsvUtilities;
 using System.Linq;
-
+ 
 public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 {
     private const string FILTER = "wasteTransferAreaFilter";
@@ -45,7 +45,7 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 
         sortResult(data);
         ViewState[RESULT] = data;
-
+        
         this.lvWasteTransferArea.DataSource = data;
         this.lvWasteTransferArea.DataBind();
 
@@ -170,7 +170,7 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
     {
         // create facility search filter from activity search criteria
         FacilitySearchFilter filter = FilterConverter.ConvertToFacilitySearchFilter(SearchFilter);
-
+                
         // Search for country according to code
         filter.AreaFilter = getAreaFilter(e);
 
@@ -243,7 +243,7 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
     //only show HW total if selected in filter
     protected bool ShowHWTotal
     {
-        get { return ShowHWIC && ShowHWOC; }
+        get { return ShowHWIC && ShowHWOC ; }
     }
 
     protected string GetRowCss(object obj)
@@ -411,68 +411,51 @@ public partial class ucWasteTransferAreas : System.Web.UI.UserControl
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-        CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-        // Create Header
-        var filter = SearchFilter;
-
-        bool isConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(filter);
-
-        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetWasteTransfersSearchHeader(
-            filter,
-            isConfidentialityAffected);
-
-        // Create Body
-        List<WasteTransfers.AreaTreeListRow> rows = WasteTransfers.GetAreaTree(filter).ToList();
-        sortResult(rows);
-
-        // dump to file
-        string topheader = csvformat.CreateHeader(header);
-        string[] colHeaderRows = csvformat.GetWasteTransferAreaColHeaderRows(filter);
-
-        Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Area_List");
-
-        Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
-
-        //all rows but total
-        foreach (var item in rows.Where(r => r.Code != ActivityTreeListRow.CODE_TOTAL))
+        try
         {
-            string row = csvformat.GetWasteTransferAreaRow(item, filter);
-            Response.Write(row);
-        }
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
 
-        //write total row
+            // Create Header
+            var filter = SearchFilter;
 
-        var totalRow = rows.SingleOrDefault(r => r.Code == ActivityTreeListRow.CODE_TOTAL);
+            bool isConfidentialityAffected = WasteTransfers.IsAffectedByConfidentiality(filter);
 
-        if (totalRow == null)
-        {
-            //find all rows on topLevel. if only one, use this as total row
-            var toplevelRows = rows.Where(r => r.Level == 0);
-            if (toplevelRows != null && toplevelRows.Count() == 1)
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetWasteTransfersSearchHeader(
+                filter,
+                isConfidentialityAffected);
+
+            // Create Body
+            List<WasteTransfers.AreaTreeListRow> rows = WasteTransfers.GetAreaTree(filter).ToList();
+            sortResult(rows);
+
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string[] colHeaderRows = csvformat.GetWasteTransferAreaColHeaderRows(filter);
+
+            Response.WriteUtf8FileHeader("EPRTR_Waste_Transfers_Area_List");
+
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
+
+            foreach (var item in rows)
             {
-                totalRow = toplevelRows.Single();
+                string row = csvformat.GetWasteTransferAreaRow(item, filter);
+
+                if (AreaTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1] + colHeaderRows[2]);
+                }
+
+                Response.Write(row);
             }
-        }
 
-        //write total row if any is found
-        if (totalRow != null)
+            Response.End();
+        }
+        catch (Exception)
         {
-            Response.Write(Environment.NewLine);
-            Response.Write(csvformat.AddText(Resources.GetGlobal("Common", "Total")));
-            Response.Write(Environment.NewLine);
 
-
-            string[] totalColHeaderRows = csvformat.GetWasteTransferAreaColHeaderRows(filter);
-
-            Response.Write(totalColHeaderRows[0] + totalColHeaderRows[1]);
-
-            string row = csvformat.GetWasteTransferAreaRow(totalRow, filter);
-            Response.Write(row);
         }
-
-        Response.End();
     }
 
 

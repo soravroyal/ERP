@@ -24,7 +24,7 @@
     </LayoutTemplate>
     <ItemTemplate>
       <tr class="generalListStyle_row">
-        <td title="<%# GetFacilityName(Container.DataItem)%>"><div id="Facility"><a href="<%=ResolveUrl("~/FacilityDetails.aspx") %>?FacilityId=<%# GetFacilityId(Container.DataItem)%>&ReportingYear=<%# GetReportingYear(Container.DataItem)%>"><%# GetFacilityName(Container.DataItem)%></a></div></td>
+        <td title="<%# GetFacilityName(Container.DataItem)%>"><div id="Facility"><asp:LinkButton ID="lnkFacilityClick" Text='<%# GetFacilityName(Container.DataItem)%>' CommandArgument="togglesheet" CommandName="<%#GetFacilityReportId(Container.DataItem)%>" OnClientClick="ShowWaitIndicator();" runat="server"></asp:LinkButton></div></td>
         <td title=""><div id="PostalCode"><%# GetPostalCode(Container.DataItem)%></div></td>
         <td title=""><div id="Address"><%# GetAddress(Container.DataItem)%></div></td>
         <td title=""><div id="TownVillage"><%# GetCity(Container.DataItem)%></div></td>

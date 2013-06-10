@@ -14,20 +14,4 @@ rem update from ver 2.0
 SET basedir=2.0
 sqlcmd -i %basedir%\00_upgrade.sql
 
-rem update from ver 2.1
-SET basedir=2.1
-sqlcmd -i %basedir%\00_upgrade.sql
-
-rem update from ver 2.2
-SET basedir=2.2
-sqlcmd -i %basedir%\00_upgrade.sql
-
-rem update from ver 3.0
-SET basedir=3.0
-sqlcmd -i %basedir%\00_upgrade.sql
-
-rem update from ver 3.1
-SET basedir=3.1
-sqlcmd -i %basedir%\00_upgrade.sql
-
 PAUSE

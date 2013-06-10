@@ -148,7 +148,7 @@ namespace QueryLayer
                     break;
                 case WasteTypeFilter.Type.NonHazardous:
                     dataFrom = groupFrom.Select(x => new TimeSeriesClasses.TsWasteCompare(x.Count(), x.Sum(p => p.QuantityTotalNONHW), x.Sum(p => p.QuantityRecoveryNONHW), x.Sum(p => p.QuantityDisposalNONHW), x.Sum(p => p.QuantityUnspecNONHW)));
-										dataTo = groupTo.Select(x => new TimeSeriesClasses.TsWasteCompare(x.Count(), x.Sum(p => p.QuantityTotalNONHW), x.Sum(p => p.QuantityRecoveryNONHW), x.Sum(p => p.QuantityDisposalNONHW), x.Sum(p => p.QuantityUnspecNONHW)));
+                    dataTo = groupTo.Select(x => new TimeSeriesClasses.TsWasteCompare(x.Count(), x.Sum(p => p.QuantityTotalNONHW), x.Sum(p => p.QuantityRecoveryNONHW), x.Sum(p => p.QuantityDisposalHWIC), x.Sum(p => p.QuantityUnspecNONHW)));
                     dataFromBoth = groupDataFromBoth.Select(x => new TimeSeriesClasses.TsWasteCompare(x.Count(), x.Sum(p => p.QuantityTotalNONHW), x.Sum(p => p.QuantityRecoveryNONHW), x.Sum(p => p.QuantityDisposalNONHW), x.Sum(p => p.QuantityUnspecNONHW)));
                     dataToBoth = groupDataToBoth.Select(x => new TimeSeriesClasses.TsWasteCompare(x.Count(), x.Sum(p => p.QuantityTotalNONHW), x.Sum(p => p.QuantityRecoveryNONHW), x.Sum(p => p.QuantityDisposalNONHW), x.Sum(p => p.QuantityUnspecNONHW)));
                     break;

@@ -14,9 +14,8 @@ namespace QueryLayer
     /// </summary>
     public class FacilityRow
     {
-        public FacilityRow(int facilityId, int facilityReportId, string facilityName, string postalCode, string address, string city, string activityCode, string countryCode, bool confidentialIndicator, int reportingYear)
+        public FacilityRow(int facilityReportId, string facilityName, string postalCode, string address, string city, string activityCode, string countryCode, bool confidentialIndicator)
         {
-            this.facilityId = facilityId;
             this.facilityReportId = facilityReportId;
             this.facilityName = facilityName;
             this.postalCode = postalCode;
@@ -25,15 +24,8 @@ namespace QueryLayer
             this.activityCode = activityCode;
             this.countryCode = countryCode;
             this.confidentialIndicator = confidentialIndicator;
-            this.reportingYear = reportingYear;
         }
 
-        private int facilityId;
-        public int FacilityId
-        {
-            get { return this.facilityId; }
-            set { this.facilityId = value; }
-        }
         private int facilityReportId;
         public int FacilityReportId
         {
@@ -83,12 +75,6 @@ namespace QueryLayer
             get { return confidentialIndicator; }
             set { confidentialIndicator = value; }
         }
-        private int reportingYear;
-        public int ReportingYear
-        {
-            get { return reportingYear; }
-            set { reportingYear = value; }
-        }
     }
     
     /// <summary>
@@ -121,16 +107,14 @@ namespace QueryLayer
                 IQueryable<FACILITYSEARCH_MAINACTIVITY> distinctFacilities = getDistinctFacilities(db, lambda);
                 dataDistinct = distinctFacilities.orderBy(column, descending)
                     .Skip(startRowIndex).Take(maxRows)
-                    .Select<FACILITYSEARCH_MAINACTIVITY, FacilityRow>(v => new FacilityRow(v.FacilityID,
-                                                                                           v.FacilityReportID,
+                    .Select<FACILITYSEARCH_MAINACTIVITY, FacilityRow>(v => new FacilityRow(v.FacilityReportID,
                                                                                            v.FacilityName,
                                                                                            v.PostalCode,
                                                                                            v.Address,
                                                                                            v.City,
                                                                                            v.IAActivityCode,
                                                                                            v.CountryCode,
-                                                                                           v.ConfidentialIndicator,
-                                                                                           v.ReportingYear));
+                                                                                           v.ConfidentialIndicator));
             }
             
             //add rows to result. Speedup paging by adding empty rows at the start and end of list.
@@ -353,24 +337,6 @@ namespace QueryLayer
 
         }
 
-
-        //RRP START 18-04-2013
-        /// <summary>
-        /// Returns Max Year of the facilityId
-        /// </summary>
-        public static int GetMaxYearFacilityId(int facilityId)
-        {
-            DataClassesFacilityDataContext db = getDataContext();
-
-            IEnumerable<int> data = from d in db.FACILITYDETAIL_DETAILs
-                                              where d.FacilityID == facilityId
-                                              select db.FACILITYDETAIL_DETAILs.Max(x => x.ReportingYear);
-
-            return data.FirstOrDefault();
-
-        }
-        //RRP END 18-04-2013
-
         #endregion //FacilityBasic
 
 
@@ -510,18 +476,7 @@ namespace QueryLayer
             return data;
         }
         
-        //D30 START 16/05/2013 
-        /// <summary>
-        /// Select distinct FacilityIDs
-        /// </summary
-        public static IEnumerable<int> GetFacilityDetailsID()
-        {
-              DataClassesFacilityDataContext db = getDataContext();
-              IEnumerable<int> data = db.FACILITYSEARCH_ALLs.Select(p => p.FacilityID).Distinct();
-              return data;
-        }
 
-        //D30 END 16/05/2013
         /// <summary>
         /// Get pollutant releases for a specific facility report and medium
         /// </summary>

@@ -3,8 +3,8 @@
 <%@ Register Src="~/UserControls/SearchFacility/TimeSeries/ucFacilityWasteTrendSheet.ascx" TagName="ucFacilityWasteTrendSheet" TagPrefix="eprtr" %>
 
 
-<asp:Panel ID="facilityWastePanel" runat="server" Width="100%">
-    <div runat="server" class="printStyles">
+<asp:Panel ID="facilityWastePanel" runat="server" Width="100%" Height="100%">
+    <div>
 
     <h3>    
         <asp:ImageButton ID="btnNonhazardouswaste" ImageUrl="~/images/timeseries.png" OnClick="onClickNonhazardouswaste" runat="server" />

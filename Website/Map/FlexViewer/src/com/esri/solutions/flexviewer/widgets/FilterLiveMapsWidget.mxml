@@ -58,8 +58,6 @@
 			//labels
 			[Bindable]
 			private var visibilityLabel:String;
-			[Bindable]
-			private var allItemsLabel:String;
 			
 			[Bindable]
 			private var transparencyLabel:String;
@@ -90,8 +88,6 @@
 			[Bindable]
 			private var keepTOCCollapsed:Boolean;
 			
-			[Bindable]
-			private var showFilter:Boolean = false;
 			
 			private var excludeAllLayersInit:Boolean;
 			
@@ -143,7 +139,7 @@
 					}
 					includeSingleLayersStr = configXML.includesinglelayers.text().toString();
 					filterGroups = configXML.filtergroups;
-					//layerfilter.filterGroups = configXML.filtergroups;
+					layerfilter.filterGroups = configXML.filtergroups;
 					showLayersInTOC = configXML.showlayers == 'true';
 					zoomToFilter = configXML.zoomtofilter == 'true';
 					openTreeInitially = configXML.opentoconstart == 'true';
@@ -191,10 +187,7 @@
 				toc.excludeGraphicsLayers = true;
 				layerRepeater.dataProvider = getLayers();
 				/** if filter is available**/
-				if(filterGroups.length() > 0){
-					showFilter = true;
-					/*wTemplate.addTitlebarButton(ICON_URL + "i_filter.gif", filterLabel, showStateFilter, "filterbtn");*/
-					}
+				if(filterGroups.length() > 0) wTemplate.addTitlebarButton(ICON_URL + "i_filter.gif", filterLabel, showStateFilter, "filterbtn");
 				/****/
 				legendBtn = wTemplate.addTitlebarButton(ICON_URL + "i_legend.png", legendLabel, showStateLegend, "legendbtn");
 				legendBtn.visible = false;
@@ -701,7 +694,6 @@
 				legendLabel = resourceManager.getString(widgetResourceFile, 'legendLabel')  || "Other Legends";
 				transparencyLabel = resourceManager.getString(widgetResourceFile, 'transparencyLabel')|| "Layer Transparency"; 	
 				visibilityLabel = resourceManager.getString(widgetResourceFile, 'visibilityLabel') || "Layer Visibility";
-				allItemsLabel =  resourceManager.getString(widgetResourceFile, 'allItemsLabel') || "All years";
 				
 				//buttons			
 					
@@ -737,17 +729,13 @@
         [ResourceBundle("FilterAllWidgetStrings")]
     </mx:Metadata> 
 	
-	<WidgetTemplate id="wTemplate" height="350" >
+	<WidgetTemplate id="wTemplate" height="280" >
 		<mx:ViewStack id="viewStack" width="100%" height="100%" creationPolicy="all">
 			<mx:Canvas id="vbox" width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-				<mx:VBox width="100%" height="100%">
-					<mx:Label text="{filterLabel}" styleName="WidgetText" width="100%" includeInLayout="{showFilter}" visible="{showFilter}"/>
-					<widgets:LayerFilter id="layerfilter"  includeInLayout="{showFilter}" visible="{showFilter}" toc="{toc}" filterGroups="{filterGroups}" basemaps="{getBasemaps()}" excludeMapLayersFromFilter="{excludeMapLayersFromFilterObj}" zoomToFilter="{zoomToFilter}" allItemsLabel="{allItemsLabel}"/>
 							
-					<mx:Label text="{visibilityLabel}" styleName="WidgetText" width="100%"/>
-					<toccomp:TOCCustom id="toc" width="100%" height="100%" showLayersInMapservice="{showLayersInTOC}" excludeLayersInMapservice="{excludeMapLayersInTOCobj}" setLayersDefinition="{layerfilter.setAllLayersDefinition}" setLayersVisibility="{this.setLayersVisibility}" doubleClickEnabled="{!keepTOCCollapsed}"  />				
-				</mx:VBox>
-					<!--mx:VBox y="85" horizontalScrollPolicy="auto"  >
+				<mx:Label text="{visibilityLabel}" styleName="WidgetText" width="100%"/>
+				<toccomp:TOCCustom y="22" id="toc" width="100%" height="100%" showLayersInMapservice="{showLayersInTOC}" excludeLayersInMapservice="{excludeMapLayersInTOCobj}" setLayersDefinition="{layerfilter.setAllLayersDefinition}" setLayersVisibility="{this.setLayersVisibility}" doubleClickEnabled="{!keepTOCCollapsed}"  />				
+				<!--mx:VBox y="85" horizontalScrollPolicy="auto"  >
 					<mx:Label text="mapservice" />
 					<mx:TextInput id="ti" width="100" text="sector1" />	
 					<mx:Button label="setVisibleLayers" click="{setVisibleLayers(ti.text)}" />					
@@ -765,14 +753,14 @@
 						<widgets:LayerAlpha id="l" layer="{layerRepeater.currentItem}" visible="{Layer(layerRepeater.currentItem).visible}"/>
 				</mx:Repeater>
 			</mx:VBox>
-			<mx:VBox width="100%" height="100%">				
+			<mx:VBox width="100%" height="100%">
 				<mx:Label text="{legendLabel}" styleName="WidgetText" width="100%"/>
 					<widgets:ImageLegend  id="imageLegend" parentWidget="{this}"  viewStack="{this.viewStack}"/>									
 			</mx:VBox>
 			<mx:VBox width="100%" height="100%">
-				<!--<mx:Label text="{filterLabel}" styleName="WidgetText" width="100%"/>
+				<mx:Label text="{filterLabel}" styleName="WidgetText" width="100%"/>
 					<widgets:LayerFilter id="layerfilter" toc="{toc}" filterGroups="{filterGroups}" basemaps="{getBasemaps()}" excludeMapLayersFromFilter="{excludeMapLayersFromFilterObj}" zoomToFilter="{zoomToFilter}"/>
-				-->					
+									
 			</mx:VBox>
 		</mx:ViewStack>
 	</WidgetTemplate>

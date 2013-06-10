@@ -6,7 +6,6 @@
 <%@ Register Src="~/UserControls/SearchOptions/ucAdvancedActivitySearchOption.ascx" TagName="AdvancedActivitySearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchOptions/ucWasteTypeSearchOption.ascx" TagName="WasteTypeSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
-<%@ Register Src="~/UserControls/Common/ucMsgWasteValidation.ascx" TagName="msgWaste" TagPrefix="eprtr" %>
 
 <script type="text/javascript">
 </script>
@@ -30,7 +29,6 @@
             </div>
          
             <eprtr:WasteTypeSearchOption ID="ucWasteTypeSearchOption" runat="server" />
-            <eprtr:msgWaste ID="ucMsgWaste" runat="server" /> 
       </asp:Panel>
 
         

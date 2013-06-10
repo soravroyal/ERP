@@ -17,29 +17,27 @@ public class BasePage : System.Web.UI.Page
 {
     protected override void InitializeCulture()
     {
-        bool enableLanguage = bool.Parse(ConfigurationManager.AppSettings["EnableLanguageSelection"]);
+         // retrieve cookie
+        HttpCookie prevCulture = Request.Cookies["Culture"];
+        
+        string cultureCode = CultureResolver.Resolve(Request);
 
-        if (enableLanguage)
+        // culture has changed write new cookie
+        if (prevCulture == null 
+            || prevCulture.Value != cultureCode)
         {
-            // retrieve cookie
-            HttpCookie prevCulture = Request.Cookies["Culture"];
-
-            string cultureCode = CultureResolver.Resolve(Request);
-
-            // culture has changed write new cookie
-            if (prevCulture == null || prevCulture.Value != cultureCode)
-            {
-                AddCultureCookie(cultureCode);
-            }
-
-            AddCsvCultureCookie(Thread.CurrentThread.CurrentCulture.ToString());
-
-            this.UICulture = cultureCode;
-            this.Culture = cultureCode;
-            System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureCode);
-            Thread.CurrentThread.CurrentCulture = culture;
-            Thread.CurrentThread.CurrentUICulture = culture;
+            AddCultureCookie(cultureCode);
         }
+
+        
+        AddCsvCultureCookie(Thread.CurrentThread.CurrentCulture.ToString());
+
+        this.UICulture = cultureCode;
+        this.Culture = cultureCode;
+        System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture(cultureCode);
+        Thread.CurrentThread.CurrentCulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
+
         base.InitializeCulture();
     }
 
@@ -64,4 +62,5 @@ public class BasePage : System.Web.UI.Page
         }
         base.OnPreLoad(e);
     }
+
 }

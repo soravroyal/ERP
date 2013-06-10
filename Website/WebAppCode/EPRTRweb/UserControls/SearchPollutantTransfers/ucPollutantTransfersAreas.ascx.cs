@@ -275,67 +275,51 @@ public partial class ucPollutantTransfersAreas : System.Web.UI.UserControl
 
     public void DoSaveCSV(object sender, EventArgs e)
     {
-        CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
-        CSVFormatter csvformat = new CSVFormatter(csvCulture);
-
-        // Create Header
-        var filter = SearchFilter;
-
-        bool isConfidentialityAffected = PollutantTransfers.IsAffectedByConfidentiality(filter);
-
-        Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantTransferSearchHeader(
-            filter,
-            isConfidentialityAffected);
-
-        // Create Body
-        List<PollutantTransfers.AreaTreeListRow> rows = PollutantTransfers.GetAreaTree(filter).ToList();
-        sortResult(rows);
-
-        // dump to file
-        string topheader = csvformat.CreateHeader(header);
-        string[] colHeaderRows = csvformat.GetPollutantTransferAreaColHeaderRows(filter);
-
-        Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Area_List");
-
-        Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
-
-        //all rows but total
-        foreach (var item in rows.Where(r => r.Code != ActivityTreeListRow.CODE_TOTAL))
+        try
         {
-            string row = csvformat.GetPollutantTransferAreaRow(item, filter);
-            Response.Write(row);
-        }
+            CultureInfo csvCulture = CultureResolver.ResolveCsvCulture(Request);
+            CSVFormatter csvformat = new CSVFormatter(csvCulture);
 
-        //write total row
+            // Create Header
+            var filter = SearchFilter;
 
-        var totalRow = rows.SingleOrDefault(r => r.Code == ActivityTreeListRow.CODE_TOTAL);
+            bool isConfidentialityAffected = PollutantTransfers.IsAffectedByConfidentiality(filter);
 
-        if (totalRow == null)
-        {
-            //find all rows on topLevel. if only one, use this as total row
-            var toplevelRows = rows.Where(r => r.Level == 0);
-            if (toplevelRows != null && toplevelRows.Count() == 1)
+            Dictionary<string, string> header = EPRTR.HeaderBuilders.CsvHeaderBuilder.GetPollutantTransferSearchHeader(
+                filter,
+                isConfidentialityAffected);
+
+            // Create Body
+            List<PollutantTransfers.AreaTreeListRow> rows = PollutantTransfers.GetAreaTree(filter).ToList();
+            sortResult(rows);
+
+            // dump to file
+            string topheader = csvformat.CreateHeader(header);
+            string[] colHeaderRows = csvformat.GetPollutantTransferAreaColHeaderRows(filter);
+
+            Response.WriteUtf8FileHeader("EPRTR_Pollutant_Transfers_Area_List");
+
+            Response.Write(topheader + colHeaderRows[0] + colHeaderRows[1]);
+
+            foreach (var item in rows)
             {
-                totalRow = toplevelRows.Single();
+                string row = csvformat.GetPollutantTransferAreaRow(item, filter);
+
+                if (AreaTreeListRow.CODE_TOTAL.Equals(item.Code))
+                {
+                    Response.Write(Environment.NewLine);
+                    Response.Write(colHeaderRows[0] + colHeaderRows[1]);
+                }
+
+                Response.Write(row);
             }
-        }
 
-        //write total row if any is found
-        if (totalRow != null)
+            Response.End();
+        }
+        catch (Exception)
         {
-            Response.Write(Environment.NewLine);
-            Response.Write(csvformat.AddText(Resources.GetGlobal("Common", "Total")));
-            Response.Write(Environment.NewLine);
 
-            string[] totalColHeaderRows = csvformat.GetPollutantTransferAreaColHeaderRows(filter);
-
-            Response.Write(totalColHeaderRows[0] + totalColHeaderRows[1]);
-
-            string row = csvformat.GetPollutantTransferAreaRow(totalRow, filter);
-            Response.Write(row);
         }
-
-        Response.End();
     }
 
 

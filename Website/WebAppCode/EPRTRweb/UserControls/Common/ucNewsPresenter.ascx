@@ -1,7 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucNewsPresenter.ascx.cs"
     Inherits="ucNewsPresenter" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
 <asp:Repeater ID="repNews" runat="server">
     <ItemTemplate>
         <ajaxToolkit:CollapsiblePanelExtender ID="cpeNews" runat="Server" Collapsed="true"

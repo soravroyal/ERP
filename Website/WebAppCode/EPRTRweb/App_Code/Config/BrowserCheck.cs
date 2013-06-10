@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using System.Web;
 using Config;
 using System.Configuration;
@@ -19,6 +18,7 @@ public class BrowserCheck
         List<int> actualVersion = strVersion.Split('.').Select(x => int.Parse(x)).ToList();
 
         var settings = System.Web.Configuration.WebConfigurationManager.AppSettings;
+
         var browsers = from string r in settings.Keys
                        where r.StartsWith(prefix) && r.ToLower().EndsWith(actualName.ToLower())
                        select new
@@ -34,22 +34,26 @@ public class BrowserCheck
         {
             return false;
         }
+        
+     
+        // step through each <section> of the version number
+        // <section>.<section>.<section>, i.e. "3.6.3"
+        // compare Actual to Minimum requirement
+        int maxCount = Math.Max(browser.BrowserVersion.Count(), actualVersion.Count());
+        bool isSupported = true;
 
-				string[] actBrowserVersion = strVersion.Split('.');
-				bool isSupported = true;
+        for (int i = 0; i < maxCount; i++)
+        {
+            int limit = browser.BrowserVersion.ElementAtOrDefault(i);
+            int actual = actualVersion.ElementAtOrDefault(i);
 
-				for (int i = 0; i < actBrowserVersion.Length; i++)
-				{ 
-					// if actbrowser has more parts than appbrowser there's no worries 
-					if (i >= browser.BrowserVersion.Count)
-						break;
+            if (actual < limit)
+            {
+                isSupported = false;
+                break;
+            }
+        }
 
-					// Check on the current section			
-					if (int.Parse(actBrowserVersion[i]) < browser.BrowserVersion[i])
-						isSupported = false;
-					else if (int.Parse(actBrowserVersion[i]) > browser.BrowserVersion[i])
-						break;
-				}
         return isSupported;
     }
 

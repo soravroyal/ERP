@@ -4,8 +4,6 @@
 <%@ Register Src="~/UserControls/SearchOptionsEPER/ucPollutantSearchOptionEPER.ascx" TagName="ucPollutantSearchOptionEPER" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchOptionsEPER/ucMediumSearchOptionEPER.ascx" TagName="ucMediumSearchOptionEPER" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfoEPER.ascx" TagName="Info" TagPrefix="eprtr" %>
-<%@ Register Src="~/UserControls/Common/ucMsgPRTvalidation.ascx" TagName="msgPRT" TagPrefix="eprtr" %>
-
 
 <asp:UpdatePanel ID="upPollutant" runat="server"  >
     <ContentTemplate>
@@ -40,7 +38,6 @@
                 <asp:Panel ID="plPollutantContent" runat="server" CssClass="cpeContent">
                     <eprtr:ucPollutantSearchOptionEPER ID="ucPollutantSearchOptionEPER" IncludeAll="true"  runat="server" />
                     <eprtr:ucMediumSearchOptionEPER ID="ucMediumSearchOptionEPER" IncludeTransfers="true" runat="server" />
-                    <eprtr:msgPRT ID="ucMsgPRT" runat="server" />
                 </asp:Panel>
           </asp:Panel>
 

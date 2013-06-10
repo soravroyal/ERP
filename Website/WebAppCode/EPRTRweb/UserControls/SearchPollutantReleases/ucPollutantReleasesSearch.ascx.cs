@@ -3,7 +3,7 @@ using System.Web.UI;
 using EPRTR.Utilities;
 using QueryLayer.Filters;
 using EPRTR.HeaderBuilders;
-using System.Web.UI.WebControls;
+
 
 public partial class ucPollutantReleasesSearch : System.Web.UI.UserControl
 {

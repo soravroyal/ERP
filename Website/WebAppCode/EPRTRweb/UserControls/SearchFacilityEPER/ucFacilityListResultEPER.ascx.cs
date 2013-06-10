@@ -327,10 +327,6 @@ public partial class ucFacilityListResultEPER : System.Web.UI.UserControl
     {
         return ((FacilityRow)obj).FacilityReportId.ToString();
     }
-    protected string GetFacilityId(object obj)
-    {
-        return ((FacilityRow)obj).FacilityId.ToString();
-    }
     protected string GetCountryCode(object obj)
     {
         return ((FacilityRow)obj).CountryCode;
@@ -383,10 +379,6 @@ public partial class ucFacilityListResultEPER : System.Web.UI.UserControl
     protected bool GetConfidentialIndicator(object obj)
     {
         return ((FacilityRow)obj).ConfidentialIndicator;
-    }
-    protected int GetReportingYear(object obj)
-    {
-        return ((FacilityRow)obj).ReportingYear;
     }
 
     #endregion

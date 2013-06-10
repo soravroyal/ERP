@@ -57,13 +57,9 @@ namespace EPRTR.Utilities
         public static Color ColorWasteWaterBothYears = Color.FromArgb(255, 179, 179, 179); //#b3b3b3
 
         public static Color ColorWasteTotal = Color.FromArgb(255, 190, 190, 190); //#bebebe
-        
-				//public static Color ColorWasteRecovery = Color.FromArgb(255, 214, 186, 165); //#d6baa5   
-        //public static Color ColorWasteDisposal = Color.FromArgb(255, 198, 212, 170); //#c6d4aa
-				public static Color ColorWasteRecovery = Color.FromArgb(255, 198, 212, 170); //#c6d4aa   
-				public static Color ColorWasteDisposal = Color.FromArgb(255, 214, 186, 165); //#d6baa5			
-
-				public static Color ColorWasteUnspec= Color.FromArgb(255, 198, 235, 247); //#C6EBF7
+        public static Color ColorWasteRecovery = Color.FromArgb(255, 214, 186, 165); //#d6baa5   
+        public static Color ColorWasteDisposal = Color.FromArgb(255, 198, 212, 170); //#c6d4aa
+        public static Color ColorWasteUnspec= Color.FromArgb(255, 198, 235, 247); //#C6EBF7
         public static Color ColorWasteBothYears = Color.FromArgb(255, 179, 179, 179); //#b3b3b3
 
 

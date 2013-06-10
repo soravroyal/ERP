@@ -21,7 +21,7 @@
 	</labels>
 	<filtergroups>
 		<group label="Year">
-			<filter type="combobox" datafield="ReportingYear" data="2007,2008,2009,2010" datajsfunction="getReportYear" condition="AND" selected="all"/>
+			<filter type="combobox" datafield="ReportingYear" data="2007,2008" datajsfunction="getReportYear" condition="AND" selected="2008"/>
 		</group>
 		<!--group label="Release">
 			<filter id ="air" type="checkbox" label="Air" data="air&gt;0" condition="OR" selected="true"/>

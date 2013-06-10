@@ -11,41 +11,29 @@ public partial class UserControls_Common_ucLanguageSelector : System.Web.UI.User
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        bool showLangSelector = bool.Parse(ConfigurationManager.AppSettings["EnableLanguageSelection"]);
-
         if (!Page.IsPostBack)
         {
-            if (showLangSelector)
-            {
-                //D30 START 22-04-2013
-                //The language selection box in the upper right corner is apparently not sorted. It would be preferable that it is sorted on language name.
-                //We have added the OrderBy sentence in the function which obtains all languages. We order by Name column.
-                //Original Code --- LangListView.DataSource = QueryLayer.ListOfValues.GetAllCultures();
-                LangListView.DataSource = QueryLayer.ListOfValues.GetAllCultures().OrderBy(x => x.Name);
-                //D30 END 22-04-2013
-                LangListView.DataBind();
-            }
+            LangListView.DataSource = QueryLayer.ListOfValues.GetAllCultures();
+            LangListView.DataBind();
         }
 
-        langSelector.Visible = showLangSelector && (LangListView.Items.Count > 1);
+        bool showLangSelector = bool.Parse(ConfigurationManager.AppSettings["EnableLanguageSelection"]);
+
+        langSelector.Visible = (LangListView.Items.Count > 1) && showLangSelector;
 
 
-        if (showLangSelector)
-        {
-            // Added code to show language selector onclick.
-            // Is needed after the panel is styled with display:none in CSS, to avoid blinking onload
-            System.Web.UI.ScriptManager
-                .RegisterStartupScript(Page, typeof(string), "show_langselector",
+        // Added code to show language selector onclick.
+        // Is needed after the panel is styled with display:none in CSS, to avoid blinking onload
+        System.Web.UI.ScriptManager
+            .RegisterStartupScript(Page, typeof(string), "show_langselector",
 
-                "$('.langSelector').click(function() { " +
-                    "$('.langDropPanelClass').show(); " +
-                    "});",
-
-                true);
-        }
+            "$('.langSelector').click(function() { " +
+                "$('.langDropPanelClass').show(); " +
+                "});",
+            
+            true);
     }
 
-   
     protected string GetCommandArgument(object obj)
     {
         LOV_Culture row = (LOV_Culture)obj;

@@ -5,7 +5,7 @@
 
 
 <asp:Content ID="cSubHeadline" ContentPlaceHolderID="ContentSubHeadline" runat="server">
-    <asp:Literal ID="litHeaderArea" Text="<%$ Resources:AreaOverview,Subheadline %>" runat="server" />
+    <asp:Literal ID="litHeaderArea" Text="<%$ Resources:AreaOverview,SubHeadline %>" runat="server" />
 </asp:Content>
 
 <asp:Content ID="cSearchForm" ContentPlaceHolderID="ContentSearchForm" Runat="Server">

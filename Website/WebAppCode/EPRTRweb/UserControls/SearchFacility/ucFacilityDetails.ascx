@@ -3,11 +3,9 @@
 <%@ Register Src="~/UserControls/SearchFacility/ucFacilityDetailsMap.ascx" TagName="ucFacilityDetailsMap" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
 
-<asp:Panel ID="facilityDetailsPanel" runat="server" Width="100%">
+<asp:Panel ID="facilityDetailsPanel" runat="server" Width="100%" Height="100%">
         
         <%--<%$ Common:PrintRefresh %>--%>
-        <div runat="server" class="printStyles">
-        
         <div id="facilityimage">
             <eprtr:ucFacilityDetailsMap ID="ucFacilityDetailsMap" runat="server" />
             <asp:Image id="detailmapprint" ImageUrl="" alt="<%$ Resources:Common,PrintRefresh %>" runat="server" visible="true" CssClass="facilityMapPrint" />
@@ -62,8 +60,5 @@
             <asp:Literal ID="litPublicInfo" Text="<%$ Resources:Common,PublicInfo %>" runat="server"></asp:Literal><br />
             <asp:TextBox ID="txPublicInfo" Font-Size="Small" Wrap="true" ReadOnly="true" Height="50" Width="100%" TextMode="MultiLine" runat="server"></asp:TextBox>
         </div>
-       
-        </div>
       
 </asp:Panel>
-

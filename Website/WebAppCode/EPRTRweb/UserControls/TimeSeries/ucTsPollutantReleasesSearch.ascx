@@ -7,7 +7,6 @@
 <%@ Register Src="~/UserControls/SearchOptions/ucPollutantSearchOption.ascx" TagName="PollutantSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchOptions/ucMediumSearchOption.ascx" TagName="MediumSearchOption" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
-<%@ Register Src="~/UserControls/Common/ucMsgPRTvalidation.ascx" TagName="msgPRT" TagPrefix="eprtr" %>
 
 <asp:UpdatePanel ID="upTsPollutantReleases" runat="server">
 
@@ -28,7 +27,6 @@
             <%--search option--%>
             <eprtr:PollutantSearchOption ID="ucPollutantSearchOption" runat="server" />
             <eprtr:MediumSearchOption ID="ucMediumSearchOption" runat="server" />
-            <eprtr:msgPRT ID="ucMsgPRT" runat="server" />
         </asp:Panel>
         
         <%--Activity search option--%>

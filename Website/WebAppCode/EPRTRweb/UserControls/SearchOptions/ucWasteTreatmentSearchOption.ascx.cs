@@ -14,10 +14,6 @@ public partial class ucWasteTreatmentSearchOption : System.Web.UI.UserControl
 
             setSelectedValues();
 
-						chkTreatmentRecovery.Attributes.Add("onclick", "WTValidation()");
-						chkTreatmentDisposal.Attributes.Add("onclick", "WTValidation()");
-						chkTreatmentUnspecified.Attributes.Add("onclick", "WTValidation()");
-
         }
     }
 

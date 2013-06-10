@@ -1,4 +1,4 @@
-cscript replace.vbs "c:\inetpub\wwwroot\EPRTRcms\web.config" "SDKCGA6302" "SDKCGA6306"
+cscript replace.vbs "c:\inetpub\wwwroot\EPRTRcms\web.config" "SDKCGA6302.rdg.bane.dk" "SDKCGA6306.rdg.bane.dk"
 cscript replace.vbs "c:\inetpub\wwwroot\EPRTRcms\web.config" "allow users" "deny users"
 cscript replace.vbs "c:\inetpub\wwwroot\EPRTRcms\web.config" "sa;" "gis;"
 cscript replace.vbs "c:\inetpub\wwwroot\EPRTRcms\web.config" "c:\a\eprtr\upload\" "C:\Inetpub\wwwroot\docs\"

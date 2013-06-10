@@ -609,9 +609,11 @@ namespace QueryLayer
         public class ResultFacilityCSV : ResultFacility
         {
             // public properties
+            public int FacilityId { get; private set; }
             public string MethodBasisCode { get; private set; }
             public string MethodTypeCode { get; private set; }
             public string MethodDesignation { get; private set; }
+            public string Url;
 
             public ResultFacilityCSV(string activityCode, string name, double quantity, string countryCode, int facilityReportId, QuantityUnit quantityUnit, bool confidentialIndicatorFacility, bool confidentialIndicator, int facilityId, string methodBasisCode, string methodTypeCode, String methodDesignation) :
                 base(activityCode,name, quantity,countryCode,facilityReportId, quantityUnit, confidentialIndicatorFacility,confidentialIndicator, facilityId)

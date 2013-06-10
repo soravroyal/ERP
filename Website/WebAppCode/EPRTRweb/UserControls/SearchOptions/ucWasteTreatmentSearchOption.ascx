@@ -9,14 +9,9 @@
 <div class="searchOption_wasteCriteria">
 <asp:CheckBox ID="chkTreatmentRecovery"  onclick="SetSearchFilter('Recovery')"   Text="<%$ Resources:Common,TreatmentRecovery %>"
     runat="server" Checked="true" />
-<input type="hidden" id="clIDchkTreatmentRecovery" value="<%=chkTreatmentRecovery.ClientID %>" />
-    
 <asp:CheckBox ID="chkTreatmentDisposal"  onclick="SetSearchFilter('Disposal')" Text="<%$ Resources:Common,TreatmentDisposal %>"
     runat="server" Checked="true" />
-<input type="hidden" id="clIDchkTreatmentDisposal" value="<%=chkTreatmentDisposal.ClientID %>" />
-
 <asp:CheckBox ID="chkTreatmentUnspecified" onclick="SetSearchFilter('Unspecified')"  Text="<%$ Resources:Common,TreatmentUnspecified %>"
     runat="server" Checked="true" />
-<input type="hidden" id="clIDchkTreatmentUnspecified" value="<%=chkTreatmentUnspecified.ClientID %>" />
     
 </div>

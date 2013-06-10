@@ -10,22 +10,13 @@ public partial class ucMediumSearchOption : System.Web.UI.UserControl
         
     protected void Page_Load(object sender, EventArgs e)
     {
-			if (!IsPostBack)
-			{
-				this.plTransfers.Visible = includeTransfers;
+        if (!IsPostBack)
+        {
+            this.plTransfers.Visible = includeTransfers;
 
-				Filter = LinkSearchBuilder.GetMediumFilter(Request);
-				setSelectedMediums();
-
-				// Disabled until changes are finished
-				// Add js validation functionality for checkboxes
-				chkAir.Attributes.Add("onclick", "PRTValidation()");
-				chkWater.Attributes.Add("onclick", "PRTValidation()");
-				chkSoil.Attributes.Add("onclick", "PRTValidation()");
-				if (includeTransfers)
-					chkWasteWater.Attributes.Add("onclick", "PRTValidation()");
-			
-			}
+            Filter = LinkSearchBuilder.GetMediumFilter(Request);
+            setSelectedMediums();
+        }
     }
 
     private void setSelectedMediums()

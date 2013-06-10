@@ -21,18 +21,16 @@
 </Project>
 !-->
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
-        InitialTargets="DeployBuild">
+        InitialTargets="DeployBuild;CreateSitemap">
     <Target Name="DeployBuild">
         <Message Text="[*** Starting Deploy Build *************]" />
         <MSBuild Projects="EPRTRweb.sln" Properties="Configuration=Release" />
     </Target> 
-	<!--
 	<Target Name="CreateSitemap" DependsOnTargets="DeployBuild">
         <Message Text="[*** Generating sitemap ***]" />
         <Exec Command="create_sitemap.cmd" ContinueOnError="true">
             <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
         </Exec>
     </Target>
-	!-->
 </Project>
 

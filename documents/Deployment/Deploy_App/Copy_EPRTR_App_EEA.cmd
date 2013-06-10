@@ -5,19 +5,11 @@ ERASE "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb" /q /s
 ERASE "C:\E-PRTR_Ori\EEA\EPRTRcms" /q /s
 echo Copy EPRTRweb folder
 echo on
-XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb" /S
-XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb" /S
-XCOPY "\\sdkcga6302\E-PRTR_CMS_DEPLOY\EPRTRcms" "C:\E-PRTR_Ori\EEA\EPRTRcms" /S
-echo off
-ERASE "C:\E-PRTR_Ori\EEA\EPRTRpublic\sitemaps-asp2google" /q /s
-ERASE "C:\E-PRTR_Ori\EEA\EPRTRpublic\create_sitemap.cmd" /q /s
-echo Get new versions of Sitemap files
-echo on
-XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\sitemaps-asp2google\bin\Release" "C:\E-PRTR_Ori\EEA\EPRTRpublic\sitemaps-asp2google" /S
-XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\create_sitemap.cmd" "C:\E-PRTR_Ori\EEA\EPRTRpublic" /S
+XCOPY "\\sdkcga6302\c$\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\E-PRTR_Ori\EEA\EPRTRreview\EPRTRweb" /S
+XCOPY "\\sdkcga6302\c$\E-PRTR_DEPLOY\PrecompiledWeb\EPRTRweb" "C:\E-PRTR_Ori\EEA\EPRTRpublic\EPRTRweb" /S
+XCOPY "\\sdkcga6302\c$\E-PRTR_CMS_DEPLOY\EPRTRcms" "C:\E-PRTR_Ori\EEA\EPRTRcms" /S
 echo off
 echo CONNECTIONSTRINGS ect. IN WEB.CONFIG FIL is updated 
-pause
 call replace_webconfig_eprtr_eea.bat
 echo STRINGS IN MAP FILES are updated
 call replace_maps_eprtr_eea.bat
@@ -31,8 +23,8 @@ ERASE "C:\E-PRTR_Ori\EEA\Import_CoreTexts.bat" /q /s
 ERASE "C:\E-PRTR_Ori\EEA\DBResources_CoreTexts.csv" /q /s
 echo Get new versions of files
 echo on
-XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\Import_CoreTexts.bat" "C:\E-PRTR_Ori\EEA" /S
-XCOPY "\\sdkcga6302\E-PRTR_DEPLOY\DBResources_CoreTexts.csv" "C:\E-PRTR_Ori\EEA" /S
+XCOPY "\\sdkcga6302\c$\E-PRTR_DEPLOY\Import_CoreTexts.bat" "C:\E-PRTR_Ori\EEA" /S
+XCOPY "\\sdkcga6302\c$\E-PRTR_DEPLOY\DBResources_CoreTexts.csv" "C:\E-PRTR_Ori\EEA" /S
 echo off
 echo Modify the Import package to point to the right database if necessary and press any key...
 pause

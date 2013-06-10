@@ -173,7 +173,7 @@ public partial class ucFacilityPollutantReleasesTrendSheetEPER : System.Web.UI.U
 
     private void updateHeader(string text)
     {
-				string PollutantCodeEPER = (PollutantCode.EndsWith("EPER") == false) ? PollutantCode + "EPER" : PollutantCode;
+        string PollutantCodeEPER = PollutantCode + "EPER";
         Dictionary<string, string> header = SheetHeaderBuilder.GetFacilityDetailPollutantTrendHeaderEPER(FacilityBasic, PollutantCodeEPER, PollutantCode /* ViewState[POLLUTANTCODE] as string*/);
         this.ucSheetSubHeader.PopulateHeader(header);
         this.ucSheetSubHeader.Text = text;

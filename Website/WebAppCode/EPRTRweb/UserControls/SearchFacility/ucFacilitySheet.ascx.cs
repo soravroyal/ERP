@@ -46,18 +46,19 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
 
     protected void Page_Load(object sender, EventArgs e)
     {
-				this.ucSheetLinks.ResetContentLinks();
-				this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentDetails"), Sheets.FacilityDetails.Details.ToString());
-				this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentPollutantReleases"), Sheets.FacilityDetails.PollutantReleases.ToString());
-				this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentPollutantTransfers"), Sheets.FacilityDetails.PollutantTransfers.ToString());
-				this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentWastetransfers"), Sheets.FacilityDetails.Waste.ToString());
-				this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentConfidientiality"), Sheets.FacilityDetails.Confidentiality.ToString());
+        this.ucSheetLinks.ResetContentLinks();
+        this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentDetails"), Sheets.FacilityDetails.Details.ToString());
+        this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentPollutantReleases"), Sheets.FacilityDetails.PollutantReleases.ToString());
+        this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentPollutantTransfers"), Sheets.FacilityDetails.PollutantTransfers.ToString());
+        this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentWastetransfers"), Sheets.FacilityDetails.Waste.ToString());
+        this.ucSheetLinks.SetLink(Resources.GetGlobal("Common", "ContentConfidientiality"), Sheets.FacilityDetails.Confidentiality.ToString());
 
-				if (this.ucSheetLinks.Linkclick == null)
-					this.ucSheetLinks.Linkclick = new EventHandler(linkClick);
+        if (this.ucSheetLinks.Linkclick == null)
+            this.ucSheetLinks.Linkclick = new EventHandler(linkClick);
 
-				if (this.ucSheetSubHeader.AlertClick == null)
-					this.ucSheetSubHeader.AlertClick = new EventHandler(alertClick);
+        if (this.ucSheetSubHeader.AlertClick == null)
+            this.ucSheetSubHeader.AlertClick = new EventHandler(alertClick);
+
     }
 
     /// <summary>
@@ -144,27 +145,30 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
                 this.litYear.Text = currentYear.ToString();
 
                 //find previous year
-                PreviousYear = null;
                 List<Facility.FacilityReportingYear> fysPrevious = fys.Where(y => y.ReportingYear < currentYear).ToList();
                 if (fysPrevious != null && fysPrevious.Count() > 0)
+                {
                     PreviousYear = fysPrevious.OrderBy(y => y.ReportingYear).Last();
+                }
+                else
+                {
+                    PreviousYear = null;
+                }
 
                 //find next year
-								NextYear = null;
-								List<Facility.FacilityReportingYear> fysNext = fys.Where(y => y.ReportingYear > currentYear).ToList();
+                List<Facility.FacilityReportingYear> fysNext = fys.Where(y => y.ReportingYear > currentYear).ToList();
                 if (fysNext != null && fysNext.Count() > 0)
+                {
                     NextYear = fysNext.OrderBy(y => y.ReportingYear).First();
+                }
+                else
+                {
+                    NextYear = null;
+                }
 
                 //hide or show links
-								if (PreviousYear != null)
-								  lnbPrevious.Visible = true;
-								else
-									lnbPrevious.Visible = false;
-
-								if (NextYear != null)
-									lnbNext.Visible = true;
-								else
-									lnbNext.Visible = false;
+                this.lnbPrevious.Visible = (PreviousYear != null);
+                this.lnbNext.Visible = (NextYear != null);
             }
         }
 
