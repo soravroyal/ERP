@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:UIComponent xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+        <![CDATA[
+
+            [Inspectable(defaultValue="rectangle", enumeration="rectangle,rectangleOutline,triangle,triangleOutline,circle,circleOutline,line,cloud")]
+            private var _shape:String = "rectangle";
+            
+            public var legendShape:Class;
+            
+            [Embed(source="/com/esri/solutions/flexviewer/assets/images/icons/i_cloud.png")]		
+			public var CloudCls:Class; 
+         
+             public function set shape (_shape:String):void 
+            {
+            	this._shape = _shape;
+            	switch(_shape){
+            		case "rectangle" :
+            			legendShape = RectangleSymbol;
+            			break;
+            		case "rectangleOutline" :
+            			legendShape = RectangleSymbolOutline;
+            			break;
+            		case "triangle" :
+            			legendShape = TriangleSymbol;
+            			break;
+            		case "triangleOutline" :
+            			legendShape = TriangleSymbolOutline;
+            			break;
+            		case "circle" :
+            			legendShape = CircleSymbol;CircleSymbolOutline
+            			break;
+            		case "circleOutline" :
+            			legendShape = CircleSymbolOutline;
+            			break;
+            		case "line" :
+            			legendShape = LineSymbol;
+            			break;
+            		case "cloud" :
+            			legendShape = CloudCls;
+            			break;
+
+            		default: legendShape = RectangleSymbol;
+            	}
+            }
+ 			public function get shape():String 
+            {
+                return _shape;
+            }
+                                           
+         ]]>
+         </mx:Script>
+
+</mx:UIComponent>
