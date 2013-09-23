@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:VBox	xmlns:mx		="http://www.adobe.com/2006/mxml" 
+			styleName		="MenuBox" 
+			width			="100%" 
+			verticalGap		="0" 
+			horizontalAlign	="center"
+			creationComplete="init()">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			import com.esri.solutions.flexviewer.utils.Hashtable;
+		
+			import com.esri.solutions.flexviewer.AppEvent;
+			import com.esri.solutions.flexviewer.SiteContainer;
+			import com.esri.ags.toolbars.Draw;
+			import com.esri.solutions.flexviewer.widgets.SearchWidgetAllLayers;
+			import dk.atkins.MapCursors;
+			import mx.resources.ResourceManager;
+			
+			private const STYLE_MENU_ACTIVE:String = "MenuBoxActive";
+			
+			private const STYLE_MENU_NORMAL:String = "MenuBox";
+			
+			/**
+			 * itemId is the runtime assigned numeric number to the menu item.
+			 */
+			public var itemId:Number;
+			 
+			/**
+			 * itemIcon allows add a small icon to the left of the menu item to give
+			 * a visual indication of the funtion of the menu item.
+			 */
+			[Bindable]
+			public var itemIcon:String;
+			
+			/**
+			 * itemLabel is the text label of the menu item.
+			 */
+			[Bindable]
+			public var itemLabel:String;
+			
+			[Bindable]
+			private var itemLocaleLabel:String;
+			/**
+			 * itemRuleVisible toggles the speration line between menu items. 
+			 * It can be set to be visible or invisible and is automatically 
+			 * set to invisible for the last menu item.
+			 * 
+			 * @default true
+			 */
+			[Bindable]
+			public var itemRuleVisible:Boolean = true;
+						
+			public var itemAction:String;
+						
+			public var itemValue:String;
+			
+			
+			private function init():void{
+				if(itemAction == "navtool" )toolTip = resourceManager.getString('ControllerStrings', itemValue) || itemLabel;
+				if(itemAction == "basemap" )itemLocaleLabel = resourceManager.getString('ControllerStrings', itemLabel.split(" ").join("_")) || itemLabel;
+				if(itemAction == "widget" )itemLocaleLabel = resourceManager.getString('ControllerStrings', itemLabel.split(" ").join("_")) || itemLabel;
+				if(!itemLabel){
+					itemLabelmx.width = 0;
+				}
+				ResourceManager.getInstance().addEventListener(Event.CHANGE,updateLocale);
+			}
+            /**
+            * @private
+            * TODO: logic here need to be refactoried to remove the depandency on named menus.
+            */						
+			private function menuItemClick():void
+			{
+				switch (itemAction)
+				{
+					case "widget":
+					{
+						SiteContainer.dispatchEvent(new AppEvent(AppEvent.WIDGET_MENU_CLICKED, false, false, itemId));
+						break;
+					}
+						
+					case "navtool":
+					{
+						var data:Object =
+						{
+							tool: itemValue,
+							status: itemLabel
+						}
+						if(itemValue == "pointsearch"){
+							var cursors:MapCursors = MapCursors.getInstance();
+	    					cursors.showCursor("crosshair");
+							//call point search in search widget
+							var widgets:Hashtable = SiteContainer.getInstance().widgetManager.getLoadedWidgets();
+							var warray:Array = widgets.getKeySet();
+							for(var i:int = 0; i < warray.length; i++){
+								var o:* = widgets.find(warray[i]);
+								if (o is SearchWidgetAllLayers){
+									SearchWidgetAllLayers(o).activateSearchTool(Draw.MAPPOINT);
+									i = warray.length;
+								}
+							}					
+																				
+						}
+						else{
+							SiteContainer.dispatchEvent(new AppEvent(AppEvent.SET_MAP_NAVIGATION, false, false, data));
+						}
+						break;
+					}
+						
+					case "basemap":
+					{
+						SiteContainer.dispatchEvent(new AppEvent(AppEvent.BASEMAP_MENU_CLICKED, false, false, itemValue));
+						break;
+					}
+						
+					case "link":
+					{
+						navigateToURL(new URLRequest(itemValue));
+						break;
+					}
+						
+					case "function":
+					{
+						break;
+					}
+				}
+			}
+			
+			private function highlight():void
+			{
+				this.styleName = this.STYLE_MENU_ACTIVE;
+			}
+			
+			private function clearHighlight():void
+			{
+				this.styleName = this.STYLE_MENU_NORMAL;
+			}
+			private function updateLocale(event:Event):void{
+					if(itemAction == "navtool" )toolTip = resourceManager.getString('ControllerStrings', itemValue)|| itemLabel;
+					if(itemAction == "basemap" )itemLocaleLabel = resourceManager.getString('ControllerStrings', itemLabel.split(" ").join("_")) || itemLabel;
+					if(itemAction == "widget" )itemLocaleLabel = resourceManager.getString('ControllerStrings', itemLabel.split(" ").join("_")) || itemLabel;
+			
+			}
+			
+					
+		]]>
+	</mx:Script>
+	 
+    <mx:Metadata>
+        [ResourceBundle("ControllerStrings")]
+    </mx:Metadata> 
+    
+	<mx:HBox horizontalGap="0" verticalAlign="middle" horizontalAlign="left"  mouseOver="highlight()" mouseOut="clearHighlight()" mouseChildren="false" click="menuItemClick()" width="100%" buttonMode="true" useHandCursor="true" height="24">
+		<mx:Spacer width="6"/>
+		<mx:Image source="{itemIcon}" height="18" width="18"/>
+		<mx:Label id="itemLabelmx" text="{itemLocaleLabel}" styleName="MenuItem" paddingLeft="2" />
+		<mx:Spacer width="6"/>
+	</mx:HBox> 
+	<mx:HRule styleName="ControllerBreak" alpha="0.3" visible="{itemRuleVisible}" width="90%" />	
+
+</mx:VBox>

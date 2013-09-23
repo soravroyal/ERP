@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  MapForce Project File  -->
+<Project Expanded="Yes" Type="Root" language="cs" OutputDir="output\" Title="xliff_in" OutputName="xliff_in" Version="6">
+	<Folder FolderName="Mapping Folder" Expanded="Yes" Type="MappingFolder">
+		<File Type="Mapping" FilePath="xliff_mapping_in.mfd"/>
+	</Folder>
+</Project>

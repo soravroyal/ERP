@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Jobs executionTime="60" commandTimeout="120" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\DOCUME~1\JKC\MYDOCU~1\EEA\SPPerformanceTester\SPPerformanceTester\TestRunData.xsd">
+	<Job name="A1 - snapshot">
+		<Threads>
+			<Thread name="snapshot" Id="1" ThreadCopies="10">
+				<Tasks>
+					<StoredProcedure executionString="exec [giseditor].[XCP_GET_SNAPSHOT_XML]"/>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_STATION_DATA_XML @thresholdType, @eoi_code">
+						<Parameters>
+							<Parameter name="@thresholdType" value="1" valueType="int"/>
+							<Parameter name="@eoi_code" value="DK0032A"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_STATION_DATA_XML @thresholdType, @eoi_code">
+						<Parameters>
+							<Parameter name="@thresholdType" value="1" valueType="int"/>
+							<Parameter name="@eoi_code" value="DK0011A"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_STATION_DATA_XML @thresholdType, @eoi_code">
+						<Parameters>
+							<Parameter name="@thresholdType" value="1" valueType="int"/>
+							<Parameter name="@eoi_code" value="DK0047A"/>
+						</Parameters>
+					</StoredProcedure>
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="A1 - explorer">
+		<Threads>
+			<Thread name="explorer" Id="2" ThreadCopies="10">
+				<Tasks>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_EXPLORER_MONTHLY_XML @onlySemivalidated">
+						<Parameters>
+							<Parameter name="@onlySemivalidated" value="1" valueType="int"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_EXPLORER_MONTHLY_XML @onlySemivalidated">
+						<Parameters>
+							<Parameter name="@onlySemivalidated" value="0" valueType="int"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_EXPLORER_OUTPUT_XML @country, @treshold, @period, @status">
+						<Parameters>
+							<Parameter name="@country" value="DK"/>
+							<Parameter name="@treshold" value="DK"/>
+							<Parameter name="@period" value="-1" valueType="int"/>
+							<Parameter name="@status" value="1" valueType="int"/>
+						</Parameters>
+					</StoredProcedure>
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="A1 - snapshot and explorer in parallel">
+		<Threads>
+			<ThreadRef Id="1" ThreadCopies="10"/>
+			<ThreadRef Id="2" ThreadCopies="10"/>
+		</Threads>
+	</Job>
+	<Job name="A2 - Admin">
+		<Threads>
+			<Thread name="Admin" Id="3" ThreadCopies="2">
+				<Tasks>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_PROVIDER_XML @pName">
+						<Parameters>
+							<Parameter name="@pName" value="dk_dmu"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_UPDATE_PROVIDER_TRUST @fk_provider_id, @trust_flag">
+						<Parameters>
+							<Parameter name="@fk_provider_id" value="FA360FC8-5515-4C2E-82CF-4C3BCE4FA2F9"/>
+							<Parameter name="@trust_flag" value="1" valueType="int"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_GET_PROVIDER_QC_XML @pName">
+						<Parameters>
+							<Parameter name="@pName" value="dk_dmu"/>
+						</Parameters>
+					</StoredProcedure>
+					<StoredProcedure executionString="exec giseditor.XCP_UPDATE_QC_MONTHLY @station_sEoI_Code, @rapport_year, @april, @may, @june, @july, @august, @september">
+						<Parameters>
+							<Parameter name="@station_sEoI_Code" value="DK0011A"/>
+							<Parameter name="@rapport_year " value="2007" valueType="int"/>
+							<Parameter name="@april" value="1" valueType="int"/>
+							<Parameter name="@may" value="1" valueType="int"/>
+							<Parameter name="@june" value="1" valueType="int"/>
+							<Parameter name="@july" value="1" valueType="int"/>
+							<Parameter name="@august" value="1" valueType="int"/>
+							<Parameter name="@september" value="1" valueType="int"/>
+						</Parameters>
+					</StoredProcedure>
+					<Script executionString="use [sor]
+declare @turn_off_id uniqueidentifier
+delete from giseditor.turn_off  where fk_station_id = '36CA8A11-74A0-4F0A-B5F0-5C4480973D2E'
+delete from giseditor.XC_IS_PUBLISHABLE_AUDIT where fk_station_id = '36CA8A11-74A0-4F0A-B5F0-5C4480973D2E'
+
+exec giseditor.XCP_Data_turn_off_Insert 
+	'System' , '2007-08-11 12:00:00' ,'2007-08-11 12:00:00' ,
+	'FA360FC8-5515-4C2E-82CF-4C3BCE4FA2F9' , 
+	'36CA8A11-74A0-4F0A-B5F0-5C4480973D2E' , 
+	'4798DBA5-B63D-48B2-99DA-0AF89024C55E' , 
+	'error in station','0','WOS'
+exec giseditor.XCP_Data_turn_off_View '36CA8A11-74A0-4F0A-B5F0-5C4480973D2E'
+
+set @turn_off_id = (select top 1 pk_turn_off_id from giseditor.turn_off where fk_station_id = '36CA8A11-74A0-4F0A-B5F0-5C4480973D2E')
+exec giseditor.XCP_Data_turn_off_Delete @turn_off_id,'DELETE_USER'
+exec giseditor.XCP_Data_turn_off_View '36CA8A11-74A0-4F0A-B5F0-5C4480973D2E'
+"/>
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="A1 - snapshot and explorer and A2 in parallel">
+		<Threads>
+			<ThreadRef Id="1" ThreadCopies="2"/>
+			<ThreadRef Id="2" ThreadCopies="10"/>
+			<ThreadRef Id="3" ThreadCopies="10"/>
+		</Threads>
+	</Job>
+<!--	<Job name="A3">
+		<Threads>
+			<Thread name="Nightly" Id="4">
+				<Tasks>
+					<Script executionString="exec giseditor.XCP_CREATE_SNAPSHOT_XML
+exec giseditor.XCP_PrepareExplorerSemiValidatedXML 
+exec giseditor.XCP_PrepareExplorerPreliminaryXML 
+exec giseditor.XCP_CREATE_STATIC_MAP
+exec giseditor.XCP_CREATE_PROVIDER_XML 'FA360FC8-5515-4C2E-82CF-4C3BCE4FA2F9'
+exec giseditor.XCP_CREATE_SNAPSHOT_XML
+exec giseditor.XCP_POPULATE_XC_MEASUREMENT_LTO
+exec giseditor.XCP_POPULATE_XC_STATION_EXCEEDANCES_SEASON
+exec giseditor.XCP_CREATE_EXPLORER_OUTPUT_XML"/>
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="A1 - snapshot and explorer and A3 in parallel">
+		<Threads>
+			<ThreadRef Id="1"/>
+			<ThreadRef Id="2"/>
+			<ThreadRef Id="4"/>
+		</Threads>
+	</Job>
+	<Job name="A2 and A3 in parallel">
+		<Threads>
+			<ThreadRef Id="3"/>
+			<ThreadRef Id="4"/>
+		</Threads>
+	</Job>
+		<Threads>
+			<ThreadRef Id="1" ThreadCopies="100"/>
+			<ThreadRef Id="2" ThreadCopies="100"/>
+			<ThreadRef Id="3" ThreadCopies="30"/>
+		</Threads>
+	</Job>-->
+</Jobs>
