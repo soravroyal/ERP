@@ -21,8 +21,8 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><asp:Label ID="lbReason" Text="<%$ Resources:WasteTransfers,NoFacilitiesReporting %>" runat="server"></asp:Label></th>
-          <th><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
+          <th scope="col"><asp:Label ID="lbReason" Text="<%$ Resources:WasteTransfers,NoFacilitiesReporting %>" runat="server"></asp:Label></th>
+          <th scope="col"><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
         </tr>
        </thead>
        
@@ -62,8 +62,8 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></th>
-          <th><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
+          <th scope="col"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></th>
+          <th scope="col"><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
         </tr>
        </thead>
        

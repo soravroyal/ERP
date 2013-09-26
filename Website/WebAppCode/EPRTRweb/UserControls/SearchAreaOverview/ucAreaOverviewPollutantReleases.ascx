@@ -36,10 +36,10 @@
                 <table width="100%">
                     <thead>
                         <tr class="generalListStyle_headerRow">
-                            <asp:ListView ID="lvColHeaders"  runat="server"  OnPagePropertiesChanging="OnPageChanging" OnDataBinding="lvColHeaders_OnDataBinding" >
+                            <asp:ListView ID="lvColHeaders" runat="server"  OnPagePropertiesChanging="OnPageChanging" OnDataBinding="lvColHeaders_OnDataBinding">
                                 <LayoutTemplate>
-                                    <th><div class="AOcolNameExpanding"><asp:Label ID="lbActivity" runat="server"></asp:Label></div></th>
-                                    <th><div class="AOcolLegend"><asp:Label ID="lnTotalAccidental" Text="" runat="server"></asp:Label></div></th>
+                                    <th scope="col"><div class="AOcolNameExpanding"><asp:Label ID="lbActivity" runat="server"></asp:Label></div></th>
+                                    <th scope="col"><div class="AOcolLegend"><asp:Label ID="lnTotalAccidental" Text="" runat="server"></asp:Label></div></th>
                                     <asp:PlaceHolder id="itemPlaceholder" runat="server" ></asp:PlaceHolder>
                                 </LayoutTemplate>
                                 <ItemTemplate>

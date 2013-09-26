@@ -13,12 +13,12 @@
          <table>
            <thead>
             <tr class="generalListStyle_headerRow">
-              <th><asp:Label ID="lbTitle" Text="" runat="server"></asp:Label></th>
-              <th><div id="headerPollutantName"><asp:Label ID="lbTransToWasteWater" Text="<%$Resources:Pollutant, PollutantName%>" runat="server"></asp:Label></div></th>
-              <th><div id="headerQuantityTotal"><asp:Label ID="lbQuantity" Text="<%$Resources:Pollutant, Quantity%>" runat="server"></asp:Label> </div></th>
-              <th><div id="headerPollutantMethod"><asp:Label ID="lbMethod" Text="<%$Resources:Pollutant, Method%>" runat="server"></asp:Label></div></th>
-              <th><div id="headerSpecialMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$Resources:Pollutant, MethodUsed%>" runat="server"></asp:Label></div></th>
-              <th><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant, Confidentiality %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><asp:Label ID="lbTitle" Text="" runat="server"></asp:Label></th>
+              <th scope="col"><div id="headerPollutantName"><asp:Label ID="lbTransToWasteWater" Text="<%$Resources:Pollutant, PollutantName%>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div id="headerQuantityTotal"><asp:Label ID="lbQuantity" Text="<%$Resources:Pollutant, Quantity%>" runat="server"></asp:Label> </div></th>
+              <th scope="col"><div id="headerPollutantMethod"><asp:Label ID="lbMethod" Text="<%$Resources:Pollutant, Method%>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div id="headerSpecialMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$Resources:Pollutant, MethodUsed%>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant, Confidentiality %>" runat="server"></asp:Label></div></th>
             </tr>
            </thead>
            <tbody>

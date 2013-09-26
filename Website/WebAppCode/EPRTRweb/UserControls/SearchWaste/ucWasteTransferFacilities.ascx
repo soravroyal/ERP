@@ -15,14 +15,14 @@
             <table class="TableExtend" >
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th>
+                        <th scope="col">
                             <div>
                                 <asp:LinkButton ID="lnkFacility" Text="<%$ Resources:Facility,FacilityName %>" CommandName="Sort"
                                     CommandArgument="FacilityName" runat="server"></asp:LinkButton>
                                 <asp:Image ID="upFacility" runat="server" ImageUrl="~/images/arrow_up.gif" Visible="true" />
                                 <asp:Image ID="downFacility" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
-                        </th>
+                        </th scope="col">
                         <th id="headerQuantityTotal" runat="server">
                             <div class="columnQuantityTotal">
                                 <asp:LinkButton ID="_lnkQuantityTotal" Text="<%$ Resources:WasteTransfers,WasteColumnHeaderTotal %>"
@@ -31,7 +31,7 @@
                                 <asp:Image ID="downTotal" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th id="headerQuantityRecovery" runat="server">
+                        <th scope="col" id="headerQuantityRecovery" runat="server">
                             <div class="columnQuantityRecovery">
                                 <asp:LinkButton ID="_lnkQuantityRecovery" Text="<%$ Resources:WasteTransfers,WasteColumnHeaderRecovery %>"
                                     CommandName="Sort" CommandArgument="QuantityRecovery" runat="server"></asp:LinkButton>
@@ -39,7 +39,7 @@
                                 <asp:Image ID="downRecovery" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th id="headerQuantityDisposal" runat="server">
+                        <th scope="col" id="headerQuantityDisposal" runat="server">
                             <div class="columnQuantityDisposal">
                                 <asp:LinkButton ID="_lnkQuantityDisposal" Text="<%$ Resources:WasteTransfers,WasteColumnHeaderDisposal %>"
                                     CommandName="Sort" CommandArgument="QuantityDisposal" runat="server"></asp:LinkButton>
@@ -47,7 +47,7 @@
                                 <asp:Image ID="downDisposal" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                                 </div>
                         </th>
-                        <th id="headerQuantityUnspecified" runat="server">
+                        <th scope="col" id="headerQuantityUnspecified" runat="server">
                             <div class="columnQuantityUnspecified">
                                 <asp:LinkButton ID="_lnkQuantityUnspecified" Text="<%$ Resources:WasteTransfers,WasteColumnHeaderUnspecified %>"
                                     CommandName="Sort" CommandArgument="QuantityUnspec" runat="server"></asp:LinkButton>
@@ -56,7 +56,7 @@
                                     Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div class="columnActivityCode">
                                 <asp:LinkButton ID="lnkActivity" Text="<%$ Resources:Facility,Activity %>" CommandName="Sort"
                                     CommandArgument="IAActivityCode" runat="server"></asp:LinkButton>
@@ -64,7 +64,7 @@
                                 <asp:Image ID="downActivity" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>                                
                         </th>
-                        <th>
+                        <th scope="col">
                             <div class="columnCountryCode">
                                 <asp:LinkButton ID="lnkCountry" Text="<%$ Resources:Common,Country%>" CommandName="Sort"
                                     CommandArgument="CountryCode" runat="server"></asp:LinkButton>

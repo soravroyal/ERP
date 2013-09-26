@@ -10,10 +10,10 @@
    <table>
      <thead>
       <tr class="generalListStyle_headerRow">
-        <th><div class="ColLink"></div></th>
-        <th><div class="PTcolName"><asp:Label ID="lbName" Text="<%$ Resources:Pollutant,TransferPerCountry %>" runat="server"></asp:Label></div></th>
-        <th><div class="PTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
-        <th><div class="PTcolQuantity"><asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,Quantity %>" runat="server"></asp:Label></div></th>
+        <th scope="col"><div class="ColLink"></div></th>
+        <th scope="col"><div class="PTcolName"><asp:Label ID="lbName" Text="<%$ Resources:Pollutant,TransferPerCountry %>" runat="server"></asp:Label></div></th>
+        <th scope="col"><div class="PTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
+        <th scope="col"><div class="PTcolQuantity"><asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,Quantity %>" runat="server"></asp:Label></div></th>
       </tr>
      </thead>
      <tbody>

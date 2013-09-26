@@ -24,9 +24,9 @@
              <table>
                <thead>
                 <tr class="generalListStyle_headerRow">
-                  <th><div id="headerTimeSeriesYear"><asp:Label ID="lbYear" Text="<%$Resources:Common,Year%>" runat="server"></asp:Label></div></th>
-                  <th><div id="headerTimeSeriesCountries"><asp:Label ID="lbReportingCountries" Text="<%$Resources:Common,EPRTRCountries%>" runat="server"></asp:Label></div></th>
-                  <th><div id="headerTimeSeriesFacilities"><asp:Label ID="lbReportingFacilities" Text="<%$Resources:Common,Facilities%>" runat="server"></asp:Label></div></th>
+                  <th scope="col"><div id="headerTimeSeriesYear"><asp:Label ID="lbYear" Text="<%$Resources:Common,Year%>" runat="server"></asp:Label></div></th>
+                  <th scope="col"><div id="headerTimeSeriesCountries"><asp:Label ID="lbReportingCountries" Text="<%$Resources:Common,EPRTRCountries%>" runat="server"></asp:Label></div></th>
+                  <th scope="col"><div id="headerTimeSeriesFacilities"><asp:Label ID="lbReportingFacilities" Text="<%$Resources:Common,Facilities%>" runat="server"></asp:Label></div></th>
                 </tr>
                </thead>
                <tbody>

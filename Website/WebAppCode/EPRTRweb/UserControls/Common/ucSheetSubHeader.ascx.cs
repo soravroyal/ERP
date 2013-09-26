@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using EPRTR.HeaderBuilders;
 using System.Diagnostics;
 using EPRTR.Formatters;
+using StylingHelper;
 
 public partial class ucSheetSubHeader : System.Web.UI.UserControl
 {
@@ -21,13 +22,24 @@ public partial class ucSheetSubHeader : System.Web.UI.UserControl
         this.subheadlineGridView.DataSource = null;
 
         //set headers
-        List<SubHeadlineData> lines = new List<SubHeadlineData>();
+        //List<SubHeadlineData> lines = new List<SubHeadlineData>();
+        //foreach (KeyValuePair<string, string> kvp in header)
+        //{
+        //   lines.Add(new SubHeadlineData(kvp.Key + ":", kvp.Value));
+        //}
+        //this.subheadlineGridView.DataSource = lines;
+        //this.subheadlineGridView.DataBind();
+
+
+        List<FacilityDetailElement> elements = new List<FacilityDetailElement>();
+
         foreach (KeyValuePair<string, string> kvp in header)
         {
-           lines.Add(new SubHeadlineData(kvp.Key + ":", kvp.Value));
+            elements.Add(new FacilityDetailElement(kvp.Key + ":", kvp.Value));
         }
 
-        this.subheadlineGridView.DataSource = lines;
+
+        this.subheadlineGridView.DataSource = elements;
         this.subheadlineGridView.DataBind();
     }
 
@@ -36,13 +48,23 @@ public partial class ucSheetSubHeader : System.Web.UI.UserControl
         this.subheadlineGridView.DataSource = null;
 
         //set headers
-        List<SubHeadlineData> lines = new List<SubHeadlineData>();
+        //List<SubHeadlineData> lines = new List<SubHeadlineData>();
+        //foreach (KeyValuePair<string, string> kvp in header)
+        //{
+        //    lines.Add(new SubHeadlineData(kvp.Key + ":", kvp.Value.Replace("E-PRTR","EPER")));
+        //}
+        //this.subheadlineGridView.DataSource = lines;
+        //this.subheadlineGridView.DataBind();
+
+        List<FacilityDetailElement> elements = new List<FacilityDetailElement>();
+
         foreach (KeyValuePair<string, string> kvp in header)
         {
-            lines.Add(new SubHeadlineData(kvp.Key + ":", kvp.Value.Replace("E-PRTR","EPER")));
+            elements.Add(new FacilityDetailElement(kvp.Key + ":", kvp.Value.Replace("E-PRTR", "EPER")));
         }
 
-        this.subheadlineGridView.DataSource = lines;
+
+        this.subheadlineGridView.DataSource = elements;
         this.subheadlineGridView.DataBind();
     }
 

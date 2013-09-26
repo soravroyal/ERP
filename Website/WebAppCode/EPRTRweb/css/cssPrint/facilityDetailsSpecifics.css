@@ -87,11 +87,12 @@
 
 .detailsTitleColor
 {
-	border-bottom:Solid 0px Transparent;
+  border-bottom:Solid 0px Transparent;
   color:Black;
   white-space:pre;
   vertical-align:top;
   padding-left:10px;
+  font-weight: bold;
 }
 
 .activitySubHeader

@@ -2,6 +2,19 @@
 /*-- Sheet headers. Common for all levels --*/
 /*-------------------------------------------------------------------------------------------*/
 
+.resultSheet_subHeader_label
+{
+	text-align:left;
+	border-bottom: none;
+	vertical-align:top;
+}
+.resultSheet_subHeader_value 
+{
+	margin-left:10px;
+	text-align:left;
+	border-bottom: none;
+	vertical-align:top;
+}
 
 #resultSheet_subHeader_label
 {

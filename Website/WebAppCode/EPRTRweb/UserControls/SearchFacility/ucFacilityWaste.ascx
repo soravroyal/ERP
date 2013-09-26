@@ -21,11 +21,11 @@
             <table>
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th><div id="headerQuantityTotal">  <asp:Label ID="lbQuantity" Text="<%$Resources:Common, Quantity%>" runat="server"/>          </div></th>
-                        <th><div id="headerSpecialTreatment">      <asp:Label ID="lbTreatment" Text="<%$Resources:Common, Treatment%>" runat="server"/>        </div></th>
-                        <th><div id="headerSpecialMethod">         <asp:Label ID="lbMethod" Text="<%$Resources:Common, Method%>" runat="server"/>             </div></th>
-                        <th><div id="headerSpecialMethodUsed">     <asp:Label ID="lbMethodUsed" Text="<%$Resources:Common, MethodUsed%>" runat="server"/>      </div></th>
-                        <th><div id="headerReason">         <asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"/>  </div></th>
+                        <th scope="col"><div id="headerQuantityTotal">  <asp:Label ID="lbQuantity" Text="<%$Resources:Common, Quantity%>" runat="server"/>          </div></th>
+                        <th scope="col"><div id="headerSpecialTreatment">      <asp:Label ID="lbTreatment" Text="<%$Resources:Common, Treatment%>" runat="server"/>        </div></th>
+                        <th scope="col"><div id="headerSpecialMethod">         <asp:Label ID="lbMethod" Text="<%$Resources:Common, Method%>" runat="server"/>             </div></th>
+                        <th scope="col"><div id="headerSpecialMethodUsed">     <asp:Label ID="lbMethodUsed" Text="<%$Resources:Common, MethodUsed%>" runat="server"/>      </div></th>
+                        <th scope="col"><div id="headerReason">         <asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"/>  </div></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,11 +65,11 @@
             <table>
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th><div id="headerQuantityTotal">  <asp:Label ID="lbQuantity" Text="<%$Resources:Common, Quantity%>" runat="server"/>          </div></th>
-                        <th><div id="headerSpecialTreatment">      <asp:Label ID="lbTreatment" Text="<%$Resources:Common, Treatment%>" runat="server"/>        </div></th>
-                        <th><div id="headerSpecialMethod">         <asp:Label ID="lbMethod" Text="<%$Resources:Common, Method%>" runat="server" />             </div></th>
-                        <th><div id="headerSpecialMethodUsed">     <asp:Label ID="lbMethodUsed" Text="<%$Resources:Common, MethodUsed%>" runat="server"/>      </div></th>
-                        <th><div id="headerReason">         <asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"/>  </div></th>
+                        <th scope="col"><div id="headerQuantityTotal">  <asp:Label ID="lbQuantity" Text="<%$Resources:Common, Quantity%>" runat="server"/>          </div></th>
+                        <th scope="col"><div id="headerSpecialTreatment">      <asp:Label ID="lbTreatment" Text="<%$Resources:Common, Treatment%>" runat="server"/>        </div></th>
+                        <th scope="col"><div id="headerSpecialMethod">         <asp:Label ID="lbMethod" Text="<%$Resources:Common, Method%>" runat="server" />             </div></th>
+                        <th scope="col"><div id="headerSpecialMethodUsed">     <asp:Label ID="lbMethodUsed" Text="<%$Resources:Common, MethodUsed%>" runat="server"/>      </div></th>
+                        <th scope="col"><div id="headerReason">         <asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"/>  </div></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,14 +108,14 @@
             <table>
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th><div id="headerQuantityTotal">      <asp:Label ID="lbQuantity" Text="<%$Resources:Common, Quantity%>" runat="server"/>                      </div></th>
-                        <th><div id="headerTreatment">          <asp:Label ID="lbTreatment" Text="<%$Resources:Common, Treatment%>" runat="server"/>                    </div></th>
-                        <th><div id="headerMethod">             <asp:Label ID="lbMethod" Text="<%$Resources:Common, Method%>" runat="server"/>                          </div></th>
-                        <th><div id="headerMethodUsed">         <asp:Label ID="lbMethodUsed" Text="<%$Resources:Common, MethodUsed%>" runat="server"/>                  </div></th>
-                        <th><div id="headerReceivingCountry">   <asp:Label ID="lbReceivingCountry" Text="<%$Resources:Common, ReceivingCountry%>" runat="server"/>      </div></th>
-                        <th><div id="headerRecoverer">          <asp:Label ID="lbRecoverer" Text="<%$ Resources:WasteTransfers, RecovererDisposer %>" runat="server"/>  </div></th>
-                        <th><div id="headerActual">             <asp:Label ID="lbActual" Text="<%$ Resources:Facility, SiteAddress %>" runat="server"/>                  </div></th>
-                        <th><div id="headerReason">             <asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"/>              </div></th>
+                        <th scope="col"><div id="headerQuantityTotal">      <asp:Label ID="lbQuantity" Text="<%$Resources:Common, Quantity%>" runat="server"/>                      </div></th>
+                        <th scope="col"><div id="headerTreatment">          <asp:Label ID="lbTreatment" Text="<%$Resources:Common, Treatment%>" runat="server"/>                    </div></th>
+                        <th scope="col"><div id="headerMethod">             <asp:Label ID="lbMethod" Text="<%$Resources:Common, Method%>" runat="server"/>                          </div></th>
+                        <th scope="col"><div id="headerMethodUsed">         <asp:Label ID="lbMethodUsed" Text="<%$Resources:Common, MethodUsed%>" runat="server"/>                  </div></th>
+                        <th scope="col"><div id="headerReceivingCountry">   <asp:Label ID="lbReceivingCountry" Text="<%$Resources:Common, ReceivingCountry%>" runat="server"/>      </div></th>
+                        <th scope="col"><div id="headerRecoverer">          <asp:Label ID="lbRecoverer" Text="<%$ Resources:WasteTransfers, RecovererDisposer %>" runat="server"/>  </div></th>
+                        <th scope="col"><div id="headerActual">             <asp:Label ID="lbActual" Text="<%$ Resources:Facility, SiteAddress %>" runat="server"/>                  </div></th>
+                        <th scope="col"><div id="headerReason">             <asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"/>              </div></th>
                     </tr>
                 </thead>
                 <tbody>

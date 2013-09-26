@@ -16,10 +16,10 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><div class="PRcolConfName"><asp:Label ID="lbPollutant" Text="<%$ Resources:Common,Pollutant %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderAir" class="PRcolConfAir" runat="server"><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderWater" class="PRcolConfWater" runat="server"><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderSoil" class="PRcolConfSoil" runat="server"><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="PRcolConfName"><asp:Label ID="lbPollutant" Text="<%$ Resources:Common,Pollutant %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderAir" class="PRcolConfAir" runat="server"><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderWater" class="PRcolConfWater" runat="server"><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderSoil" class="PRcolConfSoil" runat="server"><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></div></th>
           </tr>
          </thead>
          <tbody>
@@ -58,10 +58,10 @@
          <thead>
           <tr class="generalListStyle_headerRow">
             <%-- <th><asp:Label ID="lbImage" Text="" runat="server"></asp:Label></th> --%>
-            <th><div class="PRcolConfName"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
-            <th><div id="divReasonHeaderAir" class="PRcolConfAir" runat="server"><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></div></th>
-            <th><div id="divReasonHeaderWater" class="PRcolConfWater" runat="server"><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></div></th>
-            <th><div id="divReasonHeaderSoil" class="PRcolConfSoil" runat="server"><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="PRcolConfName"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divReasonHeaderAir" class="PRcolConfAir" runat="server"><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divReasonHeaderWater" class="PRcolConfWater" runat="server"><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divReasonHeaderSoil" class="PRcolConfSoil" runat="server"><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></div></th>
           </tr>
          </thead>
          <tbody>

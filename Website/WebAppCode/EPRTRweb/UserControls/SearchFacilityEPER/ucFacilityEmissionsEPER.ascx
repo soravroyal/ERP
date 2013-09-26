@@ -12,9 +12,9 @@
                     <thead>
                         <tr class="generalListStyle_headerRow">
                           <th></th>
-                          <th width="55%"><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label></div></th>
-                          <th><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,Emissions %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col" width="55%"><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label></div></th>
+                          <th scope="col"><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,Emissions %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
                          
                         </tr>
                     </thead>
@@ -56,11 +56,9 @@
                     <thead>
                         <tr class="generalListStyle_headerRow">
                           <th></th>
-                          <th><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,Emissions %>" runat="server"></asp:Label> </div></th>
-                          
-                          <th><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
-                         
+                          <th scope="col"><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,Emissions %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,9 +72,7 @@
                     <td><asp:ImageButton ID="ImageButton" ImageUrl="~/images/timeseries.png" CommandName='toggletimeseries' CommandArgument='<%#GetPollutantCode(Container.DataItem)%>'  runat="server"></asp:ImageButton></td>
                     <td title="<%# GetPollutantName(Container.DataItem)%>"><div id="headerSpecialPollutantName"><%# GetPollutantName(Container.DataItem)%></div></td>
                     <td title="<%# GetTotalQuantity(Container.DataItem)%>"><div id="QuantityTotal"><%# GetTotalQuantity(Container.DataItem)%></div></td>
-                  
                     <td title="<%# GetMethodBasisName(Container.DataItem)%>"><div id="Method"><%# GetMethodBasisName(Container.DataItem) %></div></td>
-                  
                 </tr>
                 <tr>
                     <td colspan="100"> <%--span all--%>

@@ -14,10 +14,10 @@
          <table cellpadding="1px;" width="100%">
            <thead>
             <tr class="generalListStyle_headerRow">
-              <th><asp:Label ID="lbTitle" Text="" runat="server"></asp:Label></th>
-              <th width="55%"><div id="headerPollutantName"><asp:Label ID="lbTransToWasteWater" Text="<%$Resources:Pollutant, PollutantName%>" runat="server"></asp:Label></div></th>
-              <th><div id="headerQuantityTotal"><asp:Label ID="lbQuantity" Text="<%$Resources:Pollutant, Emissions%>" runat="server"></asp:Label> </div></th>
-              <th><div id="headerPollutantMethod"><asp:Label ID="lbMethod" Text="<%$Resources:Pollutant, Method%>" runat="server"></asp:Label></div></th>
+              <th scope="col"><asp:Label ID="lbTitle" Text="" runat="server"></asp:Label></th>
+              <th scope="col" width="55%"><div id="headerPollutantName"><asp:Label ID="lbTransToWasteWater" Text="<%$Resources:Pollutant, PollutantName%>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div id="headerQuantityTotal"><asp:Label ID="lbQuantity" Text="<%$Resources:Pollutant, Emissions%>" runat="server"></asp:Label> </div></th>
+              <th scope="col"><div id="headerPollutantMethod"><asp:Label ID="lbMethod" Text="<%$Resources:Pollutant, Method%>" runat="server"></asp:Label></div></th>
              
             </tr>
            </thead>

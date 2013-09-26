@@ -17,10 +17,10 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><div class="WTcolConfName"><asp:Label ID="lbEmpty" Text="" runat="server"></asp:Label></div></th>
-          <th><div id="divHeaderNonHW" class="WTcolConfNonHW" runat="server"><asp:Label ID="lbNonHazardous" Text="<%$ Resources:LOV_WASTETYPE, NON-HW %>" runat="server"></asp:Label> <br/> <asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
-          <th><div id="divHeaderHWIC" class="WTcolConfHWIC" runat="server"><asp:Label ID="lbHazardousIC" Text="<%$ Resources:LOV_WASTETYPE, HWIC %>" runat="server"></asp:Label> <br/> <asp:Label ID="lbFacilities2" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
-          <th><div id="divHeaderHWOC" class="WTcolConfHWOC" runat="server"><asp:Label ID="lbHazardousOC" Text="<%$ Resources:LOV_WASTETYPE, HWOC %>" runat="server"></asp:Label> <br/> <asp:Label ID="lbFacilities3" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfName"><asp:Label ID="lbEmpty" Text="" runat="server"></asp:Label></div></th>
+          <th scope="col"><div id="divHeaderNonHW" class="WTcolConfNonHW" runat="server"><asp:Label ID="lbNonHazardous" Text="<%$ Resources:LOV_WASTETYPE, NON-HW %>" runat="server"></asp:Label> <br/> <asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div id="divHeaderHWIC" class="WTcolConfHWIC" runat="server"><asp:Label ID="lbHazardousIC" Text="<%$ Resources:LOV_WASTETYPE, HWIC %>" runat="server"></asp:Label> <br/> <asp:Label ID="lbFacilities2" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div id="divHeaderHWOC" class="WTcolConfHWOC" runat="server"><asp:Label ID="lbHazardousOC" Text="<%$ Resources:LOV_WASTETYPE, HWOC %>" runat="server"></asp:Label> <br/> <asp:Label ID="lbFacilities3" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
         </tr>
        </thead>
        
@@ -64,9 +64,9 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><div class="WTcolConfWasteType"><asp:Label ID="lbWasteType" Text="<%$ Resources:Common,WasteType %>" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfReason"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfFacilities" ><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfWasteType"><asp:Label ID="lbWasteType" Text="<%$ Resources:Common,WasteType %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfReason"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfFacilities" ><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
         </tr>
        </thead>
        

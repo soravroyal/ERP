@@ -9,14 +9,14 @@
          <table>
            <thead>
             <tr class="generalListStyle_headerRow">
-              <th><div class="ColLink"></div></th> 
-              <th><div class="PRcolName"><asp:Label ID="lbReleasesPerPollutant" Text="<%$ Resources:Pollutant,ReleasesPerCountry %>"  runat="server"></asp:Label></div></th>
-              <th><div class="ColLink"></div></th>
-              <th><div class="PRcolTAccidental"><asp:Label ID="lnTotalAccidental" Text="" runat="server"></asp:Label></div></th>
-              <th><div class="PRcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
-              <th><div class="PRcolAir"><asp:Label ID="lbAir" Text="<%$ Resources:Pollutant,Air %>" runat="server"></asp:Label></div></th>
-              <th><div class="PRcolWater"><asp:Label ID="lbWater" Text="<%$ Resources:Pollutant,Water %>" runat="server"></asp:Label></div></th>
-              <th><div class="PRcolSoil"><asp:Label ID="lbSoil" Text="<%$ Resources:Pollutant,Soil %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="ColLink"></div></th> 
+              <th scope="col"><div class="PRcolName"><asp:Label ID="lbReleasesPerPollutant" Text="<%$ Resources:Pollutant,ReleasesPerCountry %>"  runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="ColLink"></div></th>
+              <th scope="col"><div class="PRcolTAccidental"><asp:Label ID="lnTotalAccidental" Text="" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="PRcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="PRcolAir"><asp:Label ID="lbAir" Text="<%$ Resources:Pollutant,Air %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="PRcolWater"><asp:Label ID="lbWater" Text="<%$ Resources:Pollutant,Water %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="PRcolSoil"><asp:Label ID="lbSoil" Text="<%$ Resources:Pollutant,Soil %>" runat="server"></asp:Label></div></th>
             </tr>
            </thead>
            <tbody>

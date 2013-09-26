@@ -5,7 +5,7 @@
     <h1>
         <asp:Literal ID="PageHeader" Text="<%$ Resources:Library, ActivityPageHeader%>" runat="server" />
     </h1>
-    <p>
+    <div>
         <asp:Literal ID="PageContent" Text="" Mode="Transform" runat="server"></asp:Literal>
-    </p>
+    </div>
 </div>

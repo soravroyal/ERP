@@ -10,7 +10,7 @@
             <table>
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th>
+                        <th scope="col">
                             <div id="headerFacilityPT">
                                 <asp:LinkButton ID="lnkFacility" Text="<%$ Resources:Facility,FacilityName %>" CommandName="Sort"
                                     CommandArgument="FacilityName" runat="server"></asp:LinkButton>
@@ -18,7 +18,7 @@
                                 <asp:Image ID="downFacility" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerQuantityTotal">
                                 <asp:LinkButton ID="lnkQuantity" Text="<%$ Resources:Common,Quantity %>" CommandName="Sort"
                                     CommandArgument="Quantity" runat="server"></asp:LinkButton>
@@ -26,7 +26,7 @@
                                 <asp:Image ID="downQuantity" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerActivityCode">
                                 <asp:LinkButton ID="lnkActivity" Text="<%$ Resources:Facility,Activity %>" CommandName="Sort"
                                     CommandArgument="IAActivityCode" runat="server"></asp:LinkButton>
@@ -34,7 +34,7 @@
                                 <asp:Image ID="downActivity" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerCountryCode">
                                 <asp:LinkButton ID="lnkCountry" Text="<%$ Resources:Facility,Country %>" CommandName="Sort"
                                     CommandArgument="CountryCode" runat="server"></asp:LinkButton>

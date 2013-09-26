@@ -14,7 +14,7 @@
         <div id="facilityreportdetails">
             <asp:GridView ID="facilityreportDetails" OnRowDataBound="GridView1_RowDataBound"
                 runat="server" ShowHeader="false" AutoGenerateColumns="false" GridLines="none"
-                EmptyDataRowStyle-Height="0px">
+                EmptyDataRowStyle-Height="0px" RowHeaderColumn="Label">
                 <Columns>
                     <asp:BoundField DataField="Label" ></asp:BoundField>
                     <asp:BoundField DataField="Value" ></asp:BoundField>
@@ -28,7 +28,8 @@
             ShowHeader="true" AutoGenerateColumns="false" OnRowDataBound="ActivityRowDataBound"
             CssClass="generalListStyle"
             RowStyle-CssClass= "generalListStyle_row" 
-            HeaderStyle-CssClass="generalListStyle_headerRow">
+            HeaderStyle-CssClass="generalListStyle_headerRow"
+            UseAccessibleHeader="true">
                 <Columns>
                     <asp:TemplateField>
                         <HeaderTemplate>

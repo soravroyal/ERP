@@ -8,7 +8,7 @@
             <table>
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th>
+                        <th scope="col">
                             <div id="headerFromFacilityName">
                                 <asp:LinkButton ID="_lnkFromFacility" Text="<%$ Resources:Facility,TransferedFrom %>"
                                     CommandName="Sort" CommandArgument="FacilityName" runat="server"></asp:LinkButton>
@@ -16,8 +16,8 @@
                                 <asp:Image ID="downFacility" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th><div class="ColLink"></div></th>
-                        <th>
+                        <th scope="col"><div class="ColLink"></div></th>
+                        <th scope="col">
                             <div id="headerTreatment">
                                 <asp:LinkButton ID="_lnkTreatment" Text="<%$ Resources:Common,Treatment%>" CommandName="Sort"
                                     CommandArgument="WasteTreatmentCode" runat="server"></asp:LinkButton>
@@ -26,7 +26,7 @@
                                     Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerTreaterName">
                                 <asp:LinkButton ID="_lnkTreaterName" Text="<%$ Resources:Facility,TreaterName %>"
                                     CommandName="Sort" CommandArgument="WHPName" runat="server"></asp:LinkButton>
@@ -35,18 +35,18 @@
                                     Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerTeaterAddress">
                                 <asp:Literal ID="_lnkTreaterAddress" Text="<%$ Resources:Common,Address %>" runat="server"></asp:Literal>
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerSiteAddress">
                                 <asp:Literal ID="_lnkSiteAddress" Text="<%$ Resources:Facility,SiteAddress%>"
                                     runat="server"></asp:Literal>
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerQuantity">
                                 <asp:LinkButton ID="_lnkQuantity" Text="<%$ Resources:Common,Quantity %>" CommandName="Sort"
                                     CommandArgument="Quantity" runat="server"></asp:LinkButton>

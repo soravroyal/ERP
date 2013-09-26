@@ -18,9 +18,9 @@
            <table>
              <thead>
               <tr class="thirdGeneralListStyle_headerRow">
-                <th><div class="TSPRcolConfYear"><asp:Label ID="lbYear" Text="<%$ Resources:Common,Year %>" runat="server"></asp:Label></div></th>
-                <th><div class="TSPRcolConfQuantity"><asp:Label ID="lbPollutant" Text="" runat="server"></asp:Label></div></th>
-                <th><div id="divPollutantGroupHeader" class="TSPRcolConfQuantity" runat="server"><asp:Label ID="lbPollutantGroup" Text="" runat="server"></asp:Label></div></th>
+                <th scope="col"><div class="TSPRcolConfYear"><asp:Label ID="lbYear" Text="<%$ Resources:Common,Year %>" runat="server"></asp:Label></div></th>
+                <th scope="col"><div class="TSPRcolConfQuantity"><asp:Label ID="lbPollutant" Text="" runat="server"></asp:Label></div></th>
+                <th scope="col"><div id="divPollutantGroupHeader" class="TSPRcolConfQuantity" runat="server"><asp:Label ID="lbPollutantGroup" Text="" runat="server"></asp:Label></div></th>
               </tr>
              </thead>
              <tbody>
