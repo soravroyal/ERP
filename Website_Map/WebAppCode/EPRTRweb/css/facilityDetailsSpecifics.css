@@ -1,0 +1,199 @@
+﻿/*------------------------------------------------------------------------------------------------------------*/
+/*-- facility details subsheet specific styles (Only put styles that are specific to this usercontrol here) --*/
+/*------------------------------------------------------------------------------------------------------------*/
+
+/*-- rules that apply to the usercontrol containing the facility details subsheet --*/
+#unit 
+{
+	background-color:Transparent;
+}
+
+/*-- the image needs to be replaced once the real image is placed --*/
+#facilityimage 
+{
+	width:50%;
+	float:left;
+	clear:left;
+}
+
+#facilityreportdetails 
+{
+	width: 50%;
+	float:right;
+	clear:right;
+	height:100%;
+}
+#facilityreportdetails table 
+{
+	border-bottom:Solid 0px Transparent;
+	background-color:Transparent;
+}
+#facilityreportdetails table tr td
+{
+	border-bottom:Solid 0px Transparent;
+	background-color:Transparent;
+	padding-bottom:1px;
+}
+
+#facilityreportActivity 
+{
+	float:Left;
+	clear:both;
+	width:100%;
+	vertical-align:top;
+	margin-top: 40px;
+}
+
+.facilityMap
+{
+	float:Left;
+	Width:330px;
+	Height:330px;
+	border:solid 1px #ADC7AD;
+}
+
+.facilityMapPrint
+{
+	visibility:hidden;
+}
+
+
+/*-- Activities in the report area have to be indented by approximately 20px --*/
+.txIndent20
+{
+	color:Black;
+	padding-left: 20px;
+	border-bottom:Solid 0px Transparent;
+	width:75%;
+	vertical-align:top;
+}
+
+.detailsDataColor
+{
+	color:Black;
+	border-bottom:Solid 0px Transparent;
+	background-color:Blue;
+	vertical-align:top;
+}
+
+.detailsSubTitleColor
+{
+	color:Gray;
+	border-bottom:Solid 0px Transparent;
+	white-space:pre;
+	padding-left:10px;
+	vertical-align:top;
+}
+
+.detailsTitleColor
+{
+	border-bottom:Solid 0px Transparent;
+    color:#8b4513;
+    white-space:pre;
+    vertical-align:top;
+    padding-left:10px;
+    font-weight: bold;
+}
+
+.activitySubHeader
+{
+	color:Black;
+	border-bottom:Solid 0px Transparent;
+	vertical-align:top;
+}
+
+.acitvityDataColor
+{
+	color:Black;
+	vertical-align:top;
+	border-bottom:Solid 0px Transparent;
+}
+
+.facilityInfoActivity
+{
+	float:left;
+	clear:both;
+}
+
+.facilityIPPC
+{
+	width: 75px;
+    overflow:hidden; 
+    text-align:left; 
+}
+
+.facilityActivity
+{
+	width: 650px;
+    overflow:hidden; 
+}
+
+
+/*-- nested subsheet common styles --*/
+/*-- public info areas --*/
+
+#publicinfo 
+{
+	/*float:left;*/ /* Messes with the background height on facilityDetails.*/ 
+	clear:both;
+	width:95%;
+	height:15%;
+	color:Black;
+	margin-top:15px;
+}
+
+
+/*Next/previous year on facility sheet*/
+.facilitySheet_Years
+{
+	float:left;
+	margin-top:10px;
+	margin-left:10px;
+	font-size: 1.1em;
+}
+
+.capaInfoMapaLegend
+{
+    /*border: #8b4513 solid 1px;*/
+    /*border: #ADC7AD solid 1px;*/
+    background-color: #FFFFFF;
+    /*position: absolute;*/
+    /*left: 730px;*/
+    /*right: 30%;
+    top: 90px;*/
+    /*top: 502px;
+    left: 344px;*/
+    margin-top: 5px;
+  
+
+}
+.CapaCerrar
+{
+    text-align:right;
+    background-color:#F2F2F2;
+    color: black;
+    font-size: 1.1em;
+    width: 250px;
+    height:20px;
+}
+.CapaRight
+{
+    text-align:right;
+    background-color:#F2F2F2;
+    color: black;
+    font-size: 1.1em;
+    padding-right: 2px;
+    border: #8b4513 solid 1px;
+    width:10px;
+    float:right;
+}
+
+.CapaLeft
+{
+    float:left;
+    background-color:#F2F2F2;
+    color: black;
+    font-size: 1.1em;
+    margin-left:2px;
+    
+}
