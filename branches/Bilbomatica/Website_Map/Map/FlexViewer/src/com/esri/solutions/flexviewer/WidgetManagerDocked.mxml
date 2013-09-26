@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+// Copyright © 2008 ESRI
+//
+// All rights reserved under the copyright laws of the United States.
+// You may freely redistribute and use this software, with or
+// without modification, provided you include the original copyright
+// and use restrictions.  See use restrictions in the file:
+// <install location>/FlexViewer/License.txt
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<mx:Canvas	xmlns:mx				="http://www.adobe.com/2006/mxml" 
+			width					="100%" 
+			height					="100%"
+			horizontalScrollPolicy	="off" 
+			verticalScrollPolicy	="off"
+    		creationComplete		="init()">
+	<!--mx:Style> 
+     .arialembed { 
+        fontFamily:embedArialFont; 
+        fontSize: 12pt; 
+        fontWeight: Bold;
+        color: #000000;
+     } 
+	</mx:Style-->
+	
+	<mx:Script> 
+		
+		<![CDATA[
+			import mx.events.FlexEvent;
+			
+			import com.esri.ags.Map;
+			import com.esri.solutions.flexviewer.AppEvent;
+		    import com.esri.solutions.flexviewer.BaseWidget;
+		    import com.esri.solutions.flexviewer.IBaseWidget;
+			import com.esri.solutions.flexviewer.utils.Hashtable;
+			import mx.controls.Alert;
+			import mx.events.ChildExistenceChangedEvent;
+		    import mx.events.ModuleEvent;
+		    import mx.modules.IModuleInfo;
+		    import mx.modules.ModuleManager;
+		    
+		    		    
+		    private var configData:ConfigData;
+		    		
+			private var map:Map;
+			
+			private var moduleTable:Hashtable = new Hashtable();
+			
+			private var widgetTable:Hashtable = new Hashtable();
+			
+			private var info:IModuleInfo;
+			
+			private var preloadArray:Array = [];
+			
+			private var predock:Boolean = false;
+			
+			private var noPreloadWidgets:int;				
+			     
+		    private function init():void
+		    {
+			    SiteContainer.addEventListener(AppEvent.CONFIG_LOADED, config);
+			    SiteContainer.addEventListener(AppEvent.MAP_LOADED, onMapLoad); 
+			    SiteContainer.addEventListener(AppEvent.LAYER_LOADED, onLayerLoad);
+			    SiteContainer.addEventListener(AppEvent.WIDGET_MENU_CLICKED, widgetMenuClicked);
+			    
+			}		    
+		    
+		    private function config(event:AppEvent):void
+		    {    	
+		    	configData = event.data as ConfigData;
+		    	 if (configData.configParams.hidewidgetscontrol == "true") this.visible = false;
+		    	
+		    	 predock = configData.configParams.collapseWidgets == "true";
+		    	 
+		    	
+		    }		    
+		
+		    private function onMapLoad(event:AppEvent):void
+		    {
+		        map = event.data as Map;
+		    }		    
+		    
+		    private function onLayerLoad(event:AppEvent):void
+		    {
+		        for (var i:Number = 0; i < configData.configWidgets.length; i++)
+		        { 
+		        	var id:Number  = configData.configWidgets[i].id;
+		        	var preload:String = configData.configWidgets[i].preload;
+		        	if ((preload == "true") || (preload == "maximized") || (preload == "minimized"))
+		        		preloadArray.push(id);
+		        }
+		        noPreloadWidgets = preloadArray.length;
+		        preloadWidgets();
+		    	
+		    }
+		    
+		    private function preloadWidgets():void
+		    {
+		        /*if (predock) {
+		        	predock = false;		       		
+		       		currentState = "collapsed";
+		        }*/
+		    	if (preloadArray.length)
+		    	{
+		    		var id:Number = preloadArray[0];
+		    		preloadArray.splice(0,1);
+		    		SiteContainer.dispatchEvent(new AppEvent(AppEvent.WIDGET_MENU_CLICKED, false, false, id));
+		    	}
+		    }		    
+		    
+		    private function widgetMenuClicked(event:AppEvent):void
+		    {
+		    	var id:Number = event.data as Number;
+		    	var preload:String = configData.configWidgets[id].preload;
+		    	var label:String = configData.configWidgets[id].label;
+		    	var icon:String = configData.configWidgets[id].icon;
+		    	var config:String = configData.configWidgets[id].config;
+		    	var url:String = configData.configWidgets[id].url;
+		    	var invisBtns:String = configData.configWidgets[id].invisbtns;
+		    	var invisBtnsArray:Array = [];
+		    	if(invisBtns)invisBtnsArray = invisBtns.split(",");
+		    	var baseRestServerUrl:String = configData.configWidgets[id].baserestserverurl;
+		    	var widgetResourceFile:String = configData.configWidgets[id].widgetresourcefile;
+		    	
+		    	//widget loaded    	
+		    	var widget:IBaseWidget;
+		    	if (widgetTable.containsKey(id))
+		    	{
+		    		widget = widgetTable.find(id) as IBaseWidget;
+		    		widget.setState("maximized");
+		    		var wObj:DisplayObject = widget as DisplayObject;
+		    		scrollToWidget(wObj);
+		    	}
+		    	else
+		    	{
+		    		//module loaded
+		    		if (moduleTable.containsKey(url))
+		    		{
+		    			var modInfo:IModuleInfo = moduleTable.find(url) as IModuleInfo;
+		    			widget = modInfo.factory.create() as IBaseWidget;
+		    			widget.setId(id);
+		    			widget.setTitle(label);
+		    			widget.setIcon(icon);
+		    			widget.setConfig(config);
+		    			widget.setConfigData(configData);
+		    			widget.setMap(map);
+		    			widget.setInvisBtns(invisBtnsArray);
+		    			widget.setBaseRestServerUrl(baseRestServerUrl);
+		    			widget.widgetResourceFile = widgetResourceFile;
+		    			
+		   				var widgetDO:DisplayObject = widget as DisplayObject;
+						widgetBox.addChild(widgetDO);
+		    			widgetTable.add(id, widget);
+		    			if (preload == "minimized")
+						{	
+							minimizeWidgetOnLoad([widget]);
+							//setTimeout(minimizeWidgetOnLoad, 500, [widget]);
+						}
+						if (preload == "maximized")
+						{
+							setTimeout(maximizeWidgetOnLoad, 800, [widget]);
+						}
+		    		}
+		    		else
+		    		{
+		    			loadWidget(id, url, preload);
+		    		}
+		    	}
+		    }		    
+		    
+		    private function loadWidget(id:Number, url:String, preload:String):void
+		    {
+		    	info = ModuleManager.getModule(url);
+		    	info.data = 
+		    	{
+			    	id: id,
+			    	preload: preload
+		    	};
+		    	info.addEventListener(ModuleEvent.READY, widgetReadyHandler);           
+				info.load();
+				this.cursorManager.setBusyCursor();   
+		    }		    
+		    
+		    private function widgetReadyHandler(event:ModuleEvent):void
+		    {
+		    	noPreloadWidgets--;
+		    	var info:IModuleInfo = event.module;
+		    	moduleTable.add(info.url, info);
+		    	var id:Number = info.data.id;
+		    	var preload:String  = info.data.preload;
+		    	var label:String = configData.configWidgets[id].label;
+		    	var icon:String = configData.configWidgets[id].icon;
+		    	var config:String = configData.configWidgets[id].config;
+		    	var invisBtns:String = configData.configWidgets[id].invisbtns;
+		    	var invisBtnsArray:Array = [];
+		    	if(invisBtns)invisBtnsArray = invisBtns.split(",");
+		    	var baseRestServerUrl:String = configData.configWidgets[id].baserestserverurl;		    	
+		    	var widgetResourceFile:String = configData.configWidgets[id].widgetresourcefile;
+		    	
+		    	var widget:IBaseWidget = info.factory.create() as IBaseWidget;
+		    	widget.setId(id);
+		    	widget.setTitle(label);
+		    	widget.setIcon(icon);
+		    	widget.setConfig(config);
+		    	widget.setConfigData(configData);
+		    	widget.setMap(map);
+		    	widget.setInvisBtns(invisBtnsArray);
+		    	widget.setBaseRestServerUrl(baseRestServerUrl);
+		    	widget.widgetResourceFile = widgetResourceFile;
+		    	widgetTable.add(id, widget);
+		    	var widgetDO:DisplayObject = widget as DisplayObject;
+		    	
+		    	//dispatch event when all widgets that should be preloaded are ready
+				if(noPreloadWidgets <=0) {						
+					
+					widgetDO.addEventListener(Event.ADDED_TO_STAGE,dispatchAllWidgetsLoaded);
+					//SiteContainer.dispatchEvent(new AppEvent(AppEvent.WIDGETS_PRELOADED, false, false,true));
+		    
+				}
+				
+				widgetBox.addChild(widgetDO);
+				this.cursorManager.removeBusyCursor();   
+				if (preload == "minimized")
+				{
+					minimizeWidgetOnLoad([widget]);
+					//setTimeout(minimizeWidgetOnLoad, 800, [widget]);
+				}
+				if (preload == "maximized"){
+					setTimeout(maximizeWidgetOnLoad, 800, [widget]);
+				}	
+		    }
+		    
+		    private function dispatchAllWidgetsLoaded(event:Event):void{
+		    	SiteContainer.dispatchEvent(new AppEvent(AppEvent.WIDGETS_PRELOADED, false, false,true));
+		    	DisplayObject(event.currentTarget).removeEventListener(Event.ADDED,dispatchAllWidgetsLoaded);
+		    	DisplayObject(event.currentTarget).removeEventListener(FlexEvent.CREATION_COMPLETE,dispatchAllWidgetsLoaded);
+		    }
+		    private function minimizeWidgetOnLoad(array:Array):void
+		    {
+		    	var widget:IBaseWidget = array[0];
+		    	widget.setState("minimized");
+		    }
+		    
+		    private function maximizeWidgetOnLoad(array:Array):void
+		    {		    	
+		    	var widget:IBaseWidget = array[0];
+		    	widget.setState("maximized");
+		    }		
+		
+			private function widgetError(event:ModuleEvent):void
+		    {
+		    	this.cursorManager.removeBusyCursor();   
+		    	Alert.show(event.errorText);
+		    }		    
+		    
+		    /**
+			 * SCROLL FUNCTIONS
+			 */
+			
+			private var scrollinterval:uint;
+			
+			private var scrolldist:Number;
+			
+			private var dist:Number;
+			
+			private var scrolldir:String;
+				
+			//start scroll
+			private function startScroll(dir:String):void
+			{
+				//clearInterval(scrollinterval);
+				scrollinterval = setInterval(scrollWidgetBox,30,[dir]);
+			}
+						
+			//stop scroll
+			private function stopScroll():void
+			{
+				clearInterval(scrollinterval);
+			}			
+			
+			//scroll widget box
+			public function scrollWidgetBox(dir:String):void
+			{
+				if (dir == "U")
+				{
+					widgetBox.verticalScrollPosition -= 10;
+				}else{
+					widgetBox.verticalScrollPosition += 10;
+				}
+			}			
+		    
+		    //child change handler           
+		    private function childChangeHandler(event:ChildExistenceChangedEvent): void
+		    {
+		    	preloadWidgets();
+		      	var wObj:DisplayObject = event.relatedObject;
+		    	scrollToWidget(wObj);
+		    }		
+		
+			private function scrollToWidget(wObj:DisplayObject):void
+			{
+				setTimeout(scrollToWidgetStart, 1000, [wObj]);
+			}			
+			
+			private function scrollToWidgetStart(params:Array):void
+			{
+				var wObj:DisplayObject = params[0];
+				var boxRect:Rectangle = widgetBox.getRect(widgetBox);
+				var wRect:Rectangle = wObj.getRect(widgetBox);
+				var wTop:Number = wRect.y;
+				var wBottom:Number = wTop + wRect.height;
+				if ((wTop < 0) || (wBottom > widgetBox.height))
+				{
+					dist = 0;
+					if (wTop < 0)
+					{
+						scrolldist = 0 - wTop + 10;
+						scrolldir = "U";
+					}
+					else
+					{
+						scrolldist = wBottom -widgetBox.height + 10;
+						scrolldir = "D";
+					}
+					clearInterval(scrollinterval);
+					scrollinterval = setInterval(scrollToWidgetAction, 30, params);
+				}
+			}			
+			
+			private function scrollToWidgetAction(params:Array):void
+			{
+				if (dist < scrolldist)
+				{
+					if (scrolldir == "U")
+					{
+						widgetBox.verticalScrollPosition -= 10;
+					}
+					else
+					{
+						widgetBox.verticalScrollPosition += 10;
+					}
+					dist += 10;
+				}
+				else
+				{
+					clearInterval(scrollinterval);
+				}		
+			}
+			public function getLoadedWidgets():Hashtable{		    	
+		    	return widgetTable;
+		    }
+		[Embed(source='assets/fonts/arial.ttf',fontName='embedArialFont',mimeType='application/x-font')] 
+    	 private var fontArial:Class; 
+		]]>
+		
+		
+	</mx:Script> 
+
+
+	<mx:states>
+		<mx:State name="collapsed">
+			<mx:SetProperty target="{widgetBox}" name="x" value="{width}"/>
+			<mx:SetProperty target="{btnCollapse}" name="visible" value="false"/>
+			<mx:SetProperty target="{btnCollapse}" name="includeInLayout" value="false"/>
+			<mx:SetProperty target="{btnExpand}" name="visible" value="true"/>
+			<mx:SetProperty target="{btnExpand}" name="includeInLayout" value="true"/>
+			<mx:SetProperty target="{btnUp}" name="visible" value="false"/>
+			<mx:SetProperty target="{btnDown}" name="visible" value="false"/>
+		</mx:State>
+	</mx:states>
+	
+	
+	<mx:transitions>
+		<mx:Transition id="trans" fromState="*" toState="*">
+			<mx:Move target="{widgetBox}" duration="500" />
+		</mx:Transition>
+	</mx:transitions>
+ 
+	
+	<mx:VBox id="widgetBox" width="100%" height="{height}" horizontalAlign="right" paddingRight="30" verticalScrollPolicy="off" horizontalScrollPolicy="off" childAdd="childChangeHandler(event)"/>
+	<mx:VBox verticalGap="3" right="3" y="20" width="24" height="74" styleName="BannerCanvas" verticalAlign="middle" horizontalAlign="center">
+		<mx:Image id="btnCollapse" alpha="0.9" source="com/esri/solutions/flexviewer/assets/images/widget/w_collapse.png" click="{currentState='collapsed'}" useHandCursor="true" buttonMode="true"/>
+		<mx:Image id="btnExpand" alpha="0.9" source="com/esri/solutions/flexviewer/assets/images/widget/w_expand.png"  click="{currentState=''}" visible="false" includeInLayout="false" useHandCursor="true" buttonMode="true"/>
+		<mx:Image id="btnUp" alpha="0.9" source="com/esri/solutions/flexviewer/assets/images/widget/w_up.png" mouseDown="startScroll('U')" mouseUp="stopScroll()" useHandCursor="true" buttonMode="true"/>
+		<mx:Image id="btnDown" alpha="0.9" source="com/esri/solutions/flexviewer/assets/images/widget/w_down.png" mouseDown="startScroll('D')" mouseUp="stopScroll()" useHandCursor="true" buttonMode="true"/>
+		<!--mx:HBox includeInLayout="false" ><mx:Spacer width="17" /><mx:Label id="lbCollapse" text="options"  visible="{btnExpand.visible}" rotation="-90" styleName="arialembed" x="10" y="50"/></mx:HBox-->
+	</mx:VBox>
+	
+</mx:Canvas>
