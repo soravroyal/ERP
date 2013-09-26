@@ -1,0 +1,55 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
+    EnableViewState="true" CodeFile="MasterSearchPage.master.cs" Inherits="MasterSearchPage" %>
+    
+<%@ Register TagPrefix="nfp" TagName="NoFlashPlayer" Src="~/UserControls/Common/ucNoFlashPlayer.ascx" %>
+
+<asp:Content ID="infoarea" EnableViewState="true" ContentPlaceHolderID="ContentInfoArea"
+    runat="server">
+    <%--Java Script functions --%>
+    <script type="text/javasript" src="Charts/charts.js"></script>
+    <script type="text/javascript" src="Scripts/jsValidation.js"></script>
+
+    <%--Title and subtitle--%>
+    <div class="info_box_search">
+        <h1>
+            <asp:Literal ID="lbHeadline" Text="" runat="server" />
+        </h1>
+        <p>
+            <asp:ContentPlaceHolder ID="ContentSubHeadline" runat="server" />
+        </p>
+    </div>
+    <%--Map--%>
+    <div id="divMap" class="map_box" runat="server">
+        
+        <asp:Panel ID="pnExpand" runat="server">
+          <div id="expand_btn">
+              <asp:ImageButton ID="btnExpand" ImageUrl="~/images/i_maximize.gif" runat="server"  AlternateText="" CssClass="expandbutton" ImageAlign="Right" Visible="true" ToolTip="<%$ Resources:Common,ShowExpandedMap %>" />
+          </div>
+        </asp:Panel>                    
+     
+        <asp:Panel ID="pnlResultMap" runat="server" Visible="true">
+            <div id="resultMapId" visible="true">
+            <nfp:NoFlashPlayer ID="NoFlashPlayer" runat="server" />
+            </div>
+        </asp:Panel>
+    </div>
+    
+    <asp:UpdatePanel ID="upSearchControls" runat="server">
+        <ContentTemplate>
+            <%--Search options--%>
+            <div id="searchForm" class="search_form" runat="server">
+                <asp:ContentPlaceHolder ID="ContentSearchForm" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="upResultArea" runat="server">
+        <ContentTemplate>
+            <%--Result area--%>
+            <div id="resultArea" class="layout_resultArea" visible="false" runat="server">
+                <asp:ContentPlaceHolder ID="ContentResultArea" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    
+</asp:Content>

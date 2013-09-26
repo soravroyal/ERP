@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<labels>
+  <label id="threshold">Threshold for releases</label>
+  <label id="air">to air kg/year</label>
+  <label id="water">to water kg/year</label>
+  <label id="land">to land kg/year</label> 
+  <label id="Search">Search</label>
+  <label id="All">All</label>
+  <label id="pollutanthead">Pollutant Descriptions</label>
+  <label id="pollutantheadnotes">This page will display information and the reporting thresholds relating to the 91 pollutants covered under E-PRTR (reporting year 2007 and followings). You can search for a pollutant by pollutant group or by selecting a specific pollutant.</label>
+  <label id="pollutantheadlink">http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2000:192:0036:0043:</label>
+  <label id="pollutantheadlink2">:PDF#page=3</label>
+  <label id="pollutantheadlinkLabel"> Annex A1 of EPER Decision 2000/479/EC</label>
+  <label id="pollutantheadnotes2">For information and reporting thresholds relating to the 50 pollutants covered under EPER (reporting year 2001 and 2004), please refer to</label>
+  <label id="pollutantheadnotes3">Almost all the EPER pollutants correspond to the E-PRTR pollutants except for BTEX and PAHs. The CO<sub>2</sub> emissions for EPER and E-PRTR are reported differently (EPER does exclude emissions from biomass).</label>
+  <label id="Group">Pollutant Group</label>
+  <label id="Pollutant">Pollutant</label>
+  <label id="PollutantId">E-PRTR Pollutant No</label>
+  <label id="Contents">Contents</label>
+  <label id="synonyms">Synonyms or other commercial names</label>
+  <label id="physical">Physical Properties</label>
+  <label id="IUPAC">IUPAC Name</label>
+  <label id="IUPACTooltip">tooltip for IUPAC Name:</label>
+  <label id="smiles">SMILES tooltip;</label>
+  <label id="CASNumber">CAS Number</label>
+  <label id="CASToolTip">The CAS number is a unique reference for a chemical provides by the Chemical Abstracts Service.</label>
+  <label id="ECNumber">EC Number</label>
+  <label id="ECToolTip">The EC number is a unique reference number for a chemical that is commercially available within the EU.</label>
+  <label id="Formula">Formula</label>
+  <label id="Classification">Classification</label>
+  <label id="ClassificationTooltip">The classification of a chemical under the Dangerous Substances Directive (67/548/EEC)</label>
+  <label id="description">Description</label>
+  <label id="mainuses">Main Uses</label>
+  <label id="print">Print</label>
+  <label id="PollutantInfo">Pollutant Info</label>
+  <label id="Pollutants">Pollutants</label>
+  <label id="Name">Name</label>
+  <label id="structure">Structure</label>
+  <label id="provprtr">Provisions under E-PRTR Regulation</label>
+  <label id="provprtrNote">* - indicates that the parameter and medium in question do not trigger a reporting requirement.</label>
+  <label id="provprtrNote2">BTEX - sum parameter of benzene, toluene, ethyl benzene, xylenes.</label>
+  <label id="chemspider">Chemspider id</label>
+  <label id="noData">No Data Available</label>
+  <label id="isostandard">Standard</label>
+  <label id="isotitle">Title</label>
+  <label id="isotarget">Target</label>
+  <label id="isouncert">Uncertainty</label>
+  <label id="provOverview">Overview</label>
+  <label id="provReportGeneric">General Reporting</label>
+  <label id="provReportSpecific">Specific Reporting</label>
+
+  <!--Possible Alternations-->
+
+  <!--Altered Labels-->
+  <label id="Summary">General information</label>
+  <label id="provisions">Other relevant reporting requirements</label>
+  <label id="rands">Risk and Safety Phrases (R&amp;S)</label>
+  <label id="clp">Hazard Class</label>
+  <label id="ghs">Hazard Statements</label>
+  <label id="clpghs">Classification &amp; Labelling</label>
+  <label id="clpex">The Regulation (EC) No 1272/2008 establishes a standard classification and labelling system for substances distinguishing a) Hazard Class and b) Hazard Statements</label>
+  <label id="provother">Overview of relevant reporting requirements for the selected pollutant or compound set by European Regulations or Multilateral Environmental Agreements (MEAs).</label>
+  <label id="mainmethodsrelease">Where do the releases originate?</label>
+  <label id="proviso">Methods and uncertainty</label>
+  <label id="impacts">Human Health &amp; Environmental Hazard Assessment</label>
+  <label id="randsex">Risk and Safety phrases describe the risks of a substance and safety measures that should be taken.</label>
+
+  <!--New Labels-->
+  <label id="eprtrProvisions">Pollutant thresholds</label>
+  <label id="measurement">Measurement &amp; calculation methods</label>
+  <label id="hazards">Hazards and other technical characteristics</label>
+  <label id="healthAffects">How do the releases affect you and your environment?</label>
+  <label id="noRandS">There are no Risk and Safety phrases assigned.</label>
+  <label id="noClp">There is no classification and labelling assigned.</label>
+
+  <label id="isoFootNoteTitle">Footnotes</label>
+  <label id="isoFootNote1">(*) indicates that performance information is included in the standard but not in a suitable form for inclusion.</label>
+  <label id="isoFootNote2">(-) Indicates that no information is available.</label>
+  <label id="isoFootNote3">Notes:  This table is based on the following published information: the 2003 General Principles of Monitoring BREF </label>
+  <label id="isoFootNoteLink1">http://eippcb.jrc.es/reference/</label>
+  <label id="isoFootNote4">;  CEN and ISO websites and those of their relevant Technical Committees (TCs) for details and publication dates ( i.e. CEN TC230 – water analysis and CEN TC 264 – air quality, ISO TC 147 – water quality and ISO TC 146 – air quality); and current UK guidance on monitoring for air and water for IPPC Directive installations (Environment Agency documents M2 Version 6 - January 2010  and M18 Version 2 - April 2009 covering air and water respectively) available on </label>
+  <label id="isoFootNoteLink2">http://www.environment-agency.gov.uk/business/regulation/31831.aspx </label>
+  <label id="isoFootNote5">).  Standard numbers have been checked against CEN and ISO websites and, to best of our knowledge, are both available and consistent with EN or ISO publication dates.  </label>
+  <label id="isoFootNote6">Information related to uncertainty is included where it is available, in a suitable form, in the standard.  The information given for Stationary source emissions generally refers to sampling and analysis, that for Water quality data refers to the coefficient of variation of reproducibility - CVR - of the analysis alone.   CVR is the reproducibility standard deviation/mean concentration, expressed as a %, this has been expressed to one significant decimal place %. Wherever possible we have taken the sample matrix most similar to the industrial discharges to be reported under the EPRTR Regulation.   Where the Standard allows a choice of technique we have taken the 'worst' case - on the basis that if an operator reports a discharge as having been measured in accordance with the Standard and not necessarily a particular variation of it.</label>
+
+  <!--Labels Remove?-->
+  <label id="clpLinkText">Regulation (EC) No 1272/2008, OJ L 353</label>
+  <label id="clpLinkUrl">http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2008:353:0001:1355:</label>
+  <label id="clpLinkUrl2">:PDF</label>
+  <label id="ghsex">Hazard descriptions from the CLP Regulations</label>
+
+</labels>
