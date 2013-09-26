@@ -1,0 +1,58 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xliff_in", "xliff_in.csproj", "{54750AAC-4984-A14C-A338-AB1C7D5FD0F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPRTRcms", "..\EPRTRcms\EPRTRcms.csproj", "{13B27DCC-DE98-7347-978C-A24630301AC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xliff_core_1_2_transitional", "..\xliff_core_1_2_transitional\xliff_core_1_2_transitional.csproj", "{8DA15FCC-C327-5648-B312-7F89E728D1A4}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltovaFunctions", "..\AltovaFunctions\AltovaFunctions.csproj", "{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltovaDB", "..\AltovaDB\AltovaDB.csproj", "{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}"
+EndProject
+
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AltovaXML", "..\AltovaXML\AltovaXML.csproj", "{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altova", "..\Altova\Altova.csproj", "{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54750AAC-4984-A14C-A338-AB1C7D5FD0F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54750AAC-4984-A14C-A338-AB1C7D5FD0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54750AAC-4984-A14C-A338-AB1C7D5FD0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54750AAC-4984-A14C-A338-AB1C7D5FD0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13B27DCC-DE98-7347-978C-A24630301AC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13B27DCC-DE98-7347-978C-A24630301AC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13B27DCC-DE98-7347-978C-A24630301AC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13B27DCC-DE98-7347-978C-A24630301AC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA15FCC-C327-5648-B312-7F89E728D1A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA15FCC-C327-5648-B312-7F89E728D1A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA15FCC-C327-5648-B312-7F89E728D1A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA15FCC-C327-5648-B312-7F89E728D1A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56AA56BB-A330-4EE5-A3D1-7FDD0963C6D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A86C9B-FFAC-468F-9AF6-6AAA2012C607}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03AAA791-EC2D-4A90-ABBF-45337E52DFD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1E2A79A-12CC-4107-B1BF-E5C58E642B92}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
