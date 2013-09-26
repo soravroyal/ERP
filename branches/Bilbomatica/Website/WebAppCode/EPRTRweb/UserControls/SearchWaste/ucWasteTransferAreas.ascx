@@ -14,14 +14,14 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><div class="ColLink"></div></th>                                                    
-            <th><div class="WTcolName"><asp:Label ID="lbTransfers" Text="<%$ Resources:WasteTransfers,TransferPerCountry%>" runat="server"></asp:Label></div></th>
-            <th><div class="WTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
-            <th><div class="WTcolTotal"><asp:Label ID="lnTotal" Text="" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderHWIC" class="WTcolHWICheader" runat="server"><asp:Label ID="lbHazWithinCountry" Text="<%$ Resources:Common,HazardousDomestic %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderHWOC" class="WTcolHWOCheader" runat="server"><asp:Label ID="lbHazTransboundary" Text="<%$ Resources:Common,HazardousTransboundary %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderHWTotal" class="WTcolHWTotalheader" runat="server"><asp:Label ID="lbHazTotal" Text="<%$ Resources:Common,HazardousTotal %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderNonHW" class="WTcolNONHWheader" runat="server"><asp:Label ID="lbNonHazTotal" Text="<%$ Resources:Common, NonHazardousTotal %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="ColLink"></div></th>                                                    
+            <th scope="col"><div class="WTcolName"><asp:Label ID="lbTransfers" Text="<%$ Resources:WasteTransfers,TransferPerCountry%>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="WTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="WTcolTotal"><asp:Label ID="lnTotal" Text="" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderHWIC" class="WTcolHWICheader" runat="server"><asp:Label ID="lbHazWithinCountry" Text="<%$ Resources:Common,HazardousDomestic %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderHWOC" class="WTcolHWOCheader" runat="server"><asp:Label ID="lbHazTransboundary" Text="<%$ Resources:Common,HazardousTransboundary %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderHWTotal" class="WTcolHWTotalheader" runat="server"><asp:Label ID="lbHazTotal" Text="<%$ Resources:Common,HazardousTotal %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderNonHW" class="WTcolNONHWheader" runat="server"><asp:Label ID="lbNonHazTotal" Text="<%$ Resources:Common, NonHazardousTotal %>" runat="server"></asp:Label></div></th>
           </tr>
          </thead>
          <tbody>

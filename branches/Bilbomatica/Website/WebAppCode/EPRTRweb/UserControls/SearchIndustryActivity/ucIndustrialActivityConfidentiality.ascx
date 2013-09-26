@@ -21,11 +21,11 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbBlank" Text="" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbBlank" Text="" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></th>
           </tr>
          </thead>
          <tbody>
@@ -73,11 +73,11 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilitiesAir" Text="<%$ Resources:Facility,FacilitiesAir %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilitiesWater" Text="<%$ Resources:Facility,FacilitiesWater %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilitiesSoil" Text="<%$ Resources:Facility,FacilitiesSoil %>" runat="server"></asp:Label></th>
           </tr>
          </thead>
          <tbody>
@@ -116,9 +116,9 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbBlank" Text="" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbBlank" Text="" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
           </tr>
          </thead>
          <tbody>
@@ -158,9 +158,9 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></th>
-            <th><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbPollutantGroup" Text="<%$ Resources:Common,PollutantGroup %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></th>
+            <th scope="col"><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></th>
           </tr>
          </thead>
          <tbody>
@@ -198,10 +198,10 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><div class="WTcolConfName"><asp:Label ID="lbEmpty" Text="" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfNonHW"><asp:Label ID="lbNonHazardous" Text="<%$ Resources:LOV_WASTETYPE, NON-HW %>" runat="server"></asp:Label><br/> <asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfHWIC"><asp:Label ID="lbHazardousIC" Text="<%$ Resources:LOV_WASTETYPE, HWIC %>" runat="server"></asp:Label><br/> <asp:Label ID="Label1" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfHWOC"><asp:Label ID="lbHazardousOC" Text="<%$ Resources:LOV_WASTETYPE, HWOC %>" runat="server"></asp:Label><br/> <asp:Label ID="Label2" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfName"><asp:Label ID="lbEmpty" Text="" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfNonHW"><asp:Label ID="lbNonHazardous" Text="<%$ Resources:LOV_WASTETYPE, NON-HW %>" runat="server"></asp:Label><br/> <asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfHWIC"><asp:Label ID="lbHazardousIC" Text="<%$ Resources:LOV_WASTETYPE, HWIC %>" runat="server"></asp:Label><br/> <asp:Label ID="Label1" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfHWOC"><asp:Label ID="lbHazardousOC" Text="<%$ Resources:LOV_WASTETYPE, HWOC %>" runat="server"></asp:Label><br/> <asp:Label ID="Label2" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
         </tr>
        </thead>
        
@@ -242,9 +242,9 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><div class="WTcolConfWasteType"><asp:Label ID="lbWasteType" Text="<%$ Resources:Common,WasteType %>" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfReason"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
-          <th><div class="WTcolConfFacilities" ><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfWasteType"><asp:Label ID="lbWasteType" Text="<%$ Resources:Common,WasteType %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfReason"><asp:Label ID="lbReason" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="WTcolConfFacilities" ><asp:Label ID="lbFacilities" Text="<%$ Resources:Facility,Facilities %>" runat="server"></asp:Label></div></th>
         </tr>
        </thead>
        

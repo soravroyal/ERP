@@ -16,12 +16,12 @@
          <table>
            <thead>
             <tr class="generalListStyle_headerRow">
-              <th><div class="WTcolWasteType"><asp:Label ID="lbWasteTransfers" Text="<%$ Resources:Common,WasteTransfers %>" runat="server"></asp:Label></div></th>
-              <th><div class="WTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
-              <th><div class="WTcolQ"><asp:Label ID="lnRecovery" Text="<%$ Resources:Common,Recovery %>" runat="server"></asp:Label></div></th>
-              <th><div class="WTcolQ"><asp:Label ID="lbDisposal" Text="<%$ Resources:Common,Disposal %>" runat="server"></asp:Label></div></th>
-              <th><div class="WTcolQ"><asp:Label ID="lbUnspec" Text="<%$ Resources:Common,Unspecified %>" runat="server"></asp:Label></div></th>
-              <th><div class="WTcolQ"><asp:Label ID="lbTotal" Text="<%$ Resources:Common,TotalQuantity %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="WTcolWasteType"><asp:Label ID="lbWasteTransfers" Text="<%$ Resources:Common,WasteTransfers %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="WTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="WTcolQ"><asp:Label ID="lnRecovery" Text="<%$ Resources:Common,Recovery %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="WTcolQ"><asp:Label ID="lbDisposal" Text="<%$ Resources:Common,Disposal %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="WTcolQ"><asp:Label ID="lbUnspec" Text="<%$ Resources:Common,Unspecified %>" runat="server"></asp:Label></div></th>
+              <th scope="col"><div class="WTcolQ"><asp:Label ID="lbTotal" Text="<%$ Resources:Common,TotalQuantity %>" runat="server"></asp:Label></div></th>
             </tr>
            </thead>
            <tbody>

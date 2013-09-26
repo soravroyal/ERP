@@ -9,12 +9,12 @@
        <table width="100%">
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><div class="AOcolNameExpanding"><asp:Label ID="lbTransfers" Text="<%$ Resources:WasteTransfers,TransferPerIndustrialActivity %>" runat="server"></asp:Label></div></th>
-            <th><div class="AOcolLegend"><asp:Label ID="lnTotal" Text="" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderHWIC" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbHazWithinCountry" Text="<%$ Resources:Common,HazardousDomestic %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderHWOC" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbHazTransboundary" Text="<%$ Resources:Common,HazardousTransboundary %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderHWTotal" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbHazTotal" Text="<%$ Resources:Common,HazardousTotal %>" runat="server"></asp:Label></div></th>
-            <th><div id="divHeaderNonHW" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbNonHazTotal" Text="<%$ Resources:Common, NonHazardousTotal %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="AOcolNameExpanding"><asp:Label ID="lbTransfers" Text="<%$ Resources:WasteTransfers,TransferPerIndustrialActivity %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="AOcolLegend"><asp:Label ID="lnTotal" Text="" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderHWIC" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbHazWithinCountry" Text="<%$ Resources:Common,HazardousDomestic %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderHWOC" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbHazTransboundary" Text="<%$ Resources:Common,HazardousTransboundary %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderHWTotal" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbHazTotal" Text="<%$ Resources:Common,HazardousTotal %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div id="divHeaderNonHW" class="AOcolWasteHeader" runat="server"><asp:Label ID="lbNonHazTotal" Text="<%$ Resources:Common, NonHazardousTotal %>" runat="server"></asp:Label></div></th>
           </tr>
          </thead>
          <tbody>

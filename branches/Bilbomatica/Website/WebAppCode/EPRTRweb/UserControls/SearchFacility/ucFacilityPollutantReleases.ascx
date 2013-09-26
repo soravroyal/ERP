@@ -12,13 +12,13 @@
                     <thead>
                         <tr class="generalListStyle_headerRow">
                           <th></th>
-                          <th><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label></div></th>
-                          <th><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,TotalQuantity %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerAccidental"> <asp:Label ID="lbAccidental" Text="<%$ Resources:Pollutant,ReleasesAccidental %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerAccidentalPercent"><asp:Label ID="lbAccidentalPercent" Text="<%$ Resources:Pollutant,ReleasesAccidentalPercent %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$ Resources:Pollutant,MethodUsed %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label></div></th>
+                          <th scope="col"><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,TotalQuantity %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerAccidental"> <asp:Label ID="lbAccidental" Text="<%$ Resources:Pollutant,ReleasesAccidental %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerAccidentalPercent"><asp:Label ID="lbAccidentalPercent" Text="<%$ Resources:Pollutant,ReleasesAccidentalPercent %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$ Resources:Pollutant,MethodUsed %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"></asp:Label> </div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,13 +61,13 @@
                     <thead>
                         <tr class="generalListStyle_headerRow">
                           <th></th>
-                          <th><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,TotalQuantity %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerAccidental"> <asp:Label ID="lbAccidental" Text="<%$ Resources:Pollutant,ReleasesAccidental %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerAccidentalPercent"><asp:Label ID="lbAccidentalPercent" Text="<%$ Resources:Pollutant,ReleasesAccidentalPercent %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$ Resources:Pollutant,MethodUsed %>" runat="server"></asp:Label> </div></th>
-                          <th><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,TotalQuantity %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerAccidental"> <asp:Label ID="lbAccidental" Text="<%$ Resources:Pollutant,ReleasesAccidental %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerAccidentalPercent"><asp:Label ID="lbAccidentalPercent" Text="<%$ Resources:Pollutant,ReleasesAccidentalPercent %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$ Resources:Pollutant,MethodUsed %>" runat="server"></asp:Label> </div></th>
+                          <th scope="col"><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"></asp:Label> </div></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,13 +110,13 @@
                     <thead>
                         <tr class="generalListStyle_headerRow">
                             <th></th>
-                            <th><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label></div></th>
-                            <th><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,TotalQuantity %>" runat="server"></asp:Label> </div></th>
-                            <th><div id="headerAccidental"> <asp:Label ID="lbAccidental" Text="<%$ Resources:Pollutant,ReleasesAccidental %>" runat="server"></asp:Label> </div></th>
-                            <th><div id="headerAccidentalPercent"><asp:Label ID="lbAccidentalPercent" Text="<%$ Resources:Pollutant,ReleasesAccidentalPercent %>" runat="server"></asp:Label> </div></th>
-                            <th><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
-                            <th><div id="headerMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$ Resources:Pollutant,MethodUsed %>" runat="server"></asp:Label> </div></th>
-                            <th><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"></asp:Label> </div></th>
+                            <th scope="col"><div id="headerSpecialPollutantName"><asp:Label ID="lbReleasesTo" Text="<%$ Resources:Pollutant,PollutantName %>" runat="server"></asp:Label></div></th>
+                            <th scope="col"><div id="headerQuantityTotal"> <asp:Label ID="lbQuantity" Text="<%$ Resources:Pollutant,TotalQuantity %>" runat="server"></asp:Label> </div></th>
+                            <th scope="col"><div id="headerAccidental"> <asp:Label ID="lbAccidental" Text="<%$ Resources:Pollutant,ReleasesAccidental %>" runat="server"></asp:Label> </div></th>
+                            <th scope="col"><div id="headerAccidentalPercent"><asp:Label ID="lbAccidentalPercent" Text="<%$ Resources:Pollutant,ReleasesAccidentalPercent %>" runat="server"></asp:Label> </div></th>
+                            <th scope="col"><div id="headerMethod"><asp:Label ID="lbMethod" Text="<%$ Resources:Pollutant,Method %>" runat="server"></asp:Label> </div></th>
+                            <th scope="col"><div id="headerMethodUsed"><asp:Label ID="lbMethodUsed" Text="<%$ Resources:Pollutant,MethodUsed %>" runat="server"></asp:Label> </div></th>
+                            <th scope="col"><div id="headerReason"><asp:Label ID="lbReason" Text="<%$ Resources:Pollutant,Confidentiality%>" runat="server"></asp:Label> </div></th>
                         </tr>
                     </thead>
                     <tbody>

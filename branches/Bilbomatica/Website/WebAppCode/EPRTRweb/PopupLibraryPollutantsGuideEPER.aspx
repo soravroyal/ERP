@@ -5,8 +5,8 @@
 
     <%--Title and subtitle--%>
     <div class="StaticPageStyle">
-        <p>
+        <div>
             <asp:Literal ID="PageContent" Text="" runat="server"></asp:Literal>
-        </p>
+        </div>
     </div>
 </asp:Content>

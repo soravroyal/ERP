@@ -22,12 +22,12 @@
                     <table>
                        <thead>
                         <tr class="generalListStyle_headerRow">
-                          <th><div class="WTcolWasteType"><asp:Label ID="lbWasteTransfers" Text="<%$ Resources:Common,WasteTransfers %>" runat="server"></asp:Label></div></th>
-                          <th><div class="WTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
-                          <th id="divHeaderRecovery" runat="server"><div class="WTcolQ" runat="server"><asp:Label ID="lnRecovery" Text="<%$ Resources:Common,Recovery %>" runat="server"></asp:Label></div></th>
-                          <th id="divHeaderDisposal" runat="server"><div class="WTcolQ" runat="server"><asp:Label ID="lbDisposal" Text="<%$ Resources:Common,Disposal %>" runat="server"></asp:Label></div></th>
-                          <th id="divHeaderUnspecified" runat="server"><div class="WTcolQ" runat="server"><asp:Label ID="lbUnspecified" Text="<%$ Resources:Common,Unspecified %>" runat="server"></asp:Label></div></th>
-                          <th id="divHeaderTotal" runat="server"><div class="WTcolQ"><asp:Label ID="lbTotal" Text="<%$ Resources:Common,TotalQuantity %>" runat="server"></asp:Label></div></th>
+                          <th scope="col"><div class="WTcolWasteType"><asp:Label ID="lbWasteTransfers" Text="<%$ Resources:Common,WasteTransfers %>" runat="server"></asp:Label></div></th>
+                          <th scope="col"><div class="WTcolFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
+                          <th scope="col" id="divHeaderRecovery" runat="server"><div class="WTcolQ" runat="server"><asp:Label ID="lnRecovery" Text="<%$ Resources:Common,Recovery %>" runat="server"></asp:Label></div></th>
+                          <th scope="col" id="divHeaderDisposal" runat="server"><div class="WTcolQ" runat="server"><asp:Label ID="lbDisposal" Text="<%$ Resources:Common,Disposal %>" runat="server"></asp:Label></div></th>
+                          <th scope="col" id="divHeaderUnspecified" runat="server"><div class="WTcolQ" runat="server"><asp:Label ID="lbUnspecified" Text="<%$ Resources:Common,Unspecified %>" runat="server"></asp:Label></div></th>
+                          <th scope="col" id="divHeaderTotal" runat="server"><div class="WTcolQ"><asp:Label ID="lbTotal" Text="<%$ Resources:Common,TotalQuantity %>" runat="server"></asp:Label></div></th>
                         </tr>
                        </thead>
                        <tbody>

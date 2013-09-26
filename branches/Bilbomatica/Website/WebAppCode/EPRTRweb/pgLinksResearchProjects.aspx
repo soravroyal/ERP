@@ -8,8 +8,8 @@
         <h1>
             <asp:Literal ID="PageHeader" Text="<%$ Resources:Static, LinksResearchProjectsPageHeader%>" runat="server" />
         </h1>
-        <p>
+        <div>
             <asp:Literal ID="PageContent" Text="" Mode="Transform" runat="server" />
-        </p>
+        </div>
     </div>
 </asp:Content>

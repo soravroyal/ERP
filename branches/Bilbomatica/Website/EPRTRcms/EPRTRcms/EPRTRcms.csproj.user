@@ -9,12 +9,10 @@
           <StartPageUrl>TextEditPage.aspx</StartPageUrl>
           <StartAction>SpecificPage</StartAction>
           <AspNetDebugging>True</AspNetDebugging>
-          <SilverlightDebugging>False</SilverlightDebugging>
           <NativeDebugging>False</NativeDebugging>
           <SQLDebugging>False</SQLDebugging>
           <PublishCopyOption>RunFiles</PublishCopyOption>
-          <PublishTargetLocation>
-          </PublishTargetLocation>
+          <PublishTargetLocation>C:\Inetpub\wwwroot\EPRTR_CMS_Publicacion\</PublishTargetLocation>
           <PublishDeleteAllFiles>False</PublishDeleteAllFiles>
           <PublishCopyAppData>True</PublishCopyAppData>
           <ExternalProgram>

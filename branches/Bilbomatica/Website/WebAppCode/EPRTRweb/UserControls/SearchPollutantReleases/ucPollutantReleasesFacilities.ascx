@@ -14,7 +14,7 @@
             <table>
                 <thead>
                     <tr class="generalListStyle_headerRow">
-                        <th>
+                        <th scope="col">
                             <div id="headerFacilityPR">
                                 <asp:LinkButton ID="lnkFacility" Text="<%$ Resources:Facility,FacilityName %>" CommandName="Sort"
                                     CommandArgument="FacilityName" runat="server"></asp:LinkButton>
@@ -22,7 +22,7 @@
                                 <asp:Image ID="downFacility" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerQuantityTotal">
                                 <asp:LinkButton ID="lnkQuantity" Text="<%$ Resources:Common,Quantity %>" CommandName="Sort"
                                     CommandArgument="QuantityTotal" runat="server"></asp:LinkButton>
@@ -30,7 +30,7 @@
                                 <asp:Image ID="downQuantity" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerAccidental">
                                 <asp:LinkButton ID="lnkAccidental" Text="<%$ Resources:Pollutant,AccidentalQuantity %>"
                                     CommandName="Sort" CommandArgument="QuantityAccidental" runat="server"></asp:LinkButton>
@@ -39,7 +39,7 @@
                                     Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerAccidentalPercent">
                                 <asp:LinkButton ID="lnkAccidentalPercentage" Text="<%$ Resources:Pollutant,AccidentalPercentage %>"
                                     CommandName="Sort" CommandArgument="PercentAccidental" runat="server"></asp:LinkButton>
@@ -49,7 +49,7 @@
                                     Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerActivityCode">
                                 <asp:LinkButton ID="lnkActivity" Text="<%$ Resources:Facility,Activity %>" CommandName="Sort"
                                     CommandArgument="IAActivityCode" runat="server"></asp:LinkButton>
@@ -57,7 +57,7 @@
                                 <asp:Image ID="downActivity" runat="server" ImageUrl="~/images/arrow_down.gif" Visible="false" />
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerCountryCode">
                                 <asp:LinkButton ID="lnkCountry" Text="<%$ Resources:Common,Country%>" CommandName="Sort"
                                     CommandArgument="CountryCode" runat="server"></asp:LinkButton>

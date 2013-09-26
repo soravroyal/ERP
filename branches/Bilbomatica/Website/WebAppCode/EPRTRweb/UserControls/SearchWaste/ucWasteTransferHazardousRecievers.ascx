@@ -10,32 +10,32 @@
                 <thead>
                     <%--Text="<%$ Resources:Facility,FacilityName %>"--%>
                     <tr class="generalListStyle_headerRow">
-                        <th>
+                        <th scope="col">
                             <div id="headerWasteReceivingCountry">
                                 <asp:Label ID="_lnkReceivingCountry" Text="<%$ Resources:Common,Country %>" runat="server"></asp:Label>
                             </div>
                         </th>
-                        <th>
+                        <th scope="col">
                             <div id="headerWasteNFac">
                                 <asp:Label ID="_lnkNumOfFacilities" Text="<%$ Resources:Common,Facilities %>" runat="server"></asp:Label>
                             </div>
                         </th>
-                        <th id="divHeaderWasteQT" runat="server">
+                        <th scope="col" id="divHeaderWasteQT" runat="server">
                             <div class="headerWasteQT"">
                                 <asp:Label ID="_lnkQuantityTotal" Text="<%$ Resources:Common,Total %>" runat="server"></asp:Label>
                             </div>
                         </th>
-                        <th id="divHeaderWasteQR" runat="server">
+                        <th scope="col" id="divHeaderWasteQR" runat="server">
                             <div class="headerWasteQR">
                                 <asp:Label ID="_lnkQuantityRecovery" Text="<%$ Resources:Common,TreatmentRecovery %>" runat="server"></asp:Label>
                             </div>
                         </th>
-                        <th id="divHeaderWasteQD" runat="server">
+                        <th scope="col" id="divHeaderWasteQD" runat="server">
                             <div class="headerWasteQD" >
                                 <asp:Label ID="_lnkQuantityDisposal" Text="<%$ Resources:Common,TreatmentDisposal %>" runat="server"></asp:Label>
                             </div>
                         </th>
-                        <th id="divHeaderWasteU" runat="server">
+                        <th scope="col" id="divHeaderWasteU" runat="server">
                             <div class="headerWasteU">
                                 <asp:Label ID="_lnkQuantityUnspecified" Text="<%$ Resources:Common,TreatmentUnspecified %>" runat="server"></asp:Label>
                             </div>

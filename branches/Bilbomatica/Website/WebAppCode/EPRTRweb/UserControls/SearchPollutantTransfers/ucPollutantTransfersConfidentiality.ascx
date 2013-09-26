@@ -16,8 +16,8 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><div class="PTcolConfName"><asp:Label ID="lbDescription" Text="<%$ Resources:Common, Pollutant %>" runat="server"></asp:Label></div></th>
-          <th><div class="PTcolConfFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant, Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="PTcolConfName"><asp:Label ID="lbDescription" Text="<%$ Resources:Common, Pollutant %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="PTcolConfFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant, Facilities %>" runat="server"></asp:Label></div></th>
         </tr>
        </thead>
        
@@ -59,8 +59,8 @@
      <table>
        <thead>
         <tr class="generalListStyle_headerRow">
-          <th><div class="PTcolConfName"><asp:Label ID="lbDescription" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
-          <th><div class="PTcolConfFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="PTcolConfName"><asp:Label ID="lbDescription" Text="<%$ Resources:Common,Reason %>" runat="server"></asp:Label></div></th>
+          <th scope="col"><div class="PTcolConfFacilities"><asp:Label ID="lbFacilities" Text="<%$ Resources:Pollutant,Facilities %>" runat="server"></asp:Label></div></th>
         </tr>
        </thead>
        

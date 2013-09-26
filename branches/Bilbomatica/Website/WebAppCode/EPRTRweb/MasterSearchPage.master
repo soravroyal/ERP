@@ -23,7 +23,7 @@
         
         <asp:Panel ID="pnExpand" runat="server">
           <div id="expand_btn">
-              <asp:ImageButton ID="btnExpand" ImageUrl="~/images/i_maximize.gif" runat="server" CssClass="expandbutton" ImageAlign="Right" Visible="true" ToolTip="<%$ Resources:Common,ShowExpandedMap %>" />
+              <asp:ImageButton ID="btnExpand" ImageUrl="~/images/i_maximize.gif" runat="server"  AlternateText="" CssClass="expandbutton" ImageAlign="Right" Visible="true" ToolTip="<%$ Resources:Common,ShowExpandedMap %>" />
           </div>
         </asp:Panel>                    
      

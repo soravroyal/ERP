@@ -21,11 +21,11 @@
        <table>
          <thead>
           <tr class="generalListStyle_headerRow">
-            <th><div class="TSWTcolConfYear"><asp:Label ID="lbYear" Text="<%$ Resources:Common,Year %>" runat="server"></asp:Label></div></th>
-            <th><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesTot" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbTotal" Text="<%$ Resources:Common,Total %>" runat="server"></asp:Label></div></th>
-            <th><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesConf" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbConfTotal" Text="<%$ Resources:WasteTransfers,ConfidentialityWaste %>" runat="server"></asp:Label></div></th>
-            <th><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesQ" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbConfQuantity" Text="<%$ Resources:WasteTransfers,QuantityWithheld %>" runat="server"></asp:Label></div></th>
-            <th><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesTreat" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbConfTreatment" Text="<%$ Resources:WasteTransfers,TreatmentWithheld %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="TSWTcolConfYear"><asp:Label ID="lbYear" Text="<%$ Resources:Common,Year %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesTot" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbTotal" Text="<%$ Resources:Common,Total %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesConf" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbConfTotal" Text="<%$ Resources:WasteTransfers,ConfidentialityWaste %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesQ" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbConfQuantity" Text="<%$ Resources:WasteTransfers,QuantityWithheld %>" runat="server"></asp:Label></div></th>
+            <th scope="col"><div class="TSWTcolConfCount" ><asp:Literal ID="litFacilitiesTreat" Text="<%$ Resources:Facility,Facilities %>" runat="server"/><br /><asp:Label ID="lbConfTreatment" Text="<%$ Resources:WasteTransfers,TreatmentWithheld %>" runat="server"></asp:Label></div></th>
           </tr>
          </thead>
          <tbody>

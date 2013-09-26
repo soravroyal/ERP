@@ -29,7 +29,6 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
             {
                 e.Row.CssClass = "activitySubHeader";
             }
-
         }
     }
 
@@ -324,7 +323,6 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
         this.gdwActivities.DataBind();
 
     }
-
 
     private void PopulatePublicInformation(int facilityReportId)
     {

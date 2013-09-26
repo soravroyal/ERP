@@ -71,6 +71,7 @@
                     <%-- Script for setting wait cursor --%>
 
                     <script type="text/javascript" language="javascript">
+                        //<![CDATA[
                         //Events for wire up around AJAZ postback
                         Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(beginRequestHandler)
                         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequestHandler)
@@ -81,6 +82,7 @@
                         function endRequestHandler() {
                             window.document.body.style.cursor = 'auto';
                         }
+                        // ]]>
                     </script>
 
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderMaster" runat="server">
@@ -89,7 +91,7 @@
                             <asp:ContentPlaceHolder ID="ContentTop1" runat="server" />
                             <asp:HyperLink ID="imgEPRTR" ImageUrl="~/images/E-PRTR.gif" NavigateUrl="~/Home.aspx"
                                 runat="server" />
-                            <asp:Image ID="imgReview" runat="server" ImageUrl="images/review5.gif" />
+                            <asp:Image ID="imgReview" runat="server" ImageUrl="images/review5.gif" AlternateText=""/>
                             <br />
                             <div class="E-PRTR_name">
                                 <asp:Literal ID="toptext" runat="server" Text="<%$ Resources:Common,EPRTRHeadline %>" /></div>
@@ -100,10 +102,10 @@
                             <asp:ContentPlaceHolder ID="ContentTop2" runat="server" />
                             <div class="EU_flag">
                             </div>
-                            <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server" />
-                            <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server" />
-                            <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server" />
-                            <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server" />
+                            <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server" AlternateText=""/>
+                            <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server" AlternateText=""/>
+                            <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server" AlternateText=""/>
+                            <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server" AlternateText=""/>
                             
                             <span class="langSelector">
                               <eprtr:ucLanguageSelector ID="LanguageSelector1" runat="server" /> 
