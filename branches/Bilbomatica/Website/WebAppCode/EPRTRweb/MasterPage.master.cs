@@ -16,6 +16,12 @@ public partial class MasterPage : System.Web.UI.MasterPage
         jsVar.Attributes.Add("type", "text/javascript");
         jsVar.InnerHtml = String.Format("var Lang = \"{0}\" ;", System.Globalization.CultureInfo.CurrentCulture.Name);
         this.Page.Header.Controls.Add(jsVar);
+
+        imgReview.Attributes.Add("alt", "");
+        imgSoil.Attributes.Add("alt", "");
+        imgNature.Attributes.Add("alt", "");
+        imgAir.Attributes.Add("alt", "");
+        imgWater.Attributes.Add("alt", "");
     }
 
     /// <summary>

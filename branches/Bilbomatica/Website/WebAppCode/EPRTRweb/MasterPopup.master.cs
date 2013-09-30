@@ -18,5 +18,13 @@ public partial class MasterPopup : System.Web.UI.MasterPage
         {
             imgReview.Visible = false;
         }
+
+        imgEPRTR.Attributes.Add("alt", "");
+        imgReview.Attributes.Add("alt", "");
+        imgSoil.Attributes.Add("alt", "");
+        imgNature.Attributes.Add("alt", "");
+        imgAir.Attributes.Add("alt", "");
+        imgWater.Attributes.Add("alt", "");
+
     }
 }
