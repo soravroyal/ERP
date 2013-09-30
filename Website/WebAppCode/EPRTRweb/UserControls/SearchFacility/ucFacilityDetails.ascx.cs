@@ -15,6 +15,7 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
     {
     }
 
+
     /// <summary>
     ///  Applies different css styles to specific datacells in the table. (To match demo color coding)
     ///  for content rows, add indent on the first cell in the row
@@ -390,5 +391,5 @@ public class ActivityItem
     {
         get { return isSubHeaderRow; }
     }
-
+ 
 }

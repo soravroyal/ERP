@@ -5,8 +5,8 @@
 
 <asp:Panel ID="facilityDetailsPanel" runat="server" Width="100%">
         
-        <%--<%$ Common:PrintRefresh %>--%>
-        <div runat="server" class="printStyles">
+    <%--<%$ Common:PrintRefresh %>--%>
+    <div id="Div1" runat="server" class="printStyles">
         
         <div id="facilityimage">
             <eprtr:ucFacilityDetailsMap ID="ucFacilityDetailsMap" runat="server" />
@@ -63,8 +63,6 @@
             <asp:Literal ID="litPublicInfo" Text="<%$ Resources:Common,PublicInfo %>" runat="server"></asp:Literal><br />
             <asp:TextBox ID="txPublicInfo" Font-Size="Small" Wrap="true" ReadOnly="true" Height="50" Width="100%" TextMode="MultiLine" runat="server"></asp:TextBox>
         </div>
-       
-        </div>
-      
+    </div> 
 </asp:Panel>
 

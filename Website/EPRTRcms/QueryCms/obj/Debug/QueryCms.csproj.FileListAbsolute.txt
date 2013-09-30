@@ -1,0 +1,6 @@
+C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\bin\Debug\QueryCms.dll.config
+C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\bin\Debug\QueryCms.dll
+C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\bin\Debug\QueryCms.pdb
+C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\obj\Debug\ResolveAssemblyReference.cache
+C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\obj\Debug\QueryCms.dll
+C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\obj\Debug\QueryCms.pdb
