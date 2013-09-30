@@ -1,0 +1,84 @@
+body {
+
+}
+.headerlogo_right {
+	float: right;
+	height: 50px;
+}
+
+.facebook {
+	float: right;
+	margin-top: 0px;
+	display: inline-block;
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+.twitter {
+	float: right;
+	margin-left: 5px;
+	margin-top: 0px;
+	display: inline-block;
+}
+
+.extraLogo {
+	float: right;
+	margin-right: 10px;
+}
+
+.unembedlink {
+	background-image: url(../images/fullscreen.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 16px;
+	width: 20px;
+	margin: 4px 0 4px 4px;
+}
+.mainSection {
+	padding: 10px;
+}
+.esriPopup .sizer {
+	width: 300px;
+}
+.dgrid {
+	height: 200px !important;
+}
+table.gradienttable {
+	font-family: verdana, arial, sans-serif;
+	font-size: 11px;
+	color: #333333;
+	border-width: 1px;
+	border-color: #999999;
+	border-collapse: collapse !important;
+	margin-bottom: 10px;
+}
+table.gradienttable th {
+	padding: 5px;
+	background-color: #eee;	
+	border: 1px solid #ddd;
+}
+table.gradienttable td{
+	padding: 5px;	
+	border: 1px solid #ddd;
+}
+table.gradienttable th p {
+	margin: 0px;
+	padding: 8px;
+	border-top: 1px solid #eefafc;
+	border-bottom: 0px;
+	border-left: 1px solid #eefafc;
+	border-right: 0px;
+}
+table.gradienttable td p {
+	margin: 0px;
+	padding: 8px;
+	border-top: 1px solid #fcfdec;
+	border-bottom: 0px;
+	border-left: 1px solid #fcfdec;;
+	border-right: 0px;
+}
+
+table.attrTable tr{
+	vertical-align: bottom;
+	valign: bottom;
+}
