@@ -1,6 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
-    CodeFile="FacilityDetails.aspx.cs" Inherits="FacilityDetails" 
-    %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FacilityDetails.aspx.cs" Inherits="FacilityDetails"%>
 
 <%@ Register Src="~/UserControls/SearchFacility/ucFacilitySheet.ascx" TagName="FacilitySheet"   TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/SearchFacilityEPER/ucFacilitySheetEPER.ascx" TagName="FacilitySheetEPER"    TagPrefix="eprtr" %>

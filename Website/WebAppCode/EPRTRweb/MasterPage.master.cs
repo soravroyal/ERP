@@ -22,7 +22,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         imgNature.Attributes.Add("alt", "");
         imgAir.Attributes.Add("alt", "");
         imgWater.Attributes.Add("alt", "");
-    }
+   }
 
     /// <summary>
     /// Master 

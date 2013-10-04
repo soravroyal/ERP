@@ -20,7 +20,7 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
     private const string EXPAND_SECTOR = "expandSector";
     private const string EXPAND_HEAD = "expandHead";
     private const string EXPAND_VISIBLE = "expandVisible";
-        
+
     /// <summary>
     /// Page load, set expand script
     /// </summary>
@@ -36,7 +36,8 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
         // This requires a switch if postback or not (!!!)
 
         string jsFunction = MapUtils.GetExpandScript(searchPage, Headline, query, sector, head, MAPID, visible);
-        string script = MapUtils.GetButtonExpandScript(jsFunction, this.btnExpand.ClientID);
+        //string script = MapUtils.GetButtonExpandScript(jsFunction, this.btnExpand.ClientID);
+        string script = "";
 
         if (!Page.IsPostBack)
         {
@@ -59,7 +60,8 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
 
     public string ClientIDExpandButton
     {
-        get { return this.btnExpand.ClientID; }
+        //get { return this.btnExpand.ClientID; }
+        get { return ""; }
     }
        
     /// <summary>
@@ -98,7 +100,8 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
         CookieStorage.SaveExpandMap(Response, mapfilter.SqlWhere, mapfilter.Layers, header, mapfilter.VisibleLayers);
 
         string js = MapUtils.GetExpandScript(searchPage, Headline, mapfilter.SqlWhere, mapfilter.Layers, header, MAPID, mapfilter.VisibleLayers);
-        string script = MapUtils.GetButtonExpandScript(js, this.btnExpand.ClientID);
+        //string script = MapUtils.GetButtonExpandScript(js, this.btnExpand.ClientID);
+        string script = MapUtils.GetButtonExpandScript(js, "");
         ScriptManager.RegisterClientScriptBlock(Page, typeof(string), "UpdateExpandedScript", script, true);
     }
 

@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" EnableViewState="true" CodeFile="MasterPage.master.cs"
+﻿<%@ Master Language="C#" AutoEventWireup="true" EnableViewState="true" CodeFile="MasterPage.master.cs"
     Inherits="MasterPage" %>
 
 <%@ Register src="~/UserControls/Common/ucLanguageSelector.ascx" tagname="ucLanguageSelector" tagprefix="eprtr" %>
@@ -6,7 +6,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- <title></title>
+    <title></title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+
     <link rel="alternate" type="application/rss+xml" href="http://localhost:8032/EPRTRweb/news.rss" title="News rss feed" />
     <link rel="SHORTCUT ICON" href="images/favicon.ico" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
@@ -21,7 +25,18 @@
     <link href="css/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
     <link href="css/columnStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
-    
+   
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css" />
+    <%--<link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/document.css" />--%>
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/document.css" />
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dojox/layout/resources/floatingpane.css" />
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" />
+    <link rel="stylesheet" type="text/css" href="css/collapsible.css" />
+
+<%--    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script>
+    <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>--%>
+
     <!--[if lt IE 9]>
     <link href="css/searchOptionStylesIElt9.css" rel="stylesheet" type="text/css" />
     <link href="css/newsStyleIElt9.css" rel="stylesheet" type="text/css" />
@@ -41,8 +56,10 @@
 
     <script type="text/javascript" src="Scripts/jquery.corner.js"></script>
     <script type="text/javascript" src="Charts/charts.js"></script>
+
     <script type="text/javascript">
-        //<![CDATA[        var searchFilter = new Array();
+        //<![CDATA[
+        var searchFilter = new Array();
         searchFilter.push('Recovery');
         searchFilter.push('Disposal');
         searchFilter.push('Unspecified');
@@ -80,12 +97,28 @@
         // ]]>
     </script>
 
-    <asp:ContentPlaceHolder ID="head" runat="server">
 
-    </asp:ContentPlaceHolder>
+    <!--New JS Map -->
+    <script type="text/javascript" src="Scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.collapsible.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+    
+        $(document).ready(function() {
+            $.collapsible(".C_header", "C_group1");
+            $.collapsible(".C_header2", "C_group2");
+        });
+
+
+        // ]]>
+    </script>
+    <!--New JS Map -->
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
 </head>
-<body onunload="ClosePopupWindows();" >
 
+<body onunload="ClosePopupWindows();" >
     <div runat="server" id="BrowserNotSupported">
         <table class="topBarBrowserNotSupported">
             <tr style="width: 100%">
@@ -175,6 +208,9 @@
                         <div class="info_area">
                             <asp:ContentPlaceHolder ID="ContentInfoArea" runat="server" />
                         </div>
+                        <div class="info_Map">
+                            <asp:ContentPlaceHolder ID="ContentInfoMapViewer" runat="server" />
+                        </div>
                         <%-- Bottom logo and footer text --%>
                         <div class="bottom_bar">
                             <asp:ContentPlaceHolder ID="ContentBottom" runat="server" />
@@ -189,7 +225,7 @@
                         </div>
                     </asp:ContentPlaceHolder>
                 </div>
-                </form>
+               </form>
            </td>
         </tr>
     </table>
