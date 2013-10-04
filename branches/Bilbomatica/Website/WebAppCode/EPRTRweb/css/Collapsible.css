@@ -1,0 +1,54 @@
+.C_module
+{
+	border:1px solid #1E74BC;
+	width: 980px;
+	margin-top:20px;
+	margin-bottom:20px;
+	margin-left:10px;
+	margin-right:10px;
+}
+	.C_module .C_header, .C_module .C_header2
+	{
+		background-color:#1E74BC;
+		padding-left:10px;
+		padding-top:5px;
+		height:30px;
+	}
+		.C_module .C_header h1, C_.module .C_header2 h1
+		{
+			margin:0;
+            color: #FFFFFF;
+            display: inline;
+            font-size: 15px;
+            font-weight: bold;
+		}
+		
+	.C_module .C_content
+	{
+		clear:both;
+		padding:10px;
+	}
+	.C_module .placeholder
+	{
+		margin-top:-1.5px;
+		margin-right:2px;
+	}
+	.C_module .expand
+	{
+		float:right;
+		display:inline;
+		background-image:url('../images/Expand.png');
+		background-position: 0px 0px;
+		width:30px;
+		height:29px;
+	}	
+	.C_module .collapse
+	{
+		float:right;
+		display:inline;
+		background-image:url('../images/Collapse.png');
+		background-position: 0px 0px;
+		width:30px;
+		height:29px;
+	}
+	

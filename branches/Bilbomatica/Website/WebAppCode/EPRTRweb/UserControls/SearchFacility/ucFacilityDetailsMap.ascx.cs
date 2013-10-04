@@ -19,7 +19,7 @@ public partial class ucFacilityDetailsMap : System.Web.UI.UserControl
 
     protected void Page_PreRender(object sender, EventArgs e)
     {
-        createMap();
+        //createMap();
         //base.OnPreRender(e);
     }
 
@@ -29,10 +29,10 @@ public partial class ucFacilityDetailsMap : System.Web.UI.UserControl
     /// </summary>
     public void Initialize(int facilityReportID, string sectors)
     {
-        MapUniqueID = this.facilitydetailmap.ClientID;
+        //MapUniqueID = this.facilitydetailmap.ClientID;
 
-        ViewState[FACILITY_REPORT_ID] = facilityReportID;
-        ViewState[SECTORS] = sectors;
+        //ViewState[FACILITY_REPORT_ID] = facilityReportID;
+        //ViewState[SECTORS] = sectors;
     }
     
     /// <summary>
@@ -51,13 +51,13 @@ public partial class ucFacilityDetailsMap : System.Web.UI.UserControl
     /// </summary>
     private void createMap()
     {
-        if (ViewState[FACILITY_REPORT_ID]!=null)
-        {
-            int id = (int)ViewState[FACILITY_REPORT_ID];
-            string sectors = (ViewState[SECTORS] == null) ? "-1" : (string)ViewState[SECTORS];
+        //if (ViewState[FACILITY_REPORT_ID]!=null)
+        //{
+        //    int id = (int)ViewState[FACILITY_REPORT_ID];
+        //    string sectors = (ViewState[SECTORS] == null) ? "-1" : (string)ViewState[SECTORS];
             
-            // invoke script
-            MapUtils.AddDetailsMap(this.detailmapPanel, this.UniqueID, MapUniqueID, id, sectors, Request.ApplicationPath);
-        }
+        //    // invoke script
+        //    MapUtils.AddDetailsMap(this.detailmapPanel, this.UniqueID, MapUniqueID, id, sectors, Request.ApplicationPath);
+        //}
     }
 }

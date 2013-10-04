@@ -9,7 +9,62 @@
     <div id="Div1" runat="server" class="printStyles">
         
         <div id="facilityimage">
-            <eprtr:ucFacilityDetailsMap ID="ucFacilityDetailsMap" runat="server" />
+            <%--<eprtr:ucFacilityDetailsMap ID="ucFacilityDetailsMap" runat="server" />--%>
+
+            <div class="facilityMap">
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var path_location = location.pathname.replace(/\/[^/]+$/, '');
+                    var dojoConfig = {
+                    parseOnLoad: true,
+                    packages: [ { 
+                            name: "utilities",
+                            location: path_location + '/JS_Map_Min/javascript' 
+                            },{
+                            name: "templateConfig",
+                            location: path_location + '/JS_Map_Min'
+                            }
+                        ]
+                    };
+                    // ]]>
+                </script>
+                <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script>
+                <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>
+    
+                <script type="text/javascript">
+                    //<![CDATA[
+                    dojo.require("utilities.app");
+                    dojo.require("templateConfig.commonConfig");
+
+
+                    dojo.ready(function () {
+
+                        var defaults = {
+                            //webmap: "40c4c1892d5a45539b0ee95a0cae7b65",
+                            webmap: "29ca3f3396f34d19b612c18870f6efb9",
+                            bingmapskey: commonConfig.bingMapsKey,
+                            sharingurl: "",
+                            proxyurl: "",
+                            helperServices: commonConfig.helperServices,
+                            autoquery: "false",
+                            zoomto: "true",
+                            mapName: "miMapa3"
+                        };
+
+
+                        var app = new utilities.App(defaults);
+                        app.init().then(function (options) {
+                            init(options);
+                        });
+
+                    });
+                    // ]]>
+                </script>
+                <div class="claroMin">
+                    <div id="miMapa3" style="width:400px;height:400px;"></div>
+                </div>
+            </div> 
+
             <asp:Image id="detailmapprint" ImageUrl="" alt="<%$ Resources:Common,PrintRefresh %>" runat="server" visible="true" CssClass="facilityMapPrint" />
         </div>
         

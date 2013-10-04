@@ -275,7 +275,7 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
         PopulatePublicInformation(facilityReportId);
 
         // create flash map
-        this.ucFacilityDetailsMap.Initialize(facilityReportId, "-1");
+       //this.ucFacilityDetailsMap.Initialize(facilityReportId, "-1");
 
         DetailMapUrlName = facilityReportId.ToString();
         this.detailmapprint.ImageUrl = "~/MapPrint/img/" + DetailMapUrlName + ".png";
@@ -283,7 +283,8 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
     
     public string DetailMapUniqueID 
     {
-        get { return this.ucFacilityDetailsMap.MapUniqueID; }
+        //get { return this.ucFacilityDetailsMap.MapUniqueID; }
+        get { return ""; }
     }
 
     public string DetailMapUrlName 

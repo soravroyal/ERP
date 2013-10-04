@@ -19,8 +19,22 @@
     <link href="css/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
     <link href="css/columnStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
+
+    <!--New JS Map -->
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/claro.css" />
+    <%--<link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dijit/themes/claro/document.css" />--%>
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/document.css" />
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/dojo/dojox/layout/resources/floatingpane.css" />
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.4/js/esri/css/esri.css" />
+    <link rel="stylesheet" type="text/css" href="css/collapsible.css" />
+
+<%--    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script>
+    <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>
+--%>
+    <!--New JS Map -->
     
-        <!--[if lt IE 9]>
+    <!--[if lt IE 9]>
     <link href="css/searchOptionStylesIElt9.css" rel="stylesheet" type="text/css" />
     <![endif]-->
 
@@ -38,14 +52,28 @@
 
     <script type="text/javascript" src="Charts/charts.js"></script>
 
-    <asp:ContentPlaceHolder ID="head" runat="server">
 
-    </asp:ContentPlaceHolder>
+    <!--New JS Map -->
+    <script type="text/javascript" src="Scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.collapsible.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+
+        $(document).ready(function () {
+            $.collapsible(".C_header", "C_group1");
+            $.collapsible(".C_header2", "C_group2");
+        });
+
+
+        // ]]>
+    </script>
+    <!--New JS Map -->
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
 </head>
+
 <body onunload="ClosePopupWindows();">
-
-    
-
     <div runat="server" id="BrowserNotSupported">
         <table class="topBarBrowserNotSupported">
             <tr style="width: 100%">
