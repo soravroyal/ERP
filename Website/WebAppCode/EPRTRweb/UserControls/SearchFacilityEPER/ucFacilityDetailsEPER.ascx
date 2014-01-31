@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" CodeFile="ucFacilityDetailsEPER.ascx.cs" EnableViewState="true" Inherits="ucFacilityDetails" %>
+﻿<%@ Control Language="C#" CodeFile="ucFacilityDetailsEPER.ascx.cs" EnableViewState="true" Inherits="ucFacilityDetailsEPER" %>
 
 <%@ Register Src="~/UserControls/SearchFacility/ucFacilityDetailsMap.ascx" TagName="ucFacilityDetailsMap" TagPrefix="eprtr" %>
 <%@ Register Src="~/UserControls/Common/ucInfoEPER.ascx" TagName="InfoEPER" TagPrefix="eprtr" %>

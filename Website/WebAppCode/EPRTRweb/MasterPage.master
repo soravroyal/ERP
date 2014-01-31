@@ -166,7 +166,7 @@
                         <%-- Top text, headline --%>
                         <div class="topBar1">
                             <asp:ContentPlaceHolder ID="ContentTop1" runat="server" />
-                            <asp:HyperLink ID="imgEPRTR" runat="server" NavigateUrl="~/Home.aspx"><img src="~/images/E-PRTR.gif" alt="" /></asp:HyperLink>
+                            <asp:HyperLink ID="imgEPRTR" runat="server" NavigateUrl="~/Home.aspx"><img src="/images/E-PRTR.gif" alt="" /></asp:HyperLink>
                             <asp:Image ID="imgReview" runat="server" ImageUrl="images/review5.gif"/>
                             <br />
                             <div class="E-PRTR_name">
