@@ -932,7 +932,7 @@ function addLayerList(layers,map) {
 		layerList.reverse();
 	
 		var cp = new dijit.layout.ContentPane({
-        id :  'layerList',
+        id :  'layerList'
        
 		});
 		var menu = new dijit.Menu({
