@@ -13,7 +13,7 @@ using EPRTR.HeaderBuilders;
 public partial class TimeSeriesPollutantTransfers : BasePage
 {
     /// <summary>
-    /// Page load, add flash map and assign eventhandler
+    /// Page load and assign eventhandler
     /// </summary>
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,12 +22,12 @@ public partial class TimeSeriesPollutantTransfers : BasePage
             ((MasterSearchPage)this.Master).Headline = Resources.GetGlobal("Facility", "PollutantTransfersTimeSeriesHeadline");
             ((MasterSearchPage)this.Master).ShowMapPanel(Global.MainSearchPages.TimeSeriesPollutantTransfers);
         }
-
+        /*
         if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
         {
             // add swf object to page
             MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.TimeSeriesPollutantTransfers, Request.ApplicationPath);
-        }
+        }*/
 
         if (this.ucSearchOptions.InvokeSearch == null)
             this.ucSearchOptions.InvokeSearch = new EventHandler(doSearch);
@@ -65,18 +65,16 @@ public partial class TimeSeriesPollutantTransfers : BasePage
         if (filter != null)
         {
             this.ucTsPollutantTransfersSheet.Populate(filter);
-            updateFlashMap(filter);
+            updateJavaScriptMap(filter);
         }
     }
 
-    /// <summary>
-    /// update flash map
-    /// </summary>
-    private void updateFlashMap(PollutantTransferTimeSeriesFilter filter)
+
+    private void updateJavaScriptMap(PollutantTransferTimeSeriesFilter filter)
     {
-        MapFilter mapfilter = QueryLayer.PollutantTransferTrend.GetMapFilter(filter);
-        string header = MapPrintDetails.Build(SheetHeaderBuilder.GetTimeSeriesPollutantTransferHeader(filter));
-        MapUtils.UpdateSmallMap(MasterSearchPage.MAPID, this, this.ClientID, mapfilter, header, Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapfilter, header);
+        MapFilter mapfilter = QueryLayer.PollutantTransferTrend.GetMapJavascriptFilter(filter);
+
+        MapJavaScriptUtils.UpdateJavaScriptMap(mapfilter, Page);
+
     }
 }

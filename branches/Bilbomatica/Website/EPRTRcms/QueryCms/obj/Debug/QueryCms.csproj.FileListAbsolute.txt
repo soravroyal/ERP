@@ -4,3 +4,9 @@ C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\bin\Debug\QueryCms.pdb
 C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\obj\Debug\ResolveAssemblyReference.cache
 C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\obj\Debug\QueryCms.dll
 C:\Proyectos\EPRTR\Website\EPRTRcms\QueryCms\obj\Debug\QueryCms.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\EPRTRcms\QueryCms\bin\Debug\QueryCms.dll.config
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\EPRTRcms\QueryCms\bin\Debug\QueryCms.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\EPRTRcms\QueryCms\bin\Debug\QueryCms.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\EPRTRcms\QueryCms\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\EPRTRcms\QueryCms\obj\Debug\QueryCms.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\EPRTRcms\QueryCms\obj\Debug\QueryCms.pdb

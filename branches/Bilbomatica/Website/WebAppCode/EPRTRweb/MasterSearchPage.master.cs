@@ -21,6 +21,11 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
     private const string EXPAND_HEAD = "expandHead";
     private const string EXPAND_VISIBLE = "expandVisible";
 
+
+
+   
+    public string strYears = "";
+
     /// <summary>
     /// Page load, set expand script
     /// </summary>
@@ -32,10 +37,24 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
         string head = (ViewState[EXPAND_HEAD] == null) ? String.Empty : ViewState[EXPAND_HEAD].ToString();
         string visible = (ViewState[EXPAND_VISIBLE] == null) ? String.Empty : ViewState[EXPAND_VISIBLE].ToString();
 
+
+        if (!Page.IsPostBack)
+        {
+            List<int>  yearList = QueryLayer.ReportinYear.GetReportingYearsPRTR();
+          
+
+            foreach (int p in yearList)
+            {
+                if (strYears != "")
+                    strYears += "," + p.ToString();
+                else
+                    strYears = p.ToString();
+            }
+        }
         // Add click handler to expand button as client script
         // This requires a switch if postback or not (!!!)
 
-        string jsFunction = MapUtils.GetExpandScript(searchPage, Headline, query, sector, head, MAPID, visible);
+      //  string jsFunction = MapUtils.GetExpandScript(searchPage, Headline, query, sector, head, MAPID, visible);
         //string script = MapUtils.GetButtonExpandScript(jsFunction, this.btnExpand.ClientID);
         string script = "";
 
@@ -83,42 +102,7 @@ public partial class MasterSearchPage : System.Web.UI.MasterPage
         this.divMap.Visible = false;
     }
 
-    /// <summary>
-    /// Update Expand script
-    /// </summary>
-    public void UpdateExpandedScript(MapFilter mapfilter, string header)
-    {
-        string searchPage = (ViewState[SEARCHPAGE] == null) ? String.Empty : ViewState[SEARCHPAGE].ToString();
-
-        ViewState[EXPAND_QUERY] = mapfilter.SqlWhere;
-        ViewState[EXPAND_SECTOR] = mapfilter.Layers;
-        ViewState[EXPAND_VISIBLE] = mapfilter.VisibleLayers;
-        ViewState[EXPAND_HEAD] = header;
-
-        // Safety storing of sql
-        // Store the current sql in cookie. Only used as fallback if ViewState fails to store values
-        CookieStorage.SaveExpandMap(Response, mapfilter.SqlWhere, mapfilter.Layers, header, mapfilter.VisibleLayers);
-
-        string js = MapUtils.GetExpandScript(searchPage, Headline, mapfilter.SqlWhere, mapfilter.Layers, header, MAPID, mapfilter.VisibleLayers);
-        //string script = MapUtils.GetButtonExpandScript(js, this.btnExpand.ClientID);
-        string script = MapUtils.GetButtonExpandScript(js, "");
-        ScriptManager.RegisterClientScriptBlock(Page, typeof(string), "UpdateExpandedScript", script, true);
-    }
-
-    /// <summary>
-    /// retun javascript to add click handler to expand button as client script (!!!)
-    /// </summary>
-    /*private string getExpandScript(string jsFunction)
-    {
-        string script = String.Empty;
-        script += "try{ var btnExpand = $get('" + this.btnExpand.ClientID + "'); ";
-        script += "if (typeof(expandHandler) != 'undefined') { $removeHandler(btnExpand, 'click', expandHandler); } ";
-        script += "expandHandler = function(evt) { " + jsFunction + " evt.preventDefault(); }; $addHandler(btnExpand, 'click', expandHandler); ";
-        script += "} catch(err) {  } ";
-        return script;
-    }
-    */
-
+   
     /// <summary>
     /// Toggle Flash map
     /// </summary>

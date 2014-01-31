@@ -5,11 +5,11 @@
 <%-- Releases to radio buttons --%>
 <eprtr:ucMediumSelector ID="ucMediumSelector"  OnItemSelected="OnSelectedMediumChanged" runat="server" />
 
-<div class="clearBoth">
+<div class="clearBoth1">
     <asp:Literal ID="litNoResultFound" Text="<%$ Resources:Common,NoResultsFound %>" runat="server" Visible="false"></asp:Literal>
 
     <%-- Flash tag --%>
-    <%@ Register TagPrefix="nfp" TagName="NoFlashPlayer" Src="~/UserControls/Common/ucNoFlashPlayer.ascx" %>
+   <%@ Register TagPrefix="nfp" TagName="NoFlashPlayer" Src="~/UserControls/Common/ucNoFlashPlayer.ascx" %>
     <%@ Register TagPrefix="ndr" TagName="NoDataReturned" src="~/UserControls/Common/ucNoDataReturned.ascx" %>
 
     <asp:Panel ID="compareChartPanel" runat="server" Visible="true">

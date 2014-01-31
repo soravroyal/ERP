@@ -1,0 +1,15 @@
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\obj\Debug\SitemapConverter.csprojResolveAssemblyReference.cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\obj\Debug\SitemapConverter._form.resources
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\obj\Debug\SitemapConverter.Properties.Resources.resources
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\obj\Debug\SitemapConverter.csproj.GenerateResource.Cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\SitemapConverter.exe.config
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\obj\Debug\SitemapConverter.exe
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\bin\Debug\SitemapConverter.XML
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\obj\Debug\SitemapConverter.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\SitemapConverter.exe
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\SitemapConverter.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\SitemapConverter.XML
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\QueryLayer.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\QueryLayer.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\sitemaps-asp2google\LinqUtilities.pdb

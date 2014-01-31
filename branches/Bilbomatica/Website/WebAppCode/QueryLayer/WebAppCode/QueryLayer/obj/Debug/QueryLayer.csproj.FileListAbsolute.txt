@@ -1,0 +1,8 @@
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\bin\Debug\QueryLayer.dll.config
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\bin\Debug\QueryLayer.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\bin\Debug\QueryLayer.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\bin\Debug\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\bin\Debug\LinqUtilities.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\obj\Debug\QueryLayer.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\obj\Debug\QueryLayer.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\QueryLayer\obj\Debug\QueryLayer.csprojResolveAssemblyReference.cache

@@ -1,0 +1,173 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true"
+    EnableViewState="true" CodeFile="MasterSearchPage.master.cs" Inherits="MasterSearchPage" %>
+    
+<%@ Register TagPrefix="nfp" TagName="NoFlashPlayer" Src="~/UserControls/Common/ucNoFlashPlayer.ascx" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>  
+
+<asp:Content ID="infoarea" EnableViewState="true" ContentPlaceHolderID="ContentInfoArea" runat="server">
+
+    <%--Java Script functions --%>
+    <script type="text/javasript" src="Charts/charts.js"></script>
+    <script type="text/javascript" src="Scripts/jsValidation.js"></script>
+
+    <%--Title and subtitle--%>
+    <div class="info_box_search">
+        <h1>
+            <asp:Literal ID="lbHeadline" Text="" runat="server" />
+        </h1>
+        <p>
+            <asp:ContentPlaceHolder ID="ContentSubHeadline" runat="server" />
+        </p>
+    </div>
+    <%--Map--%>
+    <div id="divMap" class="map_box" runat="server">
+        
+<%--        <asp:Panel ID="pnExpand" runat="server">
+          <div id="expand_btn">
+              <asp:ImageButton ID="btnExpand" ImageUrl="~/images/i_maximize.gif" runat="server"  AlternateText="" CssClass="expandbutton" ImageAlign="Right" Visible="true" ToolTip="<%$ Resources:Common,ShowExpandedMap %>" />
+          </div>
+        </asp:Panel>                    
+     
+        <asp:Panel ID="pnlResultMap" runat="server" Visible="true">
+            <div id="resultMapId" visible="true">
+            <nfp:NoFlashPlayer ID="NoFlashPlayer" runat="server" />
+            </div>
+        </asp:Panel>--%>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            var path_location = location.pathname.replace(/\/[^/]+$/, '');            
+             path_location +='/JS_Map_Min';          
+             var dojoConfig = {
+                parseOnLoad: true,
+                packages: [ { 
+                        name: "utilities",
+                        location: path_location + '/javascript' 
+                     },{
+                        name: "templateConfig",
+                        location: path_location 
+                     }
+                ],
+		        modulePaths: {
+                    'agsjs': path_location + '/javascript/agsjs'
+                }
+              };
+            // ]]>
+        </script>
+        
+	
+
+        <script type="text/javascript" src="//js.arcgis.com/3.7"></script>
+        <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>
+   
+    
+        <script type="text/javascript">
+            //<![CDATA[
+            dojo.require("utilities.app");
+            dojo.require("templateConfig.commonConfig");
+
+
+
+            dojo.ready(function () {
+
+                var defaults = {
+                    //webmap: "40c4c1892d5a45539b0ee95a0cae7b65",
+                    webmap: "29ca3f3396f34d19b612c18870f6efb9",
+                    bingmapskey: commonConfig.bingMapsKey,
+                    sharingurl: "",
+                    proxyurl: "",
+                    helperServices: commonConfig.helperServices,
+                    autoquery: "false",
+                    zoomto: "true",
+                    mapName: "map_small"
+                };
+
+
+                var app = new utilities.App(defaults);
+                app.init().then(function (options) {
+                    init(options);
+
+                });
+                mapLoad();
+                setTimeout(function () { collapse() }, 2500);
+            });
+            // ]]>
+        </script>
+
+
+        <div class="claroMin">
+            <div id="map_small" style="width:400px;height:400px;"></div>
+        </div>
+    </div>
+    
+    <asp:UpdatePanel ID="upSearchControls" runat="server">
+        <ContentTemplate>
+            <%--Search options--%>
+            <div id="searchForm" class="search_form" runat="server">
+                <asp:ContentPlaceHolder ID="ContentSearchForm" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <asp:UpdatePanel ID="upResultArea" runat="server">
+        <ContentTemplate>
+            <%--Result area--%>
+            <div id="resultArea" class="layout_resultArea" visible="false" runat="server">
+                <asp:ContentPlaceHolder ID="ContentResultArea" runat="server" />
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+</asp:Content>
+
+<asp:Content ID="infoMapViewer" EnableViewState="true" ContentPlaceHolderID="ContentInfoMapViewer" runat="server">
+
+          <script type="text/javascript">
+          
+
+              function getPos(el) {
+                  // yay readability
+                  for (var lx = 0, ly = 0;
+                        el != null;
+                        lx += el.offsetLeft, ly += el.offsetTop, el = el.offsetParent);
+                                  return { x: lx, y: ly };
+              }
+
+              function collapse() {
+                  var mapCon = document.getElementById("mapContainer");
+                  var img = document.getElementById("imgButtonSelectFile");
+                  var span = document.getElementById("span");
+                  var pos = getPos(document.getElementById("bottom_bar"));
+                  if (mapCon.style.display == "none") {
+                      mapCon.style.display = "block";
+                      img.src = "images/minusicon.png";
+                      span.innerHTML = "Click to collapse map";                    
+                      document.getElementById("map_extended").style.top = pos.y + "px";
+                      dijit.byId("map_extendedmainWindow").resize();
+                     // mapLoad();
+                  }
+                  else {
+                      mapCon.style.display = "none";
+                      img.src = "images/plusicon.png";
+                      span.innerHTML = "Click to expand the map";
+                  }
+              }
+
+
+          </script>
+          <div id="map_bar">
+              <asp:Panel ID="pHeader" runat="server" CssClass="map_bar"> 
+                <img alt="" id="imgButtonSelectFile" class="imgbtn" style="vertical-align:middle"  src="images/minusicon.png" onclick="collapse();"/>
+                
+                <span id="span" >Click to expand the map</span>
+              </asp:Panel>
+          </div>                
+                     
+          <asp:Panel ID="pBody" runat="server" > 
+                <div id="mapContainer" style="display:block">
+                    <asp:ContentPlaceHolder ID="JSMap" runat="server"/>
+                </div>
+         </asp:Panel>
+       
+    
+</asp:Content>
