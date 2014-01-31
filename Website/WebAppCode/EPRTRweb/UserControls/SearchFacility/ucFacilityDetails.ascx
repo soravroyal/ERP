@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" CodeFile="ucFacilityDetails.ascx.cs" EnableViewState="true" Inherits="ucFacilityDetails" %>
 
-<%@ Register Src="~/UserControls/SearchFacility/ucFacilityDetailsMap.ascx" TagName="ucFacilityDetailsMap" TagPrefix="eprtr" %>
+
 <%@ Register Src="~/UserControls/Common/ucInfo.ascx" TagName="Info" TagPrefix="eprtr" %>
 
 <asp:Panel ID="facilityDetailsPanel" runat="server" Width="100%">
@@ -14,54 +14,69 @@
             <div class="facilityMap">
                 <script type="text/javascript">
                     //<![CDATA[
-                    var path_location = location.pathname.replace(/\/[^/]+$/, '');
-                    var dojoConfig = {
-                    parseOnLoad: true,
-                    packages: [ { 
-                            name: "utilities",
-                            location: path_location + '/JS_Map_Min/javascript' 
-                            },{
-                            name: "templateConfig",
-                            location: path_location + '/JS_Map_Min'
-                            }
-                        ]
-                    };
+                    var path_location = location.pathname.replace(/\/[^/]+$/, '');            
+                     path_location +='/JS_Map_Min';          
+                     var dojoConfig = {
+                        parseOnLoad: true,
+                        packages: [ { 
+                                name: "utilities",
+                                location: path_location + '/javascript' 
+                             },{
+                                name: "templateConfig",
+                                location: path_location 
+                             }
+                        ],
+		                modulePaths: {
+                            'agsjs': path_location + '/javascript/agsjs'
+                        }
+                      };
                     // ]]>
                 </script>
-                <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script>
+                <script type="text/javascript" src="//js.arcgis.com/3.7"></script>
                 <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>
     
                 <script type="text/javascript">
-                    //<![CDATA[
-                    dojo.require("utilities.app");
-                    dojo.require("templateConfig.commonConfig");
+                    $(document).ready(function () {                        
+                        // NOT DELETE - Necesary to create the map_details with the filter of FacilityReportID
+                        var facilityReportID = $('#ctl00_ContentPlaceHolderMaster_ContentInfoArea_ucFacilitySheet_TextBox1').val();
+                      
+                        //<![CDATA[
+                        dojo.require("utilities.app");
+                        dojo.require("templateConfig.commonConfig");
 
+                        dojo.ready(function () {
 
-                    dojo.ready(function () {
+                            var defaults = {
+                                //webmap: "40c4c1892d5a45539b0ee95a0cae7b65",
+                                webmap: "29ca3f3396f34d19b612c18870f6efb9",
+                                bingmapskey: commonConfig.bingMapsKey,
+                                sharingurl: "",
+                                proxyurl: "",
+                                helperServices: commonConfig.helperServices,
+                                autoquery: "false",
+                                zoomto: "true",
+                                mapName: "map_details",
+                                reportid: facilityReportID,
+                                serviceName: "http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/1",
+                                layerID: "EprtrFacilities_Dyna_WGS84_1098"
 
-                        var defaults = {
-                            //webmap: "40c4c1892d5a45539b0ee95a0cae7b65",
-                            webmap: "29ca3f3396f34d19b612c18870f6efb9",
-                            bingmapskey: commonConfig.bingMapsKey,
-                            sharingurl: "",
-                            proxyurl: "",
-                            helperServices: commonConfig.helperServices,
-                            autoquery: "false",
-                            zoomto: "true",
-                            mapName: "miMapa3"
-                        };
+                            };
+                            
+                      
 
+                            var app = new utilities.App(defaults);
+                            app.init().then(function (options) {
+                                init(options);
+                            });
 
-                        var app = new utilities.App(defaults);
-                        app.init().then(function (options) {
-                            init(options);
                         });
-
                     });
-                    // ]]>
+                 
                 </script>
+
+
                 <div class="claroMin">
-                    <div id="miMapa3" style="width:400px;height:400px;"></div>
+                    <div id="map_details" style="width:400px;height:400px;"></div>                 
                 </div>
             </div> 
 
@@ -119,5 +134,6 @@
             <asp:TextBox ID="txPublicInfo" Font-Size="Small" Wrap="true" ReadOnly="true" Height="50" Width="100%" TextMode="MultiLine" runat="server"></asp:TextBox>
         </div>
     </div> 
+    
 </asp:Panel>
 

@@ -40,6 +40,15 @@ public class BasePage : System.Web.UI.Page
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
         }
+        else
+        {
+            //Set default culture
+            this.UICulture = "en-GB";
+            this.Culture = "en-GB";
+            System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.CreateSpecificCulture("en-GB");
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+        }
         base.InitializeCulture();
     }
 

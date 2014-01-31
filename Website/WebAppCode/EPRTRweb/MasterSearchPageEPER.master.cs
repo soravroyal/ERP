@@ -20,7 +20,8 @@ public partial class MasterSearchPageEPER : System.Web.UI.MasterPage
     private const string EXPAND_SECTOR = "expandSector";
     private const string EXPAND_HEAD = "expandHead";
     private const string EXPAND_VISIBLE = "expandVisible";
-        
+
+    public string strYears = "";
     /// <summary>
     /// Page load, set expand script
     /// </summary>
@@ -32,7 +33,20 @@ public partial class MasterSearchPageEPER : System.Web.UI.MasterPage
         string head = (ViewState[EXPAND_HEAD] == null) ? String.Empty : ViewState[EXPAND_HEAD].ToString();
         string visible = (ViewState[EXPAND_VISIBLE] == null) ? String.Empty : ViewState[EXPAND_VISIBLE].ToString();
 
-         
+
+        if (!Page.IsPostBack)
+        {
+            List<int> yearList = QueryLayer.ReportinYear.GetReportingYearsEPER();
+
+
+            foreach (int p in yearList)
+            {
+                if (strYears != "")
+                    strYears += "," + p.ToString();
+                else
+                    strYears = p.ToString();
+            }
+        }
 
     }
 

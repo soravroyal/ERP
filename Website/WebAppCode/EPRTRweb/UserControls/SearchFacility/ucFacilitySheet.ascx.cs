@@ -65,6 +65,7 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
     /// </summary>
     public void Populate(string facilityReportID)
     {
+
         if (String.IsNullOrEmpty(facilityReportID))
         {
             FacilityBasic = null;
@@ -95,6 +96,9 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
             int year = Convert.ToInt32(reportingYear);
             FacilityBasic = Facility.GetFacilityBasic(facId, year);
             Populate(facId, year, Sheets.FacilityDetails.Details.ToString());
+
+            TextBox1.Value = FacilityBasic.FacilityReportId.ToString();
+           
         }
     }
 
@@ -186,7 +190,6 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
 
         if (basic != null)
         {
-
             int facilityReportID = basic.FacilityReportId;
             int year = basic.ReportingYear;
 
@@ -196,6 +199,11 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
                 this.ucSheetTitleIcon.ImageURL = null;
                 info = null;
                 this.ucFacilityDetails.Populate(facilityReportID);
+                //this.ucFacilityDetails.reloadMap(facilityReportID);
+
+
+
+
                 this.ucFacilityDetails.Visible = true;
                 disclaimer = CMSTextCache.CMSText("Facility", "DisclaimerTextFacilityDetails");
                 alert = basic.Confidential ? Resources.GetGlobal("Facility", "ConfidentialityAlertLink") : string.Empty;
@@ -258,6 +266,7 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
                 headline = Resources.GetGlobal("Facility", "FacilitylevelDetails");
             }
 
+
         }
         else
         {
@@ -269,6 +278,8 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
         setInfoIcon(info);
         updateHeader(txt);
         updateAlert(alert);
+
+
 
     }
 
@@ -352,12 +363,16 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
 
     protected void OnClickPrevious(object sender, EventArgs e)
     {
-        switchYear(PreviousYear);
+        //switchYear(PreviousYear);
+        Response.Redirect("~/FacilityDetails.aspx?FacilityId=" + PreviousYear.FacilityId + "&ReportingYear=" + PreviousYear.ReportingYear);
+
     }
 
     protected void OnClickNext(object sender, EventArgs e)
     {
-        switchYear(NextYear);
+        //switchYear(NextYear);
+        Response.Redirect("~/FacilityDetails.aspx?FacilityId=" + NextYear.FacilityId + "&ReportingYear=" + NextYear.ReportingYear);
+
     }
 
     private void switchYear(Facility.FacilityReportingYear fy)

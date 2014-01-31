@@ -7,9 +7,78 @@
         
         <%--<%$ Common:PrintRefresh %>--%>
         <div id="facilityimage">
-            <eprtr:ucFacilityDetailsMap ID="ucFacilityDetailsMap" runat="server" />
+           <!-- <eprtr:ucFacilityDetailsMap ID="ucFacilityDetailsMap" runat="server" />-->
+             <div class="facilityMap">
+                <script type="text/javascript">
+                    //<![CDATA[
+                    var path_location = location.pathname.replace(/\/[^/]+$/, '');            
+                     path_location +='/JS_Map_Min';          
+                     var dojoConfig = {
+                        parseOnLoad: true,
+                        packages: [ { 
+                                name: "utilities",
+                                location: path_location + '/javascript' 
+                             },{
+                                name: "templateConfig",
+                                location: path_location 
+                             }
+                        ],
+		                modulePaths: {
+                            'agsjs': path_location + '/javascript/agsjs'
+                        }
+                      };
+                    // ]]>
+                </script>
+                <script type="text/javascript" src="//js.arcgis.com/3.7"></script>
+                <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        // NOT DELETE - Necesary to create the map_details with the filter of FacilityReportID
+                        var facilityReportID = $('#ctl00_ContentPlaceHolderMaster_ContentInfoArea_ucFacilitySheetEPER_TextBox1').val();
+
+                        //<![CDATA[
+                        dojo.require("utilities.app");
+                        dojo.require("templateConfig.commonConfig");
+
+                        dojo.ready(function () {
+
+                            var defaults = {
+                                //webmap: "40c4c1892d5a45539b0ee95a0cae7b65",
+                                webmap: "29ca3f3396f34d19b612c18870f6efb9",
+                                bingmapskey: commonConfig.bingMapsKey,
+                                sharingurl: "",
+                                proxyurl: "",
+                                helperServices: commonConfig.helperServices,
+                                autoquery: "false",
+                                zoomto: "true",
+                                mapName: "map_details",
+                                reportid: facilityReportID,
+                                serviceName: "http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/1",
+                                layerID: "EprtrFacilities_Dyna_WGS84_1098"
+
+                            };
+
+
+                            var app = new utilities.App(defaults);
+                            app.init().then(function (options) {
+                                init(options);
+                            });
+
+                        });
+                    });
+                    // ]]>
+
+                </script>
+
+
+                <div class="claroMin">
+                    <div id="map_details" style="width:400px;height:400px;"></div>
+                </div>
+            </div> 
+
             <asp:Image id="detailmapprint" ImageUrl="" alt="<%$ Resources:Common,PrintRefresh %>" runat="server" visible="true" CssClass="facilityMapPrint" />
         </div>
+        
         
         <div id="facilityreportdetails">
             <asp:GridView ID="facilityreportDetails" OnRowDataBound="GridView1_RowDataBound"

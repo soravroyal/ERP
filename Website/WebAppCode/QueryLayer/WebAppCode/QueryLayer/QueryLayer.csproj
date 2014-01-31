@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8225010E-65FA-420F-9FB0-A481A93E446F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QueryLayer</RootNamespace>
+    <AssemblyName>QueryLayer</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>http://localhost/QueryLayer/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AreaOverview.cs" />
+    <Compile Include="DataClassesPollutantRelease.cs">
+      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesPollutantRelease.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesPollutantTransfer.cs">
+      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesPollutantTransfer.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesCulture.cs">
+      <DependentUpon>DataClassesCulture.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesCulture.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesCulture.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesFacility.cs">
+      <DependentUpon>DataClassesFacility.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesFacility.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesFacility.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesLOV.cs">
+      <DependentUpon>DataClassesLOV.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesLOV.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesLOV.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesNews.cs">
+      <DependentUpon>DataClassesNews.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesNews.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesNews.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesWasteTransfer.cs">
+      <DependentUpon>DataClassesWasteTransfer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="DataClassesWasteTransfer.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClassesWasteTransfer.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\CoordinateStatus.cs" />
+    <Compile Include="Facility.cs" />
+    <Compile Include="Filters\ActivityFilter.cs" />
+    <Compile Include="Filters\AreaFilter.cs" />
+    <Compile Include="Filters\AreaOverviewSearchFilter.cs" />
+    <Compile Include="Filters\AccidentalFilter.cs" />
+    <Compile Include="Filters\FilterConverter.cs" />
+    <Compile Include="Filters\WasteTransferTimeSeriesFilter.cs" />
+    <Compile Include="Filters\PollutantReleasesTimeSeriesFilter.cs" />
+    <Compile Include="Filters\PollutantTransferTimeSeriesFilter.cs" />
+    <Compile Include="Filters\PeriodFilter.cs" />
+    <Compile Include="Filters\DiffuseSourcesFilter.cs" />
+    <Compile Include="Filters\MapFilter.cs" />
+    <Compile Include="Filters\WasteReceiverFilter.cs" />
+    <Compile Include="Filters\WasteTreatmentFilter.cs" />
+    <Compile Include="Filters\FacilityLocationFilter.cs" />
+    <Compile Include="Filters\FacilitySearchFilter.cs" />
+    <Compile Include="Filters\IndustrialActivitySearchFilter.cs" />
+    <Compile Include="Filters\MediumFilter.cs" />
+    <Compile Include="Filters\PollutantFilter.cs" />
+    <Compile Include="Filters\PollutantReleasesSearchFilter.cs" />
+    <Compile Include="Filters\PollutantTransferSearchFilter.cs" />
+    <Compile Include="Filters\WasteTypeFilter.cs" />
+    <Compile Include="Filters\WasteTransferSearchFilter.cs" />
+    <Compile Include="Filters\YearFilter.cs" />
+    <Compile Include="IndustrialActivity.cs" />
+    <Compile Include="LinqFramework\LinqFunctionsPollutantTransfer.cs" />
+    <Compile Include="LinqFramework\LinqFunctionsPollutantRelease.cs" />
+    <Compile Include="LinqFramework\LinqFunctionsWaste.cs" />
+    <Compile Include="LinqFramework\LinqExtensions.cs" />
+    <Compile Include="LinqFramework\LinqExpressionBuilder.cs" />
+    <Compile Include="ListOfValues.cs" />
+    <Compile Include="News.cs" />
+    <Compile Include="PollutantReleases.cs" />
+    <Compile Include="PollutantReleaseTrend.cs" />
+    <Compile Include="PollutantTransfers.cs" />
+    <Compile Include="PollutantTransferTrend.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\QuantityUnit.cs" />
+    <Compile Include="Utilities\AccidentalPercent.cs" />
+    <Compile Include="Utilities\ActivityTreeListRow.cs" />
+    <Compile Include="Utilities\AreaTreeListRow.cs" />
+    <Compile Include="Utilities\DoubleExtensions.cs" />
+    <Compile Include="Utilities\EnumUtil.cs" />
+    <Compile Include="Utilities\Summary.cs" />
+    <Compile Include="Utilities\TimeSeriesClasses.cs" />
+    <Compile Include="Utilities\TreeListRow.cs" />
+    <Compile Include="WasteTransfers.cs" />
+    <Compile Include="WasteTransferTrend.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesFacility.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesFacility.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesFacility.dbml.layout">
+      <DependentUpon>DataClassesFacility.dbml</DependentUpon>
+    </None>
+    <None Include="DataClassesLOV.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesLOV.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesLOV.dbml.layout">
+      <DependentUpon>DataClassesLOV.dbml</DependentUpon>
+    </None>
+    <None Include="DataClassesNews.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesNews.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesCulture.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesCulture.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataClassesNews.dbml.layout">
+      <DependentUpon>DataClassesNews.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesCulture.dbml.layout">
+      <DependentUpon>DataClassesCulture.dbml</DependentUpon>
+    </None>
+    <None Include="DataClassesWasteTransfer.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesWasteTransfer.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesPollutantTransfer.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesPollutantTransfer.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataClassesWasteTransfer.dbml.layout">
+      <DependentUpon>DataClassesWasteTransfer.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesPollutantRelease.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClassesPollutantRelease.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataClassesPollutantTransfer.dbml.layout">
+      <DependentUpon>DataClassesPollutantTransfer.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LinqUtilities\LinqUtilities.csproj">
+      <Project>{3B3166B8-A93C-4636-AB19-BAEEC9DA1709}</Project>
+      <Name>LinqUtilities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DataClassesPollutantRelease.dbml.layout">
+      <DependentUpon>DataClassesPollutantRelease.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

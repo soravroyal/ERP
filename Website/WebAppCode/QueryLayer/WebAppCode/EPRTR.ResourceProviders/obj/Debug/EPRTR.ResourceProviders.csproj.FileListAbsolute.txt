@@ -1,0 +1,10 @@
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll.config
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\bin\Debug\EPRTR.ResourceProviders.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\bin\Debug\LinqUtilities.pdb
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.csprojResolveAssemblyReference.cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.Properties.Resource.resources
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.csproj.GenerateResource.Cache
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.dll
+C:\Users\norio\Documents\Visual Studio 2010\Projects\PRTR\PRTR_Sprint10\WebAppCode\EPRTR.ResourceProviders\obj\Debug\EPRTR.ResourceProviders.pdb

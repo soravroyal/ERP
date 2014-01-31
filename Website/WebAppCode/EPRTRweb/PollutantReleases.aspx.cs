@@ -9,7 +9,7 @@ public partial class PollutantReleases : BasePage
 {
 
     /// <summary>
-    /// Page load, add flash map and assign eventhandler
+    /// Page load and assign eventhandler
     /// </summary>
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,12 +19,7 @@ public partial class PollutantReleases : BasePage
             ((MasterSearchPage)this.Master).ShowMapPanel(Global.MainSearchPages.PollutantReleases);
         }
 
-        if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
-        {
-            // add swf object to page
-            MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.PollutantReleases, Request.ApplicationPath);
-        }
-
+     
         if (this.ucSearchOptions.InvokeSearch == null)
             this.ucSearchOptions.InvokeSearch = new EventHandler(doSearch);
 
@@ -64,19 +59,19 @@ public partial class PollutantReleases : BasePage
         PollutantReleaseSearchFilter filter = sender as PollutantReleaseSearchFilter;
         if (filter != null)
         {
+            // call javascript map_small
+            updateJavaScriptMap(filter);
             this.ucPollutantReleasesSheet.Populate(filter);
-            updateFlashMap(filter);
+           
         }
     }
+ 
 
-    /// <summary>
-    /// update flash map
-    /// </summary>
-    private void updateFlashMap(PollutantReleaseSearchFilter filter)
+    private void updateJavaScriptMap(PollutantReleaseSearchFilter filter)
     {
-        MapFilter mapfilter = QueryLayer.PollutantReleases.GetMapFilter(filter);
-        string header = MapPrintDetails.Build(SheetHeaderBuilder.GetPollutantReleaseSearchHeader(filter, false));
-        MapUtils.UpdateSmallMap(MasterSearchPage.MAPID, this, this.ClientID, mapfilter, header, Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapfilter, header);
+        MapFilter mapfilter = QueryLayer.PollutantReleases.GetMapJavascriptFilter(filter);
+
+
+        MapJavaScriptUtils.UpdateJavaScriptMap(mapfilter, Page);
     }
 }

@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Jobs executionTime="1" commandTimeout="3600" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="J:\E-PRTR Test\Performance Test\SPPerformanceTester\TestRunData.xsd">
+	<Job name="Users: 50 (A)">
+		<Threads>
+			<Thread name="MyThread" Id="1" ThreadCopies="50">
+				<Tasks>
+					<Script executionString="use EPRTRWeb
+											DECLARE @p0 int
+											DECLARE @p1 int
+											DECLARE @p2 int
+											DECLARE @p3 int
+											DECLARE @p4 int
+											DECLARE @p5 int
+											DECLARE @p6 int
+											DECLARE @p7 int
+											DECLARE @p8 int
+											DECLARE @p9 int
+											DECLARE @p10 int
+											DECLARE @p11 int
+											DECLARE @p12 int
+											DECLARE @p13 int
+											DECLARE @p14 int
+											DECLARE @p15 int
+											DECLARE @p16 int
+											DECLARE @p17 int
+											DECLARE @p18 int
+											DECLARE @p19 int
+											DECLARE @p20 int
+											DECLARE @p21 int
+											DECLARE @p22 int
+											DECLARE @p23 int
+											DECLARE @p24 int
+											DECLARE @p25 int
+											DECLARE @p26 int
+											DECLARE @p27 int
+											DECLARE @p28 int
+											DECLARE @p29 int
+											DECLARE @p30 int
+											DECLARE @p31 int
+											DECLARE @p32 NVarChar(255)
+											DECLARE @p33 NVarChar(255)
+											DECLARE @p34 NVarChar(255)
+											DECLARE @p35 NVarChar(255)
+											DECLARE @p36 NVarChar(255)
+											DECLARE @p37 NVarChar(255)
+											DECLARE @p38 NVarChar(255)
+											DECLARE @p39 NVarChar(255)
+											DECLARE @p40 NVarChar(255)
+											DECLARE @p41 NVarChar(255)
+											DECLARE @p42 NVarChar(255)
+
+											SET @p0 = 2007
+											SET @p1 = 15
+											SET @p2 = 22
+											SET @p3 = 34
+											SET @p4 = 57
+											SET @p5 = 58
+											SET @p6 = 59
+											SET @p7 = 68
+											SET @p8 = 73
+											SET @p9 = 74
+											SET @p10 = 81
+											SET @p11 = 85
+											SET @p12 = 100
+											SET @p13 = 101
+											SET @p14 = 106
+											SET @p15 = 109
+											SET @p16 = 122
+											SET @p17 = 127
+											SET @p18 = 128
+											SET @p19 = 129
+											SET @p20 = 137
+											SET @p21 = 156
+											SET @p22 = 166
+											SET @p23 = 177
+											SET @p24 = 178
+											SET @p25 = 182
+											SET @p26 = 201
+											SET @p27 = 202
+											SET @p28 = 207
+											SET @p29 = 213
+											SET @p30 = 214
+											SET @p31 = 234
+											SET @p32 = 'AIR'
+											SET @p33 = 'LAND'
+											SET @p34 = 'WATER'
+											SET @p35 = 'WASTEWATER'
+											SET @p36 = 'NON-HW'
+											SET @p37 = 'HWIC'
+											SET @p38 = 'HWOC'
+											SET @p39 = 'HW'
+											SET @p40 = 'R'
+											SET @p41 = 'D'
+											SET @p42 = NULL
+
+											SELECT [t0].[FacilityReportID], [t0].[FacilityName], [t0].[FacilityID], [t0].[NationalID], [t0].[ParentCompanyName], [t0].[ReportingYear], [t0].[Address], [t0].[City], [t0].[PostalCode], [t0].[CountryCode], [t0].[LOV_CountryID], [t0].[RiverBasinDistrictCode], [t0].[LOV_RiverBasinDistrictID], [t0].[NUTSLevel2RegionCode], [t0].[LOV_NUTSRLevel1ID], [t0].[LOV_NUTSRLevel2ID], [t0].[LOV_NUTSRLevel3ID], [t0].[IASectorCode], [t0].[IAActivityCode], [t0].[IASubActivityCode], [t0].[IPPCSectorCode], [t0].[IPPCActivityCode], [t0].[IPPCSubActivityCode], [t0].[LOV_IASectorID], [t0].[LOV_IAActivityID], [t0].[LOV_IASubActivityID], [t0].[NACESectorCode], [t0].[NACEActivityCode], [t0].[NACESubActivityCode], [t0].[LOV_NACESectorID], [t0].[LOV_NACEActivityID], [t0].[LOV_NACESubActivityID], [t0].[IAReportedActivityCode], [t0].[IPPCReportedActivityCode], [t0].[NACEReportedActivityCode], [t0].[ConfidentialCode], [t0].[LOV_ConfidentialityID], [t0].[ConfidentialIndicator], [t0].[ConfidentialIndicatorWaste], [t0].[ConfidentialIndicatorPollutantRelease], [t0].[ConfidentialIndicatorPollutantTransfer]
+											FROM [dbo].[FACILITYSEARCH_MAINACTIVITY] AS [t0]
+											WHERE EXISTS(
+												SELECT NULL AS [EMPTY]
+												FROM (
+													SELECT DISTINCT [t1].[FacilityReportID]
+													FROM [dbo].[FACILITYSEARCH_ALL] AS [t1]
+													WHERE ([t1].[ReportingYear] = @p0) AND (([t1].[LOV_CountryID] = @p1) OR ([t1].[LOV_CountryID] = @p2) OR ([t1].[LOV_CountryID] = @p3) OR ([t1].[LOV_CountryID] = @p4) OR ([t1].[LOV_CountryID] = @p5) OR ([t1].[LOV_CountryID] = @p6) OR ([t1].[LOV_CountryID] = @p7) OR ([t1].[LOV_CountryID] = @p8) OR ([t1].[LOV_CountryID] = @p9) OR ([t1].[LOV_CountryID] = @p10) OR ([t1].[LOV_CountryID] = @p11) OR ([t1].[LOV_CountryID] = @p12) OR ([t1].[LOV_CountryID] = @p13) OR ([t1].[LOV_CountryID] = @p14) OR ([t1].[LOV_CountryID] = @p15) OR ([t1].[LOV_CountryID] = @p16) OR ([t1].[LOV_CountryID] = @p17) OR ([t1].[LOV_CountryID] = @p18) OR ([t1].[LOV_CountryID] = @p19) OR ([t1].[LOV_CountryID] = @p20) OR ([t1].[LOV_CountryID] = @p21) OR ([t1].[LOV_CountryID] = @p22) OR ([t1].[LOV_CountryID] = @p23) OR ([t1].[LOV_CountryID] = @p24) OR ([t1].[LOV_CountryID] = @p25) OR ([t1].[LOV_CountryID] = @p26) OR ([t1].[LOV_CountryID] = @p27) OR ([t1].[LOV_CountryID] = @p28) OR ([t1].[LOV_CountryID] = @p29) OR ([t1].[LOV_CountryID] = @p30) OR ([t1].[LOV_CountryID] = @p31)) AND (([t1].[MediumCode] = @p32) OR ([t1].[MediumCode] = @p33) OR ([t1].[MediumCode] = @p34) OR ([t1].[MediumCode] = @p35)) AND (([t1].[WasteTypeCode] = @p36) OR ([t1].[WasteTypeCode] = @p37) OR ([t1].[WasteTypeCode] = @p38) OR ([t1].[WasteTypeCode] = @p39)) AND (([t1].[WasteTreatmentCode] = @p40) OR ([t1].[WasteTreatmentCode] = @p41) OR ([t1].[WasteTreatmentCode] = @p42))
+													) AS [t2]
+												WHERE [t2].[FacilityReportID] = [t0].[FacilityReportID]
+												)
+											ORDER BY [t0].[FacilityName]" />
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="Users: 50 (B)">
+		<Threads>
+			<Thread name="MyThread" Id="1" ThreadCopies="50">
+				<Tasks>
+					<Script executionString="use EPRTRWeb
+											DECLARE @p0 int
+											DECLARE @p1 int
+											DECLARE @p2 int
+											DECLARE @p3 int
+											DECLARE @p4 int
+											DECLARE @p5 int
+											DECLARE @p6 int
+											DECLARE @p7 int
+											DECLARE @p8 int
+											DECLARE @p9 int
+											DECLARE @p10 int
+											DECLARE @p11 int
+											DECLARE @p12 int
+											DECLARE @p13 int
+											DECLARE @p14 int
+											DECLARE @p15 int
+											DECLARE @p16 int
+											DECLARE @p17 int
+											DECLARE @p18 int
+											DECLARE @p19 int
+											DECLARE @p20 int
+											DECLARE @p21 int
+											DECLARE @p22 int
+											DECLARE @p23 int
+											DECLARE @p24 int
+											DECLARE @p25 int
+											DECLARE @p26 int
+											DECLARE @p27 int
+											DECLARE @p28 int
+											DECLARE @p29 int
+											DECLARE @p30 int
+											DECLARE @p31 int
+											DECLARE @p32 NVarChar(255)
+											DECLARE @p33 NVarChar(255)
+											DECLARE @p34 NVarChar(255)
+											DECLARE @p35 NVarChar(255)
+											DECLARE @p36 NVarChar(255)
+											DECLARE @p37 NVarChar(255)
+											DECLARE @p38 NVarChar(255)
+											DECLARE @p39 NVarChar(255)
+											DECLARE @p40 NVarChar(255)
+											DECLARE @p41 NVarChar(255)
+											DECLARE @p42 NVarChar(255)
+
+											SET @p0 = 2007
+											SET @p1 = 15
+											SET @p2 = 22
+											SET @p3 = 34
+											SET @p4 = 57
+											SET @p5 = 58
+											SET @p6 = 59
+											SET @p7 = 68
+											SET @p8 = 73
+											SET @p9 = 74
+											SET @p10 = 81
+											SET @p11 = 85
+											SET @p12 = 100
+											SET @p13 = 101
+											SET @p14 = 106
+											SET @p15 = 109
+											SET @p16 = 122
+											SET @p17 = 127
+											SET @p18 = 128
+											SET @p19 = 129
+											SET @p20 = 137
+											SET @p21 = 156
+											SET @p22 = 166
+											SET @p23 = 177
+											SET @p24 = 178
+											SET @p25 = 182
+											SET @p26 = 201
+											SET @p27 = 202
+											SET @p28 = 207
+											SET @p29 = 213
+											SET @p30 = 214
+											SET @p31 = 234
+											SET @p32 = 'AIR'
+											SET @p33 = 'LAND'
+											SET @p34 = 'WATER'
+											SET @p35 = 'WASTEWATER'
+											SET @p36 = 'NON-HW'
+											SET @p37 = 'HWIC'
+											SET @p38 = 'HWOC'
+											SET @p39 = 'HW'
+											SET @p40 = 'R'
+											SET @p41 = 'D'
+											SET @p42 = NULL
+
+											SELECT [t0].[FacilityReportID], [t0].[FacilityName], [t0].[FacilityID], [t0].[NationalID], [t0].[ParentCompanyName], [t0].[ReportingYear], [t0].[Address], [t0].[City], [t0].[PostalCode], [t0].[CountryCode], [t0].[LOV_CountryID], [t0].[RiverBasinDistrictCode], [t0].[LOV_RiverBasinDistrictID], [t0].[NUTSLevel2RegionCode], [t0].[LOV_NUTSRLevel1ID], [t0].[LOV_NUTSRLevel2ID], [t0].[LOV_NUTSRLevel3ID], [t0].[IASectorCode], [t0].[IAActivityCode], [t0].[IASubActivityCode], [t0].[IPPCSectorCode], [t0].[IPPCActivityCode], [t0].[IPPCSubActivityCode], [t0].[LOV_IASectorID], [t0].[LOV_IAActivityID], [t0].[LOV_IASubActivityID], [t0].[NACESectorCode], [t0].[NACEActivityCode], [t0].[NACESubActivityCode], [t0].[LOV_NACESectorID], [t0].[LOV_NACEActivityID], [t0].[LOV_NACESubActivityID], [t0].[IAReportedActivityCode], [t0].[IPPCReportedActivityCode], [t0].[NACEReportedActivityCode], [t0].[ConfidentialCode], [t0].[LOV_ConfidentialityID], [t0].[ConfidentialIndicator], [t0].[ConfidentialIndicatorWaste], [t0].[ConfidentialIndicatorPollutantRelease], [t0].[ConfidentialIndicatorPollutantTransfer]
+											FROM [dbo].[FACILITYSEARCH_MAINACTIVITY] AS [t0]
+											WHERE EXISTS(
+												SELECT NULL AS [EMPTY]
+												FROM (
+													SELECT DISTINCT [t1].[FacilityReportID]
+													FROM [dbo].[FACILITYSEARCH_ALL] AS [t1]
+													WHERE ([t1].[ReportingYear] = @p0) AND (([t1].[LOV_CountryID] = @p1) OR ([t1].[LOV_CountryID] = @p2) OR ([t1].[LOV_CountryID] = @p3) OR ([t1].[LOV_CountryID] = @p4) OR ([t1].[LOV_CountryID] = @p5) OR ([t1].[LOV_CountryID] = @p6) OR ([t1].[LOV_CountryID] = @p7) OR ([t1].[LOV_CountryID] = @p8) OR ([t1].[LOV_CountryID] = @p9) OR ([t1].[LOV_CountryID] = @p10) OR ([t1].[LOV_CountryID] = @p11) OR ([t1].[LOV_CountryID] = @p12) OR ([t1].[LOV_CountryID] = @p13) OR ([t1].[LOV_CountryID] = @p14) OR ([t1].[LOV_CountryID] = @p15) OR ([t1].[LOV_CountryID] = @p16) OR ([t1].[LOV_CountryID] = @p17) OR ([t1].[LOV_CountryID] = @p18) OR ([t1].[LOV_CountryID] = @p19) OR ([t1].[LOV_CountryID] = @p20) OR ([t1].[LOV_CountryID] = @p21) OR ([t1].[LOV_CountryID] = @p22) OR ([t1].[LOV_CountryID] = @p23) OR ([t1].[LOV_CountryID] = @p24) OR ([t1].[LOV_CountryID] = @p25) OR ([t1].[LOV_CountryID] = @p26) OR ([t1].[LOV_CountryID] = @p27) OR ([t1].[LOV_CountryID] = @p28) OR ([t1].[LOV_CountryID] = @p29) OR ([t1].[LOV_CountryID] = @p30) OR ([t1].[LOV_CountryID] = @p31)) AND (([t1].[MediumCode] = @p32) OR ([t1].[MediumCode] = @p33) OR ([t1].[MediumCode] = @p34) OR ([t1].[MediumCode] = @p35)) AND (([t1].[WasteTypeCode] = @p36) OR ([t1].[WasteTypeCode] = @p37) OR ([t1].[WasteTypeCode] = @p38) OR ([t1].[WasteTypeCode] = @p39)) AND (([t1].[WasteTreatmentCode] = @p40) OR ([t1].[WasteTreatmentCode] = @p41) OR ([t1].[WasteTreatmentCode] = @p42))
+													) AS [t2]
+												WHERE [t2].[FacilityReportID] = [t0].[FacilityReportID]
+												)
+											ORDER BY [t0].[FacilityName]" />
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="Users: 50 (C)">
+		<Threads>
+			<Thread name="MyThread" Id="1" ThreadCopies="50">
+				<Tasks>
+					<Script executionString="use EPRTRWeb
+											DECLARE @p0 int
+											DECLARE @p1 int
+											DECLARE @p2 int
+											DECLARE @p3 int
+											DECLARE @p4 int
+											DECLARE @p5 int
+											DECLARE @p6 int
+											DECLARE @p7 int
+											DECLARE @p8 int
+											DECLARE @p9 int
+											DECLARE @p10 int
+											DECLARE @p11 int
+											DECLARE @p12 int
+											DECLARE @p13 int
+											DECLARE @p14 int
+											DECLARE @p15 int
+											DECLARE @p16 int
+											DECLARE @p17 int
+											DECLARE @p18 int
+											DECLARE @p19 int
+											DECLARE @p20 int
+											DECLARE @p21 int
+											DECLARE @p22 int
+											DECLARE @p23 int
+											DECLARE @p24 int
+											DECLARE @p25 int
+											DECLARE @p26 int
+											DECLARE @p27 int
+											DECLARE @p28 int
+											DECLARE @p29 int
+											DECLARE @p30 int
+											DECLARE @p31 int
+											DECLARE @p32 NVarChar(255)
+											DECLARE @p33 NVarChar(255)
+											DECLARE @p34 NVarChar(255)
+											DECLARE @p35 NVarChar(255)
+											DECLARE @p36 NVarChar(255)
+											DECLARE @p37 NVarChar(255)
+											DECLARE @p38 NVarChar(255)
+											DECLARE @p39 NVarChar(255)
+											DECLARE @p40 NVarChar(255)
+											DECLARE @p41 NVarChar(255)
+											DECLARE @p42 NVarChar(255)
+
+											SET @p0 = 2007
+											SET @p1 = 15
+											SET @p2 = 22
+											SET @p3 = 34
+											SET @p4 = 57
+											SET @p5 = 58
+											SET @p6 = 59
+											SET @p7 = 68
+											SET @p8 = 73
+											SET @p9 = 74
+											SET @p10 = 81
+											SET @p11 = 85
+											SET @p12 = 100
+											SET @p13 = 101
+											SET @p14 = 106
+											SET @p15 = 109
+											SET @p16 = 122
+											SET @p17 = 127
+											SET @p18 = 128
+											SET @p19 = 129
+											SET @p20 = 137
+											SET @p21 = 156
+											SET @p22 = 166
+											SET @p23 = 177
+											SET @p24 = 178
+											SET @p25 = 182
+											SET @p26 = 201
+											SET @p27 = 202
+											SET @p28 = 207
+											SET @p29 = 213
+											SET @p30 = 214
+											SET @p31 = 234
+											SET @p32 = 'AIR'
+											SET @p33 = 'LAND'
+											SET @p34 = 'WATER'
+											SET @p35 = 'WASTEWATER'
+											SET @p36 = 'NON-HW'
+											SET @p37 = 'HWIC'
+											SET @p38 = 'HWOC'
+											SET @p39 = 'HW'
+											SET @p40 = 'R'
+											SET @p41 = 'D'
+											SET @p42 = NULL
+
+											SELECT [t0].[FacilityReportID], [t0].[FacilityName], [t0].[FacilityID], [t0].[NationalID], [t0].[ParentCompanyName], [t0].[ReportingYear], [t0].[Address], [t0].[City], [t0].[PostalCode], [t0].[CountryCode], [t0].[LOV_CountryID], [t0].[RiverBasinDistrictCode], [t0].[LOV_RiverBasinDistrictID], [t0].[NUTSLevel2RegionCode], [t0].[LOV_NUTSRLevel1ID], [t0].[LOV_NUTSRLevel2ID], [t0].[LOV_NUTSRLevel3ID], [t0].[IASectorCode], [t0].[IAActivityCode], [t0].[IASubActivityCode], [t0].[IPPCSectorCode], [t0].[IPPCActivityCode], [t0].[IPPCSubActivityCode], [t0].[LOV_IASectorID], [t0].[LOV_IAActivityID], [t0].[LOV_IASubActivityID], [t0].[NACESectorCode], [t0].[NACEActivityCode], [t0].[NACESubActivityCode], [t0].[LOV_NACESectorID], [t0].[LOV_NACEActivityID], [t0].[LOV_NACESubActivityID], [t0].[IAReportedActivityCode], [t0].[IPPCReportedActivityCode], [t0].[NACEReportedActivityCode], [t0].[ConfidentialCode], [t0].[LOV_ConfidentialityID], [t0].[ConfidentialIndicator], [t0].[ConfidentialIndicatorWaste], [t0].[ConfidentialIndicatorPollutantRelease], [t0].[ConfidentialIndicatorPollutantTransfer]
+											FROM [dbo].[FACILITYSEARCH_MAINACTIVITY] AS [t0]
+											WHERE EXISTS(
+												SELECT NULL AS [EMPTY]
+												FROM (
+													SELECT DISTINCT [t1].[FacilityReportID]
+													FROM [dbo].[FACILITYSEARCH_ALL] AS [t1]
+													WHERE ([t1].[ReportingYear] = @p0) AND (([t1].[LOV_CountryID] = @p1) OR ([t1].[LOV_CountryID] = @p2) OR ([t1].[LOV_CountryID] = @p3) OR ([t1].[LOV_CountryID] = @p4) OR ([t1].[LOV_CountryID] = @p5) OR ([t1].[LOV_CountryID] = @p6) OR ([t1].[LOV_CountryID] = @p7) OR ([t1].[LOV_CountryID] = @p8) OR ([t1].[LOV_CountryID] = @p9) OR ([t1].[LOV_CountryID] = @p10) OR ([t1].[LOV_CountryID] = @p11) OR ([t1].[LOV_CountryID] = @p12) OR ([t1].[LOV_CountryID] = @p13) OR ([t1].[LOV_CountryID] = @p14) OR ([t1].[LOV_CountryID] = @p15) OR ([t1].[LOV_CountryID] = @p16) OR ([t1].[LOV_CountryID] = @p17) OR ([t1].[LOV_CountryID] = @p18) OR ([t1].[LOV_CountryID] = @p19) OR ([t1].[LOV_CountryID] = @p20) OR ([t1].[LOV_CountryID] = @p21) OR ([t1].[LOV_CountryID] = @p22) OR ([t1].[LOV_CountryID] = @p23) OR ([t1].[LOV_CountryID] = @p24) OR ([t1].[LOV_CountryID] = @p25) OR ([t1].[LOV_CountryID] = @p26) OR ([t1].[LOV_CountryID] = @p27) OR ([t1].[LOV_CountryID] = @p28) OR ([t1].[LOV_CountryID] = @p29) OR ([t1].[LOV_CountryID] = @p30) OR ([t1].[LOV_CountryID] = @p31)) AND (([t1].[MediumCode] = @p32) OR ([t1].[MediumCode] = @p33) OR ([t1].[MediumCode] = @p34) OR ([t1].[MediumCode] = @p35)) AND (([t1].[WasteTypeCode] = @p36) OR ([t1].[WasteTypeCode] = @p37) OR ([t1].[WasteTypeCode] = @p38) OR ([t1].[WasteTypeCode] = @p39)) AND (([t1].[WasteTreatmentCode] = @p40) OR ([t1].[WasteTreatmentCode] = @p41) OR ([t1].[WasteTreatmentCode] = @p42))
+													) AS [t2]
+												WHERE [t2].[FacilityReportID] = [t0].[FacilityReportID]
+												)
+											ORDER BY [t0].[FacilityName]" />
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="Users: 50 (D)">
+		<Threads>
+			<Thread name="MyThread" Id="1" ThreadCopies="50">
+				<Tasks>
+					<Script executionString="use EPRTRWeb
+											DECLARE @p0 int
+											DECLARE @p1 int
+											DECLARE @p2 int
+											DECLARE @p3 int
+											DECLARE @p4 int
+											DECLARE @p5 int
+											DECLARE @p6 int
+											DECLARE @p7 int
+											DECLARE @p8 int
+											DECLARE @p9 int
+											DECLARE @p10 int
+											DECLARE @p11 int
+											DECLARE @p12 int
+											DECLARE @p13 int
+											DECLARE @p14 int
+											DECLARE @p15 int
+											DECLARE @p16 int
+											DECLARE @p17 int
+											DECLARE @p18 int
+											DECLARE @p19 int
+											DECLARE @p20 int
+											DECLARE @p21 int
+											DECLARE @p22 int
+											DECLARE @p23 int
+											DECLARE @p24 int
+											DECLARE @p25 int
+											DECLARE @p26 int
+											DECLARE @p27 int
+											DECLARE @p28 int
+											DECLARE @p29 int
+											DECLARE @p30 int
+											DECLARE @p31 int
+											DECLARE @p32 NVarChar(255)
+											DECLARE @p33 NVarChar(255)
+											DECLARE @p34 NVarChar(255)
+											DECLARE @p35 NVarChar(255)
+											DECLARE @p36 NVarChar(255)
+											DECLARE @p37 NVarChar(255)
+											DECLARE @p38 NVarChar(255)
+											DECLARE @p39 NVarChar(255)
+											DECLARE @p40 NVarChar(255)
+											DECLARE @p41 NVarChar(255)
+											DECLARE @p42 NVarChar(255)
+
+											SET @p0 = 2007
+											SET @p1 = 15
+											SET @p2 = 22
+											SET @p3 = 34
+											SET @p4 = 57
+											SET @p5 = 58
+											SET @p6 = 59
+											SET @p7 = 68
+											SET @p8 = 73
+											SET @p9 = 74
+											SET @p10 = 81
+											SET @p11 = 85
+											SET @p12 = 100
+											SET @p13 = 101
+											SET @p14 = 106
+											SET @p15 = 109
+											SET @p16 = 122
+											SET @p17 = 127
+											SET @p18 = 128
+											SET @p19 = 129
+											SET @p20 = 137
+											SET @p21 = 156
+											SET @p22 = 166
+											SET @p23 = 177
+											SET @p24 = 178
+											SET @p25 = 182
+											SET @p26 = 201
+											SET @p27 = 202
+											SET @p28 = 207
+											SET @p29 = 213
+											SET @p30 = 214
+											SET @p31 = 234
+											SET @p32 = 'AIR'
+											SET @p33 = 'LAND'
+											SET @p34 = 'WATER'
+											SET @p35 = 'WASTEWATER'
+											SET @p36 = 'NON-HW'
+											SET @p37 = 'HWIC'
+											SET @p38 = 'HWOC'
+											SET @p39 = 'HW'
+											SET @p40 = 'R'
+											SET @p41 = 'D'
+											SET @p42 = NULL
+
+											SELECT [t0].[FacilityReportID], [t0].[FacilityName], [t0].[FacilityID], [t0].[NationalID], [t0].[ParentCompanyName], [t0].[ReportingYear], [t0].[Address], [t0].[City], [t0].[PostalCode], [t0].[CountryCode], [t0].[LOV_CountryID], [t0].[RiverBasinDistrictCode], [t0].[LOV_RiverBasinDistrictID], [t0].[NUTSLevel2RegionCode], [t0].[LOV_NUTSRLevel1ID], [t0].[LOV_NUTSRLevel2ID], [t0].[LOV_NUTSRLevel3ID], [t0].[IASectorCode], [t0].[IAActivityCode], [t0].[IASubActivityCode], [t0].[IPPCSectorCode], [t0].[IPPCActivityCode], [t0].[IPPCSubActivityCode], [t0].[LOV_IASectorID], [t0].[LOV_IAActivityID], [t0].[LOV_IASubActivityID], [t0].[NACESectorCode], [t0].[NACEActivityCode], [t0].[NACESubActivityCode], [t0].[LOV_NACESectorID], [t0].[LOV_NACEActivityID], [t0].[LOV_NACESubActivityID], [t0].[IAReportedActivityCode], [t0].[IPPCReportedActivityCode], [t0].[NACEReportedActivityCode], [t0].[ConfidentialCode], [t0].[LOV_ConfidentialityID], [t0].[ConfidentialIndicator], [t0].[ConfidentialIndicatorWaste], [t0].[ConfidentialIndicatorPollutantRelease], [t0].[ConfidentialIndicatorPollutantTransfer]
+											FROM [dbo].[FACILITYSEARCH_MAINACTIVITY] AS [t0]
+											WHERE EXISTS(
+												SELECT NULL AS [EMPTY]
+												FROM (
+													SELECT DISTINCT [t1].[FacilityReportID]
+													FROM [dbo].[FACILITYSEARCH_ALL] AS [t1]
+													WHERE ([t1].[ReportingYear] = @p0) AND (([t1].[LOV_CountryID] = @p1) OR ([t1].[LOV_CountryID] = @p2) OR ([t1].[LOV_CountryID] = @p3) OR ([t1].[LOV_CountryID] = @p4) OR ([t1].[LOV_CountryID] = @p5) OR ([t1].[LOV_CountryID] = @p6) OR ([t1].[LOV_CountryID] = @p7) OR ([t1].[LOV_CountryID] = @p8) OR ([t1].[LOV_CountryID] = @p9) OR ([t1].[LOV_CountryID] = @p10) OR ([t1].[LOV_CountryID] = @p11) OR ([t1].[LOV_CountryID] = @p12) OR ([t1].[LOV_CountryID] = @p13) OR ([t1].[LOV_CountryID] = @p14) OR ([t1].[LOV_CountryID] = @p15) OR ([t1].[LOV_CountryID] = @p16) OR ([t1].[LOV_CountryID] = @p17) OR ([t1].[LOV_CountryID] = @p18) OR ([t1].[LOV_CountryID] = @p19) OR ([t1].[LOV_CountryID] = @p20) OR ([t1].[LOV_CountryID] = @p21) OR ([t1].[LOV_CountryID] = @p22) OR ([t1].[LOV_CountryID] = @p23) OR ([t1].[LOV_CountryID] = @p24) OR ([t1].[LOV_CountryID] = @p25) OR ([t1].[LOV_CountryID] = @p26) OR ([t1].[LOV_CountryID] = @p27) OR ([t1].[LOV_CountryID] = @p28) OR ([t1].[LOV_CountryID] = @p29) OR ([t1].[LOV_CountryID] = @p30) OR ([t1].[LOV_CountryID] = @p31)) AND (([t1].[MediumCode] = @p32) OR ([t1].[MediumCode] = @p33) OR ([t1].[MediumCode] = @p34) OR ([t1].[MediumCode] = @p35)) AND (([t1].[WasteTypeCode] = @p36) OR ([t1].[WasteTypeCode] = @p37) OR ([t1].[WasteTypeCode] = @p38) OR ([t1].[WasteTypeCode] = @p39)) AND (([t1].[WasteTreatmentCode] = @p40) OR ([t1].[WasteTreatmentCode] = @p41) OR ([t1].[WasteTreatmentCode] = @p42))
+													) AS [t2]
+												WHERE [t2].[FacilityReportID] = [t0].[FacilityReportID]
+												)
+											ORDER BY [t0].[FacilityName]" />
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+	<Job name="Users: 50 (E)">
+		<Threads>
+			<Thread name="MyThread" Id="1" ThreadCopies="50">
+				<Tasks>
+					<Script executionString="use EPRTRWeb
+											DECLARE @p0 int
+											DECLARE @p1 int
+											DECLARE @p2 int
+											DECLARE @p3 int
+											DECLARE @p4 int
+											DECLARE @p5 int
+											DECLARE @p6 int
+											DECLARE @p7 int
+											DECLARE @p8 int
+											DECLARE @p9 int
+											DECLARE @p10 int
+											DECLARE @p11 int
+											DECLARE @p12 int
+											DECLARE @p13 int
+											DECLARE @p14 int
+											DECLARE @p15 int
+											DECLARE @p16 int
+											DECLARE @p17 int
+											DECLARE @p18 int
+											DECLARE @p19 int
+											DECLARE @p20 int
+											DECLARE @p21 int
+											DECLARE @p22 int
+											DECLARE @p23 int
+											DECLARE @p24 int
+											DECLARE @p25 int
+											DECLARE @p26 int
+											DECLARE @p27 int
+											DECLARE @p28 int
+											DECLARE @p29 int
+											DECLARE @p30 int
+											DECLARE @p31 int
+											DECLARE @p32 NVarChar(255)
+											DECLARE @p33 NVarChar(255)
+											DECLARE @p34 NVarChar(255)
+											DECLARE @p35 NVarChar(255)
+											DECLARE @p36 NVarChar(255)
+											DECLARE @p37 NVarChar(255)
+											DECLARE @p38 NVarChar(255)
+											DECLARE @p39 NVarChar(255)
+											DECLARE @p40 NVarChar(255)
+											DECLARE @p41 NVarChar(255)
+											DECLARE @p42 NVarChar(255)
+
+											SET @p0 = 2007
+											SET @p1 = 15
+											SET @p2 = 22
+											SET @p3 = 34
+											SET @p4 = 57
+											SET @p5 = 58
+											SET @p6 = 59
+											SET @p7 = 68
+											SET @p8 = 73
+											SET @p9 = 74
+											SET @p10 = 81
+											SET @p11 = 85
+											SET @p12 = 100
+											SET @p13 = 101
+											SET @p14 = 106
+											SET @p15 = 109
+											SET @p16 = 122
+											SET @p17 = 127
+											SET @p18 = 128
+											SET @p19 = 129
+											SET @p20 = 137
+											SET @p21 = 156
+											SET @p22 = 166
+											SET @p23 = 177
+											SET @p24 = 178
+											SET @p25 = 182
+											SET @p26 = 201
+											SET @p27 = 202
+											SET @p28 = 207
+											SET @p29 = 213
+											SET @p30 = 214
+											SET @p31 = 234
+											SET @p32 = 'AIR'
+											SET @p33 = 'LAND'
+											SET @p34 = 'WATER'
+											SET @p35 = 'WASTEWATER'
+											SET @p36 = 'NON-HW'
+											SET @p37 = 'HWIC'
+											SET @p38 = 'HWOC'
+											SET @p39 = 'HW'
+											SET @p40 = 'R'
+											SET @p41 = 'D'
+											SET @p42 = NULL
+
+											SELECT [t0].[FacilityReportID], [t0].[FacilityName], [t0].[FacilityID], [t0].[NationalID], [t0].[ParentCompanyName], [t0].[ReportingYear], [t0].[Address], [t0].[City], [t0].[PostalCode], [t0].[CountryCode], [t0].[LOV_CountryID], [t0].[RiverBasinDistrictCode], [t0].[LOV_RiverBasinDistrictID], [t0].[NUTSLevel2RegionCode], [t0].[LOV_NUTSRLevel1ID], [t0].[LOV_NUTSRLevel2ID], [t0].[LOV_NUTSRLevel3ID], [t0].[IASectorCode], [t0].[IAActivityCode], [t0].[IASubActivityCode], [t0].[IPPCSectorCode], [t0].[IPPCActivityCode], [t0].[IPPCSubActivityCode], [t0].[LOV_IASectorID], [t0].[LOV_IAActivityID], [t0].[LOV_IASubActivityID], [t0].[NACESectorCode], [t0].[NACEActivityCode], [t0].[NACESubActivityCode], [t0].[LOV_NACESectorID], [t0].[LOV_NACEActivityID], [t0].[LOV_NACESubActivityID], [t0].[IAReportedActivityCode], [t0].[IPPCReportedActivityCode], [t0].[NACEReportedActivityCode], [t0].[ConfidentialCode], [t0].[LOV_ConfidentialityID], [t0].[ConfidentialIndicator], [t0].[ConfidentialIndicatorWaste], [t0].[ConfidentialIndicatorPollutantRelease], [t0].[ConfidentialIndicatorPollutantTransfer]
+											FROM [dbo].[FACILITYSEARCH_MAINACTIVITY] AS [t0]
+											WHERE EXISTS(
+												SELECT NULL AS [EMPTY]
+												FROM (
+													SELECT DISTINCT [t1].[FacilityReportID]
+													FROM [dbo].[FACILITYSEARCH_ALL] AS [t1]
+													WHERE ([t1].[ReportingYear] = @p0) AND (([t1].[LOV_CountryID] = @p1) OR ([t1].[LOV_CountryID] = @p2) OR ([t1].[LOV_CountryID] = @p3) OR ([t1].[LOV_CountryID] = @p4) OR ([t1].[LOV_CountryID] = @p5) OR ([t1].[LOV_CountryID] = @p6) OR ([t1].[LOV_CountryID] = @p7) OR ([t1].[LOV_CountryID] = @p8) OR ([t1].[LOV_CountryID] = @p9) OR ([t1].[LOV_CountryID] = @p10) OR ([t1].[LOV_CountryID] = @p11) OR ([t1].[LOV_CountryID] = @p12) OR ([t1].[LOV_CountryID] = @p13) OR ([t1].[LOV_CountryID] = @p14) OR ([t1].[LOV_CountryID] = @p15) OR ([t1].[LOV_CountryID] = @p16) OR ([t1].[LOV_CountryID] = @p17) OR ([t1].[LOV_CountryID] = @p18) OR ([t1].[LOV_CountryID] = @p19) OR ([t1].[LOV_CountryID] = @p20) OR ([t1].[LOV_CountryID] = @p21) OR ([t1].[LOV_CountryID] = @p22) OR ([t1].[LOV_CountryID] = @p23) OR ([t1].[LOV_CountryID] = @p24) OR ([t1].[LOV_CountryID] = @p25) OR ([t1].[LOV_CountryID] = @p26) OR ([t1].[LOV_CountryID] = @p27) OR ([t1].[LOV_CountryID] = @p28) OR ([t1].[LOV_CountryID] = @p29) OR ([t1].[LOV_CountryID] = @p30) OR ([t1].[LOV_CountryID] = @p31)) AND (([t1].[MediumCode] = @p32) OR ([t1].[MediumCode] = @p33) OR ([t1].[MediumCode] = @p34) OR ([t1].[MediumCode] = @p35)) AND (([t1].[WasteTypeCode] = @p36) OR ([t1].[WasteTypeCode] = @p37) OR ([t1].[WasteTypeCode] = @p38) OR ([t1].[WasteTypeCode] = @p39)) AND (([t1].[WasteTreatmentCode] = @p40) OR ([t1].[WasteTreatmentCode] = @p41) OR ([t1].[WasteTreatmentCode] = @p42))
+													) AS [t2]
+												WHERE [t2].[FacilityReportID] = [t0].[FacilityReportID]
+												)
+											ORDER BY [t0].[FacilityName]" />
+				</Tasks>
+			</Thread>
+		</Threads>
+	</Job>
+</Jobs>

@@ -1,0 +1,60 @@
+.agsjsTOCNode {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	background-color: #FFFFFF;
+}
+
+.agsjsTOCContent {
+	white-space: nowrap;
+}
+
+.agsjsTOCOutOfScale {
+	color: gray;
+	opacity: 0.5;
+}
+
+.agsjsTOCRootLayer {
+}
+
+.agsjsTOCRootLayerLabel {
+	font-size: 1.2em;
+	/*font-weight: bold;*/
+	padding-left: 5px;
+}
+
+.agsjsTOCGroupLayer {
+	/*font-weight: bold;*/
+}
+
+.agsjsTOCGroupLayerLabel {
+	font-size: 1em;
+}
+
+.agsjsTOCGroupLayer {
+	/*font-weight: bold;*/
+}
+
+.agsjsTOCLayerLabel {
+	font-size: 1em;
+	padding-left: 7px;
+	padding-right: 3px;
+}
+
+.agsjsTOCLegendIcon {
+	/* width: 50px;*/
+}
+
+.agsjsTOCLegendLabel {
+	font-size: 0.9em;
+	padding-left: 7px;
+}
+
+.agsjsTOCSlider {
+	padding: 12px 20px 5px 30px;
+}
+.claro .dijitTreeExpando {
+	height: 13px;
+}
+.agsjsTOCNode {
+	padding:3px;
+}
