@@ -77,6 +77,7 @@ public partial class ucFacilitySheet : System.Web.UI.UserControl
         }
 
         populateDefaultContent();
+        TextBox1.Value = facilityReportID;
     }
 
     /// <summary>
