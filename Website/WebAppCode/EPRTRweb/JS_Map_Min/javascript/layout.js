@@ -64,12 +64,11 @@ function init(initOptions) {
     appcontent = new utilities.EEACreateContent();
     appcontent.createLayout().then(function() {
         createMap();
-		
     });
-
 }
 
 function createMap() {
+    //debugger
     var popup = new esri.dijit.Popup({
         offsetX : 10,
         offsetY : 10,
@@ -115,7 +114,6 @@ function createMap() {
         switch (map.id) {
             case "map_smallmap":
                 map1 = response.map;
-
                 break;
             case "map_extendedmap":
                 map2 = response.map;
@@ -142,7 +140,6 @@ function createMap() {
 				addSearchWidget(map2);
                 break;
             case "map_detailsmap":          
-;
                 map3 = response.map;
                 filterFacilityDetails(options.layerID, options.serviceName, "FacilityReportID = " + options.reportid)
                 break;
@@ -154,7 +151,7 @@ function createMap() {
                 addLegend(response);
                 // add basemap gallery
                 addBasemapGalleryMenu(map4);
-                // add layer list
+			    // add layer list
                 addLayerList(response.itemInfo.itemData.operationalLayers, map4);
                 // add print options
                 addPrint(map4, map4);
@@ -167,8 +164,29 @@ function createMap() {
                 // add overview
                 addOverview(false,map4);
                 // add searches
-                
                 addSearchWidget(map4);
+			    //show default layer ("E-PRTR Facilities")
+                var operationalLayers = response.itemInfo.itemData.operationalLayers;
+                var defaultLayerId = "EprtrFacilities_Dyna_WGS84_1098";
+                var defaultLayerLabel;
+                dojo.forEach(operationalLayers, function (operationalLayer, index) {
+                    if (operationalLayer.id == defaultLayerId) {
+                        defaultLayerLabel = operationalLayer.title;
+                        //break;
+                    }
+                });
+                var menu = dijit.byId('layerMenu'); //layerMenu id is set in addLayerList function
+                var checkedItems = menu.getChildren(0); //get all children and iterate over
+			    dojo.forEach(checkedItems, function(checkedItem) {
+			        if (checkedItem.label == defaultLayerLabel) {
+                        //set checked value of dropdown-check box
+			            checkedItem.set('checked', true);
+                        //call onChange method to activate legend and layer
+			            checkedItem.onChange();
+			            //break;
+			        }
+			    });
+                break;
         }
 
         var layers = response.itemInfo.itemData.operationalLayers;
@@ -212,12 +230,10 @@ function createMap() {
 
         });
 
-
     }, function (error) {
         alert(options.i18n.viewer.errors.message, error);
 
     });
-
 }
 
 function filterLayers(layers, map) {
@@ -840,8 +856,8 @@ function showLeftPanel() {
         
       
         //if(dojo.byId(options.mapName + "legendContainer").style.width != "0px")
-        if(dojo.byId(options.mapName + "legendContainer").style.display == "block")
-            hideLeftPanel()
+        if (dojo.byId(options.mapName + "legendContainer").style.display == "block")
+           hideLeftPanel();
         else
         {
         dojo.style(dojo.byId(options.mapName + "legendContainer"), "width", "200px");
@@ -862,11 +878,9 @@ function showLeftPanel() {
         }
         }  
         
-        dijit.byId(options.mapName+"mainWindow").resize();
-
-    
-		
+        dijit.byId(options.mapName+"mainWindow").resize();  	
 	}
+	
 function hideLeftPanel() {	
  
     
@@ -939,9 +953,9 @@ function addLayerList(layers,map) {
 			id : 'layerMenu'
 		});
 	
-		var layerInfos = [];
+        
 		dojo.forEach(layerList, function(layer) {
-			menu.addChild(new dijit.CheckedMenuItem({
+		    menu.addChild(new dijit.CheckedMenuItem({
 				label : layer.title,
 				checked : layer.visible,
 				onChange : function() {
@@ -953,7 +967,6 @@ function addLayerList(layers,map) {
 							layer.layerObject.setVisibility(!layer.layerObject.visible);
 						});
 					} else {
-				
 						layer.layer.setVisibility(!layer.layer.visible);
 						//if(layer.layer.visible && (dojo.byId(options.mapName + "legendContainer").style.width == "0px"))                         
                         if(layer.layer.visible && (dojo.byId(options.mapName + "legendContainer").style.display == "none"))                         
@@ -965,10 +978,6 @@ function addLayerList(layers,map) {
 
 				}
 			}));
-			if (layer.layer.layerInfos)
-				layerInfos.push(layer.layer.layerInfos);
-			layerInfos[0][1].setVisibility = false;	
-				
 		});
 		
 		cp.set('content', menu.domNode);
@@ -1018,6 +1027,7 @@ function buildLayerVisibleList(layers) {
 function addPrint(map, response) {	
         var legendLayer = new esri.tasks.LegendLayer();
         legendLayer.layerId = "EprtrFacilities_Dyna_WGS84_1098";
+
         legendLayer.subLayerIds = [];
 	    // create an array of objects that will be used to create print templates
           var layouts = [{
