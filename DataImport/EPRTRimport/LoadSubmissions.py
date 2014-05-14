@@ -32,40 +32,40 @@ class cdrEnvelope(object):
     releasedate = None
     uploaded = None
     restricted = None
-    xmlfilepath = None 
-    xmlfilename = None 
+    xmlfilepath = None
+    xmlfilename = None
 #    ':[
 #    ['feedback1365517838', 1, 'text/html', '<p>\n European E\n', None, '2013-04-09 16:30:38']
 #  , ['AutomaticQA_87808_1365518161', 1, 'text/html;charset=UTF-8', '<div style="font-size:13px;">\n', 'EPRTR__Iceland_reporting_year_2011.XML', '2013-04-09 16:30:38']
 #  , ['AutomaticQA_87809_1365518161', 1, 'text/html', 'Feedback too large for inline display; <a href="qa-output/view">see attachment</a>.', 'EPRTR__Iceland_reporting_year_2011.XML', '2013-04-09 16:30:38']
-#  , ['AutomaticQA_87814_1365518162', 1, 'text/html;charset=UTF-8', '<div class="feedbacktext">/div>\n', 'EPRTR__Iceland_reporting_year_2011.XML', '2013-04-09 16:30:38'], 
-#    ['AutomaticQA_87813_1365518162', 1, 'text/html;charset=UTF-8', u'<div style="font-size:13px;" .XML', '2013-04-09 16:30:38'], 
+#  , ['AutomaticQA_87814_1365518162', 1, 'text/html;charset=UTF-8', '<div class="feedbacktext">/div>\n', 'EPRTR__Iceland_reporting_year_2011.XML', '2013-04-09 16:30:38'],
+#    ['AutomaticQA_87813_1365518162', 1, 'text/html;charset=UTF-8', u'<div style="font-size:13px;" .XML', '2013-04-09 16:30:38'],
 #    ['AutomaticQA_87812_1365518162', 1, 'text/html;charset=UTF-8', u'<div class="feedbacktext"\n', 'EPRTR__Iceland_reporting_year_2011.XML', '2013-04-09 16:30:38']
 #]
 #    , 'released': '2013-04-09T14:30:38Z'}
     def __init__(self):
-        return    
+        return
 
 
 class dbfunc():
-    
+
     def __init__(self):
         self.conf = Config()
         self.envs = []
         return
-    
+
     #===========================================================================
     # This function loads SQL files into memory and executres the SQL
     # Each row is loaded into a strin unless it starts with --
     # When the row contains GO or ; the SQL sting is executed and reset to ''
-    # If the SQL creates a stored procedure the ; is ignored   
+    # If the SQL creates a stored procedure the ; is ignored
     #===========================================================================
     def readSqlFile(self, conn, sqlpath):
         try:
             _sp = False
             sqlQuery = ''
             with open(sqlpath, 'r') as inp:
-                
+
                 for line in inp:
                     if 'create procedure' in line: _sp = True
                     if line == 'GO\n':
@@ -82,7 +82,7 @@ class dbfunc():
                         print(disp, '\r')
                     else:
                         sqlQuery = sqlQuery + line
-              
+
                 if str(sqlQuery).strip() != '':
                     conn.execute_non_query(sqlQuery)
                     sqlQuery = ''
@@ -90,19 +90,19 @@ class dbfunc():
             inp.close()
             return 1
         except _mssql.MssqlDatabaseException,e:
-            messages = 'MssqlDatabaseException raised\n' 
+            messages = 'MssqlDatabaseException raised\n'
             messages += 'File: %s' %  sqlpath
-            messages += ' message: %s\n' % e.message 
-            messages += ' number: %s\n' % e.number 
-            messages += ' severity: %s\n' % e.severity 
+            messages += ' message: %s\n' % e.message
+            messages += ' number: %s\n' % e.number
+            messages += ' severity: %s\n' % e.severity
             messages += ' state: %s\n' % e.state
             print messages
-            return 0 
+            return 0
         except _mssql.MssqlDriverException ,e:
-            messages = 'MssqlDriverException  raised\n' 
-            messages += ' message: %s\n' % e.message 
+            messages = 'MssqlDriverException  raised\n'
+            messages += ' message: %s\n' % e.message
             print messages
-            return 0 
+            return 0
         except:
             tb = sys.exc_info()[2]
             tbinfo = traceback.format_tb(tb)[0]
@@ -110,9 +110,9 @@ class dbfunc():
     #            print pymsg
             print messages
             return 0
-    
+
     #===========================================================================
-    # This function recreates the Eprtrxml database 
+    # This function recreates the Eprtrxml database
     # This is done for each new xml import
     #===========================================================================
     def recreateXMLDB(self):
@@ -136,23 +136,23 @@ class dbfunc():
             #sqlcmd -i %basedir%\Add_aux_cols_4_xmlimport.sql
             #sqlcmd -i %basedir%\SP_FindPreviousReferences.sql
             #sqlcmd -i %basedir%\copyXMLdata2EPRTR.sql
-            #sqlcmd -i %basedir%\EPRTRXML_validate_procedure.sql        
+            #sqlcmd -i %basedir%\EPRTRXML_validate_procedure.sql
             print 'EPRTRxml database now recreated'
             return 1
 
         except _mssql.MssqlDatabaseException,e:
-            messages = 'MssqlDatabaseException raised\n' 
-            messages += ' message: %s\n' % e.message 
-            messages += ' number: %s\n' % e.number 
-            messages += ' severity: %s\n' % e.severity 
+            messages = 'MssqlDatabaseException raised\n'
+            messages += ' message: %s\n' % e.message
+            messages += ' number: %s\n' % e.number
+            messages += ' severity: %s\n' % e.severity
             messages += ' state: %s\n' % e.state
             print messages
-            return 0 
+            return 0
         except _mssql.MssqlDriverException ,e:
-            messages = 'MssqlDriverException  raised\n' 
-            messages += ' message: %s\n' % e.message 
+            messages = 'MssqlDriverException  raised\n'
+            messages += ' message: %s\n' % e.message
             print messages
-            return 0 
+            return 0
         except:
             tb = sys.exc_info()[2]
             tbinfo = traceback.format_tb(tb)[0]
@@ -164,7 +164,7 @@ class dbfunc():
             conn.close()
 
 #===============================================================================
-# This function is called from batch instead to produce log output            
+# This function is called from batch instead to produce log output
 #===============================================================================
 #     def importXMLintoXMLdb(self, xmlfile):
 #         try:
@@ -176,7 +176,7 @@ class dbfunc():
 #             for line in p.stdout.readlines():
 #                 print line
 #                 retval = p.wait()
-# 
+#
 #             return 1
 #         except:
 #             tb = sys.exc_info()[2]
@@ -187,7 +187,7 @@ class dbfunc():
 #             return 0
 
     #===========================================================================
-    # This function request the recent EPRTR website for submission to download 
+    # This function request the recent EPRTR website for submission to download
     # In order to do so we use the xmlrpc library to request xmlrpc functions on cdr
     #===========================================================================
     def requestSubmissions(self):
@@ -198,15 +198,15 @@ class dbfunc():
             for envelope in server.xmlrpc_search_envelopes_feedback(self.conf.obligation, self.conf.released):
                 _b = False
                 #Filter on begin date - submissions uploaded after this date - date set in config file
-                if self.conf.minReportingDate is not None and self.getDate(str(envelope['released']).upper().replace('Z', '')) < self.getDate(self.conf.minReportingDate): 
+                if self.conf.minReportingDate is not None and self.getDate(str(envelope['released']).upper().replace('Z', '')) < self.getDate(self.conf.minReportingDate):
                     continue
                 #Filter on end date - submissions uploaded before this date - date set in config file
-                if self.conf.maxReportingDate is not None and self.getDate(str(envelope['released']).upper().replace('Z', '')) > self.getDate(self.conf.maxReportingDate): 
+                if self.conf.maxReportingDate is not None and self.getDate(str(envelope['released']).upper().replace('Z', '')) > self.getDate(self.conf.maxReportingDate):
                     continue
                 # Ready for import is the feedback title that indicates that the xml file are ready for import
-                if not 'ready for import' in str(envelope['feedbacks'][len(envelope['feedbacks'])-1]).lower(): 
+                if not 'ready for import' in str(envelope['feedbacks'][len(envelope['feedbacks'])-1]).lower():
                     continue
-                
+
                 _env = cdrEnvelope()
                 _env.country = envelope['country']
                 _env.country_code = envelope['country_code']
@@ -224,17 +224,17 @@ class dbfunc():
                 _env.feedbacks = envelope['feedbacks']
 #                _env.events = envelope['events']
                 self.envs.append(_env)
-            
-            #We order the list by year and then by country        
+
+            #We order the list by year and then by country
             self.envs.sort(key=operator.attrgetter('startyear'), reverse=False)
             self.envs.sort(key=operator.attrgetter('country_code'), reverse=False)
-# 
+#
             for _e in self.envs:
 #                     print _fe[len(_fe)-1]# '%s * %s * %s * %s' % (_fe[0],_fe[1],_fe[2],_fe[5])
                 print '%s * %s * %s * %s * %s * %s' % (_e.country_code, _e.startyear, _e.endyear,_e.title, _e.url, _e.released)
             print 'Number of submissions: %s' % len(self.envs)
-            return 1 
-               
+            return 1
+
         except xmlrpclib.ProtocolError as err:
             print "A protocol error occurred"
             print "URL: %s" % err.url
@@ -271,20 +271,20 @@ class dbfunc():
         try:
             tree = parse(StringIO.StringIO(_url.read()))
             elem = tree.getroot()
-    
+
             for child in elem:
                 if "date" in child.tag:
-                    env.releasedate = str(child.text).replace('Z','')                
+                    env.releasedate = str(child.text).replace('Z','')
                 if "file" in child.tag:
                     if child.get('type') == "text/xml":
-                        env.xmlfilepath = child.get('link') 
+                        env.xmlfilepath = child.get('link')
                         env.xmlfilename = child.get('name')
                         env.restricted = True if (str(child.get('restricted')).lower() == 'yes') else False
-                        if path == 'http://cdr.eionet.europa.eu/ie/eu/eprtrdat/envuwwvcg': 
-                            print env.xmlfilename, ' - ',child.get('restricted'),' - ',str(env.restricted) 
-                        env.uploaded = str(child.get('uploaded')).replace('Z','') 
+                        if path == 'http://cdr.eionet.europa.eu/ie/eu/eprtrdat/envuwwvcg':
+                            print env.xmlfilename, ' - ',child.get('restricted'),' - ',str(env.restricted)
+                        env.uploaded = str(child.get('uploaded')).replace('Z','')
                         break
- 
+
             del child, elem, tree
             return 1
         except:
@@ -335,10 +335,10 @@ class dbfunc():
 #             EXEC @res = EPRTRxml.dbo.import_xml @pCDRURL=N'{0}',@pCDRUploaded=N'{1}', @pCDRReleased=N'{2}', @pResubmitReason='{3}';
 #             SELECT @res
 #             """.format(env.url, env.releasedate, env.releasedate, env.description)
-#             
-#             res = conn.execute_scalar(_sql) 
+#
+#             res = conn.execute_scalar(_sql)
 #             print 'Validation returned: %s' % res
-# 
+#
 # #echo Copying data from xml to master
 # #sqlcmd -i %sqlscript_dir%\reset_cols_4_xmlimport.sql
 # #sqlcmd -Q "EXEC EPRTRxml.dbo.import_xml @pCDRURL=N'%cdrUrl%',@pCDRUploaded=N'%cdrUploaded%', @pCDRReleased=N'%cdrReleased%', @pResubmitReason='%cdrDescription%';"
@@ -354,22 +354,30 @@ class dbfunc():
 
 
     #===========================================================================
-    # This function calls the Validate_and_Import_XML_File.bat batch file 
+    # This function calls the Validate_and_Import_XML_File.bat batch file
     # It is called i a way so that the print statements from the stored procedure is loaded into the log file
     # to call an external program/ batch we use subprocess.Popen
     #===========================================================================
     def callexebat(self,name,env):
         try:
-            _str = '"%s" > %s %s %s %s ' % (self.conf.batpath,os.path.join(self.conf.path,'logs',name + '.log'),self.conf.curr,self.conf.path,'true' if self.conf.validate else 'false')
-#            Validate_and_Import_XML_File.bat > %data_dir%\logs\!filename!.log %basedir%  %data_dir%  %doValidate% 
+            _str = '%s > %s %s %s %s ' % (self.conf.batpath,os.path.join(self.conf.path,'logs',name + '.log'),self.conf.curr,self.conf.path,'true' if self.conf.validate else 'false')
+        #   _str = '"%s", %s, %s, %s, %s, ' % (self.conf.batpath,os.path.join(self.conf.path,'logs',name + '.log'),self.conf.curr,self.conf.path,'true' if self.conf.validate else 'false')
+
+#            Validate_and_Import_XML_File.bat > %data_dir%\logs\!filename!.log %basedir%  %data_dir%  %doValidate%
             _str += '"%s" %s "%s" "%s" "%s" "%s"' % (env.title,name,env.url,env.uploaded if (env.uploaded is not None and env.uploaded is not '') else env.releasedate,env.releasedate,env.description)
+        #   _str += '"%s", %s, "%s", "%s", "%s", "%s",' % (env.title,name,env.url,env.uploaded if (env.uploaded is not None and env.uploaded is not '') else env.releasedate,env.releasedate,env.description)
+
 #             "!title!"  !filename!  "!cdrUrl!"  "!cdrUploaded!"  "!cdrReleased!"  "!cdrDescription!"
             _str += ' %s %s %s' % (self.conf.sp['server'],self.conf.sp['user'], self.conf.sp['passw'])
+        #   _str += ' %s, %s, %s' % (self.conf.sp['server'],self.conf.sp['user'], self.conf.sp['passw'])
+            print _str
+            _str = _str.replace('\n','')
 #            p = subprocess.Popen([]_str, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             p = subprocess.Popen(_str, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 #            print p.communicate()[0]
             for line in p.stdout.readlines():
                 print line
+                raw_input()
                 retval = p.wait()
 #                call Validate_and_Import_XML_File.bat > %data_dir%\logs\!filename!.log %basedir%  %data_dir%  %doValidate%  "!title!"  !filename!  "!cdrUrl!"  "!cdrUploaded!"  "!cdrReleased!"  "!cdrDescription!"
             return 1
@@ -382,15 +390,15 @@ class dbfunc():
             return 0
 
     #===========================================================================
-    # This function writes a status csv file in the log folder summerizing which files that has been imported and some meta data 
+    # This function writes a status csv file in the log folder summerizing which files that has been imported and some meta data
     #===========================================================================
     def writecsv(self):
         try:
             _csv = os.path.join(self.conf.path,'logs','eprtrimport_%s.csv'% (datetime.datetime.now().strftime("%Y_%m_%d_%H%M")))
-            with open(_csv, 'wb') as f:  
+            with open(_csv, 'wb') as f:
                 writer = csv.writer(f, delimiter=';',quoting=csv.QUOTE_NONE, escapechar = '\\')
-    #            writer.writerows(someiterable)        #spamWriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])    
-                writer.writerow(['#Year','Country code','Country','CDR url','Released','Uploaded','Description','Envelope','Files','Logfile','Restricted']) 
+    #            writer.writerows(someiterable)        #spamWriter.writerow(['Spam', 'Lovely Spam', 'Wonderful Spam'])
+                writer.writerow(['#Year','Country code','Country','CDR url','Released','Uploaded','Description','Envelope','Files','Logfile','Restricted'])
                 _c = 0
                 for _env in self.envs:
                     _l = []
@@ -406,7 +414,7 @@ class dbfunc():
                     _l.append(_env.name + '.log')
                     _l.append(_env.restricted)
                     writer.writerow(_l)
-                    _c += 1 
+                    _c += 1
                     if self.conf.limited is not None and _c >= self.conf.limited: break
 
             return 1
@@ -419,45 +427,45 @@ class dbfunc():
             return 0
 
     #===========================================================================
-    # This function is a reuse - a function to parse a date string into a datetime object 
+    # This function is a reuse - a function to parse a date string into a datetime object
     #===========================================================================
     def getDate(self,inp):
         _obsDate = None
-        if len(inp)>26: 
+        if len(inp)>26:
             inp = inp[:26]
         if len(inp)>14 and int(inp[11:13]) == 24:
             #Changes to day after 2012-08-05T24:00:00 => 2012-08-06T00:00:00
             _newdate = datetime.datetime(int(inp[0:4]),int(inp[5:7]),int(inp[8:10]),0,int(inp[14:16]),int(inp[17:19]))
-            return _newdate + datetime.timedelta(1)# + datetime.timedelta(milliseconds=-3)  
+            return _newdate + datetime.timedelta(1)# + datetime.timedelta(milliseconds=-3)
         else:
             format_str = "%Y-%m-%dT%H:%M:%S"
             try:
                 return datetime.datetime.strptime(inp, format_str)
-            except ValueError: 
+            except ValueError:
                 format_str = "%Y-%m-%dT%H:%M:%Sz"
                 try:
                     return datetime.datetime.strptime(inp, format_str)
-                except ValueError: 
+                except ValueError:
                     try:
                         format_str = format_str[:19]
                         return datetime.datetime.strptime(inp, format_str)
-                    except ValueError: 
+                    except ValueError:
                         try:
                             format_str = "%Y-%m-%d %H:%M:%S"
                             return datetime.datetime.strptime(inp, format_str)
-                        except ValueError: 
+                        except ValueError:
                             try:
                                 format_str = "%Y-%m-%d %H:%M:%S.%f"
                                 return datetime.datetime.strptime(inp, format_str)
-                            except ValueError: 
+                            except ValueError:
                                 try:
                                     format_str = "%d-%m-%Y %H:%M:%S"
                                     return datetime.datetime.strptime(inp, format_str)
-                                except ValueError: 
+                                except ValueError:
                                     try:
                                         format_str = "%Y-%m-%d"
                                         return datetime.datetime.strptime(inp, format_str)
-                                    except ValueError:  
+                                    except ValueError:
                                         return None
 
     #===========================================================================
@@ -489,12 +497,12 @@ class dbfunc():
                     return 0
             _c += 1
             if self.conf.limited is not None and _c >= self.conf.limited: break
-                
+
         if not self.writecsv():
             print 'Error in writing status csv file!'
             return 0
         print 'EPRTR files successfully imported!'
-        
+
 if __name__ == '__main__':
     ei = dbfunc()
     ei.go()
