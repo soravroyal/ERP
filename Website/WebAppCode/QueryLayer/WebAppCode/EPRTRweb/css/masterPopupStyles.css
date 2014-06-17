@@ -1,0 +1,141 @@
+﻿/* Master page
+-------------------------------------------------------------- */
+
+.page_container
+{
+	background-color: #FFFFFF;
+	width: 800px;
+	height: auto;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #CCCCCC;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCCCCC;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCCCCC;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #CCCCCC;
+}
+
+/* Top bar
+-------------------------------------------------------------- */
+
+.topBar1 {
+	background-color: #94AECE;
+	float: left;
+	height: 40px;
+	width: 809px;
+	font-size: 16px;
+	color: #000000;
+	padding-top: 10px;
+	padding-left: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #666666;
+}
+
+.topBar2 {
+	background-color: #C6EBF7;
+	float: left;
+	height: 17px;
+	width: 809px;
+	padding-left: 10px;
+	}
+
+.E-PRTR_name {
+	font-size: 11px;
+	color: #000000;
+	text-decoration: none;
+	margin-top: 3px;
+	float: left;
+	width: 500px;
+	clear: left;
+}
+
+.EU_flag {
+	background: url('../images/eu_newlogo.png') no-repeat center;
+	float: right;
+	height: 52px;
+	width: 80px;
+	margin-right: 10px;
+	clear: none;
+	margin-top: -40px;
+}
+
+/* Bottom bar
+-------------------------------------------------------------- */
+
+.bottom_bar {
+	background-color: #94AECE;
+	clear: both;
+	float: left;
+	height: 35px;
+	width: 804px;
+	margin-top: 10px;
+	border-top: 1px solid #666666;
+	border-right: none #666666;
+	border-bottom: none #666666;
+	border-left: none #666666;
+	padding-right: 5px;
+	padding-left: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+.EEA_contact {
+	font-size: 9px;
+	font-weight: normal;
+	color: #757577;
+	text-decoration: none;
+	/*border-bottom:solid 1px #999999;*/
+	clear: left;
+	float: left;
+	height: 10px;
+	width: 500px;
+	margin-top: 3px;
+	
+}
+
+.EEA_logo {
+	background-image: url('../images/eea_logo.gif');
+	float: right;
+	height: 35px;
+	width: 36px;
+}
+
+.EEA_name {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	text-decoration: none;
+	clear: none;
+	float: right;
+	height: 20px;
+	width: 240px;
+	margin-top: 10px;
+	font-weight: bold;
+	text-align:right;
+	margin-right: 10px;
+}
+
+.info_area {
+	clear: none;
+	float: left;
+	width: 800px;
+	margin-top: 60px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}
+.info_area a
+{
+    color:#000099;   
+}
+
+

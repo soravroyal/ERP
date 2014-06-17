@@ -1,0 +1,30 @@
+#chartComponent{
+	background:#FFFFFF;
+}
+/*
+.chart{
+	/*height:100%;*/
+	width: 100%
+	
+}*/
+.legend{
+ 	text-align: center;
+}
+
+.inline{
+	display: inline-block;
+}
+
+.chartTitle{
+	margin:5px;
+	font-weight: bold
+}
+.chartCaption
+{
+	font-style: italic;
+	text-align: justify;
+	border-top-style: solid;
+	border-top-color:#999999;
+	border-top-width: 1px;
+	padding: 5px;
+}

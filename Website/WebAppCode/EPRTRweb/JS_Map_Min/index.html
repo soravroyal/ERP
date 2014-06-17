@@ -1,0 +1,108 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- On iOS, as part of optimizing your web application, have it use the
+    standalone mode to look more like a native application. When you use this
+    standalone mode, Safari is not used to display the web content—specifically,
+    there is no browser URL text field at the top of the screen or button bar
+    at the bottom of the screen. -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+   <!-- <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/dojo/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="//serverapi.arcgisonline.com/jsapi/arcgis/3.5/js/esri/css/esri.css" />
+	-->
+	
+	<link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/esri/css/esri.css" />
+	 <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/nihilo/nihilo.css">
+
+    <link rel="stylesheet"  href="css/layout.css"/>
+    <script type="text/javascript">
+      var path_location = location.pathname.replace(/\/[^/]+$/, '');
+      var dojoConfig = {
+        parseOnLoad: true,
+        packages: [ { 
+                name: "utilities",
+                location: path_location + '/javascript' 
+             },{
+                name: "templateConfig",
+                location: path_location 
+             }
+        ],
+		modulePaths: {
+            'agsjs': path_location + '/javascript/agsjs'
+        }
+      };
+    </script>
+	<!--//js.arcgis.com/3.7/-->
+    <!--<script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script>-->
+	<script type="text/javascript" src="//js.arcgis.com/3.7/"></script>
+    <script type="text/javascript" src="javascript/layout.js"></script>
+	 <!--<script type="text/javascript" src="javascript/agsjs/dijit/TOC.js"></script>-->
+
+    
+    <script type="text/javascript">
+    dojo.require("utilities.app");
+    dojo.require("templateConfig.commonConfig");
+	
+ 
+
+    dojo.ready(function(){
+
+        var defaults = {
+            //webmap: "40c4c1892d5a45539b0ee95a0cae7b65",
+            webmap: "29ca3f3396f34d19b612c18870f6efb9",
+			//webmap: "c2cfb408940c424ab350103f038ce298",
+            bingmapskey: commonConfig.bingMapsKey,
+            sharingurl: "",
+            proxyurl: "",
+            helperServices: commonConfig.helperServices,
+            autoquery: "false",
+            zoomto: "true",
+            mapName: "map_extended"
+        };
+
+
+        var app = new utilities.App(defaults);
+          app.init().then(function(options){
+            init(options);
+        });
+
+    });
+	function query(){
+		filterFacility("map_small","EprtrFacilities_Dyna_WGS84_1098","http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/0","ReportingYear  = 2004 AND  ParentCompanyName LIKE '%ros%'");
+	}
+	
+	function queryDetails(){
+		filterFacilityDetails("EprtrFacilities_Dyna_WGS84_1098","http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/1","FacilityReportID=1");
+	}
+    </script>
+  </head>
+
+  <body class="claro">
+
+      
+	    
+      <div id="map_extended" style="width:1000px;height:750px">
+        <div id="floater">
+          <div id="searchDiv" style="width:600px;height:340px;"></div>
+        </div>
+        <div id="search"></div> 
+        <div id="LocateButton"></div>
+
+        <div style="position:absolute; left:20px; top:10px; z-Index:999;" id="basemapDiv">
+         <div data-dojo-type="dijit/TitlePane" 
+              data-dojo-props="title:'Basemap', closable:true,  open:false">
+           <div data-dojo-type="dijit/layout/ContentPane" style="width:380px; height:280px; overflow:auto;">
+           <div id="basemapGallery" ></div></div>
+         </div>
+       </div>
+      </div>
+	 
+	<!--<button type="button"  onClick="query()">QUERY</button>	-->
+	<!--<button type="button"  onClick="queryDetails()">QUERYDetails</button>	-->
+	
+  </body>
+</html>

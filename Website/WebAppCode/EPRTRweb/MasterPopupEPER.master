@@ -14,27 +14,87 @@
     <link href="css/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
     <link href="css/columnStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    
+     <!--New JS Map -->
+     <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/document.css" />
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/layout.css" />
+ 
+	<link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/esri/css/esri.css" />
+	 <!--<link rel="stylesheet" href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/nihilo/nihilo.css">-->
+    <link rel="stylesheet" type="text/css" href="css/collapsible.css" />
+
+<%--    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script> --%>
+    <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>
+
+    <!--New JS Map -->
+
+    
     
     <script type="text/javascript" src="Scripts/swfobject.js"></script>
     <script type="text/javascript" src="Scripts/map.js"></script>
     <script type="text/javascript" src="Scripts/PopupWindow.js"></script>
+    <script type="text/javascript" src="Scripts/Cookies.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.corner.js"></script>
+
+    <script type="text/javascript" src="Charts/charts.js"></script>
+
+
+    <!--New JS Map -->
+    <script type="text/javascript" src="Scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.collapsible.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+
+        $(document).ready(function () {
+            $.collapsible(".C_header", "C_group1");
+            $.collapsible(".C_header2", "C_group2");
+        });
+
+
+        // ]]>
+    </script>
+    <!--New JS Map -->
+    
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
     
 </head>
 <body>
     <table border="0" align="center" cellpadding="0" cellspacing="0" class="page_container">
         <tr>
             <td align="left">
-                <form id="form1" runat="server">
+                <form id="masterform" runat="server">
                 <div>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        <%--  Declare script manager for ajax --%>
-                        <asp:ScriptManager ID="ScriptManagerMaster" AllowCustomErrorsRedirect="true" runat="server" />
+                    <%-- Declare script manager for ajax --%>
+                    <asp:ScriptManager ID="ScriptManagerMaster" AllowCustomErrorsRedirect="true" runat="server"
+                        ScriptMode="Release" />
+                    <%-- Script for setting wait cursor --%>
+
+                    <script type="text/javascript" language="javascript">
+                        //<![CDATA[
+                        //Events for wire up around AJAZ postback
+                        Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(beginRequestHandler)
+                        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequestHandler)
+                        function beginRequestHandler() {
+                            window.document.body.style.cursor = 'wait';
+                        }
+
+                        function endRequestHandler() {
+                            window.document.body.style.cursor = 'auto';
+                        }
+                        // ]]>
+                    </script>
+
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolderMaster" runat="server">
                         <%-- Top text, headline --%>
                         <div class="topBar1">
                             <asp:ContentPlaceHolder ID="ContentTop1" runat="server" />
-                            <asp:Image ID="imgEPRTR" ImageUrl="~/images/E-PRTR.gif" runat="server" /> <asp:image ID="imgReview" runat="server" ImageUrl="~/images/review5.gif" />
+                            <%--<asp:HyperLink ID="imgEPRTR" ImageUrl="~/images/E-PRTR.gif" NavigateUrl="~/Home.aspx" runat="server"/>--%>
+                            <asp:HyperLink ID="imgEPRTR" runat="server" NavigateUrl="~/Home.aspx"><img src="~/images/E-PRTR.gif" alt="" /></asp:HyperLink>
+                            <asp:Image ID="imgReview" runat="server" ImageUrl="images/review5.gif"/>
                             <br />
                             <div class="E-PRTR_name">
                                 <asp:Literal ID="toptext" runat="server" Text="<%$ Resources:Common,EPRTRHeadline %>" /></div>
@@ -44,14 +104,17 @@
                             <asp:ContentPlaceHolder ID="ContentTop2" runat="server" />
                             <div class="EU_flag">
                             </div>
-                            <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server" />
-                            <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server" />
-                            <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server" />
-                            <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server" />
+                            <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server"/>
+                            <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server"/>
+                            <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server"/>
+                            <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server"/>
                         </div>
                         <%-- context --%>
                         <div class="info_area">
                             <asp:ContentPlaceHolder ID="ContentInfoArea" runat="server" />
+                        </div>
+                         <div class="info_Map">
+                            <asp:ContentPlaceHolder ID="ContentInfoMapViewer" runat="server" />
                         </div>
                         <%-- Bottom logo and footer text --%>
                         <div class="bottom_bar">

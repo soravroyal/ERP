@@ -13,7 +13,7 @@ using EPRTR.HeaderBuilders;
 public partial class TimeSeriesWasteTransfers : BasePage
 {
     /// <summary>
-    /// Page load, add flash map and assign eventhandler
+    /// Page load and assign eventhandler
     /// </summary>
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -22,15 +22,15 @@ public partial class TimeSeriesWasteTransfers : BasePage
             ((MasterSearchPage)this.Master).Headline = Resources.GetGlobal("Facility", "WasteTransfersTimeSeriesHeadline");
             ((MasterSearchPage)this.Master).ShowMapPanel(Global.MainSearchPages.TimeSeriesWasteTransfers);
         }
-
+        /*
         if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
         {
             // add swf object to page
             MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.TimeSeriesWasteTransfers, Request.ApplicationPath);
         }
+        */
 
-
-        MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.PollutantTransfers, Request.ApplicationPath);
+        //MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.PollutantTransfers, Request.ApplicationPath);
 
         if (this.ucSearchOptions.InvokeSearch == null)
             this.ucSearchOptions.InvokeSearch = new EventHandler(doSearch);
@@ -67,18 +67,17 @@ public partial class TimeSeriesWasteTransfers : BasePage
         if (filter != null)
         {
             this.ucTsWasteTransfersSheet.Populate(filter);
-            updateFlashMap(filter);
+          
+            updateJavaScriptMap(filter);
         }
     }
 
-    /// <summary>
-    /// update flash map
-    /// </summary>
-    private void updateFlashMap(WasteTransferTimeSeriesFilter filter)
+    private void updateJavaScriptMap(WasteTransferTimeSeriesFilter filter)
     {
-        MapFilter mapfilter = QueryLayer.WasteTransferTrend.GetMapFilter(filter);
-        string header = MapPrintDetails.Build(SheetHeaderBuilder.GetTimeSeriesWasteTransferHeader(filter));
-        MapUtils.UpdateSmallMap(MasterSearchPage.MAPID, this, this.ClientID, mapfilter, header, Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapfilter, header);
+        MapFilter mapfilter = QueryLayer.WasteTransferTrend.GetMapJavascriptFilter(filter);
+      
+
+        MapJavaScriptUtils.UpdateJavaScriptMap(mapfilter, Page);
+
     }
 }

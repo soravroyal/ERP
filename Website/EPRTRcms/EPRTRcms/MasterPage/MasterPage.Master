@@ -29,10 +29,10 @@
                 <asp:Image ID="imgWater" ImageUrl="~/Images/ec4_water.gif" runat="server" />
                 <!-- <asp:menu runat="server" ID="EditMenu" Orientation="Horizontal" CssClass="HeaderMenuStyle"  /></div> -->
                <div class="MenuLinksDisplay" runat="server">
-                    <a href="../Home.aspx" class="linkMenu">Home</a>
-                    <a href="../TextEditPage.aspx" class="linkMenu">Static text editor</a>
-                    <a href="../NewsEditPage.aspx" class="linkMenu">News editor</a>
-                    <a href="../FileCatalog.aspx" class="linkMenu">File catalog</a>
+                    <a href="Home.aspx" class="linkMenu">Home</a>
+                    <a href="TextEditPage.aspx" class="linkMenu">Static text editor</a>
+                    <a href="NewsEditPage.aspx" class="linkMenu">News editor</a>
+                    <a href="FileCatalog.aspx" class="linkMenu">File catalog</a>
                 </div>
                 </div>
             </div>

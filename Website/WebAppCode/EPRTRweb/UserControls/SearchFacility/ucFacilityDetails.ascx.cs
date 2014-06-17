@@ -7,13 +7,20 @@ using EPRTR.Localization;
 using QueryLayer;
 using StylingHelper;
 using EPRTR.Formatters;
+using EPRTR.Utilities;
+using QueryLayer.Filters;
 
 public partial class ucFacilityDetails : System.Web.UI.UserControl
 {
 
-    protected void Page_Load(object sender, EventArgs e)
+
+
+    protected void Page_Load(object sender, EventArgs e) 
     {
+       
     }
+
+   
 
     /// <summary>
     ///  Applies different css styles to specific datacells in the table. (To match demo color coding)
@@ -29,7 +36,6 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
             {
                 e.Row.CssClass = "activitySubHeader";
             }
-
         }
     }
 
@@ -268,22 +274,25 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
     /// </summary>
     public void Populate(int facilityReportId)
     {
+
+
         populateActivities(facilityReportId);
 
         populateDetails(facilityReportId);
 
         PopulatePublicInformation(facilityReportId);
 
-        // create flash map
-        this.ucFacilityDetailsMap.Initialize(facilityReportId, "-1");
-
+      
         DetailMapUrlName = facilityReportId.ToString();
         this.detailmapprint.ImageUrl = "~/MapPrint/img/" + DetailMapUrlName + ".png";
     }
-    
+
+
+
     public string DetailMapUniqueID 
     {
-        get { return this.ucFacilityDetailsMap.MapUniqueID; }
+        //get { return this.ucFacilityDetailsMap.MapUniqueID; }
+        get { return ""; }
     }
 
     public string DetailMapUrlName 
@@ -324,7 +333,6 @@ public partial class ucFacilityDetails : System.Web.UI.UserControl
         this.gdwActivities.DataBind();
 
     }
-
 
     private void PopulatePublicInformation(int facilityReportId)
     {
@@ -392,5 +400,5 @@ public class ActivityItem
     {
         get { return isSubHeaderRow; }
     }
-
+ 
 }

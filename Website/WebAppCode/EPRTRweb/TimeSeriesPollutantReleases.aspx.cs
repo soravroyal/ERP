@@ -12,7 +12,7 @@ using EPRTR.HeaderBuilders;
 public partial class TimeSeriesPollutantReleases : BasePage
 {
     /// <summary>
-    /// Page load, add flash map and assign eventhandler
+    /// Page load and assign eventhandler
     /// </summary>
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -21,12 +21,12 @@ public partial class TimeSeriesPollutantReleases : BasePage
             ((MasterSearchPage)this.Master).Headline = Resources.GetGlobal("Facility", "PollutantReleaseTimeSeriesHeadline");
             ((MasterSearchPage)this.Master).ShowMapPanel(Global.MainSearchPages.TimeSeriesPollutantReleases);
         }
-
+        /*
         if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
         {
             // add swf object to page
             MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.TimeSeriesPollutantReleases, Request.ApplicationPath);
-        }
+        }*/
         
         if (this.ucSearchOptions.InvokeSearch == null)
             this.ucSearchOptions.InvokeSearch = new EventHandler(doSearch);
@@ -64,18 +64,17 @@ public partial class TimeSeriesPollutantReleases : BasePage
         if (filter != null)
         {
             this.ucTsPollutantReleasesSheet.Populate(filter);
-            updateFlashMap(filter);
+            updateJavaScriptMap(filter);
         }
     }
 
-    /// <summary>
-    /// update flash map
-    /// </summary>
-    private void updateFlashMap(PollutantReleasesTimeSeriesFilter filter)
+    
+
+    private void updateJavaScriptMap(PollutantReleasesTimeSeriesFilter filter)
     {
-        MapFilter mapfilter = QueryLayer.PollutantReleaseTrend.GetMapFilter(filter);
-        string header = MapPrintDetails.Build(SheetHeaderBuilder.GetTimeSeriesPollutantReleaseHeader(filter));
-        MapUtils.UpdateSmallMap(MasterSearchPage.MAPID, this, this.ClientID, mapfilter, header, Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapfilter, header);
+        MapFilter mapfilter = QueryLayer.PollutantReleaseTrend.GetMapJavascriptFilter(filter);
+
+        MapJavaScriptUtils.UpdateJavaScriptMap(mapfilter, Page);
+
     }
 }
