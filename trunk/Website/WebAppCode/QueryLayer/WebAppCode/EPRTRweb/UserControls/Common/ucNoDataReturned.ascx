@@ -1,0 +1,2 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ucNoDataReturned.ascx.cs" Inherits="UserControls_Common_ucNoDataReturned" %>
+<asp:Label ID="Label1" runat="server" Text="<%$ Resources:Common, NoDataReturnedForYourQuery %>"></asp:Label>

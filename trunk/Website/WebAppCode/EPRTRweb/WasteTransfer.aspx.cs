@@ -16,12 +16,7 @@ public partial class WasteTransfer : BasePage
             ((MasterSearchPage)this.Master).ShowMapPanel(Global.MainSearchPages.WasteTransfers);
 
         }
-
-        if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
-        {
-            // add swf object to page
-            MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.WasteTransfers, Request.ApplicationPath);
-        }
+       
         
         if (this.ucSearchOptions.InvokeSearch == null)
             this.ucSearchOptions.InvokeSearch = new EventHandler(doSearch);
@@ -60,21 +55,21 @@ public partial class WasteTransfer : BasePage
         WasteTransferSearchFilter filter = sender as WasteTransferSearchFilter;
         if (filter != null)
         {
+            updateJavaScriptMap(filter);
             this.ucWasteTransfersSheet.Populate(filter);
-            updateFlashMap(filter);
+           
         }
     }
 
-    /// <summary>
-    /// update flash map
-    /// </summary>
-    private void updateFlashMap(WasteTransferSearchFilter filter)
+  
+
+    private void updateJavaScriptMap(WasteTransferSearchFilter filter)
     {
-        MapFilter mapfilter = QueryLayer.WasteTransfers.GetMapFilter(filter); 
-        string header = MapPrintDetails.Build(SheetHeaderBuilder.GetWasteTransferSearchHeader(filter, false));
-        MapUtils.UpdateSmallMap(MasterSearchPage.MAPID, this, this.ClientID, mapfilter, header, Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapfilter, header);
+        MapFilter mapfilter = QueryLayer.WasteTransfers.GetMapJavascriptFilter(filter);
+
+        MapJavaScriptUtils.UpdateJavaScriptMap(mapfilter, Page);
     }
+
 
 
 }

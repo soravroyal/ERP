@@ -1,4 +1,4 @@
-<%@ Master Language="C#" AutoEventWireup="true" EnableViewState="true" CodeFile="MasterPage.master.cs"
+﻿<%@ Master Language="C#" AutoEventWireup="true" EnableViewState="true" CodeFile="MasterPage.master.cs"
     Inherits="MasterPage" %>
 
 <%@ Register src="~/UserControls/Common/ucLanguageSelector.ascx" tagname="ucLanguageSelector" tagprefix="eprtr" %>
@@ -6,7 +6,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- <title></title>
+    <title></title>
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" />
+
     <link rel="alternate" type="application/rss+xml" href="http://localhost:8032/EPRTRweb/news.rss" title="News rss feed" />
     <link rel="SHORTCUT ICON" href="images/favicon.ico" />
     <link href="css/reset.css" rel="stylesheet" type="text/css" />
@@ -21,7 +25,18 @@
     <link href="css/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
     <link href="css/columnStyles.css" rel="stylesheet" type="text/css" />
     <link href="css/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
-    
+   
+  
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/document.css" />
+    <link rel="stylesheet" type="text/css" href="JS_Map_Min/css/layout.css" />
+ 
+	<link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.7/js/esri/css/esri.css" />
+	 <!--<link rel="stylesheet" href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/nihilo/nihilo.css">-->
+
+<%--    <script type="text/javascript" src="//serverapi.arcgisonline.com/jsapi/arcgis/3.5"></script>
+    <script type="text/javascript" src="JS_Map_Min/javascript/layout.js"></script>--%>
+
     <!--[if lt IE 9]>
     <link href="css/searchOptionStylesIElt9.css" rel="stylesheet" type="text/css" />
     <link href="css/newsStyleIElt9.css" rel="stylesheet" type="text/css" />
@@ -41,8 +56,9 @@
 
     <script type="text/javascript" src="Scripts/jquery.corner.js"></script>
     <script type="text/javascript" src="Charts/charts.js"></script>
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+        //<![CDATA[
         var searchFilter = new Array();
         searchFilter.push('Recovery');
         searchFilter.push('Disposal');
@@ -75,17 +91,36 @@
             if (searchFilter.length == 3 && $.inArray('Total', searchFilter) == -1) {
                 searchFilter.push('Total');
             }
-            
-        
+
+
         }
+        // ]]>
     </script>
 
-    <asp:ContentPlaceHolder ID="head" runat="server">
 
-    </asp:ContentPlaceHolder>
+
+    <!--New JS Map -->
+    <script type="text/javascript" src="Scripts/jquery.cookie.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.collapsible.js"></script>
+    <script type="text/javascript">
+        //<![CDATA[
+    
+        $(document).ready(function() {
+            $.collapsible(".C_header", "C_group1");
+            $.collapsible(".C_header2", "C_group2");
+        });
+
+
+        // ]]>
+    </script>
+    
+    <!--New JS Map -->
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
 </head>
-<body onunload="ClosePopupWindows();" >
 
+<body onunload="ClosePopupWindows();" class="claro" >
     <div runat="server" id="BrowserNotSupported">
         <table class="topBarBrowserNotSupported">
             <tr style="width: 100%">
@@ -113,6 +148,7 @@
                     <%-- Script for setting wait cursor --%>
 
                     <script type="text/javascript" language="javascript">
+                        //<![CDATA[
                         //Events for wire up around AJAZ postback
                         Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(beginRequestHandler)
                         Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endRequestHandler)
@@ -123,15 +159,15 @@
                         function endRequestHandler() {
                             window.document.body.style.cursor = 'auto';
                         }
+                        // ]]>
                     </script>
 
                     <asp:ContentPlaceHolder ID="ContentPlaceHolderMaster" runat="server">
                         <%-- Top text, headline --%>
                         <div class="topBar1">
                             <asp:ContentPlaceHolder ID="ContentTop1" runat="server" />
-                            <asp:HyperLink ID="imgEPRTR" ImageUrl="~/images/E-PRTR.gif" NavigateUrl="~/Home.aspx"
-                                runat="server" />
-                            <asp:Image ID="imgReview" runat="server" ImageUrl="images/review5.gif" />
+                            <asp:HyperLink ID="imgEPRTR" runat="server" NavigateUrl="~/Home.aspx"><img src="/images/E-PRTR.gif" alt="" /></asp:HyperLink>
+                            <asp:Image ID="imgReview" runat="server" ImageUrl="images/review5.gif"/>
                             <br />
                             <div class="E-PRTR_name">
                                 <asp:Literal ID="toptext" runat="server" Text="<%$ Resources:Common,EPRTRHeadline %>" /></div>
@@ -142,10 +178,10 @@
                             <asp:ContentPlaceHolder ID="ContentTop2" runat="server" />
                             <div class="EU_flag" >
                             </div>
-                            <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server" />
-                            <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server" />
-                            <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server" />
-                            <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server" />
+                            <asp:Image ID="imgSoil" ImageUrl="~/images/ec1_soil.gif" runat="server"/>
+                            <asp:Image ID="imgNature" ImageUrl="~/images/ec2_nature.gif" runat="server"/>
+                            <asp:Image ID="imgAir" ImageUrl="~/images/ec3_air.gif" runat="server"/>
+                            <asp:Image ID="imgWater" ImageUrl="~/images/ec4_water.gif" runat="server"/>
                             
                             <div class="langSelector">
                               <eprtr:ucLanguageSelector ID="LanguageSelector1" runat="server" /> 
@@ -174,8 +210,11 @@
                         <div class="info_area">
                             <asp:ContentPlaceHolder ID="ContentInfoArea" runat="server" />
                         </div>
+                        <div class="info_Map">
+                            <asp:ContentPlaceHolder ID="ContentInfoMapViewer" runat="server" />
+                        </div>
                         <%-- Bottom logo and footer text --%>
-                        <div class="bottom_bar">
+                        <div id="bottom_bar" class="bottom_bar">
                             <asp:ContentPlaceHolder ID="ContentBottom" runat="server" />
                             <asp:HyperLink ID="HyperLink1"  NavigateUrl="http://www.eea.europa.eu/"
                                 runat="server" CssClass="EEA_logo" Target="_blank"/>
@@ -188,10 +227,9 @@
                         </div>
                     </asp:ContentPlaceHolder>
                 </div>
-                </form>
+               </form>
            </td>
         </tr>
     </table>
-   
 </body>
 </html>

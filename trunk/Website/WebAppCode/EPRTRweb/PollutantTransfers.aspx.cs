@@ -10,7 +10,7 @@ public partial class PollutantTransfers : BasePage
     
 
     /// <summary>
-    /// Page load, add flash map and assign eventhandler
+    /// Page load and assign eventhandler
     /// </summary>
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,12 +19,7 @@ public partial class PollutantTransfers : BasePage
             ((MasterSearchPage)this.Master).Headline = Resources.GetGlobal("Pollutant", "PollutantTransfersHeadline");
             ((MasterSearchPage)this.Master).ShowMapPanel(Global.MainSearchPages.PollutantTransfers);
         }
-
-        if (!ScriptManager.GetCurrent(Page).IsInAsyncPostBack)
-        {
-            // add swf object to page
-            MapUtils.AddSmallMap(MasterSearchPage.MAPID, this, Global.MainSearchPages.PollutantTransfers, Request.ApplicationPath);
-        }
+       
 
         if (this.ucSearchOptions.InvokeSearch == null)
             this.ucSearchOptions.InvokeSearch = new EventHandler(doSearch);
@@ -65,20 +60,17 @@ public partial class PollutantTransfers : BasePage
         PollutantTransfersSearchFilter filter = sender as PollutantTransfersSearchFilter;
         if (filter != null)
         {
+            updateJavaScriptMap(filter);
             this.ucPollutantTransfersSheet.Populate(filter);
-            updateFlashMap(filter);
+         
         }
     }
 
-    /// <summary>
-    /// update flash map
-    /// </summary>
-    private void updateFlashMap(PollutantTransfersSearchFilter filter)
+    
+    private void updateJavaScriptMap(PollutantTransfersSearchFilter filter)
     {
-        MapFilter mapfilter = QueryLayer.PollutantTransfers.GetMapFilter(filter);
-        string header = MapPrintDetails.Build(SheetHeaderBuilder.GetPollutantTransferSearchHeader(filter, false));
-        MapUtils.UpdateSmallMap(MasterSearchPage.MAPID, this, this.ClientID, mapfilter, header, Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapfilter, header);
+        MapFilter mapfilter = QueryLayer.PollutantTransfers.GetMapJavascriptFilter(filter);
+        MapJavaScriptUtils.UpdateJavaScriptMap(mapfilter, Page);
     }
 
 

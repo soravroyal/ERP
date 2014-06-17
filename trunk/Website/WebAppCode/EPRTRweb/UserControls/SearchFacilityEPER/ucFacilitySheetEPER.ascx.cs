@@ -64,6 +64,7 @@ public partial class ucFacilitySheetEPER : System.Web.UI.UserControl
     /// </summary>
     public void Populate(string facilityReportID)
     {
+        TextBox1.Value = facilityReportID;
         if (String.IsNullOrEmpty(facilityReportID))
         {
             FacilityBasic = null;
@@ -75,6 +76,7 @@ public partial class ucFacilitySheetEPER : System.Web.UI.UserControl
         }
 
         populateDefaultContent();
+        TextBox1.Value = facilityReportID;
     }
 
     /// <summary>
@@ -94,6 +96,7 @@ public partial class ucFacilitySheetEPER : System.Web.UI.UserControl
             int year = Convert.ToInt32(reportingYear);
             FacilityBasic = Facility.GetFacilityBasic(facId, year);
             Populate(facId, year, Sheets.FacilityDetails.Details.ToString());
+            TextBox1.Value = FacilityBasic.FacilityReportId.ToString();
         }
     }
 
@@ -328,12 +331,14 @@ public partial class ucFacilitySheetEPER : System.Web.UI.UserControl
 
     protected void OnClickPrevious(object sender, EventArgs e)
     {
-        switchYear(PreviousYear);
+        //switchYear(PreviousYear);
+        Response.Redirect("~/FacilityDetails.aspx?FacilityId=" + PreviousYear.FacilityId + "&ReportingYear=" + PreviousYear.ReportingYear);
     }
 
     protected void OnClickNext(object sender, EventArgs e)
     {
-        switchYear(NextYear);
+        //switchYear(NextYear);
+        Response.Redirect("~/FacilityDetails.aspx?FacilityId=" + NextYear.FacilityId + "&ReportingYear=" + NextYear.ReportingYear);
     }
 
 

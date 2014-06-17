@@ -1,0 +1,155 @@
+/* CSS file */
+BubbleChart
+{
+	color: #AA8162;
+	fontSize: 12;
+	horizontalAxisStyleName:myAxisStyles;
+	verticalAxisStyleName:myAxisStyles;
+	chartSeriesStyles: myBubbles, myBubbles2;	
+}
+.MyBubbleChartStyle
+{
+		direction:"both";
+        horizontalShowOrigin:true;
+        horizontalTickAligned:true;
+        horizontalChangeCount:1; 
+        verticalShowOrigin:false;
+        verticalTickAligned:true; 
+        verticalChangeCount:1;
+        horizontalAxisStyleName:myAxisStyles;
+        /*
+        horizontalFill:#990033;
+        horizontalAlternateFill:#00CCFF;
+        */
+}
+.IndustrialActivityPieChart
+{
+	chartSeriesStyles: WasteTransfer1, WasteTransfer2, WasteTransfer3, WasteTransfer4, WasteTransfer5, WasteTransfer6;
+}
+Application
+{
+	background-color:#f5f5f5;
+	background-color:#f5f5f5;
+	backgroundGradientAlphas: 1.0, 1.0;
+	backgroundGradientColors: #F5F5F5, #F5F5F5;
+	backgroundSize: auto;
+}
+
+.PollutantTransferBarChart
+{
+horizontalAxisStyleName:myAxisStyles;
+verticalAxisStyleName:myAxisStyles;
+gridLinesStyleName: barChartGridLines;
+}
+
+.PollutantReleaseBarChart
+{
+horizontalAxisStyleName:myAxisStyles;
+verticalAxisStyleName:myAxisStyles;
+gridLinesStyleName: barChartGridLines;
+}
+
+
+.WasteTransferBarChart
+{
+horizontalAxisStyleName:myAxisStyles;
+verticalAxisStyleName:myAxisStyles;
+chartSeriesStyles: PCCSeries1, PCCSeries2, PCCSeries3, PCCSeries4, PCCSeries5, PCCSeries6, PCCSeries7, PCCSeries8, air, soil, water ;
+gridLinesStyleName: WastesTransferBarChartGridLines;
+}
+.WastesTransferBarChartGridLines{
+		direction:horizontal;
+        horizontalShowOrigin:false;
+        horizontalTickAligned:true;
+        horizontalChangeCount:1; 
+        verticalShowOrigin:false;
+        verticalTickAligned:true; 
+        verticalChangeCount:1;
+		focusThickness: 1;
+		/*horizontalStroke: 2;
+		horizontalFill: #000000;
+        horizontalFill:#990033;
+        horizontalAlternateFill:#00CCFF; */
+}     
+
+.myAxisStyles
+ {
+     	fontSize: 10;
+     	color: #666666;    /* tickPlacement:none;*/    
+       	/* fontWeight: bold; */
+       	paddingRight: 9;
+	labelAlign: right;
+}
+
+
+.PCCSeries1 {
+        fill: #a3a3a3;
+     }
+.PCCSeries2 {
+        fill: #bebebe;
+     }
+.PCCSeries3 {
+        fill: #b69e8c;
+     }
+.PCCSeries4 {
+        fill: #d3b6a0;
+     }
+.PCCSeries5 {
+        fill: #a9b592;
+     }
+.PCCSeries6 {
+        fill: #c6d4aa;
+     }
+.PCCSeries7 {
+        fill:#94AECE; /* Dark blue */
+     }
+.PCCSeries8 {
+        fill:#C6EBF7; /* light blue */
+     }
+.air {
+        fill: #93adcd;  
+        fontSize: 20;    
+}
+.water {
+		fill: #c6d4aa;
+		fontSize: 20;      
+}
+.soil {
+		fill: #d5b9a4;
+		fontSize: 20;      
+}
+.myBubbles
+{
+fill: #aa8162;
+}
+.myBubbles2 
+{
+fill: #aa8162;
+}
+.myLegend{
+	borderStyle: solid;
+	borderColor: #000000;
+	fontFamily: Arial;
+	paddingRight: 6;
+}
+
+.WasteTransfer1 {
+        fill: #d6baa5;
+     }
+.WasteTransfer2 {
+        fill: #aa8162;
+     }
+.WasteTransfer3 {
+        fill: #d5ffd5;
+     }
+.WasteTransfer4 {
+        fill: #c7d5ab;
+     }
+.WasteTransfer5 {
+        fill: #e6e6e6;
+     }
+.WasteTransfer6 {
+        fill: #b3b3b3;
+     }
+
+

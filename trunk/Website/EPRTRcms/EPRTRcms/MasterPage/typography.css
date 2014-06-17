@@ -11,7 +11,8 @@
 body
 {
 	background-position: #808083;
-	font-size: 62.5%;
+	/*font-size: 62.5%;*/
+	font-size: 10pt;
 	color: #222;
 	background: white; /*#808083; */
 	font-family: Verdana, Arial, Helvetica, sans-serif; /*"Helvetica Neue", Arial, Helvetica, sans-serif;*/

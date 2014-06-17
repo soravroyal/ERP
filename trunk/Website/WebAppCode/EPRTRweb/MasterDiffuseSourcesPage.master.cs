@@ -4,6 +4,7 @@ using EPRTR.DiffuseSources;
 using EPRTR.Localization;
 using EPRTR.Utilities;
 using QueryLayer.Filters;
+using System.Web.UI;
 
 public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
 {
@@ -121,36 +122,18 @@ public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
         this.ucDiffuseSourcesSheet.Visible = true;
         this.ucDiffuseSourcesSheet.Populate(layerId);
         this.divEnlarge.Visible = true;
-        updateFlashMap(layerId);
+        string[] layer = layerId.Split(new string[] { ":::" }, StringSplitOptions.None);
+
+        updateJavaScriptMap(layerId, layer[0]);
     }
 
 
 
-    // update flash map
-    private void updateFlashMap(string layerID)
+   
+
+    private void updateJavaScriptMap(string layerID, string layer)
     {
-        MapFilter mapFilterSmall;
-        MapFilter mapFilterExpanded;
-        String header;
-
-        if (String.IsNullOrEmpty(layerID)) //clear map
-        {
-            mapFilterSmall = new MapFilter();
-            mapFilterSmall.Layers = layerID;
-
-            mapFilterExpanded = mapFilterSmall;
-            header = "";
-        }
-        else
-        {
-            DiffuseSources.Map map = DiffuseSources.GetMap(layerID);
-            mapFilterSmall = map.MapFilterSmall;
-            mapFilterExpanded = map.MapFilterExpanded;
-            header = map.GetTitleFull();
-        }
-
-        MapUtils.UpdateDiffuseMap(MAPID, Page, Page.ClientID, mapFilterSmall, "", Request.ApplicationPath);
-        ((MasterSearchPage)this.Master).UpdateExpandedScript(mapFilterExpanded, header);
+        MapJavaScriptUtils.UpdateJavaScriptMapDiffuse(Page, layerID, layer);
     }
 
     protected void OnSelectedIndexChanged_Sector(object sender, EventArgs args)
@@ -160,7 +143,7 @@ public partial class MasterDiffuseSourcesPage : System.Web.UI.MasterPage
         setMapList(MediumFilter.Medium.Air);
         //hide sheet and clear map
         this.ucDiffuseSourcesSheet.Visible = false;
-        updateFlashMap("");
+    
             
     }
 

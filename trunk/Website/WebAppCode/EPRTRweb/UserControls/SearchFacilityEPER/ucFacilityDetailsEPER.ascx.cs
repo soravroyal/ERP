@@ -8,7 +8,7 @@ using QueryLayer;
 using StylingHelper;
 using EPRTR.Formatters;
 
-public partial class ucFacilityDetails : System.Web.UI.UserControl
+public partial class ucFacilityDetailsEPER : System.Web.UI.UserControl
 {
 
     protected void Page_Load(object sender, EventArgs e)

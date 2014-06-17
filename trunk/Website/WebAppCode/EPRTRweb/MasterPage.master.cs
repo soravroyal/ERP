@@ -4,11 +4,14 @@ using System.Configuration;
 using EPRTR.Localization;
 using System.Web.UI.HtmlControls;
 using System.Linq;
+using System.Collections.Generic;
 
 
 public partial class MasterPage : System.Web.UI.MasterPage
 {
     private const string PREFIX = "menutree_";
+   
+
 
     protected void Page_Init(object sender, EventArgs e)
     {
@@ -16,7 +19,13 @@ public partial class MasterPage : System.Web.UI.MasterPage
         jsVar.Attributes.Add("type", "text/javascript");
         jsVar.InnerHtml = String.Format("var Lang = \"{0}\" ;", System.Globalization.CultureInfo.CurrentCulture.Name);
         this.Page.Header.Controls.Add(jsVar);
-    }
+
+        imgReview.Attributes.Add("alt", "");
+        imgSoil.Attributes.Add("alt", "");
+        imgNature.Attributes.Add("alt", "");
+        imgAir.Attributes.Add("alt", "");
+        imgWater.Attributes.Add("alt", "");
+   }
 
     /// <summary>
     /// Master 
@@ -55,6 +64,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
             Request.Browser.Browser,
             Request.Browser.Version));
         }
+
+      
     }
 
     
