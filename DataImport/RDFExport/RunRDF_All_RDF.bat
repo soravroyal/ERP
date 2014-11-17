@@ -9,35 +9,34 @@ echo Starting RDF files generation
 rmdir /s /q RDFfiles
 mkdir RDFfiles
 echo generating lookuptables.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute contry medium pollutant pollutantthreshold wastethreshold wastetype unit method methodtype rbd -f rdfexport.properties -o ./RDFfiles/lookuptables.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute contry medium pollutant pollutantthreshold wastethreshold wastetype unit method methodtype rbd -f rdfexport.properties -z -o ./RDFfiles/lookuptables.rdf.gz
 echo generating facility.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facility -f rdfexport.properties -o ./RDFfiles/Facility.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facility -f rdfexport.properties -z -o ./RDFfiles/Facility.rdf.gz
 echo generating facilityreport.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facilityreport -f rdfexport.properties -o ./RDFfiles/FacilityReport.rdf
-echo generating nationalreport.rdf ...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute nationalreport -f rdfexport.properties -o ./RDFfiles/nationalreport.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facilityreport -f rdfexport.properties -z -o ./RDFfiles/FacilityReport.rdf.gz
+echo generating nationalreport.rdf...
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute nationalreport -f rdfexport.properties -z -o ./RDFfiles/nationalreport.rdf.gz
 echo generating pollutantrelease.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutantrelease -f rdfexport.properties -o ./RDFfiles/PollutantRelease.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutantrelease -f rdfexport.properties -z -o ./RDFfiles/PollutantRelease.rdf.gz
 echo generating pollutanttransfer.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutanttransfer -f rdfexport.properties -o ./RDFfiles/PollutantTransfer.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutanttransfer -f rdfexport.properties -z -o ./RDFfiles/PollutantTransfer.rdf.gz
 echo generating wastetransfer.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute wastetransfer -f rdfexport.properties -o ./RDFfiles/WasteTransfer.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute wastetransfer -f rdfexport.properties -z -o ./RDFfiles/WasteTransfer.rdf.gz
 echo generating Activity.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute activity -f rdfexport.properties -o ./RDFfiles/Activity.rdf
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute activity -f rdfexport.properties -z -o ./RDFfiles/Activity.rdf.gz
 echo generating CompetentAuthority.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute competentAuthority  -f rdfexport.properties -o ./RDFfiles/CompetentAuthority.rdf 
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute competentAuthority  -f rdfexport.properties -z -o ./RDFfiles/CompetentAuthority.rdf.gz
 echo generating FacilityID_Changes.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facilityID_Changes -f rdfexport.properties -o ./RDFfiles/FacilityID_Changes.rdf 
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facilityID_Changes -f rdfexport.properties -z -o ./RDFfiles/FacilityID_Changes.rdf.gz
 echo generating PollutantReleaseMethodUsed.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutantReleaseMethodUsed -f rdfexport.properties -o ./RDFfiles/PollutantReleaseMethodUsed.rdf 
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutantReleaseMethodUsed -f rdfexport.properties -z -o ./RDFfiles/PollutantReleaseMethodUsed.rdf.gz
 echo generating PollutantTransferMethodUsed.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutantTransferMethodUsed -f rdfexport.properties -o ./RDFfiles/PollutantTransferMethodUsed.rdf 
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute pollutantTransferMethodUsed -f rdfexport.properties -z -o ./RDFfiles/PollutantTransferMethodUsed.rdf.gz
 echo generating UploadedReports.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute uploadedReports -f rdfexport.properties -o ./RDFfiles/UploadedReports.rdf 
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute uploadedReports -f rdfexport.properties -z -o ./RDFfiles/UploadedReports.rdf.gz
 echo generating WasteTransferMethodUsed.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute wasteTransferMethodUsed -f rdfexport.properties -o ./RDFfiles/WasteTransferMethodUsed.rdf 
-echo Compressing files... Why?
-tar -cf RDFfiles.gz RDFfiles/
+java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute wasteTransferMethodUsed -f rdfexport.properties -z -o ./RDFfiles/WasteTransferMethodUsed.rdf.gz
+
 echo Process finished
 pause
 
