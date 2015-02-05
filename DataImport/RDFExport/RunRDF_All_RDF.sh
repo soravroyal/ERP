@@ -4,7 +4,7 @@ rm -rf RDFfiles
 mkdir RDFfiles
 
 CMD="java -cp  rdf-exporter-1.0-SNAPSHOT.jar:./jtds-1.2.5.jar eionet.rdfexport.Execute"
-OPTS="-f rdfexport.properties -z"
+OPTS="-d database.properties -f rdfexport.properties -z"
 SUFFIX="rdf.gz"
 CFLAG=""
 #SUFFIX="rdf"
@@ -18,7 +18,6 @@ wasteTreatment wastethreshold wasteType"
 
 echo generating lookuptables.$SUFFIX ...
 $CMD $LOOKUPS $OPTS -o ./RDFfiles/lookuptables.$SUFFIX
-exit
 echo generating facility.$SUFFIX ...
 $CMD facility $OPTS -o ./RDFfiles/Facility.$SUFFIX
 echo generating facilityreport.$SUFFIX ...

@@ -1,0 +1,17 @@
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# COPY THIS FILE TO database.properties AND CHANGE THE DATABASE CREDENTIALS
+#
+# Database parameters
+#
+db.driver=net.sourceforge.jtds.jdbc.Driver
+db.database=jdbc:jtds:sqlserver://MATIKO/EPRTRmaster
+db.user=sa
+db.password=saretex1
