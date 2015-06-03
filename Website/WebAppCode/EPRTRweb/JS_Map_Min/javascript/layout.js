@@ -167,7 +167,8 @@ function createMap() {
                 addSearchWidget(map4);
 			    //show default layer ("E-PRTR Facilities")
                 var operationalLayers = response.itemInfo.itemData.operationalLayers;
-                var defaultLayerId = "EprtrFacilities_Dyna_WGS84_1098";
+			    //var defaultLayerId = "EprtrFacilities_Dyna_WGS84_1098";
+                var defaultLayerId = "EprtrFacilities_Dyna_WGS84_2570";
                 var defaultLayerLabel;
                 dojo.forEach(operationalLayers, function (operationalLayer, index) {
                     if (operationalLayer.id == defaultLayerId) {
@@ -503,7 +504,8 @@ if(map1!=undefined)
   mapLayer.show(); 
   mapLayer.resume();
   // query to obtain extent and infowindows  
-  queryFacility(layerID,servicePRTR, defExp, mapLayer.__popups[0]);
+    //queryFacility(layerID,servicePRTR, defExp, mapLayer.__popups[0]);
+  queryFacility(layerID, servicePRTR, defExp, null);
  }  
 }
 
@@ -524,7 +526,7 @@ function filterFacilityExtended( layerID, servicePRTR, defExp)
   mapLayer.show(); 
   mapLayer.resume();
   // query to obtain extent and infowindows  
-  queryFacilityExtended(layerID,servicePRTR, defExp, mapLayer.__popups[0]);
+  queryFacilityExtended(layerID,servicePRTR, defExp, null);
  }  
 }
 
@@ -547,7 +549,8 @@ if(map3!=undefined)
 	 mapLayer.show(); 
 	 
 	  // query to obtain extent and infowindows  
-	  queryFacilityDetails(layerID,servicePRTR, defExp, mapLayer.__popups[0]);
+    //queryFacilityDetails(layerID,servicePRTR, defExp, mapLayer.__popups[0]);
+	 queryFacilityDetails(layerID, servicePRTR, defExp, null);
   }
 }
 function queryAndZoomFacility(FacilityReportID, map){
@@ -598,9 +601,21 @@ function queryFacility(layerName, servicePRTR, strSql, popupInfo)
 		  map1.graphics.clear();
 		  
 		 for (var i=0; i<results.features.length;i++){		  
-			  feature = results.features[i];		 
-			  feature['infoTemplate'] = new esri.dijit.PopupTemplate(info);			 
-			  
+		     feature = results.features[i];
+
+		     
+		     //feature['infoTemplate'] = new esri.dijit.PopupTemplate(info);
+		     //var popup = new esri.dijit.PopupTemplate()
+		     var popup = new esri.InfoTemplate()
+		     popup.setTitle("${FacilityName}");
+		     popup.setContent("<b>City: </b>${City}<br/>"
+                                      + "<b>Address: </b>${Address}<br/>"
+                                      + "<b>Postal Code: </b>${PostalCode}<br/>"
+                                      + "<b>Sector: </b>${IASectorCode}<br/>"
+                                      + "<a href='http://prtr.ec.europa.eu/PopupFacilityDetails.aspx?FacilityReportId=${FacilityReportID}' target='_blank'>Show facility details</a>");
+
+
+		     feature['infoTemplate'] = popup;
 			  graphic = feature;
 			  graphic.setSymbol(simboloPunto)
 			  map1.graphics.add(graphic);
@@ -623,7 +638,7 @@ function queryFacility(layerName, servicePRTR, strSql, popupInfo)
 };
 function identifyFeatures(evt)
 {
-		  map1.infoWindow.setTitle("");
+    map1.infoWindow.setTitle(evt.graphic.getTitle());
 		  map1.infoWindow.setContent( evt.graphic.getContent());
 		  map1.infoWindow.show(evt.screenPoint,map1.getInfoWindowAnchor(evt.screenPoint));
 }
@@ -660,7 +675,18 @@ function queryFacilityExtended(layerName, servicePRTR, strSql, popupInfo)
 			  
 			 for (var i=0; i<results.features.length;i++){		  
 				  feature = results.features[i];		 
-				  feature['infoTemplate'] = new esri.dijit.PopupTemplate(info);			 
+			     //feature['infoTemplate'] = new esri.dijit.PopupTemplate(info);
+			     //var popup = new esri.dijit.PopupTemplate()
+				  var popup = new esri.InfoTemplate()
+				  popup.setTitle("${FacilityName}");
+				  popup.setContent("<b>City: </b>${City}<br/>"
+                                           + "<b>Address: </b>${Address}<br/>"
+                                           + "<b>Postal Code: </b>${PostalCode}<br/>"
+                                           + "<b>Sector: </b>${IASectorCode}<br/>"
+                                           + "<a href='http://prtr.ec.europa.eu/PopupFacilityDetails.aspx?FacilityReportId=${FacilityReportID}' target='_blank'>Show facility details</a>");
+
+
+				  feature['infoTemplate'] = popup;
 				  
 				  graphic = feature;
 				  graphic.setSymbol(simboloPunto)
@@ -685,7 +711,7 @@ function queryFacilityExtended(layerName, servicePRTR, strSql, popupInfo)
 
 function identifyFeaturesExtended(evt)
 {
-		  map2.infoWindow.setTitle("");
+    map2.infoWindow.setTitle(evt.graphic.getTitle());
 		  map2.infoWindow.setContent( evt.graphic.getContent());
 		  map2.infoWindow.show(evt.screenPoint,map2.getInfoWindowAnchor(evt.screenPoint));
 }
@@ -722,7 +748,18 @@ function queryFacilityDetails( layerName, servicePRTR, strSql, popupInfo)
 		  
 		 for (var i=0; i<results.features.length;i++){		  
 			  feature = results.features[i];		 
-			  feature['infoTemplate'] = new esri.dijit.PopupTemplate(info);			 
+		     //feature['infoTemplate'] = new esri.dijit.PopupTemplate(info);
+		     //var popup = new esri.dijit.PopupTemplate()
+			  var popup = new esri.InfoTemplate()
+			  popup.setTitle("${FacilityName}");
+			  popup.setContent("<b>City: </b>${City}<br/>"
+                                       + "<b>Address: </b>${Address}<br/>"
+                                       + "<b>Postal Code: </b>${PostalCode}<br/>"
+                                       + "<b>Sector: </b>${IASectorCode}<br/>"
+                                       + "<a href='http://prtr.ec.europa.eu/PopupFacilityDetails.aspx?FacilityReportId=${FacilityReportID}' target='_blank'>Show facility details</a>");
+
+
+			  feature['infoTemplate'] = popup;
 			  
 			  graphic = feature;
 			  graphic.setSymbol(simboloPunto)
@@ -747,7 +784,7 @@ function queryFacilityDetails( layerName, servicePRTR, strSql, popupInfo)
 
 function identifyFeaturesDetails(evt)
 {
-		  map3.infoWindow.setTitle("");
+        map3.infoWindow.setTitle(evt.graphic.getTitle());
 		  map3.infoWindow.setContent( evt.graphic.getContent());
 		  map3.infoWindow.show(evt.screenPoint,map3.getInfoWindowAnchor(evt.screenPoint));
 }
@@ -834,7 +871,8 @@ function addYearSelector(map, years){
         options: objYears
     });
     select.on("change", function(year){
-      var layer = map.getLayer("EprtrFacilities_Dyna_WGS84_1098");
+        //var layer = map.getLayer("EprtrFacilities_Dyna_WGS84_1098");
+        var layer = map.getLayer("EprtrFacilities_Dyna_WGS84_2570")
       var layerDefinitions = [];
       layerDefinitions[0] = year;
       layer.setLayerDefinitions(layerDefinitions);
@@ -1026,7 +1064,8 @@ function buildLayerVisibleList(layers) {
 
 function addPrint(map, response) {	
         var legendLayer = new esri.tasks.LegendLayer();
-        legendLayer.layerId = "EprtrFacilities_Dyna_WGS84_1098";
+    //legendLayer.layerId = "EprtrFacilities_Dyna_WGS84_1098";
+        legendLayer.layerId = "EprtrFacilities_Dyna_WGS84_2570"
 
         legendLayer.subLayerIds = [];
 	    // create an array of objects that will be used to create print templates
@@ -1474,7 +1513,9 @@ function clearResults(map){
 }
 function searchByText(facilityText)
 {
-executeTextSearch("EprtrFacilities_Dyna_WGS84_1098","http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/0",facilityText)
+    //executeTextSearch("EprtrFacilities_Dyna_WGS84_1098", "http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/0", facilityText)
+    executeTextSearch("EprtrFacilities_Dyna_WGS84_2570", "http://discomap.eea.europa.eu/ArcGIS/rest/services/Air/EprtrFacilities_Dyna_WGS84/MapServer/0", facilityText)
+    
 }
 
 function addToMapAndQuery(evt) {
@@ -1521,7 +1562,7 @@ function executeIdentifyTask(mapa,geom)
 
 function executeTextSearch(layerID, servicePRTR,text)
  {
-	var info = map2.getLayer(layerID).__popups[0];
+	//var info = map2.getLayer(layerID).__popups[0];
 	// query definition
 	queryTask = new esri.tasks.QueryTask(servicePRTR);
 	query = new esri.tasks.Query();	
@@ -1595,7 +1636,7 @@ function addToGrid(idResults,mapa) {
 	var tabs = dijit.byId("searchTab");
 	tabs.selectChild(dijit.byId("resultTab"));
 
-    var info = mapa.getLayer("EprtrFacilities_Dyna_WGS84_1098").__popups[0];
+    //var info = mapa.getLayer("EprtrFacilities_Dyna_WGS84_1098").__popups[0];
 	
 	
 
