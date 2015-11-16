@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:common="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:dc="http://purl.org/dc/elements/1.1/" elementFormDefault="qualified">
+	<xs:annotation>
+		<xs:documentation>
+				This schema defines the common types used by LCP reporting schemas. It is a reference schema only and does not have its own instance
+		</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="OtherGasesType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Blast furnace gas"/>
+			<xs:enumeration value="Products of gasification"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OtherSolidFuels">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Peat"/>
+			<xs:enumeration value="Lignite"/>
+			<xs:enumeration value="Sub-bituminous coal"/>
+			<xs:enumeration value="Bituminous coal"/>
+			<xs:enumeration value="Anthracite"/>
+			<xs:enumeration value="Other"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TextType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LongTextType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReportingYearType">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="2006"/>
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="QuantityContentType">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TrueFalseType">
+		<xs:annotation>
+			<xs:documentation>Checkbox values</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="true"/>
+			<xs:enumeration value="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MethodBasisCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C - Calculated"/>
+			<xs:enumeration value="E - Estimated"/>
+			<xs:enumeration value="M - Measured"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MethodTypeCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ALT - Alternative measurement methodology in accordance with existing CEN/ISO measurements standards"/>
+			<xs:enumeration value="CEN/ISO - Internationally approved measurement standard"/>
+			<xs:enumeration value="CRM - Measurement methodology for the performance of which is demonstrated by means of certified reference materials and accepted by competent authority."/>
+			<xs:enumeration value="ETS - Guidelines for the monitoring and reporting of greenhouse gas emissions under the Emission Trading Scheme"/>
+			<xs:enumeration value="IPCC - IPCC Guidelines"/>
+			<xs:enumeration value="MAB - Mass balance method which is accepted by the competent authority"/>
+			<xs:enumeration value="NRB - National or regional binding measurement/calculation methodology prescribed by legal act for the pollutant and facility concerned"/>
+			<xs:enumeration value="OTH - Other measurement/calculation methodology"/>
+			<xs:enumeration value="PER - Measurement/Calculation Methodology already prescribed by the competent authority in a licence or an operating permit for the facility"/>
+			<xs:enumeration value="SSC - European-wide sector specific calculation method"/>
+			<xs:enumeration value="UNECE/EMEP - UNECE/EMEP EMEP/CORINAIR Emission Inventory Guidebook"/>
+			<xs:enumeration value="WEIGH - Weighing"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatusOfThePlantType">
+		<xs:annotation>
+			<xs:documentation>Pollutants, Form 5 "Pollutants not covered by TNP"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Art 30(2) - existing plants under IED"/>
+			<xs:enumeration value="Art 30(3) - new plants under IED"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CombustionType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Boiler"/>
+			<xs:enumeration value="DieselEngine"/>
+			<xs:enumeration value="GasEngine"/>
+			<xs:enumeration value="GasTurbine"/>
+			<xs:enumeration value="Others"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EnergyInputType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Biomass"/>
+			<xs:enumeration value="HardCoal"/>
+			<xs:enumeration value="Lignite"/>
+			<xs:enumeration value="LiquidFuels"/>
+			<xs:enumeration value="NaturalGas"/>
+			<xs:enumeration value="Peat"/>
+			<xs:enumeration value="OtherGases"/>
+			<xs:enumeration value="OtherSolidFuels"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConfidentialCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A42a - Article 4(2)(a) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42b - Article 4(2)(b) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42c - Article 4(2)(c) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42d - Article 4(2)(d) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42e - Article 4(2)(e) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42f - Article 4(2)(f) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42g - Article 4(2)(g) of Directive 2003/4/EC"/>
+			<xs:enumeration value="A42h - Article 4(2)(h) of Directive 2003/4/EC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WasteTypeCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="HW - Hazardous waste"/>
+			<xs:enumeration value="HWIC - Hazardous waste within country"/>
+			<xs:enumeration value="HWOC - Harzodous waste outside country"/>
+			<xs:enumeration value="NON-HW - Non-hazardous waste"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WasteTreatmentCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="D - Destined for disposal"/>
+			<xs:enumeration value="R - Destined for recovery"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PollutantType">
+		<xs:annotation>
+			<xs:documentation>Pollutants, Form 5 "Pollutants not covered by TNP"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GRHGAS"/>
+			<xs:enumeration value="CH4"/>
+			<xs:enumeration value="CO2">
+				<xs:annotation>
+					<xs:documentation>Example Pollutant Type: CO2</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CO2 EXCL BIOMASS"/>
+			<xs:enumeration value="HCFCS"/>
+			<xs:enumeration value="N2O"/>
+			<xs:enumeration value="PFCS"/>
+			<xs:enumeration value="SF6"/>
+			<xs:enumeration value="OTHGAS"/>
+			<xs:enumeration value="CO"/>
+			<xs:enumeration value="NH3"/>
+			<xs:enumeration value="NMVOC"/>
+			<xs:enumeration value="NOX"/>
+			<xs:enumeration value="SOX"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="HALOGENATED ORGANIC COMPOUNDS"/>
+			<xs:enumeration value="HALONS"/>
+			<xs:enumeration value="HCN"/>
+			<xs:enumeration value="HEPTACHLOR"/>
+			<xs:enumeration value="HEVMET"/>
+			<xs:enumeration value="HEXABROMOBIPHENYL"/>
+			<xs:enumeration value="HEXACHLOROBENZENE (HCB)"/>
+			<xs:enumeration value="HEXACHLOROBUTADIENE (HCBD)"/>
+			<xs:enumeration value="CR AND COMPOUNDS"/>
+			<xs:enumeration value="HEXACHLOROCYCLOHEXANE(HCH)"/>
+			<xs:enumeration value="CU AND COMPOUNDS"/>
+			<xs:enumeration value="HFCS"/>
+			<xs:enumeration value="CYANIDES"/>
+			<xs:enumeration value="HG AND COMPOUNDS"/>
+			<xs:enumeration value="DDT"/>
+			<xs:enumeration value="I)PERYLENE"/>
+			<xs:enumeration value="DEHP"/>
+			<xs:enumeration value="INORG"/>
+			<xs:enumeration value="DICHLOROETHANE (DCE)"/>
+			<xs:enumeration value="ISODRIN"/>
+			<xs:enumeration value="DICHLOROMETHANE (DCM)"/>
+			<xs:enumeration value="ISOPROTURON"/>
+			<xs:enumeration value="DIELDRIN"/>
+			<xs:enumeration value="LINDANE"/>
+			<xs:enumeration value="DIURON"/>
+			<xs:enumeration value="MIREX"/>
+			<xs:enumeration value="ENDOSULPHAN"/>
+			<xs:enumeration value="NAPHTHALENE"/>
+			<xs:enumeration value="ENDRIN"/>
+			<xs:enumeration value="NI AND COMPOUNDS"/>
+			<xs:enumeration value="ETHYLBENZENE"/>
+			<xs:enumeration value="NP/NPES"/>
+			<xs:enumeration value="ETHYLENE OXIDE"/>
+			<xs:enumeration value="OCTYLPHENOLS AND OCTYLPHENOL ETHOXYLATES"/>
+			<xs:enumeration value="FLUORANTHENE"/>
+			<xs:enumeration value="ORGANOTIN - COMPOUNDS"/>
+			<xs:enumeration value="FLUORIDES"/>
+			<xs:enumeration value="OTHORG"/>
+			<xs:enumeration value="FLUORINE AND INORGANIC COMPOUNDS"/>
+			<xs:enumeration value="PB AND COMPOUNDS"/>
+			<xs:enumeration value="PCDD+PCDF (DIOXINS+FURANS)"/>
+			<xs:enumeration value="PENTACHLOROBENZENE"/>
+			<xs:enumeration value="PENTACHLOROPHENOL (PCP)"/>
+			<xs:enumeration value="PEST"/>
+			<xs:enumeration value="PHENOLS"/>
+			<xs:enumeration value="PM10"/>
+			<xs:enumeration value="POLYCHLORINATED BIPHENYLS (PCBS)"/>
+			<xs:enumeration value="POLYCYCLIC AROMATIC HYDROCARBONS"/>
+			<xs:enumeration value="SIMAZINE"/>
+			<xs:enumeration value="TETRACHLOROETHANE"/>
+			<xs:enumeration value="TETRACHLOROETHYLENE (PER)"/>
+			<xs:enumeration value="TETRACHLOROMETHANE (TCM)"/>
+			<xs:enumeration value="TOLUENE"/>
+			<xs:enumeration value="TOTAL NITROGEN"/>
+			<xs:enumeration value="TOTAL ORGANIC CARBON (TOC)"/>
+			<xs:enumeration value="TOTAL PHOSPHORUS"/>
+			<xs:enumeration value="TOXAPHENE"/>
+			<xs:enumeration value="TRIBUTYLTIN AND COMPOUNDS"/>
+			<xs:enumeration value="TRICHLOROBENZENES (TCB)"/>
+			<xs:enumeration value="TRICHLOROETHANE (TCE)"/>
+			<xs:enumeration value="TRICHLOROETHYLENE (TRI)"/>
+			<xs:enumeration value="TRICHLOROMETHANE"/>
+			<xs:enumeration value="TRIFLURALIN"/>
+			<xs:enumeration value="TRIPHENYLTIN AND COMPOUNDS"/>
+			<xs:enumeration value="VINYL CHLORIDE"/>
+			<xs:enumeration value="XYLENES"/>
+			<xs:enumeration value="ZN AND COMPOUNDS"/>
+			<xs:enumeration value="ALACHLOR"/>
+			<xs:enumeration value="ALDRIN"/>
+			<xs:enumeration value="ANTHRACENE"/>
+			<xs:enumeration value="AS AND COMPOUNDS"/>
+			<xs:enumeration value="ASBESTOS"/>
+			<xs:enumeration value="ATRAZINE"/>
+			<xs:enumeration value="BENZENE"/>
+			<xs:enumeration value="BENZO(G"/>
+			<xs:enumeration value="BROMINATED DIPHENYLETHER"/>
+			<xs:enumeration value="CD AND COMPOUNDS"/>
+			<xs:enumeration value="CFCS"/>
+			<xs:enumeration value="CHLORDECONE"/>
+			<xs:enumeration value="CHLORFENVINPHOS"/>
+			<xs:enumeration value="CHLORG"/>
+			<xs:enumeration value="CHLORIDES"/>
+			<xs:enumeration value="CHLORINE AND INORGANIC COMPOUNDS"/>
+			<xs:enumeration value="CHLORO-ALKANES (C10-13)"/>
+			<xs:enumeration value="CHLORPYRIFOS"/>
+			<xs:enumeration value="CLORDANE"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="QuantityType">
+		<xs:annotation>
+			<xs:documentation>TNE,</xs:documentation>
+		</xs:annotation>
+		<xs:sequence minOccurs="1" maxOccurs="1">
+			<xs:element name="Quantity" type="QuantityContentType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="UnitCode" type="UnitCodeType" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="UnitCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="A90 - gigawatt"/>
+			<xs:enumeration value="GV - gigajoule"/>
+			<xs:enumeration value="GWH - gigawatt hour"/>
+			<xs:enumeration value="HLT - hectolitre"/>
+			<xs:enumeration value="KGM - kilogram"/>
+			<xs:enumeration value="KWH - kilowatt hour"/>
+			<xs:enumeration value="KWT - kilowatt"/>
+			<xs:enumeration value="LTR - litre"/>
+			<xs:enumeration value="MAW - megawatt"/>
+			<xs:enumeration value="MTK - square metre"/>
+			<xs:enumeration value="MTQ - cubic metre"/>
+			<xs:enumeration value="MWH - megawatt hour"/>
+			<xs:enumeration value="PCS - pieces"/>
+			<xs:enumeration value="TNE - tonne (metric ton)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MonthType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="January"/>
+			<xs:enumeration value="February"/>
+			<xs:enumeration value="March"/>
+			<xs:enumeration value="April"/>
+			<xs:enumeration value="May"/>
+			<xs:enumeration value="June"/>
+			<xs:enumeration value="July"/>
+			<xs:enumeration value="August"/>
+			<xs:enumeration value="September"/>
+			<xs:enumeration value="October"/>
+			<xs:enumeration value="November"/>
+			<xs:enumeration value="December"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CountryCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AT - Austria"/>
+			<xs:enumeration value="BE - Belgium"/>
+			<xs:enumeration value="BG - Bulgaria"/>
+			<xs:enumeration value="CH - Switzerland"/>
+			<xs:enumeration value="CY - Cyprus"/>
+			<xs:enumeration value="CZ - Czech Republic"/>
+			<xs:enumeration value="DE - Germany"/>
+			<xs:enumeration value="DK - Denmark"/>
+			<xs:enumeration value="EE - Estonia"/>
+			<xs:enumeration value="EL - Greece"/>
+			<xs:enumeration value="ES - Spain"/>
+			<xs:enumeration value="FI - Finland"/>
+			<xs:enumeration value="FR - France"/>
+			<xs:enumeration value="HR - Croatia"/>
+			<xs:enumeration value="GB - United Kingdom"/>
+			<xs:enumeration value="HU - Hungary"/>
+			<xs:enumeration value="IE - Ireland"/>
+			<xs:enumeration value="IS - Iceland"/>
+			<xs:enumeration value="IT - Italy"/>
+			<xs:enumeration value="LT - Lithuania"/>
+			<xs:enumeration value="LU - Luxembourg"/>
+			<xs:enumeration value="LV - Latvia"/>
+			<xs:enumeration value="MT - Malta"/>
+			<xs:enumeration value="NL - Netherlands"/>
+			<xs:enumeration value="NO - Norway"/>
+			<xs:enumeration value="PL - Poland"/>
+			<xs:enumeration value="PT - Portugal"/>
+			<xs:enumeration value="RO - Romania"/>
+			<xs:enumeration value="RS - Serbia"/>
+			<xs:enumeration value="SE - Sweden"/>
+			<xs:enumeration value="SI - Slovenia"/>
+			<xs:enumeration value="SK - Slovakia"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressType">
+		<xs:annotation>
+			<xs:documentation>The base format for addresses in PRTR.
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="StreetName" type="TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name, expressed as text, of a street in the address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BuildingNumber" type="TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The building number, expressed as text, in the address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="City" type="TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name, expressed as text, of the city, town or village in the address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostalCode" type="TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The postcode, expressed as text, if the address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryID" type="TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The unique identifier of a country in the structured address (Reference ISO 3166 and UN/ECE Rec 3).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="TotalEmissionsToAirType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Dust"/>
+			<xs:enumeration value="NOx"/>
+			<xs:enumeration value="SO2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="MethodUsedType">
+		<xs:annotation>
+			<xs:documentation>Describes a measurement/calculation method used for determination of quantities of pollutants and waste
+            </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MethodTypeCode" type="MethodTypeCodeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Identifies the type of method used (CEN/ISO, ETS, etc.). Notice that the method type “WEIGH” (i.e. weighing) only is allowed for waste transfer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Designation" type="TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A short designation or description of the method used. Required for some method types as indicated in the list of legal method type codes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="MediumCodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AIR"/>
+			<xs:enumeration value="LAND"/>
+			<xs:enumeration value="WATER"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
