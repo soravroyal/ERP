@@ -3,7 +3,7 @@ echo Starting RDF files generation
 rm -rf RDFfiles
 mkdir RDFfiles
 
-CMD="java -cp  rdf-exporter-1.0-SNAPSHOT.jar:./jtds-1.2.5.jar eionet.rdfexport.Execute"
+CMD="java -jar rdf-exporter-1.3-SNAPSHOT-jar-with-dependencies.jar"
 OPTS="-d database.properties -f rdfexport.properties -z"
 SUFFIX="rdf.gz"
 CFLAG=""
