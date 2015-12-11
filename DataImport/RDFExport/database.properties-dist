@@ -11,6 +11,8 @@
 #
 # Database parameters
 #
+classpath = jtds-1.2.5.jar
+#
 db.driver=net.sourceforge.jtds.jdbc.Driver
 db.database=jdbc:jtds:sqlserver://MATIKO/EPRTRmaster
 db.user=sa

@@ -12,11 +12,11 @@ rmdir /s /q RDFfiles
 mkdir RDFfiles
 
 echo generating lookuptables.rdf...
-REM java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute AnnexIActivity AreaGroup Confidentiality Country medium pollutant pollutantthreshold wastethreshold wastetype unit method methodtype rbd -f rdfexport.properties -o ./RDFfiles/lookuptables.rdf
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute annexIActivity areaGroup confidentiality coordinateSystem country medium methodBasis methodType nACEActivity nUTSRegion pollutant riverBasinDistrict status unit wasteTreatment wasteType pollutantthreshold wastethreshold unit method methodtype rbd  -f rdfexport.properties -o ./RDFfiles/lookuptables.rdf 
+REM java -jar rdf-exporter-1.3-SNAPSHOT-jar-with-dependencies.jar AnnexIActivity AreaGroup Confidentiality Country medium pollutant pollutantthreshold wastethreshold wastetype unit method methodtype rbd -f rdfexport.properties -o ./RDFfiles/lookuptables.rdf
+java -jar rdf-exporter-1.3-SNAPSHOT-jar-with-dependencies.jar annexIActivity areaGroup confidentiality coordinateSystem country medium methodBasis methodType nACEActivity nUTSRegion pollutant riverBasinDistrict status unit wasteTreatment wasteType pollutantthreshold wastethreshold unit method methodtype rbd  -f rdfexport.properties -o ./RDFfiles/lookuptables.rdf 
 
 echo generating facility.rdf...
-java -cp  rdf-exporter-1.0-SNAPSHOT.jar;./jtds-1.2.5.jar eionet.rdfexport.Execute facility -f rdfexport.properties -o ./RDFfiles/Facility.rdf
+java -jar rdf-exporter-1.3-SNAPSHOT-jar-with-dependencies.jar facility -f rdfexport.properties -o ./RDFfiles/Facility.rdf
 
 echo Compressing files... Why?
 

@@ -26,16 +26,7 @@ if there are significant differences, then check the scripts.
 The RDF export uses a Java product that was developed for other projects.
 
 There will occasionally be updates to the Java product. When this happens,
-then the rdf-exporter-1.0-SNAPSHOT.jar will have to be recompiled.
+then get a new version from Jenkins at
+http://ci.eionet.europa.eu/view/Java/job/RDFExport/lastSuccessfulBuild/artifact/target/rdf-exporter-1.3-SNAPSHOT-jar-with-dependencies.jar
 
-The RDFExport directory links to an external SVN repository as a symbolic link.
-To recompile the rdf-exported do:
-
-    cd RDFExport
-    mvn -Dmaven.test.skip=true install
-    cp target/rdf-exporter-1.0-SNAPSHOT.jar ..
-    cd ..
-    svn ci rdf-exporter-1.0-SNAPSHOT.jar
-
-RDFExport is a Maven project, and the website is here: http://maven.apache.org/
 
