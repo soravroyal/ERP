@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<div class="feedbacktext" style="font-size:13px;">
+   <script language="javascript">
+    function toggle(divName, linkName) {
+        var elem = document.getElementById(divName);
+        var text = document.getElementById(linkName);
+        if(elem.style.display == "block") {
+            elem.style.display = "none";
+            text.innerHTML = "Show details";
+        }
+        else {
+            elem.style.display = "block";
+            text.innerHTML = "Hide details";
+        }
+        }
+</script>
+   <h1>E-PRTR - Mandatory check </h1>
+   <p>
+      <span id="feedbackStatus" class="BLOCKER" style="display:none">Mandatory check(s) FAILED. Data delivery is not acceptable. Errors found prevent data being imported to E-PRTR database.</span>
+      <div style="color:red">
+         <b>Mandatory check(s) FAILED. Data delivery is not acceptable. Errors found prevent data being imported to E-PRTR database.</b>
+      </div>
+   </p>
+   <a id="feedBackLink"
+      href="javascript:toggle(&#34;feedBackDiv&#34;,&#34;feedBackLink&#34;)">Hide details</a>
+   <div id="feedBackDiv" style="display:block">
+      <div>
+         <p>The following validations are meant to help the member states to evaluate if all mandatory data is correct. The validation detects missing or incorrect mandatory data by analysing the reported values using 3 different methods:</p>
+         <ul>
+            <li style="list-style-type:none">
+               <span style="background-color:blue;padding-left:12px;padding-right:12px; color: white;font-size: 0.8em"
+                     title="The test was skipped">1</span>
+               <span style="padding-left:10px">
+                  <b>1.  <a href="#1">XML Schema Validation</a>:</b> The test checks if the document delivered conforms to the data model defined in the XML Schema for this data flow. The XML Schema data model specifies the element names, document structure and data types.    </span>
+            </li>
+            <li style="list-style-type:none">
+               <span style="background-color:blue;padding-left:12px;padding-right:12px; color: white;font-size: 0.8em"
+                     title="The test was skipped">1</span>
+               <span style="padding-left:10px">
+                  <b>2.  <a href="#2">Envelope Validation</a>:</b> checks if the delivery data corresponds with envelope data    </span>
+            </li>
+            <li style="list-style-type:none">
+               <span style="background-color: red; font-size: 0.8em; color: white; padding-left:12px;padding-right:12px;text-align:center"
+                     title="3 errors within this type of rule - Compliance Validation"
+                     error="code:3">3</span>
+               <span style="padding-left:10px">
+                  <b>3.  <a href="#3">Compliance Validation</a>:</b> the reported value is indicated as potential not compliant value.    </span>
+            </li>
+            <li style="list-style-type:none">
+               <span style="background-color: red; font-size: 0.8em; color: white; padding-left:12px;padding-right:12px;text-align:center"
+                     title="3 errors within this type of rule - Compliance Validation sorted by facilities"
+                     error="code:4">3</span>
+               <span style="padding-left:10px">
+                  <b>4.  <a href="#4">Compliance Validation sorted by facilities</a>:</b> the reported value is indicated as potential not compliant value.    </span>
+            </li>
+         </ul>
+      </div>
+      <div>
+         <p>
+            <b>Validated XML file: </b>C:/Users/workXqu/QAQC2/XQuery/resources/test.xml</p>
+         <h2>
+            <br/>
+            <a name="1">1. XML Schema Validation</a>
+         </h2>
+         <p style="color:blue">The test is skipped in Validation Tool. XML Schema validation is done separately and if the result contains any errors, then data delivery is not acceptable.</p>
+         <h2>
+            <br/>
+            <a name="2">2. Envelope Validation</a>
+         </h2>
+         <p style="color:blue">The test is skipped in Validation Tool. Envelope validation will be done after uploading the delivery to CDR.</p>
+         <h2>
+            <br/>
+            <a name="3">3. Compliance Validation</a>
+         </h2>
+         <div>
+            <h3>
+               <br/>3.1 Validation of Codes</h3>
+            <p>This validation examines if any codes are illegal according to the code lists.</p>
+            <p style="color:red">The test failed!</p>
+            <div>
+               <h3>Illegal Reporting year</h3>
+               <p>The reporting year can not be later than current year or diferent to envelope Year</p>
+               <p>The following reporting years are not legal:</p>
+               <table border="1"
+                      class="datatable"
+                      error="Illegal Reporting year"
+                      style="font-size:11px;">
+                  <tr align="center">
+                     <th>Reporting year</th>
+                  </tr>
+                  <tr>
+                     <td style="color:red">
+                        <div errorcode="3">2014</div>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div>
+            <h3>
+               <br/>3.2 Validation of Facility Reports</h3>
+            <p style="color:blue">The test passed successfully.</p>
+         </div>
+         <div>
+            <h3>
+               <br/>3.4 Validation of Pollutant Releases</h3>
+            <div>
+               <h3>Controlled for bad reported in pollulant code</h3>
+               <p>Must be a Pollutant group (GRHGAS, OTHGAS, HEVMET, PEST, CHLORG, OTHORG OR INORG) if confidentialIndicator is True and cannot bet a Pollutant group if confidentialIndicator is False</p>
+               <p>The following Pollulant Release with illegal Pollutant code were found:</p>
+               <table border="1"
+                      class="datatable"
+                      error="PollulantRelease pollulantCode"
+                      style="font-size:11px;">
+                  <tr align="center">
+                     <th>Facility</th>
+                     <th>Medium</th>
+                     <th>Pollutant</th>
+                     <th>Method basis</th>
+                     <th>Method(s)</th>
+                     <th>Tot. quantity</th>
+                     <th>Acc. quantity</th>
+                     <th>Confidential</th>
+                     <th>Reason for conf.</th>
+                  </tr>
+                  <tr>
+                     <td>dBFacitilyID</td>
+                     <td style="color:red">
+                        <div errorcode="3">AIR</div>
+                     </td>
+                     <td>NOX</td>
+                     <td>M - Measured</td>
+                     <td>-Not reported-</td>
+                     <td>157000</td>
+                     <td>0.00</td>
+                     <td>No</td>
+                     <td>-Not reported-</td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <div>
+            <h3>
+               <br/>3.5 Validation of Pollutant Transfers</h3>
+         </div>
+         <div>
+            <h3>
+               <br/>3.6 Validation of Waste Transfers</h3>
+            <p style="color:red">The test failed!</p>
+            <div>
+               <h3>Controlled for not-reported or reported</h3>
+               <p>Must be reported if element confidentialIndicator is False and element wasteTypeCode is HWOC - Harzodous waste outside country and empty if wasteTypeCode is different </p>
+               <p>The following waste transfers with illegal quantity were found:</p>
+               <table border="1"
+                      class="datatable"
+                      error="WasteTransfer methodUsed"
+                      style="font-size:11px;">
+                  <tr align="center">
+                     <th>Facility</th>
+                     <th>Waste type</th>
+                     <th>Quantity</th>
+                     <th>Waste treatment</th>
+                     <th>Method Basis</th>
+                     <th>Method(s)</th>
+                     <th>Confidential</th>
+                     <th>Reason for conf.</th>
+                  </tr>
+                  <tr>
+                     <td>dBFacitilyID</td>
+                     <td>HWOC - Harzodous waste outside country</td>
+                     <td style="color:red">
+                        <div errorcode="3">678</div>
+                     </td>
+                     <td>R - Destined for recovery</td>
+                     <td>M - Measured</td>
+                     <td>-Not reported-</td>
+                     <td>No</td>
+                     <td>-Not reported-</td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+         <h2>
+            <br/>
+            <a name="4">4. Compliance Validation sorted by facilities</a>
+         </h2>
+         <div style="font-size:13px;">
+            <p>This report shows the results of the validation rules for compliance checking as indicated in the validation manual available at <a href="http://www.eionet.europa.eu/schemas/eprtr/">http://www.eionet.europa.eu/schemas/eprtr/</a>
+    The code lists for E-PRTR are available at the same address.</p>
+            <p>
+               <a href="javascript:toggle('facilityInfoDiv', 'facilityInfoLink')"
+                  id="facilityInfoLink"
+                  title="Click to see interpretation of columns">Show Details</a>
+            </p>
+            <div id="facilityInfoDiv" style="display:none">
+               <p>
+                  <b>(1) Codes:</b> The only allowed codes are those provided by the Code List (available in EIONET). This compliance validation examines if any codes are illegal according to the code lists. In particular, the validation checks the reporting year and if the code used for the following aspects belongs to the code list:
+      <ul style="margin-top:0px;">
+                     <li>Activity codes according to annex 1, confidentiality codes, country ID, medium codes, method codes, NACE codes, region (NUTS) codes, pollutant codes, River Basin District codes, unit codes, waste treatment codes and waste type codes </li>
+                  </ul>
+               </p>
+               <p>
+                  <b>(2) Facility Reports:</b> This compliance validation examines if any mandatory field of the facility report is missing or wrongly reported. In particular, the validation checks if:
+      <ul style="margin-top:0px;">
+                     <li>the reported competent authority is present in the 'authority list'.</li>
+                     <li>there is any facility report with no activities reported, with no main activity reported, with duplicated activities and/or with more than one main activity.</li>
+                     <li>there is any mandatory field for non-confidential facilities which is missing.</li>
+                     <li>the URL of the website facility is reported in a wrong format</li>
+                     <li>confidential codes are missing or wrongly attributed</li>
+                  </ul>
+               </p>
+               <p>
+                  <b>(3) Pollutant Releases:</b> This compliance validation examines if:
+      <ul style="margin-top:0px;">
+                     <li>releases or transfer belong to the right group code control</li>
+                     <li>3-digit rules are properly followed</li>
+                     <li>total quantities are greater than accidental quantities</li>
+                     <li>all mandatory data for non-confidential releases is reported</li>
+                     <li>the method designation is reported according to the rules</li>
+                     <li>methods are reported according to the code list</li>
+                     <li>any pollutant is reported more than once</li>
+                     <li>confidential codes are used according to the rules </li>
+                  </ul>
+               </p>
+               <p>
+                  <b>(4) Pollutant Transfers:</b> This compliance validation examines if:
+      <ul style="margin-top:0px;">
+                     <li>releases or transfer belong to the right group code control</li>
+                     <li>digit rules are properly followed</li>
+                     <li>the method designation is reported according to the rules</li>
+                     <li>methods are reported according to code list</li>
+                     <li>any pollutant is reported more than once</li>
+                     <li>confidential codes are used according to the rules </li>
+                  </ul>
+               </p>
+               <p>
+                  <b>(5) Waste Transfers:</b> This compliance validation examines if:
+      <ul style="margin-top:0px;">
+                     <li>any transfer of HWOC has a waste handler</li>
+                     <li>any non-confidential waste transfer has all mandatory data</li>
+                     <li>digit rules are properly followed</li>
+                     <li>confidential codes are used according to the rules </li>
+                  </ul>
+               </p>
+            </div>
+         </div>
+         <div>
+            <p style="color:red">The test failed!</p>
+            <table border="1" style="font-size:11px;" class="datatable">
+               <tr>
+                  <th rowspan="2" width="5%">National ID</th>
+                  <th rowspan="2" width="12.5%">(1) Codes</th>
+                  <th rowspan="2" width="12.5%">(2) Facility Reports</th>
+                  <th rowspan="2" width="12.5%">(3) PollutantReleases</th>
+                  <th rowspan="2" width="12.5%">(4) Pollutant Transfers</th>
+                  <th rowspan="2" width="12.5%">(5) WasteTransfers</th>
+               </tr>
+               <tr/>
+               <tr>
+                  <td>
+                     <dBFacitilyID xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR"
+                                   xmlns:p="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon"
+                                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">dBFacitilyID</dBFacitilyID>
+                  </td>
+                  <td style="color:red">
+                     <div errorcode="4">
+                        <div>
+                           <li style="list-style-type:none">
+                              <b>2014</b> Year not allowed</li>
+                        </div>
+                     </div>
+                  </td>
+                  <td style="color:red"/>
+                  <td style="color:red">
+                     <div errorcode="4">
+                        <div>
+                           <li style="list-style-type:none">
+                              <b>
+                                 <mediumCode xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR"
+                                             xmlns:p="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon"
+                                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">AIR</mediumCode>/<pollutantCode xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR"
+                                                xmlns:p="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon"
+                                                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">NOX</pollutantCode>: </b>pollutantCode Group</li>
+                        </div>
+                     </div>
+                  </td>
+                  <td style="color:red"/>
+                  <td style="color:red">
+                     <div errorcode="4">
+                        <div>
+                           <li style="list-style-type:none">
+                              <b>HWOC - Harzodous waste outside country/R - Destined for recovery: </b>WasteHandlerParty NOT reported</li>
+                        </div>
+                     </div>
+                  </td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LCPandPRTR xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR" xmlns:p="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dd.eionet.europa.eu/schemas/LCPandPRTR LCPandPRTRMain.xsd ">
+  <countryID>AT - Austria</countryID>
+  <remarkText>remarkText</remarkText>
+  <reportingYear>2016</reportingYear>
+  <PlantReports>
+    <PlantReport>
+      <dBPlantId>dBPlantId</dBPlantId>
+      <statusOfThePlant>Art 30(2) - existing plants under IED</statusOfThePlant>
+      <mWth>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </mWth>
+      <extensionBy50MWOrMore>true</extensionBy50MWOrMore>
+      <capacityAddedMW>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </capacityAddedMW>
+      <substantialChange>true</substantialChange>
+      <capacityAffectedMW>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </capacityAffectedMW>
+      <dateOfStartOperation>2015-01-01</dateOfStartOperation>
+      <refineries>true</refineries>
+      <operationHours>0.00</operationHours>
+      <remarkText>remarkText</remarkText>
+      <TotalEmissionsToAir>
+        <type>NOx</type>
+        <quantity>568</quantity>
+      </TotalEmissionsToAir>
+      <TotalEmissionsToAir>
+        <type>NOx</type>
+        <quantity>564</quantity>
+      </TotalEmissionsToAir>
+      <EnergyInput>
+        <type>OtherGases</type>
+        <otherGases>Blast furnace gas</otherGases>
+        <otherSolidFuels>Peat</otherSolidFuels>
+        <quantity>1</quantity>
+      </EnergyInput>
+      <EnergyInput>
+        <type>OtherGases</type>
+        <otherGases>Blast furnace gas</otherGases>
+        <otherSolidFuels>Peat</otherSolidFuels>
+        <quantity>1</quantity>
+      </EnergyInput>
+      <PlantType>
+        <combustionPlantType>Boiler</combustionPlantType>
+        <thermalInput>
+          <p:Quantity>2.5</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </thermalInput>
+      </PlantType>
+      <PlantType>
+        <combustionPlantType>Boiler</combustionPlantType>
+        <thermalInput>
+          <p:Quantity>2.5</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </thermalInput>
+      </PlantType>
+      <LCPDerogations>
+        <art32TNP>true</art32TNP>
+        <art33LLD>true</art33LLD>
+        <art34SIS>true</art34SIS>
+        <art35DHP>true</art35DHP>
+        <usefulHeatProductionRollingAverage5Years>0.0</usefulHeatProductionRollingAverage5Years>
+      </LCPDerogations>
+      <IEDArt72>
+        <iEDArt72_4a>true</iEDArt72_4a>
+        <iEDArt72_4b>true</iEDArt72_4b>
+        <remarkText>remarkText</remarkText>
+        <DesulphurisationRate>
+          <month>January</month>
+          <quantity>0.0</quantity>
+        </DesulphurisationRate>
+        <SO2>
+          <month>January</month>
+          <quantity>0.0</quantity>
+        </SO2>
+      </IEDArt72>
+    </PlantReport>
+    <PlantReport>
+      <dBPlantId>dBPlantId001</dBPlantId>
+      <statusOfThePlant>Art 30(2) - existing plants under IED</statusOfThePlant>
+      <mWth>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </mWth>
+      <extensionBy50MWOrMore>true</extensionBy50MWOrMore>
+      <capacityAddedMW>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </capacityAddedMW>
+      <substantialChange>true</substantialChange>
+      <capacityAffectedMW>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </capacityAffectedMW>
+      <dateOfStartOperation>2015-01-01</dateOfStartOperation>
+      <refineries>true</refineries>
+      <operationHours>1.00</operationHours>
+      <remarkText>remarkText</remarkText>
+      <TotalEmissionsToAir>
+        <type>NOx</type>
+        <quantity>0.000</quantity>
+      </TotalEmissionsToAir>
+      <EnergyInput>
+        <type>OtherGases</type>
+        <otherGases>Blast furnace gas</otherGases>
+        <otherSolidFuels>Peat</otherSolidFuels>
+        <quantity>17.5</quantity>
+      </EnergyInput>
+      <EnergyInput>
+        <type>OtherGases</type>
+        <otherGases>Blast furnace gas</otherGases>
+        <otherSolidFuels>Peat</otherSolidFuels>
+        <quantity>400</quantity>
+      </EnergyInput>
+      <PlantType>
+        <combustionPlantType>Boiler</combustionPlantType>
+        <thermalInput>
+          <p:Quantity>2.5</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </thermalInput>
+      </PlantType>
+      <PlantType>
+        <combustionPlantType>Boiler</combustionPlantType>
+        <thermalInput>
+          <p:Quantity>2.5</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </thermalInput>
+      </PlantType>
+      <LCPDerogations>
+        <art32TNP>true</art32TNP>
+        <art33LLD>true</art33LLD>
+        <art34SIS>true</art34SIS>
+        <art35DHP>true</art35DHP>
+        <usefulHeatProductionRollingAverage5Years>0.0</usefulHeatProductionRollingAverage5Years>
+      </LCPDerogations>
+      <IEDArt72>
+        <iEDArt72_4a>true</iEDArt72_4a>
+        <iEDArt72_4b>true</iEDArt72_4b>
+        <remarkText>remarkText</remarkText>
+        <DesulphurisationRate>
+          <month>January</month>
+          <quantity>0.0</quantity>
+        </DesulphurisationRate>
+        <SO2>
+          <month>January</month>
+          <quantity>0.0</quantity>
+        </SO2>
+      </IEDArt72>
+    </PlantReport>
+  </PlantReports>
+  <FacilityReports>
+    <FacilityReport>
+      <dBFacitilyID>dBFacitilyID</dBFacitilyID>
+      <operationHours>0</operationHours>
+      <protectVoluntaryData>true</protectVoluntaryData>
+      <publicInformation>publicInformation</publicInformation>
+      <totalEmployeeQuantity>0</totalEmployeeQuantity>
+      <confidentialIndicator>true</confidentialIndicator>
+      <confidentialCode>A42a - Article 4(2)(a) of Directive 2003/4/EC</confidentialCode>
+      <remarkText>remarkText</remarkText>
+	  <WasteTransfer>
+		<wasteTypeCode>HWOC - Harzodous waste outside country</wasteTypeCode>
+		<wasteTreatmentCode>R - Destined for recovery</wasteTreatmentCode>
+		<quantity>678</quantity>
+		<methodBasisCode>M - Measured</methodBasisCode>
+		<methodUsed>
+			<p:MethodTypeCode>MAB - Mass balance method which is accepted by the competent authority</p:MethodTypeCode>
+			<p:Designation>Designation</p:Designation>
+		</methodUsed>
+		<confidentialIndicator>false</confidentialIndicator>
+	  </WasteTransfer> 
+      <ProductionVolume>
+        <productName>productName</productName>
+        <quantity>
+          <p:Quantity>0.0</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </quantity>
+      </ProductionVolume>
+      <PollutantRelease>
+		<mediumCode>AIR</mediumCode>
+		<pollutantCode>NOX</pollutantCode>
+		<methodBasisCode>M - Measured</methodBasisCode>
+		<methodUsed>
+			<p:MethodTypeCode>ALT - Alternative measurement methodology in accordance with existing CEN/ISO measurements standards</p:MethodTypeCode>
+			<p:Designation>EN 12673</p:Designation>
+		</methodUsed>
+		<totalQuantity>157000</totalQuantity>
+		<accidentalQuantity >0.00</accidentalQuantity>
+		<confidentialIndicator>false</confidentialIndicator>
+	 </PollutantRelease>
+    </FacilityReport>
+  </FacilityReports>
+</LCPandPRTR>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsm:LCPandPRTR xmlns:p="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:rsm="http://dd.eionet.europa.eu/schemas/LCPandPRTR" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://dd.eionet.europa.eu/schemas/LCPandPRTR LCPandPRTRMain.xsd ">
+  <rsm:countryID>AT - Austria</rsm:countryID>
+  <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+  <rsm:reportingYear>2016</rsm:reportingYear>
+  <rsm:PlantReports>
+    <rsm:PlantReport>
+      <rsm:dBPlantId>rsm:dBPlantId</rsm:dBPlantId>
+      <rsm:statusOfThePlant>Art 30(2) - existing plants under IED</rsm:statusOfThePlant>
+      <rsm:mWth>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </rsm:mWth>
+      <rsm:extensionBy50MWOrMore>true</rsm:extensionBy50MWOrMore>
+      <rsm:capacityAddedMW>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </rsm:capacityAddedMW>
+      <rsm:substantialChange>true</rsm:substantialChange>
+      <rsm:capacityAffectedMW>
+        <p:Quantity>0.0</p:Quantity>
+        <p:UnitCode>A90 - gigawatt</p:UnitCode>
+      </rsm:capacityAffectedMW>
+      <rsm:dateOfStartOperation>2001-01-01</rsm:dateOfStartOperation>
+      <rsm:refineries>true</rsm:refineries>
+      <rsm:operationHours>0.0</rsm:operationHours>
+      <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+      <rsm:TotalEmissionsToAir>
+        <rsm:type>Dust</rsm:type>
+        <rsm:quantity>0.0</rsm:quantity>
+      </rsm:TotalEmissionsToAir>
+      <rsm:EnergyInput>
+        <rsm:type>Biomass</rsm:type>
+        <rsm:otherGases>Blast furnace gas</rsm:otherGases>
+        <rsm:otherSolidFuels>Peat</rsm:otherSolidFuels>
+        <rsm:quantity>0.0</rsm:quantity>
+      </rsm:EnergyInput>
+      <rsm:PlantType>
+        <rsm:combustionPlantType>Boiler</rsm:combustionPlantType>
+        <rsm:thermalInput>
+          <p:Quantity>0.0</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </rsm:thermalInput>
+      </rsm:PlantType>
+      <rsm:LCPDerogations>
+        <rsm:art32TNP>true</rsm:art32TNP>
+        <rsm:art33LLD>true</rsm:art33LLD>
+        <rsm:art34SIS>true</rsm:art34SIS>
+        <rsm:art35DHP>true</rsm:art35DHP>
+        <rsm:usefulHeatProductionRollingAverage5Years>0.0</rsm:usefulHeatProductionRollingAverage5Years>
+      </rsm:LCPDerogations>
+      <rsm:IEDArt72>
+        <rsm:iEDArt72_4a>true</rsm:iEDArt72_4a>
+        <rsm:iEDArt72_4b>true</rsm:iEDArt72_4b>
+        <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+        <rsm:DesulphurisationRate>
+          <rsm:month>January</rsm:month>
+          <rsm:quantity>0.0</rsm:quantity>
+        </rsm:DesulphurisationRate>
+        <rsm:SO2>
+          <rsm:month>January</rsm:month>
+          <rsm:quantity>0.0</rsm:quantity>
+        </rsm:SO2>
+      </rsm:IEDArt72>
+    </rsm:PlantReport>
+  </rsm:PlantReports>
+  <rsm:FacilityReports>
+    <rsm:FacilityReport>
+      <rsm:dBFacitilyID>rsm:dBFacitilyID</rsm:dBFacitilyID>
+      <rsm:operationHours>0</rsm:operationHours>
+      <rsm:protectVoluntaryData>true</rsm:protectVoluntaryData>
+      <rsm:publicInformation>rsm:publicInformation</rsm:publicInformation>
+      <rsm:totalEmployeeQuantity>0</rsm:totalEmployeeQuantity>
+      <rsm:confidentialIndicator>true</rsm:confidentialIndicator>
+      <rsm:confidentialCode>A42a - Article 4(2)(a) of Directive 2003/4/EC</rsm:confidentialCode>
+      <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+      <rsm:PollutantTransfer>
+        <rsm:pollutantCode>GRHGAS</rsm:pollutantCode>
+        <rsm:methodBasisCode>C - Calculated</rsm:methodBasisCode>
+        <rsm:methodUsed>
+          <p:MethodTypeCode>ALT - Alternative measurement methodology in accordance with existing CEN/ISO measurements standards</p:MethodTypeCode>
+          <p:Designation>p:Designation</p:Designation>
+        </rsm:methodUsed>
+        <rsm:quantity>0.0</rsm:quantity>
+        <rsm:confidentialIndicator>true</rsm:confidentialIndicator>
+        <rsm:confidentialCode>A42a - Article 4(2)(a) of Directive 2003/4/EC</rsm:confidentialCode>
+        <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+      </rsm:PollutantTransfer>
+      <rsm:WasteTransfer>
+        <rsm:wasteTypeCode>HW - Hazardous waste</rsm:wasteTypeCode>
+        <rsm:wasteTreatmentCode>D - Destined for disposal</rsm:wasteTreatmentCode>
+        <rsm:quantity>0.0</rsm:quantity>
+        <rsm:methodBasisCode>C - Calculated</rsm:methodBasisCode>
+        <rsm:methodUsed>
+          <p:MethodTypeCode>ALT - Alternative measurement methodology in accordance with existing CEN/ISO measurements standards</p:MethodTypeCode>
+          <p:Designation>p:Designation</p:Designation>
+        </rsm:methodUsed>
+        <rsm:confidentialIndicator>true</rsm:confidentialIndicator>
+        <rsm:confidentialCode>A42a - Article 4(2)(a) of Directive 2003/4/EC</rsm:confidentialCode>
+        <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+        <rsm:WasteHandlerParty>
+          <rsm:name>rsm:name</rsm:name>
+          <rsm:address>
+            <p:StreetName>p:StreetName</p:StreetName>
+            <p:BuildingNumber>p:BuildingNumber</p:BuildingNumber>
+            <p:City>p:City</p:City>
+            <p:PostalCode>p:PostalCode</p:PostalCode>
+            <p:CountryID>p:CountryID</p:CountryID>
+          </rsm:address>
+          <rsm:siteAddress>
+            <p:StreetName>p:StreetName</p:StreetName>
+            <p:BuildingNumber>p:BuildingNumber</p:BuildingNumber>
+            <p:City>p:City</p:City>
+            <p:PostalCode>p:PostalCode</p:PostalCode>
+            <p:CountryID>p:CountryID</p:CountryID>
+          </rsm:siteAddress>
+        </rsm:WasteHandlerParty>
+      </rsm:WasteTransfer>
+      <rsm:ProductionVolume>
+        <rsm:productName>rsm:productName</rsm:productName>
+        <rsm:quantity>
+          <p:Quantity>0.0</p:Quantity>
+          <p:UnitCode>A90 - gigawatt</p:UnitCode>
+        </rsm:quantity>
+      </rsm:ProductionVolume>
+      <rsm:PollutantRelease>
+        <rsm:mediumCode>AIR</rsm:mediumCode>
+        <rsm:pollutantCode>GRHGAS</rsm:pollutantCode>
+        <rsm:methodBasisCode>C - Calculated</rsm:methodBasisCode>
+        <rsm:methodUsed>
+          <p:MethodTypeCode>ALT - Alternative measurement methodology in accordance with existing CEN/ISO measurements standards</p:MethodTypeCode>
+          <p:Designation>p:Designation</p:Designation>
+        </rsm:methodUsed>
+        <rsm:totalQuantity>0.0</rsm:totalQuantity>
+        <rsm:accidentalQuantity>0.0</rsm:accidentalQuantity>
+        <rsm:confidentialIndicator>true</rsm:confidentialIndicator>
+        <rsm:confidentialCode>A42a - Article 4(2)(a) of Directive 2003/4/EC</rsm:confidentialCode>
+        <rsm:remarkText>rsm:remarkText</rsm:remarkText>
+      </rsm:PollutantRelease>
+    </rsm:FacilityReport>
+  </rsm:FacilityReports>
+</rsm:LCPandPRTR>
