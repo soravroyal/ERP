@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" elementFormDefault="qualified">
-	<xs:import namespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" schemaLocation="http://dd.eionet.europa.eu/schema/LCPandPRTR/LCPandPRTRCommon.xsd"/>
+	<xs:import namespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" schemaLocation="LCPandPRTRCommon.xsd"/>
 	<xs:complexType name="PollutantRelease">
 		<xs:annotation>
 			<xs:documentation>The PollutantRelease elements hold the reported releases of pollutants for a facility. It covers both releases to air, water and land. This will be indicated by the medium selected. Transfers in waste-water will be reported in the PollutantTransfer elements</xs:documentation>
@@ -59,44 +59,44 @@
 			<xs:documentation>Holds the reporting for a given plant</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="dBPlantId" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="dBPlantId" type="common:TextType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="statusOfThePlant" type="common:StatusOfThePlantType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Choose the status of the plant according to LCPD 2001/80/EC Article 4.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="mWth" type="common:QuantityType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the nominal capacity (nameplate capacity) of the plant in terms of rated thermal input.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="extensionBy50MWOrMore" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Indicate if the plant has been extended by 50 MW or more since 27 November 2002 according to LCPD 2001/80/EC Article 10.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="capacityAddedMW" type="common:QuantityType" minOccurs="1" maxOccurs="1">
+			<xs:element name="capacityAddedMW" type="common:QuantityType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the additional capacity.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="substantialChange" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Indicate if the plant has been substantially changed since 27 November 2002 according to LPCD 2001/80/EC Article 10.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="capacityAffectedMW" type="common:QuantityType" minOccurs="1" maxOccurs="1">
+			<xs:element name="capacityAffectedMW" type="common:QuantityType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the capacity affected by the change.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="dateOfStartOperation" type="xs:date" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the date of start of operation of the plant according IED Article 72(3)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="refineries" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
@@ -104,12 +104,16 @@
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="operationHours" type="xs:double" minOccurs="1" maxOccurs="1">
+			<xs:element name="operationHours" type="xs:double" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Enter the operating hours of the plant.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="remarkText" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="remarkText" type="common:LongTextType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Please comment possible particular situations concerning this plant and further explanations. In particular, Member States should indicate here which combustion plants have been co-incinerating waste (other than biomass, as defined in the LCP Directive). For those plants, Member States are invited to specify the type and/or amount of waste (in TJ) used if these data is available. Please include all LCPs co-incinerating waste to the reporting.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="TotalEmissionsToAir" type="TotalEmissionsToAir" minOccurs="1" maxOccurs="unbounded"/>
 			<xs:element name="EnergyInput" type="EnergyInput" minOccurs="1" maxOccurs="unbounded"/>
 			<xs:element name="PlantType" type="PlantType" minOccurs="1" maxOccurs="unbounded"/>
@@ -121,7 +125,7 @@
 		<xs:sequence>
 			<xs:element name="iEDArt72_4a" type="common:TrueFalseType" minOccurs="1" maxOccurs="1"/>
 			<xs:element name="iEDArt72_4b" type="common:TrueFalseType" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="remarkText" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="remarkText" type="common:LongTextType" minOccurs="1" maxOccurs="1"/>
 			<xs:element name="DesulphurisationRate" type="DesulphurisationRate" minOccurs="0" maxOccurs="12"/>
 			<xs:element name="SO2" type="SO2" minOccurs="0" maxOccurs="12"/>
 		</xs:sequence>
@@ -153,7 +157,7 @@
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="usefulHeatProductionRollingAverage5Years" type="xs:double" minOccurs="1" maxOccurs="1">
+			<xs:element name="usefulHeatProductionRollingAverage5Years" type="xs:double" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
@@ -169,7 +173,7 @@
 			</xs:element>
 			<xs:element name="thermalInput" type="common:QuantityType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the rated thermal input</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -193,7 +197,7 @@
 			</xs:element>
 			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the amount of fuel used over the year in TJ.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -201,7 +205,11 @@
 	<xs:complexType name="SO2">
 		<xs:sequence>
 			<xs:element name="month" type="common:MonthType" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Enter the sulphur content of fuel used averaged over each month.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TotalEmissionsToAir">
@@ -213,7 +221,7 @@
 			</xs:element>
 			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
+					<xs:documentation>Required. Enter the total emissions during the year expressed in metric tonnes.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -226,7 +234,11 @@
 	<xs:complexType name="DesulphurisationRate">
 		<xs:sequence>
 			<xs:element name="month" type="common:MonthType" minOccurs="1" maxOccurs="1"/>
-			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Enter the rate of desulphurisation achieved, averaged over each month.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="WasteTransfer">
@@ -356,7 +368,7 @@
             </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="dBFacitilyID" type="xs:string" minOccurs="1" maxOccurs="1">
+			<xs:element name="dBFacitilyID" type="common:TextType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
