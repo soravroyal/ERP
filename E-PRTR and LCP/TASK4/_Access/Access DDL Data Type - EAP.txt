@@ -1,0 +1,32 @@
+%PI=""%
+
+$Type = %columnProperty:"TYPE"%
+
+%if $Type == "Integer"%
+$comment = "in DDL the 'integer' datatype is called 'short'"
+$Type = "Long"
+%elseIf $Type=="Decimal"%
+$comment = "in DDL there is no 'Decimal' datatype, replace it with generic 'number'"
+$Type = "Number"
+%endIf%
+
+$PK =  %columnProperty:"PRIMARYKEY"%
+%if $PK == "TRUE"%
+$Type = "AUTOINCREMENT"
+%endIf%
+
+$DBMS = %ddlTableDBMS%
+$Size = %DDL_DATATYPE_SIZE($DBMS, $Type)%
+
+$Type
+
+%if $Size=="1"%
+$LENGTH = %columnProperty:"LENGTH"%
+(
+%if $LENGTH == "" or $LENGTH == "0"%
+0
+%else%
+$LENGTH
+%endIf%
+)
+%endIf%
