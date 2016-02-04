@@ -24,10 +24,7 @@ xquery version "1.0";
 (:
 import module namespace xmlutil = "urn:eu:com:env:prtr:converter:standard:2" at "http://www.eionet.europa.eu/schemas/eprtr/EPRTR_util_2p1.xquery";
 :)
-import module namespace xmlutil = "urn:eu:com:env:prtr:converter:standard:2" at "XQuery/utils.xquery";
-
-
-
+import module namespace xmlutil = "urn:eu:com:env:prtr:converter:standard:2" at "http://converterstest.eionet.europa.eu/queries/LCPandPRTR_utils.xquery";
 
 declare namespace xmlconv="urn:eu:com:env:prtr:converter:standard:2";
 declare namespace xsi="http://www.w3.org/2001/XMLSchema-instance";
@@ -43,7 +40,23 @@ declare variable $source_url as xs:string := "TestData/EPRTR-IE2008.xml";
 declare variable $source_url as xs:string := "http://cdr.eionet.europa.eu/at/eu/eprtrdat/envt0up1a/EU_Report_2009_201202Feb24.xml";
 declare variable $source_url as xs:string external;
 :)
+(:=======================================================================:)
+(:                             FME Variables                             :)
+(:     To execute Xqueries in FME uncomment the following lines          :)
+(:=======================================================================:)
+
+(:
+declare variable $source_url := {fme:get-attribute("_source_xml")};
+:)
+
+(:=======================================================================:)
+(:                          Standard Variables                            :)
+(:To execute Xqueries with an Xquery engine uncomment the following lines:)
+(:=======================================================================:)
+
+(::)
 declare variable $source_url as xs:string external;
+
 
 (:===================================================================:)
 (: Code lists                                                        :)

@@ -18,7 +18,7 @@ xquery version "1.0";
 (:===================================================================:)
 (: Namespace declaration                                             :)
 (:===================================================================:)
-import module namespace xmlutil = "urn:eu:com:env:prtr:converter:standard:2" at "XQuery/utils.xquery";
+import module namespace xmlutil = "urn:eu:com:env:prtr:converter:standard:2" at "http://converterstest.eionet.europa.eu/queries/LCPandPRTR_utils.xquery";
 
 declare namespace xmlconv="urn:eu:com:env:prtr:converter:standard:2";
 declare namespace xsi="http://www.w3.org/2001/XMLSchema-instance";
@@ -31,7 +31,23 @@ declare namespace rsm="http://dd.eionet.europa.eu/schemas/LCPandPRTR";
 declare variable $source_url as xs:string := "TestData/EPRTR-IE2008.xml";
 declare variable $source_url as xs:string external;
 :)
+(:=======================================================================:)
+(:                             FME Variables                             :)
+(:     To execute Xqueries in FME uncomment the following lines          :)
+(:=======================================================================:)
+
+(:
+declare variable $source_url := {fme:get-attribute("_source_xml")};
+:)
+
+(:=======================================================================:)
+(:                          Standard Variables                           :)
+(:To execute Xqueries with an Xquery engine uncomment the following lines:)
+(:=======================================================================:)
+
+(::)
 declare variable $source_url as xs:string external;
+
 
 (:===================================================================:)
 (: Code lists:)
