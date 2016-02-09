@@ -69,9 +69,9 @@ declare variable $xmlconv:errCodeEnvelope := "3";
 (:==================================================================:)
 
 (: for multiply the fuel quantity per his enum SO2:)
-declare function xmlconv:multiplyWithEnumSO2($type as xs:string, $quantity2 as xs:string){
+declare function xmlconv:multiplyWithEnumSO2($type as xs:string, $quantity2 as xs:double){
     let $num := 0
-    let $quantity := number($quantity2)
+    let $quantity := $quantity2
     return if($type = 'Biomass')then(
         $quantity * 0.0084 
     )else if($type = 'HardCoal')then(
@@ -101,9 +101,9 @@ declare function xmlconv:multiplyWithEnumSO2($elems){
 };
 
 (: for multiply the fuel quantity per his enum NOx:)
-declare function xmlconv:multiplyWithEnumNOx($type as xs:string, $quantity2 as xs:string){
+declare function xmlconv:multiplyWithEnumNOx($type as xs:string, $quantity2 as xs:double){
     let $num := 0
-    let $quantity := number($quantity2)
+    let $quantity := $quantity2
     return if($type = 'Biomass')then(
         $quantity * 0.0703 
     )else if($type = 'HardCoal')then(
@@ -134,9 +134,9 @@ declare function xmlconv:multiplyWithEnumNOx($elems){
 
 
 (: for multiply the fuel quantity per his enum DUST:)
-declare function xmlconv:multiplyWithEnumDust($type as xs:string, $quantity2 as xs:string){
+declare function xmlconv:multiplyWithEnumDust($type as xs:string, $quantity2 as xs:double){
     let $num := 0
-    let $quantity := number($quantity2)
+    let $quantity := $quantity2
     return if($type = 'Biomass')then(
         $quantity * 0.0042 
     )else if($type = 'HardCoal')then(
