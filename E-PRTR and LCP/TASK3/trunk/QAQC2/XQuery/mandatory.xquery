@@ -8,8 +8,7 @@
 
     XQuery agency:  The European Commission
     XQuery version: 2.5
-    Created:    2012-09-05
-    Revision:       $Id$
+    Created:    2016-01-15
   :)
 
 xquery version "1.0";
@@ -306,7 +305,7 @@ declare function xmlconv:control_DigitsQuantityPollulantTransfer($source_url as 
 };
 
 (: #19 PollutantRelease/PollutantCode Must be a Pollutant group (GRHGAS, OTHGAS, HEVMET, PEST, CHLORG, OTHORG OR INORG) if confidentialIndicator is True 
-    and cannot bet a Pollutant group if confidentialIndicator is False:)
+    and cannot be a Pollutant group if confidentialIndicator is False:)
 declare function xmlconv:control_PollulantRealese_pollulantCode($source_url as xs:string){
      for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport/rsm:PollutantRelease[rsm:confidentialIndicator = true() and (
         rsm:pollutantCode != 'GRHGAS' and rsm:pollutantCode != 'OTHGAS' and  rsm:pollutantCode != 'HEVMET' and rsm:pollutantCode != 'PEST' and rsm:pollutantCode != 'CHLORG'
