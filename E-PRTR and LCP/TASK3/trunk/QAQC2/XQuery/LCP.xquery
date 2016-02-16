@@ -179,7 +179,7 @@ declare function xmlconv:ControlDigits($value as xs:string)
              xmlconv:RemoveLeftZeros(xmlconv:RemoveDot($value)) ) != 3  ) then
            $value
       else  if( starts-with($value,"0") = false()  and  contains($value,".") = false()  and string-length( $value) > 3  and (substring($value,4) castable as xs:double) and
-        (substring($value,4)castable as xs:double) > 0)then
+        (xs:double(substring($value,4))) > 0)then
            $value
        else if( contains($value,".") = false() and  string-length( $value) < 3 ) then
            $value
