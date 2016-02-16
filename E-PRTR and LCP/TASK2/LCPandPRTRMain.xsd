@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" elementFormDefault="qualified">
-	<xs:import namespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" schemaLocation="LCPandPRTRCommon.xsd"/>
+<xs:schema targetNamespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR" xmlns:common="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" elementFormDefault="qualified">
+	<xs:import namespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" schemaLocation="X:\Bilbomatica\Projects\LCP Reporting\01_UML\07_LCP_UML_EA\LCPCommon.xsd"/>
+	<xs:element name="PollutantRelease" type="PollutantRelease"/>
 	<xs:complexType name="PollutantRelease">
 		<xs:annotation>
 			<xs:documentation>The PollutantRelease elements hold the reported releases of pollutants for a facility. It covers both releases to air, water and land. This will be indicated by the medium selected. Transfers in waste-water will be reported in the PollutantTransfer elements</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="accidentalQuantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Accidental quantity [kg/year] Must be reported with 3 significant digits.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="mediumCode" type="common:MediumCodeType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required. Identifies the environmental medium (air, water, land). </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="pollutantCode" type="common:PollutantType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Identifies the pollutant (or the pollutant group if confidentiality is claimed) Notice that if confidentiality is claimed the pollutant group must be reported.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="methodBasisCode" type="common:MethodBasisCodeType" minOccurs="1" maxOccurs="1">
@@ -26,25 +38,9 @@
 					<xs:documentation>Conditional. Identifies the calculation and measurement method(s) used for determination of the total quantity.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="totalQuantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
+			<xs:element name="pollutantCode" type="common:PollutantType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required. Total quantity including accidental quantity [kg/year]. Values below threshold are considered voluntary and will not be published. Must be reported with 3 significant digits</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="accidentalQuantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Accidental quantity [kg/year] Must be reported with 3 significant digits.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
-                    </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
+					<xs:documentation>Required. Identifies the pollutant (or the pollutant group if confidentiality is claimed) Notice that if confidentiality is claimed the pollutant group must be reported.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="remarkText" type="common:LongTextType" minOccurs="0" maxOccurs="1">
@@ -52,41 +48,22 @@
 					<xs:documentation>Textual remark, e.g. elaboration on the reason for confidentiality.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="totalQuantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Total quantity including accidental quantity [kg/year]. Values below threshold are considered voluntary and will not be published. Must be reported with 3 significant digits</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="PlantReport" type="PlantReport"/>
 	<xs:complexType name="PlantReport">
 		<xs:annotation>
 			<xs:documentation>Holds the reporting for a given plant</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="dBPlantId" type="common:TextType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="statusOfThePlant" type="common:StatusOfThePlantType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Choose the status of the plant according to LCPD 2001/80/EC Article 4.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="mWth" type="common:QuantityType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Enter the nominal capacity (nameplate capacity) of the plant in terms of rated thermal input.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="extensionBy50MWOrMore" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Indicate if the plant has been extended by 50 MW or more since 27 November 2002 according to LCPD 2001/80/EC Article 10.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="capacityAddedMW" type="common:QuantityType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required. Enter the additional capacity.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="substantialChange" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Indicate if the plant has been substantially changed since 27 November 2002 according to LPCD 2001/80/EC Article 10.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="capacityAffectedMW" type="common:QuantityType" minOccurs="0" maxOccurs="1">
@@ -99,9 +76,19 @@
 					<xs:documentation>Required. Enter the date of start of operation of the plant according IED Article 72(3)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="refineries" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+			<xs:element name="dBPlantId" type="common:TextType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="extensionBy50MWOrMore" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Indicate if the plant has been extended by 50 MW or more since 27 November 2002 according to LCPD 2001/80/EC Article 10.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mWth" type="common:QuantityType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Enter the nominal capacity (nameplate capacity) of the plant in terms of rated thermal input.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="operationHours" type="xs:double" minOccurs="0" maxOccurs="1">
@@ -109,9 +96,24 @@
 					<xs:documentation>Enter the operating hours of the plant.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="refineries" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="remarkText" type="common:LongTextType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Please comment possible particular situations concerning this plant and further explanations. In particular, Member States should indicate here which combustion plants have been co-incinerating waste (other than biomass, as defined in the LCP Directive). For those plants, Member States are invited to specify the type and/or amount of waste (in TJ) used if these data is available. Please include all LCPs co-incinerating waste to the reporting.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="statusOfThePlant" type="common:StatusOfThePlantType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Choose the status of the plant according to LCPD 2001/80/EC Article 4.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="substantialChange" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Indicate if the plant has been substantially changed since 27 November 2002 according to LPCD 2001/80/EC Article 10.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="TotalEmissionsToAir" type="TotalEmissionsToAir" minOccurs="1" maxOccurs="unbounded"/>
@@ -121,6 +123,7 @@
 			<xs:element name="IEDArt72" type="IEDArt72" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="IEDArt72" type="IEDArt72"/>
 	<xs:complexType name="IEDArt72">
 		<xs:sequence>
 			<xs:element name="iEDArt72_4a" type="common:TrueFalseType" minOccurs="1" maxOccurs="1"/>
@@ -130,11 +133,13 @@
 			<xs:element name="SO2" type="SO2" minOccurs="0" maxOccurs="12"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="FacilityReports" type="FacilityReports"/>
 	<xs:complexType name="FacilityReports">
 		<xs:sequence>
 			<xs:element name="FacilityReport" type="FacilityReport" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="LCPDerogations" type="LCPDerogations"/>
 	<xs:complexType name="LCPDerogations">
 		<xs:sequence>
 			<xs:element name="art32TNP" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
@@ -164,6 +169,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="PlantType" type="PlantType"/>
 	<xs:complexType name="PlantType">
 		<xs:sequence>
 			<xs:element name="combustionPlantType" type="common:CombustionType" minOccurs="1" maxOccurs="1">
@@ -178,13 +184,9 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="EnergyInput" type="EnergyInput"/>
 	<xs:complexType name="EnergyInput">
 		<xs:sequence>
-			<xs:element name="type" type="common:EnergyInputType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="otherGases" type="common:OtherGasesType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Conditional.</xs:documentation>
@@ -200,8 +202,14 @@
 					<xs:documentation>Required. Enter the amount of fuel used over the year in TJ.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="type" type="common:EnergyInputType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="SO2" type="SO2"/>
 	<xs:complexType name="SO2">
 		<xs:sequence>
 			<xs:element name="month" type="common:MonthType" minOccurs="1" maxOccurs="1"/>
@@ -212,25 +220,28 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="TotalEmissionsToAir" type="TotalEmissionsToAir"/>
 	<xs:complexType name="TotalEmissionsToAir">
 		<xs:sequence>
-			<xs:element name="type" type="common:TotalEmissionsToAirType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required. Enter the total emissions during the year expressed in metric tonnes.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="type" type="common:TotalEmissionsToAirType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="PlantReports" type="PlantReports"/>
 	<xs:complexType name="PlantReports">
 		<xs:sequence>
 			<xs:element name="PlantReport" type="PlantReport" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="DesulphurisationRate" type="DesulphurisationRate"/>
 	<xs:complexType name="DesulphurisationRate">
 		<xs:sequence>
 			<xs:element name="month" type="common:MonthType" minOccurs="1" maxOccurs="1"/>
@@ -241,24 +252,21 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="WasteTransfer" type="WasteTransfer"/>
 	<xs:complexType name="WasteTransfer">
 		<xs:annotation>
 			<xs:documentation>The WasteTransfer elements hold the reported data on off-site transfers of waste for a facility, except transfers of pollutants in waste-water which is reported in the PollutantTransfer element.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="wasteTypeCode" type="common:WasteTypeCodeType" minOccurs="1" maxOccurs="1">
+			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required. Identifies the type of waste (non-hazardous, hazardous, hazardous within country and hazardous outside country).</xs:documentation>
+					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="wasteTreatmentCode" type="common:WasteTreatmentCodeType" minOccurs="0" maxOccurs="1">
+			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Conditional. Identifies the waste treatment operation (recovery or disposal)</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="quantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Conditional. Quantity [t/year] Must be reported with 3 significant digits.</xs:documentation>
+					<xs:documentation>Required. Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="methodBasisCode" type="common:MethodBasisCodeType" minOccurs="1" maxOccurs="1">
@@ -271,15 +279,9 @@
 					<xs:documentation>Conditional. Identifies the calculation and measurement method(s) used for determination of the quantity</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+			<xs:element name="quantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required. Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
-                    </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
+					<xs:documentation>Conditional. Quantity [t/year] Must be reported with 3 significant digits.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="remarkText" type="common:LongTextType" minOccurs="0" maxOccurs="1">
@@ -287,24 +289,40 @@
 					<xs:documentation>Textual remark, e.g. elaboration on the reason for confidentiality.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="wasteTreatmentCode" type="common:WasteTreatmentCodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Conditional. Identifies the waste treatment operation (recovery or disposal)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="wasteTypeCode" type="common:WasteTypeCodeType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Identifies the type of waste (non-hazardous, hazardous, hazardous within country and hazardous outside country).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="WasteHandlerParty" type="WasteHandlerParty" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>
-                        Identifies the recoverer/disposer of the waste. Required for transfer of hazardous waste outside the country unless confidentiality is claimed.
+					<xs:documentation>Identifies the recoverer/disposer of the waste. Required for transfer of hazardous waste outside the country unless confidentiality is claimed.
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="PollutantTransfer" type="PollutantTransfer"/>
 	<xs:complexType name="PollutantTransfer">
 		<xs:annotation>
 			<xs:documentation>The PollutantTransfer elements hold the reported data on off-site transfers of pollutants in waste water for a facility.
                 </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="pollutantCode" type="common:PollutantType" minOccurs="1" maxOccurs="1">
+			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>Required. Identifies the pollutant (or the pollutant group if confidentiality is claimed)</xs:documentation>
+					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="methodBasisCode" type="common:MethodBasisCodeType" minOccurs="1" maxOccurs="1">
@@ -317,20 +335,14 @@
 					<xs:documentation>Conditional. Identifies the calculation and measurement method(s) used for determination of the quantity.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="pollutantCode" type="common:PollutantType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Identifies the pollutant (or the pollutant group if confidentiality is claimed)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="quantity" type="common:QuantityContentType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required. Total quantity [kg/year]. Must be reported with 3 significant digits. Values below threshold are considered voluntary and will not be published.</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Indicates if confidentiality is claimed or not. true marks confidentiality, false marks no confidentiality.
-                    </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="remarkText" type="common:LongTextType" minOccurs="0" maxOccurs="1">
@@ -340,34 +352,47 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="WasteHandlerParty" type="WasteHandlerParty"/>
 	<xs:complexType name="WasteHandlerParty">
 		<xs:annotation>
 			<xs:documentation>The WasteHandlerParty element holds information about the recoverer/disposer of waste. This should only be reported for waste transfer of hazardous waste outside the country.</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="name" type="common:TextType" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Conditional. Name of recoverer/disposer. Required unless confidentiality is claimed for the WasteTransfer element</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="address" type="common:AddressType" minOccurs="0" maxOccurs="1">
+			<xs:element name="address" type="common:AddressType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Conditional. The address of the recoverer/disposer. Required unless confidentiality is claimed for the WasteTransfer.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="siteAddress" type="common:AddressType" minOccurs="0" maxOccurs="1">
+			<xs:element name="name" type="common:TextType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Conditional. Name of recoverer/disposer. Required unless confidentiality is claimed for the WasteTransfer element</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="siteAddress" type="common:AddressType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Conditional. The address of the actual recoverer/disposer site. </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="FacilityReport" type="FacilityReport"/>
 	<xs:complexType name="FacilityReport">
 		<xs:annotation>
 			<xs:documentation>Holds the reporting for a given facility
             </xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
+			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required. Indicates if confidentiality for mandatory data is claimed or not. true marks confidentiality, false marks no confidentiality.
+                    </xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="dBFacitilyID" type="common:TextType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
@@ -388,57 +413,43 @@
 					<xs:documentation>Textual information. Additional information to be published on web site as-is (e.g. e-mail, contact person etc.).</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="totalEmployeeQuantity" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>The number of employees.                   </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialIndicator" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Required. Indicates if confidentiality for mandatory data is claimed or not. true marks confidentiality, false marks no confidentiality.
-                    </xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="confidentialCode" type="common:ConfidentialCodeType" minOccurs="0" maxOccurs="1">
-				<xs:annotation>
-					<xs:documentation>Conditional. Identifies the reason for confidentiality according to Directive 2003/4/EC, Article 4(2).</xs:documentation>
-				</xs:annotation>
-			</xs:element>
 			<xs:element name="remarkText" type="common:LongTextType" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Textual remark, e.g. information in changes of the history of the facility, elaboration on the reason for confidentiality etc.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pollutantTransfer" type="PollutantTransfer" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="totalEmployeeQuantity" type="xs:nonNegativeInteger" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>
-                        The reported off-site transfer of pollutants in waste-water for the facility.
+					<xs:documentation>The number of employees.                   </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PollutantTransfer" type="PollutantTransfer" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>The reported off-site transfer of pollutants in waste-water for the facility.
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="wasteTransfer" type="WasteTransfer" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="WasteTransfer" type="WasteTransfer" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>
-                        The reported off-site transfer of waste for the facility.
+					<xs:documentation>The reported off-site transfer of waste for the facility.
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="productionVolume" type="ProductionVolume" minOccurs="0" maxOccurs="1">
+			<xs:element name="ProductionVolume" type="ProductionVolume" minOccurs="0" maxOccurs="1">
 				<xs:annotation>
-					<xs:documentation>
-                        The total production volume related to the main activity of the facility.
+					<xs:documentation>The total production volume related to the main activity of the facility.
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="pollutantRelease" type="PollutantRelease" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="PollutantRelease" type="PollutantRelease" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation>
-                        The reported releases of pollutants to air/water/land reported for the facility.
+					<xs:documentation>The reported releases of pollutants to air/water/land reported for the facility.
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:element name="ProductionVolume" type="ProductionVolume"/>
 	<xs:complexType name="ProductionVolume">
 		<xs:annotation>
 			<xs:documentation>The total production volume related to the main activity of the facility.</xs:documentation>
@@ -461,6 +472,7 @@
 			<xs:documentation>XML Schema for Large Combustion Plants and Facility Reports</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:element name="Report" type="Report"/>
 	<xs:complexType name="Report">
 		<xs:sequence minOccurs="1" maxOccurs="1">
 			<xs:element name="countryID" type="common:CountryCodeType" minOccurs="1" maxOccurs="1">
