@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema targetNamespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR" xmlns:common="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" elementFormDefault="qualified">
-	<xs:import namespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" schemaLocation="X:\Bilbomatica\Projects\LCP Reporting\01_UML\07_LCP_UML_EA\LCPCommon.xsd"/>
-	<xs:element name="PollutantRelease" type="PollutantRelease"/>
+	<xs:import namespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" schemaLocation="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon.xsd"/>
 	<xs:complexType name="PollutantRelease">
 		<xs:annotation>
 			<xs:documentation>The PollutantRelease elements hold the reported releases of pollutants for a facility. It covers both releases to air, water and land. This will be indicated by the medium selected. Transfers in waste-water will be reported in the PollutantTransfer elements</xs:documentation>
@@ -55,7 +54,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="PlantReport" type="PlantReport"/>
 	<xs:complexType name="PlantReport">
 		<xs:annotation>
 			<xs:documentation>Holds the reporting for a given plant</xs:documentation>
@@ -123,7 +121,6 @@
 			<xs:element name="IEDArt72" type="IEDArt72" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="IEDArt72" type="IEDArt72"/>
 	<xs:complexType name="IEDArt72">
 		<xs:sequence>
 			<xs:element name="iEDArt72_4a" type="common:TrueFalseType" minOccurs="1" maxOccurs="1"/>
@@ -133,13 +130,11 @@
 			<xs:element name="SO2" type="SO2" minOccurs="0" maxOccurs="12"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="FacilityReports" type="FacilityReports"/>
 	<xs:complexType name="FacilityReports">
 		<xs:sequence>
 			<xs:element name="FacilityReport" type="FacilityReport" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="LCPDerogations" type="LCPDerogations"/>
 	<xs:complexType name="LCPDerogations">
 		<xs:sequence>
 			<xs:element name="art32TNP" type="common:TrueFalseType" minOccurs="1" maxOccurs="1">
@@ -169,7 +164,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="PlantType" type="PlantType"/>
 	<xs:complexType name="PlantType">
 		<xs:sequence>
 			<xs:element name="combustionPlantType" type="common:CombustionType" minOccurs="1" maxOccurs="1">
@@ -184,7 +178,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="EnergyInput" type="EnergyInput"/>
 	<xs:complexType name="EnergyInput">
 		<xs:sequence>
 			<xs:element name="otherGases" type="common:OtherGasesType" minOccurs="0" maxOccurs="1">
@@ -209,7 +202,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="SO2" type="SO2"/>
 	<xs:complexType name="SO2">
 		<xs:sequence>
 			<xs:element name="month" type="common:MonthType" minOccurs="1" maxOccurs="1"/>
@@ -220,7 +212,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="TotalEmissionsToAir" type="TotalEmissionsToAir"/>
 	<xs:complexType name="TotalEmissionsToAir">
 		<xs:sequence>
 			<xs:element name="quantity" type="xs:double" minOccurs="1" maxOccurs="1">
@@ -235,13 +226,11 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="PlantReports" type="PlantReports"/>
 	<xs:complexType name="PlantReports">
 		<xs:sequence>
 			<xs:element name="PlantReport" type="PlantReport" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="DesulphurisationRate" type="DesulphurisationRate"/>
 	<xs:complexType name="DesulphurisationRate">
 		<xs:sequence>
 			<xs:element name="month" type="common:MonthType" minOccurs="1" maxOccurs="1"/>
@@ -252,7 +241,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="WasteTransfer" type="WasteTransfer"/>
 	<xs:complexType name="WasteTransfer">
 		<xs:annotation>
 			<xs:documentation>The WasteTransfer elements hold the reported data on off-site transfers of waste for a facility, except transfers of pollutants in waste-water which is reported in the PollutantTransfer element.</xs:documentation>
@@ -307,7 +295,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="PollutantTransfer" type="PollutantTransfer"/>
 	<xs:complexType name="PollutantTransfer">
 		<xs:annotation>
 			<xs:documentation>The PollutantTransfer elements hold the reported data on off-site transfers of pollutants in waste water for a facility.
@@ -352,7 +339,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="WasteHandlerParty" type="WasteHandlerParty"/>
 	<xs:complexType name="WasteHandlerParty">
 		<xs:annotation>
 			<xs:documentation>The WasteHandlerParty element holds information about the recoverer/disposer of waste. This should only be reported for waste transfer of hazardous waste outside the country.</xs:documentation>
@@ -375,7 +361,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="FacilityReport" type="FacilityReport"/>
 	<xs:complexType name="FacilityReport">
 		<xs:annotation>
 			<xs:documentation>Holds the reporting for a given facility
@@ -449,7 +434,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="ProductionVolume" type="ProductionVolume"/>
 	<xs:complexType name="ProductionVolume">
 		<xs:annotation>
 			<xs:documentation>The total production volume related to the main activity of the facility.</xs:documentation>
@@ -472,7 +456,6 @@
 			<xs:documentation>XML Schema for Large Combustion Plants and Facility Reports</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	<xs:element name="Report" type="Report"/>
 	<xs:complexType name="Report">
 		<xs:sequence minOccurs="1" maxOccurs="1">
 			<xs:element name="countryID" type="common:CountryCodeType" minOccurs="1" maxOccurs="1">
