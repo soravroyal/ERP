@@ -171,6 +171,26 @@ declare function xmlconv:totalSum($elems){
     return $total
 };
 
+declare function xmlconv:ControlDigits_Integer($value as xs:string){
+    if( starts-with($value,"0") = true()  and contains($value,".") = true() and  $value !="0.00" and string-length(
+             xmlconv:RemoveLeftZeros(xmlconv:RemoveDot($value)) ) != 3  ) then
+           $value
+      else  if( starts-with($value,"0") = false()  and  contains($value,".") = false()  and string-length( $value) > 3  and (substring($value,4) castable as xs:integer) and
+        ((substring($value,4))) > "0")then
+           $value
+       else if( contains($value,".") = false() and  string-length( $value) < 3 ) then
+           $value
+        else if (starts-with($value,"-") = true()  and contains($value,".") = true() and string-length($value)  != 5 and string-length(
+             xmlconv:RemoveLeftZeros(xmlconv:RemoveDot(substring($value,2))) ) != 3) then
+            $value
+        else if (starts-with($value,"-") = false()  and starts-with($value,"0") = false() and contains($value,".") = true() and string-length
+             ($value)  != 4 ) then
+            $value
+        else
+             ()
+};
+
+
 (:Controls if a string has three significant digits. :)
 (:Returns the value if not ok otherwise an empty sequence:)
 declare function xmlconv:ControlDigits($value as xs:string)
@@ -365,7 +385,7 @@ declare function xmlconv:control_operationsHours_1($source_url as xs:string){
 (: #29 Element check: controlDigits and more than 0 :)
 declare function xmlconv:control_operationsHours_2($source_url as xs:string){
     for $i in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
-        let $hours := xmlconv:ControlDigits($i/rsm:operationHours)
+        let $hours := xmlconv:ControlDigits_Integer($i/rsm:operationHours)
         return if($hours != '')then(
             $i
         )else()
