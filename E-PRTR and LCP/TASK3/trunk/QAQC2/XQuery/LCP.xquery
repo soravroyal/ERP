@@ -653,7 +653,7 @@ declare function xmlconv:f_control_operationsHours_1($elems){
 (: #29 Element check: controlDigits and more than 0 :)
 declare function xmlconv:f_control_operationsHours_2($elems){
     for $i in $elems
-        let $hours := xmlconv:ControlDigits($i/rsm:operationHours)
+        let $hours := xmlconv:ControlDigits_Integer($i/rsm:operationHours)
         return if($hours != '')then(
             $i
         )else()
