@@ -69,7 +69,7 @@ declare variable $xmlconv:errCodeEnvelope := "3";
 (:==================================================================:)
 
 (: for multiply the fuel quantity per his enum SO2:)
-declare function xmlconv:multiplyWithEnumSO2($type as xs:string, $quantity2 as xs:double){
+declare function xmlconv:multiplyWithEnumSO2($type as xs:string, $quantity2 ){
     let $num := 0
     let $quantity := $quantity2
     return if($type = 'Biomass')then(
@@ -101,7 +101,7 @@ declare function xmlconv:multiplyWithEnumSO2($elems){
 };
 
 (: for multiply the fuel quantity per his enum NOx:)
-declare function xmlconv:multiplyWithEnumNOx($type as xs:string, $quantity2 as xs:double){
+declare function xmlconv:multiplyWithEnumNOx($type as xs:string, $quantity2 ){
     let $num := 0
     let $quantity := $quantity2
     return if($type = 'Biomass')then(
@@ -134,7 +134,7 @@ declare function xmlconv:multiplyWithEnumNOx($elems){
 
 
 (: for multiply the fuel quantity per his enum DUST:)
-declare function xmlconv:multiplyWithEnumDust($type as xs:string, $quantity2 as xs:double){
+declare function xmlconv:multiplyWithEnumDust($type as xs:string, $quantity2 ){
     let $num := 0
     let $quantity := $quantity2
     return if($type = 'Biomass')then(
@@ -313,7 +313,7 @@ declare function xmlconv:control_TotalEmissionsToAir_quantity_1($source_url as x
      let $fuel := 0
      for $i in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
         let  $totalEmisions := xmlconv:totalSum($i/rsm:TotalEmissionsToAir[rsm:type = 'SO2']/rsm:quantity)
-        let $fuel := xmlconv:multiplyWithEnumSO2($i//rsm:EnergyInput)
+        let $fuel := xmlconv:multiplyWithEnumSO2($i/rsm:EnergyInput)
         return if(count($i/rsm:TotalEmissionsToAir[rsm:type = 'SO2']/rsm:quantity) != 0 and $totalEmisions > 5 * sum($fuel) and count(doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport/rsm:EnergyInput[rsm:type != 'NaturalGas']) > 0) then(
             $i
         )else()
@@ -324,7 +324,7 @@ declare function xmlconv:control_TotalEmissionsToAir_quantity_2($source_url as x
      let $fuel := 0
      for $i in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
         let  $totalEmisions := xmlconv:totalSum($i/rsm:TotalEmissionsToAir[rsm:type = 'SO2']/rsm:quantity)
-        let $fuel := xmlconv:multiplyWithEnumSO2($i//rsm:EnergyInput)
+        let $fuel := xmlconv:multiplyWithEnumSO2($i/rsm:EnergyInput)
         return if(count($i/rsm:TotalEmissionsToAir[rsm:type = 'SO2']/rsm:quantity) != 0 and $totalEmisions <  sum($fuel) div 50 and count(doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport/rsm:EnergyInput[rsm:type != 'NaturalGas']) > 0) then(
             $i
         )else()
