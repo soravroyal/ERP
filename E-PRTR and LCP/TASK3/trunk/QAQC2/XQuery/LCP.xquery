@@ -175,11 +175,11 @@ declare function xmlconv:totalSum($elems){
 (:Returns the value if not ok otherwise an empty sequence:)
 declare function xmlconv:ControlDigits($value as xs:string)
   {
-        if( starts-with($value,"0") = true()  and contains($value,".") = true() and  $value !="0.00" and string-length(
+       if( starts-with($value,"0") = true()  and contains($value,".") = true() and  $value !="0.00" and string-length(
              xmlconv:RemoveLeftZeros(xmlconv:RemoveDot($value)) ) != 3  ) then
            $value
       else  if( starts-with($value,"0") = false()  and  contains($value,".") = false()  and string-length( $value) > 3  and (substring($value,4) castable as xs:double) and
-        number(substring($value,4)) > 0)then
+        (substring($value,4)castable as xs:double) > 0)then
            $value
        else if( contains($value,".") = false() and  string-length( $value) < 3 ) then
            $value
