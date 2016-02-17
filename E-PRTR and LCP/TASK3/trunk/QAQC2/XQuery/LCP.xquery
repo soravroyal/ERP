@@ -91,11 +91,12 @@ declare function xmlconv:multiplyWithEnumSO2($type as xs:string, $quantity2 ){
     )else()
 };
 
+(:zorba 2.7 array index difences between saxon(count($elems)-1) :)
 declare function xmlconv:multiplyWithEnumSO2($elems){
     let $num := 0
     for $i at $pos in $elems
         let $num := xmlconv:multiplyWithEnumSO2($i/rsm:type,$i/rsm:quantity)
-        return if($pos >= count($elems)-1)then(
+        return if($pos >= count($elems))then(
             $num
         )else()
 };
@@ -123,11 +124,12 @@ declare function xmlconv:multiplyWithEnumNOx($type as xs:string, $quantity2 ){
     )else()
 };
 
+(:zorba 2.7 array index difences between saxon(count($elems)-1) :)
 declare function xmlconv:multiplyWithEnumNOx($elems){
     let $num := 0
     for $i at $pos in $elems
         let $num := xmlconv:multiplyWithEnumNOx($i/rsm:type,$i/rsm:quantity)
-        return if($pos >= count($elems)-1)then(
+        return if($pos >= count($elems))then(
             $num
         )else()
 };
@@ -156,11 +158,12 @@ declare function xmlconv:multiplyWithEnumDust($type as xs:string, $quantity2 ){
     )else()
 };
 
+(:zorba 2.7 array index difences between saxon(count($elems)-1) :)
 declare function xmlconv:multiplyWithEnumDust($elems){
     let $num := 0
     for $i at $pos in $elems
         let $num := xmlconv:multiplyWithEnumDust($i/rsm:type,$i/rsm:quantity)
-        return if($pos >= count($elems)-1)then(
+        return if($pos >= count($elems))then(
             $num
         )else()
 };
