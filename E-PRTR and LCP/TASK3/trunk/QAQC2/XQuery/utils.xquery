@@ -233,6 +233,15 @@ declare function xmlutil:buildErrorElementNotEmpty($errCode as xs:string, $colDa
         ""
 };
 
+
+
+declare function xmlutil:buildErrorElementNotEmpty_From_Plant2($errCode as xs:string, $colData){
+    if ($errCode = '' and normalize-space($colData) != '') then
+        <h3>{$colData}</h3>
+    else
+        ""
+};
+
 (: Builds a table row from a list of colum data. No data colum will be marked :)
 declare function xmlutil:buildTableRow($colData){
     xmlutil:buildTableRow($colData, 0, 0)
