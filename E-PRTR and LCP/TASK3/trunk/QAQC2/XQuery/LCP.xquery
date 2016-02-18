@@ -709,7 +709,7 @@ declare function xmlconv:f_control_energyInput_type($elems){
 
 (: #36  Element check: Same type is not allowed more than once for a PlantReport :)
 declare function xmlconv:f_control_OtherGases_same($elems){
-     for $i in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
+     for $i in  $elems
          for $ii in $i/rsm:EnergyInput/rsm:otherGases 
             let $iii := $i/rsm:EnergyInput[rsm:otherGases = $ii]
             return if(count($iii) > 1 )then(
@@ -881,6 +881,95 @@ declare function xmlconv:f_controlOf_PlantReport($elems){
     </div>
 };
 
+declare function xmlconv:f_controlOf_PlantReport2($elems ,$National){
+    let $f_control_statusOFthePlant := xmlconv:f_control_statusOFthePlant($elems)
+    let $f_control_thermalInput := xmlconv:f_control_thermalInput($elems)
+    let $f_control_thermalInput_great := xmlconv:f_control_thermalInput_great($elems)
+    let $f_control_EnergyInput_quantity := xmlconv:f_control_EnergyInput_quantity($elems)
+    let $f_control_capacityAddedMW := xmlconv:f_control_capacityAddedMW($elems)
+    let $f_control_capacityAffectedMW := xmlconv:f_control_capacityAffectedMW($elems)
+    let $f_control_TotalEmissionsToAir_quantity_1 := xmlconv:f_control_TotalEmissionsToAir_quantity_1($elems)
+    let $f_control_TotalEmissionsToAir_quantity_2 := xmlconv:f_control_TotalEmissionsToAir_quantity_2($elems)
+    let $f_control_TotalEmissionsToAir_quantity_3 := xmlconv:f_control_TotalEmissionsToAir_quantity_3($elems)
+    let $f_control_TotalEmissionsToAir_quantity_4 := xmlconv:f_control_TotalEmissionsToAir_quantity_4($elems)
+    let $f_control_TotalEmissionsToAir_quantity_5 := xmlconv:f_control_TotalEmissionsToAir_quantity_5($elems)
+    let $f_control_TotalEmissionsToAir_quantity_6 := xmlconv:f_control_TotalEmissionsToAir_quantity_6($elems)
+    let $f_control_operationsHours_1 := xmlconv:f_control_operationsHours_1($elems)
+    let $f_control_operationsHours_2 := xmlconv:f_control_operationsHours_2($elems)
+    let $f_control_EmisionToAir_type := xmlconv:f_control_EmisionToAir_type($elems)
+    let $f_control_totalEmissionsToAir_quantity_controlDigits :=  xmlconv:f_control_totalEmissionsToAir_quantity_controlDigits($elems)
+    let $f_control_OtherGases := xmlconv:f_control_OtherGases($elems)
+    let $f_control_otherSolidFuels := xmlconv:f_control_otherSolidFuels($elems)
+    let $f_control_energyInput_type := xmlconv:f_control_energyInput_type($elems)
+    let $f_control_OtherGases_same := xmlconv:f_control_OtherGases_same($elems)
+    let $f_control_otherSolidFuels_same := xmlconv:f_control_otherSolidFuels_same($elems)
+    let $f_control_energyInput_quantity_controlDigits := xmlconv:f_control_energyInput_quantity_controlDigits($elems)
+    let $f_control_combustionPlantType := xmlconv:f_control_combustionPlantType($elems)
+    let $f_control_SO2_month := xmlconv:f_control_SO2_month($elems)
+    let $f_control_DesulphurisationRate_month := xmlconv:f_control_DesulphurisationRate_month($elems)
+    let $f_control_iedArt72_4a_SO2 := xmlconv:f_control_iedArt72_4a_SO2($elems)
+    let $f_control_iedArt72_4a_DesulphurisationRate := xmlconv:f_control_iedArt72_4a_DesulphurisationRate($elems)
+    
+    
+    let $message_f_control_statusOFthePlant := xmlconv:f_buildPlantsErrorMessage2($f_control_statusOFthePlant,"1-Must be 'Art 30(2) - existing plants under IED' if dateOfStartOperation is before 07.01.2014 and 'Art 30(3) - new plants under IED' if it is after")
+    let $message_f_control_thermalInput := xmlconv:f_buildPlantsErrorMessage2($f_control_thermalInput,"2- If rated thermal input is  below 50 MWth (< 50 MWth)")
+    let $message_f_control_thermalInput_great := xmlconv:f_buildPlantsErrorMessage2($f_control_thermalInput_great,"3-If rated thermal input is greater than 8500 MWth (> 8500 MWth)")
+    let $message_f_control_EnergyInput_quantity := xmlconv:f_buildPlantsErrorMessage2($f_control_EnergyInput_quantity,"4-The ratio of fuel input/thermal input cannot be larger than 35 TJ / (MW yr)")
+    let $message_f_control_capacityAddedMW := xmlconv:f_buildPlantsErrorMessage2($f_control_capacityAddedMW,"5-Must be greater than 50 (>= 50) if extensionBy50MWOrMore is True")
+    let $message_f_control_capacityAffectedMW := xmlconv:f_buildPlantsErrorMessage2($f_control_capacityAffectedMW,"6- Must be greater than 0 (> 0) if substantialChange is True.")
+    let $message_f_control_TotalEmissionsToAir_quantity_1 := xmlconv:f_buildPlantsErrorMessage2($f_control_TotalEmissionsToAir_quantity_1,"7-The total emission to air for SO2 cannot be more than 5 times the estimated emission. Estimated emission is calculated multipliying the reported fuel by the determinated factors")
+    let $message_f_control_TotalEmissionsToAir_quantity_2 := xmlconv:f_buildPlantsErrorMessage2($f_control_TotalEmissionsToAir_quantity_2,"8-The total emission to air for SO2 cannot be more than 50 times less than the estimated emission. Estimated emission is calculated multipliying the reported fuel by the determinated factors")
+    let $message_f_control_TotalEmissionsToAir_quantity_3 := xmlconv:f_buildPlantsErrorMessage2($f_control_TotalEmissionsToAir_quantity_3,"9-The total emission to air for NOx cannot be more than 15 times the estimated emission. Estimated emission is calculated multipliying the reported fuel by the determinated factors")
+    let $message_f_control_TotalEmissionsToAir_quantity_4 := xmlconv:f_buildPlantsErrorMessage2($f_control_TotalEmissionsToAir_quantity_4,"10-The total emission to air for NOx cannot be more than 7 times less than the estimated emission. Estimated emission is calculated multipliying the reported fuel by the determinated factors")
+    let $message_f_control_TotalEmissionsToAir_quantity_5 := xmlconv:f_buildPlantsErrorMessage2($f_control_TotalEmissionsToAir_quantity_5,"11-he total emission to air for Dust cannot be more than 15 times the estimated emission. Estimated emission is calculated multipliying the reported fuel by the determinated factors")
+    let $message_f_control_TotalEmissionsToAir_quantity_6 := xmlconv:f_buildPlantsErrorMessage2($f_control_TotalEmissionsToAir_quantity_6,"12-The total emission to air for Dust cannot be more than 100 times less than the estimated emission. Estimated emission is calculated multipliying the reported fuel by the determinated factors")
+    let $message_f_control_operationsHours_1 := xmlconv:f_buildPlantsErrorMessage2($f_control_operationsHours_1,"28-OperationsHours cannot exceed 8760 hours/year")
+    let $message_f_control_operationsHours_2 := xmlconv:f_buildPlantsErrorMessage2($f_control_operationsHours_2,"29-ControlDigits and more than 0")
+    let $message_f_control_EmisionToAir_type := xmlconv:f_buildPlantsErrorMessage2($f_control_EmisionToAir_type,"31-Same type is not allowed more than once for a PlantReport")
+    let $message_f_control_totalEmissionsToAir_quantity_controlDigits :=  xmlconv:f_buildPlantsErrorMessage2($f_control_totalEmissionsToAir_quantity_controlDigits,"32-TotalEmissionsToAir quantity controlDigits")
+    let $message_f_control_OtherGases := xmlconv:f_buildPlantsErrorMessage2($f_control_OtherGases,"33-Must be reported if type is OtherGases")
+    let $message_f_control_otherSolidFuels := xmlconv:f_buildPlantsErrorMessage2($f_control_otherSolidFuels,"34- Same type is not allowed more than once for a PlantReport (except OtherGases and OtherSolidFuels)")
+    let $message_f_control_energyInput_type := xmlconv:f_buildPlantsErrorMessage2($f_control_energyInput_type,"35-Same type is not allowed more than once for a PlantReport (except OtherGases and OtherSolidFuels)")
+    let $message_f_control_OtherGases_same := xmlconv:f_buildPlantsErrorMessage2($f_control_OtherGases_same,"36-Same type is not allowed more than once for a PlantReport")
+    let $message_f_control_otherSolidFuels_same := xmlconv:f_buildPlantsErrorMessage2($f_control_otherSolidFuels_same,"37-Same type is not allowed more than once for a PlantReport")
+    let $message_f_control_energyInput_quantity_controlDigits := xmlconv:f_buildPlantsErrorMessage2($f_control_energyInput_quantity_controlDigits,"38-EnergyInput quantity controlDigits")
+    let $message_f_control_combustionPlantType := xmlconv:f_buildPlantsErrorMessage2($f_control_combustionPlantType,"39-Same type is not allowed more than once for a PlantReport")
+    let $message_f_control_SO2_month := xmlconv:f_buildPlantsErrorMessage2($f_control_SO2_month,"40-Same type is not allowed more than once for a PlantReport")
+    let $message_f_control_DesulphurisationRate_month := xmlconv:f_buildPlantsErrorMessage2($f_control_DesulphurisationRate_month,"41-Same type is not allowed more than once for a PlantReport")
+    let $message_f_control_iedArt72_4a_SO2 := xmlconv:f_buildPlantsErrorMessage2($f_control_iedArt72_4a_SO2,"42- Must be reported if iedArt72_4a is True and not reported if False. If TRUE there must be 12 elements")
+    let $message_f_control_iedArt72_4a_DesulphurisationRate := xmlconv:f_buildPlantsErrorMessage2($f_control_iedArt72_4a_DesulphurisationRate,"43-Must be reported if iedArt72_4a is True and not reported if False. If TRUE there must be 12 elements")
+    
+    return
+    <div>
+    {$message_f_control_statusOFthePlant}
+    {$message_f_control_thermalInput}
+    {$message_f_control_thermalInput_great}
+    {$message_f_control_EnergyInput_quantity}
+    {$message_f_control_capacityAddedMW}
+    {$message_f_control_capacityAffectedMW}
+    {$message_f_control_TotalEmissionsToAir_quantity_1}
+    {$message_f_control_TotalEmissionsToAir_quantity_2}
+    {$message_f_control_TotalEmissionsToAir_quantity_3}
+    {$message_f_control_TotalEmissionsToAir_quantity_4}
+    {$message_f_control_TotalEmissionsToAir_quantity_5}
+    {$message_f_control_TotalEmissionsToAir_quantity_6}
+    {$message_f_control_operationsHours_1}
+    {$message_f_control_operationsHours_2}
+    {$message_f_control_EmisionToAir_type}
+    {$message_f_control_totalEmissionsToAir_quantity_controlDigits}
+    {$message_f_control_OtherGases}
+    {$message_f_control_otherSolidFuels}
+    {$message_f_control_energyInput_type}
+    {$message_f_control_OtherGases_same}
+    {$message_f_control_otherSolidFuels_same}
+    {$message_f_control_energyInput_quantity_controlDigits}
+    {$message_f_control_combustionPlantType}
+    {$message_f_control_SO2_month}
+    {$message_f_control_DesulphurisationRate_month}
+    {$message_f_control_iedArt72_4a_SO2}
+    {$message_f_control_iedArt72_4a_DesulphurisationRate}
+    </div>
+};
 
 
 (:==================================================================:)
@@ -1318,6 +1407,11 @@ declare function xmlconv:f_buildPlantsErrorMessage($elems, $error){
     <li style="list-style-type:none"><b>{concat($elem/rsm:dBPlantId, ': ')} </b> {$error}</li>
 }; 
 
+declare function xmlconv:f_buildPlantsErrorMessage2($elems, $error){
+    for $elem in $elems
+    return
+    <li style="list-style-type:none"> {$error}</li>
+}; 
 (:==================================================================:)
 (:Builds a message section  :)
 (:==================================================================:)
@@ -1433,8 +1527,28 @@ declare function xmlconv:f_findPlants($source_url){
         (
           <tr>
             <td>{$National}</td>
-            
-            <td style="color:red">{xmlutil:buildErrorElementNotEmpty($xmlconv:errCodeCompliancePlantReport, $illegalEXAMPLE)}</td>
+                <td style="color:red">{xmlutil:buildErrorElementNotEmpty($xmlconv:errCodeCompliancePlantReport, $illegalEXAMPLE)}</td>
+          </tr>
+          )
+          else
+             ()
+};
+
+(:Returns a list of Plants elements:)
+declare function xmlconv:f_findPlants2($source_url){
+
+   for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
+      let $National := $elems/rsm:dBPlantId
+     
+      let $illegalEXAMPLE :=  xmlconv:f_controlOf_PlantReport2($elems, $National)
+      
+
+        return
+        if ($illegalEXAMPLE != "" ) then
+        (
+          <tr>
+
+            <td style="color:black">{xmlutil:buildErrorElementNotEmpty_From_Plant2("",$illegalEXAMPLE)}</td>
            
           </tr>
           )
@@ -1475,9 +1589,12 @@ declare function xmlconv:PlantCompilance($source_url as xs:string) {
     <p><a href="javascript:toggle('facilityInfoDiv', 'facilityInfoLink')" id="facilityInfoLink" title='Click to see interpretation of columns'>Show Details</a></p>
     <div id='facilityInfoDiv' style='display:none'>
 
-    <p><b>(1) Plants Reports:</b> The only allowed.. TODO
+    <p><b>(1) Plants Reports:</b> Details of validations listed below
       <ul style="margin-top:0px;">
-        <li>Literal HERE TODO</li>
+        
+        
+        <th rowspan="2" width="5%">{xmlconv:f_findPlants2( $source_url)}</th>
+        
       </ul></p>
 
    
