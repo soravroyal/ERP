@@ -1,0 +1,91 @@
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|FME 2015.1.1.0 (20150715 - Build 15515 - WIN32)
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|FME_HOME is 'C:\apps\FMEx86\'
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|FME Desktop Oracle Edition (floating)
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|Permanent License.
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|Machine host name is: serval
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|START - ProcessID: 48072, peak process memory usage: 39724 kB, current process memory usage: 39652 kB
+2016-01-13 10:06:55|   0.0|  0.0|INFORM|FME Configuration: Command line arguments are `C:\apps\FMEx86\fme.exe' `S:/Common workspace/Developers/gonzalez/EPRTR/PostProcess\wb-xlate-1452676014375_47364' `LOG_STANDARDOUT' `YES' `LogCountServerName' `{398dae7f-53f6-420d-be84-aed8a3aa39e3}'
+2016-01-13 10:06:55|   0.2|  0.1|INFORM|Shared folders for formats are : C:\apps\FMEx86\datasources;u:\Users\gonzalez\Documents\FME\Formats
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Shared folders for transformers are : C:\apps\FMEx86\transformers;u:\Users\gonzalez\AppData\Roaming\Safe Software\FME\FME Store\Transformers;u:\Users\gonzalez\Documents\FME\Transformers
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Shared folders for coordinate systems are : u:\Users\gonzalez\Documents\FME\CoordinateSystems
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Shared folders for coordinate system exceptions are : u:\Users\gonzalez\Documents\FME\CoordinateSystemExceptions
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Shared folders for coordinate system grid overrides are : u:\Users\gonzalez\Documents\FME\CoordinateSystemGridOverrides
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Shared folders for CS-MAP transformation exceptions are : u:\Users\gonzalez\Documents\FME\CsmapTransformationExceptions
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Shared folders for transformer categories are : u:\Users\gonzalez\Documents\FME\TransformerCategories
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Reader Keyword is `NULL_SOURCE'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Writer Keyword is `NULL_DEST'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Writer Group Definition Keyword is `NULL_DEST_DEF'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Reader type is `NULL'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Writer type is `NULL'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Current working folder is `S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Temporary folder is `S:\FMEtemp'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: FME_HOME is `C:\apps\FMEx86\'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: FME_BASE is 'no'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: FME_MF_DIR is 'S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess/'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: FME_MF_NAME is 'Main.fmw'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: FME_PRODUCT_NAME is 'FME(R) 2015.1.1.0'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|System Status: 1.72 TB of disk space available in the FME temporary folder (S:\FMEtemp)
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|System Status: 4.00 GB of virtual memory available
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Operating System: Microsoft Windows Server 2012 Server 4.0 64-bit  (Build 9200)
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Platform: WIN32
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Locale: en_GB
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Code Page: 1252  (ANSI - Latin I)
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Process limits are 24.00 GB of physical memory and 4.00 GB of address space
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Start freeing memory when process usage exceeds 2.83 GB of memory or 3.41 GB of address space
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME Configuration: Stop freeing memory when process usage is below 2.12 GB of memory and 2.56 GB of address space
+2016-01-13 10:06:55|   0.2|  0.1|INFORM|Creating writer for format: NULL (Nothing)
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `NULL'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Loaded module 'NULL' from file 'C:\apps\FMEx86\plugins/NULL.dll'
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:06:55|   0.2|  0.0|INFORM|Creating reader for format: NULL (Nothing)
+2016-01-13 10:06:55|   0.3|  0.0|INFORM|Trying to find a DYNAMIC plugin for reader named `NULL'
+2016-01-13 10:06:55|   0.3|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:06:55|   0.3|  0.0|INFORM|Loaded module 'LogCount_func' from file 'C:\apps\FMEx86\plugins/LogCount_func.dll'
+2016-01-13 10:06:55|   0.3|  0.0|INFORM|FME API version of module 'LogCount_func' matches current internal version (3.7 20150407)
+2016-01-13 10:06:55|   0.3|  0.0|INFORM|Creating writer for format: FME Feature Store (FFS)
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|Loaded module 'Geometry_func' from file 'C:\apps\FMEx86\plugins/Geometry_func.dll'
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|FME API version of module 'Geometry_func' matches current internal version (3.7 20150407)
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|Emptying factory pipeline
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|WorkspaceRunner: Running FME Workspace S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess/accessToCSV.fmw with command line:
+2016-01-13 10:06:55|   0.4|  0.0|INFORM|WorkspaceRunner: C:/apps/FMEx86/fme {S:/Common workspace/Developers/gonzalez/EPRTR/PostProcess/accessToCSV.fmw} --SourceDataset_MDB_ADO {S:\Temp\EPRTR\Acces\Public_Database_2015-12-09.mdb} --DestDataset_CSV {S:\Temp\EPRTR\Acces\CSV} 2>@1
+2016-01-13 10:42:14|   1.2|  0.8|INFORM|WorkspaceRunner: Successfully ran workspace S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess/accessToCSV.fmw
+2016-01-13 10:42:14|   1.2|  0.0|INFORM|WorkspaceRunner_2: Initiating run of FME Workspace S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess/zipcsv.fmw with command line:
+2016-01-13 10:42:14|   1.2|  0.0|INFORM|WorkspaceRunner_2: C:/apps/FMEx86/fme {S:/Common workspace/Developers/gonzalez/EPRTR/PostProcess/zipcsv.fmw} --SourceDataset_PATH {S:\Temp\EPRTR\Acces\CSV} --DestZIP {S:\Temp\EPRTR\Acces\CSV\Public_DB.zip} >NUL: <NUL: 2>@1 &
+2016-01-13 10:42:15|   1.2|  0.0|INFORM|WorkspaceRunner_2: Successfully initiated run of workspace S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess/zipcsv.fmw
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Creator_XML_Creator(CreationFactory): Created 1 features
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Creator_Cloner(TeeFactory): Cloned 1 input feature(s) into 1 output feature(s)
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Creator_CREATED Feature Counter -1 5(TeeFactory): Cloned 1 input feature(s) into 1 output feature(s)
+2016-01-13 10:42:15|   1.2|  0.0|STATS |WorkspaceRunner_ExecutorAndRouter(TestFactory): Tested 1 input feature(s) -- 1 feature(s) passed and 0 feature(s) failed
+2016-01-13 10:42:15|   1.2|  0.0|STATS |WorkspaceRunner_SummaryMaker(CreationFactory): Created 0 features
+2016-01-13 10:42:15|   1.2|  0.0|STATS |WorkspaceRunner_SUCCEEDED Feature Counter -1 3(TeeFactory): Cloned 1 input feature(s) into 1 output feature(s)
+2016-01-13 10:42:15|   1.2|  0.0|STATS |WorkspaceRunner_2_ExecutorAndRouter(TestFactory): Tested 1 input feature(s) -- 1 feature(s) passed and 0 feature(s) failed
+2016-01-13 10:42:15|   1.2|  0.0|STATS |WorkspaceRunner_2_SummaryMaker(CreationFactory): Created 0 features
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Destination Feature Type Routing Correlator(RoutingFactory): Tested 0 input feature(s), wrote 0 output feature(s): 0 matched merge filters, 0 were routed to output, 0 could not be routed.
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Final Output Nuker(TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:15|   1.2|  0.0|INFORM|=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|INFORM|Feature output statistics for `FFS' writer using keyword `W_1':
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |                               Features Written
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |==============================================================================
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Total Features Written                                                       0
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |                            Features Read Summary
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |==============================================================================
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Total Features Read                                                          0
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |                           Features Written Summary
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|STATS |==============================================================================
+2016-01-13 10:42:15|   1.2|  0.0|STATS |Total Features Written                                                       0
+2016-01-13 10:42:15|   1.2|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:15|   1.2|  0.0|INFORM|Translation was SUCCESSFUL with 0 warning(s) (0 feature(s) output)
+2016-01-13 10:42:15|   1.2|  0.0|INFORM|FME Session Duration: 35 minutes 19.6 seconds. (CPU: 0.5s user, 0.7s system)
+2016-01-13 10:42:15|   1.2|  0.0|INFORM|END - ProcessID: 48072, peak process memory usage: 56480 kB, current process memory usage: 55856 kB

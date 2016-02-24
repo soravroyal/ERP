@@ -1,0 +1,107 @@
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|FME 2015.1.1.0 (20150715 - Build 15515 - WIN32)
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|FME_HOME is 'C:\apps\FMEx86\'
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|FME Desktop Oracle Edition (floating)
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|Permanent License.
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|Machine host name is: serval
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|START - ProcessID: 54672, peak process memory usage: 39912 kB, current process memory usage: 39912 kB
+2016-01-13 10:42:16|   0.0|  0.0|INFORM|FME Configuration: Command line arguments are `C:\apps\FMEx86\fme.exe' `S:/Common workspace/Developers/gonzalez/EPRTR/PostProcess/zipcsv.fmw' `--SourceDataset_PATH' `S:\Temp\EPRTR\Acces\CSV' `--DestZIP' `S:\Temp\EPRTR\Acces\CSV\Public_DB.zip'
+2016-01-13 10:42:16|   0.1|  0.1|INFORM|Shared folders for formats are : C:\apps\FMEx86\datasources;u:\Users\gonzalez\Documents\FME\Formats
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Shared folders for transformers are : C:\apps\FMEx86\transformers;u:\Users\gonzalez\AppData\Roaming\Safe Software\FME\FME Store\Transformers;u:\Users\gonzalez\Documents\FME\Transformers
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Shared folders for coordinate systems are : u:\Users\gonzalez\Documents\FME\CoordinateSystems
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Shared folders for coordinate system exceptions are : u:\Users\gonzalez\Documents\FME\CoordinateSystemExceptions
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Shared folders for coordinate system grid overrides are : u:\Users\gonzalez\Documents\FME\CoordinateSystemGridOverrides
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Shared folders for CS-MAP transformation exceptions are : u:\Users\gonzalez\Documents\FME\CsmapTransformationExceptions
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Shared folders for transformer categories are : u:\Users\gonzalez\Documents\FME\TransformerCategories
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Reader Keyword is `PATH_1'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Writer Keyword is `NULL_DEST'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Writer Group Definition Keyword is `NULL_DEST_DEF'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Reader type is `PATH'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Writer type is `NULL'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: No destination coordinate system set
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Current working folder is `S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Temporary folder is `S:\FMEtemp'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: FME_HOME is `C:\apps\FMEx86\'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: FME_BASE is 'no'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: FME_MF_DIR is 'S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess/'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: FME_MF_NAME is 'zipcsv.fmw'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: FME_PRODUCT_NAME is 'FME(R) 2015.1.1.0'
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|System Status: 1.72 TB of disk space available in the FME temporary folder (S:\FMEtemp)
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|System Status: 4.00 GB of virtual memory available
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Operating System: Microsoft Windows Server 2012 Server 4.0 64-bit  (Build 9200)
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Platform: WIN32
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Locale: en_GB
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|Code Page: 1252  (ANSI - Latin I)
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Process limits are 24.00 GB of physical memory and 4.00 GB of address space
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Start freeing memory when process usage exceeds 2.83 GB of memory or 3.41 GB of address space
+2016-01-13 10:42:16|   0.1|  0.0|INFORM|FME Configuration: Stop freeing memory when process usage is below 2.12 GB of memory and 2.56 GB of address space
+2016-01-13 10:42:16|   0.2|  0.1|INFORM|Creating writer for format: NULL (Nothing)
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Trying to find a DYNAMIC plugin for writer named `NULL'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Loaded module 'NULL' from file 'C:\apps\FMEx86\plugins/NULL.dll'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Creating reader for format: Directory and File Pathnames
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Trying to find a DYNAMIC plugin for reader named `PATH'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Loaded module 'PATH' from file 'C:\apps\FMEx86\plugins/PATH.dll'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|FME API version of module 'PATH' matches current internal version (3.7 20150407)
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Opening the PATH Reader on folder 'S:\Temp\EPRTR\Acces\CSV'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Using Glob Pattern '*.csv'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Allowed Path Type set to 'FILE'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Retrieve file properties 'false'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|FME API version of module 'NULL' matches current internal version (3.7 20150407)
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Loaded module 'PythonFactory' from file 'C:\apps\FMEx86\plugins/PythonFactory.dll'
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|FME API version of module 'PythonFactory' matches current internal version (3.7 20150407)
+2016-01-13 10:42:16|   0.2|  0.0|INFORM|Using FME's provided Python interpreter from C:\apps\FMEx86\fmepython27\python27.dll
+2016-01-13 10:42:16|   0.3|  0.0|INFORM|Python version 2.7 successfully loaded
+2016-01-13 10:42:16|   0.3|  0.0|INFORM|Adding folder `S:\Common workspace\Developers\gonzalez\EPRTR\PostProcess\' to the python path
+2016-01-13 10:42:16|   0.4|  0.1|WARN  |ZipArchiver: "ACTIVITY.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "EPER2EPRTR_ANNEXIACTIVITY.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "EPER2EPRTR_NACEACTIVITY.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "FACILITYID_CHANGES.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "FACILITYID_CHANGES_MINOLDFACILITYID.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "FACILITYREPORT.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "POLLUTANTRELEASE.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "POLLUTANTRELEASEANDTRANSFERREPORT.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "POLLUTANTRELEASEMETHODUSED.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "POLLUTANTTRANSFER.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "POLLUTANTTRANSFERMETHODUSED.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "UPLOADEDREPORTS.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "WASTETRANSFER.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|WARN  |ZipArchiver: "WASTETRANSFERMETHODUSED.csv" exists in the archive already.
+2016-01-13 10:42:16|   0.4|  0.0|INFORM|Emptying factory pipeline
+2016-01-13 10:42:16|   0.4|  0.0|STATS |Router and Unexpected Input Remover(RoutingFactory): Tested 14 input feature(s), wrote 14 output feature(s): 14 matched merge filters, 14 were routed to output, 0 could not be routed.
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver Input Input Collector(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_Input1452513271 Input Splitter(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_ParameterFetcher(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_TclCaller(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_Tester(TestFactory): Tested 28 input feature(s) -- 14 feature(s) passed and 14 feature(s) failed
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_AttributeRenamer(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_AttributeExposer(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_Tester_2(TestFactory): Tested 14 input feature(s) -- 0 feature(s) passed and 14 feature(s) failed
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_AttributeKeeper_2(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_AttributeKeeper(TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_AttributeRemover(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_Output1452513271 Output Collector(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_LogSuccess1452513271 Output Collector(TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver_LogFailure1452513271 Output Collector(TeeFactory): Cloned 14 input feature(s) into 14 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver Output Output Renamer/Nuker(TeeFactory): Cloned 14 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver LogSuccess Output Renamer/Nuker(TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |ZipArchiver LogFailure Output Renamer/Nuker(TeeFactory): Cloned 14 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |Destination Feature Type Routing Correlator(RoutingFactory): Tested 0 input feature(s), wrote 0 output feature(s): 0 matched merge filters, 0 were routed to output, 0 could not be routed.
+2016-01-13 10:42:16|   0.4|  0.0|STATS |Final Output Nuker(TeeFactory): Cloned 0 input feature(s) into 0 output feature(s)
+2016-01-13 10:42:16|   0.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:16|   0.4|  0.0|STATS |                            Features Read Summary
+2016-01-13 10:42:16|   0.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:16|   0.4|  0.0|STATS |PATH                                                                        14
+2016-01-13 10:42:16|   0.4|  0.0|STATS |==============================================================================
+2016-01-13 10:42:16|   0.4|  0.0|STATS |Total Features Read                                                         14
+2016-01-13 10:42:16|   0.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:16|   0.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:16|   0.4|  0.0|STATS |                           Features Written Summary
+2016-01-13 10:42:16|   0.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:16|   0.4|  0.0|STATS |==============================================================================
+2016-01-13 10:42:16|   0.4|  0.0|STATS |Total Features Written                                                       0
+2016-01-13 10:42:16|   0.4|  0.0|STATS |=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+2016-01-13 10:42:16|   0.4|  0.0|INFORM|Closing the PATH Reader
+2016-01-13 10:42:16|   0.4|  0.0|INFORM|Translation was SUCCESSFUL with 14 warning(s) (0 feature(s) output)
+2016-01-13 10:42:16|   0.4|  0.0|INFORM|FME Session Duration: 0.8 seconds. (CPU: 0.3s user, 0.1s system)
+2016-01-13 10:42:16|   0.4|  0.0|INFORM|END - ProcessID: 54672, peak process memory usage: 67864 kB, current process memory usage: 67864 kB
