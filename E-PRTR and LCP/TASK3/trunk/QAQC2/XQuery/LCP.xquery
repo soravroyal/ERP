@@ -1468,7 +1468,7 @@ return
         }}
         }}
 </script>
-    <h1>LCP batch 1 check </h1>
+    <h1>LCP Validations </h1>
     <p>{if (not($hasErrors)) then
           $xmlconv:CHECKS_PASSED_FEEDBACK_MESSAGE union xmlconv:buildOKBulet()
          else
@@ -1523,7 +1523,7 @@ declare function xmlconv:f_findPlants($source_url){
       
 
         return
-        if ($illegalEXAMPLE != "" ) then
+        if (normalize-space($illegalEXAMPLE) != '') then
         (
           <tr>
             <td>{$National}</td>
@@ -1561,7 +1561,7 @@ declare function xmlconv:PlantCompilance($source_url as xs:string) {
      let $Facility :=  xmlconv:f_findPlants( $source_url)
 
      let $result :=
-     if ($Facility != "") then
+     if (not(empty($Facility))) then
     (
     <div>
         {xmlconv:buildResultMsg(fn:true(), fn:false())}

@@ -162,9 +162,9 @@ declare function xmlconv:findSumPollutantRelease($pollutant){
 (:Returns a list of waste elements generated in xmlconv:findBelowThresholdsWasteTransfer(...) :)
 declare function xmlconv:findBelowThresholdsWasteTransfer($facilityReports as element(rsm:FacilityReport)*){
 
-          let $w := xmlconv:findBelowThresholdsWasteTransfer($facilityReports,"NON-HW - Non-hazardous waste")
+          let $w := xmlconv:findBelowThresholdsWasteTransfer($facilityReports,"NON-HW")
                       union
-                      xmlconv:findBelowThresholdsWasteTransfer($facilityReports,"HW - Hazardous waste")
+                      xmlconv:findBelowThresholdsWasteTransfer($facilityReports,"HW")
 
         return for $i in $w order by $i/rsm:dBFacitilyID return $i
 };
@@ -180,7 +180,7 @@ declare function xmlconv:findBelowThresholdsWasteTransfer($facilityReports as el
 
 (:Find sum of WasteTransfer quantities for a given  wasteTypes ("HW" of "NON-HW"). Returns a list of waste elements:)
 declare function xmlconv:findSumWasteTransfer($facilityReports as element(rsm:FacilityReport)*, $wasteType){
-    let $wasteTypeCodes := (if($wasteType = "NON-HW - Non-hazardous waste") then ("NON-HW - Non-hazardous waste") else (("HWIC - Hazardous waste within country","HWOC - Harzodous waste outside country")))
+    let $wasteTypeCodes := (if($wasteType = "NON-HW") then ("NON-HW") else (("HWIC","HWOC")))
 
 (:    let $threshold := xmlconv:findWasteTransferThreshold($wasteType)
 :)
@@ -192,8 +192,8 @@ declare function xmlconv:findSumWasteTransfer($facilityReports as element(rsm:Fa
         <xmlconv:Waste>
             <xmlconv:NationalID>{$ni}</xmlconv:NationalID>
             <xmlconv:WasteTypeCode>{$wasteType}</xmlconv:WasteTypeCode>
-             <xmlconv:Quantity>{$tot} </xmlconv:Quantity>
-             <xmlconv:ConfidentialIndicator>{count($conf)>0}</xmlconv:ConfidentialIndicator>
+            <xmlconv:Quantity>{$tot}</xmlconv:Quantity>
+            <xmlconv:ConfidentialIndicator>{count($conf)>0}</xmlconv:ConfidentialIndicator>
         </xmlconv:Waste>
 
 };
@@ -296,9 +296,9 @@ declare function xmlconv:findOnlyBelowThresholdsWasteTransfer($facilityReports a
 (:Find WasteTransfers with Quantity above the threshold:)
 (:Returns a list of waste elements generated in xmlconv:findSumWasteTransfer:)
 declare function xmlconv:findAboveThresholdsWasteTransfer($facilityReports as element(rsm:FacilityReport)*){
-    let $w := xmlconv:findAboveThresholdsWasteTransfer($facilityReports, "NON-HW - Non-hazardous waste")
+    let $w := xmlconv:findAboveThresholdsWasteTransfer($facilityReports, "NON-HW")
               union
-              xmlconv:findAboveThresholdsWasteTransfer($facilityReports, "HW - Hazardous waste")
+              xmlconv:findAboveThresholdsWasteTransfer($facilityReports, "HW")
 
     return for $i in $w order by $i/xmlconv:NationalID return $i
 };
@@ -1130,9 +1130,9 @@ declare function xmlconv:findSumPollutantReleaseAggregated($pollutant, $elems){
 (:Returns a list of waste elements generated in xmlconv:findBelowThresholdsWasteTransferT(...) :)
 declare function xmlconv:findBelowThresholdsWasteTransferTAggregated($elems){
 
-          let $w := xmlconv:findBelowThresholdsWasteTransferAggregated($elems,"NON-HW - Non-hazardous waste")
+          let $w := xmlconv:findBelowThresholdsWasteTransferAggregated($elems,"NON-HW")
                       union
-                      xmlconv:findBelowThresholdsWasteTransferAggregated($elems,"HW - Hazardous waste")
+                      xmlconv:findBelowThresholdsWasteTransferAggregated($elems,"HW")
 
        return for $i in $w order by $i/rsm:dBFacitilyID
 
@@ -1147,12 +1147,12 @@ declare function xmlconv:findBelowThresholdsWasteTransferAggregated($elems, $was
     let $threshold := xmlconv:findWasteTransferThreshold($wasteType)
 
     for $w in xmlconv:findSumWasteTransferAggregated($elems, $wasteType)
-        return $w[xmlconv:belowThreshold(xmlconv:Quantity, $threshold)]
+        return $w[xmlconv:ConfidentialIndicator=false() and xmlconv:belowThreshold(xmlconv:Quantity, $threshold)]
 };
 
 (:Find sum of WasteTransfer quantities for a given  wasteTypes ("HW" of "NON-HW"). Returns a list of waste elements:)
 declare function xmlconv:findSumWasteTransferAggregated($elems, $wasteType){
-    let $wasteTypeCodes := (if($wasteType = "NON-HW - Non-hazardous waste") then ("NON-HW - Non-hazardous waste") else (("HWIC - Hazardous waste within country","HWOC - Harzodous waste outside country")))
+    let $wasteTypeCodes := (if($wasteType = "NON-HW") then ("NON-HW") else (("HWIC","HWOC")))
 
     for $ni in distinct-values($elems/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]/../rsm:dBFacitilyID)
        let $wt := $elems[rsm:dBFacitilyID=$ni]/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]
@@ -1163,6 +1163,7 @@ declare function xmlconv:findSumWasteTransferAggregated($elems, $wasteType){
             <xmlconv:NationalID>{$ni}</xmlconv:NationalID>
             <xmlconv:WasteTypeCode>{$wasteType}</xmlconv:WasteTypeCode>
             <xmlconv:Quantity>{$tot} </xmlconv:Quantity>
+            <xmlconv:ConfidentialIndicator>{count($conf)>0}</xmlconv:ConfidentialIndicator>
         </xmlconv:Waste>
 
 
