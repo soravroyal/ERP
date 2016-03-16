@@ -664,11 +664,12 @@ declare function xmlconv:f_control_operationsHours_2($elems){
 
 (: #31 Element check: Same type is not allowed more than once for a PlantReport :)
 declare function xmlconv:f_control_EmisionToAir_type($elems){
-    for $i in $elems
-        for $ii in $elems/rsm:TotalEmissionsToAir[rsm:type = $i/rsm:TotalEmissionsToAir/rsm:type]
-            return if(count($ii) > 1)then(
-                $i
-            )else()
+for $i in $elems
+    for $ii in $i/rsm:TotalEmissionsToAir/rsm:type
+        let $iii := $i/rsm:TotalEmissionsToAir[rsm:type = $ii]
+        return if(count($iii) > 1)then(
+        $i
+        )else()
 };
 
 (: #32 TotalEmissionsToAir quantity controlDigits :)
