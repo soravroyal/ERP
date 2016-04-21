@@ -74,7 +74,7 @@
 					<xs:documentation>Required. Enter the date of start of operation of the plant according IED Article 72(3)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dBPlantId" type="common:TextType" minOccurs="1" maxOccurs="1">
+			<xs:element name="InspireIdLCP" type="common:TextType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
@@ -378,7 +378,7 @@
                     </xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="dBFacitilyID" type="common:TextType" minOccurs="1" maxOccurs="1">
+			<xs:element name="InspireIdPRTR" type="common:TextType" minOccurs="1" maxOccurs="1">
 				<xs:annotation>
 					<xs:documentation>Required.</xs:documentation>
 				</xs:annotation>
