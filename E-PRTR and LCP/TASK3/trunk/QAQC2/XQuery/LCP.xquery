@@ -1405,7 +1405,7 @@ declare function xmlconv:build_control_iedArt72_4a_DesulphurisationRate($list){
 declare function xmlconv:f_buildPlantsErrorMessage($elems, $error){
     for $elem in $elems
     return
-    <li style="list-style-type:none"><b>{concat($elem/rsm:dBPlantId, ': ')} </b> {$error}</li>
+    <li style="list-style-type:none"><b>{concat($elem/rsm:InspireIdLCP, ': ')} </b> {$error}</li>
 }; 
 
 declare function xmlconv:f_buildPlantsErrorMessage2($elems, $error){
@@ -1518,7 +1518,7 @@ as element(rules)
 declare function xmlconv:f_findPlants($source_url){
 
    for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
-      let $National := $elems/rsm:dBPlantId
+      let $National := $elems/rsm:InspireIdLCP
      
       let $illegalEXAMPLE :=  xmlconv:f_controlOf_PlantReport($elems)
       
@@ -1539,7 +1539,7 @@ declare function xmlconv:f_findPlants($source_url){
 declare function xmlconv:f_findPlants2($source_url){
 
    for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:PlantReports/rsm:PlantReport
-      let $National := $elems/rsm:dBPlantId
+      let $National := $elems/rsm:InspireIdLCP
      
       let $illegalEXAMPLE :=  xmlconv:f_controlOf_PlantReport2($elems, $National)
       

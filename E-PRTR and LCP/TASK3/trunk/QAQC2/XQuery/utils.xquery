@@ -311,7 +311,7 @@ declare function xmlutil:buildTablePlantReport($type as xs:integer, $error as xs
 declare function xmlutil:buildTablePlantReport($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("National ID")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/rsm:dBPlantId)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/rsm:InspireIdLCP)
                                                          (:, xmlutil:getElem($elem/rsm:FacilityName)
                                                          , xmlutil:getElem($elem/rsm:ParentCompanyName)
                                                            :)),$type, $errorIndex, $errorCode))
@@ -334,7 +334,7 @@ declare function xmlutil:buildTableFacilityReport($type as xs:integer, $error as
 declare function xmlutil:buildTableFacilityReport($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("National ID")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/rsm:dBFacitilyID)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/rsm:InspireIdPRTR)
                                                          (:, xmlutil:getElem($elem/rsm:FacilityName)
                                                          , xmlutil:getElem($elem/rsm:ParentCompanyName)
                                                          , xmlutil:buildAddress($elem/rsm:Address)
@@ -359,7 +359,7 @@ declare function xmlutil:buildTableFacilityReportMain($type as xs:integer, $erro
 declare function xmlutil:buildTableFacilityReportMain($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("National ID", "Facility name", "Parent company", "Address", "Longitude", "Latitude", "Web site", "Confidential")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/rsm:LCPandPRTR/rsmFacilityReports/rsm:FacilityReport/rsm:dBFacitilyID)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/rsm:LCPandPRTR/rsmFacilityReports/rsm:FacilityReport/rsm:InspireIdPRTR)
                                                          , xmlutil:getElem($elem/rsm:FacilityName)
                                                          , xmlutil:getElem($elem/rsm:ParentCompanyName)
                                                          , xmlutil:buildAddress($elem/rsm:Address)
@@ -403,7 +403,7 @@ declare function xmlutil:buildTablePollutantRelease($type as xs:integer, $error 
 declare function xmlutil:buildTablePollutantRelease($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("Facility", "Medium", "Pollutant", "Method basis", "Method(s)", "Tot. quantity", "Acc. quantity", "Confidential", "Reason for conf.")
     let $tableRows := (for $elem in $elems
-                                return xmlutil:buildTableRow((xmlutil:getElem($elem/../rsm:dBFacitilyID), xmlutil:getElem($elem/rsm:mediumCode), xmlutil:getElem($elem/rsm:pollutantCode),xmlutil:getElem($elem/rsm:methodBasisCode), xmlutil:buildMethods($elem/rsm:methodUsed), string($elem/rsm:totalQuantity), string($elem/rsm:accidentalQuantity), xmlutil:buildYesNo($elem/rsm:confidentialIndicator), xmlutil:getElem($elem/rsm:confidentialCode)), $type,  $errorIndex, $errorCode))
+                                return xmlutil:buildTableRow((xmlutil:getElem($elem/../rsm:InspireIdPRTR), xmlutil:getElem($elem/rsm:mediumCode), xmlutil:getElem($elem/rsm:pollutantCode),xmlutil:getElem($elem/rsm:methodBasisCode), xmlutil:buildMethods($elem/rsm:methodUsed), string($elem/rsm:totalQuantity), string($elem/rsm:accidentalQuantity), xmlutil:buildYesNo($elem/rsm:confidentialIndicator), xmlutil:getElem($elem/rsm:confidentialCode)), $type,  $errorIndex, $errorCode))
 
     return  xmlutil:buildTable($type, $error, $colHeaders, $tableRows)
 };
@@ -420,7 +420,7 @@ declare function xmlutil:buildTablePollutantTransfer($type as xs:integer, $error
 declare function xmlutil:buildTablePollutantTransfer($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("Facility", "Pollutant", "Method basis", "Method(s)", "Quantity",  "Confidential", "Reason for conf.")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../rsm:dBFacitilyID)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../rsm:InspireIdPRTR)
                                                          , xmlutil:getElem($elem/rsm:pollutantCode)
                                                          , xmlutil:getElem($elem/rsm:methodBasisCode)
                                                          , xmlutil:buildMethods($elem/rsm:MethodUsed)
@@ -446,7 +446,7 @@ declare function xmlutil:buildTableWasteTransfer($type as xs:integer, $error as 
 declare function xmlutil:buildTableWasteTransfer($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("Facility", "Waste type", "Quantity", "Waste treatment", "Method Basis", "Method(s)",  "Confidential", "Reason for conf.")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../rsm:dBFacitilyID)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../rsm:InspireIdPRTR)
                                                          , xmlutil:getElem($elem/rsm:wasteTypeCode)
                                                          , string($elem/rsm:quantity)
                                                          , xmlutil:getElem($elem/rsm:wasteTreatmentCode)
@@ -498,7 +498,7 @@ declare function xmlutil:buildTableWasteHandler($type as xs:integer, $error as x
 declare function xmlutil:buildTableWasteHandler($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("Facility", "Waste type", "Quantity", "Waste treatment", "Method Basis", "Method(s)",  "Confidential", "Name of recoverer/disposer", "Address of recoverer/disposer", "Address of actual recoverer/disposer")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../rsm:dBFacitilyID)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../rsm:InspireIdPRTR)
                                                          , xmlutil:getElem($elem/rsm:wasteTypeCode)
                                                          , string($elem/rsm:quantity)
                                                          , xmlutil:getElem($elem/rsm:wasteTreatmentCode)
@@ -575,7 +575,7 @@ declare function xmlutil:buildTableMethodsPollutantTransfer($type as xs:integer,
 declare function xmlutil:buildTableMethodsPollutantTransfer($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
     let $colHeaders := ("Facility", "Pollutant", "Method basis", "Method type", "Designation")
     let $tableRows := (for $elem in $elems
-                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../../rsm:dBFacitilyID)
+                            return xmlutil:buildTableRow(( xmlutil:getElem($elem/../../rsm:InspireIdPRTR)
                                                          , xmlutil:getElem($elem/../rsm:pollutantCode)
                                                          , xmlutil:getElem($elem/../rsm:MethodBasisCode)
                                                          , xmlutil:getElem($elem/rsm:MethodTypeCode)

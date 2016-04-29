@@ -154,7 +154,7 @@ declare function xmlconv:findFacilityReports($source_url){
     return
 
       for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport
-            let $National := $elems/rsm:dBFacitilyID
+            let $National := $elems/rsm:InspireIdPRTR
             (:let $FacilityName := $elems/rsm:FacilityName
             let $FacilityCompany := $elems/rsm:ParentCompanyName
             let $FacilityCompetent := $elems/rsm:CompetentAuthorityParty
@@ -297,7 +297,7 @@ declare function xmlconv:findPollutantReleasesByFacilities($elems){
     let $errLevel := data(xmlconv:getRules()//rule[@code = $errCode]/errLevel[1])
     let $errColor := xmlutil:getErrorColor($errLevel)
 
-      let $National := $elems/rsm:dBFacitilyID
+      let $National := $elems/rsm:InspireIdPRTR
       (:let $FacilityName := $elems/rsm:FacilityName
       let $FacilityCompany := $elems/rsm:ParentCompanyName
       let $FacilityCompetent := $elems/rsm:CompetentAuthorityParty
@@ -422,7 +422,7 @@ declare function xmlconv:findPollutantTransfersByFacilities($elems){
     let $errLevel := data(xmlconv:getRules()//rule[@code = $errCode]/errLevel[1])
     let $errColor := xmlutil:getErrorColor($errLevel)
 
-      let $National := $elems/rsm:dBFacitilyID
+      let $National := $elems/rsm:InspireIdPRTR
       (:let $FacilityName := $elems/rsm:FacilityName
       let $FacilityCompany := $elems/rsm:ParentCompanyName
       let $FacilityCompetent := $elems/rsm:CompetentAuthorityParty
@@ -524,7 +524,7 @@ declare function xmlconv:findWasteTransfersByFacilities($elems){
     let $errLevel := data(xmlconv:getRules()//rule[@code = $errCode]/errLevel[1])
     let $errColor := xmlutil:getErrorColor($errLevel)
 
-      let $National := $elems/rsm:dBFacitilyID
+      let $National := $elems/rsm:InspireIdPRTR
       (:let $FacilityName := $elems/rsm:FacilityName
       let $FacilityCompany := $elems/rsm:ParentCompanyName
       let $FacilityCompetent := $elems/rsm:CompetentAuthorityParty
@@ -914,7 +914,7 @@ declare function xmlconv:ClaimingOfConfidentialityByFacility($source_url as xs:s
 };
 declare function  xmlconv:findFacilityConfidentiality($source_url){
           for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport
-            let $National := $elems/rsm:dBFacitilyID
+            let $National := $elems/rsm:InspireIdPRTR
             (:let $FacilityName := $elems/rsm:FacilityName
             let $FacilityCompany := $elems/rsm:ParentCompanyName
             let $FacilityCompetent := $elems/rsm:CompetentAuthorityPartyName

@@ -178,7 +178,7 @@ declare function xmlconv:illegalReportingYear($source_url as xs:string){
  a call to the registry service will check that the ID is within the ISs communicated to the Registry:)
 declare function xmlconv:controlDuplicateFacilityReports($source_url as xs:string){
     for $i in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport
-        let $ii := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:dBFacitilyID = $i/rsm:dBFacitilyID]
+        let $ii := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:InspireIdPRTR = $i/rsm:InspireIdPRTR]
         where count($ii) > 1
         return $i
   };
@@ -263,7 +263,7 @@ declare function xmlconv:control_pollutantCode($source_url as xs:string){
 (: #13  Same pollutantCode is not allowed more than once:)
 declare function xmlconv:controlDuplicatePollutantTransfers($source_url as xs:string){
     for $i in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport/rsm:PollutantTransfer
-        let $ii := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:dBFacitilyID = $i/../rsm:dBFacitilyID]/rsm:PollutantTransfer[rsm:pollutantCode = $i/rsm:pollutantCode]
+        let $ii := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:InspireIdPRTR = $i/../rsm:InspireIdPRTR]/rsm:PollutantTransfer[rsm:pollutantCode = $i/rsm:pollutantCode]
         where count($ii) > 1
         return $i
   };
@@ -353,7 +353,7 @@ declare function xmlconv:control_PollutantRelease_confidentialCode($source_url a
 (: #25 mediumCode/pollutantCode Same pollutantCode is not allowed for a given medium:)
 declare function xmlconv:controlDuplicatePollutantReleases($source_url as xs:string){
     for $i in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport/rsm:PollutantRelease
-        let $ii := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:dBFacitilyID = $i/../rsm:dBFacitilyID]/rsm:PollutantRelease[rsm:pollutantCode = $i/rsm:pollutantCode and rsm:mediumCode = $i/rsm:mediumCode]
+        let $ii := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:InspireIdPRTR = $i/../rsm:InspireIdPRTR]/rsm:PollutantRelease[rsm:pollutantCode = $i/rsm:pollutantCode and rsm:mediumCode = $i/rsm:mediumCode]
         where count($ii) > 1
         return $i
 };
@@ -398,7 +398,7 @@ declare function xmlconv:f_illegalReportingYear($elems){
  a call to the registry service will check that the ID is within the ISs communicated to the Registry:)
 declare function xmlconv:f_controlDuplicateFacilityReports($elems){
     for $i in $elems
-        let $ii := $elems[rsm:dBFacitilyID = $i/rsm:dBFacitilyID]
+        let $ii := $elems[rsm:InspireIdPRTR = $i/rsm:InspireIdPRTR]
         where count($ii) > 1
         return $i
   };
@@ -483,7 +483,7 @@ declare function xmlconv:f_control_pollutantCode($elems){
 (: #13  Same pollutantCode is not allowed more than once:)
 declare function xmlconv:f_controlDuplicatePollutantTransfers($elems){
     for $i in $elems/rsm:PollutantTransfer
-        let $ii := $elems[rsm:dBFacitilyID = $i/../rsm:dBFacitilyID]/rsm:PollutantTransfer[rsm:pollutantCode = $i/rsm:pollutantCode]
+        let $ii := $elems[rsm:InspireIdPRTR = $i/../rsm:InspireIdPRTR]/rsm:PollutantTransfer[rsm:pollutantCode = $i/rsm:pollutantCode]
         where count($ii) > 1
         return $i
   };
@@ -573,7 +573,7 @@ declare function xmlconv:f_control_PollutantRelease_confidentialCode($elems){
 (: #25 mediumCode/pollutantCode Same pollutantCode is not allowed for a given medium:)
 declare function xmlconv:f_controlDuplicatePollutantReleases($elems){
     for $i in $elems/rsm:PollutantRelease
-        let $ii := $elems[rsm:dBFacitilyID = $i/../rsm:dBFacitilyID]/rsm:PollutantRelease[rsm:pollutantCode = $i/rsm:pollutantCode and rsm:mediumCode = $i/rsm:mediumCode]
+        let $ii := $elems[rsm:InspireIdPRTR = $i/../rsm:InspireIdPRTR]/rsm:PollutantRelease[rsm:pollutantCode = $i/rsm:pollutantCode and rsm:mediumCode = $i/rsm:mediumCode]
         where count($ii) > 1
         return $i
 };
@@ -1496,7 +1496,7 @@ as element(rules)
 declare function xmlconv:f_findFacility($source_url){
 
    for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport
-      let $National := $elems/rsm:dBFacitilyID
+      let $National := $elems/rsm:InspireIdPRTR
      
       let $illegalReportingValues :=  xmlconv:f_controlOfLegalValueHandler($elems)
       let $controlOfFacility :=  xmlconv:f_controlOfFacility($elems)

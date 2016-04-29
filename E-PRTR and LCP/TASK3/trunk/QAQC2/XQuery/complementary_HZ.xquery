@@ -141,7 +141,7 @@ declare function xmlconv:findFacilityCompetentAuthorityParty($source_url){
 declare function xmlconv:findFacilityReport($source_url){
     (:let $FacilityReportActivity := xmlconv:findFacilityReportActivity( $source_url) :)
   for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport
-          let $FacilityID  :=$elems/rsm:dBFacitilyID
+          let $FacilityID  :=$elems/rsm:InspireIdPRTR
         (:let $FacilityName:=$elems /rsm:FacilityName
         let $ParentCompany:=$elems/rsm:ParentCompanyName
         let $Address := $elems/rsm:Address/rsm:StreetName
@@ -150,7 +150,7 @@ declare function xmlconv:findFacilityReport($source_url){
         let $FacilityReportPollutantRelease := xmlconv:findFacilityReportPollutantRelease( $elems)
         let $FacilityReportPollutantTransfer := xmlconv:findFacilityReportPollutantransfer( $elems)
         let $FacilityReportWasteTransfer:= xmlconv:findFacilityReportWasteTransfer( $elems)
-        let $ReleaseNationalID := xmlconv:findCheckElementHyphens($elems/rsm:dBFacitilyID,$TextNationalID,$xmlconv:errCodeFacilities )
+        let $ReleaseNationalID := xmlconv:findCheckElementHyphens($elems/rsm:InspireIdPRTR,$TextNationalID,$xmlconv:errCodeFacilities )
        (: let $ReleasePreviousNationalIDNationalID := xmlconv:findCheckElement($elems/rsm:PreviousNationalID/rsm:NationalID,$TextPreviousNationalIDNationalID,$xmlconv:errCodeFacilities)
         let $ReleaseParentCompanyName := xmlconv:findCheckElement($elems/rsm:ParentCompanyName ,$TextParentCompanyName )
         let $ReleaseFacilityName := xmlconv:findCheckElement($elems/rsm:FacilityName,$TextFacilityName)

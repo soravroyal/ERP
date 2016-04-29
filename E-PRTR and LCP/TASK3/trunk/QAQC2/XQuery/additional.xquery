@@ -134,7 +134,7 @@ declare function xmlconv:findSumPollutantTransfer($pollutant){
     let $ppc :=  doc($pcUrl)//Code[. = $pc]/@parentGroup
     let $codes := distinct-values (doc($pcUrl)//Code[.//@parentGroup = $ppc])
 
-    let $elems := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:dBFacitilyID = $pollutant/../rsm:dBFacitilyID]/
+    let $elems := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:InspireIdPRTR = $pollutant/../rsm:InspireIdPRTR]/
             rsm:PollutantTransfer[rsm:confidentialIndicator=false() and exists(index-of($codes, rsm:pollutantCode))]
 
     let $tot :=  sum($elems/rsm:quantity)
@@ -148,7 +148,7 @@ declare function xmlconv:findSumPollutantRelease($pollutant){
     let $ppc :=  doc($pcUrl)//Code[. = $pc]/@parentGroup
     let $codes := distinct-values (doc($pcUrl)//Code[.//@parentGroup = $ppc])
 
-    let $elems := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:dBFacitilyID = $pollutant/../rsm:dBFacitilyID]/
+    let $elems := doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport[rsm:InspireIdPRTR = $pollutant/../rsm:InspireIdPRTR]/
             rsm:PollutantRelease[rsm:confidentialIndicator=false() and rsm:mediumCode = $mc and exists(index-of($codes, rsm:pollutantCode))]
 
     let $tot := sum($elems/rsm:totalQuantity)
@@ -166,7 +166,7 @@ declare function xmlconv:findBelowThresholdsWasteTransfer($facilityReports as el
                       union
                       xmlconv:findBelowThresholdsWasteTransfer($facilityReports,"HW")
 
-        return for $i in $w order by $i/rsm:dBFacitilyID return $i
+        return for $i in $w order by $i/rsm:InspireIdPRTR return $i
 };
 
 (:Find WasteTransfer elements with given wasteTypesCodes below the given threshold. If a wastetransfer is Confidential that wasteType is considered above the threshold. Returns a list of waste elements with aggregated quantities:)
@@ -184,8 +184,8 @@ declare function xmlconv:findSumWasteTransfer($facilityReports as element(rsm:Fa
 
 (:    let $threshold := xmlconv:findWasteTransferThreshold($wasteType)
 :)
-    for $ni in distinct-values($facilityReports/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]/../rsm:dBFacitilyID)
-       let $wt := $facilityReports[rsm:dBFacitilyID=$ni]/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]
+    for $ni in distinct-values($facilityReports/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]/../rsm:InspireIdPRTR)
+       let $wt := $facilityReports[rsm:InspireIdPRTR=$ni]/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]
        let $tot := sum($wt/number(rsm:quantity))
        let $conf := $wt[rsm:confidentialIndicator=true()]/rsm:confidentialIndicator
        return
@@ -290,7 +290,7 @@ declare function xmlconv:findOnlyBelowThresholdsWasteTransfer($facilityReports a
 
  for $nid in distinct-values($below/xmlconv:NationalID)
     where empty(index-of($above/xmlconv:NationalID, $nid))
-      return $facilityReports[rsm:dBFacitilyID = $nid]
+      return $facilityReports[rsm:InspireIdPRTR = $nid]
 };
 
 (:Find WasteTransfers with Quantity above the threshold:)
@@ -353,7 +353,7 @@ declare function xmlconv:buildTablePollutantReleaseThreshold($errorLevel as xs:i
                                   let $t := xmlconv:findPollutantThreshold($pc, $elem/rsm:mediumCode)
                                   let $ts := xmlconv:getPollutantThresholdString($pc, $t)
                                   let $qs := xmlconv:getPollutantQuantityString( $q,$t)
-                                return xmlutil:buildTableRow((xmlutil:getElem($elem/../rsm:dBFacitilyID), xmlutil:getElem($elem/rsm:mediumCode), xmlutil:getElem($pc),$qs, $ts), $errorLevel,  $errorIndex, $xmlconv:errThresholds))
+                                return xmlutil:buildTableRow((xmlutil:getElem($elem/../rsm:InspireIdPRTR), xmlutil:getElem($elem/rsm:mediumCode), xmlutil:getElem($pc),$qs, $ts), $errorLevel,  $errorIndex, $xmlconv:errThresholds))
 
     return  xmlutil:buildTable($errorLevel, $error, $colHeaders, $tableRows)
 };
@@ -369,7 +369,7 @@ declare function xmlconv:buildTablePollutantTransferThreshold($errorLevel as xs:
                                   let $t := xmlconv:findPollutantTransferThreshold($pc)
                                   let $ts := xmlconv:getPollutantThresholdString($pc, $t)
                                   let $qs := xmlconv:getPollutantQuantityString( $q, $t)
-                                return xmlutil:buildTableRow((xmlutil:getElem($elem/../rsm:dBFacitilyID), xmlutil:getElem($pc), $qs, $ts), $errorLevel,  $errorIndex, $xmlconv:errThresholds))
+                                return xmlutil:buildTableRow((xmlutil:getElem($elem/../rsm:InspireIdPRTR), xmlutil:getElem($pc), $qs, $ts), $errorLevel,  $errorIndex, $xmlconv:errThresholds))
 
     return  xmlutil:buildTable($errorLevel, $error, $colHeaders, $tableRows)
 };
@@ -750,7 +750,7 @@ return
 declare function xmlconv:findFacility($source_url){
 
       for $elems in doc($source_url)//rsm:LCPandPRTR/rsm:FacilityReports/rsm:FacilityReport
-            let $National := $elems/rsm:dBFacitilyID
+            let $National := $elems/rsm:InspireIdPRTR
          
 
             let $ReleaseTransfer := xmlconv:findRelease($elems)
@@ -1104,7 +1104,7 @@ declare function xmlconv:findSumPollutantTransferAggregated($pollutant, $elems){
     let $ppc :=  doc($pcUrl)//Code[. = $pc]/@parentGroup
     let $codes := distinct-values (doc($pcUrl)//Code[.//@parentGroup = $ppc])
 
-    let $dato := $elems[rsm:dBFacitilyID = $pollutant/../rsm:dBFacitilyID]/
+    let $dato := $elems[rsm:InspireIdPRTR = $pollutant/../rsm:InspireIdPRTR]/
             rsm:PollutantTransfer[rsm:confidentialIndicator=false() and exists(index-of($codes, rsm:pollutantCode))]
 
     let $tot :=  sum($dato/rsm:quantity)
@@ -1118,7 +1118,7 @@ declare function xmlconv:findSumPollutantReleaseAggregated($pollutant, $elems){
     let $ppc :=  doc($pcUrl)//Code[. = $pc]/@parentGroup
     let $codes := distinct-values (doc($pcUrl)//Code[.//@parentGroup = $ppc])
 
-    let $dato := $elems[rsm:dBFacitilyID = $pollutant/../rsm:dBFacitilyID]/
+    let $dato := $elems[rsm:InspireIdPRTR = $pollutant/../rsm:InspireIdPRTR]/
             rsm:PollutantRelease[rsm:confidentialIndicator=false() and rsm:mediumCode = $mc and exists(index-of($codes, rsm:pollutantCode))]
 
     let $tot := sum($dato/rsm:totalQuantity)
@@ -1134,7 +1134,7 @@ declare function xmlconv:findBelowThresholdsWasteTransferTAggregated($elems){
                       union
                       xmlconv:findBelowThresholdsWasteTransferAggregated($elems,"HW")
 
-       return for $i in $w order by $i/rsm:dBFacitilyID
+       return for $i in $w order by $i/rsm:InspireIdPRTR
 
        return
            <li style="list-style-type:none"><b>{xmlutil:buildErrorElement($xmlconv:errAggregated, concat($i/xmlconv:WasteTypeCode , ': '))} </b>{$TxtPollutant}</li>
@@ -1154,8 +1154,8 @@ declare function xmlconv:findBelowThresholdsWasteTransferAggregated($elems, $was
 declare function xmlconv:findSumWasteTransferAggregated($elems, $wasteType){
     let $wasteTypeCodes := (if($wasteType = "NON-HW") then ("NON-HW") else (("HWIC","HWOC")))
 
-    for $ni in distinct-values($elems/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]/../rsm:dBFacitilyID)
-       let $wt := $elems[rsm:dBFacitilyID=$ni]/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]
+    for $ni in distinct-values($elems/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]/../rsm:InspireIdPRTR)
+       let $wt := $elems[rsm:InspireIdPRTR=$ni]/rsm:WasteTransfer[index-of($wasteTypeCodes,  rsm:wasteTypeCode)>0]
        let $tot := sum($wt/number(rsm:quantity))
        let $conf := $wt[rsm:confidentialIndicator=true()]/rsm:confidentialIndicator
     return
