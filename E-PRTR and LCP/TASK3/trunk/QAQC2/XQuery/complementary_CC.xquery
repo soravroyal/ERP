@@ -370,9 +370,11 @@ declare function xmlconv:findPollutantConfidentialityReason($pollutant)
 declare function xmlconv:findPollutantMethodDesignation($pollutant)
 {
     let $methodBasicCode := $pollutant/rsm:methodBasisCode
-    let $methodTypeCode := $pollutant/rsm:methodUsed/rsm:MethodTypeCode
-    let $designation := doc($designationUrl)//Designation[@methodBasicCode =$methodBasicCode and @methodTypeCode = $methodTypeCode ]
-
+    let $methodBasicCode_url_code := normalize-space(substring-before($methodBasicCode, '-'))
+    let $methodTypeCode := $pollutant/rsm:methodUsed/p:MethodTypeCode
+    let $methodTypeCode_url_code := normalize-space(substring-before($methodTypeCode, '-'))
+    let $designation := doc($designationUrl)//Designation[@methodBasicCode =$methodBasicCode_url_code and @methodTypeCode = $methodTypeCode_url_code]
+    
     return $designation
 };
 
