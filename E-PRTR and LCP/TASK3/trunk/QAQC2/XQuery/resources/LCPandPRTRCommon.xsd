@@ -168,7 +168,6 @@
 			<xs:enumeration value="NMVOC"/>
 			<xs:enumeration value="NOX"/>
 			<xs:enumeration value="SOX"/>
-			<xs:enumeration value="H"/>
 			<xs:enumeration value="HALOGENATED ORGANIC COMPOUNDS"/>
 			<xs:enumeration value="HALONS"/>
 			<xs:enumeration value="HCN"/>
@@ -183,11 +182,11 @@
 			<xs:enumeration value="HFCS"/>
 			<xs:enumeration value="CYANIDES"/>
 			<xs:enumeration value="HG AND COMPOUNDS"/>
+			<xs:enumeration value="BENZO(G,H,I)PERYLENE"/>
 			<xs:enumeration value="DDT"/>
-			<xs:enumeration value="I)PERYLENE"/>
 			<xs:enumeration value="DEHP"/>
 			<xs:enumeration value="INORG"/>
-			<xs:enumeration value="DICHLOROETHANE (DCE)"/>
+			<xs:enumeration value="DICHLOROETHANE-1,2 (DCE)"/>
 			<xs:enumeration value="ISODRIN"/>
 			<xs:enumeration value="DICHLOROMETHANE (DCM)"/>
 			<xs:enumeration value="ISOPROTURON"/>
@@ -218,7 +217,7 @@
 			<xs:enumeration value="POLYCHLORINATED BIPHENYLS (PCBS)"/>
 			<xs:enumeration value="POLYCYCLIC AROMATIC HYDROCARBONS"/>
 			<xs:enumeration value="SIMAZINE"/>
-			<xs:enumeration value="TETRACHLOROETHANE"/>
+			<xs:enumeration value="TETRACHLOROETHANE-1,1,2,2"/>
 			<xs:enumeration value="TETRACHLOROETHYLENE (PER)"/>
 			<xs:enumeration value="TETRACHLOROMETHANE (TCM)"/>
 			<xs:enumeration value="TOLUENE"/>
@@ -228,7 +227,7 @@
 			<xs:enumeration value="TOXAPHENE"/>
 			<xs:enumeration value="TRIBUTYLTIN AND COMPOUNDS"/>
 			<xs:enumeration value="TRICHLOROBENZENES (TCB)"/>
-			<xs:enumeration value="TRICHLOROETHANE (TCE)"/>
+			<xs:enumeration value="TRICHLOROETHANE-1,1,1 (TCE)"/>
 			<xs:enumeration value="TRICHLOROETHYLENE (TRI)"/>
 			<xs:enumeration value="TRICHLOROMETHANE"/>
 			<xs:enumeration value="TRIFLURALIN"/>
@@ -243,7 +242,6 @@
 			<xs:enumeration value="ASBESTOS"/>
 			<xs:enumeration value="ATRAZINE"/>
 			<xs:enumeration value="BENZENE"/>
-			<xs:enumeration value="BENZO(G"/>
 			<xs:enumeration value="BROMINATED DIPHENYLETHER"/>
 			<xs:enumeration value="CD AND COMPOUNDS"/>
 			<xs:enumeration value="CFCS"/>
