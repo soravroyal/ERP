@@ -121,10 +121,26 @@
 	</xs:simpleType>
 	<xs:simpleType name="WasteTypeCodeType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="HW - Hazardous waste"/>
-			<xs:enumeration value="HWIC - Hazardous waste within country"/>
-			<xs:enumeration value="HWOC - Harzodous waste outside country"/>
-			<xs:enumeration value="NON-HW - Non-hazardous waste"/>
+			<xs:enumeration value="HW">
+				<xs:annotation>
+					<xs:documentation>Hazardous waste</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HWIC">
+				<xs:annotation>
+					<xs:documentation>Hazardous waste within country</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HWOC">
+				<xs:annotation>
+					<xs:documentation>Hazardous waste outside country</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NON-HW">
+				<xs:annotation>
+					<xs:documentation>Non-hazardous waste</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="WasteTreatmentCodeType">
@@ -140,11 +156,7 @@
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="GRHGAS"/>
 			<xs:enumeration value="CH4"/>
-			<xs:enumeration value="CO2">
-				<xs:annotation>
-					<xs:documentation>Example Pollutant Type: CO2</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
+			<xs:enumeration value="CO2"/>
 			<xs:enumeration value="CO2 EXCL BIOMASS"/>
 			<xs:enumeration value="HCFCS"/>
 			<xs:enumeration value="N2O"/>
