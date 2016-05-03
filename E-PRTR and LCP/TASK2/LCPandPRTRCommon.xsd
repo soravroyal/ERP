@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema targetNamespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:common="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:dc="http://purl.org/dc/elements/1.1/" elementFormDefault="qualified">
+<xs:schema targetNamespace="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://dd.eionet.europa.eu/schemas/LCPandPRTR/LCPandPRTRCommon" xmlns:dc="http://purl.org/dc/elements/1.1/" elementFormDefault="qualified">
 	<xs:annotation>
 		<xs:documentation>
 				This schema defines the common types used by LCP reporting schemas. It is a reference schema only and does not have its own instance
@@ -121,10 +121,26 @@
 	</xs:simpleType>
 	<xs:simpleType name="WasteTypeCodeType">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="HW - Hazardous waste"/>
-			<xs:enumeration value="HWIC - Hazardous waste within country"/>
-			<xs:enumeration value="HWOC - Harzodous waste outside country"/>
-			<xs:enumeration value="NON-HW - Non-hazardous waste"/>
+			<xs:enumeration value="HW">
+				<xs:annotation>
+					<xs:documentation>Hazardous waste</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HWIC">
+				<xs:annotation>
+					<xs:documentation>Hazardous waste within country</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HWOC">
+				<xs:annotation>
+					<xs:documentation>Hazardous waste outside country</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NON-HW">
+				<xs:annotation>
+					<xs:documentation>Non-hazardous waste</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="WasteTreatmentCodeType">
@@ -152,7 +168,6 @@
 			<xs:enumeration value="NMVOC"/>
 			<xs:enumeration value="NOX"/>
 			<xs:enumeration value="SOX"/>
-			<xs:enumeration value="H"/>
 			<xs:enumeration value="HALOGENATED ORGANIC COMPOUNDS"/>
 			<xs:enumeration value="HALONS"/>
 			<xs:enumeration value="HCN"/>
@@ -167,11 +182,11 @@
 			<xs:enumeration value="HFCS"/>
 			<xs:enumeration value="CYANIDES"/>
 			<xs:enumeration value="HG AND COMPOUNDS"/>
+			<xs:enumeration value="BENZO(G,H,I)PERYLENE"/>
 			<xs:enumeration value="DDT"/>
-			<xs:enumeration value="I)PERYLENE"/>
 			<xs:enumeration value="DEHP"/>
 			<xs:enumeration value="INORG"/>
-			<xs:enumeration value="DICHLOROETHANE (DCE)"/>
+			<xs:enumeration value="DICHLOROETHANE-1,2 (DCE)"/>
 			<xs:enumeration value="ISODRIN"/>
 			<xs:enumeration value="DICHLOROMETHANE (DCM)"/>
 			<xs:enumeration value="ISOPROTURON"/>
@@ -202,7 +217,7 @@
 			<xs:enumeration value="POLYCHLORINATED BIPHENYLS (PCBS)"/>
 			<xs:enumeration value="POLYCYCLIC AROMATIC HYDROCARBONS"/>
 			<xs:enumeration value="SIMAZINE"/>
-			<xs:enumeration value="TETRACHLOROETHANE"/>
+			<xs:enumeration value="TETRACHLOROETHANE-1,1,2,2"/>
 			<xs:enumeration value="TETRACHLOROETHYLENE (PER)"/>
 			<xs:enumeration value="TETRACHLOROMETHANE (TCM)"/>
 			<xs:enumeration value="TOLUENE"/>
@@ -212,7 +227,7 @@
 			<xs:enumeration value="TOXAPHENE"/>
 			<xs:enumeration value="TRIBUTYLTIN AND COMPOUNDS"/>
 			<xs:enumeration value="TRICHLOROBENZENES (TCB)"/>
-			<xs:enumeration value="TRICHLOROETHANE (TCE)"/>
+			<xs:enumeration value="TRICHLOROETHANE-1,1,1 (TCE)"/>
 			<xs:enumeration value="TRICHLOROETHYLENE (TRI)"/>
 			<xs:enumeration value="TRICHLOROMETHANE"/>
 			<xs:enumeration value="TRIFLURALIN"/>
@@ -227,7 +242,6 @@
 			<xs:enumeration value="ASBESTOS"/>
 			<xs:enumeration value="ATRAZINE"/>
 			<xs:enumeration value="BENZENE"/>
-			<xs:enumeration value="BENZO(G"/>
 			<xs:enumeration value="BROMINATED DIPHENYLETHER"/>
 			<xs:enumeration value="CD AND COMPOUNDS"/>
 			<xs:enumeration value="CFCS"/>
