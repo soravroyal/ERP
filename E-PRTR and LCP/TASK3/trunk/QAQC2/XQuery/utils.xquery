@@ -304,6 +304,26 @@ declare function xmlutil:buildValidatedFile($source_url){
 (: Functions for building basic output tables for different elements :)
 (:===================================================================:)
 
+declare function xmlutil:buildTableEnvelopeReport($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string, $control as xs:string){
+    let $i := $type
+    let $elem := $elems[1]
+    return if(not(empty($elem)) and $elem cast as xs:string)then(
+        xmlutil:buildTable($type, $error, 'No file delivery', '')
+    )else(
+        xmlutil:buildTableEnvelopeReport($type, $error, $elems, $errorIndex, $errorCode)
+    )
+    
+};
+
+declare function xmlutil:buildTableEnvelopeReport($type as xs:integer, $error as xs:string, $elems, $errorIndex, $errorCode as xs:string){
+    let $colHeaders := ("File Name")
+    let $tableRows := (for $elem in $elems
+                            return xmlutil:buildTableRow(( $elem/@name
+                                                         ),$type, $errorIndex, $errorCode))
+
+    return  xmlutil:buildTable($type, $error, $colHeaders, $tableRows)
+};
+
 declare function xmlutil:buildTablePlantReport($type as xs:integer, $error as xs:string, $elems, $errorIndex){
     xmlutil:buildTablePlantReport($type, $error, $elems, $errorIndex, '')
 };
